@@ -1,0 +1,115 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class FCMServices {
+  // Get the last updated time from shared preferences
+  Future getLastUpdatedTime() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? lastUpdatedTime = prefs.getString("lastUpdatedTime");
+
+    if (lastUpdatedTime == null) {
+      // If last updated time is not stored, store the current time and return it
+      final now = DateTime.now();
+      prefs.setString("lastUpdatedTime", now.toString());
+      return now;
+    } else {
+      // If last updated time is stored, parse and return it
+      return DateTime.parse(lastUpdatedTime);
+    }
+  }
+
+  // Save the FCM token to shared preferences
+  saveFCMtoken() async {
+    String? fcmToken = await FirebaseMessaging.instance.getToken();
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("fcmToken", fcmToken!);
+  }
+
+  // Get the saved FCM token from shared preferences
+  Future getSavedFCMToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? fcmToken = prefs.getString("fcmToken");
+    return fcmToken;
+  }
+
+  // Check if the FCM token needs to be updated
+  checkLastUpdated() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var lastUpdated = prefs.getString('lastUpdatedFCM');
+
+    if (lastUpdated == null) {
+      // If last updated time is not stored, store the current time and save FCM token
+      prefs.setString('lastUpdatedFCM', DateTime.now().toString());
+      await saveFCMtoken();
+      return true;
+    } else {
+      var lastUpdatedDate = DateTime.parse(lastUpdated);
+      var now = DateTime.now();
+      var difference = now.difference(lastUpdatedDate);
+
+      if (difference.inDays >= 29) {
+        // If last updated time is older than 29 days, update the time and save FCM token
+        prefs.setString('lastUpdatedFCM', DateTime.now().toString());
+        await saveFCMtoken();
+        return true;
+      } else {
+        final savedFCMToken = await getSavedFCMToken();
+
+        if (savedFCMToken == null) {
+          // If saved FCM token is null, save FCM token
+          await saveFCMtoken();
+          return true;
+        }
+
+        return false;
+      }
+    }
+  }
+}
+import 'package:dio/dio.dart';
+
+class ApiService {
+  static final apiUrl = "https://api.example.com"; // Replace with your API URL
+
+  Dio _dio;
+
+  ApiService() {
+    _dio = Dio(BaseOptions(baseUrl: apiUrl));
+  }
+
+  Future get(String endPoint) async {
+    try {
+      return await _dio.get(endPoint);
+    } catch (e) {
+      print("Error: $e");
+      throw e;
+    }
+  }
+
+  Future post(String endPoint, {Map data}) async {
+    try {
+      return await _dio.post(endPoint, data: data);
+    } catch (e) {
+      print("Error: $e");
+      throw e;
+    }
+  }
+}<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Theme applied to the Android Window while the process is starting -->
+    <style name="LaunchTheme" parent="@android:style/Theme.Black.NoTitleBar">
+        <!-- Show a splash screen on the activity. Automatically removed when
+             Flutter draws its first frame -->
+        <item name="android:windowBackground">@drawable/launch_background</item>
+    </style>
+    <!-- Theme applied to the Android Window as soon as the process has started.
+         This theme determines the color of the Android Window while your
+         Flutter UI initializes, as well as behind your Flutter UI while its
+         running.
+         
+         This Theme is only used starting with V2 of Flutter's Android embedding. -->
+    <style name="NormalTheme" parent="@android:style/Theme.Black.NoTitleBar">
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+</resources>
