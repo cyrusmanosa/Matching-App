@@ -23,7 +23,7 @@ class SideBar extends StatelessWidget {
               children: [
                 Text(
                   "2023-11-01から",
-                  style: CustomTextStyles.bodyLargeGray80001,
+                  style: CustomTextStyles.bodyLargegray800,
                 ),
                 SizedBox(height: 4.v),
                 _buildUserRow(context),
@@ -47,7 +47,7 @@ class SideBar extends StatelessWidget {
                         width: 30.adaptSize,
                         margin: EdgeInsets.symmetric(vertical: 3.v),
                         decoration: BoxDecoration(
-                          color: appTheme.blueGray100,
+                          color: appTheme.gray500,
                           borderRadius: BorderRadius.circular(
                             15.h,
                           ),
@@ -82,7 +82,7 @@ class SideBar extends StatelessWidget {
                         width: 30.adaptSize,
                         margin: EdgeInsets.symmetric(vertical: 3.v),
                         decoration: BoxDecoration(
-                          color: appTheme.blueGray100,
+                          color: appTheme.gray500,
                           borderRadius: BorderRadius.circular(
                             15.h,
                           ),
@@ -117,7 +117,7 @@ class SideBar extends StatelessWidget {
                         width: 30.adaptSize,
                         margin: EdgeInsets.symmetric(vertical: 3.v),
                         decoration: BoxDecoration(
-                          color: appTheme.blueGray100,
+                          color: appTheme.gray500,
                           borderRadius: BorderRadius.circular(
                             15.h,
                           ),
@@ -152,7 +152,7 @@ class SideBar extends StatelessWidget {
                         width: 30.adaptSize,
                         margin: EdgeInsets.symmetric(vertical: 3.v),
                         decoration: BoxDecoration(
-                          color: appTheme.blueGray100,
+                          color: appTheme.gray500,
                           borderRadius: BorderRadius.circular(
                             15.h,
                           ),
@@ -187,7 +187,7 @@ class SideBar extends StatelessWidget {
                         width: 30.adaptSize,
                         margin: EdgeInsets.symmetric(vertical: 3.v),
                         decoration: BoxDecoration(
-                          color: appTheme.blueGray100,
+                          color: appTheme.gray500,
                           borderRadius: BorderRadius.circular(
                             15.h,
                           ),

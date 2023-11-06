@@ -14,19 +14,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actions,
   }) : super(key: key);
 
-  final double? height;
-
-  final Style? styleType;
-
-  final double? leadingWidth;
-
-  final Widget? leading;
-
-  final Widget? title;
-
   final bool? centerTitle;
-
+  final double? height;
+  final double? leadingWidth;
   final List<Widget>? actions;
+  final Style? styleType;
+  final Widget? leading;
+  final Widget? title;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +51,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           height: 110.v,
           width: double.maxFinite,
           decoration: BoxDecoration(
-            color: appTheme.gray600,
+            color: appTheme.gray500,
           ),
         );
       default:

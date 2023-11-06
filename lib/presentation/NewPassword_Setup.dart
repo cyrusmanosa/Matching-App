@@ -41,7 +41,7 @@ class NewPasswordSetup extends StatelessWidget {
                       child: Padding(
                           padding: EdgeInsets.only(left: 2.h),
                           child: Text("＊半角英数字の組合せ（8桁以上15桁以下）",
-                              style: CustomTextStyles.bodyMediumGray50002))),
+                              style: CustomTextStyles.bodyMediumgray500))),
                   SizedBox(height: 23.v),
                   _buildNewPasswordConfirm(context),
                   SizedBox(height: 23.v),

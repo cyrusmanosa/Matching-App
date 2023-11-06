@@ -128,7 +128,7 @@ class LoverConditions extends StatelessWidget {
                           height: 20.adaptSize,
                           width: 20.adaptSize,
                           decoration: BoxDecoration(
-                            color: appTheme.blueGray100,
+                            color: appTheme.gray500,
                             borderRadius: BorderRadius.circular(
                               10.h,
                             ),

@@ -26,7 +26,7 @@ class K34Page extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 CustomImageView(
-                                    imagePath: ImageConstant.imgVectorGray60001,
+                                    imagePath: ImageConstant.imgVectorgray500,
                                     height: 150.adaptSize,
                                     width: 150.adaptSize,
                                     margin: EdgeInsets.only(

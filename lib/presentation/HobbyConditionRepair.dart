@@ -1,5 +1,5 @@
 import 'package:cyrus_man_s_application1/core/app_export.dart';
-import 'package:cyrus_man_s_application1/presentation/k1_page/k1_page.dart';
+import 'package:cyrus_man_s_application1/presentation/Header/Header.dart';
 import 'package:cyrus_man_s_application1/widgets/app_bar/appbar_title.dart';
 import 'package:cyrus_man_s_application1/widgets/app_bar/custom_app_bar.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_bottom_bar.dart';
@@ -68,7 +68,7 @@ class HobbyConditionRepair extends StatelessWidget {
                                 height: 20.adaptSize,
                                 width: 20.adaptSize,
                                 decoration: BoxDecoration(
-                                  color: appTheme.blueGray100,
+                                  color: appTheme.gray500,
                                   borderRadius: BorderRadius.circular(
                                     10.h,
                                   ),
@@ -365,7 +365,7 @@ class HobbyConditionRepair extends StatelessWidget {
   String getCurrentRoute(BottomBarEnum type) {
     switch (type) {
       case BottomBarEnum.tf:
-        return AppRoutes.k1Page;
+        return AppRoutes.header;
       default:
         return "/";
     }
@@ -374,8 +374,8 @@ class HobbyConditionRepair extends StatelessWidget {
   ///Handling page based on route
   Widget getCurrentPage(String currentRoute) {
     switch (currentRoute) {
-      case AppRoutes.k1Page:
-        return K1Page();
+      case AppRoutes.header:
+        return Header();
       default:
         return DefaultWidget();
     }

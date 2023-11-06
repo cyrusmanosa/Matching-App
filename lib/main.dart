@@ -9,7 +9,6 @@ void main() {
     DeviceOrientation.portraitUp,
   ]);
 
-  ///Please update theme as per your need if required.
   ThemeHelper().changeTheme('primary');
   runApp(MyApp());
 }
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme,
-      title: 'cyrus_man_s_application1',
+      title: 'DatingYourDate',
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.login,
       routes: AppRoutes.routes,

@@ -1,5 +1,5 @@
 import 'package:cyrus_man_s_application1/core/app_export.dart';
-import 'package:cyrus_man_s_application1/presentation/k1_page/k1_page.dart';
+import 'package:cyrus_man_s_application1/presentation/Header/Header.dart';
 import 'package:cyrus_man_s_application1/widgets/app_bar/appbar_title.dart';
 import 'package:cyrus_man_s_application1/widgets/app_bar/custom_app_bar.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_bottom_bar.dart';
@@ -48,7 +48,7 @@ class ProfileEdit extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             CustomImageView(
-                              imagePath: ImageConstant.imgVectorGray60001,
+                              imagePath: ImageConstant.imgVectorgray500,
                               height: 150.adaptSize,
                               width: 150.adaptSize,
                               margin: EdgeInsets.only(
@@ -404,7 +404,7 @@ class ProfileEdit extends StatelessWidget {
   String getCurrentRoute(BottomBarEnum type) {
     switch (type) {
       case BottomBarEnum.tf:
-        return AppRoutes.k1Page;
+        return AppRoutes.header;
       default:
         return "/";
     }
@@ -413,8 +413,8 @@ class ProfileEdit extends StatelessWidget {
   ///Handling page based on route
   Widget getCurrentPage(String currentRoute) {
     switch (currentRoute) {
-      case AppRoutes.k1Page:
-        return K1Page();
+      case AppRoutes.header:
+        return Header();
       default:
         return DefaultWidget();
     }

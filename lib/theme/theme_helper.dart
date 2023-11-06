@@ -43,6 +43,7 @@ class ThemeHelper {
 
     var colorScheme =
         _supportedColorScheme[_appTheme] ?? ColorSchemes.primaryColorScheme;
+
     return ThemeData(
       visualDensity: VisualDensity.standard,
       colorScheme: colorScheme,
@@ -67,7 +68,7 @@ class ThemeHelper {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: appTheme.blueGray100,
+          backgroundColor: appTheme.gray500,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30.h),
           ),
@@ -86,10 +87,7 @@ class ThemeHelper {
     );
   }
 
-  /// Returns the primary colors for the current theme.
   PrimaryColors themeColor() => _getThemeColors();
-
-  /// Returns the current theme data.
   ThemeData themeData() => _getThemeData();
 }
 
@@ -169,12 +167,6 @@ class TextThemes {
           fontFamily: 'Montserrat',
           fontWeight: FontWeight.w600,
         ),
-        inputTheme: TextStyle(
-          color: appTheme.black900,
-          fontSize: 14.fSize,
-          fontFamily: 'Montserrat',
-          fontWeight: FontWeight.w600,
-        ),
       );
 }
 
@@ -200,45 +192,23 @@ class PrimaryColors {
   Color get black900 => Color(0XFF000000);
 
   // Blue
-  Color get blue600 => Color(0XFF0F77F0);
   Color get blue800 => Color(0XFF1464CC);
   Color get blueA400 => Color(0XFF1877F2);
-
-  // BlueGray
-  Color get blueGray100 => Color(0XFFD9D9D9);
-  Color get blueGray200 => Color(0XFFAEB3BE);
-
-  // BlueGrayE
-  Color get blueGray100E5 => Color(0XE5CDD1D8);
 
   // Cyan
   Color get cyan600 => Color(0XFF1AB4BE);
 
   // Gray
   Color get gray500 => Color(0XFF909090);
-  Color get gray50001 => Color(0XFFA4A4A4);
-  Color get gray50002 => Color(0XFF9F9F9F);
-  Color get gray600 => Color(0XFF797979);
-  Color get gray60001 => Color(0XFF838383);
-  Color get gray700 => Color(0XFF5B5B5B);
-  Color get gray70001 => Color(0XFF895262);
-  Color get gray70002 => Color(0XFF895263);
   Color get gray800 => Color(0XFF3C3C3C);
-  Color get gray80001 => Color(0XFF454545);
 
   // Green
   Color get green600 => Color(0XFF319F43);
 
-  // LightGreen
-  Color get lightGreen100 => Color(0XFFDFEAC8);
-
   // Pink
   Color get pink800 => Color(0XFF9C3D3D);
   Color get pinkA100 => Color(0XFFFF83A8);
-
-  // Purple
-  Color get purpleA400 => Color(0XFFFF00B7);
-  Color get purpleA40001 => Color(0XFFF900FF);
+  Color get pinkA400 => Color(0XFFFF00B7);
 
   // Red
   Color get redA700 => Color(0XFFFF0505);

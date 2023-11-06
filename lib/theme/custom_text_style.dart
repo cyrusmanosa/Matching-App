@@ -14,8 +14,8 @@ class CustomTextStyles {
         color: appTheme.black900,
         fontSize: 18.fSize,
       );
-  static get bodyLargeGray80001 => theme.textTheme.bodyLarge!.copyWith(
-        color: appTheme.gray80001,
+  static get bodyLargegray800 => theme.textTheme.bodyLarge!.copyWith(
+        color: appTheme.gray800,
       );
   static get bodyLargePinkA100 => theme.textTheme.bodyLarge!.copyWith(
         color: appTheme.pinkA100,
@@ -39,11 +39,11 @@ class CustomTextStyles {
   static get bodyMediumBlack900_1 => theme.textTheme.bodyMedium!.copyWith(
         color: appTheme.black900,
       );
-  static get bodyMediumGray50002 => theme.textTheme.bodyMedium!.copyWith(
-        color: appTheme.gray50002,
+  static get bodyMediumgray500 => theme.textTheme.bodyMedium!.copyWith(
+        color: appTheme.gray500,
       );
-  static get bodyMediumGray700 => theme.textTheme.bodyMedium!.copyWith(
-        color: appTheme.gray700,
+  static get bodyMediumgray800 => theme.textTheme.bodyMedium!.copyWith(
+        color: appTheme.gray800,
       );
   static get bodyMediumOnPrimary => theme.textTheme.bodyMedium!.copyWith(
         color: theme.colorScheme.onPrimary,

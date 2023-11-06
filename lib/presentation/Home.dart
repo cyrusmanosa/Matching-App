@@ -1,5 +1,5 @@
 import 'package:cyrus_man_s_application1/core/app_export.dart';
-import 'package:cyrus_man_s_application1/presentation/k1_page/k1_page.dart';
+import 'package:cyrus_man_s_application1/presentation/Header/Header.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ class Home extends StatelessWidget {
         child: Scaffold(
             body: Navigator(
                 key: navigatorKey,
-                initialRoute: AppRoutes.k1Page,
+                initialRoute: AppRoutes.header,
                 onGenerateRoute: (routeSetting) => PageRouteBuilder(
                     pageBuilder: (ctx, ani, ani1) =>
                         getCurrentPage(routeSetting.name!),
@@ -35,7 +35,7 @@ class Home extends StatelessWidget {
   String getCurrentRoute(BottomBarEnum type) {
     switch (type) {
       case BottomBarEnum.tf:
-        return AppRoutes.k1Page;
+        return AppRoutes.header;
       default:
         return "/";
     }
@@ -44,8 +44,8 @@ class Home extends StatelessWidget {
   ///Handling page based on route
   Widget getCurrentPage(String currentRoute) {
     switch (currentRoute) {
-      case AppRoutes.k1Page:
-        return K1Page();
+      case AppRoutes.header:
+        return Header();
       default:
         return DefaultWidget();
     }

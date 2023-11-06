@@ -25,7 +25,7 @@ class CustomButtonStyles {
 
   // Outline button style
   static ButtonStyle get outlineBlack => ElevatedButton.styleFrom(
-        backgroundColor: appTheme.blue600,
+        backgroundColor: appTheme.blue800,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5.h),
         ),
@@ -45,7 +45,7 @@ class CustomButtonStyles {
   static ButtonStyle get outlineGray => OutlinedButton.styleFrom(
         backgroundColor: theme.colorScheme.primary,
         side: BorderSide(
-          color: appTheme.gray50001,
+          color: appTheme.gray500,
           width: 1,
         ),
         shape: RoundedRectangleBorder(

@@ -1,10 +1,10 @@
-import '../k1_page/widgets/mainframe_item_widget.dart';
+import '../Header/widgets/mainframe_item_widget.dart';
 import 'package:cyrus_man_s_application1/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable
-class K1Page extends StatelessWidget {
-  const K1Page({Key? key}) : super(key: key);
+class Header extends StatelessWidget {
+  const Header({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class K1Page extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          SizedBox(height: 40.v),
+          SizedBox(height: 20.v),
           Text(
             "ホーム",
             style: theme.textTheme.headlineMedium,

@@ -70,7 +70,7 @@ class NewPasswordError extends StatelessWidget {
                   padding: EdgeInsets.only(left: 2.h),
                   child: Text(
                     "＊半角英数字の組合せ（8桁以上15桁以下）",
-                    style: CustomTextStyles.bodyMediumGray50002,
+                    style: CustomTextStyles.bodyMediumgray500,
                   ),
                 ),
               ),

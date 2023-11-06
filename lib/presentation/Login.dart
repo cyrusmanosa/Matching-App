@@ -120,7 +120,7 @@ class Login extends StatelessWidget {
         Text("ユーザーID:", style: theme.textTheme.titleLarge),
         Container(
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.red),
+            border: Border.all(color: appTheme.pinkA100),
             borderRadius: BorderRadius.circular(4.0),
           ),
           child: _buildEmailInput(context),
@@ -148,7 +148,7 @@ class Login extends StatelessWidget {
       Text("パスワード:", style: theme.textTheme.titleLarge),
       Container(
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.red),
+          border: Border.all(color: appTheme.pinkA100),
           borderRadius: BorderRadius.circular(4.0),
         ),
         child: _buildPasswordInput(context),
@@ -220,7 +220,7 @@ class Login extends StatelessWidget {
             child: CustomImageView(
                 imagePath: ImageConstant.imgDevicongoogle, width: 34.v)),
         buttonStyle: CustomButtonStyles.outlineGray,
-        buttonTextStyle: CustomTextStyles.bodyMediumGray700);
+        buttonTextStyle: CustomTextStyles.bodyMediumgray800);
   }
 
   /// PasswordResetEmail

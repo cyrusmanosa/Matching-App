@@ -31,7 +31,7 @@ class MainframeItemWidget extends StatelessWidget {
             height: 570.v,
             width: 350.h,
             decoration: BoxDecoration(
-              color: appTheme.blueGray100,
+              color: appTheme.gray500,
               borderRadius: BorderRadius.circular(
                 30.h,
               ),

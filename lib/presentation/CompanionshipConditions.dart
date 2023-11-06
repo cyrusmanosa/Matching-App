@@ -58,7 +58,7 @@ class CompanionshipConditions extends StatelessWidget {
                       width: 20.adaptSize,
                       margin: EdgeInsets.only(bottom: 1.v),
                       decoration: BoxDecoration(
-                        color: appTheme.blueGray100,
+                        color: appTheme.gray500,
                         borderRadius: BorderRadius.circular(
                           10.h,
                         ),
