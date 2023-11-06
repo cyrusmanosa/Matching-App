@@ -5,9 +5,7 @@ import 'package:cyrus_man_s_application1/routes/app_routes.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   ThemeHelper().changeTheme('primary');
   runApp(MyApp());
@@ -20,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: theme,
       title: 'DatingYourDate',
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.login,
+      initialRoute: AppRoutes.appNavigationScreen,
       routes: AppRoutes.routes,
     );
   }
