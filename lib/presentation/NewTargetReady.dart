@@ -1,11 +1,8 @@
 import 'package:cyrus_man_s_application1/core/app_export.dart';
 import 'package:flutter/material.dart';
 
-class newTargetReady extends StatelessWidget {
-  const newTargetReady({Key? key})
-      : super(
-          key: key,
-        );
+class NewTargetReady extends StatelessWidget {
+  const NewTargetReady({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -5,8 +5,8 @@ import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable
-class login extends StatelessWidget {
-  login({Key? key}) : super(key: key);
+class Login extends StatelessWidget {
+  Login({Key? key}) : super(key: key);
 
   TextEditingController emailInputController = TextEditingController();
   TextEditingController passwordInputController = TextEditingController();
@@ -28,10 +28,15 @@ class login extends StatelessWidget {
                       // Logo and Name
                       SizedBox(height: 45),
                       CustomImageView(
-                          imagePath: ImageConstant.imgLogo, width: 160.h),
+                        imagePath: ImageConstant.imgLogo,
+                        width: 160.h,
+                      ),
+
                       SizedBox(height: 3.v),
                       CustomImageView(
-                          imagePath: ImageConstant.imgSlogan, width: 210.h),
+                        imagePath: ImageConstant.imgSlogan,
+                        width: 210.h,
+                      ),
 
                       // ID
                       SizedBox(height: 20.v),
@@ -44,13 +49,17 @@ class login extends StatelessWidget {
                       // reset password
                       SizedBox(height: 8.v),
                       Align(
-                          alignment: Alignment.centerLeft,
-                          child: GestureDetector(
-                              onTap: () {
-                                onTapTxtWidget(context);
-                              },
-                              child: Text("パスワードを忘れた場合",
-                                  style: CustomTextStyles.bodyMediumBlack900))),
+                        alignment: Alignment.centerLeft,
+                        child: GestureDetector(
+                          onTap: () {
+                            onTapTxtWidget(context);
+                          },
+                          child: Text(
+                            "パスワードを忘れた場合",
+                            style: CustomTextStyles.bodyMediumBlack900,
+                          ),
+                        ),
+                      ),
 
                       // login button
                       SizedBox(height: 14.v),
@@ -137,7 +146,13 @@ class login extends StatelessWidget {
   Widget _buildPasswordInput1(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text("パスワード:", style: theme.textTheme.titleLarge),
-      _buildPasswordInput(context)
+      Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.red),
+          borderRadius: BorderRadius.circular(4.0),
+        ),
+        child: _buildPasswordInput(context),
+      )
     ]);
   }
 
@@ -210,16 +225,16 @@ class login extends StatelessWidget {
 
   /// PasswordResetEmail
   onTapTxtWidget(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.PasswordResetEmail);
+    Navigator.pushNamed(context, AppRoutes.passwordResetEmail);
   }
 
   /// Home
   onTapLoginButton(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.Home);
+    Navigator.pushNamed(context, AppRoutes.home);
   }
 
   /// EmailConfirmation
   onTapRegisterWithEmailButton(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.EmailConfirmation);
+    Navigator.pushNamed(context, AppRoutes.emailConfirmation);
   }
 }

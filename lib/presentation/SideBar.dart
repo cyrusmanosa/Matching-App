@@ -1,11 +1,8 @@
 import 'package:cyrus_man_s_application1/core/app_export.dart';
 import 'package:flutter/material.dart';
 
-class sideBar extends StatelessWidget {
-  const sideBar({Key? key})
-      : super(
-          key: key,
-        );
+class SideBar extends StatelessWidget {
+  const SideBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

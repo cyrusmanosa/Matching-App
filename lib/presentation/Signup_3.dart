@@ -6,8 +6,8 @@ import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable
-class signUp_3 extends StatelessWidget {
-  signUp_3({Key? key}) : super(key: key);
+class SignUp_3 extends StatelessWidget {
+  SignUp_3({Key? key}) : super(key: key);
 
   TextEditingController zipcodeController = TextEditingController();
 
@@ -139,6 +139,6 @@ class signUp_3 extends StatelessWidget {
 
   /// Navigates to the k26Screen when the action is triggered.
   onTapNextButton(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.SearchTitle);
+    Navigator.pushNamed(context, AppRoutes.searchTitle);
   }
 }

@@ -2,8 +2,8 @@ import 'package:cyrus_man_s_application1/core/app_export.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 
-class warningDeleteUser extends StatelessWidget {
-  const warningDeleteUser({Key? key}) : super(key: key);
+class WarningDeleteUser extends StatelessWidget {
+  const WarningDeleteUser({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +47,6 @@ class warningDeleteUser extends StatelessWidget {
 
   /// Navigates to the k12Screen when the action is triggered.
   onTaptf(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.NewTargetReady);
+    Navigator.pushNamed(context, AppRoutes.newTargetReady);
   }
 }

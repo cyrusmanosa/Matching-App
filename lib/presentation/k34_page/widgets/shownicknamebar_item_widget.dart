@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class ShownicknamebarItemWidget extends StatelessWidget {
-  const ShownicknamebarItemWidget({Key? key})
-      : super(
-          key: key,
-        );
+  const ShownicknamebarItemWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

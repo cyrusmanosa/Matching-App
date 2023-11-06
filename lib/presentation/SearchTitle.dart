@@ -2,8 +2,8 @@ import 'package:cyrus_man_s_application1/core/app_export.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 
-class searchTitle extends StatelessWidget {
-  const searchTitle({Key? key}) : super(key: key);
+class SearchTitle extends StatelessWidget {
+  const SearchTitle({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,16 +52,16 @@ class searchTitle extends StatelessWidget {
 
   /// Navigates to the k23Screen when the action is triggered.
   onTaptf(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.HobbyCondition);
+    Navigator.pushNamed(context, AppRoutes.hobbyCondition);
   }
 
   /// Navigates to the k27Screen when the action is triggered.
   onTaptf1(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.LoverConditions);
+    Navigator.pushNamed(context, AppRoutes.loverConditions);
   }
 
   /// Navigates to the k29Screen when the action is triggered.
   onTaptf2(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.CompanionshipConditions);
+    Navigator.pushNamed(context, AppRoutes.companionshipConditions);
   }
 }

@@ -55,6 +55,6 @@ class K9Page extends StatelessWidget {
 
   /// Navigates to the k3Screen when the action is triggered.
   onTaptf(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.HobbyConditionRepair);
+    Navigator.pushNamed(context, AppRoutes.hobbyConditionRepair);
   }
 }

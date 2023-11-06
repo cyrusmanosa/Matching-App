@@ -2,11 +2,8 @@ import 'package:cyrus_man_s_application1/core/app_export.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 
-class lowPercentageLowWarnning extends StatelessWidget {
-  const lowPercentageLowWarnning({Key? key})
-      : super(
-          key: key,
-        );
+class LowPercentageLowWarnning extends StatelessWidget {
+  const LowPercentageLowWarnning({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

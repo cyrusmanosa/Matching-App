@@ -2,8 +2,8 @@ import 'package:cyrus_man_s_application1/core/app_export.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 
-class confirmationCore extends StatelessWidget {
-  const confirmationCore({Key? key}) : super(key: key);
+class ConfirmationCore extends StatelessWidget {
+  const ConfirmationCore({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +71,6 @@ class confirmationCore extends StatelessWidget {
 
   /// Navigates to the signupPhoneoremailPartoneScreen when the action is triggered.
   onTaptf(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.SignUp_1);
+    Navigator.pushNamed(context, AppRoutes.signUp_1);
   }
 }

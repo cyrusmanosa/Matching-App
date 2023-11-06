@@ -8,9 +8,7 @@ class AppbarLeadingImage extends StatelessWidget {
     this.imagePath,
     this.margin,
     this.onTap,
-  }) : super(
-          key: key,
-        );
+  }) : super(key: key);
 
   String? imagePath;
 

@@ -12,8 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart' as fs;
 
 // ignore_for_file: must_be_immutable
-class chatBox extends StatelessWidget {
-  chatBox({Key? key}) : super(key: key);
+class ChatBox extends StatelessWidget {
+  ChatBox({Key? key}) : super(key: key);
 
   TextEditingController secretController = TextEditingController();
 

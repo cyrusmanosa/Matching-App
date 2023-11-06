@@ -27,9 +27,7 @@ class CustomTextFormField extends StatelessWidget {
     this.validator,
     required List children,
     required InputDecoration decoration,
-  }) : super(
-          key: key,
-        );
+  }) : super(key: key);
 
   final Alignment? alignment;
 

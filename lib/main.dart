@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: theme,
       title: 'cyrus_man_s_application1',
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.Login,
+      initialRoute: AppRoutes.login,
       routes: AppRoutes.routes,
     );
   }

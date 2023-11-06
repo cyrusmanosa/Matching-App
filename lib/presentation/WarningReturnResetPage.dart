@@ -2,11 +2,8 @@ import 'package:cyrus_man_s_application1/core/app_export.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 
-class warningReturnResetPage extends StatelessWidget {
-  const warningReturnResetPage({Key? key})
-      : super(
-          key: key,
-        );
+class WarningReturnResetPage extends StatelessWidget {
+  const WarningReturnResetPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

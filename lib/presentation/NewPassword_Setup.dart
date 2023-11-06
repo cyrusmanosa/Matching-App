@@ -4,8 +4,8 @@ import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable
-class newPasswordSetup extends StatelessWidget {
-  newPasswordSetup({Key? key}) : super(key: key);
+class NewPasswordSetup extends StatelessWidget {
+  NewPasswordSetup({Key? key}) : super(key: key);
 
   TextEditingController zipcodeController = TextEditingController();
 
@@ -86,6 +86,6 @@ class newPasswordSetup extends StatelessWidget {
 
   /// Navigates to the okScreen when the action is triggered.
   onTaptf(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.NewPasswordDone);
+    Navigator.pushNamed(context, AppRoutes.newPasswordDone);
   }
 }

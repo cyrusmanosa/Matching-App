@@ -130,6 +130,6 @@ class K34Page extends StatelessWidget {
 
   /// Navigates to the k35Screen when the action is triggered.
   onTaptf(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.ProfileEdit);
+    Navigator.pushNamed(context, AppRoutes.profileEdit);
   }
 }

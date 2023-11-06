@@ -4,8 +4,8 @@ import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable
-class emailConfirmation extends StatelessWidget {
-  emailConfirmation({Key? key}) : super(key: key);
+class EmailConfirmation extends StatelessWidget {
+  EmailConfirmation({Key? key}) : super(key: key);
   TextEditingController emailController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -81,6 +81,6 @@ class emailConfirmation extends StatelessWidget {
 
   /// Navigates to the k19Screen when the action is triggered.
   onTaptf(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.ConfirmationCore);
+    Navigator.pushNamed(context, AppRoutes.confirmationCore);
   }
 }

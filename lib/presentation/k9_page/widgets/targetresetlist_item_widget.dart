@@ -7,9 +7,7 @@ class TargetresetlistItemWidget extends StatelessWidget {
   TargetresetlistItemWidget({
     Key? key,
     this.onTaptf,
-  }) : super(
-          key: key,
-        );
+  }) : super(key: key);
 
   VoidCallback? onTaptf;
 

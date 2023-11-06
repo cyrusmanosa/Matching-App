@@ -12,9 +12,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.centerTitle,
     this.actions,
-  }) : super(
-          key: key,
-        );
+  }) : super(key: key);
 
   final double? height;
 

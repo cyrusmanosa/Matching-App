@@ -4,8 +4,8 @@ import 'package:cyrus_man_s_application1/widgets/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable, camel_case_types
-class home extends StatelessWidget {
-  home({Key? key}) : super(key: key);
+class Home extends StatelessWidget {
+  Home({Key? key}) : super(key: key);
 
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 

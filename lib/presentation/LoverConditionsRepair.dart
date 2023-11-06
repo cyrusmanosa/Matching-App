@@ -8,11 +8,8 @@ import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable, camel_case_types
-class loverConditionsRepair extends StatelessWidget {
-  loverConditionsRepair({Key? key})
-      : super(
-          key: key,
-        );
+class LoverConditionsRepair extends StatelessWidget {
+  LoverConditionsRepair({Key? key}) : super(key: key);
 
   TextEditingController ageInputController = TextEditingController();
   TextEditingController nationalityController = TextEditingController();

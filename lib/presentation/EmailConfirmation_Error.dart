@@ -4,8 +4,8 @@ import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable
-class emailConfirmationError extends StatelessWidget {
-  emailConfirmationError({Key? key}) : super(key: key);
+class EmailConfirmationError extends StatelessWidget {
+  EmailConfirmationError({Key? key}) : super(key: key);
 
   TextEditingController emailController = TextEditingController();
 
@@ -97,6 +97,6 @@ class emailConfirmationError extends StatelessWidget {
 
   /// Navigates to the error3Screen when the action is triggered.
   onTaptf(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.ProfileEdit);
+    Navigator.pushNamed(context, AppRoutes.profileEdit);
   }
 }

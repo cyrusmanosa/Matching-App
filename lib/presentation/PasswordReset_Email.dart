@@ -4,11 +4,8 @@ import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable, camel_case_types
-class passwordResetEmail extends StatelessWidget {
-  passwordResetEmail({Key? key})
-      : super(
-          key: key,
-        );
+class PasswordResetEmail extends StatelessWidget {
+  PasswordResetEmail({Key? key}) : super(key: key);
 
   TextEditingController emailController = TextEditingController();
 

@@ -2,11 +2,8 @@ import 'package:cyrus_man_s_application1/core/app_export.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 
-class lowPercentageHeightWarnning extends StatelessWidget {
-  const lowPercentageHeightWarnning({Key? key})
-      : super(
-          key: key,
-        );
+class LowPercentageHeightWarnning extends StatelessWidget {
+  const LowPercentageHeightWarnning({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

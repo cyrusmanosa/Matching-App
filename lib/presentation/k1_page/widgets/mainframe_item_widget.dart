@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class MainframeItemWidget extends StatelessWidget {
-  const MainframeItemWidget({Key? key})
-      : super(
-          key: key,
-        );
+  const MainframeItemWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

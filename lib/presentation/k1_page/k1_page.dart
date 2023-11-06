@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable
 class K1Page extends StatelessWidget {
-  const K1Page({Key? key})
-      : super(
-          key: key,
-        );
+  const K1Page({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

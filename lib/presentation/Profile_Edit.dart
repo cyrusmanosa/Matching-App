@@ -8,11 +8,8 @@ import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable, camel_case_types
-class profileEdit extends StatelessWidget {
-  profileEdit({Key? key})
-      : super(
-          key: key,
-        );
+class ProfileEdit extends StatelessWidget {
+  ProfileEdit({Key? key}) : super(key: key);
 
   TextEditingController introduceInputController = TextEditingController();
   TextEditingController nickNameInputController = TextEditingController();

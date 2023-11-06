@@ -96,6 +96,7 @@ class ThemeHelper {
 /// Class containing the supported text theme styles.
 class TextThemes {
   static TextTheme textTheme(ColorScheme colorScheme) => TextTheme(
+        // body
         bodyLarge: TextStyle(
           color: colorScheme.errorContainer,
           fontSize: 16.fSize,
@@ -114,6 +115,8 @@ class TextThemes {
           fontFamily: 'Rounded Mplus 1c',
           fontWeight: FontWeight.w400,
         ),
+
+        // display
         displayMedium: TextStyle(
           color: appTheme.black900,
           fontSize: 40.fSize,
@@ -126,6 +129,8 @@ class TextThemes {
           fontFamily: 'Rounded Mplus 1c',
           fontWeight: FontWeight.w400,
         ),
+
+        // head
         headlineLarge: TextStyle(
           color: appTheme.black900,
           fontSize: 30.fSize,
@@ -144,6 +149,8 @@ class TextThemes {
           fontFamily: 'SF Pro Text',
           fontWeight: FontWeight.w300,
         ),
+
+        // title
         titleLarge: TextStyle(
           color: appTheme.pinkA100,
           fontSize: 20.fSize,
@@ -151,13 +158,19 @@ class TextThemes {
           fontWeight: FontWeight.w400,
         ),
         titleMedium: TextStyle(
-          color: appTheme.black900,
+          color: appTheme.pinkA100,
           fontSize: 18.fSize,
           fontFamily: 'Montserrat',
           fontWeight: FontWeight.w600,
         ),
         titleSmall: TextStyle(
           color: appTheme.pinkA100,
+          fontSize: 14.fSize,
+          fontFamily: 'Montserrat',
+          fontWeight: FontWeight.w600,
+        ),
+        inputTheme: TextStyle(
+          color: appTheme.black900,
           fontSize: 14.fSize,
           fontFamily: 'Montserrat',
           fontWeight: FontWeight.w600,

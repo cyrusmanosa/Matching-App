@@ -6,8 +6,8 @@ import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable
-class signUp_2 extends StatelessWidget {
-  signUp_2({Key? key}) : super(key: key);
+class SignUp_2 extends StatelessWidget {
+  SignUp_2({Key? key}) : super(key: key);
 
   TextEditingController group54Controller = TextEditingController();
 
@@ -205,6 +205,6 @@ class signUp_2 extends StatelessWidget {
 
   /// Navigates to the signupPhoneoremailPartthreeScreen when the action is triggered.
   onTapNextButton(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.SignUp_3);
+    Navigator.pushNamed(context, AppRoutes.signUp_3);
   }
 }

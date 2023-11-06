@@ -6,11 +6,8 @@ import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable, camel_case_types
-class companionshipConditions extends StatelessWidget {
-  companionshipConditions({Key? key})
-      : super(
-          key: key,
-        );
+class CompanionshipConditions extends StatelessWidget {
+  CompanionshipConditions({Key? key}) : super(key: key);
 
   TextEditingController ageController = TextEditingController();
   TextEditingController nationalityController = TextEditingController();

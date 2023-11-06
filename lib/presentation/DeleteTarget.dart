@@ -7,8 +7,8 @@ import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable
-class deleteTarget extends StatelessWidget {
-  deleteTarget({Key? key}) : super(key: key);
+class DeleteTarget extends StatelessWidget {
+  DeleteTarget({Key? key}) : super(key: key);
 
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
@@ -76,6 +76,6 @@ class deleteTarget extends StatelessWidget {
 
   /// Navigates to the warnningOfDeletePageScreen when the action is triggered.
   onTaptf(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.WarningDeleteUser);
+    Navigator.pushNamed(context, AppRoutes.warningDeleteUser);
   }
 }

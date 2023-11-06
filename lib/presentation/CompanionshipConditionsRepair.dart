@@ -7,11 +7,8 @@ import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable, camel_case_types
-class companionshipConditionsRepair extends StatelessWidget {
-  companionshipConditionsRepair({Key? key})
-      : super(
-          key: key,
-        );
+class CompanionshipConditionsRepair extends StatelessWidget {
+  CompanionshipConditionsRepair({Key? key}) : super(key: key);
 
   TextEditingController ageController = TextEditingController();
 
