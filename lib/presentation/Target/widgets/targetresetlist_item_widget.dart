@@ -4,21 +4,20 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class TargetresetlistItemWidget extends StatelessWidget {
-  TargetresetlistItemWidget({
-    Key? key,
-    this.onTaptf,
-  }) : super(key: key);
+  TargetresetlistItemWidget({Key? key}) : super(key: key);
 
-  VoidCallback? onTaptf;
+  List<String> item = ["趣味", "123", "456"];
 
   @override
   Widget build(BuildContext context) {
     return CustomElevatedButton(
       width: 350.h,
-      text: "趣味",
-      onPressed: () {
-        onTaptf!.call();
-      },
+      text: "$item",
     );
   }
+}
+
+/// Navigates to the k3Screen when the action is triggered.
+onTaptf(BuildContext context) {
+  Navigator.pushNamed(context, AppRoutes.hobbyConditionRepair);
 }

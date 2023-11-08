@@ -5,26 +5,26 @@ class CustomTextFormField extends StatelessWidget {
   CustomTextFormField({
     Key? key,
     this.alignment,
-    this.width,
+    this.borderDecoration,
     this.controller,
+    this.contentPadding,
+    this.fillColor,
     this.focusNode,
-    this.autofocus = true,
-    this.textStyle,
-    this.obscureText = false,
-    this.textInputAction = TextInputAction.next,
-    this.textInputType = TextInputType.text,
-    this.maxLines,
     this.hintText,
     this.hintStyle,
+    this.maxLines,
     this.prefix,
     this.prefixConstraints,
     this.suffix,
     this.suffixConstraints,
-    this.contentPadding,
-    this.borderDecoration,
-    this.fillColor,
-    this.filled = false,
+    this.textStyle,
+    this.width,
     this.validator,
+    this.textInputAction = TextInputAction.next,
+    this.textInputType = TextInputType.text,
+    this.autofocus = true,
+    this.filled = false,
+    this.obscureText = false,
     required List children,
     required InputDecoration decoration,
   }) : super(key: key);
@@ -114,7 +114,7 @@ class CustomTextFormField extends StatelessWidget {
 /// Extension on [CustomTextFormField] to facilitate inclusion of all types of border style etc
 extension TextFormFieldStyleHelper on CustomTextFormField {
   static OutlineInputBorder get fillGray => OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15.h),
-        borderSide: BorderSide.none,
+        borderRadius: BorderRadius.circular(4.0),
+        borderSide: BorderSide(color: appTheme.pinkA100),
       );
 }

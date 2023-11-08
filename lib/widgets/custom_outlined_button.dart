@@ -31,12 +31,9 @@ class CustomOutlinedButton extends BaseButton {
         );
 
   final BoxDecoration? decoration;
-
-  final Widget? leftIcon;
-
-  final Widget? rightIcon;
-
   final Widget? label;
+  final Widget? leftIcon;
+  final Widget? rightIcon;
 
   @override
   Widget build(BuildContext context) {

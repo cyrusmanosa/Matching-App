@@ -16,24 +16,29 @@ class ConfirmationCore extends StatelessWidget {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // Logo
                       CustomImageView(
                           imagePath: ImageConstant.imgLogo,
-                          height: 81.v,
-                          width: 95.h,
+                          height: 80,
+                          width: 95,
                           alignment: Alignment.center),
                       SizedBox(height: 1.v),
+
+                      // Slogan
                       CustomImageView(
                           imagePath: ImageConstant.imgSlogan,
-                          height: 17.v,
-                          width: 100.h,
+                          height: 17,
+                          width: 100,
                           alignment: Alignment.center),
-                      SizedBox(height: 18.v),
+                      SizedBox(height: 15.v),
+
                       Text("認証コードを送信しました",
                           style: CustomTextStyles.headlineSmallRoundedMplus1c),
                       SizedBox(height: 1.v),
                       Text("以下にコードを入力してメールアドレスを認証してください。",
                           style: theme.textTheme.bodySmall),
-                      SizedBox(height: 8.v),
+                      SizedBox(height: 15.v),
+
                       Padding(
                           padding: EdgeInsets.only(right: 36.h),
                           child: Column(
@@ -53,9 +58,14 @@ class ConfirmationCore extends StatelessWidget {
                                         style: theme.textTheme.bodyLarge))
                               ])),
                       SizedBox(height: 2.v),
-                      Text("コードが届かない場合",
-                          style: CustomTextStyles.bodyMediumBlack900),
+
+                      Text(
+                        "コードが届かない場合",
+                        style: CustomTextStyles.bodyMediumBlack900,
+                      ),
                       SizedBox(height: 24.v),
+
+                      // button
                       CustomOutlinedButton(
                           height: 38.v,
                           width: 96.h,

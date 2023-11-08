@@ -8,32 +8,31 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomImageView extends StatelessWidget {
   ///[imagePath] is required parameter for showing image
-  String? imagePath;
-
+  Alignment? alignment;
+  BoxBorder? border;
+  BorderRadius? radius;
+  BoxFit? fit;
+  Color? color;
   double? height;
   double? width;
-  Color? color;
-  BoxFit? fit;
-  final String placeHolder;
-  Alignment? alignment;
-  VoidCallback? onTap;
   EdgeInsetsGeometry? margin;
-  BorderRadius? radius;
-  BoxBorder? border;
+  String? imagePath;
+  VoidCallback? onTap;
+  final String placeHolder;
 
   ///a [CustomImageView] it can be used for showing any type of images
   /// it will shows the placeholder image if image is not found on network image
   CustomImageView({
-    this.imagePath,
-    this.height,
-    this.width,
+    this.alignment,
+    this.border,
     this.color,
     this.fit,
-    this.alignment,
+    this.height,
+    this.imagePath,
+    this.margin,
     this.onTap,
     this.radius,
-    this.margin,
-    this.border,
+    this.width,
     this.placeHolder = 'assets/images/image_not_found.png',
   });
 

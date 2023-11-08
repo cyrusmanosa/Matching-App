@@ -16,12 +16,15 @@ class Target extends StatelessWidget {
           child: Column(
             children: [
               _buildTargetColumn(context),
-              SizedBox(height: 65.v),
+              // 題目
+              SizedBox(height: 60.v),
               Text(
                 "探すターゲットの種類",
                 style: CustomTextStyles.headlineMediumBlack900_1,
               ),
-              SizedBox(height: 29.v),
+
+              // 選択
+              SizedBox(height: 30.v),
               _buildTargetResetList(context)
             ],
           ),
@@ -30,15 +33,15 @@ class Target extends StatelessWidget {
     );
   }
 
-  /// Section Widget
+  /// Home
   Widget _buildTargetColumn(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 111.h, vertical: 15.v),
+      padding: EdgeInsets.symmetric(horizontal: 111.h, vertical: 11.v),
       decoration: AppDecoration.fillGray,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          SizedBox(height: 40.v),
+          SizedBox(height: 20.v),
           Text("ターゲットの設定", style: theme.textTheme.headlineMedium)
         ],
       ),
@@ -50,27 +53,15 @@ class Target extends StatelessWidget {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 40.h),
-        child: ListView.separated(
+        child: ListView.builder(
           physics: BouncingScrollPhysics(),
           shrinkWrap: true,
-          separatorBuilder: (context, index) {
-            return SizedBox(height: 29.v);
-          },
           itemCount: 3,
           itemBuilder: (context, index) {
-            return TargetresetlistItemWidget(
-              onTaptf: () {
-                onTaptf(context);
-              },
-            );
+            return TargetresetlistItemWidget();
           },
         ),
       ),
     );
-  }
-
-  /// Navigates to the k3Screen when the action is triggered.
-  onTaptf(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.hobbyConditionRepair);
   }
 }

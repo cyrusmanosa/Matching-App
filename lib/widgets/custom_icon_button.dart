@@ -5,26 +5,20 @@ class CustomIconButton extends StatelessWidget {
   CustomIconButton({
     Key? key,
     this.alignment,
-    this.height,
-    this.width,
-    this.padding,
-    this.decoration,
     this.child,
+    this.decoration,
+    this.height,
     this.onTap,
+    this.padding,
+    this.width,
   }) : super(key: key);
 
   final Alignment? alignment;
-
-  final double? height;
-
-  final double? width;
-
-  final EdgeInsetsGeometry? padding;
-
   final BoxDecoration? decoration;
-
+  final double? height;
+  final double? width;
+  final EdgeInsetsGeometry? padding;
   final Widget? child;
-
   final VoidCallback? onTap;
 
   @override
@@ -55,10 +49,7 @@ class CustomIconButton extends StatelessWidget {
                       color: appTheme.black900.withOpacity(0.3),
                       spreadRadius: 2.h,
                       blurRadius: 2.h,
-                      offset: Offset(
-                        0,
-                        1,
-                      ),
+                      offset: Offset(0, 1),
                     ),
                   ],
                 ),
@@ -79,10 +70,7 @@ extension IconButtonStyleHelper on CustomIconButton {
             color: appTheme.black900.withOpacity(0.3),
             spreadRadius: 2.h,
             blurRadius: 2.h,
-            offset: Offset(
-              0,
-              1,
-            ),
+            offset: Offset(0, 1),
           ),
         ],
       );

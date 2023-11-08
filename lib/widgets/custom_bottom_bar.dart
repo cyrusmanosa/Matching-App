@@ -1,7 +1,4 @@
 import 'package:cyrus_man_s_application1/core/app_export.dart';
-import 'package:cyrus_man_s_application1/presentation/ChatBox.dart';
-import 'package:cyrus_man_s_application1/presentation/Home/Home.dart';
-import 'package:cyrus_man_s_application1/presentation/ProfileEdit.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -27,21 +24,21 @@ class CustomBottomBarState extends State<CustomBottomBar> {
       icon: ImageConstant.imgNavPrimary,
       activeIcon: ImageConstant.imgNavPrimary,
       title: "ターゲット",
-      type: BottomBarEnum.tf,
+      type: BottomBarEnum.tf1,
     ),
     // チャット
     BottomMenuModel(
       icon: ImageConstant.imgNavPrimary41x41,
       activeIcon: ImageConstant.imgNavPrimary41x41,
       title: "チャット",
-      type: BottomBarEnum.tf,
+      type: BottomBarEnum.tf2,
     ),
     // プロフィール
     BottomMenuModel(
       icon: ImageConstant.imgNav41x41,
       activeIcon: ImageConstant.imgNav41x41,
       title: "プロフィール",
-      type: BottomBarEnum.tf,
+      type: BottomBarEnum.tf3,
     )
   ];
 
@@ -49,9 +46,7 @@ class CustomBottomBarState extends State<CustomBottomBar> {
   Widget build(BuildContext context) {
     return Container(
       height: 80.v,
-      decoration: BoxDecoration(
-        color: appTheme.gray500,
-      ),
+      decoration: BoxDecoration(color: appTheme.gray500),
       child: BottomNavigationBar(
         backgroundColor: Colors.transparent,
         showSelectedLabels: false,
@@ -61,8 +56,9 @@ class CustomBottomBarState extends State<CustomBottomBar> {
         currentIndex: selectedIndex,
         type: BottomNavigationBarType.fixed,
         items: List.generate(bottomMenuList.length, (index) {
-          // Footage onTap
+          // Footage
           return BottomNavigationBarItem(
+            // Icon bar
             icon: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -84,6 +80,7 @@ class CustomBottomBarState extends State<CustomBottomBar> {
                 ),
               ],
             ),
+            // Icon OnTap
             activeIcon: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -111,35 +108,14 @@ class CustomBottomBarState extends State<CustomBottomBar> {
         onTap: (index) {
           selectedIndex = index;
           widget.onChanged?.call(bottomMenuList[index].type);
-          setState(() {
-            switch (index) {
-              case 0:
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Home()),
-                );
-                break;
-              case 2:
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ChatBox()),
-                );
-                break;
-              case 3:
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ProfileEdit()),
-                );
-                break;
-            }
-          });
+          setState(() {});
         },
       ),
     );
   }
 }
 
-enum BottomBarEnum { tf }
+enum BottomBarEnum { tf, tf1, tf2, tf3 }
 
 class BottomMenuModel {
   BottomMenuModel({

@@ -25,7 +25,7 @@ class MainframeItemWidget extends StatelessWidget {
             ],
           ),
           Container(
-            height: 565.v,
+            height: 568,
             width: 350.h,
             decoration: BoxDecoration(
               color: appTheme.gray500,

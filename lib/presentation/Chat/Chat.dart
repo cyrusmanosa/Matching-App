@@ -30,19 +30,13 @@ class Chat extends StatelessWidget {
   /// Header
   Widget _buildChatSection(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 163.h,
-        vertical: 14.v,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 163.h, vertical: 11.v),
       decoration: AppDecoration.fillGray,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          SizedBox(height: 40.v),
-          Text(
-            "チャット",
-            style: theme.textTheme.headlineMedium,
-          ),
+          SizedBox(height: 20.v),
+          Text("チャット", style: theme.textTheme.headlineMedium),
         ],
       ),
     );
@@ -53,15 +47,9 @@ class Chat extends StatelessWidget {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.only(left: 20.h, right: 40.h),
-        child: ListView.separated(
+        child: ListView.builder(
           physics: BouncingScrollPhysics(),
           shrinkWrap: true,
-          separatorBuilder: (
-            context,
-            index,
-          ) {
-            return SizedBox(height: 10.v);
-          },
           itemCount: 6,
           itemBuilder: (context, index) {
             return UserprofilesectionItemWidget();

@@ -13,26 +13,21 @@ class ShownicknamebarItemWidget extends StatelessWidget {
       child: Stack(
         alignment: Alignment.centerRight,
         children: [
+          // Under bar
           Align(
             alignment: Alignment.bottomCenter,
-            child: SizedBox(
-              width: 330.h,
-              child: Divider(),
-            ),
+            child: SizedBox(width: 330.h, child: Divider()),
           ),
+          // Data
           Align(
             alignment: Alignment.centerRight,
-            child: Text(
-              "山崎太一",
-              style: CustomTextStyles.bodyLargeBlack900,
-            ),
+            child: Text("山崎太一", style: CustomTextStyles.bodyLargeBlack900),
           ),
+
+          // Theme
           Align(
             alignment: Alignment.centerLeft,
-            child: Text(
-              "ニックネーム",
-              style: CustomTextStyles.bodyLargePinkA100,
-            ),
+            child: Text("ニックネーム", style: CustomTextStyles.bodyLargePinkA100),
           ),
         ],
       ),

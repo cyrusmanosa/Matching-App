@@ -74,6 +74,7 @@ class CustomTextStyles {
   static get headlineSmallRoundedMplus1c =>
       theme.textTheme.headlineSmall!.roundedMplus1c.copyWith(
         fontWeight: FontWeight.w400,
+        fontSize: 20.fSize,
       );
   static get headlineSmallRoundedMplus1cGray500 =>
       theme.textTheme.headlineSmall!.roundedMplus1c.copyWith(

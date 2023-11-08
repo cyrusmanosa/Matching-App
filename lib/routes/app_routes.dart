@@ -65,7 +65,6 @@ class AppRoutes {
   static const String lowPercentageLowWarnning = '/lowPercentageLowWarnning';
   static const String loverConditions = '/loverConditions';
   static const String loverConditionsRepair = '/loverConditionsRepair';
-  static const String header = '/header';
   static const String home = '/home';
   static const String hobbyCondition = '/hobbyCondition';
   static const String hobbyConditionRepair = '/hobbyConditionRepair';

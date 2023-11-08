@@ -40,19 +40,13 @@ class Home extends StatelessWidget {
   /// Home Header
   Widget _buildHeader(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 176.h,
-        vertical: 11.v,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 176.h, vertical: 11.v),
       decoration: AppDecoration.fillGray,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           SizedBox(height: 20.v),
-          Text(
-            "ホーム",
-            style: theme.textTheme.headlineMedium,
-          ),
+          Text("ホーム", style: theme.textTheme.headlineMedium),
         ],
       ),
     );

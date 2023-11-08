@@ -1,5 +1,8 @@
 import 'package:cyrus_man_s_application1/core/app_export.dart';
+import 'package:cyrus_man_s_application1/presentation/Chat/Chat.dart';
 import 'package:cyrus_man_s_application1/presentation/Home/Home.dart';
+import 'package:cyrus_man_s_application1/presentation/Profile/Profile.dart';
+import 'package:cyrus_man_s_application1/presentation/Target/Target.dart';
 import 'package:cyrus_man_s_application1/widgets/app_bar/appbar_title.dart';
 import 'package:cyrus_man_s_application1/widgets/app_bar/custom_app_bar.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_bottom_bar.dart';
@@ -51,10 +54,7 @@ class ProfileEdit extends StatelessWidget {
                               imagePath: ImageConstant.imgVectorgray500,
                               height: 150.adaptSize,
                               width: 150.adaptSize,
-                              margin: EdgeInsets.only(
-                                top: 10.v,
-                                bottom: 9.v,
-                              ),
+                              margin: EdgeInsets.only(top: 10.v, bottom: 9.v),
                             ),
                             CustomImageView(
                               imagePath: ImageConstant.imgPhotoSet,
@@ -67,10 +67,7 @@ class ProfileEdit extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "自己紹介:",
-                              style: theme.textTheme.titleLarge,
-                            ),
+                            Text("自己紹介:", style: theme.textTheme.titleLarge),
                             _buildIntroduceInput(context),
                           ],
                         ),
@@ -78,10 +75,7 @@ class ProfileEdit extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "ニックネーム:",
-                              style: theme.textTheme.titleLarge,
-                            ),
+                            Text("ニックネーム:", style: theme.textTheme.titleLarge),
                             _buildNickNameInput(context),
                           ],
                         ),
@@ -89,10 +83,7 @@ class ProfileEdit extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "身長:",
-                              style: theme.textTheme.titleLarge,
-                            ),
+                            Text("身長:", style: theme.textTheme.titleLarge),
                             _buildHeightInput(context),
                           ],
                         ),
@@ -100,10 +91,7 @@ class ProfileEdit extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "体重:",
-                              style: theme.textTheme.titleLarge,
-                            ),
+                            Text("体重:", style: theme.textTheme.titleLarge),
                             _buildWeightInput(context),
                           ],
                         ),
@@ -111,10 +99,7 @@ class ProfileEdit extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "居住地:",
-                              style: theme.textTheme.titleLarge,
-                            ),
+                            Text("居住地:", style: theme.textTheme.titleLarge),
                             _buildCityInput(context),
                           ],
                         ),
@@ -122,23 +107,16 @@ class ProfileEdit extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "学歴:",
-                              style: theme.textTheme.titleLarge,
-                            ),
+                            Text("学歴:", style: theme.textTheme.titleLarge),
                             Container(
                               width: 330.h,
                               padding: EdgeInsets.symmetric(
-                                horizontal: 19.h,
-                                vertical: 6.v,
-                              ),
+                                  horizontal: 19.h, vertical: 6.v),
                               decoration: AppDecoration.outlinePinkA.copyWith(
                                 borderRadius: BorderRadiusStyle.roundedBorder5,
                               ),
-                              child: Text(
-                                "高校生",
-                                style: theme.textTheme.bodyLarge,
-                              ),
+                              child:
+                                  Text("高校生", style: theme.textTheme.bodyLarge),
                             ),
                           ],
                         ),
@@ -146,10 +124,7 @@ class ProfileEdit extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "趣味のタイプ:",
-                              style: theme.textTheme.titleLarge,
-                            ),
+                            Text("趣味のタイプ:", style: theme.textTheme.titleLarge),
                             _buildHobbyTypeInput(context),
                           ],
                         ),
@@ -157,10 +132,7 @@ class ProfileEdit extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "職種:",
-                              style: theme.textTheme.titleLarge,
-                            ),
+                            Text("職種:", style: theme.textTheme.titleLarge),
                             SizedBox(height: 2.v),
                             _buildJobInput(context),
                           ],
@@ -169,10 +141,7 @@ class ProfileEdit extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "性的指向:",
-                              style: theme.textTheme.titleLarge,
-                            ),
+                            Text("性的指向:", style: theme.textTheme.titleLarge),
                             SizedBox(height: 2.v),
                             _buildSexualInput(context),
                           ],
@@ -181,10 +150,7 @@ class ProfileEdit extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "社交力:",
-                              style: theme.textTheme.titleLarge,
-                            ),
+                            Text("社交力:", style: theme.textTheme.titleLarge),
                             SizedBox(height: 2.v),
                             _buildSociabilityInput(context),
                           ],
@@ -193,10 +159,7 @@ class ProfileEdit extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "探す対象:",
-                              style: theme.textTheme.titleLarge,
-                            ),
+                            Text("探す対象:", style: theme.textTheme.titleLarge),
                             SizedBox(height: 2.v),
                             _buildFindTargetInput(context),
                           ],
@@ -205,10 +168,7 @@ class ProfileEdit extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "目的:",
-                              style: theme.textTheme.titleLarge,
-                            ),
+                            Text("目的:", style: theme.textTheme.titleLarge),
                             SizedBox(height: 2.v),
                             _buildPurposeInput(context),
                           ],
@@ -217,10 +177,7 @@ class ProfileEdit extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "宗教:",
-                              style: theme.textTheme.titleLarge,
-                            ),
+                            Text("宗教:", style: theme.textTheme.titleLarge),
                             SizedBox(height: 2.v),
                             _buildReligiousInput(context),
                           ],
@@ -235,7 +192,6 @@ class ProfileEdit extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: _buildBottomBar(context),
       ),
     );
   }
@@ -388,35 +344,5 @@ class ProfileEdit extends StatelessWidget {
       text: "確認",
       buttonStyle: CustomButtonStyles.outlinePinkATL30,
     );
-  }
-
-  /// Section Widget
-  Widget _buildBottomBar(BuildContext context) {
-    return CustomBottomBar(
-      onChanged: (BottomBarEnum type) {
-        Navigator.pushNamed(
-            navigatorKey.currentContext!, getCurrentRoute(type));
-      },
-    );
-  }
-
-  ///Handling route based on bottom click actions
-  String getCurrentRoute(BottomBarEnum type) {
-    switch (type) {
-      case BottomBarEnum.tf:
-        return AppRoutes.header;
-      default:
-        return "/";
-    }
-  }
-
-  ///Handling page based on route
-  Widget getCurrentPage(String currentRoute) {
-    switch (currentRoute) {
-      case AppRoutes.header:
-        return Home();
-      default:
-        return DefaultWidget();
-    }
   }
 }

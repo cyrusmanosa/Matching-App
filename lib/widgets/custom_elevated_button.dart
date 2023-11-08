@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 
 class CustomElevatedButton extends BaseButton {
   CustomElevatedButton({
+    Alignment? alignment,
+    bool? isDisabled,
+    ButtonStyle? buttonStyle,
+    double? height,
+    double? width,
+    EdgeInsets? margin,
     Key? key,
+    TextStyle? buttonTextStyle,
+    VoidCallback? onPressed,
     this.decoration,
     this.leftIcon,
     this.rightIcon,
-    EdgeInsets? margin,
-    VoidCallback? onPressed,
-    ButtonStyle? buttonStyle,
-    Alignment? alignment,
-    TextStyle? buttonTextStyle,
-    bool? isDisabled,
-    double? height,
-    double? width,
     required String text,
   }) : super(
           text: text,
@@ -30,9 +30,7 @@ class CustomElevatedButton extends BaseButton {
         );
 
   final BoxDecoration? decoration;
-
   final Widget? leftIcon;
-
   final Widget? rightIcon;
 
   @override

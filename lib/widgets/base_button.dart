@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 class BaseButton extends StatelessWidget {
   BaseButton({
     Key? key,
-    required this.text,
-    this.onPressed,
+    this.alignment,
     this.buttonStyle,
     this.buttonTextStyle,
-    this.isDisabled,
     this.height,
-    this.width,
+    this.isDisabled,
     this.margin,
-    this.alignment,
+    this.onPressed,
+    this.width,
+    required this.text,
   }) : super(key: key);
 
   final String text;
