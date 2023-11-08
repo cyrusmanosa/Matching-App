@@ -171,8 +171,6 @@ class LoverConditionsRepair extends StatelessWidget {
       controller: ageInputController,
       hintText: "30",
       alignment: Alignment.bottomCenter,
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -196,8 +194,6 @@ class LoverConditionsRepair extends StatelessWidget {
     return CustomTextFormField(
       controller: nationalityController,
       hintText: "日本",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -220,8 +216,6 @@ class LoverConditionsRepair extends StatelessWidget {
     return CustomTextFormField(
       controller: residenceController,
       hintText: "大阪",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -244,8 +238,6 @@ class LoverConditionsRepair extends StatelessWidget {
     return CustomTextFormField(
       controller: genderController,
       hintText: "男",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -268,8 +260,6 @@ class LoverConditionsRepair extends StatelessWidget {
     return CustomTextFormField(
       controller: sexualOrientationController,
       hintText: "異性愛",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -293,8 +283,6 @@ class LoverConditionsRepair extends StatelessWidget {
       width: 51.h,
       controller: heightInputController,
       hintText: "170cm",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -327,8 +315,6 @@ class LoverConditionsRepair extends StatelessWidget {
     return CustomTextFormField(
       controller: educationController,
       hintText: "高校生",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -352,8 +338,6 @@ class LoverConditionsRepair extends StatelessWidget {
     return CustomTextFormField(
       controller: occupationController,
       hintText: "ホスト",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -377,8 +361,6 @@ class LoverConditionsRepair extends StatelessWidget {
     return CustomTextFormField(
       controller: zipcodeController,
       hintText: "4000",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -402,8 +384,6 @@ class LoverConditionsRepair extends StatelessWidget {
     return CustomTextFormField(
       controller: socialSkillsController,
       hintText: "人たら神",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -428,8 +408,6 @@ class LoverConditionsRepair extends StatelessWidget {
       controller: religionController,
       hintText: "多神教",
       textInputAction: TextInputAction.done,
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 

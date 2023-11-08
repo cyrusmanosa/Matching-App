@@ -23,7 +23,6 @@ class ShownicknamebarItemWidget extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: Text("山崎太一", style: CustomTextStyles.bodyLargeBlack900),
           ),
-
           // Theme
           Align(
             alignment: Alignment.centerLeft,

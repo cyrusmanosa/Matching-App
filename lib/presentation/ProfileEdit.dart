@@ -1,11 +1,6 @@
 import 'package:cyrus_man_s_application1/core/app_export.dart';
-import 'package:cyrus_man_s_application1/presentation/Chat/Chat.dart';
-import 'package:cyrus_man_s_application1/presentation/Home/Home.dart';
-import 'package:cyrus_man_s_application1/presentation/Profile/Profile.dart';
-import 'package:cyrus_man_s_application1/presentation/Target/Target.dart';
 import 'package:cyrus_man_s_application1/widgets/app_bar/appbar_title.dart';
 import 'package:cyrus_man_s_application1/widgets/app_bar/custom_app_bar.dart';
-import 'package:cyrus_man_s_application1/widgets/custom_bottom_bar.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +42,7 @@ class ProfileEdit extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 50.h),
                     child: Column(
                       children: [
+                        // photos
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -108,16 +104,7 @@ class ProfileEdit extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text("学歴:", style: theme.textTheme.titleLarge),
-                            Container(
-                              width: 330.h,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 19.h, vertical: 6.v),
-                              decoration: AppDecoration.outlinePinkA.copyWith(
-                                borderRadius: BorderRadiusStyle.roundedBorder5,
-                              ),
-                              child:
-                                  Text("高校生", style: theme.textTheme.bodyLarge),
-                            ),
+                            _buildEducationInput(context),
                           ],
                         ),
                         SizedBox(height: 4.v),
@@ -183,7 +170,7 @@ class ProfileEdit extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 13.v),
-                        _buildNameButton(context),
+                        _buildSubmitButton(context),
                       ],
                     ),
                   ),
@@ -196,149 +183,126 @@ class ProfileEdit extends StatelessWidget {
     );
   }
 
-  /// Section Widget
+  /// Header
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return CustomAppBar(
       centerTitle: true,
       title: AppbarTitle(
         text: "プロフィール編集",
-        margin: EdgeInsets.only(
-          top: 59.v,
-          bottom: 11.v,
-        ),
+        margin: EdgeInsets.only(left: 67.v, right: 18.v),
       ),
       styleType: Style.bgFill,
     );
   }
 
-  /// Section Widget
+  /// Introduce
   Widget _buildIntroduceInput(BuildContext context) {
     return CustomTextFormField(
       controller: introduceInputController,
       hintText: "亜dさdさだだ",
       maxLines: 8,
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: 20.h,
-        vertical: 19.v,
-      ),
-      decoration: InputDecoration(),
-      children: [],
+      contentPadding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 19.v),
     );
   }
 
-  /// Section Widget
+  /// NickName
   Widget _buildNickNameInput(BuildContext context) {
     return CustomTextFormField(
       controller: nickNameInputController,
       hintText: "仆街",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
-  /// Section Widget
+  /// Height
   Widget _buildHeightInput(BuildContext context) {
     return CustomTextFormField(
       controller: heightInputController,
       hintText: "170cm",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
-  /// Section Widget
+  /// Weight
   Widget _buildWeightInput(BuildContext context) {
     return CustomTextFormField(
       controller: weightInputController,
       hintText: "60kg",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
-  /// Section Widget
+  /// City
   Widget _buildCityInput(BuildContext context) {
     return CustomTextFormField(
       controller: cityInputController,
       hintText: "大阪",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
-  /// Section Widget
+  Widget _buildEducationInput(BuildContext context) {
+    return CustomTextFormField(
+      controller: hobbyTypeInputController,
+      hintText: "サッカー",
+    );
+  }
+
+  /// HobbyType
   Widget _buildHobbyTypeInput(BuildContext context) {
     return CustomTextFormField(
       controller: hobbyTypeInputController,
       hintText: "サッカー",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
-  /// Section Widget
+  /// Job
   Widget _buildJobInput(BuildContext context) {
     return CustomTextFormField(
       controller: jobInputController,
       hintText: "ホスト",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
-  /// Section Widget
+  /// Sexual
   Widget _buildSexualInput(BuildContext context) {
     return CustomTextFormField(
       controller: sexualInputController,
       hintText: "異性愛",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
-  /// Section Widget
+  /// Sociability
   Widget _buildSociabilityInput(BuildContext context) {
     return CustomTextFormField(
       controller: sociabilityInputController,
       hintText: "人たら神",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
-  /// Section Widget
+  /// Find Target
   Widget _buildFindTargetInput(BuildContext context) {
     return CustomTextFormField(
       controller: findTargetInputController,
       hintText: "サッカーのチームメンバー",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
-  /// Section Widget
+  /// Purpose
   Widget _buildPurposeInput(BuildContext context) {
     return CustomTextFormField(
       controller: purposeInputController,
       hintText: "サッカーチームを組む",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
-  /// Section Widget
+  /// Religious
   Widget _buildReligiousInput(BuildContext context) {
     return CustomTextFormField(
       controller: religiousInputController,
       hintText: "多神教",
       textInputAction: TextInputAction.done,
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
-  /// Section Widget
-  Widget _buildNameButton(BuildContext context) {
+  /// button
+  Widget _buildSubmitButton(BuildContext context) {
     return CustomOutlinedButton(
       width: 150.h,
       text: "確認",

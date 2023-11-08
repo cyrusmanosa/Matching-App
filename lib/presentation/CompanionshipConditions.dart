@@ -102,8 +102,6 @@ class CompanionshipConditions extends StatelessWidget {
     return CustomTextFormField(
       controller: ageController,
       hintText: "３０代",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -126,8 +124,6 @@ class CompanionshipConditions extends StatelessWidget {
     return CustomTextFormField(
       controller: nationalityController,
       hintText: "日本",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -150,8 +146,6 @@ class CompanionshipConditions extends StatelessWidget {
     return CustomTextFormField(
       controller: residenceController,
       hintText: "大阪",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -174,8 +168,6 @@ class CompanionshipConditions extends StatelessWidget {
     return CustomTextFormField(
       controller: genderController,
       hintText: "男",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -198,8 +190,6 @@ class CompanionshipConditions extends StatelessWidget {
     return CustomTextFormField(
       controller: typeOfCompanionController,
       hintText: "おしゃべり",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -222,8 +212,6 @@ class CompanionshipConditions extends StatelessWidget {
     return CustomTextFormField(
       controller: targetController,
       hintText: "聞き役",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -247,8 +235,6 @@ class CompanionshipConditions extends StatelessWidget {
       controller: socialSkillsController,
       hintText: "人たら神",
       textInputAction: TextInputAction.done,
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 

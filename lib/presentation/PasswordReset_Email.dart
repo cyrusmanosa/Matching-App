@@ -94,8 +94,6 @@ class PasswordResetEmail extends StatelessWidget {
           hintText: "example@email.com",
           textInputAction: TextInputAction.done,
           textInputType: TextInputType.emailAddress,
-          decoration: InputDecoration(),
-          children: [],
         ),
       ],
     );

@@ -64,8 +64,6 @@ class NewPasswordSetup extends StatelessWidget {
       CustomTextFormField(
         controller: zipcodeController,
         hintText: "423198",
-        decoration: InputDecoration(),
-        children: [],
       )
     ]);
   }
@@ -78,8 +76,6 @@ class NewPasswordSetup extends StatelessWidget {
         controller: zipcodeController1,
         hintText: "423198",
         textInputAction: TextInputAction.done,
-        decoration: InputDecoration(),
-        children: [],
       )
     ]);
   }

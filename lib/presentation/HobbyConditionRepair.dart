@@ -122,8 +122,6 @@ class HobbyConditionRepair extends StatelessWidget {
     return CustomTextFormField(
       controller: ageController,
       hintText: "３０代",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -146,8 +144,6 @@ class HobbyConditionRepair extends StatelessWidget {
     return CustomTextFormField(
       controller: nationalityController,
       hintText: "日本",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -170,8 +166,6 @@ class HobbyConditionRepair extends StatelessWidget {
     return CustomTextFormField(
       controller: residenceController,
       hintText: "大阪",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -194,8 +188,6 @@ class HobbyConditionRepair extends StatelessWidget {
     return CustomTextFormField(
       controller: genderController,
       hintText: "男",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -218,8 +210,6 @@ class HobbyConditionRepair extends StatelessWidget {
     return CustomTextFormField(
       controller: interestTypeController,
       hintText: "サッカー",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -242,8 +232,6 @@ class HobbyConditionRepair extends StatelessWidget {
     return CustomTextFormField(
       controller: group77Controller,
       hintText: "サッカーのチームメンバー",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -266,8 +254,6 @@ class HobbyConditionRepair extends StatelessWidget {
     return CustomTextFormField(
       controller: experienceController,
       hintText: "3年",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -291,8 +277,6 @@ class HobbyConditionRepair extends StatelessWidget {
       controller: socialSkillsController,
       hintText: "人たら神",
       textInputAction: TextInputAction.done,
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 

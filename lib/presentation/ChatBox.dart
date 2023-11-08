@@ -478,8 +478,6 @@ class ChatBox extends StatelessWidget {
                                   TextFormFieldStyleHelper.fillGray,
                               filled: true,
                               fillColor: appTheme.gray800,
-                              decoration: InputDecoration(),
-                              children: [],
                             )),
                         CustomImageView(
                             imagePath: ImageConstant.imgSend,

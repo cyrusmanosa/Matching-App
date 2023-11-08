@@ -25,8 +25,6 @@ class CustomTextFormField extends StatelessWidget {
     this.autofocus = true,
     this.filled = false,
     this.obscureText = false,
-    required List children,
-    required InputDecoration decoration,
   }) : super(key: key);
 
   final Alignment? alignment;
@@ -87,7 +85,13 @@ class CustomTextFormField extends StatelessWidget {
         contentPadding: contentPadding ?? EdgeInsets.all(6.h),
         fillColor: fillColor,
         filled: filled,
-        border: borderDecoration ?? InputBorder.none,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5.h),
+          borderSide: BorderSide(
+            color: appTheme.pinkA100,
+            width: 1,
+          ),
+        ),
         enabledBorder: borderDecoration ?? InputBorder.none,
         focusedBorder: borderDecoration ?? InputBorder.none,
         errorBorder: OutlineInputBorder(

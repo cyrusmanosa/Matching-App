@@ -122,8 +122,6 @@ class HobbyCondition extends StatelessWidget {
     return CustomTextFormField(
       controller: group6Controller,
       hintText: "３０代",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -149,8 +147,6 @@ class HobbyCondition extends StatelessWidget {
     return CustomTextFormField(
       controller: group7Controller,
       hintText: "日本",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -176,8 +172,6 @@ class HobbyCondition extends StatelessWidget {
     return CustomTextFormField(
       controller: group8Controller,
       hintText: "大阪",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -203,8 +197,6 @@ class HobbyCondition extends StatelessWidget {
     return CustomTextFormField(
       controller: group9Controller,
       hintText: "男",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -230,8 +222,6 @@ class HobbyCondition extends StatelessWidget {
     return CustomTextFormField(
       controller: group10Controller,
       hintText: "サッカー",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -257,8 +247,6 @@ class HobbyCondition extends StatelessWidget {
     return CustomTextFormField(
       controller: group11Controller,
       hintText: "サッカーのチームメンバー",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -284,8 +272,6 @@ class HobbyCondition extends StatelessWidget {
     return CustomTextFormField(
       controller: group12Controller,
       hintText: "3年",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -311,8 +297,6 @@ class HobbyCondition extends StatelessWidget {
     return CustomTextFormField(
       controller: distanceController,
       hintText: "170cm",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
@@ -369,8 +353,6 @@ class HobbyCondition extends StatelessWidget {
       controller: frame4Controller,
       hintText: "人たら神",
       textInputAction: TextInputAction.done,
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 

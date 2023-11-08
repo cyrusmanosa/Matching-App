@@ -103,8 +103,6 @@ class NewPasswordError extends StatelessWidget {
         CustomTextFormField(
           controller: zipcodeController,
           hintText: "423198",
-          decoration: InputDecoration(),
-          children: [],
         ),
       ],
     );
@@ -123,8 +121,6 @@ class NewPasswordError extends StatelessWidget {
           controller: zipcodeController1,
           hintText: "423198",
           textInputAction: TextInputAction.done,
-          decoration: InputDecoration(),
-          children: [],
         ),
       ],
     );

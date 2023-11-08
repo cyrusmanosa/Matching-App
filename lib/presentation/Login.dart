@@ -112,10 +112,7 @@ class Login extends StatelessWidget {
     return CustomTextFormField(
       controller: emailInputController,
       textInputType: TextInputType.emailAddress,
-      decoration: InputDecoration(
-        hintText: "example@email.com",
-      ),
-      children: [],
+      hintText: "example@email.com",
     );
   }
 
@@ -144,8 +141,6 @@ class Login extends StatelessWidget {
       textInputAction: TextInputAction.done,
       textInputType: TextInputType.visiblePassword,
       obscureText: true,
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
