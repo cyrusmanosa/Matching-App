@@ -1,97 +1,61 @@
 import 'package:cyrus_man_s_application1/core/app_export.dart';
 import 'package:flutter/material.dart';
 
-/// A class that offers pre-defined button styles for customizing button appearance.
 class CustomButtonStyles {
-  // Filled button style
-  static ButtonStyle get fillPink => ElevatedButton.styleFrom(
+// Filled button style
+  // Dark Pink BG and Shadow (onTap Color)
+  static ButtonStyle get fillPinkOnTap => ElevatedButton.styleFrom(
         backgroundColor: appTheme.pink800,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.h),
-        ),
-      );
-  static ButtonStyle get fillPinkA => ElevatedButton.styleFrom(
-        backgroundColor: appTheme.pinkA100,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.h),
-        ),
-      );
-  static ButtonStyle get fillRedA => ElevatedButton.styleFrom(
-        backgroundColor: appTheme.redA700,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.h),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.h)),
       );
 
-  // Outline button style
-  static ButtonStyle get outlineBlack => ElevatedButton.styleFrom(
+  // Pink BG and Shadow (not onTap Color)
+  static ButtonStyle get fillPink => ElevatedButton.styleFrom(
+        backgroundColor: appTheme.pinkA100,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.h)),
+      );
+
+  // Red BG and Shadow (not onTap Color)
+  static ButtonStyle get fillRed => ElevatedButton.styleFrom(
+        backgroundColor: appTheme.redA700,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.h)),
+      );
+
+  // Dark Blue
+  static ButtonStyle get outlineDarkBlue => ElevatedButton.styleFrom(
         backgroundColor: appTheme.blue800,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.h),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.h)),
         shadowColor: appTheme.black900.withOpacity(0.3),
-        elevation: 1,
       );
-  static ButtonStyle get outlineBlue => OutlinedButton.styleFrom(
+
+  // light Blue GB and Shadow
+  static ButtonStyle get outlineBlueBlueBG => OutlinedButton.styleFrom(
         backgroundColor: appTheme.blueA400,
-        side: BorderSide(
-          color: appTheme.blue800,
-          width: 1,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.h),
-        ),
+        side: BorderSide(color: appTheme.blue800, width: 1),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.h)),
       );
-  static ButtonStyle get outlineGray => OutlinedButton.styleFrom(
+
+  // while BG , gray border , Shadow
+  static ButtonStyle get outlineGrayWhiteBG => OutlinedButton.styleFrom(
         backgroundColor: theme.colorScheme.primary,
-        side: BorderSide(
-          color: appTheme.gray500,
-          width: 1,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.h),
-        ),
+        side: BorderSide(color: appTheme.gray500, width: 1),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.h)),
       );
-  static ButtonStyle get outlineOnErrorContainer => OutlinedButton.styleFrom(
+
+  // gray BG , gray border , Shadow
+  static ButtonStyle get outlineBlackDGBG => OutlinedButton.styleFrom(
         backgroundColor: appTheme.gray800,
-        side: BorderSide(
-          color: theme.colorScheme.onErrorContainer,
-          width: 1,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.h),
-        ),
+        side: BorderSide(color: theme.colorScheme.onErrorContainer, width: 1),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.h)),
       );
-  static ButtonStyle get outlinePinkATL30 => OutlinedButton.styleFrom(
+
+  // light gray BG , Pink border , Shadow
+  static ButtonStyle get outlinePinkGrayBG => OutlinedButton.styleFrom(
         backgroundColor: Colors.transparent,
-        side: BorderSide(
-          color: appTheme.pinkA100,
-          width: 2,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.h),
-        ),
+        side: BorderSide(color: appTheme.pinkA100, width: 2),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.h)),
       );
-  static ButtonStyle get outlinePinkATL301 => OutlinedButton.styleFrom(
-        backgroundColor: Colors.transparent,
-        side: BorderSide(
-          color: appTheme.pinkA100,
-          width: 2,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.h),
-        ),
-      );
-  static ButtonStyle get outlinePinkATL5 => OutlinedButton.styleFrom(
-        backgroundColor: Colors.transparent,
-        side: BorderSide(
-          color: appTheme.pinkA100,
-          width: 1,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.h),
-        ),
-      );
+
   // text button style
   static ButtonStyle get none => ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),

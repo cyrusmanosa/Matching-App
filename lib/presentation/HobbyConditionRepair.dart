@@ -44,25 +44,25 @@ class HobbyConditionRepair extends StatelessWidget {
                     child: Column(
                       children: [
                         _buildEraInput(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildCounityInput(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildCityInput(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildGenderInput(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildHobbyTypeInput(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildFindTargetInput(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildExperienceInput(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildWeightInput(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildWeightInput(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildSociabilityInput(context),
-                        SizedBox(height: 21.v),
+                        SizedBox(height: 20.v),
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Row(
@@ -87,7 +87,7 @@ class HobbyConditionRepair extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(height: 28.v),
+                        SizedBox(height: 25.v),
                         _buildConditionConfirmation(context),
                       ],
                     ),
@@ -300,7 +300,7 @@ class HobbyConditionRepair extends StatelessWidget {
     return CustomOutlinedButton(
       width: 150.h,
       text: "条件確認",
-      buttonStyle: CustomButtonStyles.outlinePinkATL30,
+      buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
     );
   }
 
@@ -308,8 +308,7 @@ class HobbyConditionRepair extends StatelessWidget {
   Widget _buildBottomBar(BuildContext context) {
     return CustomBottomBar(
       onChanged: (BottomBarEnum type) {
-        Navigator.pushNamed(
-            navigatorKey.currentContext!, getCurrentRoute(type));
+        Navigator.pushNamed(navigatorKey.currentContext!, getCurrentRoute(type));
       },
     );
   }
@@ -336,7 +335,7 @@ class HobbyConditionRepair extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 8.v),
+              SizedBox(height: 10.v),
               Text(
                 "60kg",
                 style: theme.textTheme.bodyLarge,

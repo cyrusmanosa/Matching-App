@@ -82,7 +82,7 @@ class Profile extends StatelessWidget {
                   CustomOutlinedButton(
                     width: 150.h,
                     text: "編集",
-                    buttonStyle: CustomButtonStyles.outlinePinkATL30,
+                    buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
                     onPressed: () {
                       onTaptf(context);
                     },
@@ -158,25 +158,18 @@ class Profile extends StatelessWidget {
 
   Widget _buildClaimWord(BuildContext context) {
     return Column(
-      children: [
-        Text("クレーム回数", style: theme.textTheme.titleLarge),
-        Text("0", style: theme.textTheme.headlineLarge)
-      ],
+      children: [Text("クレーム回数", style: theme.textTheme.titleLarge), Text("0", style: theme.textTheme.headlineLarge)],
     );
   }
 
   Widget _buildChangeWord(BuildContext context) {
-    return Column(children: [
-      Text("交換回数", style: theme.textTheme.titleLarge),
-      Text("0", style: theme.textTheme.headlineLarge)
-    ]);
+    return Column(
+        children: [Text("交換回数", style: theme.textTheme.titleLarge), Text("0", style: theme.textTheme.headlineLarge)]);
   }
 
   Widget _buildSendWord(BuildContext context) {
-    return Column(children: [
-      Text("伝送回数", style: theme.textTheme.titleLarge),
-      Text("0", style: theme.textTheme.headlineLarge)
-    ]);
+    return Column(
+        children: [Text("伝送回数", style: theme.textTheme.titleLarge), Text("0", style: theme.textTheme.headlineLarge)]);
   }
 
 // edit button

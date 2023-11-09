@@ -36,19 +36,19 @@ class CompanionshipConditions extends StatelessWidget {
             children: [
               SizedBox(height: 88.v),
               _buildEraInput(context),
-              SizedBox(height: 16.v),
+              SizedBox(height: 15.v),
               _buildCounityInput(context),
-              SizedBox(height: 16.v),
+              SizedBox(height: 15.v),
               _buildCityInput(context),
-              SizedBox(height: 16.v),
+              SizedBox(height: 15.v),
               _buildGenderInput(context),
-              SizedBox(height: 16.v),
+              SizedBox(height: 15.v),
               _buildAccompanyTypeInput(context),
-              SizedBox(height: 16.v),
+              SizedBox(height: 15.v),
               _buildFindTargetInput(context),
-              SizedBox(height: 16.v),
+              SizedBox(height: 15.v),
               _buildSociabilityInput(context),
-              SizedBox(height: 21.v),
+              SizedBox(height: 20.v),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Row(
@@ -262,7 +262,7 @@ class CompanionshipConditions extends StatelessWidget {
         right: 140.h,
         bottom: 2.v,
       ),
-      buttonStyle: CustomButtonStyles.outlinePinkATL301,
+      buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
     );
   }
 }

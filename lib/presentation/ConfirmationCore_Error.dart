@@ -14,20 +14,11 @@ class ConfirmationCoreError extends StatelessWidget {
                 width: double.maxFinite,
                 padding: EdgeInsets.only(left: 47.h, top: 65.v, right: 47.h),
                 child: Column(children: [
-                  CustomImageView(
-                      imagePath: ImageConstant.imgLogo,
-                      height: 81.v,
-                      width: 95.h),
+                  CustomImageView(imagePath: ImageConstant.imgLogo, height: 81.v, width: 95.h),
                   SizedBox(height: 1.v),
-                  CustomImageView(
-                      imagePath: ImageConstant.imgSlogan,
-                      height: 17.v,
-                      width: 100.h),
+                  CustomImageView(imagePath: ImageConstant.imgSlogan, height: 17.v, width: 100.h),
                   SizedBox(height: 30.v),
-                  CustomImageView(
-                      imagePath: ImageConstant.imgWarning,
-                      height: 41.v,
-                      width: 49.h),
+                  CustomImageView(imagePath: ImageConstant.imgWarning, height: 41.v, width: 49.h),
                   SizedBox(height: 6.v),
                   SizedBox(
                       width: 336.h,
@@ -36,41 +27,27 @@ class ConfirmationCoreError extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
                           style: CustomTextStyles.bodyMediumOnPrimary)),
-                  Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text("認証コードを送信しました",
-                          style: CustomTextStyles.headlineSmallRoundedMplus1c)),
+                  Align(alignment: Alignment.centerLeft, child: Text("認証コードを送信しました", style: CustomTextStyles.headlineSmallRoundedMplus1c)),
                   SizedBox(height: 1.v),
-                  Text("以下にコードを入力してメールアドレスを認証してください。",
-                      style: theme.textTheme.bodySmall),
-                  SizedBox(height: 8.v),
+                  Text("以下にコードを入力してメールアドレスを認証してください。", style: theme.textTheme.bodySmall),
+                  SizedBox(height: 10.v),
                   Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
                           padding: EdgeInsets.only(right: 35.h),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("認証コード:",
-                                    style: theme.textTheme.titleLarge),
-                                Container(
-                                    width: 300.h,
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 19.h, vertical: 6.v),
-                                    decoration: AppDecoration.outlinePinkA
-                                        .copyWith(
-                                            borderRadius: BorderRadiusStyle
-                                                .roundedBorder5),
-                                    child: Text("423198",
-                                        style: theme.textTheme.bodyLarge))
-                              ]))),
+                          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                            Text("認証コード:", style: theme.textTheme.titleLarge),
+                            Container(
+                                width: 300.h,
+                                padding: EdgeInsets.symmetric(horizontal: 19.h, vertical: 6.v),
+                                decoration: AppDecoration.outlinePinkA.copyWith(borderRadius: BorderRadiusStyle.roundedBorder5),
+                                child: Text("423198", style: theme.textTheme.bodyLarge))
+                          ]))),
                   SizedBox(height: 2.v),
                   Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
-                          padding: EdgeInsets.only(left: 2.h),
-                          child: Text("コードが届かない場合",
-                              style: CustomTextStyles.bodyMediumBlack900))),
+                          padding: EdgeInsets.only(left: 2.h), child: Text("コードが届かない場合", style: CustomTextStyles.bodyMediumBlack900))),
                   SizedBox(height: 24.v),
                   CustomOutlinedButton(
                       height: 38.v,

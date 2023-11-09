@@ -9,7 +9,7 @@ class AppDecoration {
   static BoxDecoration get fillGray => BoxDecoration(
         color: appTheme.gray500,
       );
-  static BoxDecoration get fillPinkA => BoxDecoration(
+  static BoxDecoration get fillPink => BoxDecoration(
         color: appTheme.pinkA100,
       );
   static BoxDecoration get fillPrimary => BoxDecoration(
@@ -20,7 +20,7 @@ class AppDecoration {
       );
 
   // Outline decorations
-  static BoxDecoration get outlineBlack => BoxDecoration(
+  static BoxDecoration get outlineDarkBlue => BoxDecoration(
         color: theme.colorScheme.primary,
         boxShadow: [
           BoxShadow(
@@ -32,7 +32,7 @@ class AppDecoration {
         ],
       );
 
-  static BoxDecoration get outlineBlack900 => BoxDecoration(
+  static BoxDecoration get outlineDarkBlue900 => BoxDecoration(
         color: appTheme.gray500,
         boxShadow: [
           BoxShadow(
@@ -43,7 +43,7 @@ class AppDecoration {
           ),
         ],
       );
-  static BoxDecoration get outlineBlack9001 => BoxDecoration(
+  static BoxDecoration get outlineDarkBlue9001 => BoxDecoration(
         color: appTheme.pinkA100,
         boxShadow: [
           BoxShadow(

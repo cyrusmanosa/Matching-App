@@ -40,10 +40,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size(
-        mediaQueryData.size.width,
-        height ?? 110.v,
-      );
+  Size get preferredSize => Size(mediaQueryData.size.width, height ?? 110.v);
 
   _getStyle() {
     switch (styleType) {
@@ -51,9 +48,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         return Container(
           height: 81,
           width: double.maxFinite,
-          decoration: BoxDecoration(
-            color: appTheme.gray500,
-          ),
+          decoration: BoxDecoration(color: appTheme.gray500),
         );
       default:
         return null;
@@ -61,6 +56,4 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-enum Style {
-  bgFill,
-}
+enum Style { bgFill }

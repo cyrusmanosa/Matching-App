@@ -10,11 +10,11 @@
 		</data>
 		<key>flutter_assets/AssetManifest.bin</key>
 		<data>
-		AeQKfdMa93Byv6cKIoVSMR0Y7Jk=
+		1OM4gG1ab5m45cQdLSTsgsUNu3Q=
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		87ygErtYtUZaHoSHFWMeznE4tiI=
+		hqMI7j1WG3IjQB/NEFA/IHLnrt8=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -26,7 +26,7 @@
 		</data>
 		<key>flutter_assets/assets/.DS_Store</key>
 		<data>
-		iU09KTBp3kcF2RapJXevcjpcSL4=
+		Ogi/DprmluJ8A9BDEGkRSyMkA84=
 		</data>
 		<key>flutter_assets/assets/fonts/MontserratSemiBold.ttf</key>
 		<data>
@@ -44,6 +44,10 @@
 		<data>
 		tIk0YvIonfaXj5Ripj255kvMk0I=
 		</data>
+		<key>flutter_assets/assets/images/.DS_Store</key>
+		<data>
+		6dTqastNcjI0qCs8yC4lwTbLglY=
+		</data>
 		<key>flutter_assets/assets/images/image_not_found.png</key>
 		<data>
 		/i6nRWQTvvwou8vxBG28GciZC5Y=
@@ -51,6 +55,10 @@
 		<key>flutter_assets/assets/images/img_arrow_left.svg</key>
 		<data>
 		TMNh7r8uRjvjKLKjTCHNfmaGqFc=
+		</data>
+		<key>flutter_assets/assets/images/img_close.png</key>
+		<data>
+		r/4nVpQ925XN41vCjsEAWy+j11g=
 		</data>
 		<key>flutter_assets/assets/images/img_close.svg</key>
 		<data>
@@ -79,6 +87,10 @@
 		<key>flutter_assets/assets/images/img_logo.png</key>
 		<data>
 		Q5oORSl/enmCYc2+ye/ZD91ta58=
+		</data>
+		<key>flutter_assets/assets/images/img_logosfacebook.png</key>
+		<data>
+		fCIDVvB2/odL/lYLDkxyQK7nN0k=
 		</data>
 		<key>flutter_assets/assets/images/img_logosfacebook.svg</key>
 		<data>
@@ -174,7 +186,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		8HluKhutyYceTf+8sI3jy46Prag=
+		ipAdoluZ1iZomxv1VpCo3aiTIAU=
 		</data>
 		<key>flutter_assets/shaders/ink_sparkle.frag</key>
 		<data>
@@ -191,14 +203,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			DkIzJPvdWk0YtE0CvI4YOvVGQg1r3d5G2cWIgvvLD2w=
+			8oJfYcLQZRmkzKiHXwEyGl9tfA03ckRanzkbv2BUn8w=
 			</data>
 		</dict>
 		<key>flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			vJBjyeTOlSyyCh1sf521AsqVgwggoL9DCNTyfJW3WqI=
+			B79iqlL0fcCbszaz/TfgdbADUJjaZjhTEdkKm4JBDsg=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -257,6 +269,13 @@
 			WWCpggJmlzrEqMIzbbQhx5T066kl/UWvGsS1kjheLto=
 			</data>
 		</dict>
+		<key>flutter_assets/assets/images/img_close.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			NQXGAMYynBrJ3TsIgm0MUu5B1zRmo8LMMMRHWgdgENg=
+			</data>
+		</dict>
 		<key>flutter_assets/assets/images/img_close.svg</key>
 		<dict>
 			<key>hash2</key>
@@ -304,6 +323,13 @@
 			<key>hash2</key>
 			<data>
 			CJVmBmNS4uQ5Hj1c6tp+wr0V++wRByEu9oOouOEpSvg=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/img_logosfacebook.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			atavvv5BsGrxuAcWAYTlRspOey/19QJrEzrDUbJqX1k=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/images/img_logosfacebook.svg</key>
@@ -471,7 +497,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			riZcDOAr4ykPQh2XFZ41zVjMDQXXHMzh5RYJjpfhOMg=
+			izWqxWkcMiPles8zVTTZuzC0kL20vedyfcuKoSL5Q+g=
 			</data>
 		</dict>
 		<key>flutter_assets/shaders/ink_sparkle.frag</key>

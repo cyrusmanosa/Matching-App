@@ -17,7 +17,7 @@ class SideBar extends StatelessWidget {
               horizontal: 22.h,
               vertical: 79.v,
             ),
-            decoration: AppDecoration.outlineBlack9001,
+            decoration: AppDecoration.outlineDarkBlue9001,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -57,8 +57,7 @@ class SideBar extends StatelessWidget {
                         padding: EdgeInsets.only(left: 10.h),
                         child: Text(
                           "写真解放",
-                          style: CustomTextStyles
-                              .headlineSmallRoundedMplus1cGray500,
+                          style: CustomTextStyles.headlineSmallRoundedMplus1cGray500,
                         ),
                       ),
                     ],
@@ -92,8 +91,7 @@ class SideBar extends StatelessWidget {
                         padding: EdgeInsets.only(left: 10.h),
                         child: Text(
                           "連絡解放",
-                          style: CustomTextStyles
-                              .headlineSmallRoundedMplus1cGray500,
+                          style: CustomTextStyles.headlineSmallRoundedMplus1cGray500,
                         ),
                       ),
                     ],
@@ -127,8 +125,7 @@ class SideBar extends StatelessWidget {
                         padding: EdgeInsets.only(left: 10.h),
                         child: Text(
                           "位置共有",
-                          style: CustomTextStyles
-                              .headlineSmallRoundedMplus1cGray500,
+                          style: CustomTextStyles.headlineSmallRoundedMplus1cGray500,
                         ),
                       ),
                     ],
@@ -162,8 +159,7 @@ class SideBar extends StatelessWidget {
                         padding: EdgeInsets.only(left: 10.h),
                         child: Text(
                           "デート解放",
-                          style: CustomTextStyles
-                              .headlineSmallRoundedMplus1cGray500,
+                          style: CustomTextStyles.headlineSmallRoundedMplus1cGray500,
                         ),
                       ),
                     ],
@@ -197,8 +193,7 @@ class SideBar extends StatelessWidget {
                         padding: EdgeInsets.only(left: 10.h),
                         child: Text(
                           "SNS共有",
-                          style: CustomTextStyles
-                              .headlineSmallRoundedMplus1cGray500,
+                          style: CustomTextStyles.headlineSmallRoundedMplus1cGray500,
                         ),
                       ),
                     ],

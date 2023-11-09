@@ -35,7 +35,7 @@ class ProfileEdit extends StatelessWidget {
           width: double.maxFinite,
           child: Column(
             children: [
-              SizedBox(height: 16.v),
+              SizedBox(height: 15.v),
               Expanded(
                 child: SingleChildScrollView(
                   child: Padding(
@@ -75,7 +75,7 @@ class ProfileEdit extends StatelessWidget {
                             _buildNickNameInput(context),
                           ],
                         ),
-                        SizedBox(height: 8.v),
+                        SizedBox(height: 10.v),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -83,7 +83,7 @@ class ProfileEdit extends StatelessWidget {
                             _buildHeightInput(context),
                           ],
                         ),
-                        SizedBox(height: 8.v),
+                        SizedBox(height: 10.v),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -91,7 +91,7 @@ class ProfileEdit extends StatelessWidget {
                             _buildWeightInput(context),
                           ],
                         ),
-                        SizedBox(height: 8.v),
+                        SizedBox(height: 10.v),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -99,7 +99,7 @@ class ProfileEdit extends StatelessWidget {
                             _buildCityInput(context),
                           ],
                         ),
-                        SizedBox(height: 8.v),
+                        SizedBox(height: 10.v),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -115,7 +115,7 @@ class ProfileEdit extends StatelessWidget {
                             _buildHobbyTypeInput(context),
                           ],
                         ),
-                        SizedBox(height: 8.v),
+                        SizedBox(height: 10.v),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -124,7 +124,7 @@ class ProfileEdit extends StatelessWidget {
                             _buildJobInput(context),
                           ],
                         ),
-                        SizedBox(height: 8.v),
+                        SizedBox(height: 10.v),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -133,7 +133,7 @@ class ProfileEdit extends StatelessWidget {
                             _buildSexualInput(context),
                           ],
                         ),
-                        SizedBox(height: 8.v),
+                        SizedBox(height: 10.v),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -142,7 +142,7 @@ class ProfileEdit extends StatelessWidget {
                             _buildSociabilityInput(context),
                           ],
                         ),
-                        SizedBox(height: 8.v),
+                        SizedBox(height: 10.v),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -151,7 +151,7 @@ class ProfileEdit extends StatelessWidget {
                             _buildFindTargetInput(context),
                           ],
                         ),
-                        SizedBox(height: 8.v),
+                        SizedBox(height: 10.v),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -160,7 +160,7 @@ class ProfileEdit extends StatelessWidget {
                             _buildPurposeInput(context),
                           ],
                         ),
-                        SizedBox(height: 8.v),
+                        SizedBox(height: 10.v),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -169,7 +169,7 @@ class ProfileEdit extends StatelessWidget {
                             _buildReligiousInput(context),
                           ],
                         ),
-                        SizedBox(height: 13.v),
+                        SizedBox(height: 15.v),
                         _buildSubmitButton(context),
                       ],
                     ),
@@ -306,7 +306,7 @@ class ProfileEdit extends StatelessWidget {
     return CustomOutlinedButton(
       width: 150.h,
       text: "確認",
-      buttonStyle: CustomButtonStyles.outlinePinkATL30,
+      buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
     );
   }
 }

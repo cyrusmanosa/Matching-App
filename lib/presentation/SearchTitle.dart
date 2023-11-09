@@ -9,59 +9,78 @@ class SearchTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
-        child: Scaffold(
-            body: Container(
-                width: double.maxFinite,
-                padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
-                child: Column(children: [
-                  CustomImageView(
-                      imagePath: ImageConstant.imgLogo,
-                      height: 81.v,
-                      width: 95.h),
-                  SizedBox(height: 1.v),
-                  CustomImageView(
-                      imagePath: ImageConstant.imgSlogan,
-                      height: 17.v,
-                      width: 100.h),
-                  SizedBox(height: 19.v),
-                  Text("探すターゲットの種類",
-                      style: CustomTextStyles.headlineMediumBlack900_1),
-                  SizedBox(height: 26.v),
-                  CustomElevatedButton(
-                      text: "趣味",
-                      onPressed: () {
-                        onTaptf(context);
-                      }),
-                  SizedBox(height: 30.v),
-                  CustomElevatedButton(
-                      text: "恋人",
-                      buttonStyle: CustomButtonStyles.fillPink,
-                      onPressed: () {
-                        onTaptf1(context);
-                      }),
-                  SizedBox(height: 30.v),
-                  CustomElevatedButton(
-                      text: "お相伴",
-                      buttonStyle: CustomButtonStyles.fillRedA,
-                      onPressed: () {
-                        onTaptf2(context);
-                      }),
-                  SizedBox(height: 5.v)
-                ]))));
+      child: Scaffold(
+        body: Container(
+          width: double.maxFinite,
+          padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
+          child: Column(
+            children: [
+              // Logo
+              CustomImageView(
+                imagePath: ImageConstant.imgLogo,
+                height: 80,
+                width: 95,
+              ),
+              SizedBox(height: 1.v),
+
+              // Slogan
+              CustomImageView(
+                imagePath: ImageConstant.imgSlogan,
+                height: 17,
+                width: 100,
+              ),
+              SizedBox(height: 25.v),
+
+              // Tilte
+              Text(
+                "探すターゲットの種類",
+                style: CustomTextStyles.headlineMediumBlack900_1,
+              ),
+              SizedBox(height: 25.v),
+
+              // button 1
+              CustomElevatedButton(
+                text: "趣味",
+                onPressed: () {
+                  onTaptFirstHobbyCondition(context);
+                },
+              ),
+              SizedBox(height: 30.v),
+
+              // button 2
+              CustomElevatedButton(
+                text: "恋人",
+                buttonStyle: CustomButtonStyles.fillPinkOnTap,
+                onPressed: () {
+                  onTaptFirstLoverCondition(context);
+                },
+              ),
+              SizedBox(height: 30.v),
+
+              // button 3
+              CustomElevatedButton(
+                text: "お相伴",
+                buttonStyle: CustomButtonStyles.fillRed,
+                onPressed: () {
+                  onTaptFirstCompanionshipCondition(context);
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
-  /// Navigates to the k23Screen when the action is triggered.
-  onTaptf(BuildContext context) {
+  onTaptFirstHobbyCondition(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.hobbyCondition);
   }
 
-  /// Navigates to the k27Screen when the action is triggered.
-  onTaptf1(BuildContext context) {
+  onTaptFirstLoverCondition(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.loverConditions);
   }
 
-  /// Navigates to the k29Screen when the action is triggered.
-  onTaptf2(BuildContext context) {
+  onTaptFirstCompanionshipCondition(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.companionshipConditions);
   }
 }

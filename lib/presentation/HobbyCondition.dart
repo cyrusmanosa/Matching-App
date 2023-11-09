@@ -7,23 +7,16 @@ import 'package:flutter/material.dart';
 class HobbyCondition extends StatelessWidget {
   HobbyCondition({Key? key}) : super(key: key);
 
-  TextEditingController group6Controller = TextEditingController();
-
-  TextEditingController group7Controller = TextEditingController();
-
-  TextEditingController group8Controller = TextEditingController();
-
-  TextEditingController group9Controller = TextEditingController();
-
-  TextEditingController group10Controller = TextEditingController();
-
-  TextEditingController group11Controller = TextEditingController();
-
-  TextEditingController group12Controller = TextEditingController();
-
-  TextEditingController distanceController = TextEditingController();
-
-  TextEditingController frame4Controller = TextEditingController();
+  TextEditingController targetEraInputController = TextEditingController();
+  TextEditingController targetCountryInputController = TextEditingController();
+  TextEditingController targetCityInputController = TextEditingController();
+  TextEditingController targetGenderInputController = TextEditingController();
+  TextEditingController targetHobbyTypeInputController = TextEditingController();
+  TextEditingController findTargetInputController = TextEditingController();
+  TextEditingController targetExperienceInputController = TextEditingController();
+  TextEditingController targetHeightInputController = TextEditingController();
+  TextEditingController targetWeightInputController = TextEditingController();
+  TextEditingController targetSociabilityInputController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,28 +30,154 @@ class HobbyCondition extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                // Header
                 _buildHeader(context),
                 SizedBox(height: 120.v),
-                _buildEraInput(context),
-                SizedBox(height: 16.v),
-                _buildCounityInput(context),
-                SizedBox(height: 16.v),
-                _buildCityInput(context),
-                SizedBox(height: 16.v),
-                _buildGenderInput(context),
-                SizedBox(height: 16.v),
-                _buildHobbyTypeInput(context),
-                SizedBox(height: 16.v),
-                _buildFindTargetInput(context),
-                SizedBox(height: 16.v),
-                _buildExperienceInput(context),
-                SizedBox(height: 16.v),
-                _buildHeightInput(context),
-                SizedBox(height: 16.v),
-                _buildWeightInput(context),
-                SizedBox(height: 16.v),
-                _buildSociabilityInput(context),
-                SizedBox(height: 21.v),
+
+                // Era
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("年代:", style: theme.textTheme.titleLarge),
+                      _buildTargetEraInput(context),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 15.v),
+
+                // Country
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("国籍:", style: theme.textTheme.titleLarge),
+                      _buildTargetCountryInput(context),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 15.v),
+
+                // City
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("居住地:", style: theme.textTheme.titleLarge),
+                      _buildTargetCityInput(context),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 15.v),
+
+                // Gender
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("性別:", style: theme.textTheme.titleLarge),
+                      _buildTargetGenderInput(context),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 15.v),
+
+                // Hobby
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("趣味のタイプ:", style: theme.textTheme.titleLarge),
+                      _buildTargetHobbyTypeInput(context),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 15.v),
+
+                // Find Target
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("探す対象:", style: theme.textTheme.titleLarge),
+                      _buildFindTargetInput(context),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 15.v),
+
+                // Experience of Hobby
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "経験:",
+                        style: theme.textTheme.titleLarge,
+                      ),
+                      _buildTargetExperienceInput(context),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 15.v),
+
+                // Height
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "身長:",
+                        style: theme.textTheme.titleLarge,
+                      ),
+                      _buildTargetHeightInput(context),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 15.v),
+
+                // Weight
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "体重:",
+                        style: theme.textTheme.titleLarge,
+                      ),
+                      _buildTargetWeightInput(context),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 15.v),
+
+                // Sociability
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "社交力:",
+                        style: theme.textTheme.titleLarge,
+                      ),
+                      SizedBox(height: 2.v),
+                      _buildTargetSociabilityInput(context),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20.v),
+
+                // 本人
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
@@ -70,9 +189,7 @@ class HobbyCondition extends StatelessWidget {
                           width: 20.adaptSize,
                           decoration: BoxDecoration(
                             color: appTheme.gray500,
-                            borderRadius: BorderRadius.circular(
-                              10.h,
-                            ),
+                            borderRadius: BorderRadius.circular(10.h),
                           ),
                         ),
                         Padding(
@@ -86,7 +203,7 @@ class HobbyCondition extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 28.v),
+                SizedBox(height: 25.v),
                 _buildCertificationForCheck(context),
               ],
             ),
@@ -96,281 +213,102 @@ class HobbyCondition extends StatelessWidget {
     );
   }
 
-  /// Section Widget
+  /// Backend ----------------------------------------------------------------
+
+  /// Header
   Widget _buildHeader(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 124.h,
-        vertical: 10.v,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 133, vertical: 11),
       decoration: AppDecoration.fillGray,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          SizedBox(height: 49.v),
-          Text(
-            "趣味の条件設定",
-            style: theme.textTheme.headlineMedium,
-          ),
+          SizedBox(height: 50.v),
+          Text("趣味の条件設定", style: theme.textTheme.headlineMedium),
         ],
       ),
     );
   }
 
-  /// Section Widget
-  Widget _buildGroup6(BuildContext context) {
+  /// Era
+  Widget _buildTargetEraInput(BuildContext context) {
     return CustomTextFormField(
-      controller: group6Controller,
+      controller: targetEraInputController,
       hintText: "３０代",
     );
   }
 
-  /// Section Widget
-  Widget _buildEraInput(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "年代:",
-            style: theme.textTheme.titleLarge,
-          ),
-          _buildGroup6(context),
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildGroup7(BuildContext context) {
+  /// Country
+  Widget _buildTargetCountryInput(BuildContext context) {
     return CustomTextFormField(
-      controller: group7Controller,
+      controller: targetCountryInputController,
       hintText: "日本",
     );
   }
 
-  /// Section Widget
-  Widget _buildCounityInput(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "国籍:",
-            style: theme.textTheme.titleLarge,
-          ),
-          _buildGroup7(context),
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildGroup8(BuildContext context) {
+  /// City
+  Widget _buildTargetCityInput(BuildContext context) {
     return CustomTextFormField(
-      controller: group8Controller,
+      controller: targetCityInputController,
       hintText: "大阪",
     );
   }
 
-  /// Section Widget
-  Widget _buildCityInput(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "居住地:",
-            style: theme.textTheme.titleLarge,
-          ),
-          _buildGroup8(context),
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildGroup9(BuildContext context) {
+  /// Gender
+  Widget _buildTargetGenderInput(BuildContext context) {
     return CustomTextFormField(
-      controller: group9Controller,
+      controller: targetGenderInputController,
       hintText: "男",
     );
   }
 
-  /// Section Widget
-  Widget _buildGenderInput(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "性別:",
-            style: theme.textTheme.titleLarge,
-          ),
-          _buildGroup9(context),
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildGroup10(BuildContext context) {
+  /// Hobby Type
+  Widget _buildTargetHobbyTypeInput(BuildContext context) {
     return CustomTextFormField(
-      controller: group10Controller,
+      controller: targetHobbyTypeInputController,
       hintText: "サッカー",
     );
   }
 
-  /// Section Widget
-  Widget _buildHobbyTypeInput(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "趣味のタイプ:",
-            style: theme.textTheme.titleLarge,
-          ),
-          _buildGroup10(context),
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildGroup11(BuildContext context) {
+  /// Find Target
+  Widget _buildFindTargetInput(BuildContext context) {
     return CustomTextFormField(
-      controller: group11Controller,
+      controller: findTargetInputController,
       hintText: "サッカーのチームメンバー",
     );
   }
 
-  /// Section Widget
-  Widget _buildFindTargetInput(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "探す対象:",
-            style: theme.textTheme.titleLarge,
-          ),
-          _buildGroup11(context),
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildGroup12(BuildContext context) {
+  /// Experience
+  Widget _buildTargetExperienceInput(BuildContext context) {
     return CustomTextFormField(
-      controller: group12Controller,
+      controller: targetExperienceInputController,
       hintText: "3年",
     );
   }
 
-  /// Section Widget
-  Widget _buildExperienceInput(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "経験:",
-            style: theme.textTheme.titleLarge,
-          ),
-          _buildGroup12(context),
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildDistance(BuildContext context) {
+  /// Height
+  Widget _buildTargetHeightInput(BuildContext context) {
     return CustomTextFormField(
-      controller: distanceController,
+      controller: targetHeightInputController,
       hintText: "170cm",
     );
   }
 
   /// Section Widget
-  Widget _buildHeightInput(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "身長:",
-            style: theme.textTheme.titleLarge,
-          ),
-          _buildDistance(context),
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildWeightInput(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "体重:",
-            style: theme.textTheme.titleLarge,
-          ),
-          Container(
-            width: 370.h,
-            padding: EdgeInsets.symmetric(
-              horizontal: 19.h,
-              vertical: 7.v,
-            ),
-            decoration: AppDecoration.outlinePinkA.copyWith(
-              borderRadius: BorderRadiusStyle.roundedBorder5,
-            ),
-            child: Text(
-              "60kg",
-              style: theme.textTheme.bodyLarge,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildFrame4(BuildContext context) {
+  Widget _buildTargetWeightInput(BuildContext context) {
     return CustomTextFormField(
-      controller: frame4Controller,
-      hintText: "人たら神",
+      controller: targetWeightInputController,
+      hintText: "60Kg",
       textInputAction: TextInputAction.done,
     );
   }
 
-  /// Section Widget
-  Widget _buildSociabilityInput(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "社交力:",
-            style: theme.textTheme.titleLarge,
-          ),
-          SizedBox(height: 2.v),
-          _buildFrame4(context),
-        ],
-      ),
+  /// Sociability
+  Widget _buildTargetSociabilityInput(BuildContext context) {
+    return CustomTextFormField(
+      controller: targetSociabilityInputController,
+      hintText: "人たら神",
+      textInputAction: TextInputAction.done,
     );
   }
 
@@ -379,7 +317,7 @@ class HobbyCondition extends StatelessWidget {
     return CustomOutlinedButton(
       width: 150.h,
       text: "条件確認",
-      buttonStyle: CustomButtonStyles.outlinePinkATL30,
+      buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
     );
   }
 }

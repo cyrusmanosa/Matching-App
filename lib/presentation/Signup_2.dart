@@ -26,15 +26,12 @@ class SignUp_2 extends StatelessWidget {
             children: [
               // Header
               _buildSignUpBHeader(context),
-              SizedBox(height: 39),
+              SizedBox(height: 50),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 65.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("ニックネーム:", style: theme.textTheme.titleLarge),
-                    _buildNickNameInput(context)
-                  ],
+                  children: [Text("ニックネーム:", style: theme.textTheme.titleLarge), _buildNickNameInput(context)],
                 ),
               ),
               SizedBox(height: 3.v),
@@ -42,10 +39,7 @@ class SignUp_2 extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 65.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("居住地:", style: theme.textTheme.titleLarge),
-                    _buildCityInput(context)
-                  ],
+                  children: [Text("居住地:", style: theme.textTheme.titleLarge), _buildCityInput(context)],
                 ),
               ),
               SizedBox(height: 3.v),
@@ -53,10 +47,7 @@ class SignUp_2 extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 65.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("性的指向:", style: theme.textTheme.titleLarge),
-                    _buildSexualInput(context)
-                  ],
+                  children: [Text("性的指向:", style: theme.textTheme.titleLarge), _buildSexualInput(context)],
                 ),
               ),
               SizedBox(height: 3.v),
@@ -64,10 +55,7 @@ class SignUp_2 extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 65.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("身長:", style: theme.textTheme.titleLarge),
-                    _buildHeightInput(context)
-                  ],
+                  children: [Text("身長:", style: theme.textTheme.titleLarge), _buildHeightInput(context)],
                 ),
               ),
               SizedBox(height: 3.v),
@@ -75,10 +63,7 @@ class SignUp_2 extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 65.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("体重:", style: theme.textTheme.titleLarge),
-                    _buildWeightInput(context)
-                  ],
+                  children: [Text("体重:", style: theme.textTheme.titleLarge), _buildWeightInput(context)],
                 ),
               ),
               SizedBox(height: 3.v),
@@ -86,10 +71,7 @@ class SignUp_2 extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 65.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("学歴:", style: theme.textTheme.titleLarge),
-                    _buildEducationInput(context)
-                  ],
+                  children: [Text("学歴:", style: theme.textTheme.titleLarge), _buildEducationInput(context)],
                 ),
               ),
               SizedBox(height: 3.v),
@@ -97,13 +79,9 @@ class SignUp_2 extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 65.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("職種:", style: theme.textTheme.titleLarge),
-                    _buildJobInput(context)
-                  ],
+                  children: [Text("職種:", style: theme.textTheme.titleLarge), _buildJobInput(context)],
                 ),
               ),
-              SizedBox(height: 3.v),
             ],
           ),
         ),
@@ -117,14 +95,11 @@ class SignUp_2 extends StatelessWidget {
   /// Header
   Widget _buildSignUpBHeader(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 125, vertical: 11),
+      padding: EdgeInsets.symmetric(horizontal: 125.5, vertical: 11),
       decoration: AppDecoration.fillGray,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          SizedBox(height: 34.v),
-          Text("基本個人情報 - B", style: theme.textTheme.headlineMedium)
-        ],
+        children: [SizedBox(height: 34.v), Text("基本個人情報 - B", style: theme.textTheme.headlineMedium)],
       ),
     );
   }
@@ -189,13 +164,14 @@ class SignUp_2 extends StatelessWidget {
   /// Section Widget
   Widget _buildNextButton(BuildContext context) {
     return CustomOutlinedButton(
-        width: 150.h,
-        text: "次へ",
-        margin: EdgeInsets.only(left: 140.h, right: 140.h, bottom: 30.v),
-        buttonStyle: CustomButtonStyles.outlinePinkATL301,
-        onPressed: () {
-          onTapNextButton(context);
-        });
+      width: 150.h,
+      text: "次へ",
+      margin: EdgeInsets.only(left: 140.h, right: 140.h, bottom: 30.v),
+      buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
+      onPressed: () {
+        onTapNextButton(context);
+      },
+    );
   }
 
   /// Navigates to the signupPhoneoremailPartthreeScreen when the action is triggered.

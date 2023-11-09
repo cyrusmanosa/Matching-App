@@ -3,6 +3,7 @@ import 'package:cyrus_man_s_application1/presentation/Chat/Chat.dart';
 import 'package:cyrus_man_s_application1/presentation/Home/Home.dart';
 import 'package:cyrus_man_s_application1/presentation/Profile/Profile.dart';
 import 'package:cyrus_man_s_application1/presentation/ProfileEdit.dart';
+import 'package:cyrus_man_s_application1/presentation/ChatBox.dart';
 import 'package:cyrus_man_s_application1/presentation/Target/Target.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
@@ -62,6 +63,8 @@ class ContainerScreen extends StatelessWidget {
         return Chat();
       case AppRoutes.profile:
         return Profile();
+      case AppRoutes.chatBox:
+        return ChatBox();
       case AppRoutes.profileEdit:
         return ProfileEdit();
       default:

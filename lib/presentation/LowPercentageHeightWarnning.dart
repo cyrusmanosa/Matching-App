@@ -51,13 +51,13 @@ class LowPercentageHeightWarnning extends StatelessWidget {
                     CustomOutlinedButton(
                       width: 150.h,
                       text: "続ける",
-                      buttonStyle: CustomButtonStyles.outlinePinkATL30,
+                      buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
                     ),
                     CustomOutlinedButton(
                       width: 150.h,
                       text: "編集",
                       margin: EdgeInsets.only(left: 16.h),
-                      buttonStyle: CustomButtonStyles.outlinePinkATL30,
+                      buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
                     ),
                   ],
                 ),

@@ -25,15 +25,12 @@ class DeleteTarget extends StatelessWidget {
                 width: double.maxFinite,
                 decoration: AppDecoration.fillPrimary,
                 child: Column(children: [
-                  CustomImageView(
-                      imagePath: ImageConstant.imgSliderfortargetchange,
-                      height: 650.v,
-                      width: 430.h),
+                  CustomImageView(imagePath: ImageConstant.imgSliderfortargetchange, height: 650.v, width: 430.h),
                   SizedBox(height: 5.v),
                   CustomOutlinedButton(
                       width: 150.h,
                       text: "削除",
-                      buttonStyle: CustomButtonStyles.outlinePinkATL30,
+                      buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
                       onPressed: () {
                         onTaptf(context);
                       })
@@ -45,8 +42,7 @@ class DeleteTarget extends StatelessWidget {
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return CustomAppBar(
         centerTitle: true,
-        title: AppbarTitle(
-            text: "ターゲットを削除", margin: EdgeInsets.only(top: 59.v, bottom: 11.v)),
+        title: AppbarTitle(text: "ターゲットを削除", margin: EdgeInsets.only(top: 59.v, bottom: 11.v)),
         styleType: Style.bgFill);
   }
 

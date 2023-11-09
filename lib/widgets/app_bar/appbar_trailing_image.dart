@@ -10,11 +10,9 @@ class AppbarTrailingImage extends StatelessWidget {
     this.onTap,
   }) : super(key: key);
 
-  String? imagePath;
-
   EdgeInsetsGeometry? margin;
-
   Function? onTap;
+  String? imagePath;
 
   @override
   Widget build(BuildContext context) {

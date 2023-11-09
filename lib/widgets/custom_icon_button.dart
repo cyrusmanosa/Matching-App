@@ -62,7 +62,7 @@ class CustomIconButton extends StatelessWidget {
 
 /// Extension on [CustomIconButton] to facilitate inclusion of all types of border style etc
 extension IconButtonStyleHelper on CustomIconButton {
-  static BoxDecoration get outlineBlackTL5 => BoxDecoration(
+  static BoxDecoration get outlineDarkBlueTL5 => BoxDecoration(
         color: appTheme.gray500,
         borderRadius: BorderRadius.circular(5.h),
         boxShadow: [

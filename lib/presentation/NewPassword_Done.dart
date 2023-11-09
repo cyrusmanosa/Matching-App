@@ -13,31 +13,38 @@ class NewPasswordDone extends StatelessWidget {
         body: Container(
           width: double.maxFinite,
           padding: EdgeInsets.only(
-            left: 19.h,
+            left: 20.h,
             top: 65.v,
             right: 19.h,
           ),
           child: Column(
             children: [
+              // Logo
               CustomImageView(
                 imagePath: ImageConstant.imgLogo,
-                height: 81.v,
-                width: 95.h,
+                height: 80,
+                width: 95,
               ),
               SizedBox(height: 1.v),
+
+              // Slogan
               CustomImageView(
                 imagePath: ImageConstant.imgSlogan,
-                height: 17.v,
-                width: 100.h,
+                height: 17,
+                width: 100,
               ),
-              SizedBox(height: 56.v),
+              SizedBox(height: 50.v),
+
+              // Title 1
               Text(
                 "新しいパスワード設定しました",
                 style: CustomTextStyles.headlineMediumBlack900,
               ),
-              SizedBox(height: 27.v),
+              SizedBox(height: 25.v),
+
+              // Tilte 2
               SizedBox(
-                width: 260.h,
+                width: 250.h,
                 child: Text(
                   "次回から新しいパスワードで\nログインできます。",
                   maxLines: 2,
@@ -46,7 +53,6 @@ class NewPasswordDone extends StatelessWidget {
                   style: CustomTextStyles.titleLargeBlack900,
                 ),
               ),
-              SizedBox(height: 5.v),
             ],
           ),
         ),

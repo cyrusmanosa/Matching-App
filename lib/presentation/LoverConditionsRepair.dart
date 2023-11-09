@@ -83,33 +83,33 @@ class LoverConditionsRepair extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildCounityInput(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildCityInput1(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildGenderInput(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildBloodInput(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildBloodInput(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildSexualInput(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildHeightInput1(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildBloodInput(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildEducationInput(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildJobInput(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildAnnualSalaryInput(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildSociabilityInput(context),
-                        SizedBox(height: 16.v),
+                        SizedBox(height: 15.v),
                         _buildReligiousInput(context),
-                        SizedBox(height: 21.v),
+                        SizedBox(height: 20.v),
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Row(
@@ -184,7 +184,7 @@ class LoverConditionsRepair extends StatelessWidget {
         left: 15.h,
         top: 26.v,
       ),
-      buttonStyle: CustomButtonStyles.outlinePinkATL5,
+      buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
       buttonTextStyle: theme.textTheme.bodyLarge!,
     );
   }
@@ -432,7 +432,7 @@ class LoverConditionsRepair extends StatelessWidget {
       width: 150.h,
       text: "条件確認",
       margin: EdgeInsets.only(left: 100.h),
-      buttonStyle: CustomButtonStyles.outlinePinkATL30,
+      buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
       alignment: Alignment.centerLeft,
     );
   }
@@ -441,8 +441,7 @@ class LoverConditionsRepair extends StatelessWidget {
   Widget _buildBottomBar(BuildContext context) {
     return CustomBottomBar(
       onChanged: (BottomBarEnum type) {
-        Navigator.pushNamed(
-            navigatorKey.currentContext!, getCurrentRoute(type));
+        Navigator.pushNamed(navigatorKey.currentContext!, getCurrentRoute(type));
       },
     );
   }

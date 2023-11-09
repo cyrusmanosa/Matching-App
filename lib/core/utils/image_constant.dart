@@ -3,8 +3,8 @@ class ImageConstant {
   static String imagePath = 'assets/images';
 
   // ログイン images
-  static String imgLogosfacebook = '$imagePath/img_logosfacebook.svg';
-  static String imgClose = '$imagePath/img_close.svg';
+  static String imgLogosfacebook = '$imagePath/img_logosfacebook.png';
+  static String imgClose = '$imagePath/img_close.png';
   static String imgDevicongoogle = '$imagePath/img_devicongoogle.svg';
 
   // ターゲットを削除 images
