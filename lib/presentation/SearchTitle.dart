@@ -16,31 +16,21 @@ class SearchTitle extends StatelessWidget {
           child: Column(
             children: [
               // Logo
-              CustomImageView(
-                imagePath: ImageConstant.imgLogo,
-                height: 80,
-                width: 95,
-              ),
+              CustomImageView(imagePath: ImageConstant.imgLogo, height: 80, width: 95),
               SizedBox(height: 1.v),
 
               // Slogan
-              CustomImageView(
-                imagePath: ImageConstant.imgSlogan,
-                height: 17,
-                width: 100,
-              ),
+              CustomImageView(imagePath: ImageConstant.imgSlogan, height: 17, width: 100),
               SizedBox(height: 25.v),
 
               // Tilte
-              Text(
-                "探すターゲットの種類",
-                style: CustomTextStyles.headlineMediumBlack900_1,
-              ),
+              Text("探すターゲットの種類", style: CustomTextStyles.headlineMediumBlack900_1),
               SizedBox(height: 25.v),
 
               // button 1
               CustomElevatedButton(
                 text: "趣味",
+                buttonStyle: CustomButtonStyles.fillGray,
                 onPressed: () {
                   onTaptFirstHobbyCondition(context);
                 },
@@ -50,7 +40,7 @@ class SearchTitle extends StatelessWidget {
               // button 2
               CustomElevatedButton(
                 text: "恋人",
-                buttonStyle: CustomButtonStyles.fillPinkOnTap,
+                buttonStyle: CustomButtonStyles.fillDarkRed,
                 onPressed: () {
                   onTaptFirstLoverCondition(context);
                 },

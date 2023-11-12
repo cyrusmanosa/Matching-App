@@ -30,7 +30,7 @@ class Login extends StatelessWidget {
                 SizedBox(height: 45),
                 CustomImageView(imagePath: ImageConstant.imgLogo, width: 150.h),
                 // Slogan
-                SizedBox(height: 3.v),
+                SizedBox(height: 5.v),
 
                 CustomImageView(imagePath: ImageConstant.imgSlogan, width: 210.h),
                 SizedBox(height: 20.v),

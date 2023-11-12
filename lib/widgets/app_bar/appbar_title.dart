@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class AppbarTitle extends StatelessWidget {
-  AppbarTitle({Key? key, required this.text, this.margin, this.onTap})
-      : super(key: key);
+  AppbarTitle({Key? key, required this.text, this.margin, this.onTap}) : super(key: key);
 
   EdgeInsetsGeometry? margin;
   Function? onTap;

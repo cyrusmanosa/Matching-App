@@ -25,28 +25,25 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      elevation: 0,
-      toolbarHeight: height ?? 110.v,
-      automaticallyImplyLeading: false,
-      backgroundColor: Colors.transparent,
-      flexibleSpace: _getStyle(),
-      leadingWidth: leadingWidth ?? 0,
-      leading: leading,
-      title: title,
-      titleSpacing: 0,
-      centerTitle: centerTitle ?? false,
       actions: actions,
+      centerTitle: true,
+      elevation: 0,
+      flexibleSpace: _getStyle(),
+      leading: leading,
+      leadingWidth: 60,
+      title: title,
+      toolbarHeight: height ?? 110.v,
     );
   }
 
   @override
-  Size get preferredSize => Size(mediaQueryData.size.width, height ?? 110.v);
+  Size get preferredSize => Size(mediaQueryData.size.width, height ?? 100.v);
 
   _getStyle() {
     switch (styleType) {
       case Style.bgFill:
         return Container(
-          height: 81,
+          height: 100,
           width: double.maxFinite,
           decoration: BoxDecoration(color: appTheme.gray500),
         );

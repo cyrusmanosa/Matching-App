@@ -1,6 +1,10 @@
 import 'package:cyrus_man_s_application1/core/app_export.dart';
 import 'package:cyrus_man_s_application1/presentation/Chat/Chat.dart';
+import 'package:cyrus_man_s_application1/presentation/CompanionshipConditionsRepair.dart';
+import 'package:cyrus_man_s_application1/presentation/DeleteTarget.dart';
+import 'package:cyrus_man_s_application1/presentation/HobbyConditionRepair.dart';
 import 'package:cyrus_man_s_application1/presentation/Home/Home.dart';
+import 'package:cyrus_man_s_application1/presentation/LoverConditionsRepair.dart';
 import 'package:cyrus_man_s_application1/presentation/Profile/Profile.dart';
 import 'package:cyrus_man_s_application1/presentation/ProfileEdit.dart';
 import 'package:cyrus_man_s_application1/presentation/ChatBox.dart';
@@ -67,6 +71,14 @@ class ContainerScreen extends StatelessWidget {
         return ChatBox();
       case AppRoutes.profileEdit:
         return ProfileEdit();
+      case AppRoutes.companionshipConditionsRepair:
+        return CompanionshipConditionsRepair();
+      case AppRoutes.hobbyConditionRepair:
+        return HobbyConditionRepair();
+      case AppRoutes.loverConditionsRepair:
+        return LoverConditionsRepair();
+      case AppRoutes.deleteTarget:
+        return DeleteTarget();
       default:
         return DefaultWidget();
     }

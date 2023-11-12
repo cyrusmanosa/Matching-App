@@ -36,10 +36,7 @@ class CustomElevatedButton extends BaseButton {
   @override
   Widget build(BuildContext context) {
     return alignment != null
-        ? Align(
-            alignment: alignment ?? Alignment.center,
-            child: buildElevatedButtonWidget,
-          )
+        ? Align(alignment: alignment ?? Alignment.center, child: buildElevatedButtonWidget)
         : buildElevatedButtonWidget;
   }
 
@@ -56,10 +53,7 @@ class CustomElevatedButton extends BaseButton {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               leftIcon ?? const SizedBox.shrink(),
-              Text(
-                text,
-                style: buttonTextStyle ?? theme.textTheme.displayMedium,
-              ),
+              Text(text, style: buttonTextStyle ?? theme.textTheme.displayMedium),
               rightIcon ?? const SizedBox.shrink(),
             ],
           ),

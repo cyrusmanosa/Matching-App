@@ -24,12 +24,10 @@ class CustomTextStyles {
         color: theme.colorScheme.primary,
         fontSize: 18.fSize,
       );
-  static get bodyLargeSFProTextBlack900 =>
-      theme.textTheme.bodyLarge!.sFProText.copyWith(
+  static get bodyLargeSFProTextBlack900 => theme.textTheme.bodyLarge!.sFProText.copyWith(
         color: appTheme.black900,
       );
-  static get bodyLargeSFProTextPrimary =>
-      theme.textTheme.bodyLarge!.sFProText.copyWith(
+  static get bodyLargeSFProTextPrimary => theme.textTheme.bodyLarge!.sFProText.copyWith(
         color: theme.colorScheme.primary,
       );
   static get bodyMediumBlack900 => theme.textTheme.bodyMedium!.copyWith(
@@ -52,8 +50,7 @@ class CustomTextStyles {
         color: theme.colorScheme.primary,
       );
   // Display text style
-  static get displayMediumMontserrat =>
-      theme.textTheme.displayMedium!.montserrat.copyWith(
+  static get displayMediumMontserrat => theme.textTheme.displayMedium!.montserrat.copyWith(
         fontSize: 50.fSize,
         fontWeight: FontWeight.w600,
       );
@@ -62,22 +59,18 @@ class CustomTextStyles {
         color: appTheme.black900,
         fontSize: 28.fSize,
       );
-  static get headlineMediumBlack900_1 =>
-      theme.textTheme.headlineMedium!.copyWith(
+  static get headlineMediumBlack900_1 => theme.textTheme.headlineMedium!.copyWith(
         color: appTheme.black900,
       );
-  static get headlineMediumMontserratPinkA100 =>
-      theme.textTheme.headlineMedium!.montserrat.copyWith(
+  static get headlineMediumMontserratPinkA100 => theme.textTheme.headlineMedium!.montserrat.copyWith(
         color: appTheme.pinkA100,
         fontWeight: FontWeight.w600,
       );
-  static get headlineSmallRoundedMplus1c =>
-      theme.textTheme.headlineSmall!.roundedMplus1c.copyWith(
+  static get headlineSmallRoundedMplus1c => theme.textTheme.headlineSmall!.roundedMplus1c.copyWith(
         fontWeight: FontWeight.w400,
         fontSize: 20.fSize,
       );
-  static get headlineSmallRoundedMplus1cGray500 =>
-      theme.textTheme.headlineSmall!.roundedMplus1c.copyWith(
+  static get headlineSmallRoundedMplus1cGray500 => theme.textTheme.headlineSmall!.roundedMplus1c.copyWith(
         color: appTheme.gray500,
         fontWeight: FontWeight.w400,
       );
@@ -103,20 +96,14 @@ class CustomTextStyles {
 
 extension on TextStyle {
   TextStyle get sFProText {
-    return copyWith(
-      fontFamily: 'SF Pro Text',
-    );
+    return copyWith(fontFamily: 'SF Pro Text');
   }
 
   TextStyle get roundedMplus1c {
-    return copyWith(
-      fontFamily: 'Rounded Mplus 1c',
-    );
+    return copyWith(fontFamily: 'Rounded Mplus 1c');
   }
 
   TextStyle get montserrat {
-    return copyWith(
-      fontFamily: 'Montserrat',
-    );
+    return copyWith(fontFamily: 'Montserrat');
   }
 }

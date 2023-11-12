@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: theme,
       title: 'DatingYourDate',
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.login,
+      initialRoute: AppRoutes.loverConditionsRepair,
       routes: AppRoutes.routes,
     );
   }

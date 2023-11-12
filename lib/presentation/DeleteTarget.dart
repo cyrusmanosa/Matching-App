@@ -1,11 +1,6 @@
 import 'package:cyrus_man_s_application1/core/app_export.dart';
-import 'package:cyrus_man_s_application1/presentation/Chat/Chat.dart';
-import 'package:cyrus_man_s_application1/presentation/Home/Home.dart';
-import 'package:cyrus_man_s_application1/presentation/Profile/Profile.dart';
-import 'package:cyrus_man_s_application1/presentation/Target/Target.dart';
 import 'package:cyrus_man_s_application1/widgets/app_bar/appbar_title.dart';
 import 'package:cyrus_man_s_application1/widgets/app_bar/custom_app_bar.dart';
-import 'package:cyrus_man_s_application1/widgets/custom_bottom_bar.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 
@@ -19,68 +14,34 @@ class DeleteTarget extends StatelessWidget {
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
-        child: Scaffold(
-            appBar: _buildAppBar(context),
-            body: Container(
-                width: double.maxFinite,
-                decoration: AppDecoration.fillPrimary,
-                child: Column(children: [
-                  CustomImageView(imagePath: ImageConstant.imgSliderfortargetchange, height: 650.v, width: 430.h),
-                  SizedBox(height: 5.v),
-                  CustomOutlinedButton(
-                      width: 150.h,
-                      text: "削除",
-                      buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
-                      onPressed: () {
-                        onTaptf(context);
-                      })
-                ])),
-            bottomNavigationBar: _buildBottomBar(context)));
+      child: Scaffold(
+        appBar: _buildHeader(context),
+        body: Container(
+          width: double.maxFinite,
+          decoration: AppDecoration.fillPrimary,
+          child: Column(
+            children: [
+              CustomImageView(imagePath: ImageConstant.imgSliderfortargetchange, height: 650.v, width: 430.h),
+              SizedBox(height: 5.v),
+              CustomOutlinedButton(
+                width: 150.h,
+                text: "削除",
+                buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
+                onPressed: () {
+                  onTaptf(context);
+                },
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   /// Section Widget
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
+  PreferredSizeWidget _buildHeader(BuildContext context) {
     return CustomAppBar(
-        centerTitle: true,
-        title: AppbarTitle(text: "ターゲットを削除", margin: EdgeInsets.only(top: 59.v, bottom: 11.v)),
-        styleType: Style.bgFill);
-  }
-
-  /// Section Widget
-  Widget _buildBottomBar(BuildContext context) {
-    return CustomBottomBar(onChanged: (BottomBarEnum type) {
-      Navigator.pushNamed(navigatorKey.currentContext!, getCurrentRoute(type));
-    });
-  }
-
-  ///Handling route based on bottom click actions
-  String getCurrentRoute(BottomBarEnum type) {
-    switch (type) {
-      case BottomBarEnum.tf:
-        return AppRoutes.home;
-      case BottomBarEnum.tf1:
-        return AppRoutes.target;
-      case BottomBarEnum.tf2:
-        return AppRoutes.chat;
-      case BottomBarEnum.tf3:
-        return AppRoutes.profile;
-    }
-  }
-
-  ///Handling page based on route
-  Widget getCurrentPage(String currentRoute) {
-    switch (currentRoute) {
-      case AppRoutes.home:
-        return Home();
-      case AppRoutes.target:
-        return Target();
-      case AppRoutes.chat:
-        return Chat();
-      case AppRoutes.profile:
-        return Profile();
-      default:
-        return DefaultWidget();
-    }
+        centerTitle: true, title: AppbarTitle(text: "ターゲットを削除", margin: EdgeInsets.only(top: 59.v, bottom: 11.v)), styleType: Style.bgFill);
   }
 
   /// Navigates to the warnningOfDeletePageScreen when the action is triggered.

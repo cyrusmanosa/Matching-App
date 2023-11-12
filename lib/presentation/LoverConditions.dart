@@ -1,4 +1,8 @@
 import 'package:cyrus_man_s_application1/core/app_export.dart';
+import 'package:cyrus_man_s_application1/widgets/app_bar/appbar_leading_image.dart';
+import 'package:cyrus_man_s_application1/widgets/app_bar/appbar_title.dart';
+import 'package:cyrus_man_s_application1/widgets/app_bar/custom_Input_Bar.dart';
+import 'package:cyrus_man_s_application1/widgets/app_bar/custom_app_bar.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -7,29 +11,21 @@ import 'package:flutter/material.dart';
 class LoverConditions extends StatelessWidget {
   LoverConditions({Key? key}) : super(key: key);
 
-  TextEditingController ageInputController = TextEditingController();
-
-  TextEditingController group23Controller = TextEditingController();
-
-  TextEditingController group24Controller = TextEditingController();
-
-  TextEditingController group26Controller = TextEditingController();
-
-  TextEditingController group27Controller = TextEditingController();
-
-  TextEditingController group28Controller = TextEditingController();
-
-  TextEditingController distanceController = TextEditingController();
-
-  TextEditingController frame4Controller = TextEditingController();
-
-  TextEditingController frame4Controller1 = TextEditingController();
-
-  TextEditingController zipcodeController = TextEditingController();
-
-  TextEditingController frame4Controller2 = TextEditingController();
-
-  TextEditingController frame4Controller3 = TextEditingController();
+  TextEditingController loverMinAgeInputController = TextEditingController();
+  TextEditingController loverMaxAgeInputController = TextEditingController();
+  TextEditingController loverCountryController = TextEditingController();
+  TextEditingController loverCityController = TextEditingController();
+  TextEditingController loverGenderController = TextEditingController();
+  TextEditingController loverBloodController = TextEditingController();
+  TextEditingController loverConstellationController = TextEditingController();
+  TextEditingController loverSexualController = TextEditingController();
+  TextEditingController loverHeightController = TextEditingController();
+  TextEditingController loverWeightController = TextEditingController();
+  TextEditingController loverEducationController = TextEditingController();
+  TextEditingController loverJobController = TextEditingController();
+  TextEditingController loverAnnualSalaryController = TextEditingController();
+  TextEditingController loverSociabilityController = TextEditingController();
+  TextEditingController loverReligiousController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,86 +34,121 @@ class LoverConditions extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
+        // Header
+        appBar: _buildHeader(context),
         body: SizedBox(
           width: double.maxFinite,
           child: SingleChildScrollView(
             child: Column(
               children: [
-                _buildHeader(context),
                 SizedBox(height: 120.v),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 30.h),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        SizedBox(
-                          height: 66.v,
-                          width: 60.h,
-                          child: Stack(
-                            alignment: Alignment.bottomCenter,
-                            children: [
-                              Align(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  "年齢:",
-                                  style: theme.textTheme.titleLarge,
-                                ),
-                              ),
-                              _buildAgeInput(context),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: 16.h,
-                            top: 31.v,
-                            bottom: 4.v,
-                          ),
-                          child: Text(
-                            "から",
-                            style: theme.textTheme.titleLarge,
-                          ),
-                        ),
-                        _buildForty(context),
-                      ],
-                    ),
-                  ),
-                ),
+
+                // Text(
+                //   "年齢:",
+                //   style: theme.textTheme.titleLarge,
+                // ),
+                // // Age range
+                // Align(
+                //   alignment: Alignment.centerLeft,
+                //   child: Padding(
+                //     padding: EdgeInsets.only(left: 30.h),
+                //     child: Row(
+                //       children: [
+                //         // Min
+                //         Container(
+                //           height: 65.h,
+                //           width: 60.v,
+                //           decoration: BoxDecoration(
+                //             border: Border.all(color: Colors.red, width: 2),
+                //           ),
+                //           child: Stack(
+                //             children: [
+                //               _buildLoverMinAgeInput(context),
+                //             ],
+                //           ),
+                //         ),
+
+                //         // から
+                //         Padding(
+                //           padding: EdgeInsets.only(
+                //             left: 10.h,
+                //             right: 10.h,
+                //             top: 30.v,
+                //             bottom: 5,
+                //           ),
+                //           child: Text("から", style: theme.textTheme.titleLarge),
+                //         ),
+
+                //         // Max
+                //         Container(
+                //           height: 40,
+                //           width: 60,
+                //           decoration: BoxDecoration(
+                //             border: Border.all(color: Colors.red, width: 2),
+                //           ),
+                //           child: Stack(
+                //             children: [_buildLoverMaxAgeInput(context)],
+                //           ),
+                //         )
+                //       ],
+                //     ),
+                //   ),
+                // ),
+                // SizedBox(height: 15.v),
+
+                // Country
+                CustomInputBar(titleName: "国籍:", backendPart: _buildLoverCountryInput(context)),
                 SizedBox(height: 15.v),
-                _buildCounityInput(context),
+
+                // City
+                CustomInputBar(titleName: "居住地:", backendPart: _buildLoverCityInput(context)),
                 SizedBox(height: 15.v),
-                _buildCityInput(context),
+
+                // Gender
+                CustomInputBar(titleName: "性別:", backendPart: _buildLoverGenderInput(context)),
                 SizedBox(height: 15.v),
-                _buildGenderInput(context),
+
+                // Constellation
+                CustomInputBar(titleName: "星座:", backendPart: _buildLoverConstellationInput(context)),
                 SizedBox(height: 15.v),
-                _buildConstellationInput(context),
+
+                // Blood
+                CustomInputBar(titleName: "血液型:", backendPart: _buildLoverBloodInput(context)),
                 SizedBox(height: 15.v),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30.h),
-                  child: _buildWeightInput(context),
-                ),
+
+                // Sexual
+                CustomInputBar(titleName: "性的指向:", backendPart: _buildLoverSexualInput(context)),
                 SizedBox(height: 15.v),
-                _buildSexualInput(context),
+
+                // Height
+                CustomInputBar(titleName: "身長:", backendPart: _buildLoverHeightInput(context)),
                 SizedBox(height: 15.v),
-                _buildHeightInput(context),
+
+                // Wegiht
+                CustomInputBar(titleName: "体重:", backendPart: _buildLoverWeightInput(context)),
                 SizedBox(height: 15.v),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30.h),
-                  child: _buildWeightInput(context),
-                ),
+
+                // Education
+                CustomInputBar(titleName: "学歴:", backendPart: _buildLoverEducationInput(context)),
                 SizedBox(height: 15.v),
-                _buildEducationInput(context),
+
+                // Job
+                CustomInputBar(titleName: "職種:", backendPart: _buildLoverJobInput(context)),
                 SizedBox(height: 15.v),
-                _buildJobInput(context),
+
+                // Annual Salary
+                CustomInputBar(titleName: "年収:", backendPart: _buildLoverAnnualSalaryInput(context)),
                 SizedBox(height: 15.v),
-                _buildAnnualSalaryInput(context),
+
+                // Socialbility
+                CustomInputBar(titleName: "社交力:", backendPart: _buildLoverSociabilityInput(context)),
                 SizedBox(height: 15.v),
-                _buildSociabilityInput(context),
-                SizedBox(height: 15.v),
-                _buildReligiousInput(context),
-                SizedBox(height: 3.v),
+
+                // Religious
+                CustomInputBar(titleName: "宗教:", backendPart: _buildLoverReligiousInput(context)),
+                SizedBox(height: 20.v),
+
+                // 本人
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
@@ -127,26 +158,21 @@ class LoverConditions extends StatelessWidget {
                         Container(
                           height: 20.adaptSize,
                           width: 20.adaptSize,
-                          decoration: BoxDecoration(
-                            color: appTheme.gray500,
-                            borderRadius: BorderRadius.circular(
-                              10.h,
-                            ),
-                          ),
+                          decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadius.circular(10.h)),
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: 10.h),
-                          child: Text(
-                            "本人認証を確認しました",
-                            style: theme.textTheme.bodyMedium,
-                          ),
+                          child: Text("本人認証を確認しました", style: theme.textTheme.bodyMedium),
                         ),
                       ],
                     ),
                   ),
                 ),
-                SizedBox(height: 41.v),
+                SizedBox(height: 40.v),
+
+                // button
                 _buildCertificationForCheck(context),
+                SizedBox(height: 30.v)
               ],
             ),
           ),
@@ -155,366 +181,158 @@ class LoverConditions extends StatelessWidget {
     );
   }
 
-  /// Section Widget
-  Widget _buildHeader(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 124.h,
-        vertical: 11.v,
+  /// Header
+  PreferredSizeWidget _buildHeader(BuildContext context) {
+    return CustomAppBar(
+      leading: AppbarLeadingImage(
+        imagePath: ImageConstant.imgArrowLeft,
+        margin: EdgeInsets.only(left: 25, top: 60, bottom: 15),
+        onTap: () {
+          onTapArrowLeft(context);
+        },
       ),
-      decoration: AppDecoration.fillGray,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          SizedBox(height: 48.v),
-          Text(
-            "恋人の条件設定",
-            style: theme.textTheme.headlineMedium,
-          ),
-        ],
-      ),
+      title: AppbarTitle(text: "恋人の条件設定", margin: EdgeInsets.only(top: 60, bottom: 10)),
+      styleType: Style.bgFill,
     );
   }
 
-  /// Section Widget
-  Widget _buildAgeInput(BuildContext context) {
+  onTapArrowLeft(BuildContext context) {
+    Navigator.pop(context);
+  }
+
+  // /// Min Age
+  // Widget _buildLoverMinAgeInput(BuildContext context) {
+  //   return CustomTextFormField(
+  //     maxLength: 3,
+  //     width: 60.h,
+  //     controller: loverMinAgeInputController,
+  //     hintText: "30",
+  //     alignment: Alignment.bottomCenter,
+  //   );
+  // }
+
+  // /// Max Age
+  // Widget _buildLoverMaxAgeInput(BuildContext context) {
+  //   return CustomTextFormField(
+  //     maxLength: 3,
+  //     width: 60,
+  //     controller: loverMaxAgeInputController,
+  //     hintText: "30",
+  //     alignment: Alignment.bottomCenter,
+  //   );
+  // }
+
+  /// Country
+  Widget _buildLoverCountryInput(BuildContext context) {
     return CustomTextFormField(
-      width: 60.h,
-      controller: ageInputController,
-      hintText: "30",
-      alignment: Alignment.bottomCenter,
-    );
-  }
-
-  /// Section Widget
-  Widget _buildForty(BuildContext context) {
-    return CustomOutlinedButton(
-      height: 40.v,
-      width: 60.h,
-      text: "40",
-      margin: EdgeInsets.only(
-        left: 15.h,
-        top: 26.v,
-      ),
-      buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
-      buttonTextStyle: theme.textTheme.bodyLarge!,
-    );
-  }
-
-  /// Section Widget
-  Widget _buildGroup23(BuildContext context) {
-    return CustomTextFormField(
-      controller: group23Controller,
+      controller: loverCountryController,
       hintText: "日本",
     );
   }
 
-  /// Section Widget
-  Widget _buildCounityInput(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "国籍:",
-            style: theme.textTheme.titleLarge,
-          ),
-          _buildGroup23(context),
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildGroup24(BuildContext context) {
+  /// City
+  Widget _buildLoverCityInput(BuildContext context) {
     return CustomTextFormField(
-      controller: group24Controller,
+      controller: loverCityController,
       hintText: "大阪",
     );
   }
 
-  /// Section Widget
-  Widget _buildCityInput(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "居住地:",
-            style: theme.textTheme.titleLarge,
-          ),
-          _buildGroup24(context),
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildGroup26(BuildContext context) {
+  /// Gender
+  Widget _buildLoverGenderInput(BuildContext context) {
     return CustomTextFormField(
-      controller: group26Controller,
+      controller: loverGenderController,
       hintText: "男",
     );
   }
 
-  /// Section Widget
-  Widget _buildGenderInput(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "性別:",
-            style: theme.textTheme.titleLarge,
-          ),
-          _buildGroup26(context),
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildGroup27(BuildContext context) {
+  /// Constellation
+  Widget _buildLoverConstellationInput(BuildContext context) {
     return CustomTextFormField(
-      controller: group27Controller,
+      controller: loverConstellationController,
       hintText: "いて座",
     );
   }
 
-  /// Section Widget
-  Widget _buildConstellationInput(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "星座:",
-            style: theme.textTheme.titleLarge,
-          ),
-          _buildGroup27(context),
-        ],
-      ),
+  /// Constellation
+  Widget _buildLoverBloodInput(BuildContext context) {
+    return CustomTextFormField(
+      controller: loverBloodController,
+      hintText: "A",
     );
   }
 
-  /// Section Widget
-  Widget _buildGroup28(BuildContext context) {
+  /// Sexual
+  Widget _buildLoverSexualInput(BuildContext context) {
     return CustomTextFormField(
-      controller: group28Controller,
+      controller: loverSexualController,
       hintText: "異性愛",
     );
   }
 
-  /// Section Widget
-  Widget _buildSexualInput(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "性的指向:",
-            style: theme.textTheme.titleLarge,
-          ),
-          _buildGroup28(context),
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildDistance(BuildContext context) {
+  /// Height
+  Widget _buildLoverHeightInput(BuildContext context) {
     return CustomTextFormField(
-      controller: distanceController,
+      controller: loverHeightController,
       hintText: "170cm",
     );
   }
 
-  /// Section Widget
-  Widget _buildHeightInput(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "身長:",
-            style: theme.textTheme.titleLarge,
-          ),
-          _buildDistance(context),
-        ],
-      ),
+  /// Weight
+  Widget _buildLoverWeightInput(BuildContext context) {
+    return CustomTextFormField(
+      controller: loverWeightController,
+      hintText: "170cm",
     );
   }
 
-  /// Section Widget
-  Widget _buildFrame4(BuildContext context) {
+  /// Education
+  Widget _buildLoverEducationInput(BuildContext context) {
     return CustomTextFormField(
-      controller: frame4Controller,
+      controller: loverEducationController,
       hintText: "高校生",
     );
   }
 
-  /// Section Widget
-  Widget _buildEducationInput(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "学歴:",
-            style: theme.textTheme.titleLarge,
-          ),
-          SizedBox(height: 2.v),
-          _buildFrame4(context),
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildFrame5(BuildContext context) {
+  /// Job
+  Widget _buildLoverJobInput(BuildContext context) {
     return CustomTextFormField(
-      controller: frame4Controller1,
+      controller: loverJobController,
       hintText: "ホスト",
     );
   }
 
-  /// Section Widget
-  Widget _buildJobInput(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "職種:",
-            style: theme.textTheme.titleLarge,
-          ),
-          SizedBox(height: 2.v),
-          _buildFrame5(context),
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildZipcode(BuildContext context) {
+  /// Annual Salary
+  Widget _buildLoverAnnualSalaryInput(BuildContext context) {
     return CustomTextFormField(
-      controller: zipcodeController,
+      controller: loverAnnualSalaryController,
       hintText: "4000",
     );
   }
 
-  /// Section Widget
-  Widget _buildAnnualSalaryInput(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "年収:",
-            style: theme.textTheme.titleLarge,
-          ),
-          SizedBox(height: 2.v),
-          _buildZipcode(context),
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildFrame6(BuildContext context) {
+  /// Sociability
+  Widget _buildLoverSociabilityInput(BuildContext context) {
     return CustomTextFormField(
-      controller: frame4Controller2,
+      controller: loverSociabilityController,
       hintText: "人たら神",
     );
   }
 
-  /// Section Widget
-  Widget _buildSociabilityInput(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "社交力:",
-            style: theme.textTheme.titleLarge,
-          ),
-          SizedBox(height: 2.v),
-          _buildFrame6(context),
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildFrame7(BuildContext context) {
+  /// Religious
+  Widget _buildLoverReligiousInput(BuildContext context) {
     return CustomTextFormField(
-      controller: frame4Controller3,
+      controller: loverReligiousController,
       hintText: "多神教",
       textInputAction: TextInputAction.done,
     );
   }
 
-  /// Section Widget
-  Widget _buildReligiousInput(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "宗教:",
-            style: theme.textTheme.titleLarge,
-          ),
-          SizedBox(height: 2.v),
-          _buildFrame7(context),
-        ],
-      ),
-    );
-  }
-
-  /// Section Widget
+  /// Certification For Check
   Widget _buildCertificationForCheck(BuildContext context) {
     return CustomOutlinedButton(
       width: 150.h,
       text: "条件確認",
       buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
-    );
-  }
-
-  /// Common widget
-  Widget _buildWeightInput(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "体重:",
-          style: theme.textTheme.titleLarge,
-        ),
-        Container(
-          width: 370.h,
-          padding: EdgeInsets.symmetric(
-            horizontal: 19.h,
-            vertical: 7.v,
-          ),
-          decoration: AppDecoration.outlinePinkA.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder5,
-          ),
-          child: Text(
-            "60kg",
-            style: theme.textTheme.bodyLarge,
-          ),
-        ),
-      ],
     );
   }
 }

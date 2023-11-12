@@ -14,7 +14,7 @@ class Profile extends StatelessWidget {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
       child: Scaffold(
-        appBar: _buildAppBar(context),
+        appBar: _buildHeader(context),
         // main
         body: SizedBox(
           child: SingleChildScrollView(
@@ -98,7 +98,7 @@ class Profile extends StatelessWidget {
   }
 
   /// Header
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
+  PreferredSizeWidget _buildHeader(BuildContext context) {
     return CustomAppBar(
       centerTitle: true,
       title: AppbarTitle(text: "プロフィール"),
@@ -163,13 +163,11 @@ class Profile extends StatelessWidget {
   }
 
   Widget _buildChangeWord(BuildContext context) {
-    return Column(
-        children: [Text("交換回数", style: theme.textTheme.titleLarge), Text("0", style: theme.textTheme.headlineLarge)]);
+    return Column(children: [Text("交換回数", style: theme.textTheme.titleLarge), Text("0", style: theme.textTheme.headlineLarge)]);
   }
 
   Widget _buildSendWord(BuildContext context) {
-    return Column(
-        children: [Text("伝送回数", style: theme.textTheme.titleLarge), Text("0", style: theme.textTheme.headlineLarge)]);
+    return Column(children: [Text("伝送回数", style: theme.textTheme.titleLarge), Text("0", style: theme.textTheme.headlineLarge)]);
   }
 
 // edit button

@@ -30,7 +30,7 @@ class ProfileEdit extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: _buildAppBar(context),
+        appBar: _buildHeader(context),
         body: SizedBox(
           width: double.maxFinite,
           child: Column(
@@ -184,7 +184,7 @@ class ProfileEdit extends StatelessWidget {
   }
 
   /// Header
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
+  PreferredSizeWidget _buildHeader(BuildContext context) {
     return CustomAppBar(
       centerTitle: true,
       title: AppbarTitle(

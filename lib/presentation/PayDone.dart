@@ -15,27 +15,19 @@ class PayDone extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 65.v),
           child: Column(
             children: [
-              CustomImageView(
-                imagePath: ImageConstant.imgLogo,
-                height: 81.v,
-                width: 95.h,
-              ),
+              // Logo
+              CustomImageView(imagePath: ImageConstant.imgLogo, height: 80, width: 95),
               SizedBox(height: 1.v),
-              CustomImageView(
-                imagePath: ImageConstant.imgSlogan,
-                height: 17.v,
-                width: 100.h,
-              ),
+
+              // Slogan
+              CustomImageView(imagePath: ImageConstant.imgSlogan, height: 17, width: 100),
               Spacer(
                 flex: 28,
               ),
-              Text(
-                "お支払いOK",
-                style: CustomTextStyles.displayMediumMontserrat,
-              ),
-              Spacer(
-                flex: 71,
-              ),
+
+              // Title
+              Text("お支払いOK", style: CustomTextStyles.displayMediumMontserrat),
+              Spacer(flex: 70),
             ],
           ),
         ),

@@ -13,6 +13,7 @@ class CustomTextFormField extends StatelessWidget {
     this.hintText,
     this.hintStyle,
     this.maxLines,
+    this.maxLength,
     this.prefix,
     this.prefixConstraints,
     this.suffix,
@@ -39,6 +40,7 @@ class CustomTextFormField extends StatelessWidget {
   final FocusNode? focusNode;
   final FormFieldValidator<String>? validator;
   final int? maxLines;
+  final int? maxLength;
   final InputBorder? borderDecoration;
   final String? hintText;
   final TextEditingController? controller;
@@ -51,12 +53,7 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return alignment != null
-        ? Align(
-            alignment: alignment ?? Alignment.center,
-            child: textFormFieldWidget,
-          )
-        : textFormFieldWidget;
+    return alignment != null ? Align(alignment: alignment ?? Alignment.center, child: textFormFieldWidget) : textFormFieldWidget;
   }
 
   Widget get textFormFieldWidget => SizedBox(
@@ -69,7 +66,8 @@ class CustomTextFormField extends StatelessWidget {
           obscureText: obscureText!,
           textInputAction: textInputAction,
           keyboardType: textInputType,
-          maxLines: maxLines ?? 1,
+          maxLength: maxLength,
+          maxLines: maxLines,
           decoration: decoration,
           validator: validator,
         ),

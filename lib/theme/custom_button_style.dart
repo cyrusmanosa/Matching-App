@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 
 class CustomButtonStyles {
 // Filled button style
-  // Dark Pink BG and Shadow (onTap Color)
-  static ButtonStyle get fillPinkOnTap => ElevatedButton.styleFrom(
+  // Dark Red BG and Shadow (onTap Color)
+  static ButtonStyle get fillDarkRed => ElevatedButton.styleFrom(
         backgroundColor: appTheme.pink800,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.h)),
       );
-
+  // Gray BG , black word
+  static ButtonStyle get fillGray => ElevatedButton.styleFrom(
+        backgroundColor: appTheme.gray500,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.h)),
+      );
   // Pink BG and Shadow (not onTap Color)
   static ButtonStyle get fillPink => ElevatedButton.styleFrom(
         backgroundColor: appTheme.pinkA100,
@@ -42,7 +46,7 @@ class CustomButtonStyles {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.h)),
       );
 
-  // gray BG , gray border , Shadow
+  // Dark gray BG , gray border , Shadow
   static ButtonStyle get outlineBlackDGBG => OutlinedButton.styleFrom(
         backgroundColor: appTheme.gray800,
         side: BorderSide(color: theme.colorScheme.onErrorContainer, width: 1),

@@ -1,4 +1,7 @@
 import 'package:cyrus_man_s_application1/core/app_export.dart';
+import 'package:cyrus_man_s_application1/widgets/app_bar/appbar_leading_image.dart';
+import 'package:cyrus_man_s_application1/widgets/app_bar/appbar_title.dart';
+import 'package:cyrus_man_s_application1/widgets/app_bar/custom_app_bar.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +24,7 @@ class SignUp_3 extends StatelessWidget {
           child: Column(
             children: [
               // Header
-              _buildSignUpCHeader(context),
+              _buildHeader(context),
               SizedBox(height: 50),
 
               Padding(
@@ -31,7 +34,7 @@ class SignUp_3 extends StatelessWidget {
                   children: [Text("年収:", style: theme.textTheme.titleLarge), _buildAnnualSalaryInput(context)],
                 ),
               ),
-              SizedBox(height: 3.v),
+              SizedBox(height: 5.v),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 65.h),
                 child: Column(
@@ -39,7 +42,7 @@ class SignUp_3 extends StatelessWidget {
                   children: [Text("社交力:", style: theme.textTheme.titleLarge), _buildSociabilityInput(context)],
                 ),
               ),
-              SizedBox(height: 3.v),
+              SizedBox(height: 5.v),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 65.h),
                 child: Column(
@@ -47,7 +50,7 @@ class SignUp_3 extends StatelessWidget {
                   children: [Text("宗教:", style: theme.textTheme.titleLarge), _buildReligiousInput(context)],
                 ),
               ),
-              SizedBox(height: 3.v),
+              SizedBox(height: 5.v),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 65.h),
                 child: Column(
@@ -64,15 +67,23 @@ class SignUp_3 extends StatelessWidget {
   }
 
   /// Header
-  Widget _buildSignUpCHeader(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 125, vertical: 11),
-      decoration: AppDecoration.fillGray,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [SizedBox(height: 34.v), Text("基本個人情報 - C", style: theme.textTheme.headlineMedium)],
+  PreferredSizeWidget _buildHeader(BuildContext context) {
+    return CustomAppBar(
+      leading: AppbarLeadingImage(
+        imagePath: ImageConstant.imgArrowLeft,
+        margin: EdgeInsets.only(left: 25, top: 60, bottom: 15),
+        onTap: () {
+          onTapArrowLeft(context);
+        },
       ),
+      title: AppbarTitle(text: "基本個人情報 - C", margin: EdgeInsets.only(top: 60, bottom: 10)),
+      styleType: Style.bgFill,
     );
+  }
+
+  // turn back
+  onTapArrowLeft(BuildContext context) {
+    Navigator.pop(context);
   }
 
   /// Annual Salary
