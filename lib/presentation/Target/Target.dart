@@ -1,4 +1,6 @@
-import '../Target/widgets/targetresetlist_item_widget.dart';
+import 'package:cyrus_man_s_application1/presentation/Target/widgets/ResetTargetButtonCompaionship.dart';
+import 'package:cyrus_man_s_application1/presentation/Target/widgets/ResetTargetButtonLover.dart';
+import 'widgets/ResetTargetButtonHobby.dart';
 import 'package:cyrus_man_s_application1/core/app_export.dart';
 import 'package:flutter/material.dart';
 
@@ -15,14 +17,10 @@ class Target extends StatelessWidget {
           decoration: AppDecoration.fillPrimary,
           child: Column(
             children: [
-              _buildTargetColumn(context),
+              _buildHeader(context),
               // 題目
               SizedBox(height: 60.v),
-              Text(
-                "探すターゲットの種類",
-                style: CustomTextStyles.headlineMediumBlack900_1,
-              ),
-
+              Text("探すターゲットの種類", style: CustomTextStyles.headlineMediumBlack900),
               // 選択
               SizedBox(height: 30.v),
               _buildTargetResetList(context)
@@ -33,17 +31,14 @@ class Target extends StatelessWidget {
     );
   }
 
-  /// Home
-  Widget _buildTargetColumn(BuildContext context) {
+  /// Header
+  Widget _buildHeader(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 111.h, vertical: 11.v),
+      padding: EdgeInsets.symmetric(horizontal: 111.h, vertical: 20.5),
       decoration: AppDecoration.fillGray,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          SizedBox(height: 20.v),
-          Text("ターゲットの設定", style: theme.textTheme.headlineMedium)
-        ],
+        children: [SizedBox(height: 20.v), Text("ターゲットの設定", style: theme.textTheme.headlineMedium)],
       ),
     );
   }
@@ -53,12 +48,19 @@ class Target extends StatelessWidget {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 40.h),
-        child: ListView.builder(
+        child: ListView.separated(
           physics: BouncingScrollPhysics(),
-          shrinkWrap: true,
           itemCount: 3,
+          separatorBuilder: (context, index) => SizedBox(height: 15), // 设置垂直间距
           itemBuilder: (context, index) {
-            return TargetresetlistItemWidget();
+            if (index == 0) {
+              return ResetTargetButtonHobby();
+            } else if (index == 1) {
+              return ResetTargetButtonLover();
+            } else if (index == 2) {
+              return ResetTargetButtonCompaionship();
+            }
+            return SizedBox();
           },
         ),
       ),

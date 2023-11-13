@@ -8,7 +8,6 @@ class Chat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -30,7 +29,7 @@ class Chat extends StatelessWidget {
   /// Header
   Widget _buildChatSection(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 163.h, vertical: 11.v),
+      padding: EdgeInsets.symmetric(horizontal: 163.h, vertical: 20.5),
       decoration: AppDecoration.fillGray,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -52,7 +51,7 @@ class Chat extends StatelessWidget {
           shrinkWrap: true,
           itemCount: 6,
           itemBuilder: (context, index) {
-            return UserprofilesectionItemWidget();
+            return TargetSectionCheckWidget();
           },
         ),
       ),

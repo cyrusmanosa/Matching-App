@@ -118,12 +118,12 @@ class HobbyConditionRepair extends StatelessWidget {
     return CustomAppBar(
       leading: AppbarLeadingImage(
         imagePath: ImageConstant.imgArrowLeft,
-        margin: EdgeInsets.only(left: 25, top: 60, bottom: 15),
+        margin: EdgeInsets.only(left: 25, top: 50, bottom: 10),
         onTap: () {
           onTapArrowLeft(context);
         },
       ),
-      title: AppbarTitle(text: "趣味の条件更改", margin: EdgeInsets.only(top: 60, bottom: 10)),
+      title: AppbarTitle(text: "趣味の条件更改", margin: EdgeInsets.only(top: 60, bottom: 20)),
       styleType: Style.bgFill,
     );
   }
@@ -215,12 +215,19 @@ class HobbyConditionRepair extends StatelessWidget {
     );
   }
 
-  /// Button
+  /// Certification For Check
   Widget _buildCertificationForCheck(BuildContext context) {
     return CustomOutlinedButton(
       width: 150.h,
       text: "条件確認",
       buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
+      onPressed: () {
+        onTaptf(context);
+      },
     );
+  }
+
+  onTaptf(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.payDone);
   }
 }

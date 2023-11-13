@@ -186,12 +186,12 @@ class LoverConditionsRepair extends StatelessWidget {
     return CustomAppBar(
       leading: AppbarLeadingImage(
         imagePath: ImageConstant.imgArrowLeft,
-        margin: EdgeInsets.only(left: 25, top: 60, bottom: 15),
+        margin: EdgeInsets.only(left: 25, top: 50, bottom: 10),
         onTap: () {
           onTapArrowLeft(context);
         },
       ),
-      title: AppbarTitle(text: "恋人の条件更改", margin: EdgeInsets.only(top: 60, bottom: 10)),
+      title: AppbarTitle(text: "恋人の条件更改", margin: EdgeInsets.only(top: 60, bottom: 20)),
       styleType: Style.bgFill,
     );
   }
@@ -200,27 +200,27 @@ class LoverConditionsRepair extends StatelessWidget {
     Navigator.pop(context);
   }
 
-  // /// Min Age
-  // Widget _buildLoverMinAgeInput(BuildContext context) {
-  //   return CustomTextFormField(
-  //     maxLength: 3,
-  //     width: 60.h,
-  //     controller: loverMinAgeInputController,
-  //     hintText: "30",
-  //     alignment: Alignment.bottomCenter,
-  //   );
-  // }
+  /// Min Age
+  Widget _buildLoverMinAgeInput(BuildContext context) {
+    return CustomTextFormField(
+      maxLength: 3,
+      width: 60.h,
+      controller: resetLoverMinAgeInputController,
+      hintText: "30",
+      alignment: Alignment.bottomCenter,
+    );
+  }
 
-  // /// Max Age
-  // Widget _buildLoverMaxAgeInput(BuildContext context) {
-  //   return CustomTextFormField(
-  //     maxLength: 3,
-  //     width: 60,
-  //     controller: loverMaxAgeInputController,
-  //     hintText: "30",
-  //     alignment: Alignment.bottomCenter,
-  //   );
-  // }
+  /// Max Age
+  Widget _buildLoverMaxAgeInput(BuildContext context) {
+    return CustomTextFormField(
+      maxLength: 3,
+      width: 60,
+      controller: resetLoverMaxAgeInputController,
+      hintText: "30",
+      alignment: Alignment.bottomCenter,
+    );
+  }
 
   /// Country
   Widget _buildLoverResetCountryInput(BuildContext context) {
@@ -333,6 +333,13 @@ class LoverConditionsRepair extends StatelessWidget {
       width: 150.h,
       text: "条件確認",
       buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
+      onPressed: () {
+        onTaptf(context);
+      },
     );
+  }
+
+  onTaptf(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.payDone);
   }
 }

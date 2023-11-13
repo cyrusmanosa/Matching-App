@@ -37,7 +37,7 @@ class SideBar extends StatelessWidget {
                     vertical: 1.v,
                   ),
                   decoration: AppDecoration.fillPrimary.copyWith(
-                    borderRadius: BorderRadiusStyle.roundedBorder15,
+                    borderRadius: BorderRadiusStyle.r15,
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
@@ -71,7 +71,7 @@ class SideBar extends StatelessWidget {
                     vertical: 1.v,
                   ),
                   decoration: AppDecoration.fillPrimary.copyWith(
-                    borderRadius: BorderRadiusStyle.roundedBorder15,
+                    borderRadius: BorderRadiusStyle.r15,
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
@@ -105,7 +105,7 @@ class SideBar extends StatelessWidget {
                     vertical: 1.v,
                   ),
                   decoration: AppDecoration.fillPrimary.copyWith(
-                    borderRadius: BorderRadiusStyle.roundedBorder15,
+                    borderRadius: BorderRadiusStyle.r15,
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
@@ -138,7 +138,7 @@ class SideBar extends StatelessWidget {
                     vertical: 1.v,
                   ),
                   decoration: AppDecoration.fillPrimary.copyWith(
-                    borderRadius: BorderRadiusStyle.roundedBorder15,
+                    borderRadius: BorderRadiusStyle.r15,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -173,7 +173,7 @@ class SideBar extends StatelessWidget {
                     vertical: 1.v,
                   ),
                   decoration: AppDecoration.fillPrimary.copyWith(
-                    borderRadius: BorderRadiusStyle.roundedBorder15,
+                    borderRadius: BorderRadiusStyle.r15,
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
@@ -217,7 +217,7 @@ class SideBar extends StatelessWidget {
         vertical: 12.v,
       ),
       decoration: AppDecoration.fillPrimary.copyWith(
-        borderRadius: BorderRadiusStyle.roundedBorder15,
+        borderRadius: BorderRadiusStyle.r15,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.max,

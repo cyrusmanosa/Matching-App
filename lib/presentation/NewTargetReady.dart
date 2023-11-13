@@ -37,7 +37,7 @@ class NewTargetReady extends StatelessWidget {
                   style: theme.textTheme.headlineLarge,
                 ),
               ),
-              SizedBox(height: 5.v),
+              SizedBox(height: 15.v),
             ],
           ),
         ),

@@ -38,10 +38,7 @@ class CustomOutlinedButton extends BaseButton {
   @override
   Widget build(BuildContext context) {
     return alignment != null
-        ? Align(
-            alignment: alignment ?? Alignment.center,
-            child: buildOutlinedButtonWidget,
-          )
+        ? Align(alignment: alignment ?? Alignment.center, child: buildOutlinedButtonWidget)
         : buildOutlinedButtonWidget;
   }
 
@@ -58,11 +55,7 @@ class CustomOutlinedButton extends BaseButton {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               leftIcon ?? const SizedBox.shrink(),
-              Text(
-                text,
-                style: buttonTextStyle ??
-                    CustomTextStyles.headlineMediumMontserratPinkA100,
-              ),
+              Text(text, style: buttonTextStyle ?? CustomTextStyles.headlineMediumMontserratPinkA100),
               rightIcon ?? const SizedBox.shrink(),
             ],
           ),

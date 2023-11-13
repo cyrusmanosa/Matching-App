@@ -2,8 +2,10 @@ import 'package:cyrus_man_s_application1/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class UserprofilesectionItemWidget extends StatelessWidget {
-  const UserprofilesectionItemWidget({Key? key}) : super(key: key);
+class TargetSectionCheckWidget extends StatelessWidget {
+  const TargetSectionCheckWidget({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

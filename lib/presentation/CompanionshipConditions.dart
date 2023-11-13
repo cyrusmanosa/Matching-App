@@ -100,12 +100,12 @@ class CompanionshipConditions extends StatelessWidget {
     return CustomAppBar(
       leading: AppbarLeadingImage(
         imagePath: ImageConstant.imgArrowLeft,
-        margin: EdgeInsets.only(left: 25, top: 60, bottom: 15),
+        margin: EdgeInsets.only(left: 25, top: 50, bottom: 10),
         onTap: () {
           onTapArrowLeft(context);
         },
       ),
-      title: AppbarTitle(text: "お相伴の条件設定", margin: EdgeInsets.only(top: 60, bottom: 10)),
+      title: AppbarTitle(text: "お相伴の条件設定", margin: EdgeInsets.only(top: 60, bottom: 20)),
       styleType: Style.bgFill,
     );
   }

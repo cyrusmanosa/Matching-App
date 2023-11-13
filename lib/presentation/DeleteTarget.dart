@@ -22,7 +22,7 @@ class DeleteTarget extends StatelessWidget {
           child: Column(
             children: [
               CustomImageView(imagePath: ImageConstant.imgSliderfortargetchange, height: 650.v, width: 430.h),
-              SizedBox(height: 5.v),
+              SizedBox(height: 15.v),
               CustomOutlinedButton(
                 width: 150.h,
                 text: "削除",

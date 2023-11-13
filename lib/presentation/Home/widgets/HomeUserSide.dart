@@ -14,22 +14,16 @@ class MainframeItemWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "観賞回数：",
-                style: CustomTextStyles.titleLargePrimary,
-              ),
-              Text(
-                "０",
-                style: CustomTextStyles.titleLargePrimary,
-              ),
+              Text("観賞回数：", style: CustomTextStyles.bodyLargeBlack900),
+              Text("０", style: CustomTextStyles.bodyLargeBlack900),
             ],
           ),
           Container(
-            height: 568,
-            width: 350.h,
+            height: 570,
+            width: 350,
             decoration: BoxDecoration(
               color: appTheme.gray500,
-              borderRadius: BorderRadius.circular(30.h),
+              borderRadius: BorderRadiusStyle.r30,
             ),
           ),
         ],

@@ -27,12 +27,12 @@ class Login extends StatelessWidget {
             child: Column(
               children: [
                 // Logo
-                SizedBox(height: 45),
+                SizedBox(height: 50),
                 CustomImageView(imagePath: ImageConstant.imgLogo, width: 150.h),
-                // Slogan
-                SizedBox(height: 5.v),
+                SizedBox(height: 15.v),
 
-                CustomImageView(imagePath: ImageConstant.imgSlogan, width: 210.h),
+                // Slogan
+                CustomImageView(imagePath: ImageConstant.imgSlogan, width: 200.h),
                 SizedBox(height: 20.v),
 
                 // ID
@@ -42,8 +42,8 @@ class Login extends StatelessWidget {
                     Text("ユーザーID:", style: theme.textTheme.titleLarge),
                     Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: appTheme.pinkA100),
-                        borderRadius: BorderRadius.circular(4.0),
+                        border: Border.all(color: appTheme.pinkA100, width: 2),
+                        borderRadius: BorderRadiusStyle.r5,
                       ),
                       child: _buildEmailInput(context),
                     ),
@@ -58,8 +58,8 @@ class Login extends StatelessWidget {
                     Text("パスワード:", style: theme.textTheme.titleLarge),
                     Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: appTheme.pinkA100),
-                        borderRadius: BorderRadius.circular(4.0),
+                        border: Border.all(color: appTheme.pinkA100, width: 2),
+                        borderRadius: BorderRadiusStyle.r5,
                       ),
                       child: _buildPasswordInput(context),
                     )
@@ -193,6 +193,7 @@ class Login extends StatelessWidget {
       textInputAction: TextInputAction.done,
       textInputType: TextInputType.visiblePassword,
       obscureText: true,
+      maxLines: 1,
     );
   }
 

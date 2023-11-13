@@ -1,6 +1,7 @@
 import 'package:cyrus_man_s_application1/core/app_export.dart';
 import 'package:cyrus_man_s_application1/widgets/app_bar/appbar_leading_image.dart';
 import 'package:cyrus_man_s_application1/widgets/app_bar/appbar_title.dart';
+import 'package:cyrus_man_s_application1/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:cyrus_man_s_application1/widgets/app_bar/custom_app_bar.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
@@ -10,13 +11,13 @@ import 'package:flutter/material.dart';
 class SignUp_2 extends StatelessWidget {
   SignUp_2({Key? key}) : super(key: key);
 
-  TextEditingController nickNameInputController = TextEditingController();
-  TextEditingController cityInputController = TextEditingController();
-  TextEditingController sexualInputController = TextEditingController();
-  TextEditingController heightInputController = TextEditingController();
-  TextEditingController weightInputController = TextEditingController();
-  TextEditingController educationInputController = TextEditingController();
-  TextEditingController jobInputController = TextEditingController();
+  TextEditingController basicNickNameInputController = TextEditingController();
+  TextEditingController basicCityInputController = TextEditingController();
+  TextEditingController basicSexualInputController = TextEditingController();
+  TextEditingController basicHeightInputController = TextEditingController();
+  TextEditingController basicWeightInputController = TextEditingController();
+  TextEditingController basicEducationInputController = TextEditingController();
+  TextEditingController basicJobInputController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,71 +26,48 @@ class SignUp_2 extends StatelessWidget {
       child: Scaffold(
         body: SizedBox(
           width: double.maxFinite,
-          child: Column(
-            children: [
-              // Header
-              _buildHeader(context),
-              SizedBox(height: 50),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // Header
+                _buildHeader(context),
+                SizedBox(height: 50),
 
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 65.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [Text("ニックネーム:", style: theme.textTheme.titleLarge), _buildNickNameInput(context)],
-                ),
-              ),
-              SizedBox(height: 5.v),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 65.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [Text("居住地:", style: theme.textTheme.titleLarge), _buildCityInput(context)],
-                ),
-              ),
-              SizedBox(height: 5.v),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 65.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [Text("性的指向:", style: theme.textTheme.titleLarge), _buildSexualInput(context)],
-                ),
-              ),
-              SizedBox(height: 5.v),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 65.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [Text("身長:", style: theme.textTheme.titleLarge), _buildHeightInput(context)],
-                ),
-              ),
-              SizedBox(height: 5.v),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 65.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [Text("体重:", style: theme.textTheme.titleLarge), _buildWeightInput(context)],
-                ),
-              ),
-              SizedBox(height: 5.v),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 65.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [Text("学歴:", style: theme.textTheme.titleLarge), _buildEducationInput(context)],
-                ),
-              ),
-              SizedBox(height: 5.v),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 65.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [Text("職種:", style: theme.textTheme.titleLarge), _buildJobInput(context)],
-                ),
-              ),
-            ],
+                // Nick Name
+                CustomInputBar(titleName: "ニックネーム:", backendPart: _buildBasicNickNameInput(context)),
+                SizedBox(height: 15.v),
+
+                // City
+                CustomInputBar(titleName: "居住地:", backendPart: _buildBasicCityInput(context)),
+                SizedBox(height: 15.v),
+
+                // Sexual
+                CustomInputBar(titleName: "性的指向:", backendPart: _buildBasicSexualInput(context)),
+                SizedBox(height: 15.v),
+
+                // Height
+                CustomInputBar(titleName: "身長:", backendPart: _buildBasicHeightInput(context)),
+                SizedBox(height: 15.v),
+
+                // Weight
+                CustomInputBar(titleName: "体重:", backendPart: _buildBasicWeightInput(context)),
+                SizedBox(height: 15.v),
+
+                // Education
+                CustomInputBar(titleName: "学歴:", backendPart: _buildBasicEducationInput(context)),
+                SizedBox(height: 15.v),
+
+                // Job
+                CustomInputBar(titleName: "職種:", backendPart: _buildBasicJobInput(context)),
+                SizedBox(height: 40.v),
+
+                // Button
+                _buildNextButton(context),
+                SizedBox(height: 30.v),
+              ],
+            ),
           ),
         ),
-        bottomNavigationBar: _buildNextButton(context),
       ),
     );
   }
@@ -101,12 +79,12 @@ class SignUp_2 extends StatelessWidget {
     return CustomAppBar(
       leading: AppbarLeadingImage(
         imagePath: ImageConstant.imgArrowLeft,
-        margin: EdgeInsets.only(left: 25, top: 60, bottom: 15),
+        margin: EdgeInsets.only(left: 25, top: 50, bottom: 10),
         onTap: () {
           onTapArrowLeft(context);
         },
       ),
-      title: AppbarTitle(text: "基本個人情報 - B", margin: EdgeInsets.only(top: 60, bottom: 10)),
+      title: AppbarTitle(text: "基本個人情報 - B", margin: EdgeInsets.only(top: 60, bottom: 20)),
       styleType: Style.bgFill,
     );
   }
@@ -117,57 +95,57 @@ class SignUp_2 extends StatelessWidget {
   }
 
   /// Nickname
-  Widget _buildNickNameInput(BuildContext context) {
+  Widget _buildBasicNickNameInput(BuildContext context) {
     return CustomTextFormField(
-      controller: nickNameInputController,
+      controller: basicNickNameInputController,
       hintText: "仆街",
     );
   }
 
   /// City
-  Widget _buildCityInput(BuildContext context) {
+  Widget _buildBasicCityInput(BuildContext context) {
     return CustomTextFormField(
-      controller: cityInputController,
+      controller: basicCityInputController,
       hintText: "大阪",
     );
   }
 
   /// Sexual
-  Widget _buildSexualInput(BuildContext context) {
+  Widget _buildBasicSexualInput(BuildContext context) {
     return CustomTextFormField(
-      controller: sexualInputController,
+      controller: basicSexualInputController,
       hintText: "異性愛",
     );
   }
 
   /// Height
-  Widget _buildHeightInput(BuildContext context) {
+  Widget _buildBasicHeightInput(BuildContext context) {
     return CustomTextFormField(
-      controller: heightInputController,
+      controller: basicHeightInputController,
       hintText: "170cm",
     );
   }
 
   /// Weight
-  Widget _buildWeightInput(BuildContext context) {
+  Widget _buildBasicWeightInput(BuildContext context) {
     return CustomTextFormField(
-      controller: weightInputController,
+      controller: basicWeightInputController,
       hintText: "60kg",
     );
   }
 
   /// Education
-  Widget _buildEducationInput(BuildContext context) {
+  Widget _buildBasicEducationInput(BuildContext context) {
     return CustomTextFormField(
-      controller: educationInputController,
+      controller: basicEducationInputController,
       hintText: "高校生",
     );
   }
 
   /// Job
-  Widget _buildJobInput(BuildContext context) {
+  Widget _buildBasicJobInput(BuildContext context) {
     return CustomTextFormField(
-      controller: jobInputController,
+      controller: basicJobInputController,
       hintText: "ホスト",
       textInputAction: TextInputAction.done,
     );

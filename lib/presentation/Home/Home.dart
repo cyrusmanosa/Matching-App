@@ -13,23 +13,10 @@ class Home extends StatelessWidget {
       child: Scaffold(
         body: Container(
           width: double.maxFinite,
-          decoration: AppDecoration.fillPrimary,
           child: Column(
             children: [
               _buildHeader(context),
-              Expanded(
-                child: SizedBox(
-                  width: double.maxFinite,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 40.v),
-                    decoration: AppDecoration.fillPurpleA,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [_buildMainFrame(context)],
-                    ),
-                  ),
-                ),
-              ),
+              Expanded(child: _buildMainFrame(context)),
             ],
           ),
         ),
@@ -37,10 +24,9 @@ class Home extends StatelessWidget {
     );
   }
 
-  /// Home Header
   Widget _buildHeader(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 176.h, vertical: 11.v),
+      padding: EdgeInsets.symmetric(horizontal: 176.h, vertical: 20.5),
       decoration: AppDecoration.fillGray,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -52,23 +38,25 @@ class Home extends StatelessWidget {
     );
   }
 
-  /// MainUserSide
   Widget _buildMainFrame(BuildContext context) {
-    return Expanded(
-      child: SizedBox(
-        height: 600.v,
-        child: ListView.separated(
-          padding: EdgeInsets.symmetric(horizontal: 40),
-          scrollDirection: Axis.horizontal,
-          separatorBuilder: (context, index) {
-            return SizedBox(width: 15.h);
-          },
-          itemCount: 3,
-          itemBuilder: (context, index) {
-            return MainframeItemWidget();
-          },
+    return Column(
+      children: [
+        SizedBox(height: 30),
+        SizedBox(
+          height: 600,
+          child: ListView.separated(
+            padding: EdgeInsets.symmetric(horizontal: 40),
+            scrollDirection: Axis.horizontal,
+            separatorBuilder: (context, index) {
+              return SizedBox(width: 15.h);
+            },
+            itemCount: 3,
+            itemBuilder: (context, index) {
+              return MainframeItemWidget();
+            },
+          ),
         ),
-      ),
+      ],
     );
   }
 }

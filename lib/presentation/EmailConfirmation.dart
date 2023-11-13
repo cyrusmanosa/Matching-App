@@ -39,9 +39,7 @@ class EmailConfirmation extends StatelessWidget {
                 SizedBox(height: 20.v),
 
                 // Title
-                Text("メールアドレスを登録",
-                    style: CustomTextStyles.headlineSmallRoundedMplus1c
-                        .copyWith(decoration: TextDecoration.underline)),
+                Text("メールアドレスを登録", style: CustomTextStyles.headlineSmallRoundedMplus1c.copyWith(decoration: TextDecoration.underline)),
                 SizedBox(height: 15.v),
 
                 // input
@@ -72,7 +70,7 @@ class EmailConfirmation extends StatelessWidget {
                       "・メールアドレスの受信確認が必須です。\n・ご登録済みのお客様にもメールアドレス受信確認をお\n    願いしております。",
                       maxLines: 8,
                       overflow: TextOverflow.ellipsis,
-                      style: CustomTextStyles.bodyMediumBlack900_1,
+                      style: CustomTextStyles.bodyMediumBlack900,
                     ),
                   ),
                 ),

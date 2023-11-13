@@ -96,6 +96,22 @@ class LoverConditions extends StatelessWidget {
                 // ),
                 // SizedBox(height: 15.v),
 
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 50.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("学歴:", style: theme.textTheme.titleLarge),
+                      Container(
+                        width: 330.h,
+                        padding: EdgeInsets.symmetric(horizontal: 19.h, vertical: 6.v),
+                        decoration: AppDecoration.outlinePinkA.copyWith(borderRadius: BorderRadiusStyle.r5),
+                        child: Text("高校生", style: theme.textTheme.bodyLarge),
+                      ),
+                    ],
+                  ),
+                ),
+
                 // Country
                 CustomInputBar(titleName: "国籍:", backendPart: _buildLoverCountryInput(context)),
                 SizedBox(height: 15.v),
@@ -186,12 +202,12 @@ class LoverConditions extends StatelessWidget {
     return CustomAppBar(
       leading: AppbarLeadingImage(
         imagePath: ImageConstant.imgArrowLeft,
-        margin: EdgeInsets.only(left: 25, top: 60, bottom: 15),
+        margin: EdgeInsets.only(left: 25, top: 50, bottom: 10),
         onTap: () {
           onTapArrowLeft(context);
         },
       ),
-      title: AppbarTitle(text: "恋人の条件設定", margin: EdgeInsets.only(top: 60, bottom: 10)),
+      title: AppbarTitle(text: "恋人の条件設定", margin: EdgeInsets.only(top: 60, bottom: 20)),
       styleType: Style.bgFill,
     );
   }
@@ -205,7 +221,7 @@ class LoverConditions extends StatelessWidget {
   //   return CustomTextFormField(
   //     maxLength: 3,
   //     width: 60.h,
-  //     controller: loverMinAgeInputController,
+  //     controller: resetLoverMinAgeInputController,
   //     hintText: "30",
   //     alignment: Alignment.bottomCenter,
   //   );
@@ -216,7 +232,7 @@ class LoverConditions extends StatelessWidget {
   //   return CustomTextFormField(
   //     maxLength: 3,
   //     width: 60,
-  //     controller: loverMaxAgeInputController,
+  //     controller: resetLoverMaxAgeInputController,
   //     hintText: "30",
   //     alignment: Alignment.bottomCenter,
   //   );
@@ -333,6 +349,13 @@ class LoverConditions extends StatelessWidget {
       width: 150.h,
       text: "条件確認",
       buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
+      onPressed: () {
+        onTaptf(context);
+      },
     );
+  }
+
+  onTaptf(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.payDone);
   }
 }

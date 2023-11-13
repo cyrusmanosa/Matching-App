@@ -35,7 +35,7 @@ class TargetReady extends StatelessWidget {
                 "ターゲットを準備します",
                 style: theme.textTheme.headlineLarge,
               ),
-              SizedBox(height: 5.v),
+              SizedBox(height: 15.v),
             ],
           ),
         ),

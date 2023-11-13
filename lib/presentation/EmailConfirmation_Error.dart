@@ -33,7 +33,7 @@ class EmailConfirmationError extends StatelessWidget {
 
                       //Warning Logo
                       CustomImageView(imagePath: ImageConstant.imgWarning, height: 41.v, width: 49.h),
-                      SizedBox(height: 5.v),
+                      SizedBox(height: 15.v),
 
                       // Warning Msg
                       Container(
@@ -79,7 +79,7 @@ class EmailConfirmationError extends StatelessWidget {
                               width: 315.h,
                               margin: EdgeInsets.only(left: 20.h, right: 33.h),
                               child: Text("メールアドレスの受信確認が必須です。\nご登録済みのお客様にもメールアドレス受信確認をお願いしております。\n（この手続きは1回のみで、以降表示されません。）",
-                                  maxLines: 4, overflow: TextOverflow.ellipsis, style: CustomTextStyles.bodyMediumBlack900_1))),
+                                  maxLines: 4, overflow: TextOverflow.ellipsis, style: CustomTextStyles.bodyMediumBlack900))),
                       SizedBox(height: 5.v)
                     ])))));
   }

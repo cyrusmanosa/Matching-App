@@ -83,7 +83,7 @@ class NewPasswordError extends StatelessWidget {
                 text: "設定",
                 buttonTextStyle: theme.textTheme.titleSmall!,
               ),
-              SizedBox(height: 5.v),
+              SizedBox(height: 15.v),
             ],
           ),
         ),

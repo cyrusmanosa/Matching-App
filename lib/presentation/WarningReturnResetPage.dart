@@ -20,7 +20,7 @@ class WarningReturnResetPage extends StatelessWidget {
           ),
           child: Column(
             children: [
-              SizedBox(height: 5.v),
+              SizedBox(height: 15.v),
               _buildWarningOfReturnColumn(context),
             ],
           ),
@@ -37,7 +37,7 @@ class WarningReturnResetPage extends StatelessWidget {
         vertical: 19.v,
       ),
       decoration: AppDecoration.fillPrimary.copyWith(
-        borderRadius: BorderRadiusStyle.roundedBorder30,
+        borderRadius: BorderRadiusStyle.r30,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -48,7 +48,7 @@ class WarningReturnResetPage extends StatelessWidget {
           ),
           Text(
             "一旦、確認するボタンを押したら、条件はもう一度設定しますのでお確認してください",
-            style: CustomTextStyles.bodyLargeBlack90018,
+            style: CustomTextStyles.bodyLargeBlack900,
           ),
           SizedBox(height: 12.v),
           CustomOutlinedButton(

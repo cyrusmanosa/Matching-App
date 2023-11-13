@@ -56,7 +56,7 @@ class ConfirmationCoreError extends StatelessWidget {
                       Container(
                         width: 300.h,
                         padding: EdgeInsets.symmetric(horizontal: 19.h, vertical: 6.v),
-                        decoration: AppDecoration.outlinePinkA.copyWith(borderRadius: BorderRadiusStyle.roundedBorder5),
+                        decoration: AppDecoration.outlinePinkA.copyWith(borderRadius: BorderRadiusStyle.r5),
                         child: Text("423198", style: theme.textTheme.bodyLarge),
                       )
                     ],

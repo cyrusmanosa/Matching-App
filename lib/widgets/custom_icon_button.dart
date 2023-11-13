@@ -5,7 +5,6 @@ class CustomIconButton extends StatelessWidget {
   CustomIconButton({
     Key? key,
     this.alignment,
-    this.child,
     this.decoration,
     this.height,
     this.onTap,
@@ -18,7 +17,6 @@ class CustomIconButton extends StatelessWidget {
   final double? height;
   final double? width;
   final EdgeInsetsGeometry? padding;
-  final Widget? child;
   final VoidCallback? onTap;
 
   @override
@@ -43,7 +41,7 @@ class CustomIconButton extends StatelessWidget {
             decoration: decoration ??
                 BoxDecoration(
                   color: theme.colorScheme.primary,
-                  borderRadius: BorderRadius.circular(5.h),
+                  borderRadius: BorderRadiusStyle.r5,
                   boxShadow: [
                     BoxShadow(
                       color: appTheme.black900.withOpacity(0.3),
@@ -53,7 +51,6 @@ class CustomIconButton extends StatelessWidget {
                     ),
                   ],
                 ),
-            child: child,
           ),
           onPressed: onTap,
         ),
@@ -64,7 +61,7 @@ class CustomIconButton extends StatelessWidget {
 extension IconButtonStyleHelper on CustomIconButton {
   static BoxDecoration get outlineDarkBlueTL5 => BoxDecoration(
         color: appTheme.gray500,
-        borderRadius: BorderRadius.circular(5.h),
+        borderRadius: BorderRadiusStyle.r5,
         boxShadow: [
           BoxShadow(
             color: appTheme.black900.withOpacity(0.3),

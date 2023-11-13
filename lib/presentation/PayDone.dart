@@ -6,7 +6,9 @@ class PayDone extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
+    Future.delayed(Duration(seconds: 3), () {
+      Navigator.pushNamed(context, AppRoutes.containerScreen);
+    });
 
     return SafeArea(
       child: Scaffold(

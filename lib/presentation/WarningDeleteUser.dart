@@ -13,10 +13,7 @@ class WarningDeleteUser extends StatelessWidget {
             body: Container(
                 width: double.maxFinite,
                 padding: EdgeInsets.only(left: 15.h, top: 202.v, right: 15.h),
-                child: Column(children: [
-                  SizedBox(height: 5.v),
-                  _buildWarningDelete(context)
-                ]))));
+                child: Column(children: [SizedBox(height: 5.v), _buildWarningDelete(context)]))));
   }
 
   /// Section Widget
@@ -24,14 +21,12 @@ class WarningDeleteUser extends StatelessWidget {
     return Container(
         width: 400.h,
         padding: EdgeInsets.symmetric(horizontal: 38.h, vertical: 19.v),
-        decoration: AppDecoration.fillPrimary
-            .copyWith(borderRadius: BorderRadiusStyle.roundedBorder30),
+        decoration: AppDecoration.fillPrimary.copyWith(borderRadius: BorderRadiusStyle.r30),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           Text("警告", style: theme.textTheme.headlineLarge),
           Align(
               alignment: Alignment.centerLeft,
-              child: Text("一旦、確認するボタンを押したら、ご選択のユーザーを削除しましたので、もう一度お確認してください",
-                  style: CustomTextStyles.bodyLargeBlack90018)),
+              child: Text("一旦、確認するボタンを押したら、ご選択のユーザーを削除しましたので、もう一度お確認してください", style: CustomTextStyles.bodyLargeBlack900)),
           SizedBox(height: 11.v),
           CustomOutlinedButton(
               height: 38.v,

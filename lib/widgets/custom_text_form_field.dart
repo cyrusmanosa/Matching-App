@@ -53,7 +53,12 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return alignment != null ? Align(alignment: alignment ?? Alignment.center, child: textFormFieldWidget) : textFormFieldWidget;
+    return alignment != null
+        ? Align(
+            alignment: alignment ?? Alignment.center,
+            child: textFormFieldWidget,
+          )
+        : textFormFieldWidget;
   }
 
   Widget get textFormFieldWidget => SizedBox(
@@ -68,47 +73,42 @@ class CustomTextFormField extends StatelessWidget {
           keyboardType: textInputType,
           maxLength: maxLength,
           maxLines: maxLines,
-          decoration: decoration,
+          decoration: InputDecoration(hintText: hintText),
           validator: validator,
         ),
       );
+
   InputDecoration get decoration => InputDecoration(
-        hintText: hintText ?? "",
+        // Example Word
+        hintText: hintText,
         hintStyle: hintStyle ?? CustomTextStyles.bodyLargePrimary,
         prefixIcon: prefix,
         prefixIconConstraints: prefixConstraints,
         suffixIcon: suffix,
         suffixIconConstraints: suffixConstraints,
         isDense: true,
-        contentPadding: contentPadding ?? EdgeInsets.all(6.h),
+        contentPadding: contentPadding ?? EdgeInsets.all(5),
         fillColor: fillColor,
         filled: filled,
+
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5.h),
-          borderSide: BorderSide(
-            color: appTheme.pinkA100,
-            width: 1,
-          ),
+          borderRadius: BorderRadiusStyle.r5,
+          borderSide: BorderSide(color: appTheme.pinkA100, width: 1),
         ),
         enabledBorder: borderDecoration ?? InputBorder.none,
-        focusedBorder: borderDecoration ?? InputBorder.none,
+
+        // Error Border
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5.h),
-          borderSide: BorderSide(
-            color: appTheme.pinkA100,
-            width: 1,
-          ),
+          borderRadius: BorderRadiusStyle.r5,
+          borderSide: BorderSide(color: appTheme.pinkA100, width: 1),
         ),
+        // errorStyle: TextStyle(color: appTheme.pinkA100, fontSize: 12.fSize),
+
+        // Focus Border
+        focusedBorder: borderDecoration ?? InputBorder.none,
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5.h),
-          borderSide: BorderSide(
-            color: appTheme.pinkA100,
-            width: 1,
-          ),
-        ),
-        errorStyle: TextStyle(
-          color: appTheme.pinkA100,
-          fontSize: 12.fSize,
+          borderRadius: BorderRadiusStyle.r5,
+          borderSide: BorderSide(color: appTheme.pinkA100, width: 1),
         ),
       );
 }
@@ -116,7 +116,7 @@ class CustomTextFormField extends StatelessWidget {
 /// Extension on [CustomTextFormField] to facilitate inclusion of all types of border style etc
 extension TextFormFieldStyleHelper on CustomTextFormField {
   static OutlineInputBorder get fillGray => OutlineInputBorder(
-        borderRadius: BorderRadius.circular(4.0),
+        borderRadius: BorderRadiusStyle.r5,
         borderSide: BorderSide(color: appTheme.pinkA100),
       );
 }
