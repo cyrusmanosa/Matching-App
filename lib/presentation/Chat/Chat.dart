@@ -29,12 +29,12 @@ class Chat extends StatelessWidget {
   /// Header
   Widget _buildChatSection(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 163.h, vertical: 20.5),
+      padding: EdgeInsets.symmetric(horizontal: 163.h, vertical: 11),
       decoration: AppDecoration.fillGray,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          SizedBox(height: 20.v),
+          SizedBox(height: 40),
           Text("チャット", style: theme.textTheme.headlineMedium),
         ],
       ),

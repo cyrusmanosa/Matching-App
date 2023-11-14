@@ -1,9 +1,14 @@
 import 'package:cyrus_man_s_application1/core/app_export.dart';
+import 'package:cyrus_man_s_application1/widgets/app_bar/custom_Input_bar.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
+import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ConfirmationCore extends StatelessWidget {
-  const ConfirmationCore({Key? key}) : super(key: key);
+  ConfirmationCore({Key? key}) : super(key: key);
+
+  TextEditingController confirmationCoreController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +17,7 @@ class ConfirmationCore extends StatelessWidget {
       child: Scaffold(
         body: Container(
           width: double.maxFinite,
-          padding: EdgeInsets.only(left: 47.h, top: 65.v, right: 47.h),
+          padding: EdgeInsets.only(left: 30.h, top: 65.v, right: 30.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -22,53 +27,42 @@ class ConfirmationCore extends StatelessWidget {
 
               // Slogan
               CustomImageView(imagePath: ImageConstant.imgSlogan, height: 17, width: 100, alignment: Alignment.center),
-              SizedBox(height: 15.v),
+              SizedBox(height: 20.v),
 
               // Title
-              Text("認証コードを送信しました", style: CustomTextStyles.headlineSmallRoundedMplus1c),
-              SizedBox(height: 1.v),
-              Text("以下にコードを入力してメールアドレスを認証してください。", style: theme.textTheme.bodySmall),
+              Text("以下にコードを認証してください。", style: theme.textTheme.bodySmall),
               SizedBox(height: 15.v),
 
               // Input
-              Padding(
-                padding: EdgeInsets.only(right: 36.h),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("認証コード:", style: theme.textTheme.titleLarge),
-                    Container(
-                      width: 300.h,
-                      padding: EdgeInsets.symmetric(horizontal: 19.h, vertical: 6.v),
-                      decoration: AppDecoration.outlinePinkA.copyWith(borderRadius: BorderRadiusStyle.r5),
-                      child: Text("423198", style: theme.textTheme.bodyLarge),
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(height: 2.v),
+              CustomInputBar(titleName: "認証コード:", backendPart: _buildConfirmationCoreInput(context)),
+              SizedBox(height: 1.v),
 
-              Text(
-                "コードが届かない場合",
-                style: CustomTextStyles.bodyMediumBlack900,
-              ),
-              SizedBox(height: 24.v),
+              Text("コードが届かない場合", style: CustomTextStyles.bodyMediumBlack900),
+              SizedBox(height: 25.v),
 
               // button
               CustomOutlinedButton(
-                  height: 38.v,
-                  width: 96.h,
+                  height: 40,
+                  width: 95,
                   text: "認証",
                   buttonTextStyle: theme.textTheme.titleSmall!,
                   onPressed: () {
                     onTaptf(context);
                   },
                   alignment: Alignment.center),
-              SizedBox(height: 5.v)
             ],
           ),
         ),
       ),
+    );
+  }
+
+  /// Era
+  Widget _buildConfirmationCoreInput(BuildContext context) {
+    return CustomTextFormField(
+      controller: confirmationCoreController,
+      hintText: "423198",
+      maxLines: 1,
     );
   }
 

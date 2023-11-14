@@ -5,18 +5,18 @@ import 'package:flutter/material.dart';
 class CustomOutlinedButton extends BaseButton {
   CustomOutlinedButton({
     Key? key,
+    Alignment? alignment,
+    ButtonStyle? buttonStyle,
+    bool? isDisabled,
+    double? height,
+    double? width,
+    EdgeInsets? margin,
+    TextStyle? buttonTextStyle,
+    VoidCallback? onPressed,
     this.decoration,
     this.leftIcon,
     this.rightIcon,
     this.label,
-    VoidCallback? onPressed,
-    ButtonStyle? buttonStyle,
-    TextStyle? buttonTextStyle,
-    bool? isDisabled,
-    Alignment? alignment,
-    double? height,
-    double? width,
-    EdgeInsets? margin,
     required String text,
   }) : super(
           text: text,
@@ -43,8 +43,8 @@ class CustomOutlinedButton extends BaseButton {
   }
 
   Widget get buildOutlinedButtonWidget => Container(
-        height: this.height ?? 60.v,
-        width: this.width ?? double.maxFinite,
+        height: height,
+        width: width,
         margin: margin,
         decoration: decoration,
         child: OutlinedButton(

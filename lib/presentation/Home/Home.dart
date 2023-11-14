@@ -26,14 +26,11 @@ class Home extends StatelessWidget {
 
   Widget _buildHeader(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 176.h, vertical: 20.5),
+      padding: EdgeInsets.symmetric(horizontal: 176, vertical: 11),
       decoration: AppDecoration.fillGray,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          SizedBox(height: 20.v),
-          Text("ホーム", style: theme.textTheme.headlineMedium),
-        ],
+        children: [SizedBox(height: 40), Text("ホーム", style: theme.textTheme.headlineMedium)],
       ),
     );
   }

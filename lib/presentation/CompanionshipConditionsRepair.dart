@@ -185,6 +185,6 @@ class CompanionshipConditionsRepair extends StatelessWidget {
   }
 
   onTaptf(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.payDone);
+    Navigator.pushNamed(context, AppRoutes.deleteTarget);
   }
 }

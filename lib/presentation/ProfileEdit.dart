@@ -1,5 +1,7 @@
 import 'package:cyrus_man_s_application1/core/app_export.dart';
+import 'package:cyrus_man_s_application1/widgets/app_bar/appbar_leading_image.dart';
 import 'package:cyrus_man_s_application1/widgets/app_bar/appbar_title.dart';
+import 'package:cyrus_man_s_application1/widgets/app_bar/custom_Input_bar.dart';
 import 'package:cyrus_man_s_application1/widgets/app_bar/custom_app_bar.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
@@ -9,19 +11,17 @@ import 'package:flutter/material.dart';
 class ProfileEdit extends StatelessWidget {
   ProfileEdit({Key? key}) : super(key: key);
 
-  TextEditingController introduceInputController = TextEditingController();
-  TextEditingController nickNameInputController = TextEditingController();
-  TextEditingController heightInputController = TextEditingController();
-  TextEditingController weightInputController = TextEditingController();
-  TextEditingController cityInputController = TextEditingController();
-  TextEditingController hobbyTypeInputController = TextEditingController();
-  TextEditingController jobInputController = TextEditingController();
-  TextEditingController sexualInputController = TextEditingController();
-  TextEditingController sociabilityInputController = TextEditingController();
-  TextEditingController findTargetInputController = TextEditingController();
-  TextEditingController purposeInputController = TextEditingController();
-  TextEditingController religiousInputController = TextEditingController();
-  GlobalKey<NavigatorState> navigatorKey = GlobalKey();
+  TextEditingController updateBasicNickNameInputController = TextEditingController();
+  TextEditingController updateBasicCityInputController = TextEditingController();
+  TextEditingController updateBasicSexualInputController = TextEditingController();
+  TextEditingController updateBasicHeightInputController = TextEditingController();
+  TextEditingController updateBasicWeightInputController = TextEditingController();
+  TextEditingController updateBasicEducationInputController = TextEditingController();
+  TextEditingController updateBasicJobInputController = TextEditingController();
+  TextEditingController updateBasicAnnualSalaryController = TextEditingController();
+  TextEditingController updateBasicSociabilityController = TextEditingController();
+  TextEditingController updateBasicReligiousController = TextEditingController();
+  TextEditingController updateBasicIntroduceController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,141 +38,75 @@ class ProfileEdit extends StatelessWidget {
               SizedBox(height: 15.v),
               Expanded(
                 child: SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 50.h),
-                    child: Column(
-                      children: [
-                        // photos
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CustomImageView(
-                              imagePath: ImageConstant.imgVectorgray500,
-                              height: 150.adaptSize,
-                              width: 150.adaptSize,
-                              margin: EdgeInsets.only(top: 10.v, bottom: 9.v),
-                            ),
-                            CustomImageView(
-                              imagePath: ImageConstant.imgPhotoSet,
-                              height: 169.v,
-                              width: 50.h,
-                              margin: EdgeInsets.only(left: 22.h),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("自己紹介:", style: theme.textTheme.titleLarge),
-                            _buildIntroduceInput(context),
-                          ],
-                        ),
-                        SizedBox(height: 17.v),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("ニックネーム:", style: theme.textTheme.titleLarge),
-                            _buildNickNameInput(context),
-                          ],
-                        ),
-                        SizedBox(height: 10.v),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("身長:", style: theme.textTheme.titleLarge),
-                            _buildHeightInput(context),
-                          ],
-                        ),
-                        SizedBox(height: 10.v),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("体重:", style: theme.textTheme.titleLarge),
-                            _buildWeightInput(context),
-                          ],
-                        ),
-                        SizedBox(height: 10.v),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("居住地:", style: theme.textTheme.titleLarge),
-                            _buildCityInput(context),
-                          ],
-                        ),
-                        SizedBox(height: 10.v),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("学歴:", style: theme.textTheme.titleLarge),
-                            _buildEducationInput(context),
-                          ],
-                        ),
-                        SizedBox(height: 4.v),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("趣味のタイプ:", style: theme.textTheme.titleLarge),
-                            _buildHobbyTypeInput(context),
-                          ],
-                        ),
-                        SizedBox(height: 10.v),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("職種:", style: theme.textTheme.titleLarge),
-                            SizedBox(height: 2.v),
-                            _buildJobInput(context),
-                          ],
-                        ),
-                        SizedBox(height: 10.v),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("性的指向:", style: theme.textTheme.titleLarge),
-                            SizedBox(height: 2.v),
-                            _buildSexualInput(context),
-                          ],
-                        ),
-                        SizedBox(height: 10.v),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("社交力:", style: theme.textTheme.titleLarge),
-                            SizedBox(height: 2.v),
-                            _buildSociabilityInput(context),
-                          ],
-                        ),
-                        SizedBox(height: 10.v),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("探す対象:", style: theme.textTheme.titleLarge),
-                            SizedBox(height: 2.v),
-                            _buildFindTargetInput(context),
-                          ],
-                        ),
-                        SizedBox(height: 10.v),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("目的:", style: theme.textTheme.titleLarge),
-                            SizedBox(height: 2.v),
-                            _buildPurposeInput(context),
-                          ],
-                        ),
-                        SizedBox(height: 10.v),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("宗教:", style: theme.textTheme.titleLarge),
-                            SizedBox(height: 2.v),
-                            _buildReligiousInput(context),
-                          ],
-                        ),
-                        SizedBox(height: 15.v),
-                        _buildSubmitButton(context),
-                      ],
-                    ),
+                  child: Column(
+                    children: [
+                      // photos
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CustomImageView(
+                            imagePath: ImageConstant.imgVectorgray500,
+                            height: 150.adaptSize,
+                            width: 150.adaptSize,
+                            margin: EdgeInsets.only(top: 10.v, bottom: 9.v),
+                          ),
+                          CustomImageView(
+                            imagePath: ImageConstant.imgPhotoSet,
+                            height: 169.v,
+                            width: 50.h,
+                            margin: EdgeInsets.only(left: 22.h),
+                          ),
+                        ],
+                      ),
+
+                      // Introduce
+                      CustomInputBar(titleName: "自己紹介:", backendPart: _buildUpdateBasicIntroduceInput(context)),
+                      SizedBox(height: 15.v),
+
+                      // Nickname
+                      CustomInputBar(titleName: "ニックネーム:", backendPart: _buildUpdateBasicNickNameInput(context)),
+                      SizedBox(height: 15.v),
+
+                      // Height
+                      CustomInputBar(titleName: "身長:", backendPart: _buildUpdateBasicHeightInput(context)),
+                      SizedBox(height: 15.v),
+
+                      // Weight
+                      CustomInputBar(titleName: "体重:", backendPart: _buildUpdateBasicWeightInput(context)),
+                      SizedBox(height: 15.v),
+
+                      // City
+                      CustomInputBar(titleName: "居住地:", backendPart: _buildUpdateBasicCityInput(context)),
+                      SizedBox(height: 15.v),
+
+                      // Education
+                      CustomInputBar(titleName: "学歴:", backendPart: _buildUpdateBasicEducationInput(context)),
+                      SizedBox(height: 15.v),
+
+                      // Job
+                      CustomInputBar(titleName: "職種:", backendPart: _buildUpdateBasicJobInput(context)),
+                      SizedBox(height: 15.v),
+
+                      // Annual Salary
+                      CustomInputBar(titleName: "年収:", backendPart: _buildUpdateBasicAnnualSalaryInput(context)),
+                      SizedBox(height: 15.v),
+
+                      // Sexual
+                      CustomInputBar(titleName: "性的指向:", backendPart: _buildUpdateBasicSexualInput(context)),
+                      SizedBox(height: 15.v),
+
+                      // Sociability
+                      CustomInputBar(titleName: "社交力:", backendPart: _buildUpdateBasicSociabilityInput(context)),
+                      SizedBox(height: 15.v),
+
+                      // Relighious
+                      CustomInputBar(titleName: "宗教:", backendPart: _buildUpdateBasicReligiousInput(context)),
+                      SizedBox(height: 40.v),
+
+                      // button
+                      _buildSubmitButton(context),
+                      SizedBox(height: 30.v),
+                    ],
                   ),
                 ),
               ),
@@ -186,118 +120,112 @@ class ProfileEdit extends StatelessWidget {
   /// Header
   PreferredSizeWidget _buildHeader(BuildContext context) {
     return CustomAppBar(
-      centerTitle: true,
-      title: AppbarTitle(
-        text: "プロフィール編集",
-        margin: EdgeInsets.only(left: 67.v, right: 18.v),
+      leading: AppbarLeadingImage(
+        imagePath: ImageConstant.imgArrowLeft,
+        margin: EdgeInsets.only(left: 25, top: 50, bottom: 20),
+        onTap: () {
+          onTapArrowLeft(context);
+        },
       ),
+      title: AppbarTitle(text: "プロフィール編集", margin: EdgeInsets.only(top: 60, bottom: 20)),
       styleType: Style.bgFill,
     );
   }
 
-  /// Introduce
-  Widget _buildIntroduceInput(BuildContext context) {
-    return CustomTextFormField(
-      controller: introduceInputController,
-      hintText: "亜dさdさだだ",
-      maxLines: 8,
-      contentPadding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 19.v),
-    );
+  // turn back
+  onTapArrowLeft(BuildContext context) {
+    Navigator.pop(context);
   }
 
-  /// NickName
-  Widget _buildNickNameInput(BuildContext context) {
+  /// Nickname
+  Widget _buildUpdateBasicNickNameInput(BuildContext context) {
     return CustomTextFormField(
-      controller: nickNameInputController,
+      controller: updateBasicNickNameInputController,
       hintText: "仆街",
     );
   }
 
-  /// Height
-  Widget _buildHeightInput(BuildContext context) {
+  /// City
+  Widget _buildUpdateBasicCityInput(BuildContext context) {
     return CustomTextFormField(
-      controller: heightInputController,
+      controller: updateBasicCityInputController,
+      hintText: "大阪",
+    );
+  }
+
+  /// Sexual
+  Widget _buildUpdateBasicSexualInput(BuildContext context) {
+    return CustomTextFormField(
+      controller: updateBasicSexualInputController,
+      hintText: "異性愛",
+    );
+  }
+
+  /// Height
+  Widget _buildUpdateBasicHeightInput(BuildContext context) {
+    return CustomTextFormField(
+      controller: updateBasicHeightInputController,
       hintText: "170cm",
     );
   }
 
   /// Weight
-  Widget _buildWeightInput(BuildContext context) {
+  Widget _buildUpdateBasicWeightInput(BuildContext context) {
     return CustomTextFormField(
-      controller: weightInputController,
+      controller: updateBasicWeightInputController,
       hintText: "60kg",
     );
   }
 
-  /// City
-  Widget _buildCityInput(BuildContext context) {
+  /// Education
+  Widget _buildUpdateBasicEducationInput(BuildContext context) {
     return CustomTextFormField(
-      controller: cityInputController,
-      hintText: "大阪",
-    );
-  }
-
-  Widget _buildEducationInput(BuildContext context) {
-    return CustomTextFormField(
-      controller: hobbyTypeInputController,
-      hintText: "サッカー",
-    );
-  }
-
-  /// HobbyType
-  Widget _buildHobbyTypeInput(BuildContext context) {
-    return CustomTextFormField(
-      controller: hobbyTypeInputController,
-      hintText: "サッカー",
+      controller: updateBasicEducationInputController,
+      hintText: "高校生",
     );
   }
 
   /// Job
-  Widget _buildJobInput(BuildContext context) {
+  Widget _buildUpdateBasicJobInput(BuildContext context) {
     return CustomTextFormField(
-      controller: jobInputController,
+      controller: updateBasicJobInputController,
       hintText: "ホスト",
+      textInputAction: TextInputAction.done,
     );
   }
 
-  /// Sexual
-  Widget _buildSexualInput(BuildContext context) {
+  /// Annual Salary
+  Widget _buildUpdateBasicAnnualSalaryInput(BuildContext context) {
     return CustomTextFormField(
-      controller: sexualInputController,
-      hintText: "異性愛",
+      controller: updateBasicAnnualSalaryController,
+      hintText: "4000",
     );
   }
 
   /// Sociability
-  Widget _buildSociabilityInput(BuildContext context) {
+  Widget _buildUpdateBasicSociabilityInput(BuildContext context) {
     return CustomTextFormField(
-      controller: sociabilityInputController,
+      controller: updateBasicSociabilityController,
       hintText: "人たら神",
     );
   }
 
-  /// Find Target
-  Widget _buildFindTargetInput(BuildContext context) {
-    return CustomTextFormField(
-      controller: findTargetInputController,
-      hintText: "サッカーのチームメンバー",
-    );
-  }
-
-  /// Purpose
-  Widget _buildPurposeInput(BuildContext context) {
-    return CustomTextFormField(
-      controller: purposeInputController,
-      hintText: "サッカーチームを組む",
-    );
-  }
-
   /// Religious
-  Widget _buildReligiousInput(BuildContext context) {
+  Widget _buildUpdateBasicReligiousInput(BuildContext context) {
     return CustomTextFormField(
-      controller: religiousInputController,
+      controller: updateBasicReligiousController,
       hintText: "多神教",
+    );
+  }
+
+  /// Introduce
+  Widget _buildUpdateBasicIntroduceInput(BuildContext context) {
+    return CustomTextFormField(
+      controller: updateBasicIntroduceController,
+      hintText: "亜dさdさだだ",
       textInputAction: TextInputAction.done,
+      maxLines: 5,
+      contentPadding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 20.v),
     );
   }
 

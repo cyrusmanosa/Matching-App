@@ -96,7 +96,7 @@ class SignUp_1 extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 10.v),
+                SizedBox(height: 15.v),
 
                 // Agree
                 Align(

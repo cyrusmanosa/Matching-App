@@ -29,7 +29,7 @@ class SignUp_3 extends StatelessWidget {
               SizedBox(height: 50),
 
               // Annual Salary
-              CustomInputBar(titleName: "職種:", backendPart: _buildBasicAnnualSalaryInput(context)),
+              CustomInputBar(titleName: "年収:", backendPart: _buildBasicAnnualSalaryInput(context)),
               SizedBox(height: 15.v),
 
               // Sociability

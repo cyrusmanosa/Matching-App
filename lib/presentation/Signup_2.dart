@@ -7,7 +7,7 @@ import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable,camel_case_types
 class SignUp_2 extends StatelessWidget {
   SignUp_2({Key? key}) : super(key: key);
 

@@ -42,7 +42,7 @@ class ConfirmationCoreError extends StatelessWidget {
               // Title
               Align(alignment: Alignment.centerLeft, child: Text("認証コードを送信しました", style: CustomTextStyles.headlineSmallRoundedMplus1c)),
               Text("以下にコードを入力してメールアドレスを認証してください。", style: theme.textTheme.bodySmall),
-              SizedBox(height: 10.v),
+              SizedBox(height: 15.v),
 
               // Input
               Align(

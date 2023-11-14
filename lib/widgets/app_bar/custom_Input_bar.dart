@@ -3,23 +3,25 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class CustomInputBar extends StatelessWidget {
-  CustomInputBar({
-    Key? key,
-    this.titleName,
-    this.backendPart,
-  }) : super(key: key);
+  CustomInputBar({Key? key, this.titleName, this.backendPart}) : super(key: key);
 
   final String? titleName;
   final Widget? backendPart;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [Text(titleName!, style: theme.textTheme.titleLarge), backendPart!],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(titleName!, style: theme.textTheme.titleLarge),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: appTheme.pinkA100),
+            borderRadius: BorderRadiusStyle.r5,
+          ),
+          child: backendPart,
+        ),
+      ],
     );
   }
 }

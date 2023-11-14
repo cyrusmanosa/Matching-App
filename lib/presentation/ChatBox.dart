@@ -23,7 +23,7 @@ class ChatBox extends StatelessWidget {
           width: double.maxFinite,
           child: Column(
             children: [
-              SizedBox(height: 10.v),
+              SizedBox(height: 15.v),
               _buildTwo(context),
               SizedBox(height: 7.v),
               _buildNinetySeven(context),

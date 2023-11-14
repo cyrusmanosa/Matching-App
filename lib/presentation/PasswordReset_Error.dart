@@ -40,7 +40,7 @@ class PasswordResetError extends StatelessWidget {
                   height: 17.v,
                   width: 100.h,
                 ),
-                SizedBox(height: 10.v),
+                SizedBox(height: 15.v),
                 CustomImageView(
                   imagePath: ImageConstant.imgWarning,
                   height: 41.v,
@@ -61,7 +61,7 @@ class PasswordResetError extends StatelessWidget {
                     style: CustomTextStyles.bodyMediumOnPrimary,
                   ),
                 ),
-                SizedBox(height: 10.v),
+                SizedBox(height: 15.v),
                 Text(
                   "パスワード再設定",
                   style: theme.textTheme.displaySmall!.copyWith(

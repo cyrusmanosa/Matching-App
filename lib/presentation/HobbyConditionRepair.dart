@@ -33,79 +33,82 @@ class HobbyConditionRepair extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         // Header
         appBar: _buildHeader(context),
-        body: SizedBox(
-          width: double.maxFinite,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(height: 120.v),
+        body: Form(
+          child: Container(
+            width: double.maxFinite,
+            child: SingleChildScrollView(
+              padding: EdgeInsets.only(left: 30.h, top: 65.v, right: 30.h),
+              child: Column(
+                children: [
+                  SizedBox(height: 120.v),
 
-                // Era
-                CustomInputBar(titleName: "年代:", backendPart: _buildHobbyResetEraInput(context)),
-                SizedBox(height: 15.v),
+                  // Era
+                  CustomInputBar(titleName: "年代:", backendPart: _buildHobbyResetEraInput(context)),
+                  SizedBox(height: 15.v),
 
-                // Country
-                CustomInputBar(titleName: "国籍:", backendPart: _buildHobbyResetCountryInput(context)),
-                SizedBox(height: 15.v),
+                  // Country
+                  CustomInputBar(titleName: "国籍:", backendPart: _buildHobbyResetCountryInput(context)),
+                  SizedBox(height: 15.v),
 
-                // City
-                CustomInputBar(titleName: "居住地:", backendPart: _buildHobbyResetCityInput(context)),
-                SizedBox(height: 15.v),
+                  // City
+                  CustomInputBar(titleName: "居住地:", backendPart: _buildHobbyResetCityInput(context)),
+                  SizedBox(height: 15.v),
 
-                // Gender
-                CustomInputBar(titleName: "性別:", backendPart: _buildHobbyResetGenderInput(context)),
-                SizedBox(height: 15.v),
+                  // Gender
+                  CustomInputBar(titleName: "性別:", backendPart: _buildHobbyResetGenderInput(context)),
+                  SizedBox(height: 15.v),
 
-                // Hobby
-                CustomInputBar(titleName: "趣味のタイプ:", backendPart: _buildHobbyResetHobbyTypeInput(context)),
-                SizedBox(height: 15.v),
+                  // Hobby
+                  CustomInputBar(titleName: "趣味のタイプ:", backendPart: _buildHobbyResetHobbyTypeInput(context)),
+                  SizedBox(height: 15.v),
 
-                // Find Target
-                CustomInputBar(titleName: "探す対象:", backendPart: _buildHobbyResetFindTargetInput(context)),
-                SizedBox(height: 15.v),
+                  // Find Target
+                  CustomInputBar(titleName: "探す対象:", backendPart: _buildHobbyResetFindTargetInput(context)),
+                  SizedBox(height: 15.v),
 
-                // Experience of Hobby
-                CustomInputBar(titleName: "経験:", backendPart: _buildHobbyResetExperienceInput(context)),
-                SizedBox(height: 15.v),
+                  // Experience of Hobby
+                  CustomInputBar(titleName: "経験:", backendPart: _buildHobbyResetExperienceInput(context)),
+                  SizedBox(height: 15.v),
 
-                // Height
-                CustomInputBar(titleName: "身長:", backendPart: _buildHobbyResetHeightInput(context)),
-                SizedBox(height: 15.v),
+                  // Height
+                  CustomInputBar(titleName: "身長:", backendPart: _buildHobbyResetHeightInput(context)),
+                  SizedBox(height: 15.v),
 
-                // Weight
-                CustomInputBar(titleName: "体重:", backendPart: _buildHobbyResetWeightInput(context)),
-                SizedBox(height: 15.v),
+                  // Weight
+                  CustomInputBar(titleName: "体重:", backendPart: _buildHobbyResetWeightInput(context)),
+                  SizedBox(height: 15.v),
 
-                // Sociability
-                CustomInputBar(titleName: "社交力:", backendPart: _buildHobbyResetSociabilityInput(context)),
-                SizedBox(height: 20.v),
+                  // Sociability
+                  CustomInputBar(titleName: "社交力:", backendPart: _buildHobbyResetSociabilityInput(context)),
+                  SizedBox(height: 20.v),
 
-                // 本人
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 30.h),
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 20.adaptSize,
-                          width: 20.adaptSize,
-                          decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadius.circular(10.h)),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 10.h),
-                          child: Text("本人認証を確認しました", style: theme.textTheme.bodyMedium),
-                        ),
-                      ],
+                  // 本人
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 30.h),
+                      child: Row(
+                        children: [
+                          Container(
+                            height: 20.adaptSize,
+                            width: 20.adaptSize,
+                            decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadius.circular(10.h)),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 10.h),
+                            child: Text("本人認証を確認しました", style: theme.textTheme.bodyMedium),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 40.v),
+                  SizedBox(height: 40.v),
 
-                // button
-                _buildCertificationForCheck(context),
-                SizedBox(height: 30.v)
-              ],
+                  // button
+                  _buildCertificationForCheck(context),
+                  SizedBox(height: 30.v)
+                ],
+              ),
             ),
           ),
         ),
@@ -136,6 +139,7 @@ class HobbyConditionRepair extends StatelessWidget {
   Widget _buildHobbyResetEraInput(BuildContext context) {
     return CustomTextFormField(
       controller: resetHobbyEraController,
+      borderDecoration: InputBorder.none,
       hintText: "３０代",
     );
   }

@@ -53,43 +53,39 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return alignment != null
-        ? Align(
-            alignment: alignment ?? Alignment.center,
-            child: textFormFieldWidget,
-          )
-        : textFormFieldWidget;
+    return alignment != null ? Align(alignment: alignment ?? Alignment.center, child: textFormFieldWidget) : textFormFieldWidget;
   }
 
   Widget get textFormFieldWidget => SizedBox(
         width: width ?? double.maxFinite,
         child: TextFormField(
-          controller: controller,
-          focusNode: focusNode ?? FocusNode(),
           autofocus: autofocus!,
-          style: textStyle ?? theme.textTheme.bodyLarge,
-          obscureText: obscureText!,
-          textInputAction: textInputAction,
+          controller: controller,
+          decoration: InputDecoration(hintText: hintText, border: InputBorder.none),
+          focusNode: focusNode ?? FocusNode(),
           keyboardType: textInputType,
           maxLength: maxLength,
           maxLines: maxLines,
-          decoration: InputDecoration(hintText: hintText),
+          obscureText: obscureText!,
+          style: textStyle ?? theme.textTheme.bodyLarge,
+          textInputAction: textInputAction,
           validator: validator,
         ),
       );
 
   InputDecoration get decoration => InputDecoration(
         // Example Word
+
+        contentPadding: contentPadding ?? EdgeInsets.all(5),
+        fillColor: fillColor,
+        filled: filled,
         hintText: hintText,
         hintStyle: hintStyle ?? CustomTextStyles.bodyLargePrimary,
+        isDense: true,
         prefixIcon: prefix,
         prefixIconConstraints: prefixConstraints,
         suffixIcon: suffix,
         suffixIconConstraints: suffixConstraints,
-        isDense: true,
-        contentPadding: contentPadding ?? EdgeInsets.all(5),
-        fillColor: fillColor,
-        filled: filled,
 
         border: OutlineInputBorder(
           borderRadius: BorderRadiusStyle.r5,

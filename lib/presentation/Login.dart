@@ -1,4 +1,5 @@
 import 'package:cyrus_man_s_application1/core/app_export.dart';
+import 'package:cyrus_man_s_application1/widgets/app_bar/custom_Input_bar.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_elevated_button.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
 import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
@@ -28,6 +29,7 @@ class Login extends StatelessWidget {
               children: [
                 // Logo
                 SizedBox(height: 50),
+
                 CustomImageView(imagePath: ImageConstant.imgLogo, width: 150.h),
                 SizedBox(height: 15.v),
 
@@ -36,36 +38,12 @@ class Login extends StatelessWidget {
                 SizedBox(height: 20.v),
 
                 // ID
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("ユーザーID:", style: theme.textTheme.titleLarge),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: appTheme.pinkA100, width: 2),
-                        borderRadius: BorderRadiusStyle.r5,
-                      ),
-                      child: _buildEmailInput(context),
-                    ),
-                  ],
-                ),
+                CustomInputBar(titleName: "ユーザーID:", backendPart: _buildEmailInput(context)),
                 SizedBox(height: 15.v),
 
                 // Password
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("パスワード:", style: theme.textTheme.titleLarge),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: appTheme.pinkA100, width: 2),
-                        borderRadius: BorderRadiusStyle.r5,
-                      ),
-                      child: _buildPasswordInput(context),
-                    )
-                  ],
-                ),
-                SizedBox(height: 10.v),
+                CustomInputBar(titleName: "パスワード:", backendPart: _buildPasswordInput(context)),
+                SizedBox(height: 15.v),
 
                 // reset password
                 Align(
@@ -81,15 +59,15 @@ class Login extends StatelessWidget {
 
                 // login button
                 CustomOutlinedButton(
-                  height: 38.v,
-                  width: 96.h,
+                  height: 40,
+                  width: 95,
                   text: "ログイン",
                   buttonTextStyle: theme.textTheme.titleSmall!,
                   onPressed: () {
                     onTapLoginButton(context);
                   },
                 ),
-                SizedBox(height: 20.v),
+                SizedBox(height: 25.v),
 
                 // or
                 Row(
@@ -97,8 +75,8 @@ class Login extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 12.v, bottom: 8.v),
-                      child: SizedBox(width: 81.h, child: Divider()),
+                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      child: SizedBox(width: 80, child: Divider()),
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 1.h),
@@ -108,12 +86,12 @@ class Login extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 12.v, bottom: 8.v),
-                      child: SizedBox(width: 81.h, child: Divider()),
+                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      child: SizedBox(width: 80, child: Divider()),
                     ),
                   ],
                 ),
-                SizedBox(height: 30.v),
+                SizedBox(height: 25.v),
 
                 // SignUp of Email
                 CustomElevatedButton(
@@ -126,7 +104,7 @@ class Login extends StatelessWidget {
                     onTapRegisterWithEmailButton(context);
                   },
                 ),
-                SizedBox(height: 10.v),
+                SizedBox(height: 15.v),
 
                 // SignUp of Facebook
                 CustomOutlinedButton(
@@ -140,7 +118,7 @@ class Login extends StatelessWidget {
                   buttonStyle: CustomButtonStyles.outlineBlueBlueBG,
                   buttonTextStyle: CustomTextStyles.bodyMediumPrimary,
                 ),
-                SizedBox(height: 10.v),
+                SizedBox(height: 15.v),
 
                 // SignUp of Twitter
                 CustomOutlinedButton(
@@ -154,7 +132,7 @@ class Login extends StatelessWidget {
                   buttonStyle: CustomButtonStyles.outlineBlackDGBG,
                   buttonTextStyle: CustomTextStyles.bodyMediumPrimary,
                 ),
-                SizedBox(height: 10.v),
+                SizedBox(height: 15.v),
 
                 // SignUp of Google
                 CustomOutlinedButton(
@@ -181,7 +159,8 @@ class Login extends StatelessWidget {
     return CustomTextFormField(
       controller: emailInputController,
       textInputType: TextInputType.emailAddress,
-      hintText: "example@email.com",
+      hintText: "  example@email.com",
+      maxLines: 1,
     );
   }
 
@@ -189,7 +168,7 @@ class Login extends StatelessWidget {
   Widget _buildPasswordInput(BuildContext context) {
     return CustomTextFormField(
       controller: passwordInputController,
-      hintText: "Secret",
+      hintText: "  Secret",
       textInputAction: TextInputAction.done,
       textInputType: TextInputType.visiblePassword,
       obscureText: true,

@@ -27,194 +27,162 @@ class AppNavigationScreen extends StatelessWidget {
                         _buildScreenTitle(
                           context,
                           userName: "ログイン",
-                          onTapScreenTitle: () =>
-                              onTapScreenTitle(context, AppRoutes.login),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.login),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "ホーム - Container",
-                          onTapScreenTitle: () =>
-                              onTapScreenTitle(context, AppRoutes.home),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.home),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "趣味の条件更改",
-                          onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.hobbyConditionRepair),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.hobbyConditionRepair),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "パスワード忘れーError",
-                          onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.passwordResetError),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.passwordResetError),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "新しいパスワード設定ーError",
-                          onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.newPasswordError),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.newPasswordError),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "パスワード忘れ",
-                          onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.passwordResetEmail),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.passwordResetEmail),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "新しいパスワード設定",
-                          onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.newPasswordSetup),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.newPasswordSetup),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "新しいパスワードーOK",
-                          onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.newPasswordDone),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.newPasswordDone),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "恋人の条件更改",
-                          onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.loverConditionsRepair),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.loverConditionsRepair),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "ターゲットを削除",
-                          onTapScreenTitle: () =>
-                              onTapScreenTitle(context, AppRoutes.deleteTarget),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.deleteTarget),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "新しいターゲットを準備しました",
-                          onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.newTargetReady),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.newTargetReady),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "お支払いOK",
-                          onTapScreenTitle: () =>
-                              onTapScreenTitle(context, AppRoutes.payDone),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.payDone),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "Warnning of Delete Page",
-                          onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.warningDeleteUser),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.warningDeleteUser),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "相伴の条件更改",
-                          onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.companionshipConditionsRepair),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.companionshipConditionsRepair),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "新しい条件と合わせる条件は30％",
-                          onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.lowPercentageHeightWarnning),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.lowPercentageHeightWarnning),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "Warnning of Return Page",
-                          onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.warningReturnResetPage),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.warningReturnResetPage),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "メールアドレスを登録",
-                          onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.emailConfirmation),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.emailConfirmation),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "認証コード",
-                          onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.confirmationCore),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.confirmationCore),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "SignUp-PhoneOrEmail-PartOne",
-                          onTapScreenTitle: () =>
-                              onTapScreenTitle(context, AppRoutes.signUp_1),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.signUp_1),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "SignUp-PhoneOrEmail-PartTwo",
-                          onTapScreenTitle: () =>
-                              onTapScreenTitle(context, AppRoutes.signUp_2),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.signUp_2),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "SignUp-PhoneOrEmail-PartThree",
-                          onTapScreenTitle: () =>
-                              onTapScreenTitle(context, AppRoutes.signUp_3),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.signUp_3),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "趣味の条件設定",
-                          onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.hobbyCondition),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.hobbyCondition),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "メールアドレスを登録ーError",
-                          onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.emailConfirmationError),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.emailConfirmationError),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "認証コードーError",
-                          onTapScreenTitle: () =>
-                              onTapScreenTitle(context, AppRoutes.profileEdit),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.profileEdit),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "ターゲットの最初設定",
-                          onTapScreenTitle: () =>
-                              onTapScreenTitle(context, AppRoutes.searchTitle),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.searchTitle),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "恋人の条件設定",
-                          onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.loverConditions),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.loverConditions),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "ターゲットを準備しました",
-                          onTapScreenTitle: () =>
-                              onTapScreenTitle(context, AppRoutes.targetReady),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.targetReady),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "相伴の条件設定",
-                          onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.companionshipConditions),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.companionshipConditions),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "条件と合わせる条件は30％",
-                          onTapScreenTitle: () => onTapScreenTitle(
-                              context, AppRoutes.lowPercentageLowWarnning),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.lowPercentageLowWarnning),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "チャットボックス",
-                          onTapScreenTitle: () =>
-                              onTapScreenTitle(context, AppRoutes.chatBox),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.chatBox),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "Side Bar",
-                          onTapScreenTitle: () =>
-                              onTapScreenTitle(context, AppRoutes.sideBar),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.sideBar),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "プロフィール編集",
-                          onTapScreenTitle: () =>
-                              onTapScreenTitle(context, AppRoutes.profileEdit),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.profileEdit),
                         ),
                       ],
                     ),
@@ -236,7 +204,7 @@ class AppNavigationScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          SizedBox(height: 10.v),
+          SizedBox(height: 15.v),
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
@@ -253,7 +221,7 @@ class AppNavigationScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 10.v),
+          SizedBox(height: 15.v),
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
@@ -297,7 +265,7 @@ class AppNavigationScreen extends StatelessWidget {
         ),
         child: Column(
           children: [
-            SizedBox(height: 10.v),
+            SizedBox(height: 15.v),
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
@@ -314,7 +282,7 @@ class AppNavigationScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 10.v),
+            SizedBox(height: 15.v),
             SizedBox(height: 5.v),
             Divider(
               height: 1.v,
