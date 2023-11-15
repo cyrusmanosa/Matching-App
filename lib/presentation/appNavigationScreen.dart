@@ -1,4 +1,4 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
+import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 class AppNavigationScreen extends StatelessWidget {
@@ -36,8 +36,8 @@ class AppNavigationScreen extends StatelessWidget {
                         ),
                         _buildScreenTitle(
                           context,
-                          userName: "趣味の条件更改",
-                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.hobbyConditionRepair),
+                          userName: "パスワード忘れ",
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.passwordResetEmail),
                         ),
                         _buildScreenTitle(
                           context,
@@ -51,11 +51,6 @@ class AppNavigationScreen extends StatelessWidget {
                         ),
                         _buildScreenTitle(
                           context,
-                          userName: "パスワード忘れ",
-                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.passwordResetEmail),
-                        ),
-                        _buildScreenTitle(
-                          context,
                           userName: "新しいパスワード設定",
                           onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.newPasswordSetup),
                         ),
@@ -63,11 +58,6 @@ class AppNavigationScreen extends StatelessWidget {
                           context,
                           userName: "新しいパスワードーOK",
                           onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.newPasswordDone),
-                        ),
-                        _buildScreenTitle(
-                          context,
-                          userName: "恋人の条件更改",
-                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.loverConditionsRepair),
                         ),
                         _buildScreenTitle(
                           context,
@@ -88,11 +78,6 @@ class AppNavigationScreen extends StatelessWidget {
                           context,
                           userName: "Warnning of Delete Page",
                           onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.warningDeleteUser),
-                        ),
-                        _buildScreenTitle(
-                          context,
-                          userName: "相伴の条件更改",
-                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.companionshipConditionsRepair),
                         ),
                         _buildScreenTitle(
                           context,
@@ -136,6 +121,31 @@ class AppNavigationScreen extends StatelessWidget {
                         ),
                         _buildScreenTitle(
                           context,
+                          userName: "趣味の条件更改",
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.hobbyConditionRepair),
+                        ),
+                        _buildScreenTitle(
+                          context,
+                          userName: "恋人の条件設定",
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.loverConditions),
+                        ),
+                        _buildScreenTitle(
+                          context,
+                          userName: "恋人の条件更改",
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.loverConditionsRepair),
+                        ),
+                        _buildScreenTitle(
+                          context,
+                          userName: "相伴の条件設定",
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.companionshipConditions),
+                        ),
+                        _buildScreenTitle(
+                          context,
+                          userName: "相伴の条件更改",
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.companionshipConditionsRepair),
+                        ),
+                        _buildScreenTitle(
+                          context,
                           userName: "メールアドレスを登録ーError",
                           onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.emailConfirmationError),
                         ),
@@ -151,18 +161,8 @@ class AppNavigationScreen extends StatelessWidget {
                         ),
                         _buildScreenTitle(
                           context,
-                          userName: "恋人の条件設定",
-                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.loverConditions),
-                        ),
-                        _buildScreenTitle(
-                          context,
                           userName: "ターゲットを準備しました",
                           onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.targetReady),
-                        ),
-                        _buildScreenTitle(
-                          context,
-                          userName: "相伴の条件設定",
-                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.companionshipConditions),
                         ),
                         _buildScreenTitle(
                           context,

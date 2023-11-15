@@ -1,7 +1,7 @@
-import 'package:cyrus_man_s_application1/presentation/Target/widgets/ResetTargetButtonCompaionship.dart';
-import 'package:cyrus_man_s_application1/presentation/Target/widgets/ResetTargetButtonLover.dart';
+import 'package:dating_your_date/presentation/Target/widgets/ResetTargetButtonCompaionship.dart';
+import 'package:dating_your_date/presentation/Target/widgets/ResetTargetButtonLover.dart';
 import 'widgets/ResetTargetButtonHobby.dart';
-import 'package:cyrus_man_s_application1/core/app_export.dart';
+import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 class Target extends StatelessWidget {

@@ -10,15 +10,9 @@ class CustomTextStyles {
   static get bodyLargeBlack900 => theme.textTheme.bodyLarge!.copyWith(
         color: appTheme.black900,
       );
-  static get bodyLargegray800 => theme.textTheme.bodyLarge!.copyWith(
-        color: appTheme.gray800,
-      );
+
   static get bodyLargePinkA100 => theme.textTheme.bodyLarge!.copyWith(
         color: appTheme.pinkA100,
-      );
-  static get bodyLargePrimary => theme.textTheme.bodyLarge!.copyWith(
-        color: theme.colorScheme.primary,
-        fontSize: 15.fSize,
       );
   static get bodyMediumBlack900 => theme.textTheme.bodyMedium!.copyWith(
         color: appTheme.black900,
@@ -27,19 +21,11 @@ class CustomTextStyles {
   static get bodyMediumgray500 => theme.textTheme.bodyMedium!.copyWith(
         color: appTheme.gray500,
       );
-  static get bodyMediumgray800 => theme.textTheme.bodyMedium!.copyWith(
-        color: appTheme.gray800,
-      );
   static get bodyMediumOnPrimary => theme.textTheme.bodyMedium!.copyWith(
         color: theme.colorScheme.onPrimary,
       );
   static get bodyMediumPrimary => theme.textTheme.bodyMedium!.copyWith(
         color: theme.colorScheme.primary,
-      );
-  // Display text style
-  static get displayMediumMontserrat => theme.textTheme.displayMedium!.montserrat.copyWith(
-        fontSize: 50.fSize,
-        fontWeight: FontWeight.w600,
       );
   // Headline text style
   static get headlineMediumBlack900 => theme.textTheme.headlineMedium!.copyWith(

@@ -1,4 +1,4 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
+import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 class SideBar extends StatelessWidget {
@@ -23,7 +23,7 @@ class SideBar extends StatelessWidget {
               children: [
                 Text(
                   "2023-11-01から",
-                  style: CustomTextStyles.bodyLargegray800,
+                  style: TextStyle(color: appTheme.gray800),
                 ),
                 SizedBox(height: 4.v),
                 _buildUserRow(context),

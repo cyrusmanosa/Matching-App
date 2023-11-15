@@ -1,4 +1,4 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
+import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 class PayDone extends StatelessWidget {
@@ -6,6 +6,7 @@ class PayDone extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // auto move
     Future.delayed(Duration(seconds: 3), () {
       Navigator.pushNamed(context, AppRoutes.containerScreen);
     });
@@ -14,22 +15,19 @@ class PayDone extends StatelessWidget {
       child: Scaffold(
         body: Container(
           width: double.maxFinite,
-          padding: EdgeInsets.symmetric(vertical: 65.v),
+          padding: EdgeInsets.only(left: 30.h, top: 65.v, right: 30.h),
           child: Column(
             children: [
-              // Logo
-              CustomImageView(imagePath: ImageConstant.imgLogo, height: 80, width: 95),
-              SizedBox(height: 1.v),
+              // Logn
+              CustomImageView(imagePath: ImageConstant.imgLogo, width: 130),
+              SizedBox(height: 2.v),
 
               // Slogan
-              CustomImageView(imagePath: ImageConstant.imgSlogan, height: 17, width: 100),
-              Spacer(
-                flex: 28,
-              ),
+              CustomImageView(imagePath: ImageConstant.imgSlogan, width: 170),
+              SizedBox(height: 75.v),
 
               // Title
-              Text("お支払いOK", style: CustomTextStyles.displayMediumMontserrat),
-              Spacer(flex: 70),
+              Text("お支払いOK", style: TextStyle(fontSize: 40, color: appTheme.black900)),
             ],
           ),
         ),

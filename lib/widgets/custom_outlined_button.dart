@@ -1,5 +1,5 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
-import 'package:cyrus_man_s_application1/widgets/base_button.dart';
+import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/widgets/base_button.dart';
 import 'package:flutter/material.dart';
 
 class CustomOutlinedButton extends BaseButton {
@@ -38,7 +38,10 @@ class CustomOutlinedButton extends BaseButton {
   @override
   Widget build(BuildContext context) {
     return alignment != null
-        ? Align(alignment: alignment ?? Alignment.center, child: buildOutlinedButtonWidget)
+        ? Align(
+            alignment: alignment ?? Alignment.center,
+            child: buildOutlinedButtonWidget,
+          )
         : buildOutlinedButtonWidget;
   }
 

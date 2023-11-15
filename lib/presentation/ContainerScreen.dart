@@ -1,15 +1,15 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
-import 'package:cyrus_man_s_application1/presentation/Chat/Chat.dart';
-import 'package:cyrus_man_s_application1/presentation/CompanionshipConditionsRepair.dart';
-import 'package:cyrus_man_s_application1/presentation/DeleteTarget.dart';
-import 'package:cyrus_man_s_application1/presentation/HobbyConditionRepair.dart';
-import 'package:cyrus_man_s_application1/presentation/Home/Home.dart';
-import 'package:cyrus_man_s_application1/presentation/LoverConditionsRepair.dart';
-import 'package:cyrus_man_s_application1/presentation/Profile/Profile.dart';
-import 'package:cyrus_man_s_application1/presentation/ProfileEdit.dart';
-import 'package:cyrus_man_s_application1/presentation/ChatBox.dart';
-import 'package:cyrus_man_s_application1/presentation/Target/Target.dart';
-import 'package:cyrus_man_s_application1/widgets/custom_bottom_bar.dart';
+import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/presentation/Chat/Chat.dart';
+import 'package:dating_your_date/presentation/CompanionshipConditionsRepair.dart';
+import 'package:dating_your_date/presentation/DeleteTarget.dart';
+import 'package:dating_your_date/presentation/HobbyConditionRepair.dart';
+import 'package:dating_your_date/presentation/Home/Home.dart';
+import 'package:dating_your_date/presentation/LoverConditionsRepair.dart';
+import 'package:dating_your_date/presentation/Profile/Profile.dart';
+import 'package:dating_your_date/presentation/ProfileEdit.dart';
+import 'package:dating_your_date/presentation/ChatBox.dart';
+import 'package:dating_your_date/presentation/Target/Target.dart';
+import 'package:dating_your_date/widgets/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable, camel_case_types

@@ -1,5 +1,5 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
-import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
+import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/widgets/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 
 class WarningDeleteUser extends StatelessWidget {

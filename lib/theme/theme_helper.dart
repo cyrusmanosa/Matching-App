@@ -63,7 +63,7 @@ class ThemeHelper {
         style: ElevatedButton.styleFrom(
           backgroundColor: appTheme.gray500,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.h),
+            borderRadius: BorderRadiusStyle.r30,
           ),
           visualDensity: const VisualDensity(
             vertical: -4,

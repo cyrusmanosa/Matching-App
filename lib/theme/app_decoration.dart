@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cyrus_man_s_application1/core/app_export.dart';
+import 'package:dating_your_date/core/app_export.dart';
 
 class AppDecoration {
   // Fill decorations
@@ -51,9 +51,9 @@ class AppDecoration {
 
 class BorderRadiusStyle {
   // Rounded borders
-  static BorderRadius get r30 => BorderRadius.circular(30.h);
-  static BorderRadius get r15 => BorderRadius.circular(15.h);
-  static BorderRadius get r5 => BorderRadius.circular(5.h);
+  static BorderRadius get r30 => BorderRadius.circular(30);
+  static BorderRadius get r15 => BorderRadius.circular(15);
+  static BorderRadius get r5 => BorderRadius.circular(5);
 }
 
 double get strokeAlignInside => BorderSide.strokeAlignInside;

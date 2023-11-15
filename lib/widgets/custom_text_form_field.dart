@@ -1,4 +1,4 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
+import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -61,13 +61,18 @@ class CustomTextFormField extends StatelessWidget {
         child: TextFormField(
           autofocus: autofocus!,
           controller: controller,
-          decoration: InputDecoration(hintText: hintText, border: InputBorder.none),
-          focusNode: focusNode ?? FocusNode(),
+          decoration: InputDecoration(
+            hintText: hintText,
+            hintStyle: theme.textTheme.bodyLarge,
+            border: InputBorder.none,
+            prefix: Padding(padding: EdgeInsets.only(left: 15.0)),
+          ),
+          focusNode: FocusNode(),
           keyboardType: textInputType,
           maxLength: maxLength,
           maxLines: maxLines,
           obscureText: obscureText!,
-          style: textStyle ?? theme.textTheme.bodyLarge,
+          style: theme.textTheme.displayLarge,
           textInputAction: textInputAction,
           validator: validator,
         ),
@@ -80,9 +85,9 @@ class CustomTextFormField extends StatelessWidget {
         fillColor: fillColor,
         filled: filled,
         hintText: hintText,
-        hintStyle: hintStyle ?? CustomTextStyles.bodyLargePrimary,
+        hintStyle: hintStyle,
         isDense: true,
-        prefixIcon: prefix,
+        prefix: prefix,
         prefixIconConstraints: prefixConstraints,
         suffixIcon: suffix,
         suffixIconConstraints: suffixConstraints,
@@ -91,14 +96,13 @@ class CustomTextFormField extends StatelessWidget {
           borderRadius: BorderRadiusStyle.r5,
           borderSide: BorderSide(color: appTheme.pinkA100, width: 1),
         ),
-        enabledBorder: borderDecoration ?? InputBorder.none,
+        enabledBorder: OutlineInputBorder(borderRadius: BorderRadiusStyle.r5),
 
         // Error Border
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadiusStyle.r5,
           borderSide: BorderSide(color: appTheme.pinkA100, width: 1),
         ),
-        // errorStyle: TextStyle(color: appTheme.pinkA100, fontSize: 12.fSize),
 
         // Focus Border
         focusedBorder: borderDecoration ?? InputBorder.none,

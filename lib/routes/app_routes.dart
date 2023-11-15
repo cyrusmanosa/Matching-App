@@ -1,49 +1,49 @@
-import 'package:cyrus_man_s_application1/presentation/appNavigationScreen.dart';
+import 'package:dating_your_date/presentation/appNavigationScreen.dart';
 
-import 'package:cyrus_man_s_application1/presentation/Chat/Chat.dart';
-import 'package:cyrus_man_s_application1/presentation/ChatBox.dart';
-import 'package:cyrus_man_s_application1/presentation/CompanionshipConditions.dart';
-import 'package:cyrus_man_s_application1/presentation/CompanionshipConditionsRepair.dart';
-import 'package:cyrus_man_s_application1/presentation/ConfirmationCore.dart';
-import 'package:cyrus_man_s_application1/presentation/ConfirmationCore_Error.dart';
-import 'package:cyrus_man_s_application1/presentation/ContainerScreen.dart';
+import 'package:dating_your_date/presentation/Chat/Chat.dart';
+import 'package:dating_your_date/presentation/ChatBox.dart';
+import 'package:dating_your_date/presentation/CompanionshipConditions.dart';
+import 'package:dating_your_date/presentation/CompanionshipConditionsRepair.dart';
+import 'package:dating_your_date/presentation/ConfirmationCore.dart';
+import 'package:dating_your_date/presentation/ConfirmationCore_Error.dart';
+import 'package:dating_your_date/presentation/ContainerScreen.dart';
 
-import 'package:cyrus_man_s_application1/presentation/DeleteTarget.dart';
+import 'package:dating_your_date/presentation/DeleteTarget.dart';
 
-import 'package:cyrus_man_s_application1/presentation/EmailConfirmation.dart';
-import 'package:cyrus_man_s_application1/presentation/EmailConfirmation_Error.dart';
+import 'package:dating_your_date/presentation/EmailConfirmation.dart';
+import 'package:dating_your_date/presentation/EmailConfirmation_Error.dart';
 
-import 'package:cyrus_man_s_application1/presentation/Home/Home.dart';
-import 'package:cyrus_man_s_application1/presentation/HobbyCondition.dart';
-import 'package:cyrus_man_s_application1/presentation/HobbyConditionRepair.dart';
+import 'package:dating_your_date/presentation/Home/Home.dart';
+import 'package:dating_your_date/presentation/HobbyCondition.dart';
+import 'package:dating_your_date/presentation/HobbyConditionRepair.dart';
 
-import 'package:cyrus_man_s_application1/presentation/Login.dart';
-import 'package:cyrus_man_s_application1/presentation/LowPercentageHeightWarnning.dart';
-import 'package:cyrus_man_s_application1/presentation/LoverConditionsRepair.dart';
-import 'package:cyrus_man_s_application1/presentation/LoverConditions.dart';
-import 'package:cyrus_man_s_application1/presentation/LowPercentageLowWarnning.dart';
+import 'package:dating_your_date/presentation/Login.dart';
+import 'package:dating_your_date/presentation/LowPercentageHeightWarnning.dart';
+import 'package:dating_your_date/presentation/LoverConditionsRepair.dart';
+import 'package:dating_your_date/presentation/LoverConditions.dart';
+import 'package:dating_your_date/presentation/LowPercentageLowWarnning.dart';
 
-import 'package:cyrus_man_s_application1/presentation/NewPassword_Done.dart';
-import 'package:cyrus_man_s_application1/presentation/NewPassword_Error.dart';
-import 'package:cyrus_man_s_application1/presentation/NewPassword_Setup.dart';
-import 'package:cyrus_man_s_application1/presentation/NewTargetReady.dart';
+import 'package:dating_your_date/presentation/NewPassword_Done.dart';
+import 'package:dating_your_date/presentation/NewPassword_Error.dart';
+import 'package:dating_your_date/presentation/NewPassword_Setup.dart';
+import 'package:dating_your_date/presentation/NewTargetReady.dart';
 
-import 'package:cyrus_man_s_application1/presentation/PayDone.dart';
-import 'package:cyrus_man_s_application1/presentation/PasswordReset_Email.dart';
-import 'package:cyrus_man_s_application1/presentation/PasswordReset_Error.dart';
-import 'package:cyrus_man_s_application1/presentation/Profile/Profile.dart';
-import 'package:cyrus_man_s_application1/presentation/ProfileEdit.dart';
+import 'package:dating_your_date/presentation/PayDone.dart';
+import 'package:dating_your_date/presentation/PasswordReset_Email.dart';
+import 'package:dating_your_date/presentation/PasswordReset_Error.dart';
+import 'package:dating_your_date/presentation/Profile/Profile.dart';
+import 'package:dating_your_date/presentation/ProfileEdit.dart';
 
-import 'package:cyrus_man_s_application1/presentation/SearchTitle.dart';
+import 'package:dating_your_date/presentation/SearchTitle.dart';
 
-import 'package:cyrus_man_s_application1/presentation/SideBar.dart';
-import 'package:cyrus_man_s_application1/presentation/Signup_1.dart';
-import 'package:cyrus_man_s_application1/presentation/Signup_3.dart';
-import 'package:cyrus_man_s_application1/presentation/Signup_2.dart';
-import 'package:cyrus_man_s_application1/presentation/WarningDeleteUser.dart';
-import 'package:cyrus_man_s_application1/presentation/WarningReturnResetPage.dart';
-import 'package:cyrus_man_s_application1/presentation/TargetReady.dart';
-import 'package:cyrus_man_s_application1/presentation/Target/Target.dart';
+import 'package:dating_your_date/presentation/SideBar.dart';
+import 'package:dating_your_date/presentation/Signup_1.dart';
+import 'package:dating_your_date/presentation/Signup_3.dart';
+import 'package:dating_your_date/presentation/Signup_2.dart';
+import 'package:dating_your_date/presentation/WarningDeleteUser.dart';
+import 'package:dating_your_date/presentation/WarningReturnResetPage.dart';
+import 'package:dating_your_date/presentation/TargetReady.dart';
+import 'package:dating_your_date/presentation/Target/Target.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
@@ -54,14 +54,12 @@ class AppRoutes {
   static const String confirmationCore = '/confirmationCore';
   static const String confirmationCoreError = '/confirmationCoreError';
   static const String companionshipConditions = '/companionshipConditions';
-  static const String companionshipConditionsRepair =
-      '/companionshipConditionsRepair';
+  static const String companionshipConditionsRepair = '/companionshipConditionsRepair';
   static const String deleteTarget = '/deleteTarget';
   static const String emailConfirmation = '/emailConfirmation';
   static const String emailConfirmationError = '/emailConfirmationError';
   static const String login = '/login';
-  static const String lowPercentageHeightWarnning =
-      '/lowPercentageHeightWarnning';
+  static const String lowPercentageHeightWarnning = '/lowPercentageHeightWarnning';
   static const String lowPercentageLowWarnning = '/lowPercentageLowWarnning';
   static const String loverConditions = '/loverConditions';
   static const String loverConditionsRepair = '/loverConditionsRepair';

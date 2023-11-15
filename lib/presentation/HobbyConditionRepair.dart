@@ -1,10 +1,10 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
-import 'package:cyrus_man_s_application1/widgets/app_bar/appbar_leading_image.dart';
-import 'package:cyrus_man_s_application1/widgets/app_bar/appbar_title.dart';
-import 'package:cyrus_man_s_application1/widgets/app_bar/custom_Input_Bar.dart';
-import 'package:cyrus_man_s_application1/widgets/app_bar/custom_app_bar.dart';
-import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
-import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
+import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
+import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
+import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
+import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
+import 'package:dating_your_date/widgets/custom_outlined_button.dart';
+import 'package:dating_your_date/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable, camel_case_types
@@ -40,7 +40,7 @@ class HobbyConditionRepair extends StatelessWidget {
               padding: EdgeInsets.only(left: 30.h, top: 65.v, right: 30.h),
               child: Column(
                 children: [
-                  SizedBox(height: 120.v),
+                  SizedBox(height: 50.v),
 
                   // Era
                   CustomInputBar(titleName: "年代:", backendPart: _buildHobbyResetEraInput(context)),
@@ -80,19 +80,20 @@ class HobbyConditionRepair extends StatelessWidget {
 
                   // Sociability
                   CustomInputBar(titleName: "社交力:", backendPart: _buildHobbyResetSociabilityInput(context)),
-                  SizedBox(height: 20.v),
+                  SizedBox(height: 5),
 
                   // 本人
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 30.h),
+                      padding: EdgeInsets.only(left: 5),
                       child: Row(
                         children: [
+                          // 圓
                           Container(
                             height: 20.adaptSize,
                             width: 20.adaptSize,
-                            decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadius.circular(10.h)),
+                            decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
                           ),
                           Padding(
                             padding: EdgeInsets.only(left: 10.h),
@@ -222,7 +223,8 @@ class HobbyConditionRepair extends StatelessWidget {
   /// Certification For Check
   Widget _buildCertificationForCheck(BuildContext context) {
     return CustomOutlinedButton(
-      width: 150.h,
+      width: 150,
+      height: 50,
       text: "条件確認",
       buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
       onPressed: () {

@@ -1,10 +1,10 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
-import 'package:cyrus_man_s_application1/widgets/app_bar/appbar_leading_image.dart';
-import 'package:cyrus_man_s_application1/widgets/app_bar/appbar_title.dart';
-import 'package:cyrus_man_s_application1/widgets/app_bar/custom_Input_Bar.dart';
-import 'package:cyrus_man_s_application1/widgets/app_bar/custom_app_bar.dart';
-import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
-import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
+import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
+import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
+import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
+import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
+import 'package:dating_your_date/widgets/custom_outlined_button.dart';
+import 'package:dating_your_date/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable, camel_case_types
@@ -217,7 +217,8 @@ class HobbyCondition extends StatelessWidget {
   /// Certification For Check
   Widget _buildCertificationForCheck(BuildContext context) {
     return CustomOutlinedButton(
-      width: 150.h,
+      width: 150,
+      height: 50,
       text: "条件確認",
       buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
       onPressed: () {
