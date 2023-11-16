@@ -223,10 +223,10 @@ class HobbyConditionRepair extends StatelessWidget {
   /// Certification For Check
   Widget _buildCertificationForCheck(BuildContext context) {
     return CustomOutlinedButton(
-      width: 150,
-      height: 50,
+      width: 110,
+      height: 40,
       text: "条件確認",
-      buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
+      buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
         onTaptf(context);
       },

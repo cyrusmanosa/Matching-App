@@ -31,10 +31,9 @@ class CompanionshipConditions extends StatelessWidget {
         body: Container(
           width: double.maxFinite,
           child: SingleChildScrollView(
+            padding: EdgeInsets.only(left: 30.h, top: 30, right: 30.h),
             child: Column(
               children: [
-                SizedBox(height: 120.v),
-
                 // Era
                 CustomInputBar(titleName: "年代:", backendPart: _buildCompanionshipEraInput(context)),
                 SizedBox(height: 15.v),
@@ -66,23 +65,21 @@ class CompanionshipConditions extends StatelessWidget {
                 // 本人
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 30.h),
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 20.adaptSize,
-                          width: 20.adaptSize,
-                          decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadius.circular(10.h)),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 10.h),
-                          child: Text("本人認証を確認しました", style: theme.textTheme.bodyMedium),
-                        ),
-                      ],
-                    ),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 20.adaptSize,
+                        width: 20.adaptSize,
+                        decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadius.circular(10.h)),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10.h),
+                        child: Text("本人認証を確認しました", style: theme.textTheme.bodyMedium),
+                      ),
+                    ],
                   ),
                 ),
+
                 SizedBox(height: 40),
 
                 _buildCertificationForCheck(context),
@@ -175,9 +172,10 @@ class CompanionshipConditions extends StatelessWidget {
   /// Certification For Check
   Widget _buildCertificationForCheck(BuildContext context) {
     return CustomOutlinedButton(
-      width: 150.h,
+      width: 110,
+      height: 40,
       text: "条件確認",
-      buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
+      buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
         onTaptf(context);
       },

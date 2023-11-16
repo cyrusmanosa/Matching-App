@@ -49,20 +49,14 @@ class CustomImageView extends StatelessWidget {
   Widget _buildWidget() {
     return Padding(
       padding: margin ?? EdgeInsets.zero,
-      child: InkWell(
-        onTap: onTap,
-        child: _buildCircleImage(),
-      ),
+      child: InkWell(onTap: onTap, child: _buildCircleImage()),
     );
   }
 
   ///build the image with border radius
   _buildCircleImage() {
     if (radius != null) {
-      return ClipRRect(
-        borderRadius: radius ?? BorderRadius.zero,
-        child: _buildImageWithBorder(),
-      );
+      return ClipRRect(borderRadius: radius ?? BorderRadius.zero, child: _buildImageWithBorder());
     } else {
       return _buildImageWithBorder();
     }
@@ -71,13 +65,7 @@ class CustomImageView extends StatelessWidget {
   ///build the image with border and border radius style
   _buildImageWithBorder() {
     if (border != null) {
-      return Container(
-        decoration: BoxDecoration(
-          border: border,
-          borderRadius: radius,
-        ),
-        child: _buildImageView(),
-      );
+      return Container(decoration: BoxDecoration(border: border, borderRadius: radius), child: _buildImageView());
     } else {
       return _buildImageView();
     }
@@ -90,22 +78,10 @@ class CustomImageView extends StatelessWidget {
           return Container(
             height: height,
             width: width,
-            child: SvgPicture.asset(
-              imagePath!,
-              height: height,
-              width: width,
-              fit: fit ?? BoxFit.contain,
-              color: color,
-            ),
+            child: SvgPicture.asset(imagePath!, height: height, width: width, fit: fit ?? BoxFit.contain, color: color),
           );
         case ImageType.file:
-          return Image.file(
-            File(imagePath!),
-            height: height,
-            width: width,
-            fit: fit ?? BoxFit.cover,
-            color: color,
-          );
+          return Image.file(File(imagePath!), height: height, width: width, fit: fit ?? BoxFit.cover, color: color);
         case ImageType.network:
           return CachedNetworkImage(
             height: height,
@@ -116,27 +92,13 @@ class CustomImageView extends StatelessWidget {
             placeholder: (context, url) => Container(
               height: 30,
               width: 30,
-              child: LinearProgressIndicator(
-                color: Colors.grey.shade200,
-                backgroundColor: Colors.grey.shade100,
-              ),
+              child: LinearProgressIndicator(color: Colors.grey.shade200, backgroundColor: Colors.grey.shade100),
             ),
-            errorWidget: (context, url, error) => Image.asset(
-              placeHolder,
-              height: height,
-              width: width,
-              fit: fit ?? BoxFit.cover,
-            ),
+            errorWidget: (context, url, error) => Image.asset(placeHolder, height: height, width: width, fit: fit ?? BoxFit.cover),
           );
         case ImageType.png:
         default:
-          return Image.asset(
-            imagePath!,
-            height: height,
-            width: width,
-            fit: fit ?? BoxFit.cover,
-            color: color,
-          );
+          return Image.asset(imagePath!, height: height, width: width, fit: fit ?? BoxFit.cover, color: color);
       }
     }
     return SizedBox();

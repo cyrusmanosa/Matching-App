@@ -55,16 +55,16 @@ class ChatBox extends StatelessWidget {
   /// Section Widget
   Widget _buildTwo(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16.h),
+      margin: EdgeInsets.symmetric(horizontal: 15.h),
       decoration: BoxDecoration(image: DecorationImage(image: fs.Svg(ImageConstant.imgGroup2), fit: BoxFit.cover)),
-      child: CustomImageView(imagePath: ImageConstant.imgUserMessage, height: 449.v, width: 398.h),
+      child: CustomImageView(imagePath: ImageConstant.imgUserMessage, height: 450, width: 400),
     );
   }
 
   /// Section Widget
   Widget _buildNinetySeven(BuildContext context) {
     return SizedBox(
-      height: 289.v,
+      height: 300.v,
       width: double.maxFinite,
       child: Stack(
         alignment: Alignment.topCenter,

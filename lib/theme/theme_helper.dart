@@ -45,38 +45,21 @@ class ThemeHelper {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           backgroundColor: Colors.transparent,
-          side: BorderSide(
-            color: appTheme.pinkA100,
-            width: 1.h,
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(19.h),
-          ),
-          visualDensity: const VisualDensity(
-            vertical: -4,
-            horizontal: -4,
-          ),
+          side: BorderSide(color: appTheme.pinkA100, width: 1.h),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(19.h)),
+          visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
           padding: EdgeInsets.zero,
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: appTheme.gray500,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadiusStyle.r30,
-          ),
-          visualDensity: const VisualDensity(
-            vertical: -4,
-            horizontal: -4,
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r30),
+          visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
           padding: EdgeInsets.zero,
         ),
       ),
-      dividerTheme: DividerThemeData(
-        thickness: 1,
-        space: 1,
-        color: appTheme.black900,
-      ),
+      dividerTheme: DividerThemeData(thickness: 1, space: 1, color: appTheme.black900),
     );
   }
 
@@ -88,78 +71,25 @@ class ThemeHelper {
 class TextThemes {
   static TextTheme textTheme(ColorScheme colorScheme) => TextTheme(
         // body
-        bodyLarge: TextStyle(
-          color: colorScheme.errorContainer,
-          fontSize: 16.fSize,
-          fontFamily: 'Rounded Mplus 1c',
-          fontWeight: FontWeight.w400,
-        ),
-        bodyMedium: TextStyle(
-          color: appTheme.gray500,
-          fontSize: 14.fSize,
-          fontFamily: 'Rounded Mplus 1c',
-          fontWeight: FontWeight.w400,
-        ),
-        bodySmall: TextStyle(
-          color: appTheme.black900,
-          fontSize: 12.fSize,
-          fontFamily: 'Rounded Mplus 1c',
-          fontWeight: FontWeight.w400,
-        ),
+        bodyLarge:
+            TextStyle(color: colorScheme.errorContainer, fontSize: 16.fSize, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
+        bodyMedium: TextStyle(color: appTheme.gray500, fontSize: 14.fSize, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
+        bodySmall: TextStyle(color: appTheme.black900, fontSize: 12.fSize, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
 
         // display
-        displayMedium: TextStyle(
-          color: appTheme.black900,
-          fontSize: 40.fSize,
-          fontFamily: 'Rounded Mplus 1c',
-          fontWeight: FontWeight.w400,
-        ),
-        displaySmall: TextStyle(
-          color: appTheme.black900,
-          fontSize: 35.fSize,
-          fontFamily: 'Rounded Mplus 1c',
-          fontWeight: FontWeight.w400,
-        ),
+        displayMedium: TextStyle(color: appTheme.black900, fontSize: 40.fSize, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
+        displaySmall: TextStyle(color: appTheme.black900, fontSize: 35.fSize, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
 
         // head
-        headlineLarge: TextStyle(
-          color: appTheme.black900,
-          fontSize: 30.fSize,
-          fontFamily: 'Rounded Mplus 1c',
-          fontWeight: FontWeight.w400,
-        ),
-        headlineMedium: TextStyle(
-          color: colorScheme.primary,
-          fontSize: 26.fSize,
-          fontFamily: 'Rounded Mplus 1c',
-          fontWeight: FontWeight.w400,
-        ),
-        headlineSmall: TextStyle(
-          color: appTheme.black900,
-          fontSize: 24.fSize,
-          fontFamily: 'SF Pro Text',
-          fontWeight: FontWeight.w300,
-        ),
+        headlineLarge: TextStyle(color: appTheme.black900, fontSize: 30.fSize, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
+        headlineMedium:
+            TextStyle(color: colorScheme.primary, fontSize: 26.fSize, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
+        headlineSmall: TextStyle(color: appTheme.black900, fontSize: 24.fSize, fontFamily: 'SF Pro Text', fontWeight: FontWeight.w300),
 
         // title
-        titleLarge: TextStyle(
-          color: appTheme.pinkA100,
-          fontSize: 20.fSize,
-          fontFamily: 'Rounded Mplus 1c',
-          fontWeight: FontWeight.w400,
-        ),
-        titleMedium: TextStyle(
-          color: appTheme.pinkA100,
-          fontSize: 18.fSize,
-          fontFamily: 'Montserrat',
-          fontWeight: FontWeight.w600,
-        ),
-        titleSmall: TextStyle(
-          color: appTheme.pinkA100,
-          fontSize: 14.fSize,
-          fontFamily: 'Montserrat',
-          fontWeight: FontWeight.w600,
-        ),
+        titleLarge: TextStyle(color: appTheme.pinkA100, fontSize: 20.fSize, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
+        titleMedium: TextStyle(color: appTheme.pinkA100, fontSize: 18.fSize, fontFamily: 'Montserrat', fontWeight: FontWeight.w600),
+        titleSmall: TextStyle(color: appTheme.pinkA100, fontSize: 14.fSize, fontFamily: 'Montserrat', fontWeight: FontWeight.w600),
       );
 }
 

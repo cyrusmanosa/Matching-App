@@ -1,4 +1,5 @@
 import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/custom_outlined_button.dart';
 import 'package:dating_your_date/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +8,8 @@ import 'package:flutter/material.dart';
 class NewPasswordError extends StatelessWidget {
   NewPasswordError({Key? key}) : super(key: key);
 
-  TextEditingController zipcodeController = TextEditingController();
-
-  TextEditingController zipcodeController1 = TextEditingController();
+  TextEditingController newPasswordSetupController = TextEditingController();
+  TextEditingController newPasswordSetupConfirmController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -20,34 +20,24 @@ class NewPasswordError extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         body: Container(
           width: double.maxFinite,
-          padding: EdgeInsets.only(
-            left: 30.h,
-            top: 65.v,
-            right: 30.h,
-          ),
+          padding: EdgeInsets.only(left: 30.h, top: 65.v, right: 30.h),
           child: Column(
             children: [
-              CustomImageView(
-                imagePath: ImageConstant.imgLogo,
-                height: 81.v,
-                width: 95.h,
-              ),
+              // logo
+              CustomImageView(imagePath: ImageConstant.imgLogo, height: 80, width: 95),
               SizedBox(height: 1.v),
-              CustomImageView(
-                imagePath: ImageConstant.imgSlogan,
-                height: 17.v,
-                width: 100.h,
-              ),
+              // slogan
+              CustomImageView(imagePath: ImageConstant.imgSlogan, height: 17, width: 100),
               SizedBox(height: 15.v),
-              CustomImageView(
-                imagePath: ImageConstant.imgWarning,
-                height: 41.v,
-                width: 49.h,
-              ),
-              SizedBox(height: 7.v),
+
+              // warning logo
+              CustomImageView(imagePath: ImageConstant.imgWarning, height: 40, width: 50),
+              SizedBox(height: 5.v),
+
+              // warning message
               Container(
-                width: 336.h,
-                margin: EdgeInsets.symmetric(horizontal: 17.h),
+                width: 340.h,
+                margin: EdgeInsets.symmetric(horizontal: 25.h),
                 child: Text(
                   "ご確認ください\n新しいパスワードのフォーマットが正しくありません",
                   maxLines: 2,
@@ -56,14 +46,10 @@ class NewPasswordError extends StatelessWidget {
                   style: CustomTextStyles.bodyMediumOnPrimary,
                 ),
               ),
-              SizedBox(height: 15.v),
-              Text(
-                "新しいパスワード設定",
-                style: theme.textTheme.headlineLarge!.copyWith(
-                  decoration: TextDecoration.underline,
-                ),
-              ),
-              _buildNewPasswordInput(context),
+              SizedBox(height: 20.v),
+
+              // input 1
+              CustomInputBar(titleName: "新しいパスワード:", backendPart: _buildNewPasswordSetupInput(context)),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
@@ -74,16 +60,19 @@ class NewPasswordError extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 23.v),
-              _buildNewPasswordConfirm(context),
-              SizedBox(height: 23.v),
+              SizedBox(height: 30.v),
+
+              // input 2
+              CustomInputBar(titleName: "新しいパスワード（確認）:", backendPart: _buildNewPasswordSetupConfirm(context)),
+              SizedBox(height: 40.v),
+
+              // button
               CustomOutlinedButton(
-                height: 38.v,
-                width: 96.h,
+                height: 40,
+                width: 95,
                 text: "設定",
                 buttonTextStyle: theme.textTheme.titleSmall!,
               ),
-              SizedBox(height: 15.v),
             ],
           ),
         ),
@@ -92,37 +81,19 @@ class NewPasswordError extends StatelessWidget {
   }
 
   /// Section Widget
-  Widget _buildNewPasswordInput(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "新しいパスワード:",
-          style: theme.textTheme.titleLarge,
-        ),
-        CustomTextFormField(
-          controller: zipcodeController,
-          hintText: "423198",
-        ),
-      ],
+  Widget _buildNewPasswordSetupInput(BuildContext context) {
+    return CustomTextFormField(
+      controller: newPasswordSetupController,
+      hintText: "ASD423198",
     );
   }
 
   /// Section Widget
-  Widget _buildNewPasswordConfirm(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "新しいパスワード（確認）:",
-          style: theme.textTheme.titleLarge,
-        ),
-        CustomTextFormField(
-          controller: zipcodeController1,
-          hintText: "423198",
-          textInputAction: TextInputAction.done,
-        ),
-      ],
+  Widget _buildNewPasswordSetupConfirm(BuildContext context) {
+    return CustomTextFormField(
+      controller: newPasswordSetupConfirmController,
+      hintText: "ASD423198",
+      textInputAction: TextInputAction.done,
     );
   }
 }

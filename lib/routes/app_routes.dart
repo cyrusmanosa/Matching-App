@@ -1,3 +1,5 @@
+import 'package:dating_your_date/presentation/WarningDeleteUser.dart';
+import 'package:dating_your_date/presentation/WarningReturnResetPage.dart';
 import 'package:dating_your_date/presentation/appNavigationScreen.dart';
 
 import 'package:dating_your_date/presentation/Chat/Chat.dart';
@@ -40,8 +42,6 @@ import 'package:dating_your_date/presentation/SideBar.dart';
 import 'package:dating_your_date/presentation/Signup_1.dart';
 import 'package:dating_your_date/presentation/Signup_3.dart';
 import 'package:dating_your_date/presentation/Signup_2.dart';
-import 'package:dating_your_date/presentation/WarningDeleteUser.dart';
-import 'package:dating_your_date/presentation/WarningReturnResetPage.dart';
 import 'package:dating_your_date/presentation/TargetReady.dart';
 import 'package:dating_your_date/presentation/Target/Target.dart';
 import 'package:flutter/material.dart';
@@ -82,8 +82,8 @@ class AppRoutes {
   static const String signUp_3 = '/signUp_3';
   static const String target = '/target';
   static const String targetReady = '/targetReady';
-  static const String warningDeleteUser = '/warningDeleteUser';
-  static const String warningReturnResetPage = '/warningReturnResetPage';
+  static const String warningMsgDeleteUser = '/WarningMsgDeleteUser';
+  static const String warningMsgReturnResetPage = '/WarningMsgReturnResetPage';
 
   static Map<String, WidgetBuilder> routes = {
     appNavigationScreen: (context) => AppNavigationScreen(),
@@ -121,7 +121,7 @@ class AppRoutes {
     signUp_3: (context) => SignUp_3(),
     target: (context) => Target(),
     targetReady: (context) => TargetReady(),
-    warningDeleteUser: (context) => WarningDeleteUser(),
-    warningReturnResetPage: (context) => WarningReturnResetPage()
+    warningMsgDeleteUser: (context) => WarningMsgDeleteUser(),
+    warningMsgReturnResetPage: (context) => WarningMsgReturnResetPage()
   };
 }

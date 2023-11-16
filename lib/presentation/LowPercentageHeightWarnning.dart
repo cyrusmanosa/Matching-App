@@ -13,27 +13,24 @@ class LowPercentageHeightWarnning extends StatelessWidget {
       child: Scaffold(
         body: Container(
           width: double.maxFinite,
-          padding: EdgeInsets.only(
-            left: 20.h,
-            top: 65.v,
-            right: 20.h,
-          ),
+          padding: EdgeInsets.only(left: 30.h, top: 65.v, right: 30.h),
           child: Column(
             children: [
+              // logo
               CustomImageView(
                 imagePath: ImageConstant.imgLogo,
-                height: 81.v,
-                width: 95.h,
+                width: 110,
+                alignment: Alignment.center,
               ),
               SizedBox(height: 1.v),
-              CustomImageView(
-                imagePath: ImageConstant.imgSlogan,
-                height: 17.v,
-                width: 100.h,
-              ),
-              SizedBox(height: 74.v),
+
+              // Slogan
+              CustomImageView(imagePath: ImageConstant.imgSlogan, width: 150, alignment: Alignment.center),
+
+              SizedBox(height: 75.v),
+
               SizedBox(
-                width: 390.h,
+                width: 350.h,
                 child: Text(
                   "新しい条件で合わせるパーセントは最高30％しかありませんので\nまだ続けませんか？",
                   maxLines: 4,
@@ -42,27 +39,30 @@ class LowPercentageHeightWarnning extends StatelessWidget {
                   style: CustomTextStyles.headlineMediumBlack900,
                 ),
               ),
-              SizedBox(height: 53.v),
+              SizedBox(height: 30.v),
+
+              // button
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 37.h),
+                padding: EdgeInsets.symmetric(horizontal: 30.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomOutlinedButton(
-                      width: 150.h,
+                      width: 100,
+                      height: 40,
                       text: "続ける",
-                      buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
+                      buttonTextStyle: theme.textTheme.titleLarge,
                     ),
                     CustomOutlinedButton(
-                      width: 150.h,
+                      margin: EdgeInsets.only(left: 15.h),
+                      width: 100,
+                      height: 40,
                       text: "編集",
-                      margin: EdgeInsets.only(left: 16.h),
-                      buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
+                      buttonTextStyle: theme.textTheme.titleLarge,
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 15.v),
             ],
           ),
         ),

@@ -74,17 +74,15 @@ class Login extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
+                    // line 1
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                       child: SizedBox(width: 80, child: Divider()),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 1.h),
-                      child: Text(
-                        "または",
-                        style: theme.textTheme.titleMedium,
-                      ),
-                    ),
+                    // Word
+                    Text("または", style: theme.textTheme.titleMedium),
+
+                    // line 2
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                       child: SizedBox(width: 80, child: Divider()),

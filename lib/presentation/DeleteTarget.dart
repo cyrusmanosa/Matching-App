@@ -62,6 +62,6 @@ class DeleteTarget extends StatelessWidget {
   }
 
   onTaptf(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.warningDeleteUser);
+    Navigator.pushNamed(context, AppRoutes.warningMsgDeleteUser);
   }
 }

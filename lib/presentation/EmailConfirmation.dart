@@ -8,16 +8,14 @@ import 'package:flutter/material.dart';
 class EmailConfirmation extends StatelessWidget {
   EmailConfirmation({Key? key}) : super(key: key);
   TextEditingController emailController = TextEditingController();
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Form(
-          key: _formKey,
+        body: SafeArea(
+          // body: Form(
           child: Container(
             width: double.maxFinite,
             padding: EdgeInsets.only(left: 30.h, top: 65.v, right: 30.h),
@@ -29,51 +27,46 @@ class EmailConfirmation extends StatelessWidget {
 
                 // slogan
                 CustomImageView(imagePath: ImageConstant.imgSlogan, height: 17, width: 100),
-                SizedBox(height: 20.v),
-
-                // Title
-                Text("メールアドレスを登録", style: CustomTextStyles.headlineSmallRoundedMplus1c.copyWith(decoration: TextDecoration.underline)),
                 SizedBox(height: 15.v),
+
+                // information note
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Container(
+                    width: 350,
+                    margin: EdgeInsets.only(left: 20.h, right: 33.h),
+                    child: Text(
+                      "・メールアドレスの受信確認が必須です。\n・ご登録済みのお客様は受信確認をお願いしております。",
+                      overflow: TextOverflow.ellipsis,
+                      style: CustomTextStyles.bodyMediumBlack900,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20.v),
 
                 // input
                 CustomInputBar(titleName: "メールアドレス", backendPart: _buildEmailInputSection(context)),
-                SizedBox(height: 40.v),
+                SizedBox(height: 30.v),
 
                 // send button
                 CustomOutlinedButton(
                   height: 40,
                   width: 95,
                   text: "送信する",
-                  margin: EdgeInsets.only(left: 130.h),
                   buttonTextStyle: theme.textTheme.titleSmall!,
                   onPressed: () {
                     onTaptf(context);
                   },
-                  alignment: Alignment.centerLeft,
                 ),
-                SizedBox(height: 40.v),
+                SizedBox(height: 20.v),
 
-                // information note
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Container(
-                    width: 315,
-                    margin: EdgeInsets.only(left: 20.h, right: 33.h),
-                    child: Text(
-                      "・メールアドレスの受信確認が必須です。\n・ご登録済みのお客様にもメールアドレス受信確認をお\n    願いしております。",
-                      overflow: TextOverflow.ellipsis,
-                      style: CustomTextStyles.bodyMediumBlack900,
-                    ),
-                  ),
-                ),
                 // 手続き
                 Align(
                   alignment: Alignment.center,
                   child: Container(
                     width: 315,
-                    margin: EdgeInsets.symmetric(horizontal: 40),
                     child: Text(
-                      "\n（この手続きは1回のみで、以降表示されません）",
+                      "（この手続きは1回のみで、以降表示されません）",
                       overflow: TextOverflow.ellipsis,
                       style: CustomTextStyles.bodyMediumBlack900,
                     ),

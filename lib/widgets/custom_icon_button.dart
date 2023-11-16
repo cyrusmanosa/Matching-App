@@ -21,12 +21,7 @@ class CustomIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return alignment != null
-        ? Align(
-            alignment: alignment ?? Alignment.center,
-            child: iconButtonWidget,
-          )
-        : iconButtonWidget;
+    return alignment != null ? Align(alignment: alignment ?? Alignment.center, child: iconButtonWidget) : iconButtonWidget;
   }
 
   Widget get iconButtonWidget => SizedBox(
@@ -43,12 +38,7 @@ class CustomIconButton extends StatelessWidget {
                   color: theme.colorScheme.primary,
                   borderRadius: BorderRadiusStyle.r5,
                   boxShadow: [
-                    BoxShadow(
-                      color: appTheme.black900.withOpacity(0.3),
-                      spreadRadius: 2.h,
-                      blurRadius: 2.h,
-                      offset: Offset(0, 1),
-                    ),
+                    BoxShadow(color: appTheme.black900.withOpacity(0.3), spreadRadius: 2.h, blurRadius: 2.h, offset: Offset(0, 1)),
                   ],
                 ),
           ),

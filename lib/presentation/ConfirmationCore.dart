@@ -35,21 +35,30 @@ class ConfirmationCore extends StatelessWidget {
 
               // Input
               CustomInputBar(titleName: "認証コード:", backendPart: _buildConfirmationCoreInput(context)),
-              SizedBox(height: 1.v),
-
-              Text("コードが届かない場合", style: CustomTextStyles.bodyMediumBlack900),
+              SizedBox(height: 2.v),
+              // reset password
+              Align(
+                alignment: Alignment.centerLeft,
+                child: GestureDetector(
+                  onTap: () {
+                    onTapReturn(context);
+                  },
+                  child: Text("コードが届かない場合", style: CustomTextStyles.bodyMediumBlack900),
+                ),
+              ),
               SizedBox(height: 25.v),
 
               // button
               CustomOutlinedButton(
-                  height: 40,
-                  width: 95,
-                  text: "認証",
-                  buttonTextStyle: theme.textTheme.titleSmall!,
-                  onPressed: () {
-                    onTaptf(context);
-                  },
-                  alignment: Alignment.center),
+                alignment: Alignment.center,
+                height: 40,
+                width: 95,
+                text: "認証",
+                buttonTextStyle: theme.textTheme.titleSmall!,
+                onPressed: () {
+                  onTaptf(context);
+                },
+              ),
             ],
           ),
         ),
@@ -64,6 +73,10 @@ class ConfirmationCore extends StatelessWidget {
       hintText: "423198",
       maxLines: 1,
     );
+  }
+
+  onTapReturn(BuildContext context) {
+    Navigator.pop(context);
   }
 
   /// Navigates to the signupPhoneoremailPartoneScreen when the action is triggered.

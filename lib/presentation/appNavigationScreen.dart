@@ -77,7 +77,7 @@ class AppNavigationScreen extends StatelessWidget {
                         _buildScreenTitle(
                           context,
                           userName: "Warnning of Delete Page",
-                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.warningDeleteUser),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.warningMsgDeleteUser),
                         ),
                         _buildScreenTitle(
                           context,
@@ -87,7 +87,7 @@ class AppNavigationScreen extends StatelessWidget {
                         _buildScreenTitle(
                           context,
                           userName: "Warnning of Return Page",
-                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.warningReturnResetPage),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.warningMsgReturnResetPage),
                         ),
                         _buildScreenTitle(
                           context,
@@ -152,7 +152,7 @@ class AppNavigationScreen extends StatelessWidget {
                         _buildScreenTitle(
                           context,
                           userName: "認証コードーError",
-                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.profileEdit),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.confirmationCoreError),
                         ),
                         _buildScreenTitle(
                           context,
@@ -183,6 +183,11 @@ class AppNavigationScreen extends StatelessWidget {
                           context,
                           userName: "プロフィール編集",
                           onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.profileEdit),
+                        ),
+                        _buildScreenTitle(
+                          context,
+                          userName: "プロフィール",
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.profile),
                         ),
                       ],
                     ),

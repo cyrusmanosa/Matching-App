@@ -15,12 +15,17 @@ class NewPasswordDone extends StatelessWidget {
           padding: EdgeInsets.only(top: 75.v),
           child: Column(
             children: [
-              // Logo
-              CustomImageView(imagePath: ImageConstant.imgLogo, height: 80, width: 95),
+              // logo
+              CustomImageView(
+                imagePath: ImageConstant.imgLogo,
+                width: 110,
+                alignment: Alignment.center,
+              ),
               SizedBox(height: 1.v),
 
               // Slogan
-              CustomImageView(imagePath: ImageConstant.imgSlogan, height: 17, width: 100),
+              CustomImageView(imagePath: ImageConstant.imgSlogan, width: 150, alignment: Alignment.center),
+
               SizedBox(height: 75.v),
 
               // Title 1

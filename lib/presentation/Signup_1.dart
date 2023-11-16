@@ -21,15 +21,14 @@ class SignUp_1 extends StatelessWidget {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
       child: Scaffold(
-        body: SizedBox(
+        // Header
+        appBar: _buildHeader(context),
+        body: Container(
           width: double.maxFinite,
           child: SingleChildScrollView(
+            padding: EdgeInsets.only(left: 30.h, top: 30, right: 30.h),
             child: Column(
               children: [
-                // Header
-                _buildHeader(context),
-                SizedBox(height: 15.v),
-
                 // image
                 CustomImageView(
                   imagePath: ImageConstant.imgVector,
@@ -79,21 +78,18 @@ class SignUp_1 extends StatelessWidget {
                 // 18
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 30.h),
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 20.adaptSize,
-                          width: 20.adaptSize,
-                          decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 10.h),
-                          child: Text("満18歳以上の独身であることを誓約します", style: theme.textTheme.bodyMedium),
-                        )
-                      ],
-                    ),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 20.adaptSize,
+                        width: 20.adaptSize,
+                        decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10.h),
+                        child: Text("満18歳以上の独身であることを誓約します", style: theme.textTheme.bodyMedium),
+                      )
+                    ],
                   ),
                 ),
                 SizedBox(height: 15.v),
@@ -101,23 +97,21 @@ class SignUp_1 extends StatelessWidget {
                 // Agree
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 30.h),
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 20.adaptSize,
-                          width: 20.adaptSize,
-                          decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 10.h),
-                          child: Text("全ての規約に同意します", style: theme.textTheme.bodyMedium),
-                        )
-                      ],
-                    ),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 20.adaptSize,
+                        width: 20.adaptSize,
+                        decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10.h),
+                        child: Text("全ての規約に同意します", style: theme.textTheme.bodyMedium),
+                      )
+                    ],
                   ),
                 ),
+
                 SizedBox(height: 40.v),
 
                 // Button
@@ -183,10 +177,10 @@ class SignUp_1 extends StatelessWidget {
   /// Next Button
   Widget _buildNextButton(BuildContext context) {
     return CustomOutlinedButton(
-      width: 150.h,
+      width: 90,
+      height: 40,
       text: "次へ",
-      margin: EdgeInsets.only(left: 140.h, right: 140.h, bottom: 30.v),
-      buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
+      buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
         onTapNextButton(context);
       },

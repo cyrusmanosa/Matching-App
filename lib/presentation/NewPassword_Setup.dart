@@ -31,10 +31,6 @@ class NewPasswordSetup extends StatelessWidget {
                 CustomImageView(imagePath: ImageConstant.imgSlogan, height: 17, width: 100),
                 SizedBox(height: 30.v),
 
-                // Title
-                Text("新しいパスワード設定", style: CustomTextStyles.headlineSmallRoundedMplus1c.copyWith(decoration: TextDecoration.underline)),
-                SizedBox(height: 20.v),
-
                 // New Password
                 CustomInputBar(titleName: "新しいパスワード", backendPart: _buildNewPasswordInput(context)),
 
@@ -50,7 +46,6 @@ class NewPasswordSetup extends StatelessWidget {
 
                 // New Password Confirm
                 CustomInputBar(titleName: "新しいパスワード（確認）", backendPart: _buildNewPasswordConfirm(context)),
-
                 SizedBox(height: 40.v),
 
                 // Button

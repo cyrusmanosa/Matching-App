@@ -16,9 +16,9 @@ class SearchTitle extends StatelessWidget {
           child: Column(
             children: [
               // Logo
-              CustomImageView(imagePath: ImageConstant.imgLogo, height: 80, width: 95),
+              // logo
+              CustomImageView(imagePath: ImageConstant.imgLogo, width: 130),
               SizedBox(height: 1.v),
-
               // Slogan
               CustomImageView(imagePath: ImageConstant.imgSlogan, height: 17, width: 100),
               SizedBox(height: 25.v),

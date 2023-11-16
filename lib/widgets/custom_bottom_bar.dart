@@ -64,18 +64,12 @@ class CustomBottomBarState extends State<CustomBottomBar> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CustomImageView(
-                  imagePath: bottomMenuList[index].icon,
-                  height: 41.adaptSize,
-                  width: 41.adaptSize,
-                  color: theme.colorScheme.primary,
-                ),
+                    imagePath: bottomMenuList[index].icon, height: 41.adaptSize, width: 41.adaptSize, color: theme.colorScheme.primary),
                 Padding(
                   padding: EdgeInsets.only(top: 2.v),
                   child: Text(
                     bottomMenuList[index].title ?? "",
-                    style: CustomTextStyles.roundedMplus1cPrimary.copyWith(
-                      color: theme.colorScheme.primary,
-                    ),
+                    style: CustomTextStyles.roundedMplus1cPrimary.copyWith(color: theme.colorScheme.primary),
                   ),
                 ),
               ],
@@ -86,23 +80,16 @@ class CustomBottomBarState extends State<CustomBottomBar> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CustomImageView(
-                  imagePath: bottomMenuList[index].activeIcon,
-                  height: 41.v,
-                  width: 44.h,
-                  color: appTheme.cyan600,
-                ),
+                    imagePath: bottomMenuList[index].activeIcon, height: 41.adaptSize, width: 41.adaptSize, color: appTheme.cyan600),
                 Padding(
                   padding: EdgeInsets.only(top: 2.v),
                   child: Text(
                     bottomMenuList[index].title ?? "",
-                    style: CustomTextStyles.roundedMplus1cCyan600.copyWith(
-                      color: appTheme.cyan600,
-                    ),
+                    style: CustomTextStyles.roundedMplus1cCyan600.copyWith(color: appTheme.cyan600),
                   ),
                 ),
               ],
             ),
-            label: '',
           );
         }),
         onTap: (index) {
@@ -142,10 +129,7 @@ class DefaultWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Please replace the respective Widget here',
-              style: TextStyle(fontSize: 18),
-            ),
+            Text('Please replace the respective Widget here', style: TextStyle(fontSize: 18)),
           ],
         ),
       ),

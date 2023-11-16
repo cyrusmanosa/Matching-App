@@ -34,10 +34,9 @@ class HobbyCondition extends StatelessWidget {
         body: SizedBox(
           width: double.maxFinite,
           child: SingleChildScrollView(
+            padding: EdgeInsets.only(left: 30.h, top: 30, right: 30.h),
             child: Column(
               children: [
-                SizedBox(height: 120.v),
-
                 // Era
                 CustomInputBar(titleName: "年代:", backendPart: _buildHobbyEraInput(context)),
                 SizedBox(height: 15.v),
@@ -81,23 +80,21 @@ class HobbyCondition extends StatelessWidget {
                 // 本人
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 30.h),
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 20.adaptSize,
-                          width: 20.adaptSize,
-                          decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadius.circular(10.h)),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 10.h),
-                          child: Text("本人認証を確認しました", style: theme.textTheme.bodyMedium),
-                        ),
-                      ],
-                    ),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 20.adaptSize,
+                        width: 20.adaptSize,
+                        decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadius.circular(10.h)),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10.h),
+                        child: Text("本人認証を確認しました", style: theme.textTheme.bodyMedium),
+                      ),
+                    ],
                   ),
                 ),
+
                 SizedBox(height: 40.v),
 
                 // button
@@ -217,10 +214,10 @@ class HobbyCondition extends StatelessWidget {
   /// Certification For Check
   Widget _buildCertificationForCheck(BuildContext context) {
     return CustomOutlinedButton(
-      width: 150,
-      height: 50,
+      width: 110,
+      height: 40,
       text: "条件確認",
-      buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
+      buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
         onTaptf(context);
       },

@@ -15,10 +15,7 @@ class CustomInputBar extends StatelessWidget {
       children: [
         Text(titleName!, style: theme.textTheme.titleLarge),
         Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: appTheme.pinkA100),
-            borderRadius: BorderRadiusStyle.r5,
-          ),
+          decoration: BoxDecoration(border: Border.all(color: appTheme.pinkA100), borderRadius: BorderRadiusStyle.r10),
           child: backendPart,
         ),
       ],

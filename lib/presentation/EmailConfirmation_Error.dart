@@ -1,4 +1,5 @@
 import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/custom_outlined_button.dart';
 import 'package:dating_your_date/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -15,73 +16,90 @@ class EmailConfirmationError extends StatelessWidget {
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
-        child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            body: Form(
-                key: _formKey,
-                child: Container(
-                    width: double.maxFinite,
-                    padding: EdgeInsets.only(left: 30.h, top: 65.v, right: 30.h),
-                    child: Column(children: [
-                      // Logo
-                      CustomImageView(imagePath: ImageConstant.imgLogo, height: 80, width: 95),
-                      SizedBox(height: 1.v),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Form(
+          key: _formKey,
+          child: Container(
+            width: double.maxFinite,
+            padding: EdgeInsets.only(left: 30.h, top: 65.v, right: 30.h),
+            child: Column(
+              children: [
+                // Logo
+                CustomImageView(imagePath: ImageConstant.imgLogo, height: 80, width: 95),
+                SizedBox(height: 1.v),
 
-                      // Slogan
-                      CustomImageView(imagePath: ImageConstant.imgSlogan, height: 17, width: 100),
-                      SizedBox(height: 30.v),
+                // Slogan
+                CustomImageView(imagePath: ImageConstant.imgSlogan, height: 17, width: 100),
+                SizedBox(height: 30.v),
 
-                      //Warning Logo
-                      CustomImageView(imagePath: ImageConstant.imgWarning, height: 41.v, width: 49.h),
-                      SizedBox(height: 15.v),
+                //Warning Logo
+                CustomImageView(imagePath: ImageConstant.imgWarning, height: 41.v, width: 49.h),
+                SizedBox(height: 15.v),
 
-                      // Warning Msg
-                      Container(
-                          width: 322.h,
-                          margin: EdgeInsets.only(left: 23.h, right: 25.h),
-                          child: Text("ご確認ください\nメールアドレスのフォーマットが正しくありません",
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.center,
-                              style: CustomTextStyles.bodyMediumOnPrimary)),
-                      SizedBox(height: 2.v),
+                // Warning Msg
+                Container(
+                  width: 340.h,
+                  margin: EdgeInsets.symmetric(horizontal: 25.h),
+                  child: Text(
+                    "ご確認ください\nメールアドレスのフォーマットが正しくありません",
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: CustomTextStyles.bodyMediumOnPrimary,
+                  ),
+                ),
+                SizedBox(height: 20.v),
 
-                      // Title
-                      Text("メールアドレスを登録",
-                          style: CustomTextStyles.headlineSmallRoundedMplus1c.copyWith(decoration: TextDecoration.underline)),
-                      SizedBox(height: 1.v),
+                // information note
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Container(
+                    width: 350,
+                    margin: EdgeInsets.only(left: 20.h, right: 33.h),
+                    child: Text(
+                      "・メールアドレスの受信確認が必須です。\n・ご登録済みのお客様は受信確認をお願いしております。",
+                      overflow: TextOverflow.ellipsis,
+                      style: CustomTextStyles.bodyMediumBlack900,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20.v),
 
-                      // Input
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("メールアドレス:", style: theme.textTheme.titleLarge),
-                          _buildEmailInput(context),
-                        ],
-                      ),
-                      SizedBox(height: 42.v),
+                // Input
+                CustomInputBar(titleName: "メールアドレス:", backendPart: _buildEmailInput(context)),
+                SizedBox(height: 30.v),
 
-                      // button
-                      CustomOutlinedButton(
-                          height: 38.v,
-                          width: 96.h,
-                          text: "送信する",
-                          margin: EdgeInsets.only(left: 130.h),
-                          buttonTextStyle: theme.textTheme.titleSmall!,
-                          onPressed: () {
-                            onTaptf(context);
-                          },
-                          alignment: Alignment.centerLeft),
-                      SizedBox(height: 39.v),
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: Container(
-                              width: 315.h,
-                              margin: EdgeInsets.only(left: 20.h, right: 33.h),
-                              child: Text("メールアドレスの受信確認が必須です。\nご登録済みのお客様にもメールアドレス受信確認をお願いしております。\n（この手続きは1回のみで、以降表示されません。）",
-                                  maxLines: 4, overflow: TextOverflow.ellipsis, style: CustomTextStyles.bodyMediumBlack900))),
-                      SizedBox(height: 5.v)
-                    ])))));
+                // send button
+                CustomOutlinedButton(
+                  height: 40,
+                  width: 95,
+                  text: "送信する",
+                  buttonTextStyle: theme.textTheme.titleSmall!,
+                  onPressed: () {
+                    onTaptf(context);
+                  },
+                ),
+                SizedBox(height: 20.v),
+
+                // 手続き
+                Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    width: 315,
+                    child: Text(
+                      "（この手続きは1回のみで、以降表示されません）",
+                      overflow: TextOverflow.ellipsis,
+                      style: CustomTextStyles.bodyMediumBlack900,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   /// Section Widget

@@ -19,9 +19,7 @@ class AppbarTitle extends StatelessWidget {
         padding: margin ?? EdgeInsets.zero,
         child: Text(
           text,
-          style: theme.textTheme.headlineMedium!.copyWith(
-            color: theme.colorScheme.primary,
-          ),
+          style: theme.textTheme.headlineMedium!.copyWith(color: theme.colorScheme.primary),
         ),
       ),
     );

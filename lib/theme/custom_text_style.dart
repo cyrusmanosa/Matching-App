@@ -7,34 +7,16 @@ import '../core/app_export.dart';
 
 class CustomTextStyles {
   // Body text style
-  static get bodyLargeBlack900 => theme.textTheme.bodyLarge!.copyWith(
-        color: appTheme.black900,
-      );
-
-  static get bodyLargePinkA100 => theme.textTheme.bodyLarge!.copyWith(
-        color: appTheme.pinkA100,
-      );
-  static get bodyMediumBlack900 => theme.textTheme.bodyMedium!.copyWith(
-        color: appTheme.black900,
-        fontSize: 13.fSize,
-      );
-  static get bodyMediumgray500 => theme.textTheme.bodyMedium!.copyWith(
-        color: appTheme.gray500,
-      );
-  static get bodyMediumOnPrimary => theme.textTheme.bodyMedium!.copyWith(
-        color: theme.colorScheme.onPrimary,
-      );
-  static get bodyMediumPrimary => theme.textTheme.bodyMedium!.copyWith(
-        color: theme.colorScheme.primary,
-      );
+  static get bodyLargeBlack900 => theme.textTheme.bodyLarge!.copyWith(color: appTheme.black900);
+  static get bodyLargePinkA100 => theme.textTheme.bodyLarge!.copyWith(color: appTheme.pinkA100);
+  static get bodyMediumBlack900 => theme.textTheme.bodyMedium!.copyWith(color: appTheme.black900, fontSize: 13.fSize);
+  static get bodyMediumgray500 => theme.textTheme.bodyMedium!.copyWith(color: appTheme.gray500);
+  static get bodyMediumOnPrimary => theme.textTheme.bodyMedium!.copyWith(color: theme.colorScheme.onPrimary);
+  static get bodyMediumPrimary => theme.textTheme.bodyMedium!.copyWith(color: theme.colorScheme.primary);
   // Headline text style
-  static get headlineMediumBlack900 => theme.textTheme.headlineMedium!.copyWith(
-        color: appTheme.black900,
-      );
-  static get headlineMediumMontserratPinkA100 => theme.textTheme.headlineMedium!.montserrat.copyWith(
-        color: appTheme.pinkA100,
-        fontWeight: FontWeight.w600,
-      );
+  static get headlineMediumBlack900 => theme.textTheme.headlineMedium!.copyWith(color: appTheme.black900);
+  static get headlineMediumMontserratPinkA100 =>
+      theme.textTheme.headlineMedium!.montserrat.copyWith(color: appTheme.pinkA100, fontWeight: FontWeight.w600);
   static get headlineSmallRoundedMplus1c => theme.textTheme.headlineSmall!.roundedMplus1c.copyWith(
         fontWeight: FontWeight.w400,
         fontSize: 20.fSize,
@@ -57,9 +39,7 @@ class CustomTextStyles {
       ).roundedMplus1c;
 
   // Title text style
-  static get titleLargeBlack900 => theme.textTheme.titleLarge!.copyWith(
-        color: appTheme.black900,
-      );
+  static get titleLargeBlack900 => theme.textTheme.titleLarge!.copyWith(color: appTheme.black900);
 }
 
 extension on TextStyle {

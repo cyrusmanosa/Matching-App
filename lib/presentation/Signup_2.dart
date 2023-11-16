@@ -24,15 +24,14 @@ class SignUp_2 extends StatelessWidget {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
       child: Scaffold(
+        // Header
+        appBar: _buildHeader(context),
         body: SizedBox(
           width: double.maxFinite,
           child: SingleChildScrollView(
+            padding: EdgeInsets.only(left: 30.h, top: 30, right: 30.h),
             child: Column(
               children: [
-                // Header
-                _buildHeader(context),
-                SizedBox(height: 50),
-
                 // Nick Name
                 CustomInputBar(titleName: "ニックネーム:", backendPart: _buildBasicNickNameInput(context)),
                 SizedBox(height: 15.v),
@@ -151,13 +150,13 @@ class SignUp_2 extends StatelessWidget {
     );
   }
 
-  /// Section Widget
+  /// Next Button
   Widget _buildNextButton(BuildContext context) {
     return CustomOutlinedButton(
-      width: 150.h,
+      width: 90,
+      height: 40,
       text: "次へ",
-      margin: EdgeInsets.only(left: 140.h, right: 140.h, bottom: 30.v),
-      buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
+      buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
         onTapNextButton(context);
       },

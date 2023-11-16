@@ -8,8 +8,7 @@ import 'package:flutter/material.dart';
 class PasswordResetEmail extends StatelessWidget {
   PasswordResetEmail({Key? key}) : super(key: key);
 
-  TextEditingController emailController = TextEditingController();
-
+  TextEditingController passwordResetEmailController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -50,15 +49,14 @@ class PasswordResetEmail extends StatelessWidget {
 
                 // Input
                 CustomInputBar(titleName: "メールアドレス:", backendPart: _buildResetPasswordEmailInput(context)),
-
                 SizedBox(height: 25.v),
 
                 // button
                 CustomOutlinedButton(
-                  height: 45,
-                  width: 120,
+                  height: 40,
+                  width: 95,
                   text: "送信する",
-                  buttonTextStyle: theme.textTheme.titleMedium,
+                  buttonTextStyle: theme.textTheme.titleSmall,
                   onPressed: () {
                     onTapPasswordResetButton(context);
                   },
@@ -74,10 +72,11 @@ class PasswordResetEmail extends StatelessWidget {
   /// _ResetPassword Email
   Widget _buildResetPasswordEmailInput(BuildContext context) {
     return CustomTextFormField(
-      controller: emailController,
+      controller: passwordResetEmailController,
       hintText: "example@email.com",
       textInputAction: TextInputAction.done,
       textInputType: TextInputType.emailAddress,
+      maxLines: 1,
     );
   }
 }

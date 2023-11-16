@@ -21,13 +21,11 @@ class SignUp_3 extends StatelessWidget {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
       child: Scaffold(
-        body: SizedBox(
+        appBar: _buildHeader(context),
+        body: Padding(
+          padding: EdgeInsets.only(left: 30.h, top: 30, right: 30.h),
           child: Column(
             children: [
-              // Header
-              _buildHeader(context),
-              SizedBox(height: 50),
-
               // Annual Salary
               CustomInputBar(titleName: "年収:", backendPart: _buildBasicAnnualSalaryInput(context)),
               SizedBox(height: 15.v),
@@ -42,10 +40,12 @@ class SignUp_3 extends StatelessWidget {
 
               // Introduce
               CustomInputBar(titleName: "自己紹介:", backendPart: _buildBasicIntroduceInput(context)),
+
+              SizedBox(height: 40),
+              _buildNextButton(context),
             ],
           ),
         ),
-        bottomNavigationBar: _buildNextButton(context),
       ),
     );
   }
@@ -78,7 +78,7 @@ class SignUp_3 extends StatelessWidget {
     );
   }
 
-  /// Section Widget
+  /// Sociability
   Widget _buildBasicSociabilityInput(BuildContext context) {
     return CustomTextFormField(
       controller: basicSociabilityController,
@@ -86,7 +86,7 @@ class SignUp_3 extends StatelessWidget {
     );
   }
 
-  /// Section Widget
+  /// Religious
   Widget _buildBasicReligiousInput(BuildContext context) {
     return CustomTextFormField(
       controller: basicReligiousController,
@@ -94,7 +94,7 @@ class SignUp_3 extends StatelessWidget {
     );
   }
 
-  /// Section Widget
+  /// Introduce
   Widget _buildBasicIntroduceInput(BuildContext context) {
     return CustomTextFormField(
       controller: basicIntroduceController,
@@ -105,16 +105,17 @@ class SignUp_3 extends StatelessWidget {
     );
   }
 
-  /// Section Widget
+  /// Next Button
   Widget _buildNextButton(BuildContext context) {
     return CustomOutlinedButton(
-        width: 150.h,
-        text: "次へ",
-        margin: EdgeInsets.only(left: 140.h, right: 140.h, bottom: 30.v),
-        buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
-        onPressed: () {
-          onTapNextButton(context);
-        });
+      width: 90,
+      height: 40,
+      text: "次へ",
+      buttonTextStyle: theme.textTheme.titleMedium,
+      onPressed: () {
+        onTapNextButton(context);
+      },
+    );
   }
 
   /// Navigates to the k26Screen when the action is triggered.

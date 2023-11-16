@@ -39,10 +39,9 @@ class LoverConditions extends StatelessWidget {
         body: SizedBox(
           width: double.maxFinite,
           child: SingleChildScrollView(
+            padding: EdgeInsets.only(left: 30.h, top: 30, right: 30.h),
             child: Column(
               children: [
-                SizedBox(height: 120.v),
-
                 // Text(
                 //   "年齢:",
                 //   style: theme.textTheme.titleLarge,
@@ -95,22 +94,6 @@ class LoverConditions extends StatelessWidget {
                 //   ),
                 // ),
                 // SizedBox(height: 15.v),
-
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 50.h),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("学歴:", style: theme.textTheme.titleLarge),
-                      Container(
-                        width: 330.h,
-                        padding: EdgeInsets.symmetric(horizontal: 19.h, vertical: 6.v),
-                        decoration: AppDecoration.outlinePinkA.copyWith(borderRadius: BorderRadiusStyle.r5),
-                        child: Text("高校生", style: theme.textTheme.bodyLarge),
-                      ),
-                    ],
-                  ),
-                ),
 
                 // Country
                 CustomInputBar(titleName: "国籍:", backendPart: _buildLoverCountryInput(context)),
@@ -167,21 +150,18 @@ class LoverConditions extends StatelessWidget {
                 // 本人
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 30.h),
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 20.adaptSize,
-                          width: 20.adaptSize,
-                          decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadius.circular(10.h)),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 10.h),
-                          child: Text("本人認証を確認しました", style: theme.textTheme.bodyMedium),
-                        ),
-                      ],
-                    ),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 20.adaptSize,
+                        width: 20.adaptSize,
+                        decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10.h),
+                        child: Text("本人認証を確認しました", style: theme.textTheme.bodyMedium),
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(height: 40.v),
@@ -346,9 +326,10 @@ class LoverConditions extends StatelessWidget {
   /// Certification For Check
   Widget _buildCertificationForCheck(BuildContext context) {
     return CustomOutlinedButton(
-      width: 150.h,
+      width: 110,
+      height: 40,
       text: "条件確認",
-      buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
+      buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
         onTaptf(context);
       },
