@@ -23,5 +23,10 @@ migrateup:
 migratedown:
 	migrate -path db/migration -database "postgresql://root:secret@localhost:5432/dating_date?sslmode=disable" -verbose down
 
+sqlc:
+	sqlc generate
 
-.PHONY: dockernetwork postgres createdb dropdb createmigrate migrateup migratedown
+server:
+	go run main.go
+
+.PHONY: dockernetwork postgres createdb dropdb createmigrate migrateup migratedown server sqlc
