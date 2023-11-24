@@ -13,7 +13,7 @@ CREATE TABLE "fixinformation" (
   "certification" BOOLEAN DEFAULT false,
   "created_at" TIMESTAMPTZ NOT NULL DEFAULT (now()),
   "password_changed_at" TIMESTAMPTZ NOT NULL,
- 
+   
 );
 
 CREATE TABLE "canchangeinformation" (
@@ -21,8 +21,8 @@ CREATE TABLE "canchangeinformation" (
   "nickname" VARCHAR NOT NULL,
   "city" VARCHAR NOT NULL,
   "sexual" VARCHAR NOT NULL,
-  "height" INT NOT NULL,
-  "weight" INT NOT NULL,
+  "height" FLOAT NOT NULL,
+  "weight" FLOAT NOT NULL,
   "education" VARCHAR NOT NULL,
   "job" VARCHAR NOT NULL,
   "annual_salary" INT NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE "canchangeinformation" (
   "religious" VARCHAR NOT NULL,
   "introduce" VARCHAR NOT NULL,
   "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (now()),
- 
+   
 );
 
 CREATE TABLE "loverrequest" (
@@ -39,27 +39,23 @@ CREATE TABLE "loverrequest" (
   "max_age" INT NOT NULL,
   "country" VARCHAR NOT NULL,
   "city" VARCHAR NOT NULL,
-  "age" INT NOT NULL,
   "gender" VARCHAR NOT NULL,
   "constellation" VARCHAR NOT NULL,
-  "blood" VARCHAR NOT NULL,
   "sexual" VARCHAR NOT NULL,
-  "height" INT NOT NULL,
-  "weight" INT NOT NULL,
-  "education" VARCHAR NOT NULL,
+  "height" FLOAT NOT NULL,
+  "weight" FLOAT NOT NULL,
   "job" VARCHAR NOT NULL,
   "annual_salary" INT NOT NULL,
   "sociability" VARCHAR NOT NULL,
   "religious" VARCHAR NOT NULL,
   "certification" BOOLEAN DEFAULT false,
   "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (now()),
- 
+   
 );
 
 CREATE TABLE "hobbyrequest" (
   "user_id" INT PRIMARY KEY,
   "era" INT NOT NULL,
-  "country" VARCHAR NOT NULL,
   "city" VARCHAR NOT NULL,
   "gender" VARCHAR NOT NULL,
   "height" INT NOT NULL,
@@ -70,13 +66,12 @@ CREATE TABLE "hobbyrequest" (
   "sociability" VARCHAR NOT NULL,
   "certification" BOOLEAN DEFAULT false,
   "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (now()),
- 
+   
 );
 
 CREATE TABLE "accompanyrequest" (
   "user_id" INT PRIMARY KEY,
   "era" INT NOT NULL,
-  "country" VARCHAR NOT NULL,
   "city" VARCHAR NOT NULL,
   "gender" VARCHAR NOT NULL,
   "find_type" VARCHAR NOT NULL,
@@ -84,14 +79,14 @@ CREATE TABLE "accompanyrequest" (
   "sociability" VARCHAR NOT NULL,
   "certification" BOOLEAN DEFAULT false,
   "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (now()),
- 
+   
 );
 
 CREATE TABLE "image" (
   "user_id" INT PRIMARY KEY,
   "qr" VARCHAR UNIQUE NOT NULL,
   "icon" VARCHAR NOT NULL,
- 
+   
 );
 
 CREATE TABLE "targetlist" (
@@ -100,7 +95,7 @@ CREATE TABLE "targetlist" (
   "target_2_id" INT,
   "target_3_id" INT,
   "updated_at" TIMESTAMPTZ NOT NULL DEFAULT (now()),
- 
+   
 );
 
 CREATE TABLE "changetargetuser" (
@@ -109,7 +104,7 @@ CREATE TABLE "changetargetuser" (
   "reason" VARCHAR NOT NULL,
   "reply_user_id" INT NOT NULL,
   "change_time" TIMESTAMPTZ NOT NULL DEFAULT (now()),
- 
+   
 );
 
 CREATE TABLE "complaint" (

@@ -15,7 +15,6 @@ const createAccompanyRequest = `-- name: CreateAccompanyRequest :one
 INSERT INTO accompanyrequest (
     user_id,
     era,
-    country,
     city,
     gender,
     find_type,
@@ -23,14 +22,13 @@ INSERT INTO accompanyrequest (
     sociability,
     certification
 ) VALUES (
-    $1,$2,$3,$4,$5,$6,$7,$8,$9
-) RETURNING user_id, era, country, city, gender, find_type, find_target, sociability, certification, info_changed_at
+    $1,$2,$3,$4,$5,$6,$7,$8
+) RETURNING user_id, era, city, gender, find_type, find_target, sociability, certification, info_changed_at
 `
 
 type CreateAccompanyRequestParams struct {
 	UserID        int32       `json:"user_id"`
 	Era           int32       `json:"era"`
-	Country       string      `json:"country"`
 	City          string      `json:"city"`
 	Gender        string      `json:"gender"`
 	FindType      string      `json:"find_type"`
@@ -43,7 +41,6 @@ func (q *Queries) CreateAccompanyRequest(ctx context.Context, arg CreateAccompan
 	row := q.db.QueryRow(ctx, createAccompanyRequest,
 		arg.UserID,
 		arg.Era,
-		arg.Country,
 		arg.City,
 		arg.Gender,
 		arg.FindType,
@@ -55,7 +52,6 @@ func (q *Queries) CreateAccompanyRequest(ctx context.Context, arg CreateAccompan
 	err := row.Scan(
 		&i.UserID,
 		&i.Era,
-		&i.Country,
 		&i.City,
 		&i.Gender,
 		&i.FindType,
@@ -78,7 +74,7 @@ func (q *Queries) DeleteUserAccompany(ctx context.Context, userID int32) error {
 }
 
 const getUserAccompany = `-- name: GetUserAccompany :one
-SELECT user_id, era, country, city, gender, find_type, find_target, sociability, certification, info_changed_at FROM accompanyrequest
+SELECT user_id, era, city, gender, find_type, find_target, sociability, certification, info_changed_at FROM accompanyrequest
 WHERE user_id = $1 LIMIT 1
 `
 
@@ -88,7 +84,6 @@ func (q *Queries) GetUserAccompany(ctx context.Context, userID int32) (Accompany
 	err := row.Scan(
 		&i.UserID,
 		&i.Era,
-		&i.Country,
 		&i.City,
 		&i.Gender,
 		&i.FindType,
@@ -101,7 +96,7 @@ func (q *Queries) GetUserAccompany(ctx context.Context, userID int32) (Accompany
 }
 
 const listUserAccompany = `-- name: ListUserAccompany :many
-SELECT user_id, era, country, city, gender, find_type, find_target, sociability, certification, info_changed_at FROM accompanyrequest
+SELECT user_id, era, city, gender, find_type, find_target, sociability, certification, info_changed_at FROM accompanyrequest
 ORDER BY user_id
 `
 
@@ -117,7 +112,6 @@ func (q *Queries) ListUserAccompany(ctx context.Context) ([]Accompanyrequest, er
 		if err := rows.Scan(
 			&i.UserID,
 			&i.Era,
-			&i.Country,
 			&i.City,
 			&i.Gender,
 			&i.FindType,
@@ -139,21 +133,19 @@ func (q *Queries) ListUserAccompany(ctx context.Context) ([]Accompanyrequest, er
 const updateUserAccompany = `-- name: UpdateUserAccompany :one
 UPDATE accompanyrequest
 SET era = $2,
-    country = $3,
-    city = $4,
-    gender = $5,
-    find_type = $6,
-    find_target = $7,
-    sociability = $8,
-    certification = $9
+    city = $3,
+    gender = $4,
+    find_type = $5,
+    find_target = $6,
+    sociability = $7,
+    certification = $8
 WHERE user_id = $1
-RETURNING user_id, era, country, city, gender, find_type, find_target, sociability, certification, info_changed_at
+RETURNING user_id, era, city, gender, find_type, find_target, sociability, certification, info_changed_at
 `
 
 type UpdateUserAccompanyParams struct {
 	UserID        int32       `json:"user_id"`
 	Era           int32       `json:"era"`
-	Country       string      `json:"country"`
 	City          string      `json:"city"`
 	Gender        string      `json:"gender"`
 	FindType      string      `json:"find_type"`
@@ -166,7 +158,6 @@ func (q *Queries) UpdateUserAccompany(ctx context.Context, arg UpdateUserAccompa
 	row := q.db.QueryRow(ctx, updateUserAccompany,
 		arg.UserID,
 		arg.Era,
-		arg.Country,
 		arg.City,
 		arg.Gender,
 		arg.FindType,
@@ -178,7 +169,6 @@ func (q *Queries) UpdateUserAccompany(ctx context.Context, arg UpdateUserAccompa
 	err := row.Scan(
 		&i.UserID,
 		&i.Era,
-		&i.Country,
 		&i.City,
 		&i.Gender,
 		&i.FindType,

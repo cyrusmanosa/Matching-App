@@ -2,7 +2,6 @@
 INSERT INTO accompanyrequest (
     user_id,
     era,
-    country,
     city,
     gender,
     find_type,
@@ -10,7 +9,7 @@ INSERT INTO accompanyrequest (
     sociability,
     certification
 ) VALUES (
-    $1,$2,$3,$4,$5,$6,$7,$8,$9
+    $1,$2,$3,$4,$5,$6,$7,$8
 ) RETURNING *;
 
 -- name: GetUserAccompany :one
@@ -24,13 +23,12 @@ ORDER BY user_id;
 -- name: UpdateUserAccompany :one
 UPDATE accompanyrequest
 SET era = $2,
-    country = $3,
-    city = $4,
-    gender = $5,
-    find_type = $6,
-    find_target = $7,
-    sociability = $8,
-    certification = $9
+    city = $3,
+    gender = $4,
+    find_type = $5,
+    find_target = $6,
+    sociability = $7,
+    certification = $8
 WHERE user_id = $1
 RETURNING *;
 

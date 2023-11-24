@@ -15,7 +15,6 @@ const createHobbyRequest = `-- name: CreateHobbyRequest :one
 INSERT INTO hobbyrequest (
     user_id,
     era,
-    country,
     city,
     gender,
     height,
@@ -26,14 +25,13 @@ INSERT INTO hobbyrequest (
     sociability,
     certification
 ) VALUES (
-    $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12
-) RETURNING user_id, era, country, city, gender, height, weight, find_type, find_target, experience, sociability, certification, info_changed_at
+    $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11
+) RETURNING user_id, era, city, gender, height, weight, find_type, find_target, experience, sociability, certification, info_changed_at
 `
 
 type CreateHobbyRequestParams struct {
 	UserID        int32       `json:"user_id"`
 	Era           int32       `json:"era"`
-	Country       string      `json:"country"`
 	City          string      `json:"city"`
 	Gender        string      `json:"gender"`
 	Height        int32       `json:"height"`
@@ -49,7 +47,6 @@ func (q *Queries) CreateHobbyRequest(ctx context.Context, arg CreateHobbyRequest
 	row := q.db.QueryRow(ctx, createHobbyRequest,
 		arg.UserID,
 		arg.Era,
-		arg.Country,
 		arg.City,
 		arg.Gender,
 		arg.Height,
@@ -64,7 +61,6 @@ func (q *Queries) CreateHobbyRequest(ctx context.Context, arg CreateHobbyRequest
 	err := row.Scan(
 		&i.UserID,
 		&i.Era,
-		&i.Country,
 		&i.City,
 		&i.Gender,
 		&i.Height,
@@ -90,7 +86,7 @@ func (q *Queries) DeleteUserHobby(ctx context.Context, userID int32) error {
 }
 
 const getUserHobby = `-- name: GetUserHobby :one
-SELECT user_id, era, country, city, gender, height, weight, find_type, find_target, experience, sociability, certification, info_changed_at FROM hobbyrequest
+SELECT user_id, era, city, gender, height, weight, find_type, find_target, experience, sociability, certification, info_changed_at FROM hobbyrequest
 WHERE user_id = $1
 `
 
@@ -100,7 +96,6 @@ func (q *Queries) GetUserHobby(ctx context.Context, userID int32) (Hobbyrequest,
 	err := row.Scan(
 		&i.UserID,
 		&i.Era,
-		&i.Country,
 		&i.City,
 		&i.Gender,
 		&i.Height,
@@ -116,7 +111,7 @@ func (q *Queries) GetUserHobby(ctx context.Context, userID int32) (Hobbyrequest,
 }
 
 const listUserHobby = `-- name: ListUserHobby :many
-SELECT user_id, era, country, city, gender, height, weight, find_type, find_target, experience, sociability, certification, info_changed_at FROM hobbyrequest
+SELECT user_id, era, city, gender, height, weight, find_type, find_target, experience, sociability, certification, info_changed_at FROM hobbyrequest
 ORDER BY user_id
 `
 
@@ -132,7 +127,6 @@ func (q *Queries) ListUserHobby(ctx context.Context) ([]Hobbyrequest, error) {
 		if err := rows.Scan(
 			&i.UserID,
 			&i.Era,
-			&i.Country,
 			&i.City,
 			&i.Gender,
 			&i.Height,
@@ -157,24 +151,22 @@ func (q *Queries) ListUserHobby(ctx context.Context) ([]Hobbyrequest, error) {
 const updateUserHobby = `-- name: UpdateUserHobby :one
 UPDATE hobbyrequest
 SET era = $2,
-    country = $3,
-    city = $4,
-    gender = $5,
-    height = $6,
-    weight = $7,
-    find_type = $8,
-    find_target = $9,
-    experience = $10,
-    sociability = $11,
-    certification = $12
+    city = $3,
+    gender = $4,
+    height = $5,
+    weight = $6,
+    find_type = $7,
+    find_target = $8,
+    experience = $9,
+    sociability = $10,
+    certification = $11
 WHERE user_id = $1
-RETURNING user_id, era, country, city, gender, height, weight, find_type, find_target, experience, sociability, certification, info_changed_at
+RETURNING user_id, era, city, gender, height, weight, find_type, find_target, experience, sociability, certification, info_changed_at
 `
 
 type UpdateUserHobbyParams struct {
 	UserID        int32       `json:"user_id"`
 	Era           int32       `json:"era"`
-	Country       string      `json:"country"`
 	City          string      `json:"city"`
 	Gender        string      `json:"gender"`
 	Height        int32       `json:"height"`
@@ -190,7 +182,6 @@ func (q *Queries) UpdateUserHobby(ctx context.Context, arg UpdateUserHobbyParams
 	row := q.db.QueryRow(ctx, updateUserHobby,
 		arg.UserID,
 		arg.Era,
-		arg.Country,
 		arg.City,
 		arg.Gender,
 		arg.Height,
@@ -205,7 +196,6 @@ func (q *Queries) UpdateUserHobby(ctx context.Context, arg UpdateUserHobbyParams
 	err := row.Scan(
 		&i.UserID,
 		&i.Era,
-		&i.Country,
 		&i.City,
 		&i.Gender,
 		&i.Height,

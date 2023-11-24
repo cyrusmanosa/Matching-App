@@ -11,7 +11,6 @@ import (
 type Accompanyrequest struct {
 	UserID        int32              `json:"user_id"`
 	Era           int32              `json:"era"`
-	Country       string             `json:"country"`
 	City          string             `json:"city"`
 	Gender        string             `json:"gender"`
 	FindType      string             `json:"find_type"`
@@ -26,8 +25,8 @@ type Canchangeinformation struct {
 	Nickname      string             `json:"nickname"`
 	City          string             `json:"city"`
 	Sexual        string             `json:"sexual"`
-	Height        int32              `json:"height"`
-	Weight        int32              `json:"weight"`
+	Height        float64            `json:"height"`
+	Weight        float64            `json:"weight"`
 	Education     string             `json:"education"`
 	Job           string             `json:"job"`
 	AnnualSalary  int32              `json:"annual_salary"`
@@ -74,7 +73,6 @@ type Fixinformation struct {
 type Hobbyrequest struct {
 	UserID        int32              `json:"user_id"`
 	Era           int32              `json:"era"`
-	Country       string             `json:"country"`
 	City          string             `json:"city"`
 	Gender        string             `json:"gender"`
 	Height        int32              `json:"height"`
@@ -99,14 +97,11 @@ type Loverrequest struct {
 	MaxAge        int32              `json:"max_age"`
 	Country       string             `json:"country"`
 	City          string             `json:"city"`
-	Age           int32              `json:"age"`
 	Gender        string             `json:"gender"`
 	Constellation string             `json:"constellation"`
-	Blood         string             `json:"blood"`
 	Sexual        string             `json:"sexual"`
-	Height        int32              `json:"height"`
-	Weight        int32              `json:"weight"`
-	Education     string             `json:"education"`
+	Height        float64            `json:"height"`
+	Weight        float64            `json:"weight"`
 	Job           string             `json:"job"`
 	AnnualSalary  int32              `json:"annual_salary"`
 	Sociability   string             `json:"sociability"`

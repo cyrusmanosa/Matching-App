@@ -20,8 +20,8 @@ CREATE TABLE "canchangeinformation" (
   "nickname" VARCHAR NOT NULL,
   "city" VARCHAR NOT NULL,
   "sexual" VARCHAR NOT NULL,
-  "height" INT NOT NULL,
-  "weight" INT NOT NULL,
+  "height" FLOAT NOT NULL,
+  "weight" FLOAT NOT NULL,
   "education" VARCHAR NOT NULL,
   "job" VARCHAR NOT NULL,
   "annual_salary" INT NOT NULL,
@@ -37,14 +37,11 @@ CREATE TABLE "loverrequest" (
   "max_age" INT NOT NULL,
   "country" VARCHAR NOT NULL,
   "city" VARCHAR NOT NULL,
-  "age" INT NOT NULL,
   "gender" VARCHAR NOT NULL,
   "constellation" VARCHAR NOT NULL,
-  "blood" VARCHAR NOT NULL,
   "sexual" VARCHAR NOT NULL,
-  "height" INT NOT NULL,
-  "weight" INT NOT NULL,
-  "education" VARCHAR NOT NULL,
+  "height" FLOAT NOT NULL,
+  "weight" FLOAT NOT NULL,
   "job" VARCHAR NOT NULL,
   "annual_salary" INT NOT NULL,
   "sociability" VARCHAR NOT NULL,
@@ -56,7 +53,6 @@ CREATE TABLE "loverrequest" (
 CREATE TABLE "hobbyrequest" (
   "user_id" INT PRIMARY KEY,
   "era" INT NOT NULL,
-  "country" VARCHAR NOT NULL,
   "city" VARCHAR NOT NULL,
   "gender" VARCHAR NOT NULL,
   "height" INT NOT NULL,
@@ -72,7 +68,6 @@ CREATE TABLE "hobbyrequest" (
 CREATE TABLE "accompanyrequest" (
   "user_id" INT PRIMARY KEY,
   "era" INT NOT NULL,
-  "country" VARCHAR NOT NULL,
   "city" VARCHAR NOT NULL,
   "gender" VARCHAR NOT NULL,
   "find_type" VARCHAR NOT NULL,
@@ -114,19 +109,11 @@ CREATE TABLE "complaint" (
 );
 
 CREATE INDEX ON "complaint" ("user_id");
-
 ALTER TABLE "canchangeinformation" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
-
 ALTER TABLE "loverrequest" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
-
 ALTER TABLE "hobbyrequest" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
-
 ALTER TABLE "accompanyrequest" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
-
 ALTER TABLE "image" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
-
 ALTER TABLE "targetlist" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
-
 ALTER TABLE "changetargetuser" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
-
 ALTER TABLE "complaint" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");

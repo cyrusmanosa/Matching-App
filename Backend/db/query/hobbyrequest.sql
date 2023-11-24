@@ -2,7 +2,6 @@
 INSERT INTO hobbyrequest (
     user_id,
     era,
-    country,
     city,
     gender,
     height,
@@ -13,7 +12,7 @@ INSERT INTO hobbyrequest (
     sociability,
     certification
 ) VALUES (
-    $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12
+    $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11
 ) RETURNING *;
 
 -- name: GetUserHobby :one
@@ -27,16 +26,15 @@ ORDER BY user_id;
 -- name: UpdateUserHobby :one
 UPDATE hobbyrequest
 SET era = $2,
-    country = $3,
-    city = $4,
-    gender = $5,
-    height = $6,
-    weight = $7,
-    find_type = $8,
-    find_target = $9,
-    experience = $10,
-    sociability = $11,
-    certification = $12
+    city = $3,
+    gender = $4,
+    height = $5,
+    weight = $6,
+    find_type = $7,
+    find_target = $8,
+    experience = $9,
+    sociability = $10,
+    certification = $11
 WHERE user_id = $1
 RETURNING *;
 
