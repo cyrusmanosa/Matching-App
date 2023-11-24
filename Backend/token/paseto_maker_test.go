@@ -5,14 +5,15 @@ import (
 	"testing"
 	"time"
 
+	"github.com/Pallinder/go-randomdata"
 	"github.com/stretchr/testify/require"
 )
 
 func TestPasetoMaker(t *testing.T) {
-	maker, err := NewPasetoMaker(util.RandomString(32))
+	maker, err := NewPasetoMaker(util.RandomPassword(32))
 	require.NoError(t, err)
 
-	username := util.RandomOwner()
+	username := randomdata.SillyName()
 	duration := time.Minute
 
 	issuedAt := time.Now()
@@ -33,10 +34,10 @@ func TestPasetoMaker(t *testing.T) {
 }
 
 func TestExpiredPasetoToken(t *testing.T) {
-	maker, err := NewPasetoMaker(util.RandomString(32))
+	maker, err := NewPasetoMaker(util.RandomPassword(32))
 	require.NoError(t, err)
 
-	token, err := maker.CreateToken(util.RandomOwner(), -time.Minute)
+	token, err := maker.CreateToken(randomdata.SillyName(), -time.Minute)
 	require.NoError(t, err)
 	require.NotEmpty(t, token)
 

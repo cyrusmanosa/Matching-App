@@ -7,8 +7,6 @@ package db
 
 import (
 	"context"
-
-	"github.com/jackc/pgx/v5/pgtype"
 )
 
 const createLoverRequest = `-- name: CreateLoverRequest :one
@@ -46,7 +44,7 @@ type CreateLoverRequestParams struct {
 	AnnualSalary  int32       `json:"annual_salary"`
 	Sociability   string      `json:"sociability"`
 	Religious     string      `json:"religious"`
-	Certification pgtype.Bool `json:"certification"`
+	Certification bool `json:"certification"`
 }
 
 func (q *Queries) CreateLoverRequest(ctx context.Context, arg CreateLoverRequestParams) (Loverrequest, error) {
@@ -202,7 +200,7 @@ type UpdateUserLoverParams struct {
 	AnnualSalary  int32       `json:"annual_salary"`
 	Sociability   string      `json:"sociability"`
 	Religious     string      `json:"religious"`
-	Certification pgtype.Bool `json:"certification"`
+	Certification bool `json:"certification"`
 }
 
 func (q *Queries) UpdateUserLover(ctx context.Context, arg UpdateUserLoverParams) (Loverrequest, error) {

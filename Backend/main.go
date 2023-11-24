@@ -1,35 +1,26 @@
 package main
 
 import (
-	"Backend/api"
 	"Backend/util"
-	"database/sql"
-	"fmt"
-	"log"
+	"context"
 
+	"github.com/rs/zerolog/log"
+
+	"github.com/jackc/pgx/v5/pgxpool"
 	_ "github.com/lib/pq"
 )
 
 func main() {
 	config, err := util.LoadConfig(".")
 	if err != nil {
-		log.Fatal("cannot connect to config file: ", err)
-	}
-	conn, err := sql.Open(config.DBDriver, config.DBSource)
-	if err != nil {
-		log.Fatal("cannot connect to database:", err)
-	}
-	if err := conn.Ping(); err != nil {
-		fmt.Println("cannot connect to database:", err.Error())
-		return
-	}
-	server, err := api.NewServer(config)
-	if err != nil {
-		log.Fatal("cannot create server:", err)
+		log.Fatal().Err(err).Msg("cannot load config")
 	}
 
-	err = server.Start(config.ServerAddress)
+	conn, err := pgxpool.New(context.Background(), config.DBSource)
 	if err != nil {
-		log.Fatal("cannot start server:", err)
+		log.Fatal().Err(err).Msg("cannot connect to db")
 	}
+
+	defer conn.Close()
+
 }

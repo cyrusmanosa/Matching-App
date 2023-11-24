@@ -7,8 +7,6 @@ package db
 
 import (
 	"context"
-
-	"github.com/jackc/pgx/v5/pgtype"
 )
 
 const createUserFixInformation = `-- name: CreateUserFixInformation :one
@@ -34,13 +32,13 @@ type CreateUserFixInformationParams struct {
 	LastName       string      `json:"last_name"`
 	Email          string      `json:"email"`
 	HashedPassword string      `json:"hashed_password"`
-	Birth          pgtype.Date `json:"birth"`
+	Birth          string `json:"birth"`
 	Country        string      `json:"country"`
 	Gender         string      `json:"gender"`
 	Blood          string      `json:"blood"`
 	Age            int32       `json:"age"`
 	Constellation  string      `json:"constellation"`
-	Certification  pgtype.Bool `json:"certification"`
+	Certification  bool `json:"certification"`
 }
 
 func (q *Queries) CreateUserFixInformation(ctx context.Context, arg CreateUserFixInformationParams) (Fixinformation, error) {

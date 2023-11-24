@@ -16,7 +16,7 @@ type Accompanyrequest struct {
 	FindType      string             `json:"find_type"`
 	FindTarget    string             `json:"find_target"`
 	Sociability   string             `json:"sociability"`
-	Certification pgtype.Bool        `json:"certification"`
+	Certification bool        		 `json:"certification"`
 	InfoChangedAt pgtype.Timestamptz `json:"info_changed_at"`
 }
 
@@ -59,13 +59,13 @@ type Fixinformation struct {
 	LastName          string             `json:"last_name"`
 	Email             string             `json:"email"`
 	HashedPassword    string             `json:"hashed_password"`
-	Birth             pgtype.Date        `json:"birth"`
+	Birth             string        `json:"birth"`
 	Country           string             `json:"country"`
 	Gender            string             `json:"gender"`
 	Blood             string             `json:"blood"`
 	Age               int32              `json:"age"`
 	Constellation     string             `json:"constellation"`
-	Certification     pgtype.Bool        `json:"certification"`
+	Certification     bool        `json:"certification"`
 	CreatedAt         pgtype.Timestamptz `json:"created_at"`
 	PasswordChangedAt pgtype.Timestamptz `json:"password_changed_at"`
 }
@@ -81,7 +81,7 @@ type Hobbyrequest struct {
 	FindTarget    string             `json:"find_target"`
 	Experience    int32              `json:"experience"`
 	Sociability   string             `json:"sociability"`
-	Certification pgtype.Bool        `json:"certification"`
+	Certification bool        `json:"certification"`
 	InfoChangedAt pgtype.Timestamptz `json:"info_changed_at"`
 }
 
@@ -106,7 +106,7 @@ type Loverrequest struct {
 	AnnualSalary  int32              `json:"annual_salary"`
 	Sociability   string             `json:"sociability"`
 	Religious     string             `json:"religious"`
-	Certification pgtype.Bool        `json:"certification"`
+	Certification bool        `json:"certification"`
 	InfoChangedAt pgtype.Timestamptz `json:"info_changed_at"`
 }
 

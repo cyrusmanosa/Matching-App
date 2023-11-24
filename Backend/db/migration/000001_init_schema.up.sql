@@ -4,7 +4,7 @@ CREATE TABLE "fixinformation" (
   "last_name" VARCHAR NOT NULL,
   "email" VARCHAR UNIQUE NOT NULL,
   "hashed_password" VARCHAR NOT NULL,
-  "birth" DATE NOT NULL,
+  "birth" string NOT NULL,
   "country" VARCHAR NOT NULL,
   "gender" VARCHAR NOT NULL,
   "blood" VARCHAR NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE "fixinformation" (
   "constellation" VARCHAR NOT NULL,
   "certification" BOOLEAN DEFAULT false,
   "created_at" TIMESTAMPTZ NOT NULL DEFAULT (now()),
-  "password_changed_at" TIMESTAMPTZ NOT NULL
+  "password_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (now())
 );
 
 CREATE TABLE "canchangeinformation" (
@@ -102,11 +102,15 @@ CREATE TABLE "changetargetuser" (
 CREATE TABLE "complaint" (
   "user_id" INT PRIMARY KEY,
   "cp_target_id" INT NOT NULL,
-  "cp_tpye" VARCHAR NOT NULL,
+  "cp_type" VARCHAR NOT NULL,
   "cp_message" VARCHAR NOT NULL,
   "status" VARCHAR NOT NULL,
   "complaint_time" TIMESTAMPTZ NOT NULL DEFAULT (now())
 );
+
+
+
+
 
 CREATE INDEX ON "complaint" ("user_id");
 ALTER TABLE "canchangeinformation" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
