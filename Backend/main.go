@@ -16,11 +16,18 @@ func main() {
 		log.Fatal().Err(err).Msg("cannot load config")
 	}
 
-	conn, err := pgxpool.New(context.Background(), config.DBSource)
+	info_conn, err := pgxpool.New(context.Background(), config.DBSourceInfo)
 	if err != nil {
-		log.Fatal().Err(err).Msg("cannot connect to db")
+		log.Fatal().Err(err).Msg("cannot connect to Info db")
 	}
 
-	defer conn.Close()
+	defer info_conn.Close()
+
+	chat_conn, err := pgxpool.New(context.Background(), config.DBSourceChat)
+	if err != nil {
+		log.Fatal().Err(err).Msg("cannot connect to Chat db")
+	}
+
+	defer chat_conn.Close()
 
 }

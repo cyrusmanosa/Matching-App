@@ -120,9 +120,17 @@ type Loverrequest struct {
 }
 
 type Targetlist struct {
-	UserID    int32              `json:"user_id"`
+	UserID    int32        `json:"user_id"`
 	Target1ID int32        `json:"target_1_id"`
 	Target2ID int32        `json:"target_2_id"`
 	Target3ID int32        `json:"target_3_id"`
 	UpdatedAt pgtype.Timestamptz `json:"updated_at"`
+}
+
+type Recordtest struct {
+	UserID    int32    `json:"user_id"`
+	TargetID  int32    `json:"target_id"`
+	Message	  string   `json:"message"`
+	Images	  string	   `json:"images"`
+	CreatedAt pgtype.Timestamptz `json:"created_at"`
 }

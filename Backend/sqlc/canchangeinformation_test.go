@@ -31,7 +31,7 @@ func CreateRandomUserCanChangeInformation(t *testing.T, user Fixinformation) Can
 		Introduce:     gofakeit.HackerPhrase(),
 	}
 
-	CanInformation, err := testQueries.CreateUserCanChangeInformation(context.Background(), Can)
+	CanInformation, err := testinfoQueries.CreateUserCanChangeInformation(context.Background(), Can)
 	require.NoError(t, err)
 	require.NotEmpty(t, CanInformation)
 
@@ -71,7 +71,7 @@ func TestUpdateInformation(t *testing.T) {
 		Religious:     util.RandomReligious(),
 		Introduce:     gofakeit.HackerPhrase(),
 	}
-	UpdateCan, err := testQueries.UpdateInformation(context.Background(), Can)
+	UpdateCan, err := testinfoQueries.UpdateInformation(context.Background(), Can)
 	require.NoError(t, err)
 	require.NotEmpty(t, UpdateCan)
 	require.Equal(t, UpdateCan.Nickname, Can.Nickname)
@@ -94,7 +94,7 @@ func TestGetUserCanChangeInformation(t *testing.T) {
 	arg := CreateRandomUserFixInformaion(t)
 	user1 := CreateRandomUserCanChangeInformation(t, arg)
 
-	GetCan, err := testQueries.GetUserCanChangeInformation(context.Background(), user1.UserID)
+	GetCan, err := testinfoQueries.GetUserCanChangeInformation(context.Background(), user1.UserID)
 	require.NoError(t, err)
 	require.NotEmpty(t, GetCan)
 
@@ -118,7 +118,7 @@ func TestListCanChangeInformation(t *testing.T) {
 		CreateRandomUserCanChangeInformation(t, arg)
 	}
 
-	ListCan, err := testQueries.ListCanChangeInformation(context.Background())
+	ListCan, err := testinfoQueries.ListCanChangeInformation(context.Background())
 	require.NoError(t, err)
 	require.NotEmpty(t, ListCan)
 
@@ -128,6 +128,6 @@ func TestDeleteInformation(t *testing.T) {
 	user := CreateRandomUserFixInformaion(t)
 	Can := CreateRandomUserCanChangeInformation(t, user)
 
-	err := testQueries.DeleteInformation(context.Background(), Can.UserID)
+	err := testinfoQueries.DeleteInformation(context.Background(), Can.UserID)
 	require.NoError(t, err)
 }

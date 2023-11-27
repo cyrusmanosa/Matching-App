@@ -28,7 +28,7 @@ func CreateRandomAccompanyRequest(t *testing.T, user Fixinformation) Accompanyre
 		Certification: gofakeit.Bool(),
 	}
 
-	Accompany, err := testQueries.CreateAccompanyRequest(context.Background(), arg)
+	Accompany, err := testinfoQueries.CreateAccompanyRequest(context.Background(), arg)
 	require.NoError(t, err)
 	require.NotEmpty(t, Accompany)
 	require.Equal(t, Accompany.UserID, arg.UserID)
@@ -63,7 +63,7 @@ func TestUpdateUserAccompany(t *testing.T) {
 		Certification: gofakeit.Bool(),
 	}
 
-	UpdateAC, err := testQueries.UpdateUserAccompany(context.Background(), Nac)
+	UpdateAC, err := testinfoQueries.UpdateUserAccompany(context.Background(), Nac)
 	require.NoError(t, err)
 	require.NotEmpty(t, UpdateAC)
 	require.Equal(t, UpdateAC.UserID, Nac.UserID)
@@ -81,7 +81,7 @@ func TestUpdateUserAccompany(t *testing.T) {
 func TestGetUserAccompany(t *testing.T) {
 	arg := CreateRandomUserFixInformaion(t)
 	ac := CreateRandomAccompanyRequest(t, arg)
-	GetAC, err := testQueries.GetUserAccompany(context.Background(), ac.UserID)
+	GetAC, err := testinfoQueries.GetUserAccompany(context.Background(), ac.UserID)
 	require.NoError(t, err)
 	require.NotEmpty(t, GetAC)
 	require.Equal(t, GetAC.UserID, ac.UserID)
@@ -102,7 +102,7 @@ func TestListUserAccompany(t *testing.T) {
 		CreateRandomAccompanyRequest(t, arg)
 	}
 
-	ListAC, err := testQueries.ListUserAccompany(context.Background())
+	ListAC, err := testinfoQueries.ListUserAccompany(context.Background())
 	require.NoError(t, err)
 	require.NotEmpty(t, ListAC)
 
@@ -111,7 +111,7 @@ func TestListUserAccompany(t *testing.T) {
 func TestDeleteUserAccompany(t *testing.T) {
 	arg := CreateRandomUserFixInformaion(t)
 	ac := CreateRandomAccompanyRequest(t, arg)
-	DelAC := testQueries.DeleteUserAccompany(context.Background(), ac.UserID)
+	DelAC := testinfoQueries.DeleteUserAccompany(context.Background(), ac.UserID)
 
 	require.Empty(t, DelAC)
 }

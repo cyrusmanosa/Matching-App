@@ -23,7 +23,7 @@ func CreateRandomComplaint(t *testing.T, user, arg Fixinformation) Complaint {
 		Status:     gofakeit.HackerPhrase(),
 	}
 
-	Cp, err := testQueries.CreateComplaint(context.Background(), Complaint)
+	Cp, err := testinfoQueries.CreateComplaint(context.Background(), Complaint)
 	require.NoError(t, err)
 	require.NotEmpty(t, Cp)
 	require.Equal(t, Cp.UserID, Complaint.UserID)
@@ -41,7 +41,7 @@ func TestGetUserComplaintList(t *testing.T) {
 	arg := CreateRandomUserFixInformaion(t)
 	Cp := CreateRandomComplaint(t, user, arg)
 
-	GetCp, err := testQueries.GetUserComplaintList(context.Background(), Cp.CpID)
+	GetCp, err := testinfoQueries.GetUserComplaintList(context.Background(), Cp.CpID)
 	require.NoError(t, err)
 	require.NotEmpty(t, GetCp)
 	require.Equal(t, Cp.CpID, Cp.CpID)
@@ -65,7 +65,7 @@ func TestUpdateUserComplaint(t *testing.T) {
 		Status:    gofakeit.HackerPhrase(),
 	}
 
-	UpdateCP, err := testQueries.UpdateUserComplaint(context.Background(), NCP)
+	UpdateCP, err := testinfoQueries.UpdateUserComplaint(context.Background(), NCP)
 	require.NoError(t, err)
 	require.NotEmpty(t, UpdateCP)
 	require.Equal(t, UpdateCP.CpID, Cp.CpID)
@@ -82,7 +82,7 @@ func TestListComplaint(t *testing.T) {
 		CreateRandomComplaint(t, user, arg)
 	}
 
-	ListCp, err := testQueries.ListComplaint(context.Background())
+	ListCp, err := testinfoQueries.ListComplaint(context.Background())
 	require.NoError(t, err)
 	require.NotEmpty(t, ListCp)
 }
@@ -92,6 +92,6 @@ func TestDeleteComplaint(t *testing.T) {
 	arg := CreateRandomUserFixInformaion(t)
 	CP := CreateRandomComplaint(t, user, arg)
 
-	err := testQueries.DeleteComplaint(context.Background(), CP.CpID)
+	err := testinfoQueries.DeleteComplaint(context.Background(), CP.CpID)
 	require.NoError(t, err)
 }

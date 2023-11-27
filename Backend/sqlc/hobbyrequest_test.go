@@ -30,7 +30,7 @@ func CreateRandomHobbyRequest(t *testing.T, user Fixinformation) Hobbyrequest {
 		Certification: gofakeit.Bool(),
 	}
 
-	HobbyList, err := testQueries.CreateHobbyRequest(context.Background(), hobby)
+	HobbyList, err := testinfoQueries.CreateHobbyRequest(context.Background(), hobby)
 	require.NoError(t, err)
 	require.NotEmpty(t, HobbyList)
 	require.Equal(t, HobbyList.UserID, hobby.UserID)
@@ -66,7 +66,7 @@ func TestUpdateUserHobby(t *testing.T) {
 		Sociability:   util.RandomSociability(),
 		Certification: gofakeit.Bool(),
 	}
-	HobbyList, err := testQueries.UpdateUserHobby(context.Background(), NH)
+	HobbyList, err := testinfoQueries.UpdateUserHobby(context.Background(), NH)
 	require.NoError(t, err)
 	require.NotEmpty(t, HobbyList)
 	require.Equal(t, HobbyList.UserID, NH.UserID)
@@ -86,7 +86,7 @@ func TestGetUserHobby(t *testing.T) {
 	arg := CreateRandomUserFixInformaion(t)
 	Hobby := CreateRandomHobbyRequest(t, arg)
 
-	HobbyList, err := testQueries.GetUserHobby(context.Background(), Hobby.UserID)
+	HobbyList, err := testinfoQueries.GetUserHobby(context.Background(), Hobby.UserID)
 	require.NoError(t, err)
 	require.NotEmpty(t, HobbyList)
 	require.Equal(t, HobbyList.UserID, Hobby.UserID)
@@ -108,7 +108,7 @@ func TestListUserHobby(t *testing.T) {
 		CreateRandomHobbyRequest(t, arg)
 	}
 
-	user, err := testQueries.ListUserHobby(context.Background())
+	user, err := testinfoQueries.ListUserHobby(context.Background())
 	require.NoError(t, err)
 	require.NotEmpty(t, user)
 
@@ -117,7 +117,7 @@ func TestListUserHobby(t *testing.T) {
 func TestDeleteUserHobby(t *testing.T) {
 	arg := CreateRandomUserFixInformaion(t)
 	ac := CreateRandomHobbyRequest(t, arg)
-	user := testQueries.DeleteUserHobby(context.Background(), ac.UserID)
+	user := testinfoQueries.DeleteUserHobby(context.Background(), ac.UserID)
 
 	require.Empty(t, user)
 }

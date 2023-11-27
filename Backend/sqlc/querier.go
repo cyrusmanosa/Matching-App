@@ -53,6 +53,11 @@ type Querier interface {
 	UpdateUserComplaint(ctx context.Context, arg UpdateUserComplaintParams) (Complaint, error)
 	UpdateUserHobby(ctx context.Context, arg UpdateUserHobbyParams) (Hobbyrequest, error)
 	UpdateUserLover(ctx context.Context, arg UpdateUserLoverParams) (Loverrequest, error)
+	Getrecode(ctx context.Context, userID int32) (Recordtest, error)
+	Listrecode(ctx context.Context) ([]Recordtest, error)
+	RecordTest(ctx context.Context, arg RecordTestParams) (Recordtest, error)
+	
+
+
 }
 
-var _ Querier = (*Queries)(nil)

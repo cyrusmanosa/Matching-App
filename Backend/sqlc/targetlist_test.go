@@ -26,7 +26,7 @@ func RandomTargetUserList(t *testing.T, user Fixinformation) Targetlist {
 		Target3ID: arg3.UserID,
 	}
 
-	Target, err := testQueries.TargetUserList(context.Background(), Targetlist)
+	Target, err := testinfoQueries.TargetUserList(context.Background(), Targetlist)
 	require.NoError(t, err)
 	require.NotEmpty(t, Target)
 	require.Equal(t, Target.UserID, Targetlist.UserID)
@@ -42,7 +42,7 @@ func TestGetTargetUserList(t *testing.T) {
 	user := CreateRandomUserFixInformaion(t)
 	tl := RandomTargetUserList(t, user)
 
-	GetTL, err := testQueries.GetTargetUserList(context.Background(), tl.UserID)
+	GetTL, err := testinfoQueries.GetTargetUserList(context.Background(), tl.UserID)
 	require.NoError(t, err)
 	require.NotEmpty(t, GetTL)
 
@@ -60,7 +60,7 @@ func TestAllTargetUserList(t *testing.T) {
 		RandomTargetUserList(t, user)
 	}
 
-	ListTL, err := testQueries.AllTargetUserList(context.Background())
+	ListTL, err := testinfoQueries.AllTargetUserList(context.Background())
 	require.NoError(t, err)
 	require.NotEmpty(t, ListTL)
 }
@@ -69,7 +69,7 @@ func TestDeleteTargetList(t *testing.T) {
 	user := CreateRandomUserFixInformaion(t)
 	tl := RandomTargetUserList(t, user)
 
-	err := testQueries.DeleteTargetList(context.Background(), tl.UserID)
+	err := testinfoQueries.DeleteTargetList(context.Background(), tl.UserID)
 	require.NoError(t, err)
 }
 
@@ -88,7 +88,7 @@ func TestUpdateTargetList(t *testing.T) {
 		Target3ID: Narg3.UserID,
 	}
 
-	UpTL, err := testQueries.UpdateTargetList(context.Background(), ntl)
+	UpTL, err := testinfoQueries.UpdateTargetList(context.Background(), ntl)
 	require.NoError(t, err)
 	require.NotEmpty(t, UpTL)
 	require.NotEqual(t, UpTL.UpdatedAt, tl.UpdatedAt)

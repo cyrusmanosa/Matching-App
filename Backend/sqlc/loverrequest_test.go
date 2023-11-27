@@ -33,7 +33,7 @@ func CreateRandomLoverRequest(t *testing.T, user Fixinformation) Loverrequest {
 		Certification: gofakeit.Bool(),
 	}
 
-	L, err := testQueries.CreateLoverRequest(context.Background(), Lover)
+	L, err := testinfoQueries.CreateLoverRequest(context.Background(), Lover)
 	require.NoError(t, err)
 	require.NotEmpty(t, L)
 	require.Equal(t, L.UserID, Lover.UserID)
@@ -78,7 +78,7 @@ func TestUpdateUserLover(t *testing.T) {
 		Certification: gofakeit.Bool(),
 	}
 
-	UpdateL, err := testQueries.UpdateUserLover(context.Background(), Lover)
+	UpdateL, err := testinfoQueries.UpdateUserLover(context.Background(), Lover)
 	require.NoError(t, err)
 	require.NotEmpty(t, UpdateL)
 	require.Equal(t, UpdateL.UserID, Lover.UserID)
@@ -103,7 +103,7 @@ func TestGetUserLover(t *testing.T) {
 	arg := CreateRandomUserFixInformaion(t)
 	Lover := CreateRandomLoverRequest(t, arg)
 
-	GetL, err := testQueries.GetUserLover(context.Background(), Lover.UserID)
+	GetL, err := testinfoQueries.GetUserLover(context.Background(), Lover.UserID)
 	require.NoError(t, err)
 	require.NotEmpty(t, GetL)
 	require.Equal(t, GetL.UserID, Lover.UserID)
@@ -130,7 +130,7 @@ func TestListUserLover(t *testing.T) {
 		CreateRandomLoverRequest(t, arg)
 	}
 
-	ListL, err := testQueries.ListUserLover(context.Background())
+	ListL, err := testinfoQueries.ListUserLover(context.Background())
 	require.NoError(t, err)
 	require.NotEmpty(t, ListL)
 
@@ -139,7 +139,7 @@ func TestListUserLover(t *testing.T) {
 func TestDeleteUserLover(t *testing.T) {
 	arg := CreateRandomUserFixInformaion(t)
 	Lover := CreateRandomLoverRequest(t, arg)
-	DelL := testQueries.DeleteUserLoverRequest(context.Background(), Lover.UserID)
+	DelL := testinfoQueries.DeleteUserLoverRequest(context.Background(), Lover.UserID)
 
 	require.Empty(t, DelL)
 }

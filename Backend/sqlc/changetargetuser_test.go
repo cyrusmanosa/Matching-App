@@ -25,7 +25,7 @@ func CreateRandomChangeTargetUser(t *testing.T, arg1, arg2, arg3 Fixinformation)
 		Frequency:    0,
 	}
 
-	C, err := testQueries.CreateChangeTargetUser(context.Background(), CTU)
+	C, err := testinfoQueries.CreateChangeTargetUser(context.Background(), CTU)
 	require.NoError(t, err)
 	require.NotEmpty(t, C)
 	require.Equal(t, C.UserID, CTU.UserID)
@@ -44,7 +44,7 @@ func TestGetChangeTargetUserList(t *testing.T) {
 	arg3 := CreateRandomUserFixInformaion(t)
 	Get := CreateRandomChangeTargetUser(t, arg1, arg2, arg3)
 
-	GetC, err := testQueries.GetChangeTargetUserList(context.Background(), Get.UserID)
+	GetC, err := testinfoQueries.GetChangeTargetUserList(context.Background(), Get.UserID)
 	require.NoError(t, err)
 	require.NotEmpty(t, GetC)
 	require.Equal(t, GetC.UserID, Get.UserID)
@@ -62,7 +62,7 @@ func TestAllChangeTargetUserList(t *testing.T) {
 		arg3 := CreateRandomUserFixInformaion(t)
 		CreateRandomChangeTargetUser(t, arg1, arg2, arg3)
 	}
-	ListC, err := testQueries.AllChangeTargetUserList(context.Background())
+	ListC, err := testinfoQueries.AllChangeTargetUserList(context.Background())
 	require.NoError(t, err)
 	require.NotEmpty(t, ListC)
 }
@@ -73,6 +73,6 @@ func TestDeleteData(t *testing.T) {
 	arg3 := CreateRandomUserFixInformaion(t)
 	CreateRandomChangeTargetUser(t, arg1, arg2, arg3)
 
-	err := testQueries.DeleteData(context.Background(), arg1.UserID)
+	err := testinfoQueries.DeleteData(context.Background(), arg1.UserID)
 	require.NoError(t, err)
 }

@@ -40,7 +40,7 @@ func CreateRandomUserFixInformaion(t *testing.T) Fixinformation {
 		Constellation:  util.Constellation(M, D),
 		Certification:  gofakeit.Bool(),
 	}
-	fix, err := testQueries.CreateUserFixInformation(context.Background(), arg)
+	fix, err := testinfoQueries.CreateUserFixInformation(context.Background(), arg)
 	require.NoError(t, err)
 	require.NotEmpty(t, fix)
 
@@ -66,7 +66,7 @@ func CreateRandomUserFixInformaion(t *testing.T) Fixinformation {
 func TestGetUserFixInformation(t *testing.T) {
 	user1 := CreateRandomUserFixInformaion(t)
 
-	user2, err := testQueries.GetUserFixInformation(context.Background(), user1.UserID)
+	user2, err := testinfoQueries.GetUserFixInformation(context.Background(), user1.UserID)
 	require.NoError(t, err)
 	require.NotEmpty(t, user2)
 
@@ -91,7 +91,7 @@ func TestListFixInformaion(t *testing.T) {
 		CreateRandomUserFixInformaion(t)
 	}
 
-	user, err := testQueries.ListFixInformaion(context.Background())
+	user, err := testinfoQueries.ListFixInformaion(context.Background())
 	require.NoError(t, err)
 	require.NotEmpty(t, user)
 
@@ -108,7 +108,7 @@ func TestUpdatePassword(t *testing.T) {
 		HashedPassword: NewPW,
 	}
 
-	New, err := testQueries.UpdatePassword(context.Background(), Nhashed)
+	New, err := testinfoQueries.UpdatePassword(context.Background(), Nhashed)
 	require.NoError(t, err)
 	require.NotEmpty(t, New)
 	require.NotEqual(t, New.HashedPassword, user.HashedPassword)
@@ -118,6 +118,6 @@ func TestUpdatePassword(t *testing.T) {
 func TestDeleteUser(t *testing.T) {
 	user := CreateRandomUserFixInformaion(t)
 
-	user1 := testQueries.DeleteUser(context.Background(), user.UserID)
+	user1 := testinfoQueries.DeleteUser(context.Background(), user.UserID)
 	require.Empty(t, user1)
 }

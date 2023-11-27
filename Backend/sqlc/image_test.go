@@ -30,7 +30,7 @@ func CreateRandomImage(t *testing.T, arg Fixinformation) Image {
 		Img5:   gofakeit.ImageURL(200, 300),
 	}
 
-	image, err := testQueries.CreateImage(context.Background(), Img)
+	image, err := testinfoQueries.CreateImage(context.Background(), Img)
 	require.NoError(t, err)
 	require.NotEmpty(t, image)
 	require.Equal(t, image.UserID, arg.UserID)
@@ -56,7 +56,7 @@ func TestUpdateImage(t *testing.T) {
 		Img4:   gofakeit.ImageURL(200, 300),
 		Img5:   gofakeit.ImageURL(200, 300),
 	}
-	UpdateImg, err := testQueries.UpdateImage(context.Background(), NewImg)
+	UpdateImg, err := testinfoQueries.UpdateImage(context.Background(), NewImg)
 	require.NoError(t, err)
 	require.NotEmpty(t, UpdateImg)
 }
@@ -65,7 +65,7 @@ func TestGetUserimageData(t *testing.T) {
 	user := CreateRandomUserFixInformaion(t)
 	Img := CreateRandomImage(t, user)
 
-	GetImg, err := testQueries.GetUserimageData(context.Background(), Img.UserID)
+	GetImg, err := testinfoQueries.GetUserimageData(context.Background(), Img.UserID)
 	require.NoError(t, err)
 	require.NotEmpty(t, GetImg)
 	require.Equal(t, GetImg.UserID, Img.UserID)
@@ -83,7 +83,7 @@ func TestListimagesList(t *testing.T) {
 		CreateRandomImage(t, user)
 	}
 
-	ListImg, err := testQueries.ListimagesList(context.Background())
+	ListImg, err := testinfoQueries.ListimagesList(context.Background())
 	require.NoError(t, err)
 	require.NotEmpty(t, ListImg)
 }
@@ -91,6 +91,6 @@ func TestListimagesList(t *testing.T) {
 func TestDeleteImage(t *testing.T) {
 	user := CreateRandomUserFixInformaion(t)
 	Img := CreateRandomImage(t, user)
-	err := testQueries.DeleteImage(context.Background(), Img.UserID)
+	err := testinfoQueries.DeleteImage(context.Background(), Img.UserID)
 	require.NoError(t, err)
 }
