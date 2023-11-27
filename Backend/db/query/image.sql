@@ -2,9 +2,13 @@
 INSERT INTO image (
     user_id,
     qr,
-    icon
+    img1,
+    img2,
+    img3,
+    img4,
+    img5
 ) VALUES (
-    $1,$2,$3
+    $1,$2,$3,$4,$5,$6,$7
 ) RETURNING *;
 
 -- name: GetUserimageData :one
@@ -17,7 +21,11 @@ ORDER BY user_id;
 
 -- name: UpdateImage :one
 UPDATE image
-SET icon = $2
+SET img1 = $2,
+    img2 = $3,
+    img3 = $4,
+    img4 = $5,
+    img5 = $6
 WHERE user_id = $1
 RETURNING *;
 

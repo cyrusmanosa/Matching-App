@@ -9,13 +9,84 @@ import (
 	"context"
 )
 
-const allComplaintList = `-- name: AllComplaintList :many
-SELECT user_id, cp_target_id, cp_tpye, cp_message, status, complaint_time FROM complaint
-ORDER BY user_id
+const createComplaint = `-- name: CreateComplaint :one
+INSERT INTO complaint (
+    user_id,
+    cp_target_id,
+    cp_type,
+    cp_message,
+    status
+) VALUES (
+    $1,$2,$3,$4,$5
+) RETURNING cp_id, user_id, cp_target_id, cp_type, cp_message, status, complaint_time
 `
 
-func (q *Queries) AllComplaintList(ctx context.Context) ([]Complaint, error) {
-	rows, err := q.db.Query(ctx, allComplaintList)
+type CreateComplaintParams struct {
+	UserID     int32  `json:"user_id"`
+	CpTargetID int32  `json:"cp_target_id"`
+	CpType     string `json:"cp_type"`
+	CpMessage  string `json:"cp_message"`
+	Status     string `json:"status"`
+}
+
+func (q *Queries) CreateComplaint(ctx context.Context, arg CreateComplaintParams) (Complaint, error) {
+	row := q.db.QueryRow(ctx, createComplaint,
+		arg.UserID,
+		arg.CpTargetID,
+		arg.CpType,
+		arg.CpMessage,
+		arg.Status,
+	)
+	var i Complaint
+	err := row.Scan(
+		&i.CpID,
+		&i.UserID,
+		&i.CpTargetID,
+		&i.CpType,
+		&i.CpMessage,
+		&i.Status,
+		&i.ComplaintTime,
+	)
+	return i, err
+}
+
+const deleteComplaint = `-- name: DeleteComplaint :exec
+DELETE FROM complaint
+WHERE cp_id = $1
+`
+
+func (q *Queries) DeleteComplaint(ctx context.Context, cpID int32) error {
+	_, err := q.db.Exec(ctx, deleteComplaint, cpID)
+	return err
+}
+
+const getUserComplaintList = `-- name: GetUserComplaintList :one
+SELECT cp_id, user_id, cp_target_id, cp_type, cp_message, status, complaint_time FROM complaint
+WHERE cp_id = $1
+`
+
+func (q *Queries) GetUserComplaintList(ctx context.Context, cpID int32) (Complaint, error) {
+	row := q.db.QueryRow(ctx, getUserComplaintList, cpID)
+	var i Complaint
+	err := row.Scan(
+		&i.CpID,
+		&i.UserID,
+		&i.CpTargetID,
+		&i.CpType,
+		&i.CpMessage,
+		&i.Status,
+		&i.ComplaintTime,
+	)
+	return i, err
+}
+
+const listComplaint = `-- name: ListComplaint :many
+SELECT cp_id, user_id, cp_target_id, cp_type, cp_message, status, complaint_time FROM complaint
+ORDER BY cp_id
+`
+
+func (q *Queries) ListComplaint(ctx context.Context) ([]Complaint, error) {
+	rows, err := q.db.Query(ctx, listComplaint)
 	if err != nil {
 		return nil, err
 	}
@@ -24,9 +95,10 @@ func (q *Queries) AllComplaintList(ctx context.Context) ([]Complaint, error) {
 	for rows.Next() {
 		var i Complaint
 		if err := rows.Scan(
+			&i.CpID,
 			&i.UserID,
 			&i.CpTargetID,
-			&i.CpTpye,
+			&i.CpType,
 			&i.CpMessage,
 			&i.Status,
 			&i.ComplaintTime,
@@ -41,68 +113,35 @@ func (q *Queries) AllComplaintList(ctx context.Context) ([]Complaint, error) {
 	return items, nil
 }
 
-const createComplaint = `-- name: CreateComplaint :one
-INSERT INTO complaint (
-    user_id,
-    cp_target_id,
-    cp_tpye,
-    cp_message,
-    status
-) VALUES (
-    $1,$2,$3,$4,$5
-) RETURNING user_id, cp_target_id, cp_tpye, cp_message, status, complaint_time
+const updateUserComplaint = `-- name: UpdateUserComplaint :one
+UPDATE complaint
+SET cp_type = $2,
+    cp_message = $3,
+    status = $4
+WHERE cp_id = $1
+RETURNING cp_id, user_id, cp_target_id, cp_type, cp_message, status, complaint_time
 `
 
-type CreateComplaintParams struct {
-	UserID     int32  `json:"user_id"`
-	CpTargetID int32  `json:"cp_target_id"`
-	CpTpye     string `json:"cp_tpye"`
-	CpMessage  string `json:"cp_message"`
-	Status     string `json:"status"`
+type UpdateUserComplaintParams struct {
+	CpID      int32  `json:"cp_id"`
+	CpType    string `json:"cp_type"`
+	CpMessage string `json:"cp_message"`
+	Status    string `json:"status"`
 }
 
-func (q *Queries) CreateComplaint(ctx context.Context, arg CreateComplaintParams) (Complaint, error) {
-	row := q.db.QueryRow(ctx, createComplaint,
-		arg.UserID,
-		arg.CpTargetID,
-		arg.CpTpye,
+func (q *Queries) UpdateUserComplaint(ctx context.Context, arg UpdateUserComplaintParams) (Complaint, error) {
+	row := q.db.QueryRow(ctx, updateUserComplaint,
+		arg.CpID,
+		arg.CpType,
 		arg.CpMessage,
 		arg.Status,
 	)
 	var i Complaint
 	err := row.Scan(
+		&i.CpID,
 		&i.UserID,
 		&i.CpTargetID,
-		&i.CpTpye,
-		&i.CpMessage,
-		&i.Status,
-		&i.ComplaintTime,
-	)
-	return i, err
-}
-
-const deleteComplaint = `-- name: DeleteComplaint :exec
-DELETE FROM complaint
-WHERE user_id = $1
-`
-
-func (q *Queries) DeleteComplaint(ctx context.Context, userID int32) error {
-	_, err := q.db.Exec(ctx, deleteComplaint, userID)
-	return err
-}
-
-const getUserComplaintList = `-- name: GetUserComplaintList :one
-SELECT user_id, cp_target_id, cp_tpye, cp_message, status, complaint_time FROM complaint
-WHERE user_id = $1
-`
-
-func (q *Queries) GetUserComplaintList(ctx context.Context, userID int32) (Complaint, error) {
-	row := q.db.QueryRow(ctx, getUserComplaintList, userID)
-	var i Complaint
-	err := row.Scan(
-		&i.UserID,
-		&i.CpTargetID,
-		&i.CpTpye,
+		&i.CpType,
 		&i.CpMessage,
 		&i.Status,
 		&i.ComplaintTime,

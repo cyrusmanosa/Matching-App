@@ -18,10 +18,10 @@ ORDER BY user_id;
 
 -- name: UpdateTargetList :one
 UPDATE targetlist
-SET target_1_id = $2 OR
-    target_2_id = $3 OR
-    target_3_id = $4
-WHERE user_id = $1
+SET target_1_id = $2,
+    target_2_id = $3,
+    target_3_id = $4,
+WHERE user_id = $1 
 RETURNING *;
 
 -- name: DeleteTargetList :exec

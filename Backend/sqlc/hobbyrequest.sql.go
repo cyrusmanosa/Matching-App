@@ -17,14 +17,15 @@ INSERT INTO hobbyrequest (
     gender,
     height,
     weight,
+    speaklanguage,
     find_type,
     find_target,
     experience,
     sociability,
     certification
 ) VALUES (
-    $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11
-) RETURNING user_id, era, city, gender, height, weight, find_type, find_target, experience, sociability, certification, info_changed_at
+    $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12
+) RETURNING user_id, era, city, gender, height, weight, speaklanguage, find_type, find_target, experience, sociability, certification, info_changed_at
 `
 
 type CreateHobbyRequestParams struct {
@@ -34,6 +35,7 @@ type CreateHobbyRequestParams struct {
 	Gender        string      `json:"gender"`
 	Height        int32       `json:"height"`
 	Weight        int32       `json:"weight"`
+	Speaklanguage string      `json:"speaklanguage"`
 	FindType      string      `json:"find_type"`
 	FindTarget    string      `json:"find_target"`
 	Experience    int32       `json:"experience"`
@@ -49,6 +51,7 @@ func (q *Queries) CreateHobbyRequest(ctx context.Context, arg CreateHobbyRequest
 		arg.Gender,
 		arg.Height,
 		arg.Weight,
+		arg.Speaklanguage,
 		arg.FindType,
 		arg.FindTarget,
 		arg.Experience,
@@ -63,6 +66,7 @@ func (q *Queries) CreateHobbyRequest(ctx context.Context, arg CreateHobbyRequest
 		&i.Gender,
 		&i.Height,
 		&i.Weight,
+		&i.Speaklanguage,
 		&i.FindType,
 		&i.FindTarget,
 		&i.Experience,
@@ -84,7 +88,7 @@ func (q *Queries) DeleteUserHobby(ctx context.Context, userID int32) error {
 }
 
 const getUserHobby = `-- name: GetUserHobby :one
-SELECT user_id, era, city, gender, height, weight, find_type, find_target, experience, sociability, certification, info_changed_at FROM hobbyrequest
+SELECT user_id, era, city, gender, height, weight, speaklanguage, find_type, find_target, experience, sociability, certification, info_changed_at FROM hobbyrequest
 WHERE user_id = $1
 `
 
@@ -98,6 +102,7 @@ func (q *Queries) GetUserHobby(ctx context.Context, userID int32) (Hobbyrequest,
 		&i.Gender,
 		&i.Height,
 		&i.Weight,
+		&i.Speaklanguage,
 		&i.FindType,
 		&i.FindTarget,
 		&i.Experience,
@@ -109,7 +114,7 @@ func (q *Queries) GetUserHobby(ctx context.Context, userID int32) (Hobbyrequest,
 }
 
 const listUserHobby = `-- name: ListUserHobby :many
-SELECT user_id, era, city, gender, height, weight, find_type, find_target, experience, sociability, certification, info_changed_at FROM hobbyrequest
+SELECT user_id, era, city, gender, height, weight, speaklanguage, find_type, find_target, experience, sociability, certification, info_changed_at FROM hobbyrequest
 ORDER BY user_id
 `
 
@@ -129,6 +134,7 @@ func (q *Queries) ListUserHobby(ctx context.Context) ([]Hobbyrequest, error) {
 			&i.Gender,
 			&i.Height,
 			&i.Weight,
+			&i.Speaklanguage,
 			&i.FindType,
 			&i.FindTarget,
 			&i.Experience,
@@ -153,13 +159,14 @@ SET era = $2,
     gender = $4,
     height = $5,
     weight = $6,
-    find_type = $7,
-    find_target = $8,
-    experience = $9,
-    sociability = $10,
-    certification = $11
+    speaklanguage = $7,
+    find_type = $8,
+    find_target = $9,
+    experience = $10,
+    sociability = $11,
+    certification = $12
 WHERE user_id = $1
-RETURNING user_id, era, city, gender, height, weight, find_type, find_target, experience, sociability, certification, info_changed_at
+RETURNING user_id, era, city, gender, height, weight, speaklanguage, find_type, find_target, experience, sociability, certification, info_changed_at
 `
 
 type UpdateUserHobbyParams struct {
@@ -169,6 +176,7 @@ type UpdateUserHobbyParams struct {
 	Gender        string      `json:"gender"`
 	Height        int32       `json:"height"`
 	Weight        int32       `json:"weight"`
+	Speaklanguage string      `json:"speaklanguage"`
 	FindType      string      `json:"find_type"`
 	FindTarget    string      `json:"find_target"`
 	Experience    int32       `json:"experience"`
@@ -184,6 +192,7 @@ func (q *Queries) UpdateUserHobby(ctx context.Context, arg UpdateUserHobbyParams
 		arg.Gender,
 		arg.Height,
 		arg.Weight,
+		arg.Speaklanguage,
 		arg.FindType,
 		arg.FindTarget,
 		arg.Experience,
@@ -198,6 +207,7 @@ func (q *Queries) UpdateUserHobby(ctx context.Context, arg UpdateUserHobbyParams
 		&i.Gender,
 		&i.Height,
 		&i.Weight,
+		&i.Speaklanguage,
 		&i.FindType,
 		&i.FindTarget,
 		&i.Experience,

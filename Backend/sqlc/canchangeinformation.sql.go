@@ -17,6 +17,7 @@ INSERT INTO canchangeinformation (
     sexual,
     height,
     weight,
+    speaklanguage,
     Education,
     job,
     annual_salary,
@@ -24,23 +25,24 @@ INSERT INTO canchangeinformation (
     religious,
     introduce
 ) VALUES (
-    $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12
-) RETURNING user_id, nickname, city, sexual, height, weight, education, job, annual_salary, sociability, religious, introduce, info_changed_at
+    $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13
+) RETURNING user_id, nickname, city, sexual, height, weight, speaklanguage, education, job, annual_salary, sociability, religious, introduce, info_changed_at
 `
 
 type CreateUserCanChangeInformationParams struct {
-	UserID       int32   `json:"user_id"`
-	Nickname     string  `json:"nickname"`
-	City         string  `json:"city"`
-	Sexual       string  `json:"sexual"`
-	Height       float64 `json:"height"`
-	Weight       float64 `json:"weight"`
-	Education    string  `json:"education"`
-	Job          string  `json:"job"`
-	AnnualSalary int32   `json:"annual_salary"`
-	Sociability  string  `json:"sociability"`
-	Religious    string  `json:"religious"`
-	Introduce    string  `json:"introduce"`
+	UserID        int32  `json:"user_id"`
+	Nickname      string `json:"nickname"`
+	City          string `json:"city"`
+	Sexual        string `json:"sexual"`
+	Height        int32  `json:"height"`
+	Weight        int32  `json:"weight"`
+	Speaklanguage string `json:"speaklanguage"`
+	Education     string `json:"education"`
+	Job           string `json:"job"`
+	AnnualSalary  int32  `json:"annual_salary"`
+	Sociability   string `json:"sociability"`
+	Religious     string `json:"religious"`
+	Introduce     string `json:"introduce"`
 }
 
 func (q *Queries) CreateUserCanChangeInformation(ctx context.Context, arg CreateUserCanChangeInformationParams) (Canchangeinformation, error) {
@@ -51,6 +53,7 @@ func (q *Queries) CreateUserCanChangeInformation(ctx context.Context, arg Create
 		arg.Sexual,
 		arg.Height,
 		arg.Weight,
+		arg.Speaklanguage,
 		arg.Education,
 		arg.Job,
 		arg.AnnualSalary,
@@ -66,6 +69,7 @@ func (q *Queries) CreateUserCanChangeInformation(ctx context.Context, arg Create
 		&i.Sexual,
 		&i.Height,
 		&i.Weight,
+		&i.Speaklanguage,
 		&i.Education,
 		&i.Job,
 		&i.AnnualSalary,
@@ -88,7 +92,7 @@ func (q *Queries) DeleteInformation(ctx context.Context, userID int32) error {
 }
 
 const getUserCanChangeInformation = `-- name: GetUserCanChangeInformation :one
-SELECT user_id, nickname, city, sexual, height, weight, education, job, annual_salary, sociability, religious, introduce, info_changed_at FROM canchangeinformation
+SELECT user_id, nickname, city, sexual, height, weight, speaklanguage, education, job, annual_salary, sociability, religious, introduce, info_changed_at FROM canchangeinformation
 WHERE user_id = $1 LIMIT 1
 `
 
@@ -102,6 +106,7 @@ func (q *Queries) GetUserCanChangeInformation(ctx context.Context, userID int32)
 		&i.Sexual,
 		&i.Height,
 		&i.Weight,
+		&i.Speaklanguage,
 		&i.Education,
 		&i.Job,
 		&i.AnnualSalary,
@@ -113,13 +118,13 @@ func (q *Queries) GetUserCanChangeInformation(ctx context.Context, userID int32)
 	return i, err
 }
 
-const listUserFixInformaion = `-- name: ListUserFixInformaion :many
-SELECT user_id, nickname, city, sexual, height, weight, education, job, annual_salary, sociability, religious, introduce, info_changed_at FROM canchangeinformation
+const listCanChangeInformation = `-- name: ListCanChangeInformation :many
+SELECT user_id, nickname, city, sexual, height, weight, speaklanguage, education, job, annual_salary, sociability, religious, introduce, info_changed_at FROM canchangeinformation
 ORDER BY user_id
 `
 
-func (q *Queries) ListUserFixInformaion(ctx context.Context) ([]Canchangeinformation, error) {
-	rows, err := q.db.Query(ctx, listUserFixInformaion)
+func (q *Queries) ListCanChangeInformation(ctx context.Context) ([]Canchangeinformation, error) {
+	rows, err := q.db.Query(ctx, listCanChangeInformation)
 	if err != nil {
 		return nil, err
 	}
@@ -134,6 +139,7 @@ func (q *Queries) ListUserFixInformaion(ctx context.Context) ([]Canchangeinforma
 			&i.Sexual,
 			&i.Height,
 			&i.Weight,
+			&i.Speaklanguage,
 			&i.Education,
 			&i.Job,
 			&i.AnnualSalary,
@@ -159,29 +165,31 @@ SET nickname = $2,
     sexual = $4,
     height = $5,
     weight = $6,
-    Education = $7,
-    job = $8,
-    annual_salary = $9,
-    sociability = $10,
-    religious = $11,
-    introduce = $12
+    speaklanguage = $7,
+    Education = $8,
+    job = $9,
+    annual_salary = $10,
+    sociability = $11,
+    religious = $12,
+    introduce = $13
 WHERE user_id = $1
-RETURNING user_id, nickname, city, sexual, height, weight, education, job, annual_salary, sociability, religious, introduce, info_changed_at
+RETURNING user_id, nickname, city, sexual, height, weight, speaklanguage, education, job, annual_salary, sociability, religious, introduce, info_changed_at
 `
 
 type UpdateInformationParams struct {
-	UserID       int32   `json:"user_id"`
-	Nickname     string  `json:"nickname"`
-	City         string  `json:"city"`
-	Sexual       string  `json:"sexual"`
-	Height       float64 `json:"height"`
-	Weight       float64 `json:"weight"`
-	Education    string  `json:"education"`
-	Job          string  `json:"job"`
-	AnnualSalary int32   `json:"annual_salary"`
-	Sociability  string  `json:"sociability"`
-	Religious    string  `json:"religious"`
-	Introduce    string  `json:"introduce"`
+	UserID        int32  `json:"user_id"`
+	Nickname      string `json:"nickname"`
+	City          string `json:"city"`
+	Sexual        string `json:"sexual"`
+	Height        int32  `json:"height"`
+	Weight        int32  `json:"weight"`
+	Speaklanguage string `json:"speaklanguage"`
+	Education     string `json:"education"`
+	Job           string `json:"job"`
+	AnnualSalary  int32  `json:"annual_salary"`
+	Sociability   string `json:"sociability"`
+	Religious     string `json:"religious"`
+	Introduce     string `json:"introduce"`
 }
 
 func (q *Queries) UpdateInformation(ctx context.Context, arg UpdateInformationParams) (Canchangeinformation, error) {
@@ -192,6 +200,7 @@ func (q *Queries) UpdateInformation(ctx context.Context, arg UpdateInformationPa
 		arg.Sexual,
 		arg.Height,
 		arg.Weight,
+		arg.Speaklanguage,
 		arg.Education,
 		arg.Job,
 		arg.AnnualSalary,
@@ -207,6 +216,7 @@ func (q *Queries) UpdateInformation(ctx context.Context, arg UpdateInformationPa
 		&i.Sexual,
 		&i.Height,
 		&i.Weight,
+		&i.Speaklanguage,
 		&i.Education,
 		&i.Job,
 		&i.AnnualSalary,

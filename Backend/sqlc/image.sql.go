@@ -13,22 +13,46 @@ const createImage = `-- name: CreateImage :one
 INSERT INTO image (
     user_id,
     qr,
-    icon
+    img1,
+    img2,
+    img3,
+    img4,
+    img5
 ) VALUES (
-    $1,$2,$3
-) RETURNING user_id, qr, icon
+    $1,$2,$3,$4,$5,$6,$7
+) RETURNING user_id, qr, img1, img2, img3, img4, img5
 `
 
 type CreateImageParams struct {
 	UserID int32  `json:"user_id"`
 	Qr     string `json:"qr"`
-	Icon   string `json:"icon"`
+	Img1   string `json:"img1"`
+	Img2   string `json:"img2"`
+	Img3   string `json:"img3"`
+	Img4   string `json:"img4"`
+	Img5   string `json:"img5"`
 }
 
 func (q *Queries) CreateImage(ctx context.Context, arg CreateImageParams) (Image, error) {
-	row := q.db.QueryRow(ctx, createImage, arg.UserID, arg.Qr, arg.Icon)
+	row := q.db.QueryRow(ctx, createImage,
+		arg.UserID,
+		arg.Qr,
+		arg.Img1,
+		arg.Img2,
+		arg.Img3,
+		arg.Img4,
+		arg.Img5,
+	)
 	var i Image
-	err := row.Scan(&i.UserID, &i.Qr, &i.Icon)
+	err := row.Scan(
+		&i.UserID,
+		&i.Qr,
+		&i.Img1,
+		&i.Img2,
+		&i.Img3,
+		&i.Img4,
+		&i.Img5,
+	)
 	return i, err
 }
 
@@ -43,19 +67,27 @@ func (q *Queries) DeleteImage(ctx context.Context, userID int32) error {
 }
 
 const getUserimageData = `-- name: GetUserimageData :one
-SELECT user_id, qr, icon FROM image
+SELECT user_id, qr, img1, img2, img3, img4, img5 FROM image
 WHERE user_id = $1
 `
 
 func (q *Queries) GetUserimageData(ctx context.Context, userID int32) (Image, error) {
 	row := q.db.QueryRow(ctx, getUserimageData, userID)
 	var i Image
-	err := row.Scan(&i.UserID, &i.Qr, &i.Icon)
+	err := row.Scan(
+		&i.UserID,
+		&i.Qr,
+		&i.Img1,
+		&i.Img2,
+		&i.Img3,
+		&i.Img4,
+		&i.Img5,
+	)
 	return i, err
 }
 
 const listimagesList = `-- name: ListimagesList :many
-SELECT user_id, qr, icon FROM image
+SELECT user_id, qr, img1, img2, img3, img4, img5 FROM image
 ORDER BY user_id
 `
 
@@ -68,7 +100,15 @@ func (q *Queries) ListimagesList(ctx context.Context) ([]Image, error) {
 	items := []Image{}
 	for rows.Next() {
 		var i Image
-		if err := rows.Scan(&i.UserID, &i.Qr, &i.Icon); err != nil {
+		if err := rows.Scan(
+			&i.UserID,
+			&i.Qr,
+			&i.Img1,
+			&i.Img2,
+			&i.Img3,
+			&i.Img4,
+			&i.Img5,
+		); err != nil {
 			return nil, err
 		}
 		items = append(items, i)
@@ -81,19 +121,42 @@ func (q *Queries) ListimagesList(ctx context.Context) ([]Image, error) {
 
 const updateImage = `-- name: UpdateImage :one
 UPDATE image
-SET icon = $2
+SET img1 = $2,
+    img2 = $3,
+    img3 = $4,
+    img4 = $5,
+    img5 = $6
 WHERE user_id = $1
-RETURNING user_id, qr, icon
+RETURNING user_id, qr, img1, img2, img3, img4, img5
 `
 
 type UpdateImageParams struct {
 	UserID int32  `json:"user_id"`
-	Icon   string `json:"icon"`
+	Img1   string `json:"img1"`
+	Img2   string `json:"img2"`
+	Img3   string `json:"img3"`
+	Img4   string `json:"img4"`
+	Img5   string `json:"img5"`
 }
 
 func (q *Queries) UpdateImage(ctx context.Context, arg UpdateImageParams) (Image, error) {
-	row := q.db.QueryRow(ctx, updateImage, arg.UserID, arg.Icon)
+	row := q.db.QueryRow(ctx, updateImage,
+		arg.UserID,
+		arg.Img1,
+		arg.Img2,
+		arg.Img3,
+		arg.Img4,
+		arg.Img5,
+	)
 	var i Image
-	err := row.Scan(&i.UserID, &i.Qr, &i.Icon)
+	err := row.Scan(
+		&i.UserID,
+		&i.Qr,
+		&i.Img1,
+		&i.Img2,
+		&i.Img3,
+		&i.Img4,
+		&i.Img5,
+	)
 	return i, err
 }

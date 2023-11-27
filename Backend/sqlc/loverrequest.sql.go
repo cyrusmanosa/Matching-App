@@ -20,14 +20,15 @@ INSERT INTO loverrequest (
     sexual,
     height,
     weight,
+    speaklanguage,
     job,
     annual_salary,
     sociability,
     religious,
     certification
 ) VALUES (
-    $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14
-) RETURNING user_id, min_age, max_age, country, city, gender, constellation, sexual, height, weight, job, annual_salary, sociability, religious, certification, info_changed_at
+    $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15
+) RETURNING user_id, min_age, max_age, city, gender, constellation, sexual, height, weight, speaklanguage, job, annual_salary, sociability, religious, certification, info_changed_at
 `
 
 type CreateLoverRequestParams struct {
@@ -38,8 +39,9 @@ type CreateLoverRequestParams struct {
 	Gender        string      `json:"gender"`
 	Constellation string      `json:"constellation"`
 	Sexual        string      `json:"sexual"`
-	Height        float64     `json:"height"`
-	Weight        float64     `json:"weight"`
+	Height        int32       `json:"height"`
+	Weight        int32       `json:"weight"`
+	Speaklanguage string      `json:"speaklanguage"`
 	Job           string      `json:"job"`
 	AnnualSalary  int32       `json:"annual_salary"`
 	Sociability   string      `json:"sociability"`
@@ -58,6 +60,7 @@ func (q *Queries) CreateLoverRequest(ctx context.Context, arg CreateLoverRequest
 		arg.Sexual,
 		arg.Height,
 		arg.Weight,
+		arg.Speaklanguage,
 		arg.Job,
 		arg.AnnualSalary,
 		arg.Sociability,
@@ -69,13 +72,13 @@ func (q *Queries) CreateLoverRequest(ctx context.Context, arg CreateLoverRequest
 		&i.UserID,
 		&i.MinAge,
 		&i.MaxAge,
-		&i.Country,
 		&i.City,
 		&i.Gender,
 		&i.Constellation,
 		&i.Sexual,
 		&i.Height,
 		&i.Weight,
+		&i.Speaklanguage,
 		&i.Job,
 		&i.AnnualSalary,
 		&i.Sociability,
@@ -97,7 +100,7 @@ func (q *Queries) DeleteUserLoverRequest(ctx context.Context, userID int32) erro
 }
 
 const getUserLover = `-- name: GetUserLover :one
-SELECT user_id, min_age, max_age, country, city, gender, constellation, sexual, height, weight, job, annual_salary, sociability, religious, certification, info_changed_at FROM loverrequest
+SELECT user_id, min_age, max_age, city, gender, constellation, sexual, height, weight, speaklanguage, job, annual_salary, sociability, religious, certification, info_changed_at FROM loverrequest
 WHERE user_id = $1 LIMIT 1
 `
 
@@ -108,13 +111,13 @@ func (q *Queries) GetUserLover(ctx context.Context, userID int32) (Loverrequest,
 		&i.UserID,
 		&i.MinAge,
 		&i.MaxAge,
-		&i.Country,
 		&i.City,
 		&i.Gender,
 		&i.Constellation,
 		&i.Sexual,
 		&i.Height,
 		&i.Weight,
+		&i.Speaklanguage,
 		&i.Job,
 		&i.AnnualSalary,
 		&i.Sociability,
@@ -126,7 +129,7 @@ func (q *Queries) GetUserLover(ctx context.Context, userID int32) (Loverrequest,
 }
 
 const listUserLover = `-- name: ListUserLover :many
-SELECT user_id, min_age, max_age, country, city, gender, constellation, sexual, height, weight, job, annual_salary, sociability, religious, certification, info_changed_at FROM loverrequest
+SELECT user_id, min_age, max_age, city, gender, constellation, sexual, height, weight, speaklanguage, job, annual_salary, sociability, religious, certification, info_changed_at FROM loverrequest
 ORDER BY user_id
 `
 
@@ -143,13 +146,13 @@ func (q *Queries) ListUserLover(ctx context.Context) ([]Loverrequest, error) {
 			&i.UserID,
 			&i.MinAge,
 			&i.MaxAge,
-			&i.Country,
 			&i.City,
 			&i.Gender,
 			&i.Constellation,
 			&i.Sexual,
 			&i.Height,
 			&i.Weight,
+			&i.Speaklanguage,
 			&i.Job,
 			&i.AnnualSalary,
 			&i.Sociability,
@@ -177,13 +180,14 @@ SET min_age = $2,
     sexual = $7,
     height = $8,
     weight = $9,
-    job = $10,
-    annual_salary = $11,
-    sociability = $12,
-    religious = $13,
-    certification = $14
+    speaklanguage = $10,
+    job = $11,
+    annual_salary = $12,
+    sociability = $13,
+    religious = $14,
+    certification = $15
 WHERE user_id = $1
-RETURNING user_id, min_age, max_age, country, city, gender, constellation, sexual, height, weight, job, annual_salary, sociability, religious, certification, info_changed_at
+RETURNING user_id, min_age, max_age, city, gender, constellation, sexual, height, weight, speaklanguage, job, annual_salary, sociability, religious, certification, info_changed_at
 `
 
 type UpdateUserLoverParams struct {
@@ -194,8 +198,9 @@ type UpdateUserLoverParams struct {
 	Gender        string      `json:"gender"`
 	Constellation string      `json:"constellation"`
 	Sexual        string      `json:"sexual"`
-	Height        float64     `json:"height"`
-	Weight        float64     `json:"weight"`
+	Height        int32       `json:"height"`
+	Weight        int32       `json:"weight"`
+	Speaklanguage string      `json:"speaklanguage"`
 	Job           string      `json:"job"`
 	AnnualSalary  int32       `json:"annual_salary"`
 	Sociability   string      `json:"sociability"`
@@ -214,6 +219,7 @@ func (q *Queries) UpdateUserLover(ctx context.Context, arg UpdateUserLoverParams
 		arg.Sexual,
 		arg.Height,
 		arg.Weight,
+		arg.Speaklanguage,
 		arg.Job,
 		arg.AnnualSalary,
 		arg.Sociability,
@@ -225,13 +231,13 @@ func (q *Queries) UpdateUserLover(ctx context.Context, arg UpdateUserLoverParams
 		&i.UserID,
 		&i.MinAge,
 		&i.MaxAge,
-		&i.Country,
 		&i.City,
 		&i.Gender,
 		&i.Constellation,
 		&i.Sexual,
 		&i.Height,
 		&i.Weight,
+		&i.Speaklanguage,
 		&i.Job,
 		&i.AnnualSalary,
 		&i.Sociability,

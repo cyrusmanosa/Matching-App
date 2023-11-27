@@ -6,6 +6,7 @@ INSERT INTO canchangeinformation (
     sexual,
     height,
     weight,
+    speaklanguage,
     Education,
     job,
     annual_salary,
@@ -13,14 +14,14 @@ INSERT INTO canchangeinformation (
     religious,
     introduce
 ) VALUES (
-    $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12
+    $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13
 ) RETURNING *;
 
 -- name: GetUserCanChangeInformation :one
 SELECT * FROM canchangeinformation
 WHERE user_id = $1 LIMIT 1;
 
--- name: ListUserFixInformaion :many
+-- name: ListCanChangeInformation :many
 SELECT * FROM canchangeinformation
 ORDER BY user_id;
 
@@ -31,12 +32,13 @@ SET nickname = $2,
     sexual = $4,
     height = $5,
     weight = $6,
-    Education = $7,
-    job = $8,
-    annual_salary = $9,
-    sociability = $10,
-    religious = $11,
-    introduce = $12
+    speaklanguage = $7,
+    Education = $8,
+    job = $9,
+    annual_salary = $10,
+    sociability = $11,
+    religious = $12,
+    introduce = $13
 WHERE user_id = $1
 RETURNING *;
 

@@ -32,7 +32,7 @@ type CreateUserFixInformationParams struct {
 	LastName       string      `json:"last_name"`
 	Email          string      `json:"email"`
 	HashedPassword string      `json:"hashed_password"`
-	Birth          string `json:"birth"`
+	Birth          string      `json:"birth"`
 	Country        string      `json:"country"`
 	Gender         string      `json:"gender"`
 	Blood          string      `json:"blood"`

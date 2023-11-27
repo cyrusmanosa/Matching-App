@@ -10,7 +10,6 @@ import (
 
 type Querier interface {
 	AllChangeTargetUserList(ctx context.Context) ([]Changetargetuser, error)
-	AllComplaintList(ctx context.Context) ([]Complaint, error)
 	AllTargetUserList(ctx context.Context) ([]Targetlist, error)
 	CreateAccompanyRequest(ctx context.Context, arg CreateAccompanyRequestParams) (Accompanyrequest, error)
 	CreateChangeTargetUser(ctx context.Context, arg CreateChangeTargetUserParams) (Changetargetuser, error)
@@ -20,7 +19,7 @@ type Querier interface {
 	CreateLoverRequest(ctx context.Context, arg CreateLoverRequestParams) (Loverrequest, error)
 	CreateUserCanChangeInformation(ctx context.Context, arg CreateUserCanChangeInformationParams) (Canchangeinformation, error)
 	CreateUserFixInformation(ctx context.Context, arg CreateUserFixInformationParams) (Fixinformation, error)
-	DeleteComplaint(ctx context.Context, userID int32) error
+	DeleteComplaint(ctx context.Context, cpID int32) error
 	DeleteData(ctx context.Context, userID int32) error
 	DeleteImage(ctx context.Context, userID int32) error
 	DeleteInformation(ctx context.Context, userID int32) error
@@ -33,14 +32,15 @@ type Querier interface {
 	GetTargetUserList(ctx context.Context, userID int32) (Targetlist, error)
 	GetUserAccompany(ctx context.Context, userID int32) (Accompanyrequest, error)
 	GetUserCanChangeInformation(ctx context.Context, userID int32) (Canchangeinformation, error)
-	GetUserComplaintList(ctx context.Context, userID int32) (Complaint, error)
+	GetUserComplaintList(ctx context.Context, cpID int32) (Complaint, error)
 	GetUserFixInformation(ctx context.Context, userID int32) (Fixinformation, error)
 	GetUserHobby(ctx context.Context, userID int32) (Hobbyrequest, error)
 	GetUserLover(ctx context.Context, userID int32) (Loverrequest, error)
 	GetUserimageData(ctx context.Context, userID int32) (Image, error)
+	ListCanChangeInformation(ctx context.Context) ([]Canchangeinformation, error)
+	ListComplaint(ctx context.Context) ([]Complaint, error)
 	ListFixInformaion(ctx context.Context) ([]Fixinformation, error)
 	ListUserAccompany(ctx context.Context) ([]Accompanyrequest, error)
-	ListUserFixInformaion(ctx context.Context) ([]Canchangeinformation, error)
 	ListUserHobby(ctx context.Context) ([]Hobbyrequest, error)
 	ListUserLover(ctx context.Context) ([]Loverrequest, error)
 	ListimagesList(ctx context.Context) ([]Image, error)
@@ -50,6 +50,7 @@ type Querier interface {
 	UpdatePassword(ctx context.Context, arg UpdatePasswordParams) (Fixinformation, error)
 	UpdateTargetList(ctx context.Context, arg UpdateTargetListParams) (Targetlist, error)
 	UpdateUserAccompany(ctx context.Context, arg UpdateUserAccompanyParams) (Accompanyrequest, error)
+	UpdateUserComplaint(ctx context.Context, arg UpdateUserComplaintParams) (Complaint, error)
 	UpdateUserHobby(ctx context.Context, arg UpdateUserHobbyParams) (Hobbyrequest, error)
 	UpdateUserLover(ctx context.Context, arg UpdateUserLoverParams) (Loverrequest, error)
 }

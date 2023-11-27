@@ -10,7 +10,7 @@ import (
 )
 
 const allChangeTargetUserList = `-- name: AllChangeTargetUserList :many
-SELECT user_id, change_user_id, reason, reply_user_id, change_time FROM changetargetuser
+SELECT user_id, change_user_id, reason, reply_user_id, frequency, change_time FROM changetargetuser
 ORDER BY user_id
 `
 
@@ -28,6 +28,7 @@ func (q *Queries) AllChangeTargetUserList(ctx context.Context) ([]Changetargetus
 			&i.ChangeUserID,
 			&i.Reason,
 			&i.ReplyUserID,
+			&i.Frequency,
 			&i.ChangeTime,
 		); err != nil {
 			return nil, err
@@ -45,10 +46,11 @@ INSERT INTO changetargetuser (
     user_id,
     change_user_id,
     reason,
-    reply_user_id
+    reply_user_id,
+    frequency
 ) VALUES (
-    $1,$2,$3,$4
-) RETURNING user_id, change_user_id, reason, reply_user_id, change_time
+    $1,$2,$3,$4,$5
+) RETURNING user_id, change_user_id, reason, reply_user_id, frequency, change_time
 `
 
 type CreateChangeTargetUserParams struct {
@@ -56,6 +58,7 @@ type CreateChangeTargetUserParams struct {
 	ChangeUserID int32  `json:"change_user_id"`
 	Reason       string `json:"reason"`
 	ReplyUserID  int32  `json:"reply_user_id"`
+	Frequency    int32  `json:"frequency"`
 }
 
 func (q *Queries) CreateChangeTargetUser(ctx context.Context, arg CreateChangeTargetUserParams) (Changetargetuser, error) {
@@ -64,6 +67,7 @@ func (q *Queries) CreateChangeTargetUser(ctx context.Context, arg CreateChangeTa
 		arg.ChangeUserID,
 		arg.Reason,
 		arg.ReplyUserID,
+		arg.Frequency,
 	)
 	var i Changetargetuser
 	err := row.Scan(
@@ -71,6 +75,7 @@ func (q *Queries) CreateChangeTargetUser(ctx context.Context, arg CreateChangeTa
 		&i.ChangeUserID,
 		&i.Reason,
 		&i.ReplyUserID,
+		&i.Frequency,
 		&i.ChangeTime,
 	)
 	return i, err
@@ -87,7 +92,7 @@ func (q *Queries) DeleteData(ctx context.Context, userID int32) error {
 }
 
 const getChangeTargetUserList = `-- name: GetChangeTargetUserList :one
-SELECT user_id, change_user_id, reason, reply_user_id, change_time FROM changetargetuser
+SELECT user_id, change_user_id, reason, reply_user_id, frequency, change_time FROM changetargetuser
 WHERE user_id = $1
 `
 
@@ -99,6 +104,7 @@ func (q *Queries) GetChangeTargetUserList(ctx context.Context, userID int32) (Ch
 		&i.ChangeUserID,
 		&i.Reason,
 		&i.ReplyUserID,
+		&i.Frequency,
 		&i.ChangeTime,
 	)
 	return i, err

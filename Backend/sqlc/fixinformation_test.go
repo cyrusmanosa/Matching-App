@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Pallinder/go-randomdata"
+	"github.com/brianvoe/gofakeit/v6"
 	"github.com/stretchr/testify/require"
 )
 
@@ -28,17 +28,17 @@ func CreateRandomUserFixInformaion(t *testing.T) Fixinformation {
 	require.NoError(t, err)
 
 	arg := CreateUserFixInformationParams{
-		FirstName:      randomdata.FirstName(randomdata.Male),
-		LastName:       randomdata.LastName(),
-		Email:          randomdata.Email(),
+		FirstName:      gofakeit.FirstName(),
+		LastName:       gofakeit.LastName(),
+		Email:          gofakeit.Email(),
 		HashedPassword: hashed,
 		Birth:          birthday,
-		Country:        randomdata.Country(randomdata.FullCountry),
-		Gender:         util.RandomGender(),
+		Country:        gofakeit.Country(),
+		Gender:         gofakeit.Gender(),
 		Blood:          util.RandomBlood(),
 		Age:            age,
-		Constellation:  util.RandomConstellation(M, D),
-		Certification:  randomdata.Boolean(),
+		Constellation:  util.Constellation(M, D),
+		Certification:  gofakeit.Bool(),
 	}
 	fix, err := testQueries.CreateUserFixInformation(context.Background(), arg)
 	require.NoError(t, err)
@@ -111,8 +111,8 @@ func TestUpdatePassword(t *testing.T) {
 	New, err := testQueries.UpdatePassword(context.Background(), Nhashed)
 	require.NoError(t, err)
 	require.NotEmpty(t, New)
-	require.NotEmpty(t, New.HashedPassword, user.HashedPassword)
-	require.NotEmpty(t, New.PasswordChangedAt, user.PasswordChangedAt)
+	require.NotEqual(t, New.HashedPassword, user.HashedPassword)
+	require.NotEqual(t, New.PasswordChangedAt, user.PasswordChangedAt)
 }
 
 func TestDeleteUser(t *testing.T) {

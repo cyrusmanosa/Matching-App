@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Pallinder/go-randomdata"
+	"github.com/brianvoe/gofakeit/v6"
 	"github.com/stretchr/testify/require"
 )
 
@@ -13,7 +13,7 @@ func TestPasetoMaker(t *testing.T) {
 	maker, err := NewPasetoMaker(util.RandomPassword(32))
 	require.NoError(t, err)
 
-	username := randomdata.SillyName()
+	username := gofakeit.Username()
 	duration := time.Minute
 
 	issuedAt := time.Now()
@@ -37,7 +37,7 @@ func TestExpiredPasetoToken(t *testing.T) {
 	maker, err := NewPasetoMaker(util.RandomPassword(32))
 	require.NoError(t, err)
 
-	token, err := maker.CreateToken(randomdata.SillyName(), -time.Minute)
+	token, err := maker.CreateToken(gofakeit.FirstName(), -time.Minute)
 	require.NoError(t, err)
 	require.NotEmpty(t, token)
 

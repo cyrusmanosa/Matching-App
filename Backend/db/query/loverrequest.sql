@@ -9,13 +9,14 @@ INSERT INTO loverrequest (
     sexual,
     height,
     weight,
+    speaklanguage,
     job,
     annual_salary,
     sociability,
     religious,
     certification
 ) VALUES (
-    $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14
+    $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15
 ) RETURNING *;
 
 -- name: GetUserLover :one
@@ -36,11 +37,12 @@ SET min_age = $2,
     sexual = $7,
     height = $8,
     weight = $9,
-    job = $10,
-    annual_salary = $11,
-    sociability = $12,
-    religious = $13,
-    certification = $14
+    speaklanguage = $10,
+    job = $11,
+    annual_salary = $12,
+    sociability = $13,
+    religious = $14,
+    certification = $15
 WHERE user_id = $1
 RETURNING *;
 

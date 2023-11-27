@@ -13,10 +13,11 @@ type Accompanyrequest struct {
 	Era           int32              `json:"era"`
 	City          string             `json:"city"`
 	Gender        string             `json:"gender"`
+	Speaklanguage string             `json:"speaklanguage"`
 	FindType      string             `json:"find_type"`
 	FindTarget    string             `json:"find_target"`
 	Sociability   string             `json:"sociability"`
-	Certification bool        		 `json:"certification"`
+	Certification bool        `json:"certification"`
 	InfoChangedAt pgtype.Timestamptz `json:"info_changed_at"`
 }
 
@@ -25,8 +26,9 @@ type Canchangeinformation struct {
 	Nickname      string             `json:"nickname"`
 	City          string             `json:"city"`
 	Sexual        string             `json:"sexual"`
-	Height        float64            `json:"height"`
-	Weight        float64            `json:"weight"`
+	Height        int32              `json:"height"`
+	Weight        int32              `json:"weight"`
+	Speaklanguage string             `json:"speaklanguage"`
 	Education     string             `json:"education"`
 	Job           string             `json:"job"`
 	AnnualSalary  int32              `json:"annual_salary"`
@@ -41,13 +43,15 @@ type Changetargetuser struct {
 	ChangeUserID int32              `json:"change_user_id"`
 	Reason       string             `json:"reason"`
 	ReplyUserID  int32              `json:"reply_user_id"`
+	Frequency    int32              `json:"frequency"`
 	ChangeTime   pgtype.Timestamptz `json:"change_time"`
 }
 
 type Complaint struct {
+	CpID          int32              `json:"cp_id"`
 	UserID        int32              `json:"user_id"`
 	CpTargetID    int32              `json:"cp_target_id"`
-	CpTpye        string             `json:"cp_tpye"`
+	CpType        string             `json:"cp_type"`
 	CpMessage     string             `json:"cp_message"`
 	Status        string             `json:"status"`
 	ComplaintTime pgtype.Timestamptz `json:"complaint_time"`
@@ -59,7 +63,7 @@ type Fixinformation struct {
 	LastName          string             `json:"last_name"`
 	Email             string             `json:"email"`
 	HashedPassword    string             `json:"hashed_password"`
-	Birth             string        `json:"birth"`
+	Birth             string             `json:"birth"`
 	Country           string             `json:"country"`
 	Gender            string             `json:"gender"`
 	Blood             string             `json:"blood"`
@@ -77,6 +81,7 @@ type Hobbyrequest struct {
 	Gender        string             `json:"gender"`
 	Height        int32              `json:"height"`
 	Weight        int32              `json:"weight"`
+	Speaklanguage string             `json:"speaklanguage"`
 	FindType      string             `json:"find_type"`
 	FindTarget    string             `json:"find_target"`
 	Experience    int32              `json:"experience"`
@@ -88,20 +93,24 @@ type Hobbyrequest struct {
 type Image struct {
 	UserID int32  `json:"user_id"`
 	Qr     string `json:"qr"`
-	Icon   string `json:"icon"`
+	Img1   string `json:"img1"`
+	Img2   string `json:"img2"`
+	Img3   string `json:"img3"`
+	Img4   string `json:"img4"`
+	Img5   string `json:"img5"`
 }
 
 type Loverrequest struct {
 	UserID        int32              `json:"user_id"`
 	MinAge        int32              `json:"min_age"`
 	MaxAge        int32              `json:"max_age"`
-	Country       string             `json:"country"`
 	City          string             `json:"city"`
 	Gender        string             `json:"gender"`
 	Constellation string             `json:"constellation"`
 	Sexual        string             `json:"sexual"`
-	Height        float64            `json:"height"`
-	Weight        float64            `json:"weight"`
+	Height        int32              `json:"height"`
+	Weight        int32              `json:"weight"`
+	Speaklanguage string             `json:"speaklanguage"`
 	Job           string             `json:"job"`
 	AnnualSalary  int32              `json:"annual_salary"`
 	Sociability   string             `json:"sociability"`
@@ -112,8 +121,8 @@ type Loverrequest struct {
 
 type Targetlist struct {
 	UserID    int32              `json:"user_id"`
-	Target1ID pgtype.Int4        `json:"target_1_id"`
-	Target2ID pgtype.Int4        `json:"target_2_id"`
-	Target3ID pgtype.Int4        `json:"target_3_id"`
+	Target1ID int32        `json:"target_1_id"`
+	Target2ID int32        `json:"target_2_id"`
+	Target3ID int32        `json:"target_3_id"`
 	UpdatedAt pgtype.Timestamptz `json:"updated_at"`
 }

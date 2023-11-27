@@ -6,13 +6,14 @@ INSERT INTO hobbyrequest (
     gender,
     height,
     weight,
+    speaklanguage,
     find_type,
     find_target,
     experience,
     sociability,
     certification
 ) VALUES (
-    $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11
+    $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12
 ) RETURNING *;
 
 -- name: GetUserHobby :one
@@ -30,11 +31,12 @@ SET era = $2,
     gender = $4,
     height = $5,
     weight = $6,
-    find_type = $7,
-    find_target = $8,
-    experience = $9,
-    sociability = $10,
-    certification = $11
+    speaklanguage = $7,
+    find_type = $8,
+    find_target = $9,
+    experience = $10,
+    sociability = $11,
+    certification = $12
 WHERE user_id = $1
 RETURNING *;
 

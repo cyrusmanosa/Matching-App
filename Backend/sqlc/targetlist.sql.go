@@ -7,8 +7,6 @@ package db
 
 import (
 	"context"
-
-	"github.com/jackc/pgx/v5/pgtype"
 )
 
 const allTargetUserList = `-- name: AllTargetUserList :many
@@ -83,9 +81,9 @@ INSERT INTO targetlist (
 
 type TargetUserListParams struct {
 	UserID    int32       `json:"user_id"`
-	Target1ID pgtype.Int4 `json:"target_1_id"`
-	Target2ID pgtype.Int4 `json:"target_2_id"`
-	Target3ID pgtype.Int4 `json:"target_3_id"`
+	Target1ID int32 `json:"target_1_id"`
+	Target2ID int32 `json:"target_2_id"`
+	Target3ID int32 `json:"target_3_id"`
 }
 
 func (q *Queries) TargetUserList(ctx context.Context, arg TargetUserListParams) (Targetlist, error) {
@@ -111,15 +109,15 @@ UPDATE targetlist
 SET target_1_id = $2 OR
     target_2_id = $3 OR
     target_3_id = $4
-WHERE user_id = $1
+WHERE user_id = $1 
 RETURNING user_id, target_1_id, target_2_id, target_3_id, updated_at
 `
 
 type UpdateTargetListParams struct {
 	UserID    int32       `json:"user_id"`
-	Target1ID pgtype.Int4 `json:"target_1_id"`
-	Target2ID pgtype.Int4 `json:"target_2_id"`
-	Target3ID pgtype.Int4 `json:"target_3_id"`
+	Target1ID int32 `json:"target_1_id"`
+	Target2ID int32 `json:"target_2_id"`
+	Target3ID int32 `json:"target_3_id"`
 }
 
 func (q *Queries) UpdateTargetList(ctx context.Context, arg UpdateTargetListParams) (Targetlist, error) {

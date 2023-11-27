@@ -3,9 +3,10 @@ INSERT INTO changetargetuser (
     user_id,
     change_user_id,
     reason,
-    reply_user_id
+    reply_user_id,
+    frequency
 ) VALUES (
-    $1,$2,$3,$4
+    $1,$2,$3,$4,$5
 ) RETURNING *;
 
 -- name: GetChangeTargetUserList :one
