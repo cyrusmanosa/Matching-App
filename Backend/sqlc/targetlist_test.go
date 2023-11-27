@@ -1,5 +1,7 @@
 package db
 
+//TODO: Update Target List function
+
 import (
 	"context"
 	"testing"
@@ -69,4 +71,25 @@ func TestDeleteTargetList(t *testing.T) {
 
 	err := testQueries.DeleteTargetList(context.Background(), tl.UserID)
 	require.NoError(t, err)
+}
+
+func TestUpdateTargetList(t *testing.T) {
+	user := CreateRandomUserFixInformaion(t)
+	tl := RandomTargetUserList(t, user)
+
+	Narg1 := CreateRandomUserFixInformaion(t)
+	Narg2 := CreateRandomUserFixInformaion(t)
+	Narg3 := CreateRandomUserFixInformaion(t)
+
+	ntl := UpdateTargetListParams{
+		UserID:    tl.UserID,
+		Target1ID: Narg1.UserID,
+		Target2ID: Narg2.UserID,
+		Target3ID: Narg3.UserID,
+	}
+
+	UpTL, err := testQueries.UpdateTargetList(context.Background(), ntl)
+	require.NoError(t, err)
+	require.NotEmpty(t, UpTL)
+	require.NotEqual(t, UpTL.UpdatedAt, tl.UpdatedAt)
 }

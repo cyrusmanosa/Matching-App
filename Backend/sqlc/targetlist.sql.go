@@ -106,8 +106,8 @@ func (q *Queries) TargetUserList(ctx context.Context, arg TargetUserListParams) 
 
 const updateTargetList = `-- name: UpdateTargetList :one
 UPDATE targetlist
-SET target_1_id = $2 OR
-    target_2_id = $3 OR
+SET target_1_id = $2,
+    target_2_id = $3,
     target_3_id = $4
 WHERE user_id = $1 
 RETURNING user_id, target_1_id, target_2_id, target_3_id, updated_at

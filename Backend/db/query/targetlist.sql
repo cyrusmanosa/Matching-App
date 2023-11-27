@@ -20,7 +20,7 @@ ORDER BY user_id;
 UPDATE targetlist
 SET target_1_id = $2,
     target_2_id = $3,
-    target_3_id = $4,
+    target_3_id = $4
 WHERE user_id = $1 
 RETURNING *;
 
