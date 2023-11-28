@@ -1,47 +1,54 @@
 package api
 
 import (
+	db "Backend/db/sqlc/info"
 	"Backend/token"
 	"Backend/util"
 	"fmt"
+	"net/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/labstack/echo/v4"
 )
 
-type Server struct {
+type InfoServer struct {
 	config     util.Config
+	store      db.InfoStore
 	tokenMaker token.Maker
-	router     *gin.Engine
+	router     *echo.Echo
 }
 
-func NewServer(config util.Config) (*Server, error) {
+func errorResponse(err error) map[string]interface{} {
+	return map[string]interface{}{"error": err.Error()}
+}
+
+func NewServer(config util.Config) (*InfoServer, error) {
 	tokenMaker, err := token.NewPasetoMaker(config.TokenSymmetricKey)
 	if err != nil {
 		return nil, fmt.Errorf("cannot create token maker: %w", err)
 	}
-	server := &Server{
+	inserver := &InfoServer{
 		config:     config,
 		tokenMaker: tokenMaker,
 	}
 
-	server.setupRouter()
-	return server, nil
+	inserver.setupRouter()
+	return inserver, nil
 }
 
-func (server *Server) setupRouter() {
-	router := gin.Default()
+func (inserver *InfoServer) setupRouter() {
+	router := echo.New()
+	router.GET("/", func(c echo.Context) error {
+		return c.String(http.StatusOK, "OK")
+	})
 
-	// after login
-	// authRoutes := router.Group("/").Use(authMiddleware(server.tokenMaker))
+	router.POST("/test1", inserver.GetUserFixInformation)
 
-	server.router = router
+	// router.Use(middleware.Logger())
+	// router.Use(middleware.Recover())
+
+	inserver.router = router
 }
 
-// start runs the HTTP server on specific address
-func (server *Server) Start(address string) error {
-	return server.router.Run(address)
-}
-
-func errorResponse(err error) gin.H {
-	return gin.H{"error": err.Error()}
+func (inserver *InfoServer) Start(address string) error {
+	return inserver.router.Start(address)
 }

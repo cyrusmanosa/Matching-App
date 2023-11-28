@@ -17,7 +17,7 @@ INSERT INTO fixinformation (
 
 -- name: GetUserFixInformation :one
 SELECT * FROM fixinformation
-WHERE user_id = $1;
+WHERE Email = $1;
 
 -- name: ListFixInformaion :many
 SELECT * FROM fixinformation

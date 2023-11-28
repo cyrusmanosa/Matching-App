@@ -10,7 +10,7 @@ func CreateQR(name string, url string) (string, error) {
 		return "", err
 	}
 
-	filename := "../images/Qr/" + name + ".png"
+	filename := "../Images/QR" + name + ".png"
 	err = qrCode.WriteFile(256, filename)
 	if err != nil {
 		return "", err
