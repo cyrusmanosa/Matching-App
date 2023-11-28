@@ -1,44 +1,39 @@
 package main
 
 import (
-	"Backend/api"
 	"Backend/util"
 	"context"
+	"log"
 
-	"github.com/rs/zerolog/log"
+	controllers "Backend/controllers"
+	db "Backend/db/sqlc/info"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 	_ "github.com/lib/pq"
 )
 
-func main() {
-	config, err := util.LoadConfig(".")
+func main(){
+	config, err := util.LoadConfig("./")
 	if err != nil {
-		log.Fatal().Err(err).Msg("cannot load config")
+		log.Fatal("cannot load config:",err)
 	}
 
 	// Information
 	info_conn, err := pgxpool.New(context.Background(), config.DBSourceInfo)
 	if err != nil {
-		log.Fatal().Err(err).Msg("cannot connect to Info db")
+		log.Fatal("cannot connect to Info db",err)
 	}
 	defer info_conn.Close()
 
-	// ChatBox
-	chat_conn, err := pgxpool.New(context.Background(), config.DBSourceChat)
+	store := db.NewInfoStore(info_conn)
+	server, err := controllers.NewServer(config, store)
 	if err != nil {
-		log.Fatal().Err(err).Msg("cannot connect to Chat db")
+		log.Fatal("cannot create server:", err)
 	}
 
-	defer chat_conn.Close()
-
-	server, err := api.NewServer(config)
+	err = server.Run(config.ServerAddress)
 	if err != nil {
-		log.Fatal().Err(err).Msg("cannot create server")
-
-	}
-	err = server.Start(config.ServerAddress)
-	if err != nil {
-		log.Fatal().Err(err).Msg("cannot start server")
+		log.Fatal("cannot start server:", err)
 	}
 }
+	

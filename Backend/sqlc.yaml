@@ -15,6 +15,7 @@ sql:
       overrides:
         - db_type: "uuid"
           go_type: "github.com/google/uuid.UUID"
+          
 - schema: "./db/migration/chat"
   queries: "./db/query/chat"
   engine: "postgresql"
