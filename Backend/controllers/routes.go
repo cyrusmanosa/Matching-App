@@ -4,18 +4,17 @@ import (
 	"Backend/token"
 	"Backend/util"
 	"fmt"
-	"net/http"
 
 	db "Backend/db/sqlc/info"
 
-	"github.com/labstack/echo"
+	"github.com/gin-gonic/gin"
 )
 
 type Server struct {
 	config     util.Config
 	store      db.InfoStore
 	tokenMaker token.Maker
-	router 		*echo.Echo
+	router     *gin.Engine
 }
 
 func NewServer(config util.Config, store db.InfoStore) (*Server, error) {
@@ -23,6 +22,7 @@ func NewServer(config util.Config, store db.InfoStore) (*Server, error) {
 	if err != nil {
 		return nil, fmt.Errorf("cannot create token maker: %w", err)
 	}
+
 	server := &Server{
 		config:     config,
 		store:      store,
@@ -33,18 +33,25 @@ func NewServer(config util.Config, store db.InfoStore) (*Server, error) {
 	return server, nil
 }
 
-
 func (server *Server) setupRouter() {
-	server.router = echo.New()
+	router := gin.Default()
 
-	server.router.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Selamat Data di Echo")
-	})
-	server.router.POST("/test", server.CreateUserFixInformationControllers)
+	// before login
+	router.POST("/CreateUser", server.CreateUserFixInformationControllers)
+	router.GET("/Login", server.GetUserFixInformatioControllers)
+
+	// transition
+	authRoutes := router.Group("/").Use(authMiddleware(server.tokenMaker))
+
+	// after login
+	authRoutes.POST("/CreateCanChangeInfo", server.CreateUserCanChangeInformationControllers)
+	authRoutes.GET("/UserList", server.ListFixInformaionControllers)
+	server.router = router
 }
 
-// start runs the HTTP server on specific address
-func (server *Server) Run(address string) error {
-	return server.router.Start(address)
+func (server *Server) Start(address string) error {
+	return server.router.Run(address)
 }
-
+func errorResponse(err error) gin.H {
+	return gin.H{"error": err.Error()}
+}

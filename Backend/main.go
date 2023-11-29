@@ -1,11 +1,11 @@
 package main
 
 import (
+	"Backend/controllers"
 	"Backend/util"
 	"context"
 	"log"
 
-	controllers "Backend/controllers"
 	db "Backend/db/sqlc/info"
 
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -31,7 +31,7 @@ func main(){
 		log.Fatal("cannot create server:", err)
 	}
 
-	err = server.Run(config.ServerAddress)
+	err = server.Start(config.ServerAddress)
 	if err != nil {
 		log.Fatal("cannot start server:", err)
 	}
