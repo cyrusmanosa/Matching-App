@@ -12,16 +12,16 @@ import (
 	_ "github.com/lib/pq"
 )
 
-func main(){
+func main() {
 	config, err := util.LoadConfig("./")
 	if err != nil {
-		log.Fatal("cannot load config:",err)
+		log.Fatal("cannot load config:", err)
 	}
 
 	// Information
 	info_conn, err := pgxpool.New(context.Background(), config.DBSourceInfo)
 	if err != nil {
-		log.Fatal("cannot connect to Info db",err)
+		log.Fatal("cannot connect to Info db", err)
 	}
 	defer info_conn.Close()
 
@@ -36,4 +36,3 @@ func main(){
 		log.Fatal("cannot start server:", err)
 	}
 }
-	

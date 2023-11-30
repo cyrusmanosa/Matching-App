@@ -3,11 +3,15 @@ package util
 import (
 	"math/rand"
 	"strings"
+	"time"
 
 	"github.com/sethvargo/go-password/password"
 )
 
+const charset = alphabet + "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 const alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+var seededRand *rand.Rand = rand.New(rand.NewSource(time.Now().UnixNano()))
 
 func RandomString(n int) string {
 	var sb strings.Builder
@@ -278,4 +282,12 @@ func RandomReligious() string {
 		"Confucianism",
 	}
 	return religions[rand.Intn(len(religions))]
+}
+
+func RandomCheckCode() string {
+	b := make([]byte, 8)
+	for i := range b {
+		b[i] = charset[seededRand.Intn(len(charset))]
+	}
+	return string(b)
 }

@@ -37,13 +37,15 @@ func (server *Server) setupRouter() {
 	router := gin.Default()
 
 	// before login
-	router.POST("/CreateUser", server.CreateUserFixInformationControllers)
-	router.GET("/Login", server.GetUserFixInformatioControllers)
+	router.POST("/CheckEmail", server.CheckEmail)
+	router.POST("/CheckSecurity", server.CheckEmailCode)
+	router.POST("/SignUp", server.CreateUserControllers)
+	router.GET("/Login", server.UserLoginControllers)
 
 	// transition
 	authRoutes := router.Group("/").Use(authMiddleware(server.tokenMaker))
 
-	// after login
+	// after take the access token
 	authRoutes.POST("/CreateCanChangeInfo", server.CreateUserCanChangeInformationControllers)
 	authRoutes.GET("/UserList", server.ListFixInformaionControllers)
 	server.router = router

@@ -9,7 +9,6 @@ import (
 )
 
 type createCanChangeInfoRequest struct {
-	UserID        int32  `json:"user_id",binding:"required"`
 	Nickname      string `json:"nickname" binding:"required"`
 	City          string `json:"city" binding:"required,alpha"`
 	Sexual        string `json:"sexual" binding:"required,alpha"`
