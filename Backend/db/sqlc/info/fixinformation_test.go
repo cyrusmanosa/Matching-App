@@ -86,12 +86,12 @@ func TestGetUserFixInformation(t *testing.T) {
 	require.Equal(t, user1.PasswordChangedAt, user2.PasswordChangedAt)
 }
 
-func TestListFixInformaion(t *testing.T) {
+func TestListFixInformation(t *testing.T) {
 	for i := 0; i < 10; i++ {
 		CreateRandomUserFixInformaion(t)
 	}
 
-	user, err := testinfoQueries.ListFixInformaion(context.Background())
+	user, err := testinfoQueries.ListFixInformation(context.Background())
 	require.NoError(t, err)
 	require.NotEmpty(t, user)
 

@@ -39,7 +39,7 @@ type InfoQuerier interface {
 	GetUserimageData(ctx context.Context, userID int32) (Image, error)
 	ListCanChangeInformation(ctx context.Context) ([]Canchangeinformation, error)
 	ListComplaint(ctx context.Context) ([]Complaint, error)
-	ListFixInformaion(ctx context.Context) ([]Fixinformation, error)
+	ListFixInformation(ctx context.Context) ([]Fixinformation, error)
 	ListUserAccompany(ctx context.Context) ([]Accompanyrequest, error)
 	ListUserHobby(ctx context.Context) ([]Hobbyrequest, error)
 	ListUserLover(ctx context.Context) ([]Loverrequest, error)
@@ -54,3 +54,5 @@ type InfoQuerier interface {
 	UpdateUserHobby(ctx context.Context, arg UpdateUserHobbyParams) (Hobbyrequest, error)
 	UpdateUserLover(ctx context.Context, arg UpdateUserLoverParams) (Loverrequest, error)
 }
+
+var _ InfoQuerier = (*Queries)(nil)

@@ -8,6 +8,7 @@ import (
 
 	db "Backend/db/sqlc/info"
 
+	_ "github.com/golang/mock/mockgen/model"
 	"github.com/jackc/pgx/v5/pgxpool"
 	_ "github.com/lib/pq"
 )

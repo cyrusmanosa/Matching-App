@@ -3,12 +3,14 @@ package controllers
 import (
 	db "Backend/db/sqlc"
 	info "Backend/db/sqlc/info"
+	"database/sql"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
 type createCanChangeInfoRequest struct {
+	UserID        int32  `json:"user_id" binding:"required"`
 	Nickname      string `json:"nickname" binding:"required"`
 	City          string `json:"city" binding:"required,alpha"`
 	Sexual        string `json:"sexual" binding:"required,alpha"`
@@ -30,6 +32,7 @@ func (server *Server) CreateUserCanChangeInformationControllers(ctx *gin.Context
 		return
 	}
 	arg := info.CreateUserCanChangeInformationParams{
+		UserID:        req.UserID,
 		Nickname:      req.Nickname,
 		City:          req.City,
 		Sexual:        req.Sexual,
@@ -54,4 +57,18 @@ func (server *Server) CreateUserCanChangeInformationControllers(ctx *gin.Context
 		return
 	}
 	ctx.JSON(http.StatusOK, user)
+}
+
+// List
+func (server *Server) ListCanChangeInformationControllers(ctx *gin.Context) {
+	list, err := server.store.ListCanChangeInformation(ctx)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			ctx.JSON(http.StatusNotFound, errorResponse(err))
+			return
+		}
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+	ctx.JSON(http.StatusOK, list)
 }

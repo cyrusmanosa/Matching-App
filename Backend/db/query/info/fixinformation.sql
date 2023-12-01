@@ -19,7 +19,7 @@ INSERT INTO fixinformation (
 SELECT * FROM fixinformation
 WHERE Email = $1;
 
--- name: ListFixInformaion :many
+-- name: ListFixInformation :many
 SELECT * FROM fixinformation
 ORDER BY user_id;
 

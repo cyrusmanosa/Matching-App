@@ -35,6 +35,11 @@ info_migrateup1:
 	migrate -path db/migration/info -database "postgresql://root:secret@localhost:5432/dating_date_info?sslmode=disable" -verbose up 1
 info_migratedown1:
 	migrate -path db/migration/info -database "postgresql://root:secret@localhost:5432/dating_date_info?sslmode=disable" -verbose down 1
+info_migrateup2:
+	migrate -path db/migration/info -database "postgresql://root:secret@localhost:5432/dating_date_info?sslmode=disable" -verbose up 2
+info_migratedown2:
+	migrate -path db/migration/info -database "postgresql://root:secret@localhost:5432/dating_date_info?sslmode=disable" -verbose down 2
+
 
 # chat 
 chat_migrateup:
@@ -53,5 +58,5 @@ server:
 
 
 .PHONY: dockernetwork postgres createdb_info dropdb_info createdb_chat dropdb_chat test sqlc server 
-		createmigrate_info info_migrateup info_migrateup1 info_migratedown info_migratedown1
+		createmigrate_info info_migrateup info_migrateup1 info_migrateup2 info_migratedown info_migratedown1 info_migratedown2
 		createmigrate_chat chat_migrateup chat_migratedown 

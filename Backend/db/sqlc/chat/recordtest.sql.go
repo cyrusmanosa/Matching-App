@@ -7,6 +7,8 @@ package db
 
 import (
 	"context"
+
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 const getrecord = `-- name: Getrecord :one
@@ -72,8 +74,8 @@ INSERT INTO recordtest (
 type recordTestParams struct {
 	UserID   int32       `json:"user_id"`
 	TargetID int32       `json:"target_id"`
-	Message  string `json:"message"`
-	Images   string `json:"images"`
+	Message  pgtype.Text `json:"message"`
+	Images   pgtype.Text `json:"images"`
 }
 
 func (q *Queries) recordTest(ctx context.Context, arg recordTestParams) (Recordtest, error) {

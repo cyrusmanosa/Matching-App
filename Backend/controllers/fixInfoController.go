@@ -6,19 +6,17 @@ import (
 	"Backend/token"
 	"Backend/util"
 	"database/sql"
-	"errors"
 	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
 )
 
-// Create user
+// Create Fix
 // Json input
 type createUserRequest struct {
 	FirstName     string `json:"first_name" binding:"required"`
 	LastName      string `json:"last_name" binding:"required"`
-	Email         string `json:"email" binding:"required,email"`
 	Password      string `json:"password" binding:"required,min=6"`
 	Birth         string `json:"birth" binding:"required"`
 	Country       string `json:"country" binding:"required"`
@@ -41,18 +39,20 @@ func newUserResponse(user info.Fixinformation) userResponse {
 	}
 }
 
-func (server *Server) CreateUserControllers(ctx *gin.Context) {
+func (server *Server) CreateUserFixInformationControllers(ctx *gin.Context) {
 	var req createUserRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}
 
+	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
+
 	Hash, _ := util.HashPassword(req.Password)
 	arg := info.CreateUserFixInformationParams{
 		FirstName:      req.FirstName,
 		LastName:       req.LastName,
-		Email:          req.Email,
+		Email:          authPayload.Email,
 		HashedPassword: Hash,
 		Birth:          req.Birth,
 		Country:        req.Country,
@@ -72,14 +72,6 @@ func (server *Server) CreateUserControllers(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
-
-	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
-	if user.Email != authPayload.Email {
-		err := errors.New("Email doesn't belong to the authenticated user")
-		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
-		return
-	}
-
 	rsq := newUserResponse(user)
 	ctx.JSON(http.StatusOK, rsq)
 }
@@ -101,6 +93,7 @@ func (server *Server) UserLoginControllers(ctx *gin.Context) {
 		return
 	}
 
+	// Check Email
 	user, err := server.store.GetUserFixInformation(ctx, req.Email)
 	if err != nil {
 		if err == sql.ErrNoRows {
@@ -111,7 +104,7 @@ func (server *Server) UserLoginControllers(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
-
+	// Password
 	err = util.CheckPassword(req.Password, user.HashedPassword)
 	if err != nil {
 		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
@@ -120,6 +113,7 @@ func (server *Server) UserLoginControllers(ctx *gin.Context) {
 
 	accessToken, err := server.tokenMaker.CreateToken(
 		user.Email,
+		user.Role,
 		server.config.AccessTokenDuration,
 	)
 	if err != nil {
@@ -135,8 +129,8 @@ func (server *Server) UserLoginControllers(ctx *gin.Context) {
 }
 
 // List
-func (server *Server) ListFixInformaionControllers(ctx *gin.Context) {
-	list, err := server.store.ListFixInformaion(ctx)
+func (server *Server) ShowListFixInfo(ctx *gin.Context) {
+	list, err := server.store.ListFixInformation(ctx)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			ctx.JSON(http.StatusNotFound, errorResponse(err))
@@ -148,4 +142,39 @@ func (server *Server) ListFixInformaionControllers(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, list)
 }
 
-// TODO: Delete User by after session
+// Delete
+type DeleteController struct {
+	UserID int32 `json:"user_id" binding:"required"`
+}
+
+func (server *Server) DeleteUser(ctx *gin.Context) {
+	var req DeleteController
+	if err := ctx.ShouldBindJSON(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
+	// Fix
+	err := server.store.DeleteUser(ctx, req.UserID)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			ctx.JSON(http.StatusNotFound, errorResponse(err))
+			return
+		}
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+	// Can
+	err = server.store.DeleteInformation(ctx, req.UserID)
+	// Hobby
+	err = server.store.DeleteUserHobby(ctx, req.UserID)
+	// Lover
+	err = server.store.DeleteUserLoverRequest(ctx, req.UserID)
+	// Accompany
+	err = server.store.DeleteUserAccompany(ctx, req.UserID)
+	// Image
+	err = server.store.DeleteImage(ctx, req.UserID)
+	// Target List
+	err = server.store.DeleteTargetList(ctx, req.UserID)
+	// Change Target
+	err = server.store.DeleteData(ctx, req.UserID)
+}

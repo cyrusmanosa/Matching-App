@@ -10,9 +10,9 @@ CREATE TABLE "fixinformation" (
   "blood" VARCHAR NOT NULL,
   "age" INT NOT NULL,
   "constellation" VARCHAR NOT NULL,
-  "certification" BOOLEAN DEFAULT false,
-  "created_at" TIMESTAMPTZ NOT NULL DEFAULT (now()),
-  "password_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (now())
+  "certification" BOOLEAN DEFAULT FALSE,
+  "created_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW()),
+  "password_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
 
 CREATE TABLE "canchangeinformation" (
@@ -29,7 +29,7 @@ CREATE TABLE "canchangeinformation" (
   "sociability" VARCHAR NOT NULL,
   "religious" VARCHAR NOT NULL,
   "introduce" VARCHAR NOT NULL,
-  "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (now())
+  "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
 
 CREATE TABLE "loverrequest" (
@@ -47,8 +47,8 @@ CREATE TABLE "loverrequest" (
   "annual_salary" INT NOT NULL,
   "sociability" VARCHAR NOT NULL,
   "religious" VARCHAR NOT NULL,
-  "certification" BOOLEAN DEFAULT false,
-  "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (now())
+  "certification" BOOLEAN DEFAULT FALSE,
+  "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
 
 CREATE TABLE "hobbyrequest" (
@@ -63,8 +63,8 @@ CREATE TABLE "hobbyrequest" (
   "find_target" VARCHAR NOT NULL,
   "experience" INT NOT NULL,
   "sociability" VARCHAR NOT NULL,
-  "certification" BOOLEAN DEFAULT false,
-  "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (now())
+  "certification" BOOLEAN DEFAULT FALSE,
+  "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
 
 CREATE TABLE "accompanyrequest" (
@@ -76,8 +76,8 @@ CREATE TABLE "accompanyrequest" (
   "find_type" VARCHAR NOT NULL,
   "find_target" VARCHAR NOT NULL,
   "sociability" VARCHAR NOT NULL,
-  "certification" BOOLEAN DEFAULT false,
-  "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (now())
+  "certification" BOOLEAN DEFAULT FALSE,
+  "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
 
 CREATE TABLE "image" (
@@ -91,11 +91,11 @@ CREATE TABLE "image" (
 );
 
 CREATE TABLE "targetlist" (
-  "user_id"     INT PRIMARY KEY,
+  "user_id" INT PRIMARY KEY,
   "target_1_id" INT,
   "target_2_id" INT,
   "target_3_id" INT,
-  "updated_at" TIMESTAMPTZ NOT NULL DEFAULT (now())
+  "updated_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
 
 CREATE TABLE "changetargetuser" (
@@ -103,8 +103,8 @@ CREATE TABLE "changetargetuser" (
   "change_user_id" INT NOT NULL,
   "reason" VARCHAR NOT NULL,
   "reply_user_id" INT NOT NULL,
-  "frequency" INT not NULL DEFAULT (0),
-  "change_time" TIMESTAMPTZ NOT NULL DEFAULT (now())
+  "frequency" INT NOT NULL DEFAULT (0),
+  "change_time" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
 
 CREATE TABLE "complaint" (
@@ -114,15 +114,21 @@ CREATE TABLE "complaint" (
   "cp_type" VARCHAR NOT NULL,
   "cp_message" VARCHAR NOT NULL,
   "status" VARCHAR NOT NULL,
-  "complaint_time" TIMESTAMPTZ NOT NULL DEFAULT (now())
+  "complaint_time" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
 
-
 ALTER TABLE "canchangeinformation" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
+
 ALTER TABLE "loverrequest" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
+
 ALTER TABLE "hobbyrequest" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
+
 ALTER TABLE "accompanyrequest" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
+
 ALTER TABLE "image" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
+
 ALTER TABLE "targetlist" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
+
 ALTER TABLE "changetargetuser" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
+
 ALTER TABLE "complaint" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");

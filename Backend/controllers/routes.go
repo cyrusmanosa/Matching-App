@@ -35,19 +35,22 @@ func NewServer(config util.Config, store db.InfoStore) (*Server, error) {
 
 func (server *Server) setupRouter() {
 	router := gin.Default()
-
-	// before login
-	router.POST("/CheckEmail", server.CheckEmail)
-	router.POST("/CheckSecurity", server.CheckEmailCode)
-	router.POST("/SignUp", server.CreateUserControllers)
-	router.GET("/Login", server.UserLoginControllers)
-
-	// transition
 	authRoutes := router.Group("/").Use(authMiddleware(server.tokenMaker))
 
+	// before login
+	router.POST("/SignUp", server.CheckEmail)              // OK
+	router.POST("/SignUpCheckCode", server.CheckEmailCode) // OK
+	router.GET("/Login", server.UserLoginControllers)      // OK
+
+	// transition
+
 	// after take the access token
+	authRoutes.POST("/CreateFixInfo", server.CreateUserFixInformationControllers)
 	authRoutes.POST("/CreateCanChangeInfo", server.CreateUserCanChangeInformationControllers)
-	authRoutes.GET("/UserList", server.ListFixInformaionControllers)
+
+	// for inside
+	authRoutes.GET("/UserList", server.ShowListFixInfo)
+	authRoutes.POST("/UserDel", server.DeleteUser)
 	server.router = router
 }
 

@@ -4,7 +4,7 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-// Store defines all functions to execute db queries and transactions
+// InfoStore defines all functions to execute db queries and transactions
 type InfoStore interface {
 	InfoQuerier
 }

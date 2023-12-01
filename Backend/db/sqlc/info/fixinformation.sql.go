@@ -7,7 +7,6 @@ package db
 
 import (
 	"context"
-
 )
 
 const createUserFixInformation = `-- name: CreateUserFixInformation :one
@@ -25,7 +24,7 @@ INSERT INTO fixinformation (
     certification
 ) VALUES (
     $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11
-) RETURNING user_id, first_name, last_name, email, hashed_password, birth, country, gender, blood, age, constellation, certification, created_at, password_changed_at
+) RETURNING user_id, first_name, last_name, email, hashed_password, birth, country, gender, blood, age, constellation, certification, created_at, password_changed_at, role
 `
 
 type CreateUserFixInformationParams struct {
@@ -72,6 +71,7 @@ func (q *Queries) CreateUserFixInformation(ctx context.Context, arg CreateUserFi
 		&i.Certification,
 		&i.CreatedAt,
 		&i.PasswordChangedAt,
+		&i.Role,
 	)
 	return i, err
 }
@@ -87,7 +87,7 @@ func (q *Queries) DeleteUser(ctx context.Context, userID int32) error {
 }
 
 const getUserFixInformation = `-- name: GetUserFixInformation :one
-SELECT user_id, first_name, last_name, email, hashed_password, birth, country, gender, blood, age, constellation, certification, created_at, password_changed_at FROM fixinformation
+SELECT user_id, first_name, last_name, email, hashed_password, birth, country, gender, blood, age, constellation, certification, created_at, password_changed_at, role FROM fixinformation
 WHERE Email = $1
 `
 
@@ -109,17 +109,18 @@ func (q *Queries) GetUserFixInformation(ctx context.Context, email string) (Fixi
 		&i.Certification,
 		&i.CreatedAt,
 		&i.PasswordChangedAt,
+		&i.Role,
 	)
 	return i, err
 }
 
-const listFixInformaion = `-- name: ListFixInformaion :many
-SELECT user_id, first_name, last_name, email, hashed_password, birth, country, gender, blood, age, constellation, certification, created_at, password_changed_at FROM fixinformation
+const listFixInformation = `-- name: ListFixInformation :many
+SELECT user_id, first_name, last_name, email, hashed_password, birth, country, gender, blood, age, constellation, certification, created_at, password_changed_at, role FROM fixinformation
 ORDER BY user_id
 `
 
-func (q *Queries) ListFixInformaion(ctx context.Context) ([]Fixinformation, error) {
-	rows, err := q.db.Query(ctx, listFixInformaion)
+func (q *Queries) ListFixInformation(ctx context.Context) ([]Fixinformation, error) {
+	rows, err := q.db.Query(ctx, listFixInformation)
 	if err != nil {
 		return nil, err
 	}
@@ -142,6 +143,7 @@ func (q *Queries) ListFixInformaion(ctx context.Context) ([]Fixinformation, erro
 			&i.Certification,
 			&i.CreatedAt,
 			&i.PasswordChangedAt,
+			&i.Role,
 		); err != nil {
 			return nil, err
 		}
@@ -157,7 +159,7 @@ const updatePassword = `-- name: UpdatePassword :one
 UPDATE fixinformation
 SET hashed_password = $2
 WHERE user_id = $1
-RETURNING user_id, first_name, last_name, email, hashed_password, birth, country, gender, blood, age, constellation, certification, created_at, password_changed_at
+RETURNING user_id, first_name, last_name, email, hashed_password, birth, country, gender, blood, age, constellation, certification, created_at, password_changed_at, role
 `
 
 type UpdatePasswordParams struct {
@@ -183,6 +185,7 @@ func (q *Queries) UpdatePassword(ctx context.Context, arg UpdatePasswordParams) 
 		&i.Certification,
 		&i.CreatedAt,
 		&i.PasswordChangedAt,
+		&i.Role,
 	)
 	return i, err
 }

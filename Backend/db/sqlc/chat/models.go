@@ -11,7 +11,7 @@ import (
 type Recordtest struct {
 	UserID    int32              `json:"user_id"`
 	TargetID  int32              `json:"target_id"`
-	Message   string        `json:"message"`
-	Images    string        `json:"images"`
+	Message   pgtype.Text        `json:"message"`
+	Images    pgtype.Text        `json:"images"`
 	CreatedAt pgtype.Timestamptz `json:"created_at"`
 }
