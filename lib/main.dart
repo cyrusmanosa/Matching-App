@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:dating_your_date/theme/theme_helper.dart';
 import 'package:dating_your_date/routes/app_routes.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 

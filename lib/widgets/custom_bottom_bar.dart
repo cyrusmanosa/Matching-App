@@ -16,28 +16,28 @@ class CustomBottomBarState extends State<CustomBottomBar> {
     BottomMenuModel(
       icon: ImageConstant.imgNav,
       activeIcon: ImageConstant.imgNav,
-      title: "ホーム",
+      label: "ホーム",
       type: BottomBarEnum.tf,
     ),
     // ターゲット
     BottomMenuModel(
       icon: ImageConstant.imgNavPrimary,
       activeIcon: ImageConstant.imgNavPrimary,
-      title: "ターゲット",
+      label: "ターゲット",
       type: BottomBarEnum.tf1,
     ),
     // チャット
     BottomMenuModel(
       icon: ImageConstant.imgNavPrimary41x41,
       activeIcon: ImageConstant.imgNavPrimary41x41,
-      title: "チャット",
+      label: "チャット",
       type: BottomBarEnum.tf2,
     ),
     // プロフィール
     BottomMenuModel(
       icon: ImageConstant.imgNav41x41,
       activeIcon: ImageConstant.imgNav41x41,
-      title: "プロフィール",
+      label: "プロフィール",
       type: BottomBarEnum.tf3,
     )
   ];
@@ -59,6 +59,7 @@ class CustomBottomBarState extends State<CustomBottomBar> {
           // Footage
           return BottomNavigationBarItem(
             // Icon bar
+            label: "Test",
             icon: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -68,7 +69,7 @@ class CustomBottomBarState extends State<CustomBottomBar> {
                 Padding(
                   padding: EdgeInsets.only(top: 2.v),
                   child: Text(
-                    bottomMenuList[index].title ?? "",
+                    bottomMenuList[index].label!,
                     style: CustomTextStyles.roundedMplus1cPrimary.copyWith(color: theme.colorScheme.primary),
                   ),
                 ),
@@ -84,7 +85,7 @@ class CustomBottomBarState extends State<CustomBottomBar> {
                 Padding(
                   padding: EdgeInsets.only(top: 2.v),
                   child: Text(
-                    bottomMenuList[index].title ?? "",
+                    bottomMenuList[index].label!,
                     style: CustomTextStyles.roundedMplus1cCyan600.copyWith(color: appTheme.cyan600),
                   ),
                 ),
@@ -94,7 +95,7 @@ class CustomBottomBarState extends State<CustomBottomBar> {
         }),
         onTap: (index) {
           selectedIndex = index;
-          widget.onChanged?.call(bottomMenuList[index].type);
+          widget.onChanged?.call(bottomMenuList[index].type!);
           setState(() {});
         },
       ),
@@ -106,16 +107,16 @@ enum BottomBarEnum { tf, tf1, tf2, tf3 }
 
 class BottomMenuModel {
   BottomMenuModel({
-    this.title,
-    required this.activeIcon,
-    required this.icon,
-    required this.type,
+    this.label,
+    this.activeIcon,
+    this.icon,
+    this.type,
   });
 
-  String activeIcon;
-  String icon;
-  String? title;
-  BottomBarEnum type;
+  String? activeIcon;
+  String? icon;
+  String? label;
+  BottomBarEnum? type;
 }
 
 class DefaultWidget extends StatelessWidget {

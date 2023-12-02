@@ -1,6 +1,6 @@
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/presentation/Chat/Chat.dart';
-import 'package:dating_your_date/presentation/CompanionshipConditionsRepair.dart';
+import 'package:dating_your_date/presentation/AccompanyConditionsRepair.dart';
 import 'package:dating_your_date/presentation/DeleteTarget.dart';
 import 'package:dating_your_date/presentation/HobbyConditionRepair.dart';
 import 'package:dating_your_date/presentation/Home/Home.dart';
@@ -71,8 +71,8 @@ class ContainerScreen extends StatelessWidget {
         return ChatBox();
       case AppRoutes.profileEdit:
         return ProfileEdit();
-      case AppRoutes.companionshipConditionsRepair:
-        return CompanionshipConditionsRepair();
+      case AppRoutes.accompanyConditionsRepair:
+        return AccompanyConditionsRepair();
       case AppRoutes.hobbyConditionRepair:
         return HobbyConditionRepair();
       case AppRoutes.loverConditionsRepair:

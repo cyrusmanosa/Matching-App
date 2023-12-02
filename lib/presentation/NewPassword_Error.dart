@@ -20,7 +20,7 @@ class NewPasswordError extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         body: Container(
           width: double.maxFinite,
-          padding: EdgeInsets.only(left: 30.h, top: 65.v, right: 30.h),
+          padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
           child: Column(
             children: [
               // logo

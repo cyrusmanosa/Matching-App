@@ -8,16 +8,17 @@ import 'package:dating_your_date/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable, camel_case_types
-class CompanionshipConditions extends StatelessWidget {
-  CompanionshipConditions({Key? key}) : super(key: key);
+class AccompanyConditionsRepair extends StatelessWidget {
+  AccompanyConditionsRepair({Key? key}) : super(key: key);
 
-  TextEditingController companionshipEraController = TextEditingController();
-  TextEditingController companionshipCountryController = TextEditingController();
-  TextEditingController companionshipCityController = TextEditingController();
-  TextEditingController companionshipGenderController = TextEditingController();
-  TextEditingController companionshipAccompanyTypeController = TextEditingController();
-  TextEditingController companionshipFindTargetController = TextEditingController();
-  TextEditingController companionshipSociabilityController = TextEditingController();
+  TextEditingController resetAccompanyEraController = TextEditingController();
+  TextEditingController resetAccompanyCountryController = TextEditingController();
+  TextEditingController resetAccompanyCityController = TextEditingController();
+  TextEditingController resetAccompanyGenderController = TextEditingController();
+  TextEditingController resetAccompanyAccompanyTypeController = TextEditingController();
+  TextEditingController resetAccompanyFindTargetController = TextEditingController();
+  TextEditingController resetAccompanySociabilityController = TextEditingController();
+  GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -35,32 +36,32 @@ class CompanionshipConditions extends StatelessWidget {
             child: Column(
               children: [
                 // Era
-                CustomInputBar(titleName: "年代:", backendPart: _buildCompanionshipEraInput(context)),
+                CustomInputBar(titleName: "年代:", backendPart: _buildAccompanyResetEraInput(context)),
                 SizedBox(height: 15.v),
 
                 // Country
-                CustomInputBar(titleName: "国籍:", backendPart: _buildCompanionshipCountryInput(context)),
+                CustomInputBar(titleName: "国籍:", backendPart: _buildAccompanyResetCountryInput(context)),
                 SizedBox(height: 15.v),
 
                 // City
-                CustomInputBar(titleName: "居住地:", backendPart: _buildCompanionshipCityInput(context)),
+                CustomInputBar(titleName: "居住地:", backendPart: _buildAccompanyResetCityInput(context)),
                 SizedBox(height: 15.v),
 
                 // Gender
-                CustomInputBar(titleName: "性別:", backendPart: _buildCompanionshipGenderInput(context)),
+                CustomInputBar(titleName: "性別:", backendPart: _buildAccompanyResetGenderInput(context)),
                 SizedBox(height: 15.v),
 
                 // Accompany Type
-                CustomInputBar(titleName: "お相伴のタイプ:", backendPart: _buildCompanionshipAccompanyTypeInput(context)),
+                CustomInputBar(titleName: "お相伴のタイプ:", backendPart: _buildAccompanyResetAccompanyTypeInput(context)),
                 SizedBox(height: 15.v),
 
                 // Find Target
-                CustomInputBar(titleName: "探す対象:", backendPart: _buildCompanionshipFindTargetInput(context)),
+                CustomInputBar(titleName: "探す対象:", backendPart: _buildAccompanyResetFindTargetInput(context)),
                 SizedBox(height: 15.v),
 
                 // Sociability
-                CustomInputBar(titleName: "社交力:", backendPart: _buildCompanionshipSociabilityInput(context)),
-                SizedBox(height: 20.v),
+                CustomInputBar(titleName: "社交力:", backendPart: _buildAccompanyResetSociabilityInput(context)),
+                SizedBox(height: 23.v),
 
                 // 本人
                 Align(
@@ -79,7 +80,6 @@ class CompanionshipConditions extends StatelessWidget {
                     ],
                   ),
                 ),
-
                 SizedBox(height: 40),
 
                 _buildCertificationForCheck(context),
@@ -102,68 +102,67 @@ class CompanionshipConditions extends StatelessWidget {
           onTapArrowLeft(context);
         },
       ),
-      title: AppbarTitle(text: "お相伴の条件設定", margin: EdgeInsets.only(top: 60, bottom: 20)),
+      title: AppbarTitle(text: "お相伴の条件更改", margin: EdgeInsets.only(top: 60, bottom: 20)),
       styleType: Style.bgFill,
     );
   }
 
-  /// ture back
   onTapArrowLeft(BuildContext context) {
     Navigator.pop(context);
   }
 
-  /// Era
-  Widget _buildCompanionshipEraInput(BuildContext context) {
+  /// Section Widget
+  Widget _buildAccompanyResetEraInput(BuildContext context) {
     return CustomTextFormField(
-      controller: companionshipEraController,
+      controller: resetAccompanyEraController,
       hintText: "３０代",
     );
   }
 
-  /// Country
-  Widget _buildCompanionshipCountryInput(BuildContext context) {
+  /// Section Widget
+  Widget _buildAccompanyResetCountryInput(BuildContext context) {
     return CustomTextFormField(
-      controller: companionshipCountryController,
+      controller: resetAccompanyCountryController,
       hintText: "日本",
     );
   }
 
-  /// City
-  Widget _buildCompanionshipCityInput(BuildContext context) {
+  /// Section Widget
+  Widget _buildAccompanyResetCityInput(BuildContext context) {
     return CustomTextFormField(
-      controller: companionshipCityController,
+      controller: resetAccompanyCityController,
       hintText: "大阪",
     );
   }
 
-  /// Gender
-  Widget _buildCompanionshipGenderInput(BuildContext context) {
+  /// Section Widget
+  Widget _buildAccompanyResetGenderInput(BuildContext context) {
     return CustomTextFormField(
-      controller: companionshipGenderController,
+      controller: resetAccompanyGenderController,
       hintText: "男",
     );
   }
 
-  /// Accompany Type
-  Widget _buildCompanionshipAccompanyTypeInput(BuildContext context) {
+  /// Section Widget
+  Widget _buildAccompanyResetAccompanyTypeInput(BuildContext context) {
     return CustomTextFormField(
-      controller: companionshipAccompanyTypeController,
+      controller: resetAccompanyAccompanyTypeController,
       hintText: "おしゃべり",
     );
   }
 
-  /// FindTarget
-  Widget _buildCompanionshipFindTargetInput(BuildContext context) {
+  /// Section Widget
+  Widget _buildAccompanyResetFindTargetInput(BuildContext context) {
     return CustomTextFormField(
-      controller: companionshipFindTargetController,
+      controller: resetAccompanyFindTargetController,
       hintText: "聞き役",
     );
   }
 
-  /// Sociability
-  Widget _buildCompanionshipSociabilityInput(BuildContext context) {
+  /// Section Widget
+  Widget _buildAccompanyResetSociabilityInput(BuildContext context) {
     return CustomTextFormField(
-      controller: companionshipSociabilityController,
+      controller: resetAccompanySociabilityController,
       hintText: "人たら神",
       textInputAction: TextInputAction.done,
     );
@@ -183,6 +182,6 @@ class CompanionshipConditions extends StatelessWidget {
   }
 
   onTaptf(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.payDone);
+    Navigator.pushNamed(context, AppRoutes.deleteTarget);
   }
 }

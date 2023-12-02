@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		StMlIvzPRawa6VANigPuyFwlsz4=
+		FPMbUrV+4DFwTlqEkX5OHrM+M6c=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		ovFW/Uxx3WmEP1/vB6Ib+862nnQ=
+		VoYu9paARz2Wr5yU/4RcNXVb1Jo=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
@@ -70,7 +70,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
-		JebNDNnm4qB0uGYaDlbUP0qIl84=
+		d24YtM5a6tywVKMd96p4tDfAAes=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/fonts/MontserratSemiBold.ttf</key>
 		<data>
@@ -226,7 +226,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		oKzNAOtq2RO/VmNak6iL0XwMT4o=
+		RHCyW/PE4jhBrd0eOdWbA/NlbIQ=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/shaders/ink_sparkle.frag</key>
 		<data>
@@ -331,6 +331,18 @@
 		<key>Frameworks/Flutter.framework/icudtl.dat</key>
 		<data>
 		nMTZkkm9uooDDa8A2YJSyK73oP8=
+		</data>
+		<key>Frameworks/flutter_email_sender.framework/Info.plist</key>
+		<data>
+		BehygC4FPo49L+qL4PPDmsJ0gVc=
+		</data>
+		<key>Frameworks/flutter_email_sender.framework/_CodeSignature/CodeResources</key>
+		<data>
+		oGDrqkc3t+UC/ic36KIHJs7YsV4=
+		</data>
+		<key>Frameworks/flutter_email_sender.framework/flutter_email_sender</key>
+		<data>
+		gaeeiS4gUzKKK+g8hwCODaP0Qjk=
 		</data>
 		<key>Frameworks/path_provider_foundation.framework/Info.plist</key>
 		<data>
@@ -441,7 +453,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			EgRXgyqDd4Mkwm+G6lZeV5M0C9tYFUrEzDWsutjl0KU=
+			l1xLzqyVSGbh0jSKulhHYtoMsT+4DcbrsQ3HNEBrcx8=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -455,7 +467,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			XYM7QL0ELjRp/MGqAgbLM5ZvDzTs9nDfT+1zhFNloT8=
+			7ysuW93Yp+BrKmkC4DOtwHzehtZyoC1wJXgJCIE/43o=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
@@ -483,7 +495,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			bydaCV4Pgj5cCY//4XIVQykQU2BsZJYZ7XiY9reBsAo=
+			i8Tpa4sYdlOMrWSa7Ost9K+uH0IIMuM0p3jCKSVxmr4=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/fonts/MontserratSemiBold.ttf</key>
@@ -756,7 +768,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Ku+dhZ2XU7WG0LjjQKQhR+/mpIFHUFNDG8OR2VuAV4c=
+			L8Tex6la/NmRDZ0mLIHi+dJ4Y8bzZhPEqpT+VMd6G0w=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/shaders/ink_sparkle.frag</key>
@@ -939,6 +951,27 @@
 			<key>hash2</key>
 			<data>
 			rETMw/Yb9jC7IPuAQ9hs/kyJldBrRgCEQA20XXBJezA=
+			</data>
+		</dict>
+		<key>Frameworks/flutter_email_sender.framework/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			aew1WbvTU8x3qe2L2d28NZu2GazKgpk9OY59xM6YJ74=
+			</data>
+		</dict>
+		<key>Frameworks/flutter_email_sender.framework/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			UYNraY3iRkkV+AdVaIn4k/sC1Okp4sXssYec9hhUYmk=
+			</data>
+		</dict>
+		<key>Frameworks/flutter_email_sender.framework/flutter_email_sender</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			JeQxoMyQ4+h5tH48kA/Dnv9c7ueyg7SQHeW4cjUXmcY=
 			</data>
 		</dict>
 		<key>Frameworks/path_provider_foundation.framework/Info.plist</key>

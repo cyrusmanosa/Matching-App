@@ -31,86 +31,81 @@ class ProfileEdit extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: _buildHeader(context),
-        body: SizedBox(
+        body: Container(
           width: double.maxFinite,
-          child: Column(
-            children: [
-              SizedBox(height: 15.v),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      // photos
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CustomImageView(
-                            imagePath: ImageConstant.imgVectorgray500,
-                            height: 150.adaptSize,
-                            width: 150.adaptSize,
-                            margin: EdgeInsets.only(top: 10.v, bottom: 9.v),
-                          ),
-                          CustomImageView(
-                            imagePath: ImageConstant.imgPhotoSet,
-                            height: 169.v,
-                            width: 50.h,
-                            margin: EdgeInsets.only(left: 22.h),
-                          ),
-                        ],
-                      ),
-
-                      // Introduce
-                      CustomInputBar(titleName: "自己紹介:", backendPart: _buildUpdateBasicIntroduceInput(context)),
-                      SizedBox(height: 15.v),
-
-                      // Nickname
-                      CustomInputBar(titleName: "ニックネーム:", backendPart: _buildUpdateBasicNickNameInput(context)),
-                      SizedBox(height: 15.v),
-
-                      // Height
-                      CustomInputBar(titleName: "身長:", backendPart: _buildUpdateBasicHeightInput(context)),
-                      SizedBox(height: 15.v),
-
-                      // Weight
-                      CustomInputBar(titleName: "体重:", backendPart: _buildUpdateBasicWeightInput(context)),
-                      SizedBox(height: 15.v),
-
-                      // City
-                      CustomInputBar(titleName: "居住地:", backendPart: _buildUpdateBasicCityInput(context)),
-                      SizedBox(height: 15.v),
-
-                      // Education
-                      CustomInputBar(titleName: "学歴:", backendPart: _buildUpdateBasicEducationInput(context)),
-                      SizedBox(height: 15.v),
-
-                      // Job
-                      CustomInputBar(titleName: "職種:", backendPart: _buildUpdateBasicJobInput(context)),
-                      SizedBox(height: 15.v),
-
-                      // Annual Salary
-                      CustomInputBar(titleName: "年収:", backendPart: _buildUpdateBasicAnnualSalaryInput(context)),
-                      SizedBox(height: 15.v),
-
-                      // Sexual
-                      CustomInputBar(titleName: "性的指向:", backendPart: _buildUpdateBasicSexualInput(context)),
-                      SizedBox(height: 15.v),
-
-                      // Sociability
-                      CustomInputBar(titleName: "社交力:", backendPart: _buildUpdateBasicSociabilityInput(context)),
-                      SizedBox(height: 15.v),
-
-                      // Relighious
-                      CustomInputBar(titleName: "宗教:", backendPart: _buildUpdateBasicReligiousInput(context)),
-                      SizedBox(height: 40.v),
-
-                      // button
-                      _buildSubmitButton(context),
-                      SizedBox(height: 30.v),
-                    ],
-                  ),
+          child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: 40),
+            child: Column(
+              children: [
+                // photos
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomImageView(
+                      imagePath: ImageConstant.imgVectorgray500,
+                      height: 150.adaptSize,
+                      width: 150.adaptSize,
+                      margin: EdgeInsets.symmetric(vertical: 10),
+                    ),
+                    CustomImageView(
+                      imagePath: ImageConstant.imgPhotoSet,
+                      height: 170.v,
+                      width: 50.h,
+                      margin: EdgeInsets.only(left: 22.h),
+                    ),
+                  ],
                 ),
-              ),
-            ],
+
+                // Introduce
+                CustomInputBar(titleName: "自己紹介:", backendPart: _buildUpdateBasicIntroduceInput(context)),
+                SizedBox(height: 15.v),
+
+                // Nickname
+                CustomInputBar(titleName: "ニックネーム:", backendPart: _buildUpdateBasicNickNameInput(context)),
+                SizedBox(height: 15.v),
+
+                // Height
+                CustomInputBar(titleName: "身長:", backendPart: _buildUpdateBasicHeightInput(context)),
+                SizedBox(height: 15.v),
+
+                // Weight
+                CustomInputBar(titleName: "体重:", backendPart: _buildUpdateBasicWeightInput(context)),
+                SizedBox(height: 15.v),
+
+                // City
+                CustomInputBar(titleName: "居住地:", backendPart: _buildUpdateBasicCityInput(context)),
+                SizedBox(height: 15.v),
+
+                // Education
+                CustomInputBar(titleName: "学歴:", backendPart: _buildUpdateBasicEducationInput(context)),
+                SizedBox(height: 15.v),
+
+                // Job
+                CustomInputBar(titleName: "職種:", backendPart: _buildUpdateBasicJobInput(context)),
+                SizedBox(height: 15.v),
+
+                // Annual Salary
+                CustomInputBar(titleName: "年収:", backendPart: _buildUpdateBasicAnnualSalaryInput(context)),
+                SizedBox(height: 15.v),
+
+                // Sexual
+                CustomInputBar(titleName: "性的指向:", backendPart: _buildUpdateBasicSexualInput(context)),
+                SizedBox(height: 15.v),
+
+                // Sociability
+                CustomInputBar(titleName: "社交力:", backendPart: _buildUpdateBasicSociabilityInput(context)),
+                SizedBox(height: 15.v),
+
+                // Relighious
+                CustomInputBar(titleName: "宗教:", backendPart: _buildUpdateBasicReligiousInput(context)),
+                SizedBox(height: 40.v),
+
+                // button
+                _buildSubmitButton(context),
+                SizedBox(height: 30.v),
+              ],
+            ),
           ),
         ),
       ),
@@ -232,9 +227,10 @@ class ProfileEdit extends StatelessWidget {
   /// button
   Widget _buildSubmitButton(BuildContext context) {
     return CustomOutlinedButton(
-      width: 150.h,
+      width: 110.h,
+      height: 40,
       text: "確認",
-      buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
+      buttonTextStyle: theme.textTheme.titleMedium,
     );
   }
 }

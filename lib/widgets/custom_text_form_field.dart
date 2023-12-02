@@ -20,6 +20,7 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixConstraints,
     this.textStyle,
     this.width,
+    this.height,
     this.validator,
     this.textInputAction = TextInputAction.next,
     this.textInputType = TextInputType.text,
@@ -36,6 +37,7 @@ class CustomTextFormField extends StatelessWidget {
   final BoxConstraints? suffixConstraints;
   final Color? fillColor;
   final double? width;
+  final double? height;
   final EdgeInsets? contentPadding;
   final FocusNode? focusNode;
   final FormFieldValidator<String>? validator;
@@ -57,6 +59,7 @@ class CustomTextFormField extends StatelessWidget {
   }
 
   Widget get textFormFieldWidget => SizedBox(
+        height: height,
         width: width ?? double.maxFinite,
         child: TextFormField(
           autofocus: autofocus!,

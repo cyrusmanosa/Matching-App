@@ -52,7 +52,7 @@ class Profile extends StatelessWidget {
 
                       // intro
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 35.h),
+                        padding: EdgeInsets.symmetric(horizontal: 20),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -62,14 +62,37 @@ class Profile extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(height: 150.v),
+                      SizedBox(height: 100.v),
 
                       // title
                       Text("個人基本情報", style: CustomTextStyles.headlineSmallRoundedMplus1c),
                       SizedBox(height: 25.v),
 
                       // Nick Name
-                      _buildShowNicknameBar(context),
+                      ShownDataBaWidget(item: "ニックネーム", data: "泰泰"),
+                      SizedBox(height: 25.v),
+                      ShownDataBaWidget(item: "身長", data: "泰泰"),
+                      SizedBox(height: 25.v),
+                      ShownDataBaWidget(item: "体重", data: "泰泰"),
+                      SizedBox(height: 25.v),
+                      ShownDataBaWidget(item: "居住地", data: "泰泰"),
+                      SizedBox(height: 25.v),
+                      ShownDataBaWidget(item: "学歴", data: "泰泰"),
+                      SizedBox(height: 25.v),
+                      ShownDataBaWidget(item: "趣味", data: "泰泰"),
+                      SizedBox(height: 25.v),
+                      ShownDataBaWidget(item: "職種", data: "泰泰"),
+                      SizedBox(height: 25.v),
+                      ShownDataBaWidget(item: "性的指向", data: "泰泰"),
+                      SizedBox(height: 25.v),
+                      ShownDataBaWidget(item: "社交力", data: "泰泰"),
+                      SizedBox(height: 25.v),
+                      ShownDataBaWidget(item: "探す対象", data: "泰泰"),
+                      SizedBox(height: 25.v),
+                      ShownDataBaWidget(item: "目的", data: "泰泰"),
+                      SizedBox(height: 25.v),
+                      ShownDataBaWidget(item: "宗教", data: "泰泰"),
+
                       SizedBox(height: 40.v),
 
                       // edit button
@@ -108,11 +131,13 @@ class Profile extends StatelessWidget {
     );
   }
 
-// Part2 All in one
+  // Part2 All in one
   Widget _buildInformationBar(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 35.h),
-        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      padding: EdgeInsets.symmetric(horizontal: 35.h),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
           _buildChangeWord(context),
           // link1
           SizedBox(
@@ -136,7 +161,9 @@ class Profile extends StatelessWidget {
             ),
           ),
           _buildSendWord(context)
-        ]));
+        ],
+      ),
+    );
   }
 
   // Part2 Backend
@@ -152,24 +179,6 @@ class Profile extends StatelessWidget {
 
   Widget _buildSendWord(BuildContext context) {
     return Column(children: [Text("伝送回数", style: theme.textTheme.titleMedium), Text("0", style: theme.textTheme.headlineSmall)]);
-  }
-
-  /// Nick Name
-  Widget _buildShowNicknameBar(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15.h),
-      child: ListView.separated(
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        separatorBuilder: (context, index) {
-          return SizedBox(height: 24.v);
-        },
-        itemCount: 1,
-        itemBuilder: (context, index) {
-          return ShownicknamebarItemWidget();
-        },
-      ),
-    );
   }
 
 // edit button

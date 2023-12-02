@@ -1,0 +1,17 @@
+verson: '3.1'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: root
+    port:
+      - 5432:5432
+
+  admin:
+    image: adminer
+    restart: always
+    port:
+      - 8082:8080

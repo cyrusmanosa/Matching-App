@@ -7,8 +7,8 @@ import '../core/app_export.dart';
 
 class CustomTextStyles {
   // Body text style
-  static get bodyLargeBlack900 => theme.textTheme.bodyLarge!.copyWith(color: appTheme.black900);
-  static get bodyLargePinkA100 => theme.textTheme.bodyLarge!.copyWith(color: appTheme.pinkA100);
+  static get bodyLargeBlack900 => theme.textTheme.bodyLarge!.copyWith(color: appTheme.black900, fontSize: 18);
+  static get bodyLargePinkA100 => theme.textTheme.bodyLarge!.copyWith(color: appTheme.pinkA100, fontSize: 18);
   static get bodyMediumBlack900 => theme.textTheme.bodyMedium!.copyWith(color: appTheme.black900, fontSize: 13.fSize);
   static get bodyMediumgray500 => theme.textTheme.bodyMedium!.copyWith(color: appTheme.gray500);
   static get bodyMediumOnPrimary => theme.textTheme.bodyMedium!.copyWith(color: theme.colorScheme.onPrimary);

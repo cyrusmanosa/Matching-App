@@ -37,7 +37,7 @@ class HobbyConditionRepair extends StatelessWidget {
           child: Container(
             width: double.maxFinite,
             child: SingleChildScrollView(
-              padding: EdgeInsets.only(left: 30.h, top: 65.v, right: 30.h),
+              padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
               child: Column(
                 children: [
                   SizedBox(height: 50.v),

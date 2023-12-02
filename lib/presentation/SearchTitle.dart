@@ -52,7 +52,7 @@ class SearchTitle extends StatelessWidget {
                 text: "お相伴",
                 buttonStyle: CustomButtonStyles.fillRed,
                 onPressed: () {
-                  onTaptFirstCompanionshipCondition(context);
+                  onTaptFirstAccompanyCondition(context);
                 },
               ),
             ],
@@ -70,7 +70,7 @@ class SearchTitle extends StatelessWidget {
     Navigator.pushNamed(context, AppRoutes.loverConditions);
   }
 
-  onTaptFirstCompanionshipCondition(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.companionshipConditions);
+  onTaptFirstAccompanyCondition(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.accompanyConditions);
   }
 }

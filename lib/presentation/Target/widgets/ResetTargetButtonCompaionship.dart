@@ -20,5 +20,5 @@ class ResetTargetButtonCompaionship extends StatelessWidget {
 
 /// Navigates to the k3Screen when the action is triggered.
 onTaptf(BuildContext context) {
-  Navigator.pushNamed(context, AppRoutes.companionshipConditionsRepair);
+  Navigator.pushNamed(context, AppRoutes.accompanyConditionsRepair);
 }

@@ -42,58 +42,8 @@ class LoverConditions extends StatelessWidget {
             padding: EdgeInsets.only(left: 30.h, top: 30, right: 30.h),
             child: Column(
               children: [
-                // Text(
-                //   "年齢:",
-                //   style: theme.textTheme.titleLarge,
-                // ),
-                // // Age range
-                // Align(
-                //   alignment: Alignment.centerLeft,
-                //   child: Padding(
-                //     padding: EdgeInsets.only(left: 30.h),
-                //     child: Row(
-                //       children: [
-                //         // Min
-                //         Container(
-                //           height: 65.h,
-                //           width: 60.v,
-                //           decoration: BoxDecoration(
-                //             border: Border.all(color: Colors.red, width: 2),
-                //           ),
-                //           child: Stack(
-                //             children: [
-                //               _buildLoverMinAgeInput(context),
-                //             ],
-                //           ),
-                //         ),
-
-                //         // から
-                //         Padding(
-                //           padding: EdgeInsets.only(
-                //             left: 10.h,
-                //             right: 10.h,
-                //             top: 30.v,
-                //             bottom: 5,
-                //           ),
-                //           child: Text("から", style: theme.textTheme.titleLarge),
-                //         ),
-
-                //         // Max
-                //         Container(
-                //           height: 40,
-                //           width: 60,
-                //           decoration: BoxDecoration(
-                //             border: Border.all(color: Colors.red, width: 2),
-                //           ),
-                //           child: Stack(
-                //             children: [_buildLoverMaxAgeInput(context)],
-                //           ),
-                //         )
-                //       ],
-                //     ),
-                //   ),
-                // ),
-                // SizedBox(height: 15.v),
+                // _buildLoverAgeInput(context),
+                SizedBox(height: 15.v),
 
                 // Country
                 CustomInputBar(titleName: "国籍:", backendPart: _buildLoverCountryInput(context)),
@@ -201,7 +151,7 @@ class LoverConditions extends StatelessWidget {
   //   return CustomTextFormField(
   //     maxLength: 3,
   //     width: 60.h,
-  //     controller: resetLoverMinAgeInputController,
+  //     controller: loverMinAgeInputController,
   //     hintText: "30",
   //     alignment: Alignment.bottomCenter,
   //   );
@@ -211,10 +161,27 @@ class LoverConditions extends StatelessWidget {
   // Widget _buildLoverMaxAgeInput(BuildContext context) {
   //   return CustomTextFormField(
   //     maxLength: 3,
+  //     maxLines: 1,
   //     width: 60,
-  //     controller: resetLoverMaxAgeInputController,
+  //     height: 20,
+  //     controller: loverMaxAgeInputController,
   //     hintText: "30",
-  //     alignment: Alignment.bottomCenter,
+  //   );
+  // }
+
+  // Widget _buildLoverAgeInput(BuildContext context) {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       Text("年齢", style: theme.textTheme.titleLarge),
+  //       Container(
+  //         decoration: BoxDecoration(
+  //           border: Border.all(color: appTheme.pinkA100),
+  //           borderRadius: BorderRadiusStyle.r10,
+  //         ),
+  //         child: _buildLoverMaxAgeInput(context),
+  //       ),
+  //     ],
   //   );
   // }
 

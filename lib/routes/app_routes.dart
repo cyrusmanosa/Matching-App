@@ -1,11 +1,12 @@
+import 'package:dating_your_date/presentation/Password_Setup.dart';
 import 'package:dating_your_date/presentation/WarningDeleteUser.dart';
 import 'package:dating_your_date/presentation/WarningReturnResetPage.dart';
 import 'package:dating_your_date/presentation/appNavigationScreen.dart';
 
 import 'package:dating_your_date/presentation/Chat/Chat.dart';
 import 'package:dating_your_date/presentation/ChatBox.dart';
-import 'package:dating_your_date/presentation/CompanionshipConditions.dart';
-import 'package:dating_your_date/presentation/CompanionshipConditionsRepair.dart';
+import 'package:dating_your_date/presentation/AccompanyConditions.dart';
+import 'package:dating_your_date/presentation/AccompanyConditionsRepair.dart';
 import 'package:dating_your_date/presentation/ConfirmationCore.dart';
 import 'package:dating_your_date/presentation/ConfirmationCore_Error.dart';
 import 'package:dating_your_date/presentation/ContainerScreen.dart';
@@ -53,8 +54,8 @@ class AppRoutes {
   static const String containerScreen = '/containerScreen';
   static const String confirmationCore = '/confirmationCore';
   static const String confirmationCoreError = '/confirmationCoreError';
-  static const String companionshipConditions = '/companionshipConditions';
-  static const String companionshipConditionsRepair = '/companionshipConditionsRepair';
+  static const String accompanyConditions = '/AccompanyConditions';
+  static const String accompanyConditionsRepair = '/AccompanyConditionsRepair';
   static const String deleteTarget = '/deleteTarget';
   static const String emailConfirmation = '/emailConfirmation';
   static const String emailConfirmationError = '/emailConfirmationError';
@@ -70,6 +71,7 @@ class AppRoutes {
   static const String newPasswordSetup = '/newPasswordSetup';
   static const String newPasswordDone = '/newPasswordDone';
   static const String newTargetReady = '/newTargetReady';
+  static const String passwordSetup = '/passwordSetup';
   static const String passwordResetError = '/passwordResetError';
   static const String passwordResetEmail = '/passwordResetEmail';
   static const String payDone = '/payDone';
@@ -90,8 +92,8 @@ class AppRoutes {
     chat: (context) => Chat(),
     chatBox: (context) => ChatBox(),
     containerScreen: (context) => ContainerScreen(),
-    companionshipConditions: (context) => CompanionshipConditions(),
-    companionshipConditionsRepair: (context) => CompanionshipConditionsRepair(),
+    accompanyConditions: (context) => AccompanyConditions(),
+    accompanyConditionsRepair: (context) => AccompanyConditionsRepair(),
     confirmationCore: (context) => ConfirmationCore(),
     confirmationCoreError: (context) => ConfirmationCoreError(),
     deleteTarget: (context) => DeleteTarget(),
@@ -109,6 +111,7 @@ class AppRoutes {
     newPasswordError: (context) => NewPasswordError(),
     newPasswordSetup: (context) => NewPasswordSetup(),
     newTargetReady: (context) => NewTargetReady(),
+    passwordSetup: (context) => PasswordSetup(),
     passwordResetError: (context) => PasswordResetError(),
     passwordResetEmail: (context) => PasswordResetEmail(),
     payDone: (context) => PayDone(),

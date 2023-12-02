@@ -1,12 +1,19 @@
+import 'dart:math';
+
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/custom_outlined_button.dart';
 import 'package:dating_your_date/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 
 // ignore_for_file: must_be_immutable
 class EmailConfirmation extends StatelessWidget {
   EmailConfirmation({Key? key}) : super(key: key);
+
+  final _key = GlobalKey<FormState>();
+  RegExp emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+
   TextEditingController emailController = TextEditingController();
 
   @override
@@ -14,11 +21,11 @@ class EmailConfirmation extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: SafeArea(
-          // body: Form(
+        body: Form(
+          key: _key,
           child: Container(
             width: double.maxFinite,
-            padding: EdgeInsets.only(left: 30.h, top: 65.v, right: 30.h),
+            padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
             child: Column(
               children: [
                 // Logo
@@ -55,6 +62,7 @@ class EmailConfirmation extends StatelessWidget {
                   text: "送信する",
                   buttonTextStyle: theme.textTheme.titleSmall!,
                   onPressed: () {
+                    print('${emailController.text}');
                     onTaptf(context);
                   },
                 ),
@@ -65,11 +73,7 @@ class EmailConfirmation extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Container(
                     width: 315,
-                    child: Text(
-                      "（この手続きは1回のみで、以降表示されません）",
-                      overflow: TextOverflow.ellipsis,
-                      style: CustomTextStyles.bodyMediumBlack900,
-                    ),
+                    child: Text("（この手続きは1回のみで、以降表示されません）", overflow: TextOverflow.ellipsis, style: CustomTextStyles.bodyMediumBlack900),
                   ),
                 ),
               ],

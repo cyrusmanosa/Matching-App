@@ -9,9 +9,11 @@ dependencies:
   cached_network_image:
   flutter_svg: 
   flutter_svg_provider:
+  flutter_verification_code:
+  flutter_email_sender:
   intl: 
   google_fonts:
-  flutter_verification_code:
+  postgres: 
 
 dev_dependencies: 
   flutter_test: 
