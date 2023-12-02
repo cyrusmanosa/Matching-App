@@ -39,7 +39,7 @@ func newUserResponse(user info.Fixinformation) userResponse {
 	}
 }
 
-func (server *Server) CreateUserFixInformationControllers(ctx *gin.Context) {
+func (server *Server) CreateUserFixInfo(ctx *gin.Context) {
 	var req createUserRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
@@ -76,6 +76,42 @@ func (server *Server) CreateUserFixInformationControllers(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, rsq)
 }
 
+// Reset Password
+type ResetPasswordRequset struct {
+	UserID   int32  `json:"user_id" binding:"required"`
+	Password string `json:"password" binding:"required"`
+}
+
+func (server *Server) ResetPassword(ctx *gin.Context) {
+	var req ResetPasswordRequset
+	if err := ctx.ShouldBindJSON(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
+
+	hash, err := util.HashPassword(req.Password)
+	if err != nil {
+		return
+	}
+
+	NewPassword := info.UpdatePasswordParams{
+		UserID:         req.UserID,
+		HashedPassword: hash,
+	}
+
+	ResetPW, err := server.store.UpdatePassword(ctx, NewPassword)
+	if err != nil {
+		errCode := db.ErrorCode(err)
+		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+			ctx.JSON(http.StatusForbidden, errorResponse(err))
+			return
+		}
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+	ctx.JSON(http.StatusOK, ResetPW)
+}
+
 // Login
 type loginUserRequest struct {
 	Email    string `json:"email" binding:"required,email"`
@@ -86,7 +122,7 @@ type loginUserResponse struct {
 	User        userResponse `json:"user"`
 }
 
-func (server *Server) UserLoginControllers(ctx *gin.Context) {
+func (server *Server) UserLogin(ctx *gin.Context) {
 	var req loginUserRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))

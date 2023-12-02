@@ -40,16 +40,37 @@ func (server *Server) setupRouter() {
 	// before login
 	router.POST("/SignUp", server.CheckEmail)              // OK
 	router.POST("/SignUpCheckCode", server.CheckEmailCode) // OK
-	router.GET("/Login", server.UserLoginControllers)      // OK
+	router.GET("/Login", server.UserLogin)                 // OK
 
 	// transition
 
-	// after take the access token
-	authRoutes.POST("/CreateFixInfo", server.CreateUserFixInformationControllers)
-	authRoutes.POST("/CreateCanChangeInfo", server.CreateUserCanChangeInformationControllers)
+	// --------------after take the access token--------------
+	// Create
+	authRoutes.POST("/CreateFixInfo", server.CreateUserFixInfo)
+	authRoutes.POST("/CreateCanChangeInfo", server.CreateUserCanChangeInfo)
+	authRoutes.POST("/CreateHobby", server.CreateHobby)
+	authRoutes.POST("/CreateLover", server.CreateLover)
+	authRoutes.POST("/CreateAccompant", server.CreateAccompany)
+	authRoutes.POST("/CreateComplaint", server.CreateComplaint)
 
-	// for inside
-	authRoutes.GET("/UserList", server.ShowListFixInfo)
+	// Update
+	authRoutes.POST("/ChangePassword", server.ResetPassword)
+	authRoutes.POST("/UpdateCanChangeInfo", server.UpdateCanChangeInfo)
+	authRoutes.POST("/UpdateHobby", server.UpdateHobby)
+	authRoutes.POST("/UpdateLover", server.UpdateLover)
+	authRoutes.POST("/UpdateAccompany", server.UpdateAccompany)
+	authRoutes.POST("/UpdateComplaint", server.UpdateComplaint)
+
+	// --------------for staff--------------
+	// List
+	authRoutes.GET("/FixList", server.ShowListFixInfo)
+	authRoutes.GET("/CanChangeList", server.ShowListCanChangeInfo)
+	authRoutes.GET("/HobbyList", server.ShowListHobby)
+	authRoutes.GET("/LoverList", server.ShowListLover)
+	authRoutes.GET("/AccompanyList", server.ShowListAccompany)
+	authRoutes.GET("/ComplaintList", server.ShowListComplaint)
+
+	// Del
 	authRoutes.POST("/UserDel", server.DeleteUser)
 	server.router = router
 }

@@ -20,7 +20,6 @@ func CreateRandomComplaint(t *testing.T, user, arg Fixinformation) Complaint {
 		CpTargetID: arg.UserID,
 		CpType:     gofakeit.ConnectiveComplaint(),
 		CpMessage:  gofakeit.HackerPhrase(),
-		Status:     gofakeit.HackerPhrase(),
 	}
 
 	Cp, err := testinfoQueries.CreateComplaint(context.Background(), Complaint)
@@ -29,7 +28,6 @@ func CreateRandomComplaint(t *testing.T, user, arg Fixinformation) Complaint {
 	require.Equal(t, Cp.UserID, Complaint.UserID)
 	require.Equal(t, Cp.CpTargetID, Complaint.CpTargetID)
 	require.Equal(t, Cp.CpType, Complaint.CpType)
-	require.Equal(t, Cp.Status, Complaint.Status)
 	require.NotZero(t, Cp.CpID)
 	require.NotZero(t, Cp.ComplaintTime)
 
@@ -59,10 +57,8 @@ func TestUpdateUserComplaint(t *testing.T) {
 	Cp := CreateRandomComplaint(t, user, arg)
 
 	NCP := UpdateUserComplaintParams{
-		CpID:      Cp.CpID,
-		CpType:    gofakeit.ConnectiveComplaint(),
-		CpMessage: gofakeit.HackerPhrase(),
-		Status:    gofakeit.HackerPhrase(),
+		CpID:   Cp.CpID,
+		Status: gofakeit.HackerPhrase(),
 	}
 
 	UpdateCP, err := testinfoQueries.UpdateUserComplaint(context.Background(), NCP)

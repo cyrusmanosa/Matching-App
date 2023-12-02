@@ -53,25 +53,25 @@ CREATE TABLE "loverrequest" (
 
 CREATE TABLE "hobbyrequest" (
   "user_id" INT PRIMARY KEY,
-  "era" INT NOT NULL,
+  "era" INT,
   "city" VARCHAR NOT NULL,
   "gender" VARCHAR NOT NULL,
-  "height" INT NOT NULL,
-  "weight" INT NOT NULL,
+  "height" INT,
+  "weight" INT,
   "speaklanguage" VARCHAR NOT NULL,
   "find_type" VARCHAR NOT NULL,
   "find_target" VARCHAR NOT NULL,
-  "experience" INT NOT NULL,
-  "sociability" VARCHAR NOT NULL,
+  "experience" INT,
+  "sociability" VARCHAR,
   "certification" BOOLEAN DEFAULT FALSE,
   "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
 
 CREATE TABLE "accompanyrequest" (
   "user_id" INT PRIMARY KEY,
-  "era" INT NOT NULL,
+  "era" INT,
   "city" VARCHAR NOT NULL,
-  "gender" VARCHAR NOT NULL,
+  "gender" VARCHAR,
   "speaklanguage" VARCHAR NOT NULL,
   "find_type" VARCHAR NOT NULL,
   "find_target" VARCHAR NOT NULL,
@@ -84,15 +84,15 @@ CREATE TABLE "image" (
   "user_id" INT PRIMARY KEY,
   "qr" VARCHAR UNIQUE NOT NULL,
   "img1" VARCHAR NOT NULL,
-  "img2" VARCHAR NOT NULL,
-  "img3" VARCHAR NOT NULL,
-  "img4" VARCHAR NOT NULL,
-  "img5" VARCHAR NOT NULL
+  "img2" VARCHAR,
+  "img3" VARCHAR,
+  "img4" VARCHAR,
+  "img5" VARCHAR
 );
 
 CREATE TABLE "targetlist" (
   "user_id" INT PRIMARY KEY,
-  "target_1_id" INT,
+  "target_1_id" INT NOT NULL,
   "target_2_id" INT,
   "target_3_id" INT,
   "updated_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW())

@@ -5,7 +5,7 @@ import (
 	"net/smtp"
 )
 
-func SendMail(RequestCode string, to []string) {
+func SendValidateCodeOnMail(RequestCode string, to []string) {
 	auth := smtp.PlainAuth("", "studiocmkc0110@gmail.com", "iodvpvmlyvadnhfb", "smtp.gmail.com")
 	subject := "Verification Code Email for Dating Date"
 	body := `<html>

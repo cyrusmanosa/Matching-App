@@ -14,10 +14,9 @@ INSERT INTO complaint (
     user_id,
     cp_target_id,
     cp_type,
-    cp_message,
-    status
+    cp_message
 ) VALUES (
-    $1,$2,$3,$4,$5
+    $1,$2,$3,$4
 ) RETURNING cp_id, user_id, cp_target_id, cp_type, cp_message, status, complaint_time
 `
 
@@ -26,7 +25,6 @@ type CreateComplaintParams struct {
 	CpTargetID int32  `json:"cp_target_id"`
 	CpType     string `json:"cp_type"`
 	CpMessage  string `json:"cp_message"`
-	Status     string `json:"status"`
 }
 
 func (q *Queries) CreateComplaint(ctx context.Context, arg CreateComplaintParams) (Complaint, error) {
@@ -35,7 +33,6 @@ func (q *Queries) CreateComplaint(ctx context.Context, arg CreateComplaintParams
 		arg.CpTargetID,
 		arg.CpType,
 		arg.CpMessage,
-		arg.Status,
 	)
 	var i Complaint
 	err := row.Scan(
@@ -115,27 +112,18 @@ func (q *Queries) ListComplaint(ctx context.Context) ([]Complaint, error) {
 
 const updateUserComplaint = `-- name: UpdateUserComplaint :one
 UPDATE complaint
-SET cp_type = $2,
-    cp_message = $3,
-    status = $4
+SET status = $2
 WHERE cp_id = $1
 RETURNING cp_id, user_id, cp_target_id, cp_type, cp_message, status, complaint_time
 `
 
 type UpdateUserComplaintParams struct {
-	CpID      int32  `json:"cp_id"`
-	CpType    string `json:"cp_type"`
-	CpMessage string `json:"cp_message"`
-	Status    string `json:"status"`
+	CpID   int32  `json:"cp_id"`
+	Status string `json:"status"`
 }
 
 func (q *Queries) UpdateUserComplaint(ctx context.Context, arg UpdateUserComplaintParams) (Complaint, error) {
-	row := q.db.QueryRow(ctx, updateUserComplaint,
-		arg.CpID,
-		arg.CpType,
-		arg.CpMessage,
-		arg.Status,
-	)
+	row := q.db.QueryRow(ctx, updateUserComplaint, arg.CpID, arg.Status)
 	var i Complaint
 	err := row.Scan(
 		&i.CpID,

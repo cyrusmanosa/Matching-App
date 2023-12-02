@@ -39,7 +39,7 @@ func (server *Server) CheckEmail(ctx *gin.Context) {
 	} else {
 		req.Email = CE.Email
 		req.CheckCode = util.RandomCheckCode()
-		util.SendMail(req.CheckCode, []string{req.Email})
+		util.SendValidateCodeOnMail(req.CheckCode, []string{req.Email})
 		ctx.JSON(http.StatusOK, req)
 
 	}
