@@ -113,7 +113,7 @@ CREATE TABLE "complaint" (
   "cp_target_id" INT NOT NULL,
   "cp_type" VARCHAR NOT NULL,
   "cp_message" VARCHAR NOT NULL,
-  "status" VARCHAR NOT NULL,
+  "status" VARCHAR DEFAULT 'active',
   "complaint_time" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
 
