@@ -1,4 +1,4 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
+import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -8,14 +8,10 @@ class AppbarLeadingImage extends StatelessWidget {
     this.imagePath,
     this.margin,
     this.onTap,
-  }) : super(
-          key: key,
-        );
+  }) : super(key: key);
 
   String? imagePath;
-
   EdgeInsetsGeometry? margin;
-
   Function? onTap;
 
   @override
@@ -26,12 +22,7 @@ class AppbarLeadingImage extends StatelessWidget {
       },
       child: Padding(
         padding: margin ?? EdgeInsets.zero,
-        child: CustomImageView(
-          imagePath: imagePath,
-          height: 25.v,
-          width: 35.h,
-          fit: BoxFit.contain,
-        ),
+        child: CustomImageView(imagePath: imagePath, height: 25.v, width: 35.h, fit: BoxFit.contain),
       ),
     );
   }

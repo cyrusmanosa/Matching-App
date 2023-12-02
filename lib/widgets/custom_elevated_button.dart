@@ -1,21 +1,21 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
-import 'package:cyrus_man_s_application1/widgets/base_button.dart';
+import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/widgets/base_button.dart';
 import 'package:flutter/material.dart';
 
 class CustomElevatedButton extends BaseButton {
   CustomElevatedButton({
+    Alignment? alignment,
+    bool? isDisabled,
+    ButtonStyle? buttonStyle,
+    double? height,
+    double? width,
+    EdgeInsets? margin,
     Key? key,
+    TextStyle? buttonTextStyle,
+    VoidCallback? onPressed,
     this.decoration,
     this.leftIcon,
     this.rightIcon,
-    EdgeInsets? margin,
-    VoidCallback? onPressed,
-    ButtonStyle? buttonStyle,
-    Alignment? alignment,
-    TextStyle? buttonTextStyle,
-    bool? isDisabled,
-    double? height,
-    double? width,
     required String text,
   }) : super(
           text: text,
@@ -30,18 +30,13 @@ class CustomElevatedButton extends BaseButton {
         );
 
   final BoxDecoration? decoration;
-
   final Widget? leftIcon;
-
   final Widget? rightIcon;
 
   @override
   Widget build(BuildContext context) {
     return alignment != null
-        ? Align(
-            alignment: alignment ?? Alignment.center,
-            child: buildElevatedButtonWidget,
-          )
+        ? Align(alignment: alignment ?? Alignment.center, child: buildElevatedButtonWidget)
         : buildElevatedButtonWidget;
   }
 
@@ -58,10 +53,7 @@ class CustomElevatedButton extends BaseButton {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               leftIcon ?? const SizedBox.shrink(),
-              Text(
-                text,
-                style: buttonTextStyle ?? theme.textTheme.displayMedium,
-              ),
+              Text(text, style: buttonTextStyle ?? theme.textTheme.displayMedium),
               rightIcon ?? const SizedBox.shrink(),
             ],
           ),

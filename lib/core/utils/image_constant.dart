@@ -3,8 +3,8 @@ class ImageConstant {
   static String imagePath = 'assets/images';
 
   // ログイン images
-  static String imgLogosfacebook = '$imagePath/img_logosfacebook.svg';
-  static String imgClose = '$imagePath/img_close.svg';
+  static String imgLogosfacebook = '$imagePath/img_logosfacebook.png';
+  static String imgClose = '$imagePath/img_close.png';
   static String imgDevicongoogle = '$imagePath/img_devicongoogle.svg';
 
   // ターゲットを削除 images
@@ -38,7 +38,7 @@ class ImageConstant {
   static String imgUser = '$imagePath/img_user.svg';
   static String imgNavCyan60041x41 = '$imagePath/img_nav_cyan_600_41x41.svg';
   static String imgMenu = '$imagePath/img_menu.svg';
-  static String imgVectorGray60001 = '$imagePath/img_vector_gray_600_01.svg';
+  static String imgVectorgray500 = '$imagePath/img_vector_gray_600_01.svg';
   static String imgPhotoSet = '$imagePath/img_photo_set.svg';
   static String imgNav1 = '$imagePath/img_nav_1.svg';
   static String imageNotFound = 'assets/images/image_not_found.png';

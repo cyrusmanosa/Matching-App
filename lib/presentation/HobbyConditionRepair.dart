@@ -1,27 +1,27 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
-import 'package:cyrus_man_s_application1/presentation/k1_page/k1_page.dart';
-import 'package:cyrus_man_s_application1/widgets/app_bar/appbar_title.dart';
-import 'package:cyrus_man_s_application1/widgets/app_bar/custom_app_bar.dart';
-import 'package:cyrus_man_s_application1/widgets/custom_bottom_bar.dart';
-import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
-import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
+import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
+import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
+import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
+import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
+import 'package:dating_your_date/widgets/custom_outlined_button.dart';
+import 'package:dating_your_date/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable, camel_case_types
-class hobbyConditionRepair extends StatelessWidget {
-  hobbyConditionRepair({Key? key})
-      : super(
-          key: key,
-        );
+class HobbyConditionRepair extends StatelessWidget {
+  HobbyConditionRepair({Key? key}) : super(key: key);
 
-  TextEditingController ageController = TextEditingController();
-  TextEditingController nationalityController = TextEditingController();
-  TextEditingController residenceController = TextEditingController();
-  TextEditingController genderController = TextEditingController();
-  TextEditingController interestTypeController = TextEditingController();
-  TextEditingController group77Controller = TextEditingController();
-  TextEditingController experienceController = TextEditingController();
-  TextEditingController socialSkillsController = TextEditingController();
+  TextEditingController resetHobbyEraController = TextEditingController();
+  TextEditingController resetHobbyCountryController = TextEditingController();
+  TextEditingController resetHobbyCityController = TextEditingController();
+  TextEditingController resetHobbyGenderController = TextEditingController();
+  TextEditingController resetHobbyTypeController = TextEditingController();
+  TextEditingController resetHobbyFindTargetController = TextEditingController();
+  TextEditingController resetHobbyExperienceController = TextEditingController();
+  TextEditingController resetHobbySociabilityController = TextEditingController();
+  TextEditingController resetHobbyHeightController = TextEditingController();
+  TextEditingController resetHobbyWeightController = TextEditingController();
+
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
   @override
@@ -31,356 +31,209 @@ class hobbyConditionRepair extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: _buildAppBar(context),
-        body: SizedBox(
-          width: double.maxFinite,
-          child: Column(
-            children: [
-              SizedBox(height: 113.v),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30.h),
-                    child: Column(
-                      children: [
-                        _buildEraInput(context),
-                        SizedBox(height: 16.v),
-                        _buildCounityInput(context),
-                        SizedBox(height: 16.v),
-                        _buildCityInput(context),
-                        SizedBox(height: 16.v),
-                        _buildGenderInput(context),
-                        SizedBox(height: 16.v),
-                        _buildHobbyTypeInput(context),
-                        SizedBox(height: 16.v),
-                        _buildFindTargetInput(context),
-                        SizedBox(height: 16.v),
-                        _buildExperienceInput(context),
-                        SizedBox(height: 16.v),
-                        _buildWeightInput(context),
-                        SizedBox(height: 16.v),
-                        _buildWeightInput(context),
-                        SizedBox(height: 16.v),
-                        _buildSociabilityInput(context),
-                        SizedBox(height: 21.v),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 20.adaptSize,
-                                width: 20.adaptSize,
-                                decoration: BoxDecoration(
-                                  color: appTheme.blueGray100,
-                                  borderRadius: BorderRadius.circular(
-                                    10.h,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 10.h),
-                                child: Text(
-                                  "本人認証を確認しました",
-                                  style: theme.textTheme.bodyMedium,
-                                ),
-                              ),
-                            ],
+        // Header
+        appBar: _buildHeader(context),
+        body: Form(
+          child: Container(
+            width: double.maxFinite,
+            child: SingleChildScrollView(
+              padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
+              child: Column(
+                children: [
+                  SizedBox(height: 50.v),
+
+                  // Era
+                  CustomInputBar(titleName: "年代:", backendPart: _buildHobbyResetEraInput(context)),
+                  SizedBox(height: 15.v),
+
+                  // Country
+                  CustomInputBar(titleName: "国籍:", backendPart: _buildHobbyResetCountryInput(context)),
+                  SizedBox(height: 15.v),
+
+                  // City
+                  CustomInputBar(titleName: "居住地:", backendPart: _buildHobbyResetCityInput(context)),
+                  SizedBox(height: 15.v),
+
+                  // Gender
+                  CustomInputBar(titleName: "性別:", backendPart: _buildHobbyResetGenderInput(context)),
+                  SizedBox(height: 15.v),
+
+                  // Hobby
+                  CustomInputBar(titleName: "趣味のタイプ:", backendPart: _buildHobbyResetHobbyTypeInput(context)),
+                  SizedBox(height: 15.v),
+
+                  // Find Target
+                  CustomInputBar(titleName: "探す対象:", backendPart: _buildHobbyResetFindTargetInput(context)),
+                  SizedBox(height: 15.v),
+
+                  // Experience of Hobby
+                  CustomInputBar(titleName: "経験:", backendPart: _buildHobbyResetExperienceInput(context)),
+                  SizedBox(height: 15.v),
+
+                  // Height
+                  CustomInputBar(titleName: "身長:", backendPart: _buildHobbyResetHeightInput(context)),
+                  SizedBox(height: 15.v),
+
+                  // Weight
+                  CustomInputBar(titleName: "体重:", backendPart: _buildHobbyResetWeightInput(context)),
+                  SizedBox(height: 15.v),
+
+                  // Sociability
+                  CustomInputBar(titleName: "社交力:", backendPart: _buildHobbyResetSociabilityInput(context)),
+                  SizedBox(height: 5),
+
+                  // 本人
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 5),
+                      child: Row(
+                        children: [
+                          // 圓
+                          Container(
+                            height: 20.adaptSize,
+                            width: 20.adaptSize,
+                            decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
                           ),
-                        ),
-                        SizedBox(height: 28.v),
-                        _buildConditionConfirmation(context),
-                      ],
+                          Padding(
+                            padding: EdgeInsets.only(left: 10.h),
+                            child: Text("本人認証を確認しました", style: theme.textTheme.bodyMedium),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
+                  SizedBox(height: 40.v),
+
+                  // button
+                  _buildCertificationForCheck(context),
+                  SizedBox(height: 30.v)
+                ],
               ),
-            ],
+            ),
           ),
         ),
-        bottomNavigationBar: _buildBottomBar(context),
       ),
     );
   }
 
-  /// Section Widget
-  PreferredSizeWidget _buildAppBar(BuildContext context) {
+  /// Header
+  PreferredSizeWidget _buildHeader(BuildContext context) {
     return CustomAppBar(
-      centerTitle: true,
-      title: AppbarTitle(
-        text: "趣味の条件更改",
-        margin: EdgeInsets.only(
-          top: 60.v,
-          bottom: 10.v,
-        ),
+      leading: AppbarLeadingImage(
+        imagePath: ImageConstant.imgArrowLeft,
+        margin: EdgeInsets.only(left: 25, top: 50, bottom: 10),
+        onTap: () {
+          onTapArrowLeft(context);
+        },
       ),
+      title: AppbarTitle(text: "趣味の条件更改", margin: EdgeInsets.only(top: 60, bottom: 20)),
       styleType: Style.bgFill,
     );
   }
 
-  /// Section Widget
-  Widget _buildAge(BuildContext context) {
+  onTapArrowLeft(BuildContext context) {
+    Navigator.pop(context);
+  }
+
+  /// Reset Era
+  Widget _buildHobbyResetEraInput(BuildContext context) {
     return CustomTextFormField(
-      controller: ageController,
+      controller: resetHobbyEraController,
+      borderDecoration: InputBorder.none,
       hintText: "３０代",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
-  /// Section Widget
-  Widget _buildEraInput(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "年代:",
-          style: theme.textTheme.titleLarge,
-        ),
-        _buildAge(context),
-      ],
-    );
-  }
-
-  /// Section Widget
-  Widget _buildNationality(BuildContext context) {
+  /// Reset Country
+  Widget _buildHobbyResetCountryInput(BuildContext context) {
     return CustomTextFormField(
-      controller: nationalityController,
+      controller: resetHobbyCountryController,
       hintText: "日本",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
-  /// Section Widget
-  Widget _buildCounityInput(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "国籍:",
-          style: theme.textTheme.titleLarge,
-        ),
-        _buildNationality(context),
-      ],
-    );
-  }
-
-  /// Section Widget
-  Widget _buildResidence(BuildContext context) {
+  /// Reset City
+  Widget _buildHobbyResetCityInput(BuildContext context) {
     return CustomTextFormField(
-      controller: residenceController,
+      controller: resetHobbyCityController,
       hintText: "大阪",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
-  /// Section Widget
-  Widget _buildCityInput(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "居住地:",
-          style: theme.textTheme.titleLarge,
-        ),
-        _buildResidence(context),
-      ],
-    );
-  }
-
-  /// Section Widget
-  Widget _buildGender(BuildContext context) {
+  /// Reset Gender
+  Widget _buildHobbyResetGenderInput(BuildContext context) {
     return CustomTextFormField(
-      controller: genderController,
+      controller: resetHobbyGenderController,
       hintText: "男",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
-  /// Section Widget
-  Widget _buildGenderInput(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "性別:",
-          style: theme.textTheme.titleLarge,
-        ),
-        _buildGender(context),
-      ],
-    );
-  }
-
-  /// Section Widget
-  Widget _buildInterestType(BuildContext context) {
+  /// Reset Hobby Type
+  Widget _buildHobbyResetHobbyTypeInput(BuildContext context) {
     return CustomTextFormField(
-      controller: interestTypeController,
+      controller: resetHobbyTypeController,
       hintText: "サッカー",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
-  /// Section Widget
-  Widget _buildHobbyTypeInput(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "趣味のタイプ:",
-          style: theme.textTheme.titleLarge,
-        ),
-        _buildInterestType(context),
-      ],
-    );
-  }
-
-  /// Section Widget
-  Widget _buildGroup77(BuildContext context) {
+  /// Reset Find Target
+  Widget _buildHobbyResetFindTargetInput(BuildContext context) {
     return CustomTextFormField(
-      controller: group77Controller,
+      controller: resetHobbyFindTargetController,
       hintText: "サッカーのチームメンバー",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
-  /// Section Widget
-  Widget _buildFindTargetInput(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "探す対象:",
-          style: theme.textTheme.titleLarge,
-        ),
-        _buildGroup77(context),
-      ],
-    );
-  }
-
-  /// Section Widget
-  Widget _buildExperience(BuildContext context) {
+  /// Reset Experience
+  Widget _buildHobbyResetExperienceInput(BuildContext context) {
     return CustomTextFormField(
-      controller: experienceController,
+      controller: resetHobbyExperienceController,
       hintText: "3年",
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
-  /// Section Widget
-  Widget _buildExperienceInput(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "経験:",
-          style: theme.textTheme.titleLarge,
-        ),
-        _buildExperience(context),
-      ],
-    );
-  }
-
-  /// Section Widget
-  Widget _buildSocialSkills(BuildContext context) {
+  /// Reset Sociability
+  Widget _buildHobbyResetSociabilityInput(BuildContext context) {
     return CustomTextFormField(
-      controller: socialSkillsController,
+      controller: resetHobbySociabilityController,
       hintText: "人たら神",
       textInputAction: TextInputAction.done,
-      decoration: InputDecoration(),
-      children: [],
     );
   }
 
-  /// Section Widget
-  Widget _buildSociabilityInput(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "社交力:",
-          style: theme.textTheme.titleLarge,
-        ),
-        SizedBox(height: 2.v),
-        _buildSocialSkills(context),
-      ],
+  /// Reset Height
+  Widget _buildHobbyResetHeightInput(BuildContext context) {
+    return CustomTextFormField(
+      controller: resetHobbyHeightController,
+      hintText: "172",
+      textInputAction: TextInputAction.done,
     );
   }
 
-  /// Section Widget
-  Widget _buildConditionConfirmation(BuildContext context) {
+  /// Reset Weight
+  Widget _buildHobbyResetWeightInput(BuildContext context) {
+    return CustomTextFormField(
+      controller: resetHobbyWeightController,
+      hintText: "65Kg",
+      textInputAction: TextInputAction.done,
+    );
+  }
+
+  /// Certification For Check
+  Widget _buildCertificationForCheck(BuildContext context) {
     return CustomOutlinedButton(
-      width: 150.h,
+      width: 110,
+      height: 40,
       text: "条件確認",
-      buttonStyle: CustomButtonStyles.outlinePinkATL30,
-    );
-  }
-
-  /// Section Widget
-  Widget _buildBottomBar(BuildContext context) {
-    return CustomBottomBar(
-      onChanged: (BottomBarEnum type) {
-        Navigator.pushNamed(
-            navigatorKey.currentContext!, getCurrentRoute(type));
+      buttonTextStyle: theme.textTheme.titleMedium,
+      onPressed: () {
+        onTaptf(context);
       },
     );
   }
 
-  /// Common widget
-  Widget _buildWeightInput(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "体重:",
-          style: theme.textTheme.titleLarge,
-        ),
-        Container(
-          width: 370.h,
-          padding: EdgeInsets.symmetric(
-            horizontal: 19.h,
-            vertical: 3.v,
-          ),
-          decoration: AppDecoration.outlinePinkA.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder5,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 8.v),
-              Text(
-                "60kg",
-                style: theme.textTheme.bodyLarge,
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  ///Handling route based on bottom click actions
-  String getCurrentRoute(BottomBarEnum type) {
-    switch (type) {
-      case BottomBarEnum.tf:
-        return AppRoutes.k1Page;
-      default:
-        return "/";
-    }
-  }
-
-  ///Handling page based on route
-  Widget getCurrentPage(String currentRoute) {
-    switch (currentRoute) {
-      case AppRoutes.k1Page:
-        return K1Page();
-      default:
-        return DefaultWidget();
-    }
+  onTaptf(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.payDone);
   }
 }

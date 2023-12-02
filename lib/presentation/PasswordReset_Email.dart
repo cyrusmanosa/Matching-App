@@ -1,17 +1,14 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
-import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
-import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
+import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
+import 'package:dating_your_date/widgets/custom_outlined_button.dart';
+import 'package:dating_your_date/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable, camel_case_types
-class passwordResetEmail extends StatelessWidget {
-  passwordResetEmail({Key? key})
-      : super(
-          key: key,
-        );
+class PasswordResetEmail extends StatelessWidget {
+  PasswordResetEmail({Key? key}) : super(key: key);
 
-  TextEditingController emailController = TextEditingController();
-
+  TextEditingController passwordResetEmailController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -25,56 +22,45 @@ class passwordResetEmail extends StatelessWidget {
           key: _formKey,
           child: Container(
             width: double.maxFinite,
-            padding: EdgeInsets.only(
-              left: 30.h,
-              top: 65.v,
-              right: 30.h,
-            ),
+            padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
             child: Column(
               children: [
-                CustomImageView(
-                  imagePath: ImageConstant.imgLogo,
-                  height: 81.v,
-                  width: 95.h,
-                ),
+                // Logo
+                CustomImageView(imagePath: ImageConstant.imgLogo, height: 80, width: 95),
                 SizedBox(height: 1.v),
-                CustomImageView(
-                  imagePath: ImageConstant.imgSlogan,
-                  height: 17.v,
-                  width: 100.h,
-                ),
-                SizedBox(height: 57.v),
-                Text(
-                  "パスワード再設定",
-                  style: theme.textTheme.headlineLarge!.copyWith(
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-                SizedBox(height: 22.v),
-                _buildEmailInputSection(context),
-                SizedBox(height: 28.v),
+
+                // Slogan
+                CustomImageView(imagePath: ImageConstant.imgSlogan, height: 17, width: 100),
+                SizedBox(height: 20.v),
+
+                // msg
                 Container(
                   width: 356.h,
-                  margin: EdgeInsets.only(
-                    left: 3.h,
-                    right: 10.h,
-                  ),
+                  margin: EdgeInsets.only(left: 3.h, right: 10.h),
                   child: Text(
-                    "ご登録されているメールアドレスに認証キーを送します。\n「送信する」ボタンを押してください。",
-                    maxLines: 2,
+                    "ご登録されているメールアドレスに認証キーを送します。",
+                    maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
-                    style: CustomTextStyles.bodyMediumBlack900_1,
+                    textAlign: TextAlign.left,
+                    style: CustomTextStyles.bodyMediumBlack900,
                   ),
                 ),
-                SizedBox(height: 14.v),
+                SizedBox(height: 20.v),
+
+                // Input
+                CustomInputBar(titleName: "メールアドレス:", backendPart: _buildResetPasswordEmailInput(context)),
+                SizedBox(height: 25.v),
+
+                // button
                 CustomOutlinedButton(
-                  height: 38.v,
-                  width: 96.h,
+                  height: 40,
+                  width: 95,
                   text: "送信する",
-                  buttonTextStyle: theme.textTheme.titleSmall!,
+                  buttonTextStyle: theme.textTheme.titleSmall,
+                  onPressed: () {
+                    onTapPasswordResetButton(context);
+                  },
                 ),
-                SizedBox(height: 5.v),
               ],
             ),
           ),
@@ -83,24 +69,20 @@ class passwordResetEmail extends StatelessWidget {
     );
   }
 
-  /// Section Widget
-  Widget _buildEmailInputSection(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "メールアドレス:",
-          style: theme.textTheme.titleLarge,
-        ),
-        CustomTextFormField(
-          controller: emailController,
-          hintText: "example@email.com",
-          textInputAction: TextInputAction.done,
-          textInputType: TextInputType.emailAddress,
-          decoration: InputDecoration(),
-          children: [],
-        ),
-      ],
+  /// _ResetPassword Email
+  Widget _buildResetPasswordEmailInput(BuildContext context) {
+    return CustomTextFormField(
+      controller: passwordResetEmailController,
+      hintText: "example@email.com",
+      textInputAction: TextInputAction.done,
+      textInputType: TextInputType.emailAddress,
+      maxLines: 1,
     );
   }
+}
+
+/// PasswordResetEmail-Send
+/// Send to Email for check user
+onTapPasswordResetButton(BuildContext context) {
+  Navigator.pushNamed(context, AppRoutes.newPasswordSetup);
 }

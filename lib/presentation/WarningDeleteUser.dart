@@ -1,52 +1,21 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
-import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
+import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/widgets/custom_warningMsgBox.dart';
 import 'package:flutter/material.dart';
 
-class warningDeleteUser extends StatelessWidget {
-  const warningDeleteUser({Key? key}) : super(key: key);
+class WarningMsgDeleteUser extends StatelessWidget {
+  const WarningMsgDeleteUser({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
-    return SafeArea(
-        child: Scaffold(
-            body: Container(
-                width: double.maxFinite,
-                padding: EdgeInsets.only(left: 15.h, top: 202.v, right: 15.h),
-                child: Column(children: [
-                  SizedBox(height: 5.v),
-                  _buildWarningDelete(context)
-                ]))));
+    return CustomWarningMsgBox(
+      title: "削除確認",
+      msg: "一旦、確認するボタンを押したら、ご選択のユーザーを削除しましたので、もう一度お確認してください",
+      // page: onTaptf(context),
+    );
   }
 
-  /// Section Widget
-  Widget _buildWarningDelete(BuildContext context) {
-    return Container(
-        width: 400.h,
-        padding: EdgeInsets.symmetric(horizontal: 38.h, vertical: 19.v),
-        decoration: AppDecoration.fillPrimary
-            .copyWith(borderRadius: BorderRadiusStyle.roundedBorder30),
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
-          Text("警告", style: theme.textTheme.headlineLarge),
-          Align(
-              alignment: Alignment.centerLeft,
-              child: Text("一旦、確認するボタンを押したら、ご選択のユーザーを削除しましたので、もう一度お確認してください",
-                  style: CustomTextStyles.bodyLargeBlack90018)),
-          SizedBox(height: 11.v),
-          CustomOutlinedButton(
-              height: 38.v,
-              width: 96.h,
-              text: "削除確認",
-              buttonTextStyle: theme.textTheme.titleSmall!,
-              onPressed: () {
-                onTaptf(context);
-              }),
-          SizedBox(height: 13.v)
-        ]));
-  }
-
-  /// Navigates to the k12Screen when the action is triggered.
-  onTaptf(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.NewTargetReady);
-  }
+  // onTaptf(BuildContext context) {
+  //   Navigator.pushNamed(context, AppRoutes.newTargetReady);
+  // }
 }

@@ -1,4 +1,4 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
+import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -11,41 +11,42 @@ class CustomBottomBar extends StatefulWidget {
 
 class CustomBottomBarState extends State<CustomBottomBar> {
   int selectedIndex = 0;
-
   List<BottomMenuModel> bottomMenuList = [
+    // ホーム
     BottomMenuModel(
       icon: ImageConstant.imgNav,
       activeIcon: ImageConstant.imgNav,
-      title: "ホーム",
+      label: "ホーム",
       type: BottomBarEnum.tf,
     ),
+    // ターゲット
     BottomMenuModel(
       icon: ImageConstant.imgNavPrimary,
       activeIcon: ImageConstant.imgNavPrimary,
-      title: "ターゲット",
-      type: BottomBarEnum.tf,
+      label: "ターゲット",
+      type: BottomBarEnum.tf1,
     ),
+    // チャット
     BottomMenuModel(
       icon: ImageConstant.imgNavPrimary41x41,
       activeIcon: ImageConstant.imgNavPrimary41x41,
-      title: "チャット",
-      type: BottomBarEnum.tf,
+      label: "チャット",
+      type: BottomBarEnum.tf2,
     ),
+    // プロフィール
     BottomMenuModel(
       icon: ImageConstant.imgNav41x41,
       activeIcon: ImageConstant.imgNav41x41,
-      title: "プロフィール",
-      type: BottomBarEnum.tf,
+      label: "プロフィール",
+      type: BottomBarEnum.tf3,
     )
   ];
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 82.v,
-      decoration: BoxDecoration(
-        color: appTheme.gray600,
-      ),
+      height: 80.v,
+      decoration: BoxDecoration(color: appTheme.gray500),
       child: BottomNavigationBar(
         backgroundColor: Colors.transparent,
         showSelectedLabels: false,
@@ -55,55 +56,46 @@ class CustomBottomBarState extends State<CustomBottomBar> {
         currentIndex: selectedIndex,
         type: BottomNavigationBarType.fixed,
         items: List.generate(bottomMenuList.length, (index) {
+          // Footage
           return BottomNavigationBarItem(
+            // Icon bar
+            label: "Test",
             icon: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CustomImageView(
-                  imagePath: bottomMenuList[index].icon,
-                  height: 41.adaptSize,
-                  width: 41.adaptSize,
-                  color: theme.colorScheme.primary,
-                ),
+                    imagePath: bottomMenuList[index].icon, height: 41.adaptSize, width: 41.adaptSize, color: theme.colorScheme.primary),
                 Padding(
                   padding: EdgeInsets.only(top: 2.v),
                   child: Text(
-                    bottomMenuList[index].title ?? "",
-                    style: CustomTextStyles.roundedMplus1cPrimary.copyWith(
-                      color: theme.colorScheme.primary,
-                    ),
+                    bottomMenuList[index].label!,
+                    style: CustomTextStyles.roundedMplus1cPrimary.copyWith(color: theme.colorScheme.primary),
                   ),
                 ),
               ],
             ),
+            // Icon OnTap
             activeIcon: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CustomImageView(
-                  imagePath: bottomMenuList[index].activeIcon,
-                  height: 41.v,
-                  width: 44.h,
-                  color: appTheme.cyan600,
-                ),
+                    imagePath: bottomMenuList[index].activeIcon, height: 41.adaptSize, width: 41.adaptSize, color: appTheme.cyan600),
                 Padding(
                   padding: EdgeInsets.only(top: 2.v),
                   child: Text(
-                    bottomMenuList[index].title ?? "",
-                    style: CustomTextStyles.roundedMplus1cCyan600.copyWith(
-                      color: appTheme.cyan600,
-                    ),
+                    bottomMenuList[index].label!,
+                    style: CustomTextStyles.roundedMplus1cCyan600.copyWith(color: appTheme.cyan600),
                   ),
                 ),
               ],
             ),
-            label: '',
           );
         }),
         onTap: (index) {
           selectedIndex = index;
-          widget.onChanged?.call(bottomMenuList[index].type);
+          widget.onChanged?.call(bottomMenuList[index].type!);
           setState(() {});
         },
       ),
@@ -111,22 +103,20 @@ class CustomBottomBarState extends State<CustomBottomBar> {
   }
 }
 
-enum BottomBarEnum {
-  tf,
-}
+enum BottomBarEnum { tf, tf1, tf2, tf3 }
 
 class BottomMenuModel {
   BottomMenuModel({
-    required this.icon,
-    required this.activeIcon,
-    this.title,
-    required this.type,
+    this.label,
+    this.activeIcon,
+    this.icon,
+    this.type,
   });
 
-  String icon;
-  String activeIcon;
-  String? title;
-  BottomBarEnum type;
+  String? activeIcon;
+  String? icon;
+  String? label;
+  BottomBarEnum? type;
 }
 
 class DefaultWidget extends StatelessWidget {
@@ -140,12 +130,7 @@ class DefaultWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Please replace the respective Widget here',
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
+            Text('Please replace the respective Widget here', style: TextStyle(fontSize: 18)),
           ],
         ),
       ),

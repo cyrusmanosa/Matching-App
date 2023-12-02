@@ -1,42 +1,27 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
+import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 class CustomIconButton extends StatelessWidget {
   CustomIconButton({
     Key? key,
     this.alignment,
-    this.height,
-    this.width,
-    this.padding,
     this.decoration,
-    this.child,
+    this.height,
     this.onTap,
-  }) : super(
-          key: key,
-        );
+    this.padding,
+    this.width,
+  }) : super(key: key);
 
   final Alignment? alignment;
-
-  final double? height;
-
-  final double? width;
-
-  final EdgeInsetsGeometry? padding;
-
   final BoxDecoration? decoration;
-
-  final Widget? child;
-
+  final double? height;
+  final double? width;
+  final EdgeInsetsGeometry? padding;
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return alignment != null
-        ? Align(
-            alignment: alignment ?? Alignment.center,
-            child: iconButtonWidget,
-          )
-        : iconButtonWidget;
+    return alignment != null ? Align(alignment: alignment ?? Alignment.center, child: iconButtonWidget) : iconButtonWidget;
   }
 
   Widget get iconButtonWidget => SizedBox(
@@ -51,20 +36,11 @@ class CustomIconButton extends StatelessWidget {
             decoration: decoration ??
                 BoxDecoration(
                   color: theme.colorScheme.primary,
-                  borderRadius: BorderRadius.circular(5.h),
+                  borderRadius: BorderRadiusStyle.r5,
                   boxShadow: [
-                    BoxShadow(
-                      color: appTheme.black900.withOpacity(0.3),
-                      spreadRadius: 2.h,
-                      blurRadius: 2.h,
-                      offset: Offset(
-                        0,
-                        1,
-                      ),
-                    ),
+                    BoxShadow(color: appTheme.black900.withOpacity(0.3), spreadRadius: 2.h, blurRadius: 2.h, offset: Offset(0, 1)),
                   ],
                 ),
-            child: child,
           ),
           onPressed: onTap,
         ),
@@ -73,18 +49,15 @@ class CustomIconButton extends StatelessWidget {
 
 /// Extension on [CustomIconButton] to facilitate inclusion of all types of border style etc
 extension IconButtonStyleHelper on CustomIconButton {
-  static BoxDecoration get outlineBlackTL5 => BoxDecoration(
-        color: appTheme.blueGray200,
-        borderRadius: BorderRadius.circular(5.h),
+  static BoxDecoration get outlineDarkBlueTL5 => BoxDecoration(
+        color: appTheme.gray500,
+        borderRadius: BorderRadiusStyle.r5,
         boxShadow: [
           BoxShadow(
             color: appTheme.black900.withOpacity(0.3),
             spreadRadius: 2.h,
             blurRadius: 2.h,
-            offset: Offset(
-              0,
-              1,
-            ),
+            offset: Offset(0, 1),
           ),
         ],
       );

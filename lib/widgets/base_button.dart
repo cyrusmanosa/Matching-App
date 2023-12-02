@@ -1,38 +1,27 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 class BaseButton extends StatelessWidget {
   BaseButton({
     Key? key,
-    required this.text,
-    this.onPressed,
+    this.alignment,
     this.buttonStyle,
     this.buttonTextStyle,
-    this.isDisabled,
     this.height,
-    this.width,
+    this.isDisabled,
     this.margin,
-    this.alignment,
-  }) : super(
-          key: key,
-        );
+    this.onPressed,
+    this.width,
+    required this.text,
+  }) : super(key: key);
 
   final String text;
-
   final VoidCallback? onPressed;
-
   final ButtonStyle? buttonStyle;
-
   final TextStyle? buttonTextStyle;
-
   final bool? isDisabled;
-
   final double? height;
-
   final double? width;
-
   final EdgeInsets? margin;
-
   final Alignment? alignment;
 
   @override

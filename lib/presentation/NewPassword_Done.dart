@@ -1,11 +1,8 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
+import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
-class newPasswordDone extends StatelessWidget {
-  const newPasswordDone({Key? key})
-      : super(
-          key: key,
-        );
+class NewPasswordDone extends StatelessWidget {
+  const NewPasswordDone({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,41 +12,37 @@ class newPasswordDone extends StatelessWidget {
       child: Scaffold(
         body: Container(
           width: double.maxFinite,
-          padding: EdgeInsets.only(
-            left: 19.h,
-            top: 65.v,
-            right: 19.h,
-          ),
+          padding: EdgeInsets.only(top: 75.v),
           child: Column(
             children: [
+              // logo
               CustomImageView(
                 imagePath: ImageConstant.imgLogo,
-                height: 81.v,
-                width: 95.h,
+                width: 110,
+                alignment: Alignment.center,
               ),
               SizedBox(height: 1.v),
-              CustomImageView(
-                imagePath: ImageConstant.imgSlogan,
-                height: 17.v,
-                width: 100.h,
-              ),
-              SizedBox(height: 56.v),
-              Text(
-                "新しいパスワード設定しました",
-                style: CustomTextStyles.headlineMediumBlack900,
-              ),
-              SizedBox(height: 27.v),
+
+              // Slogan
+              CustomImageView(imagePath: ImageConstant.imgSlogan, width: 150, alignment: Alignment.center),
+
+              SizedBox(height: 75.v),
+
+              // Title 1
+              Text("新しいパスワード設定しました", style: TextStyle(fontSize: 25, color: appTheme.black900)),
+              SizedBox(height: 25.v),
+
+              // Tilte 2
               SizedBox(
-                width: 260.h,
+                width: 250,
                 child: Text(
-                  "次回から新しいパスワードで\nログインできます。",
+                  "次回から新しいパスワードでログインできます。",
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                   style: CustomTextStyles.titleLargeBlack900,
                 ),
               ),
-              SizedBox(height: 5.v),
             ],
           ),
         ),

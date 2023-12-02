@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:cyrus_man_s_application1/theme/theme_helper.dart';
-import 'package:cyrus_man_s_application1/routes/app_routes.dart';
+import 'package:dating_your_date/theme/theme_helper.dart';
+import 'package:dating_your_date/routes/app_routes.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-  ///Please update theme as per your need if required.
   ThemeHelper().changeTheme('primary');
   runApp(MyApp());
 }
@@ -19,9 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme,
-      title: 'cyrus_man_s_application1',
+      title: 'DatingYourDate',
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.Login,
+      initialRoute: AppRoutes.appNavigationScreen,
       routes: AppRoutes.routes,
     );
   }

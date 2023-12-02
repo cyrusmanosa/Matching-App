@@ -1,17 +1,19 @@
-name: cyrus_man_s_application1
+name: dating_your_date
 description: A new Flutter project.
 version: 1.0.0+1
 environment: 
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: ^3.1.0
 dependencies: 
   flutter: 
     sdk: flutter
   cached_network_image:
   flutter_svg: 
   flutter_svg_provider:
+  flutter_verification_code:
+  flutter_email_sender:
   intl: 
   google_fonts:
-  flutter_verification_code:
+  postgres: 
 
 dev_dependencies: 
   flutter_test: 

@@ -1,12 +1,9 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
-import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
+import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/widgets/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 
-class lowPercentageHeightWarnning extends StatelessWidget {
-  const lowPercentageHeightWarnning({Key? key})
-      : super(
-          key: key,
-        );
+class LowPercentageHeightWarnning extends StatelessWidget {
+  const LowPercentageHeightWarnning({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,56 +13,56 @@ class lowPercentageHeightWarnning extends StatelessWidget {
       child: Scaffold(
         body: Container(
           width: double.maxFinite,
-          padding: EdgeInsets.only(
-            left: 20.h,
-            top: 65.v,
-            right: 20.h,
-          ),
+          padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
           child: Column(
             children: [
+              // logo
               CustomImageView(
                 imagePath: ImageConstant.imgLogo,
-                height: 81.v,
-                width: 95.h,
+                width: 110,
+                alignment: Alignment.center,
               ),
               SizedBox(height: 1.v),
-              CustomImageView(
-                imagePath: ImageConstant.imgSlogan,
-                height: 17.v,
-                width: 100.h,
-              ),
-              SizedBox(height: 74.v),
+
+              // Slogan
+              CustomImageView(imagePath: ImageConstant.imgSlogan, width: 150, alignment: Alignment.center),
+
+              SizedBox(height: 75.v),
+
               SizedBox(
-                width: 390.h,
+                width: 350.h,
                 child: Text(
                   "新しい条件で合わせるパーセントは最高30％しかありませんので\nまだ続けませんか？",
                   maxLines: 4,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
-                  style: CustomTextStyles.headlineMediumBlack900_1,
+                  style: CustomTextStyles.headlineMediumBlack900,
                 ),
               ),
-              SizedBox(height: 53.v),
+              SizedBox(height: 30.v),
+
+              // button
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 37.h),
+                padding: EdgeInsets.symmetric(horizontal: 30.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomOutlinedButton(
-                      width: 150.h,
+                      width: 100,
+                      height: 40,
                       text: "続ける",
-                      buttonStyle: CustomButtonStyles.outlinePinkATL30,
+                      buttonTextStyle: theme.textTheme.titleLarge,
                     ),
                     CustomOutlinedButton(
-                      width: 150.h,
+                      margin: EdgeInsets.only(left: 15.h),
+                      width: 100,
+                      height: 40,
                       text: "編集",
-                      margin: EdgeInsets.only(left: 16.h),
-                      buttonStyle: CustomButtonStyles.outlinePinkATL30,
+                      buttonTextStyle: theme.textTheme.titleLarge,
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 5.v),
             ],
           ),
         ),

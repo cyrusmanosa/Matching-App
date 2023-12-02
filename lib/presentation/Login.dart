@@ -1,12 +1,13 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
-import 'package:cyrus_man_s_application1/widgets/custom_elevated_button.dart';
-import 'package:cyrus_man_s_application1/widgets/custom_outlined_button.dart';
-import 'package:cyrus_man_s_application1/widgets/custom_text_form_field.dart';
+import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
+import 'package:dating_your_date/widgets/custom_elevated_button.dart';
+import 'package:dating_your_date/widgets/custom_outlined_button.dart';
+import 'package:dating_your_date/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable
-class login extends StatelessWidget {
-  login({Key? key}) : super(key: key);
+class Login extends StatelessWidget {
+  Login({Key? key}) : super(key: key);
 
   TextEditingController emailInputController = TextEditingController();
   TextEditingController passwordInputController = TextEditingController();
@@ -17,79 +18,138 @@ class login extends StatelessWidget {
     mediaQueryData = MediaQuery.of(context);
 
     return SafeArea(
-        child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            body: Form(
-                key: _formKey,
-                child: Container(
-                    width: double.maxFinite,
-                    padding: EdgeInsets.symmetric(horizontal: 30.h),
-                    child: Column(children: [
-                      // Logo and Name
-                      SizedBox(height: 45),
-                      CustomImageView(
-                          imagePath: ImageConstant.imgLogo, width: 160.h),
-                      SizedBox(height: 3.v),
-                      CustomImageView(
-                          imagePath: ImageConstant.imgSlogan, width: 210.h),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Form(
+          key: _formKey,
+          child: Container(
+            width: double.maxFinite,
+            padding: EdgeInsets.symmetric(horizontal: 30.h),
+            child: Column(
+              children: [
+                // Logo
+                SizedBox(height: 50),
 
-                      // ID
-                      SizedBox(height: 20.v),
-                      _buildEmailInput1(context),
+                CustomImageView(imagePath: ImageConstant.imgLogo, width: 150.h),
+                SizedBox(height: 15.v),
 
-                      // Password
-                      SizedBox(height: 13.v),
-                      _buildPasswordInput1(context),
+                // Slogan
+                CustomImageView(imagePath: ImageConstant.imgSlogan, width: 200.h),
+                SizedBox(height: 20.v),
 
-                      // reset password
-                      SizedBox(height: 8.v),
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: GestureDetector(
-                              onTap: () {
-                                onTapTxtWidget(context);
-                              },
-                              child: Text("パスワードを忘れた場合",
-                                  style: CustomTextStyles.bodyMediumBlack900))),
+                // ID
+                CustomInputBar(titleName: "ユーザーID:", backendPart: _buildEmailInput(context)),
+                SizedBox(height: 15.v),
 
-                      // login button
-                      SizedBox(height: 14.v),
-                      _buildLoginButton(context),
-                      SizedBox(height: 20.v),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Padding(
-                                padding:
-                                    EdgeInsets.only(top: 12.v, bottom: 8.v),
-                                child: SizedBox(width: 81.h, child: Divider())),
-                            Padding(
-                                padding: EdgeInsets.only(left: 1.h),
-                                child: Text("または",
-                                    style: theme.textTheme.titleMedium)),
-                            Padding(
-                                padding:
-                                    EdgeInsets.only(top: 12.v, bottom: 8.v),
-                                child: SizedBox(width: 81.h, child: Divider()))
-                          ]),
+                // Password
+                CustomInputBar(titleName: "パスワード:", backendPart: _buildPasswordInput(context)),
+                SizedBox(height: 5.v),
 
-                      // SignUp of Email
-                      SizedBox(height: 30.v),
-                      _buildRegisterWithEmailButton(context),
+                // reset password
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: GestureDetector(
+                    onTap: () {
+                      onTapPasswordResetEmail(context);
+                    },
+                    child: Text("パスワードを忘れた場合", style: CustomTextStyles.bodyMediumBlack900),
+                  ),
+                ),
+                SizedBox(height: 15.v),
 
-                      // SignUp of Facebook
-                      SizedBox(height: 9.v),
-                      _buildContinueWithFacebookButton(context),
+                // login button
+                CustomOutlinedButton(
+                  height: 40,
+                  width: 95,
+                  text: "ログイン",
+                  buttonTextStyle: theme.textTheme.titleSmall,
+                  onPressed: () {
+                    onTapLoginButton(context);
+                  },
+                ),
+                SizedBox(height: 25.v),
 
-                      // SignUp of Twitter
-                      SizedBox(height: 13.v),
-                      _buildContinueWithTwitterButton(context),
+                // or
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    // line 1
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      child: SizedBox(width: 80, child: Divider()),
+                    ),
+                    // Word
+                    Text("または", style: theme.textTheme.titleMedium),
 
-                      // SignUp of Google
-                      SizedBox(height: 9.v),
-                      _buildContinueWithGoogleButton(context),
-                    ])))));
+                    // line 2
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      child: SizedBox(width: 80, child: Divider()),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 25.v),
+
+                // SignUp of Email
+                CustomElevatedButton(
+                  height: 50.v,
+                  text: "メールアドレスで登録",
+                  margin: EdgeInsets.symmetric(horizontal: 35.h),
+                  buttonStyle: CustomButtonStyles.fillPink,
+                  buttonTextStyle: CustomTextStyles.bodyMediumPrimary,
+                  onPressed: () {
+                    onTapRegisterWithEmailButton(context);
+                  },
+                ),
+                SizedBox(height: 15.v),
+
+                // SignUp of Facebook
+                CustomOutlinedButton(
+                  height: 50.v,
+                  text: "フェイスブックで続ける",
+                  margin: EdgeInsets.symmetric(horizontal: 35.h),
+                  leftIcon: Container(
+                    margin: EdgeInsets.only(left: 25.h, right: 35.h),
+                    child: CustomImageView(imagePath: ImageConstant.imgLogosfacebook, width: 20.v),
+                  ),
+                  buttonStyle: CustomButtonStyles.outlineBlueBlueBG,
+                  buttonTextStyle: CustomTextStyles.bodyMediumPrimary,
+                ),
+                SizedBox(height: 15.v),
+
+                // SignUp of Twitter
+                CustomOutlinedButton(
+                  height: 50.v,
+                  text: "ツイッターで続ける",
+                  margin: EdgeInsets.symmetric(horizontal: 35.h),
+                  leftIcon: Container(
+                    margin: EdgeInsets.only(left: 2, right: 30.h),
+                    child: CustomImageView(imagePath: ImageConstant.imgClose, width: 35.v),
+                  ),
+                  buttonStyle: CustomButtonStyles.outlineBlackDGBG,
+                  buttonTextStyle: CustomTextStyles.bodyMediumPrimary,
+                ),
+                SizedBox(height: 15.v),
+
+                // SignUp of Google
+                CustomOutlinedButton(
+                  height: 50.v,
+                  text: "グーグルで続ける",
+                  margin: EdgeInsets.symmetric(horizontal: 35.h),
+                  leftIcon: Container(
+                    margin: EdgeInsets.only(right: 35.h),
+                    child: CustomImageView(imagePath: ImageConstant.imgDevicongoogle, width: 35.v),
+                  ),
+                  buttonStyle: CustomButtonStyles.outlineGrayWhiteBG,
+                  buttonTextStyle: TextStyle(color: appTheme.gray800),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   /// Email Input Backend
@@ -98,25 +158,7 @@ class login extends StatelessWidget {
       controller: emailInputController,
       textInputType: TextInputType.emailAddress,
       hintText: "example@email.com",
-      decoration: InputDecoration(),
-      children: [],
-    );
-  }
-
-  /// Email Input
-  Widget _buildEmailInput1(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text("ユーザーID:", style: theme.textTheme.titleLarge),
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.red),
-            borderRadius: BorderRadius.circular(4.0),
-          ),
-          child: _buildEmailInput(context),
-        ),
-      ],
+      maxLines: 1,
     );
   }
 
@@ -128,98 +170,22 @@ class login extends StatelessWidget {
       textInputAction: TextInputAction.done,
       textInputType: TextInputType.visiblePassword,
       obscureText: true,
-      decoration: InputDecoration(),
-      children: [],
+      maxLines: 1,
     );
   }
 
-  /// Password Input
-  Widget _buildPasswordInput1(BuildContext context) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text("パスワード:", style: theme.textTheme.titleLarge),
-      _buildPasswordInput(context)
-    ]);
-  }
-
-  /// Login Button
-  Widget _buildLoginButton(BuildContext context) {
-    return CustomOutlinedButton(
-        height: 38.v,
-        width: 96.h,
-        text: "ログイン",
-        buttonTextStyle: theme.textTheme.titleSmall!,
-        onPressed: () {
-          onTapLoginButton(context);
-        });
-  }
-
-  /// SignUp of Email Backend
-  Widget _buildRegisterWithEmailButton(BuildContext context) {
-    return CustomElevatedButton(
-        height: 50.v,
-        text: "メールアドレスで登録",
-        margin: EdgeInsets.symmetric(horizontal: 35.h),
-        buttonStyle: CustomButtonStyles.fillPinkA,
-        buttonTextStyle: CustomTextStyles.bodyMediumPrimary,
-        onPressed: () {
-          onTapRegisterWithEmailButton(context);
-        });
-  }
-
-  /// SignUp of facebook Backend
-  Widget _buildContinueWithFacebookButton(BuildContext context) {
-    return CustomOutlinedButton(
-        height: 50.v,
-        text: "フェイスブックで続ける",
-        margin: EdgeInsets.symmetric(horizontal: 35.h),
-        leftIcon: Container(
-            margin: EdgeInsets.only(right: 15.h),
-            child: CustomImageView(
-                imagePath: ImageConstant.imgLogosfacebook, width: 42.v)),
-        buttonStyle: CustomButtonStyles.outlineBlue,
-        buttonTextStyle: CustomTextStyles.bodyMediumPrimary);
-  }
-
-  /// SignUp of twtter Backend
-  Widget _buildContinueWithTwitterButton(BuildContext context) {
-    return CustomOutlinedButton(
-        height: 50.v,
-        text: "ツイッターで続ける",
-        margin: EdgeInsets.symmetric(horizontal: 35.h),
-        leftIcon: Container(
-            margin: EdgeInsets.only(right: 30.h),
-            child: CustomImageView(
-                imagePath: ImageConstant.imgClose, width: 34.v)),
-        buttonStyle: CustomButtonStyles.outlineOnErrorContainer,
-        buttonTextStyle: CustomTextStyles.bodyMediumPrimary);
-  }
-
-  /// SignUp of google Backend
-  Widget _buildContinueWithGoogleButton(BuildContext context) {
-    return CustomOutlinedButton(
-        height: 50.v,
-        text: "グーグルで続ける",
-        margin: EdgeInsets.symmetric(horizontal: 35.h),
-        leftIcon: Container(
-            margin: EdgeInsets.only(right: 30.h),
-            child: CustomImageView(
-                imagePath: ImageConstant.imgDevicongoogle, width: 34.v)),
-        buttonStyle: CustomButtonStyles.outlineGray,
-        buttonTextStyle: CustomTextStyles.bodyMediumGray700);
+  /// Login
+  onTapLoginButton(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.containerScreen);
   }
 
   /// PasswordResetEmail
-  onTapTxtWidget(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.PasswordResetEmail);
-  }
-
-  /// Home
-  onTapLoginButton(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.Home);
+  onTapPasswordResetEmail(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.passwordResetEmail);
   }
 
   /// EmailConfirmation
   onTapRegisterWithEmailButton(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.EmailConfirmation);
+    Navigator.pushNamed(context, AppRoutes.emailConfirmation);
   }
 }

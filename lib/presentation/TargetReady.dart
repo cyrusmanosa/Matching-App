@@ -1,11 +1,8 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
+import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
-class targetReady extends StatelessWidget {
-  const targetReady({Key? key})
-      : super(
-          key: key,
-        );
+class TargetReady extends StatelessWidget {
+  const TargetReady({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,30 +12,18 @@ class targetReady extends StatelessWidget {
       child: Scaffold(
         body: Container(
           width: double.maxFinite,
-          padding: EdgeInsets.only(
-            left: 50.h,
-            top: 65.v,
-            right: 50.h,
-          ),
+          padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
           child: Column(
             children: [
-              CustomImageView(
-                imagePath: ImageConstant.imgLogo,
-                height: 81.v,
-                width: 95.h,
-              ),
+              // logo
+              CustomImageView(imagePath: ImageConstant.imgLogo, width: 110, alignment: Alignment.center),
               SizedBox(height: 1.v),
-              CustomImageView(
-                imagePath: ImageConstant.imgSlogan,
-                height: 17.v,
-                width: 100.h,
-              ),
+
+              CustomImageView(imagePath: ImageConstant.imgSlogan, width: 150, alignment: Alignment.center),
               SizedBox(height: 75.v),
-              Text(
-                "ターゲットを準備します",
-                style: theme.textTheme.headlineLarge,
-              ),
-              SizedBox(height: 5.v),
+
+              Text("ターゲットを準備します", style: theme.textTheme.headlineLarge),
+              SizedBox(height: 15.v),
             ],
           ),
         ),

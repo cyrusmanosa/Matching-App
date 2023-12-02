@@ -1,0 +1,59 @@
+import 'widgets/HomeUserSide.dart';
+import 'package:dating_your_date/core/app_export.dart';
+import 'package:flutter/material.dart';
+
+// ignore_for_file: must_be_immutable
+class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    mediaQueryData = MediaQuery.of(context);
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          width: double.maxFinite,
+          child: Column(
+            children: [
+              _buildHeader(context),
+              Expanded(child: _buildMainFrame(context)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 176, vertical: 11),
+      decoration: AppDecoration.fillGray,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [SizedBox(height: 40), Text("ホーム", style: theme.textTheme.headlineMedium)],
+      ),
+    );
+  }
+
+  Widget _buildMainFrame(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(height: 30),
+        SizedBox(
+          height: 600,
+          child: ListView.separated(
+            padding: EdgeInsets.symmetric(horizontal: 40),
+            scrollDirection: Axis.horizontal,
+            separatorBuilder: (context, index) {
+              return SizedBox(width: 15.h);
+            },
+            itemCount: 3,
+            itemBuilder: (context, index) {
+              return MainframeItemWidget();
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}

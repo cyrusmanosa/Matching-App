@@ -1,22 +1,13 @@
-import 'package:cyrus_man_s_application1/core/app_export.dart';
+import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class AppbarTitle extends StatelessWidget {
-  AppbarTitle({
-    Key? key,
-    required this.text,
-    this.margin,
-    this.onTap,
-  }) : super(
-          key: key,
-        );
-
-  String text;
+  AppbarTitle({Key? key, required this.text, this.margin, this.onTap}) : super(key: key);
 
   EdgeInsetsGeometry? margin;
-
   Function? onTap;
+  String text;
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +19,7 @@ class AppbarTitle extends StatelessWidget {
         padding: margin ?? EdgeInsets.zero,
         child: Text(
           text,
-          style: theme.textTheme.headlineMedium!.copyWith(
-            color: theme.colorScheme.primary,
-          ),
+          style: theme.textTheme.headlineMedium!.copyWith(color: theme.colorScheme.primary),
         ),
       ),
     );
