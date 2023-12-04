@@ -56,7 +56,9 @@ test:
 server:
 	go run main.go
 
+mock:
+	mockgen -destination mock/store.go  Backend/db/sqlc/info InfoStore
 
 .PHONY: dockernetwork postgres createdb_info dropdb_info createdb_chat dropdb_chat test sqlc server 
 		createmigrate_info info_migrateup info_migrateup1 info_migrateup2 info_migratedown info_migratedown1 info_migratedown2
-		createmigrate_chat chat_migrateup chat_migratedown 
+		createmigrate_chat chat_migrateup chat_migratedown mock

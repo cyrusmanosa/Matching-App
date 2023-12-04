@@ -1,4 +1,4 @@
-package controllers
+package api
 
 import (
 	"Backend/util"
@@ -41,7 +41,6 @@ func (server *Server) CheckEmail(ctx *gin.Context) {
 		req.CheckCode = util.RandomCheckCode()
 		util.SendValidateCodeOnMail(req.CheckCode, []string{req.Email})
 		ctx.JSON(http.StatusOK, req)
-
 	}
 }
 

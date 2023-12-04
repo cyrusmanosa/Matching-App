@@ -11,18 +11,21 @@ import (
 func TestCreateChangeTargetUser(t *testing.T) {
 	arg1 := CreateRandomUserFixInformaion(t)
 	arg2 := CreateRandomUserFixInformaion(t)
-	arg3 := CreateRandomUserFixInformaion(t)
-	CreateRandomChangeTargetUser(t, arg1, arg2, arg3)
+	CreateRandomChangeTargetUser(t, arg1, arg2)
 }
 
-func CreateRandomChangeTargetUser(t *testing.T, arg1, arg2, arg3 Fixinformation) Changetargetuser {
-
+func CreateRandomChangeTargetUser(t *testing.T, arg1, arg2 Fixinformation) Changetargetuser {
 	CTU := CreateChangeTargetUserParams{
 		UserID:       arg1.UserID,
 		ChangeUserID: arg2.UserID,
 		Reason:       gofakeit.HackerPhrase(),
-		ReplyUserID:  arg3.UserID,
-		Frequency:    0,
+	}
+
+	Row, err1 := testinfoQueries.GetRowCount(context.Background(), arg1.UserID)
+	if err1 != nil {
+		CTU.Frequency = Row + 1
+	} else {
+		CTU.Frequency = 1
 	}
 
 	C, err := testinfoQueries.CreateChangeTargetUser(context.Background(), CTU)
@@ -31,8 +34,6 @@ func CreateRandomChangeTargetUser(t *testing.T, arg1, arg2, arg3 Fixinformation)
 	require.Equal(t, C.UserID, CTU.UserID)
 	require.Equal(t, C.ChangeUserID, CTU.ChangeUserID)
 	require.Equal(t, C.Reason, CTU.Reason)
-	require.Equal(t, C.ReplyUserID, CTU.ReplyUserID)
-	require.Equal(t, C.Frequency, CTU.Frequency)
 	require.NotZero(t, C.ChangeTime)
 
 	return C
@@ -41,8 +42,7 @@ func CreateRandomChangeTargetUser(t *testing.T, arg1, arg2, arg3 Fixinformation)
 func TestGetChangeTargetUserList(t *testing.T) {
 	arg1 := CreateRandomUserFixInformaion(t)
 	arg2 := CreateRandomUserFixInformaion(t)
-	arg3 := CreateRandomUserFixInformaion(t)
-	Get := CreateRandomChangeTargetUser(t, arg1, arg2, arg3)
+	Get := CreateRandomChangeTargetUser(t, arg1, arg2)
 
 	GetC, err := testinfoQueries.GetChangeTargetUserList(context.Background(), Get.UserID)
 	require.NoError(t, err)
@@ -50,7 +50,6 @@ func TestGetChangeTargetUserList(t *testing.T) {
 	require.Equal(t, GetC.UserID, Get.UserID)
 	require.Equal(t, GetC.ChangeUserID, Get.ChangeUserID)
 	require.Equal(t, GetC.Reason, Get.Reason)
-	require.Equal(t, GetC.ReplyUserID, Get.ReplyUserID)
 	require.Equal(t, GetC.Frequency, Get.Frequency)
 	require.Equal(t, GetC.ChangeTime, Get.ChangeTime)
 }
@@ -59,8 +58,7 @@ func TestAllChangeTargetUserList(t *testing.T) {
 	for i := 0; i < 10; i++ {
 		arg1 := CreateRandomUserFixInformaion(t)
 		arg2 := CreateRandomUserFixInformaion(t)
-		arg3 := CreateRandomUserFixInformaion(t)
-		CreateRandomChangeTargetUser(t, arg1, arg2, arg3)
+		CreateRandomChangeTargetUser(t, arg1, arg2)
 	}
 	ListC, err := testinfoQueries.AllChangeTargetUserList(context.Background())
 	require.NoError(t, err)
@@ -70,8 +68,7 @@ func TestAllChangeTargetUserList(t *testing.T) {
 func TestDeleteData(t *testing.T) {
 	arg1 := CreateRandomUserFixInformaion(t)
 	arg2 := CreateRandomUserFixInformaion(t)
-	arg3 := CreateRandomUserFixInformaion(t)
-	CreateRandomChangeTargetUser(t, arg1, arg2, arg3)
+	CreateRandomChangeTargetUser(t, arg1, arg2)
 
 	err := testinfoQueries.DeleteData(context.Background(), arg1.UserID)
 	require.NoError(t, err)

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"Backend/controllers"
+	"Backend/api"
 	"Backend/util"
 	"context"
 	"log"
@@ -27,7 +27,7 @@ func main() {
 	defer info_conn.Close()
 
 	store := db.NewInfoStore(info_conn)
-	server, err := controllers.NewServer(config, store)
+	server, err := api.NewServer(config, store)
 	if err != nil {
 		log.Fatal("cannot create server:", err)
 	}

@@ -1,4 +1,4 @@
-package controllers
+package api
 
 import (
 	db "Backend/db/sqlc"

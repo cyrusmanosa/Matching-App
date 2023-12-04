@@ -10,7 +10,7 @@ import (
 )
 
 const allChangeTargetUserList = `-- name: AllChangeTargetUserList :many
-SELECT user_id, change_user_id, reason, reply_user_id, frequency, change_time FROM changetargetuser
+SELECT user_id, change_user_id, reason, frequency, change_time FROM changetargetuser
 ORDER BY user_id
 `
 
@@ -27,7 +27,6 @@ func (q *Queries) AllChangeTargetUserList(ctx context.Context) ([]Changetargetus
 			&i.UserID,
 			&i.ChangeUserID,
 			&i.Reason,
-			&i.ReplyUserID,
 			&i.Frequency,
 			&i.ChangeTime,
 		); err != nil {
@@ -46,18 +45,16 @@ INSERT INTO changetargetuser (
     user_id,
     change_user_id,
     reason,
-    reply_user_id,
     frequency
 ) VALUES (
-    $1,$2,$3,$4,$5
-) RETURNING user_id, change_user_id, reason, reply_user_id, frequency, change_time
+    $1,$2,$3,$4
+) RETURNING user_id, change_user_id, reason, frequency, change_time
 `
 
 type CreateChangeTargetUserParams struct {
 	UserID       int32  `json:"user_id"`
 	ChangeUserID int32  `json:"change_user_id"`
 	Reason       string `json:"reason"`
-	ReplyUserID  int32  `json:"reply_user_id"`
 	Frequency    int32  `json:"frequency"`
 }
 
@@ -66,7 +63,6 @@ func (q *Queries) CreateChangeTargetUser(ctx context.Context, arg CreateChangeTa
 		arg.UserID,
 		arg.ChangeUserID,
 		arg.Reason,
-		arg.ReplyUserID,
 		arg.Frequency,
 	)
 	var i Changetargetuser
@@ -74,7 +70,6 @@ func (q *Queries) CreateChangeTargetUser(ctx context.Context, arg CreateChangeTa
 		&i.UserID,
 		&i.ChangeUserID,
 		&i.Reason,
-		&i.ReplyUserID,
 		&i.Frequency,
 		&i.ChangeTime,
 	)
@@ -92,7 +87,7 @@ func (q *Queries) DeleteData(ctx context.Context, userID int32) error {
 }
 
 const getChangeTargetUserList = `-- name: GetChangeTargetUserList :one
-SELECT user_id, change_user_id, reason, reply_user_id, frequency, change_time FROM changetargetuser
+SELECT user_id, change_user_id, reason, frequency, change_time FROM changetargetuser
 WHERE user_id = $1
 `
 
@@ -103,9 +98,20 @@ func (q *Queries) GetChangeTargetUserList(ctx context.Context, userID int32) (Ch
 		&i.UserID,
 		&i.ChangeUserID,
 		&i.Reason,
-		&i.ReplyUserID,
 		&i.Frequency,
 		&i.ChangeTime,
 	)
 	return i, err
+}
+
+const getRowCount = `-- name: GetRowCount :one
+SELECT COUNT(*) AS row_count FROM changetargetuser
+WHERE user_id = $1
+`
+
+func (q *Queries) GetRowCount(ctx context.Context, userID int32) (int32, error) {
+	row := q.db.QueryRow(ctx, getRowCount, userID)
+	var row_count int32
+	err := row.Scan(&row_count)
+	return row_count, err
 }

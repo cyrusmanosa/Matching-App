@@ -1,4 +1,4 @@
-package controllers
+package api
 
 import (
 	db "Backend/db/sqlc"
@@ -38,7 +38,6 @@ func newUserResponse(user info.Fixinformation) userResponse {
 		CreatedAt: user.CreatedAt.Time,
 	}
 }
-
 func (server *Server) CreateUserFixInfo(ctx *gin.Context) {
 	var req createUserRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {

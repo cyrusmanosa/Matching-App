@@ -7,6 +7,7 @@ package db
 
 import (
 	"context"
+
 )
 
 const createComplaint = `-- name: CreateComplaint :one
@@ -118,7 +119,7 @@ RETURNING cp_id, user_id, cp_target_id, cp_type, cp_message, status, complaint_t
 `
 
 type UpdateUserComplaintParams struct {
-	CpID   int32  `json:"cp_id"`
+	CpID   int32       `json:"cp_id"`
 	Status string `json:"status"`
 }
 

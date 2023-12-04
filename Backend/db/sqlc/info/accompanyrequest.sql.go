@@ -7,6 +7,7 @@ package db
 
 import (
 	"context"
+
 )
 
 const createAccompanyRequest = `-- name: CreateAccompanyRequest :one
@@ -27,9 +28,9 @@ INSERT INTO accompanyrequest (
 
 type CreateAccompanyRequestParams struct {
 	UserID        int32       `json:"user_id"`
-	Era           int32       `json:"era"`
+	Era           int32 `json:"era"`
 	City          string      `json:"city"`
-	Gender        string      `json:"gender"`
+	Gender        string `json:"gender"`
 	Speaklanguage string      `json:"speaklanguage"`
 	FindType      string      `json:"find_type"`
 	FindTarget    string      `json:"find_target"`
@@ -150,9 +151,9 @@ RETURNING user_id, era, city, gender, speaklanguage, find_type, find_target, soc
 
 type UpdateUserAccompanyParams struct {
 	UserID        int32       `json:"user_id"`
-	Era           int32       `json:"era"`
+	Era           int32 `json:"era"`
 	City          string      `json:"city"`
-	Gender        string      `json:"gender"`
+	Gender        string `json:"gender"`
 	Speaklanguage string      `json:"speaklanguage"`
 	FindType      string      `json:"find_type"`
 	FindTarget    string      `json:"find_target"`

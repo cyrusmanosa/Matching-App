@@ -1,4 +1,4 @@
-package controllers
+package api
 
 import (
 	db "Backend/db/sqlc"
@@ -70,7 +70,7 @@ func (server *Server) GetComplaint(ctx *gin.Context) {
 // Update
 type UpdateComplaint struct {
 	UserID   int32  `json:"user_id" binding:"numeric,required"`
-	Cpstatus string `json:"Cpstatus" binding: "required"`
+	Cpstatus string `json:"cp_Status"`
 }
 
 func (server *Server) UpdateComplaint(ctx *gin.Context) {

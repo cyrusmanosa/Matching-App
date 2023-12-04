@@ -24,9 +24,9 @@ INSERT INTO image (
 `
 
 type CreateImageParams struct {
-	UserID int32  `json:"user_id"`
-	Qr     string `json:"qr"`
-	Img1   string `json:"img1"`
+	UserID int32       `json:"user_id"`
+	Qr     string      `json:"qr"`
+	Img1   string      `json:"img1"`
 	Img2   string `json:"img2"`
 	Img3   string `json:"img3"`
 	Img4   string `json:"img4"`
@@ -131,8 +131,8 @@ RETURNING user_id, qr, img1, img2, img3, img4, img5
 `
 
 type UpdateImageParams struct {
-	UserID int32  `json:"user_id"`
-	Img1   string `json:"img1"`
+	UserID int32       `json:"user_id"`
+	Img1   string      `json:"img1"`
 	Img2   string `json:"img2"`
 	Img3   string `json:"img3"`
 	Img4   string `json:"img4"`

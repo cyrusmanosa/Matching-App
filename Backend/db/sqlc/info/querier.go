@@ -29,6 +29,7 @@ type InfoQuerier interface {
 	DeleteUserHobby(ctx context.Context, userID int32) error
 	DeleteUserLoverRequest(ctx context.Context, userID int32) error
 	GetChangeTargetUserList(ctx context.Context, userID int32) (Changetargetuser, error)
+	GetRowCount(ctx context.Context, userID int32) (int32, error)
 	GetTargetUserList(ctx context.Context, userID int32) (Targetlist, error)
 	GetUserAccompany(ctx context.Context, userID int32) (Accompanyrequest, error)
 	GetUserCanChangeInformation(ctx context.Context, userID int32) (Canchangeinformation, error)

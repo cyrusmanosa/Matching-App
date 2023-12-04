@@ -3,11 +3,14 @@ INSERT INTO changetargetuser (
     user_id,
     change_user_id,
     reason,
-    reply_user_id,
     frequency
 ) VALUES (
-    $1,$2,$3,$4,$5
+    $1,$2,$3,$4
 ) RETURNING *;
+
+-- name: GetRowCount :one
+SELECT COUNT(*) AS row_count FROM changetargetuser
+WHERE user_id = $1;
 
 -- name: GetChangeTargetUserList :one
 SELECT * FROM changetargetuser
@@ -17,6 +20,6 @@ WHERE user_id = $1;
 SELECT * FROM changetargetuser
 ORDER BY user_id;
 
--- name: DeleteData :exec
+-- name: DeleteChangeTargetUser :exec
 DELETE FROM changetargetuser
 WHERE user_id = $1;

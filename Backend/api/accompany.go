@@ -1,4 +1,4 @@
-package controllers
+package api
 
 import (
 	db "Backend/db/sqlc"
@@ -10,42 +10,36 @@ import (
 )
 
 // Create
-type CreateHobbyRequest struct {
+type CreateAccompanyRequest struct {
 	UserID        int32  `json:"user_id" binding:"required"`
 	Era           int32  `json:"era" binding:"numeric"`
 	City          string `json:"city" binding:"required"`
 	Gender        string `json:"gender" binding:"required"`
-	Height        int32  `json:"height"`
-	Weight        int32  `json:"weight"`
 	Speaklanguage string `json:"speaklanguage"`
 	FindType      string `json:"find_type" binding:"required"`
 	FindTarget    string `json:"find_target" binding:"required"`
-	Experience    int32  `json:"experience"`
 	Sociability   string `json:"sociability"`
 	Certification bool   `json:"certification"`
 }
 
-func (server *Server) CreateHobby(ctx *gin.Context) {
-	var req CreateHobbyRequest
+func (server *Server) CreateAccompany(ctx *gin.Context) {
+	var req CreateAccompanyRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}
-	H := info.CreateHobbyRequestParams{
+	Ac := info.CreateAccompanyRequestParams{
 		UserID:        req.UserID,
 		Era:           req.Era,
 		City:          req.City,
 		Gender:        req.Gender,
-		Height:        req.Height,
-		Weight:        req.Weight,
 		Speaklanguage: req.Speaklanguage,
 		FindType:      req.FindType,
 		FindTarget:    req.FindTarget,
-		Experience:    req.Experience,
 		Sociability:   req.Sociability,
 		Certification: req.Certification,
 	}
-	hobby, err := server.store.CreateHobbyRequest(ctx, H)
+	accompany, err := server.store.CreateAccompanyRequest(ctx, Ac)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -55,21 +49,21 @@ func (server *Server) CreateHobby(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
-	ctx.JSON(http.StatusOK, hobby)
+	ctx.JSON(http.StatusOK, accompany)
 }
 
 // Get
-type GetHobbyRequest struct {
+type GetAccompanyRequest struct {
 	UserID int32 `json:"user_id" binding:"required"`
 }
 
-func (server *Server) GetHobby(ctx *gin.Context) {
-	var req GetHobbyRequest
+func (server *Server) GetAccompany(ctx *gin.Context) {
+	var req GetAccompanyRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}
-	GetHobby, err := server.store.GetUserHobby(ctx, req.UserID)
+	GetAccompany, err := server.store.GetUserAccompany(ctx, req.UserID)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -79,12 +73,12 @@ func (server *Server) GetHobby(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
-	ctx.JSON(http.StatusOK, GetHobby)
+	ctx.JSON(http.StatusOK, GetAccompany)
 }
 
 // List
-func (server *Server) ShowListHobby(ctx *gin.Context) {
-	list, err := server.store.ListUserHobby(ctx)
+func (server *Server) ShowListAccompany(ctx *gin.Context) {
+	list, err := server.store.ListUserAccompany(ctx)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			ctx.JSON(http.StatusNotFound, errorResponse(err))
@@ -97,42 +91,36 @@ func (server *Server) ShowListHobby(ctx *gin.Context) {
 }
 
 // Update
-type UpdateHobbyRequest struct {
+type UpdateAccompanyRequest struct {
 	UserID        int32  `json:"user_id" binding:"required"`
 	Era           int32  `json:"era" binding:"numeric"`
 	City          string `json:"city" binding:"required"`
 	Gender        string `json:"gender" binding:"required"`
-	Height        int32  `json:"height"`
-	Weight        int32  `json:"weight"`
 	Speaklanguage string `json:"speaklanguage"`
 	FindType      string `json:"find_type" binding:"required"`
 	FindTarget    string `json:"find_target" binding:"required"`
-	Experience    int32  `json:"experience"`
 	Sociability   string `json:"sociability"`
 	Certification bool   `json:"certification"`
 }
 
-func (server *Server) UpdateHobby(ctx *gin.Context) {
+func (server *Server) UpdateAccompany(ctx *gin.Context) {
 	var req UpdateHobbyRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}
-	H := info.UpdateUserHobbyParams{
+	Ac := info.UpdateUserAccompanyParams{
 		UserID:        req.UserID,
 		Era:           req.Era,
 		City:          req.City,
 		Gender:        req.Gender,
-		Height:        req.Height,
-		Weight:        req.Weight,
 		Speaklanguage: req.Speaklanguage,
 		FindType:      req.FindType,
 		FindTarget:    req.FindTarget,
-		Experience:    req.Experience,
 		Sociability:   req.Sociability,
 		Certification: req.Certification,
 	}
-	UpdateHobby, err := server.store.UpdateUserHobby(ctx, H)
+	UpdateAccompany, err := server.store.UpdateUserAccompany(ctx, Ac)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -142,5 +130,5 @@ func (server *Server) UpdateHobby(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
-	ctx.JSON(http.StatusOK, UpdateHobby)
+	ctx.JSON(http.StatusOK, UpdateAccompany)
 }

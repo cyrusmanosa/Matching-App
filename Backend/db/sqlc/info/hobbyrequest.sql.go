@@ -30,16 +30,16 @@ INSERT INTO hobbyrequest (
 
 type CreateHobbyRequestParams struct {
 	UserID        int32       `json:"user_id"`
-	Era           int32       `json:"era"`
+	Era           int32 `json:"era"`
 	City          string      `json:"city"`
 	Gender        string      `json:"gender"`
-	Height        int32       `json:"height"`
-	Weight        int32       `json:"weight"`
+	Height        int32 `json:"height"`
+	Weight        int32 `json:"weight"`
 	Speaklanguage string      `json:"speaklanguage"`
 	FindType      string      `json:"find_type"`
 	FindTarget    string      `json:"find_target"`
-	Experience    int32       `json:"experience"`
-	Sociability   string      `json:"sociability"`
+	Experience    int32 `json:"experience"`
+	Sociability   string `json:"sociability"`
 	Certification bool `json:"certification"`
 }
 
@@ -171,16 +171,16 @@ RETURNING user_id, era, city, gender, height, weight, speaklanguage, find_type, 
 
 type UpdateUserHobbyParams struct {
 	UserID        int32       `json:"user_id"`
-	Era           int32       `json:"era"`
+	Era           int32 `json:"era"`
 	City          string      `json:"city"`
 	Gender        string      `json:"gender"`
-	Height        int32       `json:"height"`
-	Weight        int32       `json:"weight"`
+	Height        int32 `json:"height"`
+	Weight        int32 `json:"weight"`
 	Speaklanguage string      `json:"speaklanguage"`
 	FindType      string      `json:"find_type"`
 	FindTarget    string      `json:"find_target"`
-	Experience    int32       `json:"experience"`
-	Sociability   string      `json:"sociability"`
+	Experience    int32 `json:"experience"`
+	Sociability   string `json:"sociability"`
 	Certification bool `json:"certification"`
 }
 

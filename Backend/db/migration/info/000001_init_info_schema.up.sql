@@ -102,9 +102,8 @@ CREATE TABLE "changetargetuser" (
   "user_id" INT PRIMARY KEY,
   "change_user_id" INT NOT NULL,
   "reason" VARCHAR NOT NULL,
-  "reply_user_id" INT NOT NULL,
-  "frequency" INT NOT NULL DEFAULT (0),
-  "change_time" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
+  "frequency" INT NOT NULL,
+  "change_time" TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE "complaint" (
@@ -116,6 +115,7 @@ CREATE TABLE "complaint" (
   "status" VARCHAR DEFAULT 'active',
   "complaint_time" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
+
 
 ALTER TABLE "canchangeinformation" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
 

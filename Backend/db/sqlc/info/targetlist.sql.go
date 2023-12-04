@@ -81,7 +81,7 @@ INSERT INTO targetlist (
 
 type TargetUserListParams struct {
 	UserID    int32       `json:"user_id"`
-	Target1ID int32 `json:"target_1_id"`
+	Target1ID int32       `json:"target_1_id"`
 	Target2ID int32 `json:"target_2_id"`
 	Target3ID int32 `json:"target_3_id"`
 }
@@ -115,7 +115,7 @@ RETURNING user_id, target_1_id, target_2_id, target_3_id, updated_at
 
 type UpdateTargetListParams struct {
 	UserID    int32       `json:"user_id"`
-	Target1ID int32 `json:"target_1_id"`
+	Target1ID int32       `json:"target_1_id"`
 	Target2ID int32 `json:"target_2_id"`
 	Target3ID int32 `json:"target_3_id"`
 }

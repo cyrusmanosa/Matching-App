@@ -1,4 +1,4 @@
-package controllers
+package api
 
 import (
 	"Backend/token"
@@ -52,26 +52,39 @@ func (server *Server) setupRouter() {
 	authRoutes.POST("/CreateLover", server.CreateLover)
 	authRoutes.POST("/CreateAccompant", server.CreateAccompany)
 	authRoutes.POST("/CreateComplaint", server.CreateComplaint)
+	authRoutes.POST("/CreateTargetList", server.CreateTargetList)
+	authRoutes.POST("/CreateChangeTarget", server.CreateChangeTarget)
+
+	// Get
+	authRoutes.GET("/GetCanChange", server.GetCanChangeInfo)
+	authRoutes.GET("/GetAccompany", server.GetAccompany)
+	authRoutes.GET("/GetHobby", server.GetHobby)
+	authRoutes.GET("/GetLover", server.GetLover)
+	authRoutes.GET("/GetComplaint", server.GetComplaint)
+	authRoutes.GET("/GetTargetList", server.GetTargetList)
 
 	// Update
-	authRoutes.POST("/ChangePassword", server.ResetPassword)
-	authRoutes.POST("/UpdateCanChangeInfo", server.UpdateCanChangeInfo)
-	authRoutes.POST("/UpdateHobby", server.UpdateHobby)
-	authRoutes.POST("/UpdateLover", server.UpdateLover)
-	authRoutes.POST("/UpdateAccompany", server.UpdateAccompany)
-	authRoutes.POST("/UpdateComplaint", server.UpdateComplaint)
+	authRoutes.PUT("/ChangePassword", server.ResetPassword)
+	authRoutes.PUT("/UpdateCanChangeInfo", server.UpdateCanChangeInfo)
+	authRoutes.PUT("/UpdateHobby", server.UpdateHobby)
+	authRoutes.PUT("/UpdateLover", server.UpdateLover)
+	authRoutes.PUT("/UpdateAccompany", server.UpdateAccompany)
+	authRoutes.PUT("/UpdateComplaint", server.UpdateComplaint)
+	authRoutes.PUT("/UpdateTargetList", server.UpdateTargetList)
 
 	// --------------for staff--------------
 	// List
-	authRoutes.GET("/FixList", server.ShowListFixInfo)
-	authRoutes.GET("/CanChangeList", server.ShowListCanChangeInfo)
+	authRoutes.GET("/FixInfoList", server.ShowListFixInfo)
+	authRoutes.GET("/CanChangeInfoList", server.ShowListCanChangeInfo)
 	authRoutes.GET("/HobbyList", server.ShowListHobby)
 	authRoutes.GET("/LoverList", server.ShowListLover)
 	authRoutes.GET("/AccompanyList", server.ShowListAccompany)
 	authRoutes.GET("/ComplaintList", server.ShowListComplaint)
+	authRoutes.GET("/TargetList", server.ShowListTargetList)
+	authRoutes.GET("/ChangeTargetList", server.ShowlistChangeTarget)
 
 	// Del
-	authRoutes.POST("/UserDel", server.DeleteUser)
+	authRoutes.DELETE("/UserDel", server.DeleteUser)
 	server.router = router
 }
 
