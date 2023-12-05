@@ -15,7 +15,7 @@ type CreateAccompanyRequest struct {
 	Era           int32  `json:"era" binding:"numeric"`
 	City          string `json:"city" binding:"required"`
 	Gender        string `json:"gender" binding:"required"`
-	Speaklanguage string `json:"speaklanguage"`
+	Speaklanguage string `json:"speak_language"`
 	FindType      string `json:"find_type" binding:"required"`
 	FindTarget    string `json:"find_target" binding:"required"`
 	Sociability   string `json:"sociability"`

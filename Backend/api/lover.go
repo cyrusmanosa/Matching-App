@@ -20,7 +20,7 @@ type CreateLoverRequest struct {
 	Sexual        string `json:"sexual" binding:"required"`
 	Height        int32  `json:"height"`
 	Weight        int32  `json:"weight"`
-	Speaklanguage string `json:"speaklanguage"`
+	Speaklanguage string `json:"speak_language"`
 	Job           string `json:"job" binding:"required"`
 	AnnualSalary  int32  `json:"annual_salary" binding:"required"`
 	Sociability   string `json:"sociability"`

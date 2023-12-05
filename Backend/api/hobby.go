@@ -17,7 +17,7 @@ type CreateHobbyRequest struct {
 	Gender        string `json:"gender" binding:"required"`
 	Height        int32  `json:"height"`
 	Weight        int32  `json:"weight"`
-	Speaklanguage string `json:"speaklanguage"`
+	Speaklanguage string `json:"speak_language"`
 	FindType      string `json:"find_type" binding:"required"`
 	FindTarget    string `json:"find_target" binding:"required"`
 	Experience    int32  `json:"experience"`

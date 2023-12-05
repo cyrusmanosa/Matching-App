@@ -40,7 +40,7 @@ func (server *Server) setupRouter() {
 	// before login
 	router.POST("/SignUp", server.CheckEmail)              // OK
 	router.POST("/SignUpCheckCode", server.CheckEmailCode) // OK
-	router.GET("/Login", server.UserLogin)                 // OK
+	router.POST("/Login", server.UserLogin)                // OK
 
 	// transition
 
@@ -50,10 +50,11 @@ func (server *Server) setupRouter() {
 	authRoutes.POST("/CreateCanChangeInfo", server.CreateUserCanChangeInfo)
 	authRoutes.POST("/CreateHobby", server.CreateHobby)
 	authRoutes.POST("/CreateLover", server.CreateLover)
-	authRoutes.POST("/CreateAccompant", server.CreateAccompany)
+	authRoutes.POST("/CreateAccompany", server.CreateAccompany)
 	authRoutes.POST("/CreateComplaint", server.CreateComplaint)
 	authRoutes.POST("/CreateTargetList", server.CreateTargetList)
 	authRoutes.POST("/CreateChangeTarget", server.CreateChangeTarget)
+	authRoutes.POST("/CreateImg", server.CreateImage)
 
 	// Get
 	authRoutes.GET("/GetCanChange", server.GetCanChangeInfo)
@@ -62,6 +63,7 @@ func (server *Server) setupRouter() {
 	authRoutes.GET("/GetLover", server.GetLover)
 	authRoutes.GET("/GetComplaint", server.GetComplaint)
 	authRoutes.GET("/GetTargetList", server.GetTargetList)
+	authRoutes.GET("/GetImg", server.GetImages)
 
 	// Update
 	authRoutes.PUT("/ChangePassword", server.ResetPassword)
@@ -71,6 +73,7 @@ func (server *Server) setupRouter() {
 	authRoutes.PUT("/UpdateAccompany", server.UpdateAccompany)
 	authRoutes.PUT("/UpdateComplaint", server.UpdateComplaint)
 	authRoutes.PUT("/UpdateTargetList", server.UpdateTargetList)
+	authRoutes.PUT("/UpdateImg", server.UpdateImg)
 
 	// --------------for staff--------------
 	// List
@@ -81,7 +84,8 @@ func (server *Server) setupRouter() {
 	authRoutes.GET("/AccompanyList", server.ShowListAccompany)
 	authRoutes.GET("/ComplaintList", server.ShowListComplaint)
 	authRoutes.GET("/TargetList", server.ShowListTargetList)
-	authRoutes.GET("/ChangeTargetList", server.ShowlistChangeTarget)
+	authRoutes.GET("/ChangeTargetList", server.ShowListChangeTarget)
+	authRoutes.GET("/ImgList", server.ShowListImg)
 
 	// Del
 	authRoutes.DELETE("/UserDel", server.DeleteUser)

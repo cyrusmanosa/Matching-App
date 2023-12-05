@@ -10,10 +10,9 @@ import (
 
 // Create
 type CreateChangeTargetRequest struct {
-	UserID       int32  `json:"user_id" binding:"required numeric"`
-	ChangeUserID int32  `json:"change_user_id" binding:"required numeric"`
+	UserID       int32  `json:"user_id" binding:"required"`
+	ChangeUserID int32  `json:"change_user_id" binding:"required"`
 	Reason       string `json:"reason"`
-	Frequency    int32  `json:"frequency"`
 }
 
 func (server *Server) CreateChangeTarget(ctx *gin.Context) {
@@ -74,7 +73,7 @@ func (server *Server) GetChangeTarget(ctx *gin.Context) {
 }
 
 // list
-func (server Server) ShowlistChangeTarget(ctx *gin.Context) {
+func (server Server) ShowListChangeTarget(ctx *gin.Context) {
 	ListCT, err := server.store.AllChangeTargetUserList(ctx)
 	if err != nil {
 		errCode := db.ErrorCode(err)

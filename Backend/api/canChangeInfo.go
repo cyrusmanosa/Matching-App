@@ -17,10 +17,10 @@ type createCanChangeInfoRequest struct {
 	Sexual        string `json:"sexual" binding:"required,alpha"`
 	Height        int32  `json:"height" binding:"required,numeric"`
 	Weight        int32  `json:"weight" binding:"required,numeric"`
-	Speaklanguage string `json:"speaklanguage" binding:"required"`
+	Speaklanguage string `json:"speak_language" binding:"required"`
 	Education     string `json:"education" binding:"required,alpha"`
 	Job           string `json:"job" binding:"required"`
-	AnnualSalary  int32  `json:"annualsalary" binding:"required,numeric"`
+	AnnualSalary  int32  `json:"annual_salary" binding:"required,numeric"`
 	Sociability   string `json:"sociability" binding:"required,alpha"`
 	Religious     string `json:"religious" binding:"alpha"`
 	Introduce     string `json:"introduce" binding:"required"`

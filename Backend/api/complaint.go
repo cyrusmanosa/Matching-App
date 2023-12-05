@@ -10,8 +10,8 @@ import (
 )
 
 type CreateComplaint struct {
-	UserID     int32  `json:"user_id" binding:"numeric,required"`
-	CpTargetID int32  `json:"cp_target_id" binding:"numeric,required"`
+	UserID     int32  `json:"user_id" binding:"required"`
+	CpTargetID int32  `json:"cp_target_id" binding:"required"`
 	CpType     string `json:"cp_type" binding:"alpha"`
 	CpMessage  string `json:"cp_message" binding:"required"`
 }

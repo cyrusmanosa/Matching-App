@@ -99,7 +99,7 @@ CREATE TABLE "targetlist" (
 );
 
 CREATE TABLE "changetargetuser" (
-  "user_id" INT PRIMARY KEY,
+  "user_id" INT NOT NULL,
   "change_user_id" INT NOT NULL,
   "reason" VARCHAR NOT NULL,
   "frequency" INT NOT NULL,
