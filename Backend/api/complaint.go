@@ -4,6 +4,7 @@ import (
 	db "Backend/db/sqlc"
 	info "Backend/db/sqlc/info"
 	"database/sql"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -20,6 +21,9 @@ func (server *Server) CreateComplaint(ctx *gin.Context) {
 	var req CreateComplaint
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		println(" ")
+		log.Println(err)
+		println(" ")
 		return
 	}
 
@@ -51,6 +55,9 @@ func (server *Server) GetComplaint(ctx *gin.Context) {
 	var req GetComplaint
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		println(" ")
+		log.Println(err)
+		println(" ")
 		return
 	}
 
@@ -77,6 +84,9 @@ func (server *Server) UpdateComplaint(ctx *gin.Context) {
 	var req UpdateComplaint
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		println(" ")
+		log.Println(err)
+		println(" ")
 		return
 	}
 

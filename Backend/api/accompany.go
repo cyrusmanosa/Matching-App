@@ -4,6 +4,7 @@ import (
 	db "Backend/db/sqlc"
 	info "Backend/db/sqlc/info"
 	"database/sql"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -26,6 +27,9 @@ func (server *Server) CreateAccompany(ctx *gin.Context) {
 	var req CreateAccompanyRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		println(" ")
+		log.Println(err)
+		println(" ")
 		return
 	}
 	Ac := info.CreateAccompanyRequestParams{
@@ -61,6 +65,9 @@ func (server *Server) GetAccompany(ctx *gin.Context) {
 	var req GetAccompanyRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		println(" ")
+		log.Println(err)
+		println(" ")
 		return
 	}
 	GetAccompany, err := server.store.GetUserAccompany(ctx, req.UserID)
@@ -107,6 +114,9 @@ func (server *Server) UpdateAccompany(ctx *gin.Context) {
 	var req UpdateHobbyRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		println(" ")
+		log.Println(err)
+		println(" ")
 		return
 	}
 	Ac := info.UpdateUserAccompanyParams{

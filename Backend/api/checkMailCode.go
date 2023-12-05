@@ -2,6 +2,7 @@ package api
 
 import (
 	"Backend/util"
+	"log"
 	"net/http"
 
 	"github.com/badoux/checkmail"
@@ -21,20 +22,24 @@ var req checkEmailResponse
 
 func (server *Server) CheckEmail(ctx *gin.Context) {
 	var CE EmailRequset
-	err := ctx.ShouldBindJSON(&CE)
-	if err != nil {
+	if err := ctx.ShouldBindJSON(&CE); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-	}
-
-	err = checkmail.ValidateFormat(CE.Email)
-	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		println(" ")
+		log.Println(err)
+		println(" ")
 		return
 	}
 
-	_, err = server.store.GetUserFixInformation(ctx, CE.Email)
+	if err := checkmail.ValidateFormat(CE.Email); err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		log.Println(err)
+		return
+	}
+
+	_, err := server.store.GetUserFixInformation(ctx, CE.Email)
 	if err == nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		log.Println(err)
 		return
 	} else {
 		req.Email = CE.Email
@@ -56,6 +61,10 @@ func (server *Server) CheckEmailCode(ctx *gin.Context) {
 	var CC CodeRequest
 	if err := ctx.ShouldBindJSON(&CC); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		println(" ")
+		log.Println(err)
+		println(" ")
+		return
 	}
 	if CC.CheckCode == req.CheckCode {
 		accessToken, err := server.tokenMaker.CreateToken(

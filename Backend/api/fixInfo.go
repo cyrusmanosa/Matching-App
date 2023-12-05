@@ -6,6 +6,7 @@ import (
 	"Backend/token"
 	"Backend/util"
 	"database/sql"
+	"log"
 	"net/http"
 	"time"
 
@@ -42,6 +43,9 @@ func (server *Server) CreateUserFixInfo(ctx *gin.Context) {
 	var req createUserRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		println(" ")
+		log.Println(err)
+		println(" ")
 		return
 	}
 
@@ -85,6 +89,9 @@ func (server *Server) ResetPassword(ctx *gin.Context) {
 	var req ResetPasswordRequset
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		println(" ")
+		log.Println(err)
+		println(" ")
 		return
 	}
 
@@ -125,6 +132,9 @@ func (server *Server) UserLogin(ctx *gin.Context) {
 	var req loginUserRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		println(" ")
+		log.Println(err)
+		println(" ")
 		return
 	}
 
@@ -133,16 +143,19 @@ func (server *Server) UserLogin(ctx *gin.Context) {
 	if err != nil {
 		if err == sql.ErrNoRows {
 			ctx.JSON(http.StatusNotFound, errorResponse(err))
+			log.Println(err)
 			return
 		}
-
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		log.Println(err)
 		return
 	}
 	// Password
 	err = util.CheckPassword(req.Password, user.HashedPassword)
 	if err != nil {
 		ctx.JSON(http.StatusUnauthorized, errorResponse(err))
+		log.Println(err)
+
 		return
 	}
 
@@ -153,6 +166,7 @@ func (server *Server) UserLogin(ctx *gin.Context) {
 	)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		log.Println(err)
 		return
 	}
 
@@ -186,6 +200,9 @@ func (server *Server) DeleteUser(ctx *gin.Context) {
 	var req DeleteController
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		println(" ")
+		log.Println(err)
+		println(" ")
 		return
 	}
 	// Fix

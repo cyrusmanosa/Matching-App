@@ -38,9 +38,9 @@ func (server *Server) setupRouter() {
 	authRoutes := router.Group("/").Use(authMiddleware(server.tokenMaker))
 
 	// before login
-	router.POST("/SignUp", server.CheckEmail)              // OK
-	router.POST("/SignUpCheckCode", server.CheckEmailCode) // OK
-	router.POST("/Login", server.UserLogin)                // OK
+	router.POST("/SignUp", server.CheckEmail)
+	router.POST("/SignUpCheckCode", server.CheckEmailCode)
+	router.POST("/Login", server.UserLogin)
 
 	// transition
 

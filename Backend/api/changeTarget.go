@@ -3,6 +3,7 @@ package api
 import (
 	db "Backend/db/sqlc"
 	info "Backend/db/sqlc/info"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -19,6 +20,9 @@ func (server *Server) CreateChangeTarget(ctx *gin.Context) {
 	var req CreateChangeTargetRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		println(" ")
+		log.Println(err)
+		println(" ")
 		return
 	}
 
@@ -57,6 +61,10 @@ func (server *Server) GetChangeTarget(ctx *gin.Context) {
 	var req GetChangeTargetRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		println(" ")
+		log.Println(err)
+		println(" ")
+		return
 	}
 
 	GetCT, err := server.store.GetChangeTargetUserList(ctx, req.UserID)
