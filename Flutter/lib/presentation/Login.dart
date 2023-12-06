@@ -6,6 +6,7 @@ import 'package:dating_your_date/widgets/custom_outlined_button.dart';
 import 'package:dating_your_date/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 // ignore_for_file: must_be_immutable
 class Login extends StatelessWidget {
@@ -17,18 +18,21 @@ class Login extends StatelessWidget {
 
   void loginRequset(BuildContext context) async {
     var url = "http://127.0.0.1:8080/Login";
-    var response = await http.post(Uri.parse(url), body: {
+    var requestBody = {
       "Email": emailInputController.text,
       "Password": passwordInputController.text,
-    });
+    };
+    var response = await http.post(
+      Uri.parse(url),
+      body: jsonEncode(requestBody),
+      headers: {"Content-Type": "application/json"},
+    );
 
     if (response.statusCode == 200) {
-      Navigator.pushNamed(context, AppRoutes.containerScreen);
+      onTapLoginButton(context);
     } else {
-      print("email:");
-      print(emailInputController.text);
-      print("password:");
-      print(passwordInputController.text);
+      print("Email: ${emailInputController.text}");
+      print("Password: ${passwordInputController.text}");
     }
   }
 
@@ -83,7 +87,7 @@ class Login extends StatelessWidget {
                   text: "ログイン",
                   buttonTextStyle: theme.textTheme.titleSmall,
                   onPressed: () {
-                    onTapLoginButton(context);
+                    loginRequset(context);
                   },
                 ),
                 SizedBox(height: 25.v),
@@ -195,7 +199,7 @@ class Login extends StatelessWidget {
 
   /// Login
   onTapLoginButton(BuildContext context) {
-    loginRequset(context);
+    Navigator.pushNamed(context, AppRoutes.containerScreen);
   }
 
   /// PasswordResetEmail

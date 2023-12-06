@@ -6,6 +6,7 @@ environment:
 dependencies: 
   flutter: 
     sdk: flutter
+  flutter_launcher_icons:
   cached_network_image:
   flutter_svg: 
   flutter_svg_provider:
@@ -14,6 +15,14 @@ dependencies:
   intl: 
   google_fonts:
   postgres: 
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path_android: "assets/images/app_logo.png"
+  image_path_ios: "assets/images/app_logo.png"
+  android_icon_background: "#FFFFFF"
+  ios_icon_background: "#FFFFFF"
 
 dev_dependencies: 
   flutter_test: 

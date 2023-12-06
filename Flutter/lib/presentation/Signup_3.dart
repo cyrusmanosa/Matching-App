@@ -6,6 +6,8 @@ import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
 import 'package:dating_your_date/widgets/custom_outlined_button.dart';
 import 'package:dating_your_date/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 // ignore_for_file: must_be_immutable,camel_case_types
 class SignUp_3 extends StatelessWidget {
@@ -23,7 +25,7 @@ class SignUp_3 extends StatelessWidget {
       child: Scaffold(
         appBar: _buildHeader(context),
         body: Padding(
-          padding: EdgeInsets.only(left: 30.h, top: 30, right: 30.h),
+          padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
           child: Column(
             children: [
               // Annual Salary

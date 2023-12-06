@@ -5,7 +5,7 @@ import (
 	"net/smtp"
 )
 
-func SendValidateCodeOnMail(RequestCode string, to []string) {
+func SendValidateCodeOnMail(RequestCode string, to []string) bool {
 	auth := smtp.PlainAuth("", "studiocmkc0110@gmail.com", "iodvpvmlyvadnhfb", "smtp.gmail.com")
 	subject := "Verification Code Email for Dating Date"
 	body := `<html>
@@ -15,7 +15,7 @@ func SendValidateCodeOnMail(RequestCode string, to []string) {
 		<br>
 		<h3>Verification Code:  ` + RequestCode + `  </h3>
 		<br>
-		<h3>Please enter this code in the designated field on our website or application within the next 10 minutes to complete your account verification. If you did not initiate this request or have any concerns, please contact our support team immediately.</h3>
+		<h3>Please enter this code in the designated field on our website or application within the next 5 minutes to complete your account verification. If you did not initiate this request or have any concerns, please contact our support team immediately.</h3>
 		<h3>Thank you for your cooperation.</h3>
 		<br>
 		<h2>Best regards,</h2>
@@ -30,5 +30,7 @@ func SendValidateCodeOnMail(RequestCode string, to []string) {
 	err := smtp.SendMail("smtp.gmail.com:587", auth, "studiocmkc0110@gmail.com", to, []byte(msg))
 	if err != nil {
 		fmt.Println(err)
+		return false
 	}
+	return true
 }

@@ -11,6 +11,8 @@ import 'package:dating_your_date/presentation/ChatBox.dart';
 import 'package:dating_your_date/presentation/Target/Target.dart';
 import 'package:dating_your_date/widgets/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 // ignore: must_be_immutable, camel_case_types
 class ContainerScreen extends StatelessWidget {
@@ -72,11 +74,11 @@ class ContainerScreen extends StatelessWidget {
       case AppRoutes.profileEdit:
         return ProfileEdit();
       case AppRoutes.accompanyConditionsRepair:
-        return AccompanyConditionsRepair();
+        return AccompanyConditionsRepair("お相伴の条件更改");
       case AppRoutes.hobbyConditionRepair:
-        return HobbyConditionRepair();
+        return HobbyConditionRepair("趣味の条件更改");
       case AppRoutes.loverConditionsRepair:
-        return LoverConditionsRepair();
+        return LoverConditionsRepair("恋人の条件更改");
       case AppRoutes.deleteTarget:
         return DeleteTarget();
       default:

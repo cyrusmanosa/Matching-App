@@ -46,6 +46,8 @@ import 'package:dating_your_date/presentation/Signup_2.dart';
 import 'package:dating_your_date/presentation/TargetReady.dart';
 import 'package:dating_your_date/presentation/Target/Target.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class AppRoutes {
   static const String appNavigationScreen = '/app_navigation_screen';
@@ -92,21 +94,21 @@ class AppRoutes {
     chat: (context) => Chat(),
     chatBox: (context) => ChatBox(),
     containerScreen: (context) => ContainerScreen(),
-    accompanyConditions: (context) => AccompanyConditions(),
-    accompanyConditionsRepair: (context) => AccompanyConditionsRepair(),
+    accompanyConditions: (context) => AccompanyConditions("お相伴の条件設定"),
+    accompanyConditionsRepair: (context) => AccompanyConditionsRepair("お相伴の条件更改"),
     confirmationCore: (context) => ConfirmationCore(),
     confirmationCoreError: (context) => ConfirmationCoreError(),
     deleteTarget: (context) => DeleteTarget(),
     emailConfirmation: (context) => EmailConfirmation(),
     emailConfirmationError: (context) => EmailConfirmationError(),
-    hobbyCondition: (context) => HobbyCondition(),
-    hobbyConditionRepair: (context) => HobbyConditionRepair(),
+    hobbyCondition: (context) => HobbyCondition("趣味の条件設定"),
+    hobbyConditionRepair: (context) => HobbyConditionRepair("趣味の条件更改"),
     home: (context) => Home(),
     login: (context) => Login(),
     lowPercentageHeightWarnning: (context) => LowPercentageHeightWarnning(),
     lowPercentageLowWarnning: (context) => LowPercentageLowWarnning(),
-    loverConditions: (context) => LoverConditions(),
-    loverConditionsRepair: (context) => LoverConditionsRepair(),
+    loverConditions: (context) => LoverConditions("恋人の条件設定"),
+    loverConditionsRepair: (context) => LoverConditionsRepair("恋人の条件更改"),
     newPasswordDone: (context) => NewPasswordDone(),
     newPasswordError: (context) => NewPasswordError(),
     newPasswordSetup: (context) => NewPasswordSetup(),

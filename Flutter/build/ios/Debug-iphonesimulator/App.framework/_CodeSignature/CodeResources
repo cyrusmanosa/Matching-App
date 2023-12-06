@@ -10,11 +10,11 @@
 		</data>
 		<key>flutter_assets/AssetManifest.bin</key>
 		<data>
-		1OM4gG1ab5m45cQdLSTsgsUNu3Q=
+		1//ElKV8ZQCLYeudZ7JwY3IztiM=
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		hqMI7j1WG3IjQB/NEFA/IHLnrt8=
+		94JfsXlY2cuE00X7KDZIOigYZIo=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -22,11 +22,11 @@
 		</data>
 		<key>flutter_assets/NOTICES.Z</key>
 		<data>
-		d24YtM5a6tywVKMd96p4tDfAAes=
+		ldkvroBha1600ss/1d6ePeAdXcs=
 		</data>
 		<key>flutter_assets/assets/.DS_Store</key>
 		<data>
-		Ogi/DprmluJ8A9BDEGkRSyMkA84=
+		hLBA0hYd4NReGRMkS0L0sllp6xw=
 		</data>
 		<key>flutter_assets/assets/fonts/MontserratSemiBold.ttf</key>
 		<data>
@@ -47,6 +47,10 @@
 		<key>flutter_assets/assets/images/.DS_Store</key>
 		<data>
 		6dTqastNcjI0qCs8yC4lwTbLglY=
+		</data>
+		<key>flutter_assets/assets/images/app_logo.png</key>
+		<data>
+		GMIfpErbp7ZyJ6/wzG3VYqPeudU=
 		</data>
 		<key>flutter_assets/assets/images/image_not_found.png</key>
 		<data>
@@ -186,7 +190,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		namSdvLNXDy8pFegkK0S/6kGh8k=
+		Gniat43sxNzpJ9isc3vS3lfhr2o=
 		</data>
 		<key>flutter_assets/shaders/ink_sparkle.frag</key>
 		<data>
@@ -203,14 +207,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			8oJfYcLQZRmkzKiHXwEyGl9tfA03ckRanzkbv2BUn8w=
+			ugrgvRP1odrlUYHPYeY5QP/O6omzJ5Rmdce6cLOZMjE=
 			</data>
 		</dict>
 		<key>flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			B79iqlL0fcCbszaz/TfgdbADUJjaZjhTEdkKm4JBDsg=
+			8p6Og2/EqycKaUbDDgLcu1Fi5CG9LovPmu2IlhK9DvM=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -224,7 +228,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			i8Tpa4sYdlOMrWSa7Ost9K+uH0IIMuM0p3jCKSVxmr4=
+			O/amzpWETyUS2ahBjyhDZxR9xF9/LpUJBVw3wIRc+dA=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/fonts/MontserratSemiBold.ttf</key>
@@ -253,6 +257,13 @@
 			<key>hash2</key>
 			<data>
 			tTFYFzHaTeLvzyE7d3/0AYyk3COZgLN/A05h6RyDG/Q=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/app_logo.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			0NwD5AmqirwhYeYur7sM0wWdF3l8Tv1N+HMmg8xea+k=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/images/image_not_found.png</key>
@@ -497,7 +508,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			WzD/1bk/1KeBsUHVnsptuZxX5Fn4uoatJ3vEN5n0NBM=
+			XdStaZM4K+xJVy2slfZ2dew1I1UCXos8EuSGMk6z/CY=
 			</data>
 		</dict>
 		<key>flutter_assets/shaders/ink_sparkle.frag</key>

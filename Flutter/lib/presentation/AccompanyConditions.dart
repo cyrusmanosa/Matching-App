@@ -6,18 +6,21 @@ import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
 import 'package:dating_your_date/widgets/custom_outlined_button.dart';
 import 'package:dating_your_date/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 // ignore: must_be_immutable, camel_case_types
 class AccompanyConditions extends StatelessWidget {
-  AccompanyConditions({Key? key}) : super(key: key);
+  final String title;
+  AccompanyConditions(this.title, {Key? key}) : super(key: key);
 
-  TextEditingController AccompanyEraController = TextEditingController();
-  TextEditingController AccompanyCountryController = TextEditingController();
-  TextEditingController AccompanyCityController = TextEditingController();
-  TextEditingController AccompanyGenderController = TextEditingController();
-  TextEditingController AccompanyAccompanyTypeController = TextEditingController();
-  TextEditingController AccompanyFindTargetController = TextEditingController();
-  TextEditingController AccompanySociabilityController = TextEditingController();
+  TextEditingController accompanyEraController = TextEditingController();
+  TextEditingController accompanyCountryController = TextEditingController();
+  TextEditingController accompanyCityController = TextEditingController();
+  TextEditingController accompanyGenderController = TextEditingController();
+  TextEditingController accompanyAccompanyTypeController = TextEditingController();
+  TextEditingController accompanyFindTargetController = TextEditingController();
+  TextEditingController accompanySociabilityController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +30,11 @@ class AccompanyConditions extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         // Header
-        appBar: _buildHeader(context),
+        appBar: _buildHeader(context, title),
         body: Container(
           width: double.maxFinite,
           child: SingleChildScrollView(
-            padding: EdgeInsets.only(left: 30.h, top: 30, right: 30.h),
+            padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
             child: Column(
               children: [
                 // Era
@@ -93,7 +96,7 @@ class AccompanyConditions extends StatelessWidget {
   }
 
   /// Header
-  PreferredSizeWidget _buildHeader(BuildContext context) {
+  PreferredSizeWidget _buildHeader(BuildContext context, String title) {
     return CustomAppBar(
       leading: AppbarLeadingImage(
         imagePath: ImageConstant.imgArrowLeft,
@@ -102,7 +105,7 @@ class AccompanyConditions extends StatelessWidget {
           onTapArrowLeft(context);
         },
       ),
-      title: AppbarTitle(text: "お相伴の条件設定", margin: EdgeInsets.only(top: 60, bottom: 20)),
+      title: AppbarTitle(text: title, margin: EdgeInsets.only(top: 60, bottom: 20)),
       styleType: Style.bgFill,
     );
   }
@@ -115,7 +118,7 @@ class AccompanyConditions extends StatelessWidget {
   /// Era
   Widget _buildAccompanyEraInput(BuildContext context) {
     return CustomTextFormField(
-      controller: AccompanyEraController,
+      controller: accompanyEraController,
       hintText: "３０代",
     );
   }
@@ -123,7 +126,7 @@ class AccompanyConditions extends StatelessWidget {
   /// Country
   Widget _buildAccompanyCountryInput(BuildContext context) {
     return CustomTextFormField(
-      controller: AccompanyCountryController,
+      controller: accompanyCountryController,
       hintText: "日本",
     );
   }
@@ -131,7 +134,7 @@ class AccompanyConditions extends StatelessWidget {
   /// City
   Widget _buildAccompanyCityInput(BuildContext context) {
     return CustomTextFormField(
-      controller: AccompanyCityController,
+      controller: accompanyCityController,
       hintText: "大阪",
     );
   }
@@ -139,7 +142,7 @@ class AccompanyConditions extends StatelessWidget {
   /// Gender
   Widget _buildAccompanyGenderInput(BuildContext context) {
     return CustomTextFormField(
-      controller: AccompanyGenderController,
+      controller: accompanyGenderController,
       hintText: "男",
     );
   }
@@ -147,7 +150,7 @@ class AccompanyConditions extends StatelessWidget {
   /// Accompany Type
   Widget _buildAccompanyAccompanyTypeInput(BuildContext context) {
     return CustomTextFormField(
-      controller: AccompanyAccompanyTypeController,
+      controller: accompanyAccompanyTypeController,
       hintText: "おしゃべり",
     );
   }
@@ -155,7 +158,7 @@ class AccompanyConditions extends StatelessWidget {
   /// FindTarget
   Widget _buildAccompanyFindTargetInput(BuildContext context) {
     return CustomTextFormField(
-      controller: AccompanyFindTargetController,
+      controller: accompanyFindTargetController,
       hintText: "聞き役",
     );
   }
@@ -163,7 +166,7 @@ class AccompanyConditions extends StatelessWidget {
   /// Sociability
   Widget _buildAccompanySociabilityInput(BuildContext context) {
     return CustomTextFormField(
-      controller: AccompanySociabilityController,
+      controller: accompanySociabilityController,
       hintText: "人たら神",
       textInputAction: TextInputAction.done,
     );

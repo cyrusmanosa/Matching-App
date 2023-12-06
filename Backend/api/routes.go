@@ -66,6 +66,7 @@ func (server *Server) setupRouter() {
 	authRoutes.GET("/GetImg", server.GetImages)
 
 	// Update
+	authRoutes.PUT("/InputPassword", server.inputPassword)
 	authRoutes.PUT("/ChangePassword", server.ResetPassword)
 	authRoutes.PUT("/UpdateCanChangeInfo", server.UpdateCanChangeInfo)
 	authRoutes.PUT("/UpdateHobby", server.UpdateHobby)

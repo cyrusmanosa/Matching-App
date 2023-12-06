@@ -6,10 +6,13 @@ import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
 import 'package:dating_your_date/widgets/custom_outlined_button.dart';
 import 'package:dating_your_date/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 // ignore: must_be_immutable, camel_case_types
 class HobbyConditionRepair extends StatelessWidget {
-  HobbyConditionRepair({Key? key}) : super(key: key);
+  final String title;
+  HobbyConditionRepair(this.title, {Key? key}) : super(key: key);
 
   TextEditingController resetHobbyEraController = TextEditingController();
   TextEditingController resetHobbyCountryController = TextEditingController();
@@ -32,7 +35,7 @@ class HobbyConditionRepair extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         // Header
-        appBar: _buildHeader(context),
+        appBar: _buildHeader(context, title),
         body: Form(
           child: Container(
             width: double.maxFinite,
@@ -118,7 +121,7 @@ class HobbyConditionRepair extends StatelessWidget {
   }
 
   /// Header
-  PreferredSizeWidget _buildHeader(BuildContext context) {
+  PreferredSizeWidget _buildHeader(BuildContext context, String title) {
     return CustomAppBar(
       leading: AppbarLeadingImage(
         imagePath: ImageConstant.imgArrowLeft,
@@ -127,7 +130,7 @@ class HobbyConditionRepair extends StatelessWidget {
           onTapArrowLeft(context);
         },
       ),
-      title: AppbarTitle(text: "趣味の条件更改", margin: EdgeInsets.only(top: 60, bottom: 20)),
+      title: AppbarTitle(text: title, margin: EdgeInsets.only(top: 60, bottom: 20)),
       styleType: Style.bgFill,
     );
   }

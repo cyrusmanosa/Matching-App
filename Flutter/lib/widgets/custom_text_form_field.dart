@@ -27,6 +27,7 @@ class CustomTextFormField extends StatelessWidget {
     this.autofocus = true,
     this.filled = false,
     this.obscureText = false,
+    this.dateonTap,
   }) : super(key: key);
 
   final Alignment? alignment;
@@ -52,6 +53,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextStyle? textStyle;
   final Widget? prefix;
   final Widget? suffix;
+  final VoidCallback? dateonTap;
 
   @override
   Widget build(BuildContext context) {
@@ -64,12 +66,15 @@ class CustomTextFormField extends StatelessWidget {
         child: TextFormField(
           autofocus: autofocus!,
           controller: controller,
+
+          // input complete
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: theme.textTheme.bodyLarge,
             border: InputBorder.none,
             prefix: Padding(padding: EdgeInsets.only(left: 15.0)),
           ),
+
           focusNode: FocusNode(),
           keyboardType: textInputType,
           maxLength: maxLength,
@@ -78,12 +83,12 @@ class CustomTextFormField extends StatelessWidget {
           style: theme.textTheme.displayLarge,
           textInputAction: textInputAction,
           validator: validator,
+          onTap: dateonTap,
         ),
       );
 
   InputDecoration get decoration => InputDecoration(
         // Example Word
-
         contentPadding: contentPadding ?? EdgeInsets.all(5),
         fillColor: fillColor,
         filled: filled,
@@ -111,7 +116,7 @@ class CustomTextFormField extends StatelessWidget {
         focusedBorder: borderDecoration ?? InputBorder.none,
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadiusStyle.r5,
-          borderSide: BorderSide(color: appTheme.pinkA100, width: 1),
+          borderSide: BorderSide(color: appTheme.blue800, width: 1),
         ),
       );
 }

@@ -1,11 +1,10 @@
-import 'dart:math';
-
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/custom_outlined_button.dart';
 import 'package:dating_your_date/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 // ignore_for_file: must_be_immutable
 class EmailConfirmation extends StatelessWidget {
@@ -15,6 +14,22 @@ class EmailConfirmation extends StatelessWidget {
   RegExp emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
 
   TextEditingController emailController = TextEditingController();
+
+  void signupRequset(BuildContext context) async {
+    var url = "http://127.0.0.1:8080/SignUp";
+    var requestBody = {"email": emailController.text};
+    var response = await http.post(
+      Uri.parse(url),
+      body: jsonEncode(requestBody),
+      headers: {"Content-Type": "application/json"},
+    );
+
+    if (response.statusCode == 200) {
+      onTaptf(context);
+    } else {
+      print("email: ${emailController.text}");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +78,8 @@ class EmailConfirmation extends StatelessWidget {
                   buttonTextStyle: theme.textTheme.titleSmall!,
                   onPressed: () {
                     print('${emailController.text}');
-                    onTaptf(context);
+                    signupRequset(context);
+                    // onTaptf(context);
                   },
                 ),
                 SizedBox(height: 20.v),

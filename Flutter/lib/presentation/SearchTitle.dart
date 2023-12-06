@@ -1,6 +1,8 @@
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class SearchTitle extends StatelessWidget {
   const SearchTitle({Key? key}) : super(key: key);
@@ -15,7 +17,6 @@ class SearchTitle extends StatelessWidget {
           padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
           child: Column(
             children: [
-              // Logo
               // logo
               CustomImageView(imagePath: ImageConstant.imgLogo, width: 130),
               SizedBox(height: 1.v),

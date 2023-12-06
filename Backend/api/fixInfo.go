@@ -13,12 +13,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Create Fix
-// Json input
+// Create
 type createUserRequest struct {
 	FirstName     string `json:"first_name" binding:"required"`
 	LastName      string `json:"last_name" binding:"required"`
-	Password      string `json:"password" binding:"required,min=6"`
 	Birth         string `json:"birth" binding:"required"`
 	Country       string `json:"country" binding:"required"`
 	Gender        string `json:"gender" binding:"required"`
@@ -51,18 +49,16 @@ func (server *Server) CreateUserFixInfo(ctx *gin.Context) {
 
 	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
 
-	Hash, _ := util.HashPassword(req.Password)
 	arg := info.CreateUserFixInformationParams{
-		FirstName:      req.FirstName,
-		LastName:       req.LastName,
-		Email:          authPayload.Email,
-		HashedPassword: Hash,
-		Birth:          req.Birth,
-		Country:        req.Country,
-		Gender:         req.Gender,
-		Blood:          req.Blood,
-		Age:            req.Age,
-		Constellation:  req.Constellation,
+		FirstName:     req.FirstName,
+		LastName:      req.LastName,
+		Email:         authPayload.Email,
+		Birth:         req.Birth,
+		Country:       req.Country,
+		Gender:        req.Gender,
+		Blood:         req.Blood,
+		Age:           req.Age,
+		Constellation: req.Constellation,
 	}
 
 	user, err := server.store.CreateUserFixInformation(ctx, arg)
@@ -77,6 +73,41 @@ func (server *Server) CreateUserFixInfo(ctx *gin.Context) {
 	}
 	rsq := newUserResponse(user)
 	ctx.JSON(http.StatusOK, rsq)
+}
+
+type passwordRequest struct {
+	UserID   int32  `json:"user_id" binding:"required"`
+	Password string `json:"password" binding:"required,min=6"`
+}
+
+// input password
+func (server *Server) inputPassword(ctx *gin.Context) {
+	var req passwordRequest
+	if err := ctx.ShouldBindJSON(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		println(" ")
+		log.Println(err)
+		println(" ")
+		return
+	}
+
+	Hash, _ := util.HashPassword(req.Password)
+	arg := info.UpdatePasswordParams{
+		UserID:         req.UserID,
+		HashedPassword: Hash,
+	}
+
+	inputPW, err := server.store.UpdatePassword(ctx, arg)
+	if err != nil {
+		errCode := db.ErrorCode(err)
+		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+			ctx.JSON(http.StatusForbidden, errorResponse(err))
+			return
+		}
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+	ctx.JSON(http.StatusOK, inputPW)
 }
 
 // Reset Password

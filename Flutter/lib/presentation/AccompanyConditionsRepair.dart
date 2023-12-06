@@ -6,10 +6,13 @@ import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
 import 'package:dating_your_date/widgets/custom_outlined_button.dart';
 import 'package:dating_your_date/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 // ignore: must_be_immutable, camel_case_types
 class AccompanyConditionsRepair extends StatelessWidget {
-  AccompanyConditionsRepair({Key? key}) : super(key: key);
+  final String title;
+  AccompanyConditionsRepair(this.title, {Key? key}) : super(key: key);
 
   TextEditingController resetAccompanyEraController = TextEditingController();
   TextEditingController resetAccompanyCountryController = TextEditingController();
@@ -28,11 +31,11 @@ class AccompanyConditionsRepair extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         // Header
-        appBar: _buildHeader(context),
+        appBar: _buildHeader(context, title),
         body: Container(
           width: double.maxFinite,
           child: SingleChildScrollView(
-            padding: EdgeInsets.only(left: 30.h, top: 30, right: 30.h),
+            padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
             child: Column(
               children: [
                 // Era
@@ -93,7 +96,7 @@ class AccompanyConditionsRepair extends StatelessWidget {
   }
 
   /// Header
-  PreferredSizeWidget _buildHeader(BuildContext context) {
+  PreferredSizeWidget _buildHeader(BuildContext context, String title) {
     return CustomAppBar(
       leading: AppbarLeadingImage(
         imagePath: ImageConstant.imgArrowLeft,
@@ -102,7 +105,7 @@ class AccompanyConditionsRepair extends StatelessWidget {
           onTapArrowLeft(context);
         },
       ),
-      title: AppbarTitle(text: "お相伴の条件更改", margin: EdgeInsets.only(top: 60, bottom: 20)),
+      title: AppbarTitle(text: title, margin: EdgeInsets.only(top: 60, bottom: 20)),
       styleType: Style.bgFill,
     );
   }

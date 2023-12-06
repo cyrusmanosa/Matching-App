@@ -3,12 +3,33 @@ import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/custom_outlined_button.dart';
 import 'package:dating_your_date/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 // ignore: must_be_immutable
 class ConfirmationCore extends StatelessWidget {
   ConfirmationCore({Key? key}) : super(key: key);
 
   TextEditingController confirmationCoreController = TextEditingController();
+
+  void checkcodeRequset(BuildContext context) async {
+    var url = "http://127.0.0.1:8080/SignUpCheckCode";
+    var requestBody = {"checkcode": confirmationCoreController.text};
+    var response = await http.post(
+      Uri.parse(url),
+      body: jsonEncode(requestBody),
+      headers: {"Content-Type": "application/json"},
+    );
+
+    if (response.statusCode == 200) {
+      onTaptf(context);
+    } else {
+      print("checkcode:");
+      print(confirmationCoreController.text);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +62,7 @@ class ConfirmationCore extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: GestureDetector(
                   onTap: () {
-                    onTapReturn(context);
+                    checkcodeRequset(context);
                   },
                   child: Text("コードが届かない場合", style: CustomTextStyles.bodyMediumBlack900),
                 ),

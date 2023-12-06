@@ -3,7 +3,7 @@ CREATE TABLE "fixinformation" (
   "first_name" VARCHAR NOT NULL,
   "last_name" VARCHAR NOT NULL,
   "email" VARCHAR UNIQUE NOT NULL,
-  "hashed_password" VARCHAR NOT NULL,
+  "hashed_password" VARCHAR,
   "birth" VARCHAR NOT NULL,
   "country" VARCHAR NOT NULL,
   "gender" VARCHAR NOT NULL,

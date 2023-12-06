@@ -4,6 +4,7 @@ import (
 	"Backend/util"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/badoux/checkmail"
 	"github.com/gin-gonic/gin"
@@ -44,7 +45,14 @@ func (server *Server) CheckEmail(ctx *gin.Context) {
 	} else {
 		req.Email = CE.Email
 		req.CheckCode = util.RandomCheckCode()
-		util.SendValidateCodeOnMail(req.CheckCode, []string{req.Email})
+		sended := util.SendValidateCodeOnMail(req.CheckCode, []string{req.Email})
+
+		if sended {
+			time.AfterFunc(300*time.Second, func() {
+				req.CheckCode = ""
+			})
+		}
+
 		ctx.JSON(http.StatusOK, req)
 	}
 }
