@@ -46,8 +46,6 @@ import 'package:dating_your_date/presentation/Signup_2.dart';
 import 'package:dating_your_date/presentation/TargetReady.dart';
 import 'package:dating_your_date/presentation/Target/Target.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class AppRoutes {
   static const String appNavigationScreen = '/app_navigation_screen';

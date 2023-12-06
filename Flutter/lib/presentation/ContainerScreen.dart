@@ -11,8 +11,6 @@ import 'package:dating_your_date/presentation/ChatBox.dart';
 import 'package:dating_your_date/presentation/Target/Target.dart';
 import 'package:dating_your_date/widgets/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 // ignore: must_be_immutable, camel_case_types
 class ContainerScreen extends StatelessWidget {

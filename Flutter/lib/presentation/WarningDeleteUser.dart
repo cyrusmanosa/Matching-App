@@ -1,8 +1,6 @@
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/widgets/custom_warningMsgBox.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class WarningMsgDeleteUser extends StatelessWidget {
   const WarningMsgDeleteUser({Key? key}) : super(key: key);

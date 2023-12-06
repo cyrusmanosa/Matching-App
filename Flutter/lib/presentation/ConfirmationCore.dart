@@ -5,8 +5,6 @@ import 'package:dating_your_date/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 // ignore: must_be_immutable
 class ConfirmationCore extends StatelessWidget {

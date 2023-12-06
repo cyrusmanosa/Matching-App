@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import '../core/app_export.dart';
 
 /// A collection of pre-defined text styles for customizing text appearance,

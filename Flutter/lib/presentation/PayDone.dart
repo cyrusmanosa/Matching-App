@@ -1,7 +1,5 @@
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class PayDone extends StatelessWidget {
   const PayDone({Key? key}) : super(key: key);
