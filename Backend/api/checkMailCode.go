@@ -25,9 +25,6 @@ func (server *Server) CheckEmail(ctx *gin.Context) {
 	var CE EmailRequset
 	if err := ctx.ShouldBindJSON(&CE); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
 		return
 	}
 
@@ -69,15 +66,12 @@ func (server *Server) CheckEmailCode(ctx *gin.Context) {
 	var CC CodeRequest
 	if err := ctx.ShouldBindJSON(&CC); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
 		return
 	}
 	if CC.CheckCode == req.CheckCode {
 		accessToken, err := server.tokenMaker.CreateToken(
 			req.Email,
-			"",
+			util.DepositorRole,
 			server.config.AccessTokenDuration,
 		)
 		if err != nil {

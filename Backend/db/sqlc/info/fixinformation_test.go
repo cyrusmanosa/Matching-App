@@ -37,7 +37,7 @@ func CreateRandomUserFixInformaion(t *testing.T) Fixinformation {
 		Gender:         gofakeit.Gender(),
 		Blood:          util.RandomBlood(),
 		Age:            age,
-		Constellation:  util.Constellation(M, D),
+		Constellation:  util.SwitchConstellation(M, D),
 		Certification:  gofakeit.Bool(),
 	}
 	fix, err := testinfoQueries.CreateUserFixInformation(context.Background(), arg)

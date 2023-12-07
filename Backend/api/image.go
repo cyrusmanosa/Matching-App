@@ -3,7 +3,6 @@ package api
 import (
 	db "Backend/db/sqlc"
 	info "Backend/db/sqlc/info"
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -23,9 +22,6 @@ func (server Server) CreateImage(ctx *gin.Context) {
 	var req CreateImageRequset
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
 		return
 	}
 
@@ -60,9 +56,6 @@ func (server Server) GetImages(ctx *gin.Context) {
 	var req GetImageRequset
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
 		return
 	}
 	GetImg, err := server.store.GetUserimageData(ctx, req.UserID)
@@ -107,9 +100,6 @@ func (server *Server) UpdateImg(ctx *gin.Context) {
 	var req UpdateImageRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
 		return
 	}
 

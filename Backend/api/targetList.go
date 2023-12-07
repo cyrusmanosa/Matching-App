@@ -4,7 +4,6 @@ import (
 	db "Backend/db/sqlc"
 	info "Backend/db/sqlc/info"
 	"database/sql"
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -22,9 +21,6 @@ func (server *Server) CreateTargetList(ctx *gin.Context) {
 	var req inputTargetUser
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
 		return
 	}
 
@@ -57,9 +53,6 @@ func (server *Server) GetTargetList(ctx *gin.Context) {
 	var req GetTargetUser
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
 		return
 	}
 
@@ -102,9 +95,6 @@ func (server *Server) UpdateTargetList(ctx *gin.Context) {
 	var req inputTargetUser
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
 		return
 	}
 

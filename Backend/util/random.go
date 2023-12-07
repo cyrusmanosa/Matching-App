@@ -1,6 +1,7 @@
 package util
 
 import (
+	"fmt"
 	"math/rand"
 	"strings"
 	"time"
@@ -30,7 +31,7 @@ func RandomBlood() string {
 	return a
 }
 
-func Constellation(M, D int) string {
+func SwitchConstellation(M, D int) string {
 	switch M {
 	case 1:
 		if D < 20 {
@@ -290,4 +291,31 @@ func RandomCheckCode() string {
 		b[i] = charset[seededRand.Intn(len(charset))]
 	}
 	return string(b)
+}
+
+func BirthStringtoInt(Bday string) (int, int, int) {
+	date, err := time.Parse("2006-01-02", Bday)
+	if err != nil {
+		fmt.Println("日期解析錯誤:", err)
+	}
+	year := int(date.Year())
+	month := int(date.Month())
+	day := int(date.Day())
+
+	return year, month, day
+}
+
+func SwitchAge(Y, M, D int) int32 {
+	currentDate := time.Now()
+	currentYear := currentDate.Year()
+	currentMonth := int(currentDate.Month())
+	currentDay := currentDate.Day()
+
+	age := currentYear - Y
+
+	if currentMonth < M || (currentMonth == M && currentDay < D) {
+		age--
+	}
+
+	return int32(age)
 }

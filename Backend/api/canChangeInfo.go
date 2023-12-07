@@ -4,7 +4,6 @@ import (
 	db "Backend/db/sqlc"
 	info "Backend/db/sqlc/info"
 	"database/sql"
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -31,9 +30,6 @@ func (server *Server) CreateUserCanChangeInfo(ctx *gin.Context) {
 	var req createCanChangeInfoRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
 		return
 	}
 
@@ -74,9 +70,6 @@ func (server *Server) GetCanChangeInfo(ctx *gin.Context) {
 	var req GetCanChangeInfoRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
 		return
 	}
 	GetCanChangeInfo, err := server.store.GetUserCanChangeInformation(ctx, req.UserID)
@@ -97,9 +90,6 @@ func (server *Server) UpdateCanChangeInfo(ctx *gin.Context) {
 	var req createCanChangeInfoRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
 		return
 	}
 	arg := info.UpdateInformationParams{

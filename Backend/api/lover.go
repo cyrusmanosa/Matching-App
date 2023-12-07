@@ -4,7 +4,6 @@ import (
 	db "Backend/db/sqlc"
 	info "Backend/db/sqlc/info"
 	"database/sql"
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -33,9 +32,6 @@ func (server *Server) CreateLover(ctx *gin.Context) {
 	var req CreateLoverRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
 		return
 	}
 	L := info.CreateLoverRequestParams{
@@ -77,9 +73,6 @@ func (server *Server) GetLover(ctx *gin.Context) {
 	var req GetHobbyRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
 		return
 	}
 	GetHobby, err := server.store.GetUserLover(ctx, req.UserID)
@@ -132,9 +125,6 @@ func (server *Server) UpdateLover(ctx *gin.Context) {
 	var req UpdateLoverRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
 		return
 	}
 	L := info.UpdateUserLoverParams{

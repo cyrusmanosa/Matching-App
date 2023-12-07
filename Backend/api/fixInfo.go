@@ -15,14 +15,12 @@ import (
 
 // Create
 type createUserRequest struct {
-	FirstName     string `json:"first_name" binding:"required"`
-	LastName      string `json:"last_name" binding:"required"`
-	Birth         string `json:"birth" binding:"required"`
-	Country       string `json:"country" binding:"required"`
-	Gender        string `json:"gender" binding:"required"`
-	Blood         string `json:"blood" binding:"required"`
-	Age           int32  `json:"age" binding:"required,numeric"`
-	Constellation string `json:"constellation" binding:"required"`
+	FirstName string `json:"first_name" binding:"required"`
+	LastName  string `json:"last_name" binding:"required"`
+	Birth     string `json:"birth" binding:"required"`
+	Country   string `json:"country" binding:"required"`
+	Gender    string `json:"gender" binding:"required"`
+	Blood     string `json:"blood" binding:"required"`
 }
 type userResponse struct {
 	UserID    int32     `json:"user_id"`
@@ -37,15 +35,17 @@ func newUserResponse(user info.Fixinformation) userResponse {
 		CreatedAt: user.CreatedAt.Time,
 	}
 }
+
 func (server *Server) CreateUserFixInfo(ctx *gin.Context) {
 	var req createUserRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
 		return
 	}
+
+	By, Bm, Bd := util.BirthStringtoInt(req.Birth)
+	a := util.SwitchAge(By, Bm, Bd)
+	Con := util.SwitchConstellation(Bm, Bd)
 
 	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
 
@@ -57,12 +57,13 @@ func (server *Server) CreateUserFixInfo(ctx *gin.Context) {
 		Country:       req.Country,
 		Gender:        req.Gender,
 		Blood:         req.Blood,
-		Age:           req.Age,
-		Constellation: req.Constellation,
+		Age:           a,
+		Constellation: Con,
 	}
 
 	user, err := server.store.CreateUserFixInformation(ctx, arg)
 	if err != nil {
+		log.Print(arg)
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
 			ctx.JSON(http.StatusForbidden, errorResponse(err))
@@ -70,24 +71,24 @@ func (server *Server) CreateUserFixInfo(ctx *gin.Context) {
 		}
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
+	} else {
+		log.Print(authPayload)
 	}
 	rsq := newUserResponse(user)
 	ctx.JSON(http.StatusOK, rsq)
 }
 
+// input password
 type passwordRequest struct {
 	UserID   int32  `json:"user_id" binding:"required"`
 	Password string `json:"password" binding:"required,min=6"`
 }
 
-// input password
 func (server *Server) inputPassword(ctx *gin.Context) {
 	var req passwordRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
+		log.Print(err)
 		return
 	}
 
@@ -99,6 +100,9 @@ func (server *Server) inputPassword(ctx *gin.Context) {
 
 	inputPW, err := server.store.UpdatePassword(ctx, arg)
 	if err != nil {
+		println(" ")
+		log.Println(err)
+		println(" ")
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
 			ctx.JSON(http.StatusForbidden, errorResponse(err))
@@ -120,9 +124,6 @@ func (server *Server) ResetPassword(ctx *gin.Context) {
 	var req ResetPasswordRequset
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
 		return
 	}
 
@@ -163,9 +164,6 @@ func (server *Server) UserLogin(ctx *gin.Context) {
 	var req loginUserRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
 		return
 	}
 
@@ -231,9 +229,6 @@ func (server *Server) DeleteUser(ctx *gin.Context) {
 	var req DeleteController
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
 		return
 	}
 	// Fix

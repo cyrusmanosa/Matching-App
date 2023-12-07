@@ -4,7 +4,6 @@ import (
 	db "Backend/db/sqlc"
 	info "Backend/db/sqlc/info"
 	"database/sql"
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -30,9 +29,6 @@ func (server *Server) CreateHobby(ctx *gin.Context) {
 	var req CreateHobbyRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
 		return
 	}
 	H := info.CreateHobbyRequestParams{
@@ -71,9 +67,6 @@ func (server *Server) GetHobby(ctx *gin.Context) {
 	var req GetHobbyRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
 		return
 	}
 	GetHobby, err := server.store.GetUserHobby(ctx, req.UserID)
@@ -123,9 +116,6 @@ func (server *Server) UpdateHobby(ctx *gin.Context) {
 	var req UpdateHobbyRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		println(" ")
-		log.Println(err)
-		println(" ")
 		return
 	}
 	H := info.UpdateUserHobbyParams{
