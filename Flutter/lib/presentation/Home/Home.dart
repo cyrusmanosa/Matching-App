@@ -1,8 +1,6 @@
 import 'widgets/HomeUserSide.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 // ignore_for_file: must_be_immutable
 class Home extends StatelessWidget {

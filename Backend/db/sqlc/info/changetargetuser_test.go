@@ -70,6 +70,6 @@ func TestDeleteData(t *testing.T) {
 	arg2 := CreateRandomUserFixInformaion(t)
 	CreateRandomChangeTargetUser(t, arg1, arg2)
 
-	err := testinfoQueries.DeleteData(context.Background(), arg1.UserID)
+	err := testinfoQueries.DeleteChangeTargetUser(context.Background(), arg1.UserID)
 	require.NoError(t, err)
 }

@@ -58,7 +58,6 @@ func CreateRandomUserFixInformaion(t *testing.T) Fixinformation {
 
 	require.NotZero(t, fix.UserID)
 	require.NotZero(t, fix.CreatedAt)
-	require.NotZero(t, fix.PasswordChangedAt)
 
 	return fix
 }
@@ -104,7 +103,7 @@ func TestUpdatePassword(t *testing.T) {
 	require.NoError(t, err)
 
 	Nhashed := UpdatePasswordParams{
-		UserID:         user.UserID,
+		Email:          user.Email,
 		HashedPassword: NewPW,
 	}
 

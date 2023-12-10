@@ -50,13 +50,14 @@ class PasswordSetup extends StatelessWidget {
 
                 // Button
                 CustomOutlinedButton(
-                    height: 40,
-                    width: 95,
-                    text: "設定",
-                    buttonTextStyle: theme.textTheme.titleMedium,
-                    onPressed: () {
-                      onTaptf(context);
-                    }),
+                  height: 40,
+                  width: 95,
+                  text: "設定",
+                  buttonTextStyle: theme.textTheme.titleMedium,
+                  onPressed: () {
+                    onTaptf(context);
+                  },
+                ),
               ],
             ),
           ),

@@ -19,10 +19,10 @@ type InfoQuerier interface {
 	CreateLoverRequest(ctx context.Context, arg CreateLoverRequestParams) (Loverrequest, error)
 	CreateUserCanChangeInformation(ctx context.Context, arg CreateUserCanChangeInformationParams) (Canchangeinformation, error)
 	CreateUserFixInformation(ctx context.Context, arg CreateUserFixInformationParams) (Fixinformation, error)
+	DeleteCanChangeInformation(ctx context.Context, userID int32) error
+	DeleteChangeTargetUser(ctx context.Context, userID int32) error
 	DeleteComplaint(ctx context.Context, cpID int32) error
-	DeleteData(ctx context.Context, userID int32) error
 	DeleteImage(ctx context.Context, userID int32) error
-	DeleteInformation(ctx context.Context, userID int32) error
 	DeleteTargetList(ctx context.Context, userID int32) error
 	DeleteUser(ctx context.Context, userID int32) error
 	DeleteUserAccompany(ctx context.Context, userID int32) error

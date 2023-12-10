@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "Backend/pb";
+
+
+message hobby {
+    int32 UserID = 1;
+    int32 Era = 2;
+    string City = 3;
+    string Gender = 4;
+    int32 Height = 5;
+    int32 Weight = 6;
+    string Speaklanguage = 7;
+    string FindType = 8;
+    string FindTarget = 9;
+    int32 Experience = 10;
+    string Sociability = 11;
+    bool Certification = 12;
+    google.protobuf.Timestamp InfoChangedAt = 13;
+}

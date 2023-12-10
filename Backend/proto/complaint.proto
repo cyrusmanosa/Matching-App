@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "Backend/pb";
+
+message complaint {
+    int32 CpID = 1;
+    int32 UserID = 2;
+    int32 CpTargetID = 3;
+    string CpType = 4;
+    string CpMessage = 5;
+    string Status = 6;
+    google.protobuf.Timestamp ComplaintTime = 7;
+}

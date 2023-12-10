@@ -7,7 +7,6 @@ package db
 
 import (
 	"context"
-
 )
 
 const createUserFixInformation = `-- name: CreateUserFixInformation :one
@@ -32,7 +31,7 @@ type CreateUserFixInformationParams struct {
 	FirstName      string      `json:"first_name"`
 	LastName       string      `json:"last_name"`
 	Email          string      `json:"email"`
-	HashedPassword string      `json:"hashed_password"`
+	HashedPassword string `json:"hashed_password"`
 	Birth          string      `json:"birth"`
 	Country        string      `json:"country"`
 	Gender         string      `json:"gender"`
@@ -159,17 +158,17 @@ func (q *Queries) ListFixInformation(ctx context.Context) ([]Fixinformation, err
 const updatePassword = `-- name: UpdatePassword :one
 UPDATE fixinformation
 SET hashed_password = $2
-WHERE user_id = $1
+WHERE Email = $1
 RETURNING user_id, first_name, last_name, email, hashed_password, birth, country, gender, blood, age, constellation, certification, created_at, password_changed_at, role
 `
 
 type UpdatePasswordParams struct {
-	UserID         int32  `json:"user_id"`
+	Email          string      `json:"email"`
 	HashedPassword string `json:"hashed_password"`
 }
 
 func (q *Queries) UpdatePassword(ctx context.Context, arg UpdatePasswordParams) (Fixinformation, error) {
-	row := q.db.QueryRow(ctx, updatePassword, arg.UserID, arg.HashedPassword)
+	row := q.db.QueryRow(ctx, updatePassword, arg.Email, arg.HashedPassword)
 	var i Fixinformation
 	err := row.Scan(
 		&i.UserID,

@@ -293,16 +293,24 @@ func RandomCheckCode() string {
 	return string(b)
 }
 
-func BirthStringtoInt(Bday string) (int, int, int) {
+func BirthStringtoInt(Bday string) (map[string]int, error) {
+	BirthInt := map[string]int{
+		"year":  0,
+		"month": 0,
+		"day":   0,
+	}
+
 	date, err := time.Parse("2006-01-02", Bday)
 	if err != nil {
 		fmt.Println("日期解析錯誤:", err)
+		return nil, err
 	}
-	year := int(date.Year())
-	month := int(date.Month())
-	day := int(date.Day())
 
-	return year, month, day
+	BirthInt["year"] = int(date.Year())
+	BirthInt["month"] = int(date.Month())
+	BirthInt["day"] = int(date.Day())
+
+	return BirthInt, nil
 }
 
 func SwitchAge(Y, M, D int) int32 {

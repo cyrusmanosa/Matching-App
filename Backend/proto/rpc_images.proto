@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package pb;
+
+import "images.proto";
+
+option go_package = "Backend/pb";
+
+message createImagesRequest {
+    int32 UserID = 1;
+    string Qr = 2;
+    string Img1 = 3;
+    string Img2 = 4;
+    string Img3 = 5;
+    string Img4 = 6;
+    string Img5 = 7;
+}
+message createImagesResponse {
+    images img = 1;
+}
+
+message getImagesRequest {
+    int32 UserID = 1;
+}
+
+message getImagesResponse {
+    images img = 1;
+}
+
+message updateImagesRequest {
+    int32 UserID = 1;
+    string Qr = 2;
+    string Img1 = 3;
+    string Img2 = 4;
+    string Img3 = 5;
+    string Img4 = 6;
+    string Img5 = 7;
+}
+message updateImagesResponse {
+    images img = 1;
+}

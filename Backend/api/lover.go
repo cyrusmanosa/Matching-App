@@ -65,12 +65,12 @@ func (server *Server) CreateLover(ctx *gin.Context) {
 }
 
 // Get
-type GetHLoverRequest struct {
+type GetLoverRequest struct {
 	UserID int32 `json:"user_id" binding:"required"`
 }
 
 func (server *Server) GetLover(ctx *gin.Context) {
-	var req GetHobbyRequest
+	var req GetLoverRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return

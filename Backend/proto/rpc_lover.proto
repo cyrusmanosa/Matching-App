@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package pb;
+
+import "lover.proto";
+
+option go_package = "Backend/pb";
+
+message createLoverRequest {
+    int32 UserID = 1;
+    int32 MinAge = 2;
+    int32 MaxAge = 3;
+    string City = 4;
+    string Gender = 5;
+    string Constellation = 6;
+    string Sexual = 7;
+    int32 Height = 8;
+    int32 Weight = 9;
+    string Speaklanguage = 10;
+    string Job = 11;
+    int32 AnnualSalary = 12;
+    string Sociability = 13;
+    string Religious = 14;
+    bool Certification = 15;
+}
+message createLoverResponse {
+    lover l = 1;
+}
+
+message getLoverRequest {
+    int32 UserID = 1;
+}
+message getLoverResponse {
+    lover l = 1;
+}
+
+message updateLoverRequest {
+    int32 UserID = 1;
+    int32 MinAge = 2;
+    int32 MaxAge = 3;
+    string City = 4;
+    string Gender = 5;
+    string Constellation = 6;
+    string Sexual = 7;
+    int32 Height = 8;
+    int32 Weight = 9;
+    string Speaklanguage = 10;
+    string Job = 11;
+    int32 AnnualSalary = 12;
+    string Sociability = 13;
+    string Religious = 14;
+    bool Certification = 15;
+}
+message updateLoverResponse {
+    lover l = 1;
+}

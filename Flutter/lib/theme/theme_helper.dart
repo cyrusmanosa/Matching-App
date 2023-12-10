@@ -5,10 +5,7 @@ String _appTheme = "primary";
 
 /// Helper class for managing themes and colors.
 class ThemeHelper {
-  // A map of custom color themes supported by the app
   Map<String, PrimaryColors> _supportedCustomColor = {'primary': PrimaryColors()};
-
-// A map of color schemes supported by the app
   Map<String, ColorScheme> _supportedColorScheme = {'primary': ColorSchemes.primaryColorScheme};
 
   /// Changes the app theme to [_newTheme].
@@ -36,12 +33,11 @@ class ThemeHelper {
     //return theme from map
 
     var colorScheme = _supportedColorScheme[_appTheme] ?? ColorSchemes.primaryColorScheme;
-
     return ThemeData(
       visualDensity: VisualDensity.standard,
       colorScheme: colorScheme,
       textTheme: TextThemes.textTheme(colorScheme),
-      scaffoldBackgroundColor: colorScheme.primary,
+      scaffoldBackgroundColor: colorScheme.onPrimary,
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           backgroundColor: Colors.transparent,
@@ -53,8 +49,8 @@ class ThemeHelper {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: appTheme.gray500,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r30),
+          backgroundColor: appTheme.blueGray100,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.h)),
           visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
           padding: EdgeInsets.zero,
         ),
@@ -63,7 +59,10 @@ class ThemeHelper {
     );
   }
 
+  /// Returns the primary colors for the current theme.
   PrimaryColors themeColor() => _getThemeColors();
+
+  /// Returns the current theme data.
   ThemeData themeData() => _getThemeData();
 }
 
@@ -71,25 +70,72 @@ class ThemeHelper {
 class TextThemes {
   static TextTheme textTheme(ColorScheme colorScheme) => TextTheme(
         // body
-        bodyLarge:
-            TextStyle(color: colorScheme.errorContainer, fontSize: 16.fSize, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
-        bodyMedium: TextStyle(color: appTheme.gray500, fontSize: 14.fSize, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
-        bodySmall: TextStyle(color: appTheme.black900, fontSize: 12.fSize, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
+        bodyLarge: TextStyle(
+          color: appTheme.gray500,
+          fontSize: 16.fSize,
+          fontFamily: 'Rounded Mplus 1c',
+          fontWeight: FontWeight.w400,
+        ),
+        bodyMedium: TextStyle(
+          color: appTheme.gray500,
+          fontSize: 14.fSize,
+          fontFamily: 'Rounded Mplus 1c',
+          fontWeight: FontWeight.w400,
+        ),
+        bodySmall: TextStyle(
+          color: appTheme.black900,
+          fontSize: 12.fSize,
+          fontFamily: 'Rounded Mplus 1c',
+          fontWeight: FontWeight.w400,
+        ),
 
         // display
-        displayMedium: TextStyle(color: appTheme.black900, fontSize: 40.fSize, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
-        displaySmall: TextStyle(color: appTheme.black900, fontSize: 35.fSize, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
+        displayMedium: TextStyle(
+          color: appTheme.black900,
+          fontSize: 40.fSize,
+          fontFamily: 'Rounded Mplus 1c',
+          fontWeight: FontWeight.w400,
+        ),
 
         // head
-        headlineLarge: TextStyle(color: appTheme.black900, fontSize: 30.fSize, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
-        headlineMedium:
-            TextStyle(color: colorScheme.primary, fontSize: 26.fSize, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
-        headlineSmall: TextStyle(color: appTheme.black900, fontSize: 24.fSize, fontFamily: 'SF Pro Text', fontWeight: FontWeight.w300),
+        headlineLarge: TextStyle(
+          color: appTheme.black900,
+          fontSize: 30.fSize,
+          fontFamily: 'Rounded Mplus 1c',
+          fontWeight: FontWeight.w400,
+        ),
+        headlineMedium: TextStyle(
+          color: colorScheme.onPrimary,
+          fontSize: 26.fSize,
+          fontFamily: 'Rounded Mplus 1c',
+          fontWeight: FontWeight.w400,
+        ),
+        headlineSmall: TextStyle(
+          color: appTheme.black900,
+          fontSize: 24.fSize,
+          fontFamily: 'SF Pro Text',
+          fontWeight: FontWeight.w300,
+        ),
 
         // title
-        titleLarge: TextStyle(color: appTheme.pinkA100, fontSize: 20.fSize, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
-        titleMedium: TextStyle(color: appTheme.pinkA100, fontSize: 18.fSize, fontFamily: 'Montserrat', fontWeight: FontWeight.w600),
-        titleSmall: TextStyle(color: appTheme.pinkA100, fontSize: 14.fSize, fontFamily: 'Montserrat', fontWeight: FontWeight.w600),
+        titleLarge: TextStyle(
+          color: appTheme.pinkA100,
+          fontSize: 20.fSize,
+          fontFamily: 'Rounded Mplus 1c',
+          fontWeight: FontWeight.w400,
+        ),
+        titleMedium: TextStyle(
+          color: appTheme.pinkA100,
+          fontSize: 18.fSize,
+          fontFamily: 'Montserrat',
+          fontWeight: FontWeight.w600,
+        ),
+        titleSmall: TextStyle(
+          color: appTheme.pinkA100,
+          fontSize: 14.fSize,
+          fontFamily: 'Montserrat',
+          fontWeight: FontWeight.w600,
+        ),
       );
 }
 
@@ -97,15 +143,16 @@ class TextThemes {
 class ColorSchemes {
   static final primaryColorScheme = ColorScheme.light(
     // Primary colors
-    primary: Color(0XFFFFFFFF),
-    primaryContainer: Color(0XFF9C3C3C),
+    primary: Color(0XFF454545),
+    primaryContainer: Color(0XE5CDD1D8),
+    secondaryContainer: Color(0XFF3C3C3C),
 
     // Error colors
-    errorContainer: Color(0XFFB3B3B3),
-    onErrorContainer: Color(0XFF151515),
+    errorContainer: Color(0XFF9C3C3C),
 
     // On colors(text colors)
-    onPrimary: Color(0XFFFF0000),
+    onPrimary: Color(0XFFFFFFFF),
+    onPrimaryContainer: Color(0XFFFF0000),
   );
 }
 
@@ -118,23 +165,22 @@ class PrimaryColors {
   Color get blue800 => Color(0XFF1464CC);
   Color get blueA400 => Color(0XFF1877F2);
 
+  // BlueGray
+  Color get blueGray100 => Color(0XFFD9D9D9);
+
   // Cyan
   Color get cyan600 => Color(0XFF1AB4BE);
 
   // Gray
   Color get gray500 => Color(0XFF909090);
-  Color get gray800 => Color(0XFF3C3C3C);
+  Color get gray800 => Color(0XFF454545);
 
-  // Green
-  Color get green600 => Color(0XFF319F43);
+  Color get redA700 => Color(0XFFFF0505);
 
   // Pink
   Color get pink800 => Color(0XFF9C3D3D);
   Color get pinkA100 => Color(0XFFFF83A8);
   Color get pinkA400 => Color(0XFFFF00B7);
-
-  // Red
-  Color get redA700 => Color(0XFFFF0505);
 }
 
 PrimaryColors get appTheme => ThemeHelper().themeColor();

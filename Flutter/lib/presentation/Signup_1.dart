@@ -21,7 +21,7 @@ class SignUp_1 extends StatelessWidget {
   TextEditingController basicBloodInputController = TextEditingController();
 
   void fixInformationRequset(BuildContext context) async {
-    var url = "http://127.0.0.1:8080/SignUp";
+    var url = "http://127.0.0.1:8080/CreateFixInfo";
     var requestBody = {
       "First_Name": basicFirstNameInputController.text,
       "Last_Name": basicLastNameInputController.text,
@@ -69,11 +69,8 @@ class SignUp_1 extends StatelessWidget {
 
                   // msg
                   Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 65.h),
-                      child: Text("以下の項目は全部入力するのが必要です。", style: CustomTextStyles.bodyMediumBlack900),
-                    ),
+                    alignment: Alignment.center,
+                    child: Text("以下の項目は全部入力するのが必要です。", style: CustomTextStyles.bodyMediumBlack900),
                   ),
                   SizedBox(height: 25.v),
 
@@ -173,12 +170,12 @@ class SignUp_1 extends StatelessWidget {
     return CustomTextFormField(
       controller: basicBirthInputController,
       hintText: "1982−03−12",
-      dateonTap: () async {
+      onTap: () async {
         DateTime? pickedDate = await showDatePicker(
           context: context,
           initialDate: DateTime.now(),
           firstDate: DateTime(1950),
-          lastDate: DateTime(2100),
+          lastDate: DateTime(DateTime.now().year, 12, 31),
         );
         if (pickedDate != null) {
           String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);

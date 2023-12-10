@@ -43,9 +43,13 @@ func (server *Server) CreateUserFixInfo(ctx *gin.Context) {
 		return
 	}
 
-	By, Bm, Bd := util.BirthStringtoInt(req.Birth)
-	a := util.SwitchAge(By, Bm, Bd)
-	Con := util.SwitchConstellation(Bm, Bd)
+	B, Berr := util.BirthStringtoInt(req.Birth)
+	if Berr != nil {
+		ctx.JSON(http.StatusBadRequest, errorResponse(Berr))
+		return
+	}
+	a := util.SwitchAge(B["year"], B["month"], B["day"])
+	Con := util.SwitchConstellation(B["month"], B["day"])
 
 	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
 
@@ -80,7 +84,7 @@ func (server *Server) CreateUserFixInfo(ctx *gin.Context) {
 
 // input password
 type passwordRequest struct {
-	UserID   int32  `json:"user_id" binding:"required"`
+	Email    string `json:"email" binding:"required"`
 	Password string `json:"password" binding:"required,min=6"`
 }
 
@@ -94,7 +98,7 @@ func (server *Server) inputPassword(ctx *gin.Context) {
 
 	Hash, _ := util.HashPassword(req.Password)
 	arg := info.UpdatePasswordParams{
-		UserID:         req.UserID,
+		Email:          req.Email,
 		HashedPassword: Hash,
 	}
 
@@ -116,7 +120,7 @@ func (server *Server) inputPassword(ctx *gin.Context) {
 
 // Reset Password
 type ResetPasswordRequset struct {
-	UserID   int32  `json:"user_id" binding:"required"`
+	Email    string `json:"email" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
 
@@ -133,7 +137,7 @@ func (server *Server) ResetPassword(ctx *gin.Context) {
 	}
 
 	NewPassword := info.UpdatePasswordParams{
-		UserID:         req.UserID,
+		Email:          req.Email,
 		HashedPassword: hash,
 	}
 
@@ -242,7 +246,7 @@ func (server *Server) DeleteUser(ctx *gin.Context) {
 		return
 	}
 	// Can
-	err = server.store.DeleteInformation(ctx, req.UserID)
+	err = server.store.DeleteCanChangeInformation(ctx, req.UserID)
 	// Hobby
 	err = server.store.DeleteUserHobby(ctx, req.UserID)
 	// Lover
@@ -254,5 +258,5 @@ func (server *Server) DeleteUser(ctx *gin.Context) {
 	// Target List
 	err = server.store.DeleteTargetList(ctx, req.UserID)
 	// Change Target
-	err = server.store.DeleteData(ctx, req.UserID)
+	err = server.store.DeleteChangeTargetUser(ctx, req.UserID)
 }

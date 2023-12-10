@@ -45,7 +45,7 @@ class PasswordResetError extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
-                    style: CustomTextStyles.bodyMediumOnPrimary,
+                    style: CustomTextStyles.bodyMediumred700,
                   ),
                 ),
                 SizedBox(height: 20.v),

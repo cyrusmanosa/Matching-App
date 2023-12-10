@@ -60,7 +60,7 @@ class SideBar extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10.h),
       padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 10.v),
-      decoration: AppDecoration.fillPrimary.copyWith(borderRadius: BorderRadiusStyle.r30),
+      decoration: AppDecoration.fillOnPrimary.copyWith(borderRadius: BorderRadiusStyle.r30),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [

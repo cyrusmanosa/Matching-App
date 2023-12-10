@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "Backend/pb";
+
+message checkEmailRequest {
+    string Email = 1;
+}
+
+
+message checkEmailResponse {
+    string Email = 1;
+    string CheckCode = 2;
+}
+
+message sendEmailRequest {
+    string CheckCode = 1;
+}
+
+message checkedEmailResponse {
+    string Email = 1;
+    string AccessToken = 2;
+}

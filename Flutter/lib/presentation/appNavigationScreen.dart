@@ -36,6 +36,11 @@ class AppNavigationScreen extends StatelessWidget {
                         ),
                         _buildScreenTitle(
                           context,
+                          userName: "パスワード設定",
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.passwordSetup),
+                        ),
+                        _buildScreenTitle(
+                          context,
                           userName: "パスワード忘れ",
                           onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.passwordResetEmail),
                         ),

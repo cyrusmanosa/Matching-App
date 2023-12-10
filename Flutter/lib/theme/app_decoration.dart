@@ -7,7 +7,7 @@ class AppDecoration {
   static BoxDecoration get fillGray => BoxDecoration(color: appTheme.gray500);
   static BoxDecoration get fillPink => BoxDecoration(color: appTheme.pinkA100);
   static BoxDecoration get fillPrimary => BoxDecoration(color: theme.colorScheme.primary);
-  static BoxDecoration get fillPurpleA => BoxDecoration(color: appTheme.pinkA400);
+  static BoxDecoration get fillOnPrimary => BoxDecoration(color: theme.colorScheme.onPrimary);
 
   // Outline decorations
   static BoxDecoration get outlineDarkBlue => BoxDecoration(

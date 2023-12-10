@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "Backend/pb";
+
+message canChange {
+  int32 UserID = 1;
+  string NickName = 2;
+  string City = 3;
+  string Sexual = 4;
+  int32 Height = 5;
+  int32 Weight = 6;
+  string Speaklanguage = 7;
+  string Education = 8;
+  string Job = 9;
+  int32 AnnualSalary = 10;
+  string Sociability = 11;
+  string Religious = 12;
+  string Introduce = 13;
+  google.protobuf.Timestamp InfoChangedAt = 14;
+}

@@ -76,13 +76,13 @@ func (q *Queries) CreateChangeTargetUser(ctx context.Context, arg CreateChangeTa
 	return i, err
 }
 
-const deleteData = `-- name: DeleteData :exec
+const deleteChangeTargetUser = `-- name: DeleteChangeTargetUser :exec
 DELETE FROM changetargetuser
 WHERE user_id = $1
 `
 
-func (q *Queries) DeleteData(ctx context.Context, userID int32) error {
-	_, err := q.db.Exec(ctx, deleteData, userID)
+func (q *Queries) DeleteChangeTargetUser(ctx context.Context, userID int32) error {
+	_, err := q.db.Exec(ctx, deleteChangeTargetUser, userID)
 	return err
 }
 

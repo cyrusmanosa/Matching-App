@@ -81,13 +81,13 @@ func (q *Queries) CreateUserCanChangeInformation(ctx context.Context, arg Create
 	return i, err
 }
 
-const deleteInformation = `-- name: DeleteInformation :exec
+const deleteCanChangeInformation = `-- name: DeleteCanChangeInformation :exec
 DELETE FROM canchangeinformation 
 WHERE user_id = $1
 `
 
-func (q *Queries) DeleteInformation(ctx context.Context, userID int32) error {
-	_, err := q.db.Exec(ctx, deleteInformation, userID)
+func (q *Queries) DeleteCanChangeInformation(ctx context.Context, userID int32) error {
+	_, err := q.db.Exec(ctx, deleteCanChangeInformation, userID)
 	return err
 }
 

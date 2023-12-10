@@ -1,3 +1,5 @@
+DB_URL = postgresql://root:secret@localhost:5432/dating_date_info?sslmode=disable
+
 # 建立PSQL
 dockernetwork:
 	docker network create datingDate
@@ -28,17 +30,17 @@ createmigrate_chat:
 
 # info 
 info_migrateup:
-	migrate -path db/migration/info -database "postgresql://root:secret@localhost:5432/dating_date_info?sslmode=disable" -verbose up
+	migrate -path db/migration/info -database "${DB_URL}" -verbose up
 info_migratedown:
-	migrate -path db/migration/info -database "postgresql://root:secret@localhost:5432/dating_date_info?sslmode=disable" -verbose down
+	migrate -path db/migration/info -database "${DB_URL}" -verbose down
 info_migrateup1:
-	migrate -path db/migration/info -database "postgresql://root:secret@localhost:5432/dating_date_info?sslmode=disable" -verbose up 1
+	migrate -path db/migration/info -database "${DB_URL}" -verbose up 1
 info_migratedown1:
-	migrate -path db/migration/info -database "postgresql://root:secret@localhost:5432/dating_date_info?sslmode=disable" -verbose down 1
+	migrate -path db/migration/info -database "${DB_URL}" -verbose down 1
 info_migrateup2:
-	migrate -path db/migration/info -database "postgresql://root:secret@localhost:5432/dating_date_info?sslmode=disable" -verbose up 2
+	migrate -path db/migration/info -database "${DB_URL}" -verbose up 2
 info_migratedown2:
-	migrate -path db/migration/info -database "postgresql://root:secret@localhost:5432/dating_date_info?sslmode=disable" -verbose down 2
+	migrate -path db/migration/info -database "${DB_URL}" -verbose down 2
 
 
 # chat 
@@ -53,12 +55,34 @@ sqlc:
 test:
 	go test -v -cover ./...
 
+db_docs:
+	dbdocs build doc/db.dbml  
+
+db_schema:
+	dbml2sql --postgres -o doc/schema.sql doc/db.dbml
+
 server:
 	go run main.go
 
 mock:
 	mockgen -destination mock/store.go  Backend/db/sqlc/info InfoStore
 
+protob:
+	rm -f pb/*.go
+	rm -f doc/swagger/*.swagger.json
+	protoc --proto_path=proto --go_out=pb --go_opt=paths=source_relative \
+	--go-grpc_out=pb --go-grpc_opt=paths=source_relative \
+	--grpc-gateway_out=pb --grpc-gateway_opt paths=source_relative \
+	--openapiv2_out=doc/swagger --openapiv2_opt=allow_merge=true,merge_file_name=Backend\
+    proto/*.proto
+
+evans:
+	evans --host localhost --port 9090 -r repl
+
+# inside:
+# package pb
+# service Backend
+
 .PHONY: dockernetwork postgres createdb_info dropdb_info createdb_chat dropdb_chat test sqlc server 
 		createmigrate_info info_migrateup info_migrateup1 info_migrateup2 info_migratedown info_migratedown1 info_migratedown2
-		createmigrate_chat chat_migrateup chat_migratedown mock
+		createmigrate_chat chat_migrateup chat_migratedown mock db_docs db_schema protob

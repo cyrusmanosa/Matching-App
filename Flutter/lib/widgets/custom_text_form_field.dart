@@ -27,11 +27,11 @@ class CustomTextFormField extends StatelessWidget {
     this.autofocus = true,
     this.filled = false,
     this.obscureText = false,
-    this.dateonTap,
+    this.onTap,
   }) : super(key: key);
 
   final Alignment? alignment;
-  final bool? autofocus;
+  final bool autofocus;
   final bool? filled;
   final bool? obscureText;
   final BoxConstraints? prefixConstraints;
@@ -53,7 +53,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextStyle? textStyle;
   final Widget? prefix;
   final Widget? suffix;
-  final VoidCallback? dateonTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -62,11 +62,10 @@ class CustomTextFormField extends StatelessWidget {
 
   Widget get textFormFieldWidget => SizedBox(
         height: height,
-        width: width ?? double.maxFinite,
+        width: double.maxFinite,
         child: TextFormField(
-          autofocus: autofocus!,
+          autofocus: autofocus,
           controller: controller,
-
           // input complete
           decoration: InputDecoration(
             hintText: hintText,
@@ -74,8 +73,7 @@ class CustomTextFormField extends StatelessWidget {
             border: InputBorder.none,
             prefix: Padding(padding: EdgeInsets.only(left: 15.0)),
           ),
-
-          focusNode: FocusNode(),
+          focusNode: focusNode,
           keyboardType: textInputType,
           maxLength: maxLength,
           maxLines: maxLines,
@@ -83,18 +81,17 @@ class CustomTextFormField extends StatelessWidget {
           style: theme.textTheme.displayLarge,
           textInputAction: textInputAction,
           validator: validator,
-          onTap: dateonTap,
+          onTap: onTap,
         ),
       );
 
   InputDecoration get decoration => InputDecoration(
-        // Example Word
         contentPadding: contentPadding ?? EdgeInsets.all(5),
         fillColor: fillColor,
         filled: filled,
         hintText: hintText,
         hintStyle: hintStyle,
-        isDense: true,
+        isDense: false,
         prefix: prefix,
         prefixIconConstraints: prefixConstraints,
         suffixIcon: suffix,
@@ -109,11 +106,11 @@ class CustomTextFormField extends StatelessWidget {
         // Error Border
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadiusStyle.r5,
-          borderSide: BorderSide(color: appTheme.pinkA100, width: 1),
+          borderSide: BorderSide(color: appTheme.redA700, width: 1),
         ),
 
         // Focus Border
-        focusedBorder: borderDecoration ?? InputBorder.none,
+        focusedBorder: borderDecoration,
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadiusStyle.r5,
           borderSide: BorderSide(color: appTheme.blue800, width: 1),

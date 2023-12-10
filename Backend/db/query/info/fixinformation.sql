@@ -26,7 +26,7 @@ ORDER BY user_id;
 -- name: UpdatePassword :one
 UPDATE fixinformation
 SET hashed_password = $2
-WHERE user_id = $1
+WHERE Email = $1
 RETURNING *;
 
 -- name: DeleteUser :exec

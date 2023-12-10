@@ -41,7 +41,7 @@ class CustomButtonStyles {
 
   // while BG , gray border , Shadow
   static ButtonStyle get outlineGrayWhiteBG => OutlinedButton.styleFrom(
-        backgroundColor: theme.colorScheme.primary,
+        backgroundColor: theme.colorScheme.onPrimary,
         side: BorderSide(color: appTheme.gray500, width: 1),
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
       );

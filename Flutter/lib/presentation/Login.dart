@@ -120,7 +120,7 @@ class Login extends StatelessWidget {
                   text: "メールアドレスで登録",
                   margin: EdgeInsets.symmetric(horizontal: 35.h),
                   buttonStyle: CustomButtonStyles.fillPink,
-                  buttonTextStyle: CustomTextStyles.bodyMediumPrimary,
+                  buttonTextStyle: CustomTextStyles.bodyMediumOnPrimary,
                   onPressed: () {
                     onTapRegisterWithEmailButton(context);
                   },
@@ -137,7 +137,7 @@ class Login extends StatelessWidget {
                     child: CustomImageView(imagePath: ImageConstant.imgLogosfacebook, width: 20.v),
                   ),
                   buttonStyle: CustomButtonStyles.outlineBlueBlueBG,
-                  buttonTextStyle: CustomTextStyles.bodyMediumPrimary,
+                  buttonTextStyle: CustomTextStyles.bodyMediumOnPrimary,
                 ),
                 SizedBox(height: 15.v),
 
@@ -151,7 +151,7 @@ class Login extends StatelessWidget {
                     child: CustomImageView(imagePath: ImageConstant.imgClose, width: 35.v),
                   ),
                   buttonStyle: CustomButtonStyles.outlineBlackDGBG,
-                  buttonTextStyle: CustomTextStyles.bodyMediumPrimary,
+                  buttonTextStyle: CustomTextStyles.bodyMediumOnPrimary,
                 ),
                 SizedBox(height: 15.v),
 
@@ -177,11 +177,17 @@ class Login extends StatelessWidget {
 
   /// Email Input Backend
   Widget _buildEmailInput(BuildContext context) {
+    FocusNode _focusNode = FocusNode();
     return CustomTextFormField(
+      autofocus: true,
       controller: emailInputController,
       textInputType: TextInputType.emailAddress,
       hintText: "example@email.com",
       maxLines: 1,
+      focusNode: _focusNode,
+      onTap: () {
+        _focusNode.requestFocus();
+      },
     );
   }
 

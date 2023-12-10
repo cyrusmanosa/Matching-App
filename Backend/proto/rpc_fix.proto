@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+
+option go_package = "Backend/pb";
+
+message createFixRequest {
+  string FirstName = 1;
+  string LastName = 2;
+  string Birth = 3;
+  string Country = 4;
+  string Gender = 5;
+  string Blood = 6;
+}
+
+message createFixResponse {
+  int32 UserID = 1;
+  string Email = 2;
+  google.protobuf.Timestamp CreateAt = 3;
+}
+
+message delFix { int32 UserID = 1; }

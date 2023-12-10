@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "Backend/pb";
+
+message images {
+    int32 UserID = 1;
+    string Qr = 2;
+    string Img1 = 3;
+    string Img2 = 4;
+    string Img3 = 5;
+    string Img4 = 6;
+    string Img5 = 7;
+}

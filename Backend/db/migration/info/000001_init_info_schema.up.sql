@@ -12,7 +12,7 @@ CREATE TABLE "fixinformation" (
   "constellation" VARCHAR NOT NULL,
   "certification" BOOLEAN DEFAULT FALSE,
   "created_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW()),
-  "password_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
+  "password_changed_at" TIMESTAMPTZ
 );
 
 CREATE TABLE "canchangeinformation" (

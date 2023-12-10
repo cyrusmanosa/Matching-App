@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package pb;
+
+import "complaint.proto";
+
+option go_package = "Backend/pb";
+
+message createComplaintRequest {
+    int32 UserID = 1;
+    int32 CpTargetID = 2;
+    string CpType = 3;
+    string CpMessage = 4;
+}
+message createComplaintResponse {
+    complaint cp = 1;
+}
+
+message getComplaintRequest {
+    int32 CpID = 1;
+}
+message getComplaintResponse {
+    complaint cp = 1;
+}
+
+message updateComplaintRequest {
+    int32 CpID = 1;
+    string Status = 2;
+}
+message updateComplaintResponse {
+    complaint cp = 1;
+}

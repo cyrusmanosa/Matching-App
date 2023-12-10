@@ -1,0 +1,211 @@
+syntax = "proto3";
+
+package pb;
+
+import "rpc_fix.proto";
+import "rpc_canChange.proto";
+import "rpc_changeTarget.proto";
+import "rpc_accompany.proto";
+import "rpc_complaint.proto";
+import "rpc_targetList.proto";
+import "rpc_hobby.proto";
+import "rpc_images.proto";
+import "rpc_lover.proto";
+import "rpc_login.proto";
+import "rpc_password.proto";
+import "rpc_checkEmail.proto";
+import "google/api/annotations.proto";
+
+option go_package = "Backend/pb";
+
+
+service Backend {
+    rpc loginUser(loginUserRequest) returns (loginUserResponse){
+        option (google.api.http) = {
+            post: "/v1/Login"
+            body: "*"
+        };
+    }
+
+    rpc CheckEmail(checkEmailRequest) returns (checkEmailResponse){
+        option (google.api.http) = {
+            post: "/v1/SignUp"
+            body: "*"
+        };
+    }
+
+    rpc CheckEmailCode(sendEmailRequest) returns (checkedEmailResponse){
+        option (google.api.http) = {
+            post: "/v1/CheckCode"
+            body: "*"
+        };
+    }
+
+    rpc InputPassword(inputPasswordRequest) returns (inputPasswordResponse){
+        option (google.api.http) = {
+            put: "/v1/Password"
+            body: "*"
+        };
+    }
+    rpc esetPassword(resetPasswordRequest) returns (resetPasswordResponse){
+        option (google.api.http) = {
+            put: "/v1/ResetPassword"
+            body: "*"
+        };
+    }
+
+    // Fix Information
+    rpc CreateFix(createFixRequest) returns (createFixResponse){
+        option (google.api.http) = {
+            post: "/v1/CreateFix"
+            body: "*"
+        };
+    }
+
+    // Can Change Information
+    rpc CreateCanChange(createCanChangeRequest) returns (createCanChangeResponse){
+        option (google.api.http) = {
+            post: "/v1/CreateCanChange"
+            body: "*"
+        };
+    }
+    rpc GetCanChange(getCanChangeRequest) returns (getCanChangeResponse){
+        option (google.api.http) = {
+            get: "/v1/GetCanChange"
+        };
+    }
+    rpc UpdateCanChange(updateCanChangeRequest) returns (updateCanChangeResponse){
+        option (google.api.http) = {
+            put: "/v1/UpdateCanChange"
+            body: "*"
+        };
+    }
+
+    // Accompany
+    rpc CreateAccompany(createAccompanyRequest) returns (createAccompanyResponse){
+        option (google.api.http) = {
+            post: "/v1/CreateAccompany"
+            body: "*"
+        };
+    }
+    rpc GetAccompany(getAccompanyRequest) returns (getAccompanyResponse){
+        option (google.api.http) = {
+            get: "/v1/GetAccompany"
+        };
+    }
+    rpc UpdateAccompany(updateAccompanyRequest) returns (updateAccompanyResponse){
+        option (google.api.http) = {
+            put: "/v1/UpdateAccompany"
+            body: "*"
+        };
+    }
+
+    // Hobby
+    rpc CreateHobby(createHobbyRequest) returns (createHobbyResponse){
+        option (google.api.http) = {
+            post: "/v1/CreateHobby"
+            body: "*"
+        };
+    }
+    rpc GetHobby(getHobbyRequest) returns (getHobbyResponse){
+        option (google.api.http) = {
+            get: "/v1/GetHobby"
+        };
+    }
+    rpc UpdateHobby(updateHobbyRequest) returns (updateHobbyResponse){
+        option (google.api.http) = {
+            put: "/v1/UpdateHobby"
+            body: "*"
+        };
+    }
+
+    // Lover
+    rpc CreateLover(createLoverRequest) returns (createLoverResponse){
+        option (google.api.http) = {
+            post: "/v1/CreateLover"
+            body: "*"
+        };
+    }
+    rpc GetLover(getLoverRequest) returns (getLoverResponse){
+        option (google.api.http) = {
+            get: "/v1/GetLover"
+        };
+    }
+    rpc UpdateLover(updateLoverRequest) returns (updateLoverResponse){
+        option (google.api.http) = {
+            put: "/v1/UpdateLover"
+            body: "*"
+        };
+    }
+
+    // Complaint
+    rpc CreateComplaint(createComplaintRequest) returns (createComplaintResponse){
+        option (google.api.http) = {
+            post: "/v1/CreateComplaint"
+            body: "*"
+        };
+    }
+    rpc GetComplaint(getComplaintRequest) returns (getComplaintResponse){
+        option (google.api.http) = {
+            get: "/v1/GetComplaint"
+        };
+    }
+    rpc UpdateComplaint(updateComplaintRequest) returns (updateComplaintResponse){
+        option (google.api.http) = {
+            put: "/v1/UpdateComplaint"
+            body: "*"
+        };
+    }
+
+    // Target List
+    rpc CreateTargetList(createTargetListRequest) returns (createTargetListResponse){
+        option (google.api.http) = {
+            post: "/v1/CreateTargetList"
+            body: "*"
+        };
+    }
+    rpc GetTargetList(getTargetListRequest) returns (getTargetListResponse){
+        option (google.api.http) = {
+            get: "/v1/GetTargetList"
+        };
+    }
+    rpc UpdateTargetList(updateTargetListRequest) returns (updateTargetListResponse){
+        option (google.api.http) = {
+            put: "/v1/UpdateTargetList"
+            body: "*"
+        };
+    }
+    
+    // Change Target
+    rpc CreateChangeTarget(createChangeTargetRequest) returns (createChangeTargetResponse) {
+        option (google.api.http) = {
+            post: "/v1/CreateChangeTarget"
+            body: "*"
+        };
+    }
+
+    rpc GetChangeTarget(getChangeTargetRequest) returns (getChangeTargetResponse){
+        option (google.api.http) = {
+            get: "/v1/GetChangeTarget"
+        };
+    }
+    
+    // images
+    rpc CreateImages(createImagesRequest) returns (createImagesResponse){
+        option (google.api.http) = {
+            post: "/v1/CreateImages"
+            body: "*"
+        };
+    }
+    rpc GetImages(getImagesRequest) returns (getImagesResponse){
+        option (google.api.http) = {
+            get: "/v1/GetImages"
+        };
+    }
+    rpc UpdateImages(updateImagesRequest) returns (updateImagesResponse){
+        option (google.api.http) = {
+            put: "/v1/UpdategetImagesResponse"
+            body: "*"
+        };
+    }
+}

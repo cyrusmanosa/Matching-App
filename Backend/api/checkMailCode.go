@@ -42,7 +42,7 @@ func (server *Server) CheckEmail(ctx *gin.Context) {
 	} else {
 		req.Email = CE.Email
 		req.CheckCode = util.RandomCheckCode()
-		sended := util.SendValidateCodeOnMail(req.CheckCode, []string{req.Email})
+		sended := util.SendValidateCodeOnEmail(req.CheckCode, []string{req.Email})
 
 		if sended {
 			time.AfterFunc(300*time.Second, func() {
