@@ -12,8 +12,10 @@ message loginUserRequest {
 }
 
 message loginUserResponse {
-    int32 UserID = 1;
-    string Email = 2;
-    google.protobuf.Timestamp CreateAt = 3;
-    string AccessToken = 4;
+    string SessionsID = 1;
+    int32 UserID = 2;
+    string Email = 3;
+    google.protobuf.Timestamp CreateAt = 4;
+    string AccessToken = 5;
+    google.protobuf.Timestamp  AccessTokenExpiresAt = 6;
 }

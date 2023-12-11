@@ -16,7 +16,7 @@ import (
 func (server *Server) InputPassword(ctx context.Context, req *pb.InputPasswordRequest) (*pb.InputPasswordResponse, error) {
 	Hash, _ := util.HashPassword(req.GetPassword())
 	arg := info.UpdatePasswordParams{
-		Email:          req.GetEmail(),
+		UserID:         req.GetUserID(),
 		HashedPassword: Hash,
 	}
 	_, err := server.store.UpdatePassword(ctx, arg)
@@ -28,7 +28,7 @@ func (server *Server) InputPassword(ctx context.Context, req *pb.InputPasswordRe
 		return nil, status.Errorf(codes.Internal, "failed to input password: %s", err)
 	}
 
-	user, err := server.store.GetUserFixInformation(ctx, req.Email)
+	user, err := server.store.GetUserFixInformation(ctx, req.UserID)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, status.Errorf(codes.NotFound, "user not found")
@@ -48,7 +48,7 @@ func (server *Server) ResetPassword(ctx context.Context, req *pb.ResetPasswordRe
 	Hash, _ := util.HashPassword(req.GetPassword())
 
 	arg := info.UpdatePasswordParams{
-		Email:          req.GetEmail(),
+		UserID:         req.GetUserID(),
 		HashedPassword: Hash,
 	}
 	_, err := server.store.UpdatePassword(ctx, arg)
@@ -60,7 +60,7 @@ func (server *Server) ResetPassword(ctx context.Context, req *pb.ResetPasswordRe
 		return nil, status.Errorf(codes.Internal, "failed to reset password: %s", err)
 	}
 
-	user, err := server.store.GetUserFixInformation(ctx, req.Email)
+	user, err := server.store.GetUserFixInformation(ctx, req.UserID)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, status.Errorf(codes.NotFound, "user not found")

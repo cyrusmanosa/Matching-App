@@ -1,6 +1,7 @@
 package gapi
 
 import (
+	db "Backend/db/sqlc/info"
 	"Backend/pb"
 	"Backend/util"
 	"context"
@@ -13,7 +14,7 @@ import (
 
 func (server *Server) loginUser(ctx context.Context, req *pb.LoginUserRequest) (*pb.LoginUserResponse, error) {
 
-	user, err := server.store.GetUserFixInformation(ctx, req.GetEmail())
+	user, err := server.store.LoginAtEmail(ctx, req.GetEmail())
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, status.Errorf(codes.NotFound, "user not found")
@@ -26,7 +27,7 @@ func (server *Server) loginUser(ctx context.Context, req *pb.LoginUserRequest) (
 		return nil, status.Errorf(codes.Internal, "incorrect password")
 	}
 
-	accessToken, err := server.tokenMaker.CreateToken(
+	accessToken, payload, err := server.tokenMaker.CreateToken(
 		user.Email,
 		user.Role,
 		server.config.AccessTokenDuration,
@@ -35,11 +36,21 @@ func (server *Server) loginUser(ctx context.Context, req *pb.LoginUserRequest) (
 		return nil, status.Errorf(codes.Internal, "failed to create access token")
 	}
 
-	rsp := &pb.LoginUserResponse{
-		UserID:      user.UserID,
-		Email:       user.Email,
-		CreateAt:    timestamppb.New(user.CreatedAt.Time),
+	sessions, err := server.store.CreateSession(ctx, db.CreateSessionParams{
+		ID:          payload.ID,
+		Email:       Validate.Email,
 		AccessToken: accessToken,
+		IsBlocked:   false,
+		ExpiresAt:   payload.ExpiredAt,
+	})
+
+	rsp := &pb.LoginUserResponse{
+		SessionsID:           sessions.ID.String(),
+		UserID:               user.UserID,
+		Email:                sessions.Email,
+		CreateAt:             timestamppb.New(user.CreatedAt.Time),
+		AccessToken:          accessToken,
+		AccessTokenExpiresAt: timestamppb.New(payload.ExpiredAt),
 	}
 
 	return rsp, nil

@@ -5,12 +5,24 @@ import (
 	info "Backend/db/sqlc/info"
 	"Backend/pb"
 	"context"
+	"fmt"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
 func (server *Server) CreateCanChange(ctx context.Context, req *pb.CreateCanChangeRequest) (*pb.CreateCanChangeResponse, error) {
+
+	token, err := server.store.GetSession(ctx, GlobalSessionID)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
+	}
+
+	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	if err != nil {
+		return nil, fmt.Errorf("invalid access token: %v", err)
+	}
+
 	CC := info.CreateUserCanChangeInformationParams{
 		UserID:        req.GetUserID(),
 		Nickname:      req.GetNickName(),
@@ -26,6 +38,8 @@ func (server *Server) CreateCanChange(ctx context.Context, req *pb.CreateCanChan
 		Religious:     req.GetReligious(),
 		Introduce:     req.GetIntroduce(),
 	}
+
+	// 寫入DataBase
 	canChange, err := server.store.CreateUserCanChangeInformation(ctx, CC)
 	if err != nil {
 		errCode := db.ErrorCode(err)

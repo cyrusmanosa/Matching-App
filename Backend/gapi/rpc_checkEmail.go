@@ -17,10 +17,11 @@ func (server *Server) CheckEmail(ctx context.Context, req *pb.CheckEmailRequest)
 		return nil, status.Errorf(codes.Internal, "failed to create user: %s", err)
 	}
 
-	_, err := server.store.GetUserFixInformation(ctx, req.GetEmail())
+	_, err := server.store.LoginAtEmail(ctx, req.GetEmail())
 	if err == nil {
 		return nil, status.Errorf(codes.AlreadyExists, "failed to create user: %s", err)
 	}
+
 	sendEmail := req.GetEmail()
 	checkRandomCode := util.RandomCheckCode()
 	sended := util.SendValidateCodeOnEmail(checkRandomCode, []string{sendEmail})
@@ -37,22 +38,16 @@ func (server *Server) CheckEmail(ctx context.Context, req *pb.CheckEmailRequest)
 
 func (server *Server) CheckEmailCode(ctx context.Context, req *pb.SendEmailRequest) (*pb.CheckedEmailResponse, error) {
 	Code := Validate.CheckCode
+	Mail := Validate.Email
 	if req.GetCheckCode() != Code {
 		return nil, status.Errorf(codes.Internal, "No Work at %s not max this :%s", req.GetCheckCode(), Code)
 	}
-	aToken, err := server.tokenMaker.CreateToken(
-		Validate.Email,
-		util.DepositorRole,
-		server.config.AccessTokenDuration,
-	)
-	if err != nil {
-		return nil, status.Errorf(codes.Internal, "failed Code: %s", err)
-	}
 
 	rsp := &pb.CheckedEmailResponse{
-		Email:       Validate.Email,
-		AccessToken: aToken,
+		Email:  Mail,
+		Status: "OK",
 	}
+
 	return rsp, nil
 
 }

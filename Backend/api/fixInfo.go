@@ -3,7 +3,6 @@ package api
 import (
 	db "Backend/db/sqlc"
 	info "Backend/db/sqlc/info"
-	"Backend/token"
 	"Backend/util"
 	"database/sql"
 	"log"
@@ -11,6 +10,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 // Create
@@ -43,7 +43,7 @@ func (server *Server) CreateUserFixInfo(ctx *gin.Context) {
 		return
 	}
 
-	B, Berr := util.BirthStringtoInt(req.Birth)
+	B, Berr := util.BirthstringtoInt(req.Birth)
 	if Berr != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(Berr))
 		return
@@ -51,12 +51,32 @@ func (server *Server) CreateUserFixInfo(ctx *gin.Context) {
 	a := util.SwitchAge(B["year"], B["month"], B["day"])
 	Con := util.SwitchConstellation(B["month"], B["day"])
 
-	authPayload := ctx.MustGet(authorizationPayloadKey).(*token.Payload)
+	accessToken, payload, err := server.tokenMaker.CreateToken(
+		returnData.Email,
+		util.DepositorRole,
+		server.config.AccessTokenDuration,
+	)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	sessions, err := server.store.CreateSession(ctx, info.CreateSessionParams{
+		ID:          payload.ID,
+		Email:       returnData.Email,
+		AccessToken: accessToken,
+		IsBlocked:   false,
+		ExpiresAt:   payload.ExpiredAt,
+	})
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
 
 	arg := info.CreateUserFixInformationParams{
 		FirstName:     req.FirstName,
 		LastName:      req.LastName,
-		Email:         authPayload.Email,
+		Email:         sessions.Email,
 		Birth:         req.Birth,
 		Country:       req.Country,
 		Gender:        req.Gender,
@@ -75,8 +95,6 @@ func (server *Server) CreateUserFixInfo(ctx *gin.Context) {
 		}
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
-	} else {
-		log.Print(authPayload)
 	}
 	rsq := newUserResponse(user)
 	ctx.JSON(http.StatusOK, rsq)
@@ -84,7 +102,7 @@ func (server *Server) CreateUserFixInfo(ctx *gin.Context) {
 
 // input password
 type passwordRequest struct {
-	Email    string `json:"email" binding:"required"`
+	UserID   int32  `json:"userid" binding:"required"`
 	Password string `json:"password" binding:"required,min=6"`
 }
 
@@ -98,7 +116,7 @@ func (server *Server) inputPassword(ctx *gin.Context) {
 
 	Hash, _ := util.HashPassword(req.Password)
 	arg := info.UpdatePasswordParams{
-		Email:          req.Email,
+		UserID:         req.UserID,
 		HashedPassword: Hash,
 	}
 
@@ -120,7 +138,7 @@ func (server *Server) inputPassword(ctx *gin.Context) {
 
 // Reset Password
 type ResetPasswordRequset struct {
-	Email    string `json:"email" binding:"required"`
+	UserID   int32  `json:"userid" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
 
@@ -137,7 +155,7 @@ func (server *Server) ResetPassword(ctx *gin.Context) {
 	}
 
 	NewPassword := info.UpdatePasswordParams{
-		Email:          req.Email,
+		UserID:         req.UserID,
 		HashedPassword: hash,
 	}
 
@@ -160,8 +178,10 @@ type loginUserRequest struct {
 	Password string `json:"password" binding:"required,min=6"`
 }
 type loginUserResponse struct {
-	AccessToken string       `json:"access_token"`
-	User        userResponse `json:"user"`
+	SessionsID           uuid.UUID    `json:"sessionsid" binding:"required"`
+	AccessToken          string       `json:"access_token"`
+	AccessTokenExpiresAt time.Time    `json:"access_token_expires_at"`
+	User                 userResponse `json:"user"`
 }
 
 func (server *Server) UserLogin(ctx *gin.Context) {
@@ -172,7 +192,7 @@ func (server *Server) UserLogin(ctx *gin.Context) {
 	}
 
 	// Check Email
-	user, err := server.store.GetUserFixInformation(ctx, req.Email)
+	user, err := server.store.LoginAtEmail(ctx, req.Email)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			ctx.JSON(http.StatusNotFound, errorResponse(err))
@@ -183,6 +203,7 @@ func (server *Server) UserLogin(ctx *gin.Context) {
 		log.Println(err)
 		return
 	}
+
 	// Password
 	err = util.CheckPassword(req.Password, user.HashedPassword)
 	if err != nil {
@@ -192,7 +213,7 @@ func (server *Server) UserLogin(ctx *gin.Context) {
 		return
 	}
 
-	accessToken, err := server.tokenMaker.CreateToken(
+	accessToken, payload, err := server.tokenMaker.CreateToken(
 		user.Email,
 		user.Role,
 		server.config.AccessTokenDuration,
@@ -203,9 +224,24 @@ func (server *Server) UserLogin(ctx *gin.Context) {
 		return
 	}
 
-	rsp := loginUserResponse{
+	sessions, err := server.store.CreateSession(ctx, info.CreateSessionParams{
+		ID:          payload.ID,
+		Email:       user.Email,
 		AccessToken: accessToken,
-		User:        newUserResponse(user),
+		IsBlocked:   false,
+		ExpiresAt:   payload.ExpiredAt,
+	})
+
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	rsp := loginUserResponse{
+		SessionsID:           sessions.ID,
+		AccessToken:          accessToken,
+		AccessTokenExpiresAt: payload.ExpiredAt,
+		User:                 newUserResponse(user),
 	}
 	ctx.JSON(http.StatusOK, rsp)
 }

@@ -1,8 +1,13 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "accompany.proto",
-    "version": "version not set"
+    "title": "A Bit of Everything",
+    "version": "1.0",
+    "contact": {
+      "name": "App",
+      "url": "https://github.com/cyrusmanosa/Apps",
+      "email": "cyrusmanosa@gmail.com"
+    }
   },
   "tags": [
     {
@@ -16,7 +21,7 @@
     "application/json"
   ],
   "paths": {
-    "/v1/CheckCode": {
+    "/v1/Check_Code": {
       "post": {
         "operationId": "Backend_CheckEmailCode",
         "responses": {
@@ -48,7 +53,7 @@
         ]
       }
     },
-    "/v1/CreateAccompany": {
+    "/v1/Create_Accompany": {
       "post": {
         "summary": "Accompany",
         "operationId": "Backend_CreateAccompany",
@@ -81,7 +86,7 @@
         ]
       }
     },
-    "/v1/CreateCanChange": {
+    "/v1/Create_CanChange": {
       "post": {
         "summary": "Can Change Information",
         "operationId": "Backend_CreateCanChange",
@@ -114,7 +119,7 @@
         ]
       }
     },
-    "/v1/CreateChangeTarget": {
+    "/v1/Create_ChangeTarget": {
       "post": {
         "summary": "Change Target",
         "operationId": "Backend_CreateChangeTarget",
@@ -147,7 +152,7 @@
         ]
       }
     },
-    "/v1/CreateComplaint": {
+    "/v1/Create_Complaint": {
       "post": {
         "summary": "Complaint",
         "operationId": "Backend_CreateComplaint",
@@ -180,7 +185,7 @@
         ]
       }
     },
-    "/v1/CreateFix": {
+    "/v1/Create_Fix": {
       "post": {
         "summary": "Fix Information",
         "operationId": "Backend_CreateFix",
@@ -213,7 +218,7 @@
         ]
       }
     },
-    "/v1/CreateHobby": {
+    "/v1/Create_Hobby": {
       "post": {
         "summary": "Hobby",
         "operationId": "Backend_CreateHobby",
@@ -246,7 +251,7 @@
         ]
       }
     },
-    "/v1/CreateImages": {
+    "/v1/Create_Images": {
       "post": {
         "summary": "images",
         "operationId": "Backend_CreateImages",
@@ -279,7 +284,7 @@
         ]
       }
     },
-    "/v1/CreateLover": {
+    "/v1/Create_Lover": {
       "post": {
         "summary": "Lover",
         "operationId": "Backend_CreateLover",
@@ -312,7 +317,7 @@
         ]
       }
     },
-    "/v1/CreateTargetList": {
+    "/v1/Create_TargetList": {
       "post": {
         "summary": "Target List",
         "operationId": "Backend_CreateTargetList",
@@ -345,7 +350,7 @@
         ]
       }
     },
-    "/v1/GetAccompany": {
+    "/v1/Get_Accompany": {
       "get": {
         "operationId": "Backend_GetAccompany",
         "responses": {
@@ -376,7 +381,7 @@
         ]
       }
     },
-    "/v1/GetCanChange": {
+    "/v1/Get_CanChange": {
       "get": {
         "operationId": "Backend_GetCanChange",
         "responses": {
@@ -407,7 +412,7 @@
         ]
       }
     },
-    "/v1/GetChangeTarget": {
+    "/v1/Get_ChangeTarget": {
       "get": {
         "operationId": "Backend_GetChangeTarget",
         "responses": {
@@ -438,7 +443,7 @@
         ]
       }
     },
-    "/v1/GetComplaint": {
+    "/v1/Get_Complaint": {
       "get": {
         "operationId": "Backend_GetComplaint",
         "responses": {
@@ -469,7 +474,7 @@
         ]
       }
     },
-    "/v1/GetHobby": {
+    "/v1/Get_Hobby": {
       "get": {
         "operationId": "Backend_GetHobby",
         "responses": {
@@ -500,7 +505,7 @@
         ]
       }
     },
-    "/v1/GetImages": {
+    "/v1/Get_Images": {
       "get": {
         "operationId": "Backend_GetImages",
         "responses": {
@@ -531,7 +536,7 @@
         ]
       }
     },
-    "/v1/GetLover": {
+    "/v1/Get_Lover": {
       "get": {
         "operationId": "Backend_GetLover",
         "responses": {
@@ -562,7 +567,7 @@
         ]
       }
     },
-    "/v1/GetTargetList": {
+    "/v1/Get_TargetList": {
       "get": {
         "operationId": "Backend_GetTargetList",
         "responses": {
@@ -625,7 +630,7 @@
         ]
       }
     },
-    "/v1/Password": {
+    "/v1/Password_Setup": {
       "put": {
         "operationId": "Backend_InputPassword",
         "responses": {
@@ -657,9 +662,9 @@
         ]
       }
     },
-    "/v1/ResetPassword": {
+    "/v1/Reset_Password": {
       "put": {
-        "operationId": "Backend_esetPassword",
+        "operationId": "Backend_ResetPassword",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -689,7 +694,7 @@
         ]
       }
     },
-    "/v1/SignUp": {
+    "/v1/Sign_Up": {
       "post": {
         "operationId": "Backend_CheckEmail",
         "responses": {
@@ -721,7 +726,7 @@
         ]
       }
     },
-    "/v1/UpdateAccompany": {
+    "/v1/Update_Accompany": {
       "put": {
         "operationId": "Backend_UpdateAccompany",
         "responses": {
@@ -753,7 +758,7 @@
         ]
       }
     },
-    "/v1/UpdateCanChange": {
+    "/v1/Update_CanChange": {
       "put": {
         "operationId": "Backend_UpdateCanChange",
         "responses": {
@@ -785,7 +790,7 @@
         ]
       }
     },
-    "/v1/UpdateComplaint": {
+    "/v1/Update_Complaint": {
       "put": {
         "operationId": "Backend_UpdateComplaint",
         "responses": {
@@ -817,7 +822,7 @@
         ]
       }
     },
-    "/v1/UpdateHobby": {
+    "/v1/Update_Hobby": {
       "put": {
         "operationId": "Backend_UpdateHobby",
         "responses": {
@@ -849,7 +854,39 @@
         ]
       }
     },
-    "/v1/UpdateLover": {
+    "/v1/Update_ImagesResponse": {
+      "put": {
+        "operationId": "Backend_UpdateImages",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbupdateImagesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbupdateImagesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Backend"
+        ]
+      }
+    },
+    "/v1/Update_Lover": {
       "put": {
         "operationId": "Backend_UpdateLover",
         "responses": {
@@ -881,7 +918,7 @@
         ]
       }
     },
-    "/v1/UpdateTargetList": {
+    "/v1/Update_TargetList": {
       "put": {
         "operationId": "Backend_UpdateTargetList",
         "responses": {
@@ -905,38 +942,6 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/pbupdateTargetListRequest"
-            }
-          }
-        ],
-        "tags": [
-          "Backend"
-        ]
-      }
-    },
-    "/v1/UpdategetImagesResponse": {
-      "put": {
-        "operationId": "Backend_UpdateImages",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/pbupdateImagesResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/pbupdateImagesRequest"
             }
           }
         ],
@@ -1086,7 +1091,7 @@
         "Email": {
           "type": "string"
         },
-        "AccessToken": {
+        "Status": {
           "type": "string"
         }
       }
@@ -1296,6 +1301,9 @@
     "pbcreateFixResponse": {
       "type": "object",
       "properties": {
+        "SessionsID": {
+          "type": "string"
+        },
         "UserID": {
           "type": "integer",
           "format": "int32"
@@ -1304,6 +1312,13 @@
           "type": "string"
         },
         "CreateAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "AccessToken": {
+          "type": "string"
+        },
+        "AccessTokenExpiresAt": {
           "type": "string",
           "format": "date-time"
         }
@@ -1635,8 +1650,9 @@
     "pbinputPasswordRequest": {
       "type": "object",
       "properties": {
-        "Email": {
-          "type": "string"
+        "UserID": {
+          "type": "integer",
+          "format": "int32"
         },
         "Password": {
           "type": "string"
@@ -1669,6 +1685,9 @@
     "pbloginUserResponse": {
       "type": "object",
       "properties": {
+        "SessionsID": {
+          "type": "string"
+        },
         "UserID": {
           "type": "integer",
           "format": "int32"
@@ -1682,6 +1701,10 @@
         },
         "AccessToken": {
           "type": "string"
+        },
+        "AccessTokenExpiresAt": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -1748,8 +1771,9 @@
     "pbresetPasswordRequest": {
       "type": "object",
       "properties": {
-        "Email": {
-          "type": "string"
+        "UserID": {
+          "type": "integer",
+          "format": "int32"
         },
         "Password": {
           "type": "string"

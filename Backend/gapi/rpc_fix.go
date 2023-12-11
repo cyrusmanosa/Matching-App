@@ -7,14 +7,35 @@ import (
 	"Backend/util"
 	"context"
 
+	"github.com/google/uuid"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
-func (server *Server) CreateFix(ctx context.Context, req *pb.CreateFixRequest) (*pb.CreateFixResponse, error) {
+var GlobalSessionID uuid.UUID
 
-	B, Berr := util.BirthStringtoInt(req.GetBirth())
+func (server *Server) CreateFix(ctx context.Context, req *pb.CreateFixRequest) (*pb.CreateFixResponse, error) {
+	Mail := Validate.Email
+
+	aToken, payload, err := server.tokenMaker.CreateToken(
+		Mail,
+		util.DepositorRole,
+		server.config.AccessTokenDuration,
+	)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "failed Code: %s", err)
+	}
+
+	sessions, err := server.store.CreateSession(ctx, info.CreateSessionParams{
+		ID:          payload.ID,
+		Email:       Mail,
+		AccessToken: aToken,
+		IsBlocked:   false,
+		ExpiresAt:   payload.ExpiredAt,
+	})
+
+	B, Berr := util.BirthstringtoInt(req.GetBirth())
 	if Berr != nil {
 		return nil, status.Errorf(codes.Internal, "Birth Error: %s", Berr)
 	}
@@ -23,9 +44,9 @@ func (server *Server) CreateFix(ctx context.Context, req *pb.CreateFixRequest) (
 	Con := util.SwitchConstellation(B["month"], B["day"])
 
 	arg := info.CreateUserFixInformationParams{
-		FirstName: req.GetFirstName(),
-		LastName:  req.GetLastName(),
-		// Email:         authPayload.Email,
+		FirstName:     req.GetFirstName(),
+		LastName:      req.GetLastName(),
+		Email:         sessions.Email,
 		Birth:         req.GetBirth(),
 		Country:       req.GetCountry(),
 		Gender:        req.GetGender(),
@@ -41,13 +62,21 @@ func (server *Server) CreateFix(ctx context.Context, req *pb.CreateFixRequest) (
 			return nil, status.Errorf(codes.AlreadyExists, err.Error())
 		}
 		return nil, status.Errorf(codes.Internal, "failed to create user: %s", err)
+	} else {
+		Validate.Email = ""
+		Validate.CheckCode = ""
 	}
 
 	rsp := &pb.CreateFixResponse{
-		UserID:   fix.UserID,
-		Email:    fix.Email,
-		CreateAt: timestamppb.New(fix.CreatedAt.Time),
+		SessionsID:           sessions.ID.String(),
+		UserID:               fix.UserID,
+		Email:                sessions.Email,
+		CreateAt:             timestamppb.New(fix.CreatedAt.Time),
+		AccessToken:          sessions.AccessToken,
+		AccessTokenExpiresAt: timestamppb.New(sessions.ExpiresAt.Time),
 	}
+
+	GlobalSessionID = sessions.ID
 
 	return rsp, nil
 }

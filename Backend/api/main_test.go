@@ -19,7 +19,7 @@ func TestMain(m *testing.M) {
 
 func newTestServer(t *testing.T, store db.InfoStore) *Server {
 	config := util.Config{
-		TokenSymmetricKey:   util.RandomString(32),
+		TokenSymmetricKey:   util.Randomstring(32),
 		AccessTokenDuration: time.Minute,
 	}
 	server, err := NewServer(config, store)

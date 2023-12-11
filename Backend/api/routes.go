@@ -38,15 +38,13 @@ func (server *Server) setupRouter() {
 	authRoutes := router.Group("/").Use(authMiddleware(server.tokenMaker))
 
 	// before login
-	router.POST("/SignUp", server.CheckEmail)
+	router.POST("/SignUpEmail", server.CheckEmail)
 	router.POST("/SignUpCheckCode", server.CheckEmailCode)
-	router.POST("/Login", server.UserLogin)
-
-	// transition
+	router.POST("/UserLogin", server.UserLogin)
+	router.POST("/CreateFixInfo", server.CreateUserFixInfo)
 
 	// --------------after take the access token--------------
 	// Create
-	authRoutes.POST("/CreateFixInfo", server.CreateUserFixInfo)
 	authRoutes.POST("/CreateCanChangeInfo", server.CreateUserCanChangeInfo)
 	authRoutes.POST("/CreateHobby", server.CreateHobby)
 	authRoutes.POST("/CreateLover", server.CreateLover)

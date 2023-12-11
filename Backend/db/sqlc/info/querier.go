@@ -6,6 +6,8 @@ package db
 
 import (
 	"context"
+
+	"github.com/google/uuid"
 )
 
 type InfoQuerier interface {
@@ -17,6 +19,7 @@ type InfoQuerier interface {
 	CreateHobbyRequest(ctx context.Context, arg CreateHobbyRequestParams) (Hobbyrequest, error)
 	CreateImage(ctx context.Context, arg CreateImageParams) (Image, error)
 	CreateLoverRequest(ctx context.Context, arg CreateLoverRequestParams) (Loverrequest, error)
+	CreateSession(ctx context.Context, arg CreateSessionParams) (Session, error)
 	CreateUserCanChangeInformation(ctx context.Context, arg CreateUserCanChangeInformationParams) (Canchangeinformation, error)
 	CreateUserFixInformation(ctx context.Context, arg CreateUserFixInformationParams) (Fixinformation, error)
 	DeleteCanChangeInformation(ctx context.Context, userID int32) error
@@ -30,11 +33,12 @@ type InfoQuerier interface {
 	DeleteUserLoverRequest(ctx context.Context, userID int32) error
 	GetChangeTargetUserList(ctx context.Context, userID int32) (Changetargetuser, error)
 	GetRowCount(ctx context.Context, userID int32) (int32, error)
+	GetSession(ctx context.Context, id uuid.UUID) (Session, error)
 	GetTargetUserList(ctx context.Context, userID int32) (Targetlist, error)
 	GetUserAccompany(ctx context.Context, userID int32) (Accompanyrequest, error)
 	GetUserCanChangeInformation(ctx context.Context, userID int32) (Canchangeinformation, error)
 	GetUserComplaintList(ctx context.Context, cpID int32) (Complaint, error)
-	GetUserFixInformation(ctx context.Context, email string) (Fixinformation, error)
+	GetUserFixInformation(ctx context.Context, userID int32) (Fixinformation, error)
 	GetUserHobby(ctx context.Context, userID int32) (Hobbyrequest, error)
 	GetUserLover(ctx context.Context, userID int32) (Loverrequest, error)
 	GetUserimageData(ctx context.Context, userID int32) (Image, error)
@@ -45,6 +49,7 @@ type InfoQuerier interface {
 	ListUserHobby(ctx context.Context) ([]Hobbyrequest, error)
 	ListUserLover(ctx context.Context) ([]Loverrequest, error)
 	ListimagesList(ctx context.Context) ([]Image, error)
+	LoginAtEmail(ctx context.Context, email string) (Fixinformation, error)
 	TargetUserList(ctx context.Context, arg TargetUserListParams) (Targetlist, error)
 	UpdateImage(ctx context.Context, arg UpdateImageParams) (Image, error)
 	UpdateInformation(ctx context.Context, arg UpdateInformationParams) (Canchangeinformation, error)

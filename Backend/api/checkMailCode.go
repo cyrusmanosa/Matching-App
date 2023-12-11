@@ -19,7 +19,7 @@ type checkEmailResponse struct {
 	CheckCode string `json:"check_code"`
 }
 
-var req checkEmailResponse
+var returnData checkEmailResponse
 
 func (server *Server) CheckEmail(ctx *gin.Context) {
 	var CE EmailRequset
@@ -34,23 +34,23 @@ func (server *Server) CheckEmail(ctx *gin.Context) {
 		return
 	}
 
-	_, err := server.store.GetUserFixInformation(ctx, CE.Email)
+	_, err := server.store.LoginAtEmail(ctx, CE.Email)
 	if err == nil {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		log.Println(err)
 		return
 	} else {
-		req.Email = CE.Email
-		req.CheckCode = util.RandomCheckCode()
-		sended := util.SendValidateCodeOnEmail(req.CheckCode, []string{req.Email})
+		returnData.Email = CE.Email
+		returnData.CheckCode = util.RandomCheckCode()
+		sended := util.SendValidateCodeOnEmail(returnData.CheckCode, []string{returnData.Email})
 
 		if sended {
 			time.AfterFunc(300*time.Second, func() {
-				req.CheckCode = ""
+				returnData.CheckCode = ""
 			})
 		}
 
-		ctx.JSON(http.StatusOK, req)
+		ctx.JSON(http.StatusOK, returnData)
 	}
 }
 
@@ -58,30 +58,21 @@ type CodeRequest struct {
 	CheckCode string `json:"checkcode" binding:"required"`
 }
 type successResponse struct {
-	AccessToken string `json:"access_token"`
-	Email       string `json:"email"`
+	Email  string `json:"email"`
+	Status string `json:"status"`
 }
 
 func (server *Server) CheckEmailCode(ctx *gin.Context) {
 	var CC CodeRequest
 	if err := ctx.ShouldBindJSON(&CC); err != nil {
+		log.Fatal(returnData)
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}
-	if CC.CheckCode == req.CheckCode {
-		accessToken, err := server.tokenMaker.CreateToken(
-			req.Email,
-			util.DepositorRole,
-			server.config.AccessTokenDuration,
-		)
-		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, errorResponse(err))
-			return
-		}
-
+	if CC.CheckCode == returnData.CheckCode {
 		rsp := successResponse{
-			AccessToken: accessToken,
-			Email:       req.Email,
+			Email:  returnData.Email,
+			Status: "OK",
 		}
 		ctx.JSON(http.StatusOK, rsp)
 	}

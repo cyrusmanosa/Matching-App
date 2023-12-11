@@ -14,7 +14,7 @@ const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
 var seededRand *rand.Rand = rand.New(rand.NewSource(time.Now().UnixNano()))
 
-func RandomString(n int) string {
+func Randomstring(n int) string {
 	var sb strings.Builder
 	k := len(alphabet)
 	for i := 0; i < n; i++ {
@@ -293,7 +293,7 @@ func RandomCheckCode() string {
 	return string(b)
 }
 
-func BirthStringtoInt(Bday string) (map[string]int, error) {
+func BirthstringtoInt(Bday string) (map[string]int, error) {
 	BirthInt := map[string]int{
 		"year":  0,
 		"month": 0,

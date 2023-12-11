@@ -167,7 +167,7 @@ func local_request_Backend_InputPassword_0(ctx context.Context, marshaler runtim
 
 }
 
-func request_Backend_EsetPassword_0(ctx context.Context, marshaler runtime.Marshaler, client BackendClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Backend_ResetPassword_0(ctx context.Context, marshaler runtime.Marshaler, client BackendClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ResetPasswordRequest
 	var metadata runtime.ServerMetadata
 
@@ -179,12 +179,12 @@ func request_Backend_EsetPassword_0(ctx context.Context, marshaler runtime.Marsh
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.EsetPassword(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.ResetPassword(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_Backend_EsetPassword_0(ctx context.Context, marshaler runtime.Marshaler, server BackendServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_Backend_ResetPassword_0(ctx context.Context, marshaler runtime.Marshaler, server BackendServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ResetPasswordRequest
 	var metadata runtime.ServerMetadata
 
@@ -196,7 +196,7 @@ func local_request_Backend_EsetPassword_0(ctx context.Context, marshaler runtime
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := server.EsetPassword(ctx, &protoReq)
+	msg, err := server.ResetPassword(ctx, &protoReq)
 	return msg, metadata, err
 
 }
@@ -1072,7 +1072,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CheckEmail", runtime.WithHTTPPathPattern("/v1/SignUp"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CheckEmail", runtime.WithHTTPPathPattern("/v1/Sign_Up"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1097,7 +1097,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CheckEmailCode", runtime.WithHTTPPathPattern("/v1/CheckCode"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CheckEmailCode", runtime.WithHTTPPathPattern("/v1/Check_Code"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1122,7 +1122,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/InputPassword", runtime.WithHTTPPathPattern("/v1/Password"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/InputPassword", runtime.WithHTTPPathPattern("/v1/Password_Setup"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1139,7 +1139,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 
 	})
 
-	mux.Handle("PUT", pattern_Backend_EsetPassword_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_Backend_ResetPassword_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -1147,12 +1147,12 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/EsetPassword", runtime.WithHTTPPathPattern("/v1/ResetPassword"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/ResetPassword", runtime.WithHTTPPathPattern("/v1/Reset_Password"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Backend_EsetPassword_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Backend_ResetPassword_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -1160,7 +1160,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 			return
 		}
 
-		forward_Backend_EsetPassword_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Backend_ResetPassword_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -1172,7 +1172,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CreateFix", runtime.WithHTTPPathPattern("/v1/CreateFix"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CreateFix", runtime.WithHTTPPathPattern("/v1/Create_Fix"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1197,7 +1197,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CreateCanChange", runtime.WithHTTPPathPattern("/v1/CreateCanChange"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CreateCanChange", runtime.WithHTTPPathPattern("/v1/Create_CanChange"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1222,7 +1222,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/GetCanChange", runtime.WithHTTPPathPattern("/v1/GetCanChange"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/GetCanChange", runtime.WithHTTPPathPattern("/v1/Get_CanChange"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1247,7 +1247,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/UpdateCanChange", runtime.WithHTTPPathPattern("/v1/UpdateCanChange"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/UpdateCanChange", runtime.WithHTTPPathPattern("/v1/Update_CanChange"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1272,7 +1272,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CreateAccompany", runtime.WithHTTPPathPattern("/v1/CreateAccompany"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CreateAccompany", runtime.WithHTTPPathPattern("/v1/Create_Accompany"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1297,7 +1297,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/GetAccompany", runtime.WithHTTPPathPattern("/v1/GetAccompany"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/GetAccompany", runtime.WithHTTPPathPattern("/v1/Get_Accompany"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1322,7 +1322,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/UpdateAccompany", runtime.WithHTTPPathPattern("/v1/UpdateAccompany"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/UpdateAccompany", runtime.WithHTTPPathPattern("/v1/Update_Accompany"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1347,7 +1347,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CreateHobby", runtime.WithHTTPPathPattern("/v1/CreateHobby"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CreateHobby", runtime.WithHTTPPathPattern("/v1/Create_Hobby"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1372,7 +1372,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/GetHobby", runtime.WithHTTPPathPattern("/v1/GetHobby"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/GetHobby", runtime.WithHTTPPathPattern("/v1/Get_Hobby"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1397,7 +1397,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/UpdateHobby", runtime.WithHTTPPathPattern("/v1/UpdateHobby"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/UpdateHobby", runtime.WithHTTPPathPattern("/v1/Update_Hobby"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1422,7 +1422,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CreateLover", runtime.WithHTTPPathPattern("/v1/CreateLover"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CreateLover", runtime.WithHTTPPathPattern("/v1/Create_Lover"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1447,7 +1447,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/GetLover", runtime.WithHTTPPathPattern("/v1/GetLover"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/GetLover", runtime.WithHTTPPathPattern("/v1/Get_Lover"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1472,7 +1472,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/UpdateLover", runtime.WithHTTPPathPattern("/v1/UpdateLover"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/UpdateLover", runtime.WithHTTPPathPattern("/v1/Update_Lover"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1497,7 +1497,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CreateComplaint", runtime.WithHTTPPathPattern("/v1/CreateComplaint"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CreateComplaint", runtime.WithHTTPPathPattern("/v1/Create_Complaint"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1522,7 +1522,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/GetComplaint", runtime.WithHTTPPathPattern("/v1/GetComplaint"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/GetComplaint", runtime.WithHTTPPathPattern("/v1/Get_Complaint"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1547,7 +1547,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/UpdateComplaint", runtime.WithHTTPPathPattern("/v1/UpdateComplaint"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/UpdateComplaint", runtime.WithHTTPPathPattern("/v1/Update_Complaint"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1572,7 +1572,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CreateTargetList", runtime.WithHTTPPathPattern("/v1/CreateTargetList"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CreateTargetList", runtime.WithHTTPPathPattern("/v1/Create_TargetList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1597,7 +1597,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/GetTargetList", runtime.WithHTTPPathPattern("/v1/GetTargetList"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/GetTargetList", runtime.WithHTTPPathPattern("/v1/Get_TargetList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1622,7 +1622,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/UpdateTargetList", runtime.WithHTTPPathPattern("/v1/UpdateTargetList"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/UpdateTargetList", runtime.WithHTTPPathPattern("/v1/Update_TargetList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1647,7 +1647,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CreateChangeTarget", runtime.WithHTTPPathPattern("/v1/CreateChangeTarget"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CreateChangeTarget", runtime.WithHTTPPathPattern("/v1/Create_ChangeTarget"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1672,7 +1672,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/GetChangeTarget", runtime.WithHTTPPathPattern("/v1/GetChangeTarget"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/GetChangeTarget", runtime.WithHTTPPathPattern("/v1/Get_ChangeTarget"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1697,7 +1697,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CreateImages", runtime.WithHTTPPathPattern("/v1/CreateImages"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/CreateImages", runtime.WithHTTPPathPattern("/v1/Create_Images"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1722,7 +1722,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/GetImages", runtime.WithHTTPPathPattern("/v1/GetImages"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/GetImages", runtime.WithHTTPPathPattern("/v1/Get_Images"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1747,7 +1747,7 @@ func RegisterBackendHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/UpdateImages", runtime.WithHTTPPathPattern("/v1/UpdategetImagesResponse"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Backend/UpdateImages", runtime.WithHTTPPathPattern("/v1/Update_ImagesResponse"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1833,7 +1833,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CheckEmail", runtime.WithHTTPPathPattern("/v1/SignUp"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CheckEmail", runtime.WithHTTPPathPattern("/v1/Sign_Up"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1855,7 +1855,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CheckEmailCode", runtime.WithHTTPPathPattern("/v1/CheckCode"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CheckEmailCode", runtime.WithHTTPPathPattern("/v1/Check_Code"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1877,7 +1877,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/InputPassword", runtime.WithHTTPPathPattern("/v1/Password"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/InputPassword", runtime.WithHTTPPathPattern("/v1/Password_Setup"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1893,25 +1893,25 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 
 	})
 
-	mux.Handle("PUT", pattern_Backend_EsetPassword_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_Backend_ResetPassword_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/EsetPassword", runtime.WithHTTPPathPattern("/v1/ResetPassword"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/ResetPassword", runtime.WithHTTPPathPattern("/v1/Reset_Password"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Backend_EsetPassword_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Backend_ResetPassword_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Backend_EsetPassword_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Backend_ResetPassword_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -1921,7 +1921,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CreateFix", runtime.WithHTTPPathPattern("/v1/CreateFix"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CreateFix", runtime.WithHTTPPathPattern("/v1/Create_Fix"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1943,7 +1943,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CreateCanChange", runtime.WithHTTPPathPattern("/v1/CreateCanChange"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CreateCanChange", runtime.WithHTTPPathPattern("/v1/Create_CanChange"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1965,7 +1965,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/GetCanChange", runtime.WithHTTPPathPattern("/v1/GetCanChange"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/GetCanChange", runtime.WithHTTPPathPattern("/v1/Get_CanChange"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1987,7 +1987,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/UpdateCanChange", runtime.WithHTTPPathPattern("/v1/UpdateCanChange"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/UpdateCanChange", runtime.WithHTTPPathPattern("/v1/Update_CanChange"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2009,7 +2009,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CreateAccompany", runtime.WithHTTPPathPattern("/v1/CreateAccompany"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CreateAccompany", runtime.WithHTTPPathPattern("/v1/Create_Accompany"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2031,7 +2031,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/GetAccompany", runtime.WithHTTPPathPattern("/v1/GetAccompany"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/GetAccompany", runtime.WithHTTPPathPattern("/v1/Get_Accompany"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2053,7 +2053,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/UpdateAccompany", runtime.WithHTTPPathPattern("/v1/UpdateAccompany"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/UpdateAccompany", runtime.WithHTTPPathPattern("/v1/Update_Accompany"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2075,7 +2075,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CreateHobby", runtime.WithHTTPPathPattern("/v1/CreateHobby"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CreateHobby", runtime.WithHTTPPathPattern("/v1/Create_Hobby"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2097,7 +2097,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/GetHobby", runtime.WithHTTPPathPattern("/v1/GetHobby"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/GetHobby", runtime.WithHTTPPathPattern("/v1/Get_Hobby"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2119,7 +2119,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/UpdateHobby", runtime.WithHTTPPathPattern("/v1/UpdateHobby"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/UpdateHobby", runtime.WithHTTPPathPattern("/v1/Update_Hobby"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2141,7 +2141,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CreateLover", runtime.WithHTTPPathPattern("/v1/CreateLover"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CreateLover", runtime.WithHTTPPathPattern("/v1/Create_Lover"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2163,7 +2163,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/GetLover", runtime.WithHTTPPathPattern("/v1/GetLover"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/GetLover", runtime.WithHTTPPathPattern("/v1/Get_Lover"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2185,7 +2185,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/UpdateLover", runtime.WithHTTPPathPattern("/v1/UpdateLover"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/UpdateLover", runtime.WithHTTPPathPattern("/v1/Update_Lover"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2207,7 +2207,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CreateComplaint", runtime.WithHTTPPathPattern("/v1/CreateComplaint"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CreateComplaint", runtime.WithHTTPPathPattern("/v1/Create_Complaint"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2229,7 +2229,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/GetComplaint", runtime.WithHTTPPathPattern("/v1/GetComplaint"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/GetComplaint", runtime.WithHTTPPathPattern("/v1/Get_Complaint"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2251,7 +2251,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/UpdateComplaint", runtime.WithHTTPPathPattern("/v1/UpdateComplaint"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/UpdateComplaint", runtime.WithHTTPPathPattern("/v1/Update_Complaint"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2273,7 +2273,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CreateTargetList", runtime.WithHTTPPathPattern("/v1/CreateTargetList"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CreateTargetList", runtime.WithHTTPPathPattern("/v1/Create_TargetList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2295,7 +2295,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/GetTargetList", runtime.WithHTTPPathPattern("/v1/GetTargetList"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/GetTargetList", runtime.WithHTTPPathPattern("/v1/Get_TargetList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2317,7 +2317,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/UpdateTargetList", runtime.WithHTTPPathPattern("/v1/UpdateTargetList"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/UpdateTargetList", runtime.WithHTTPPathPattern("/v1/Update_TargetList"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2339,7 +2339,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CreateChangeTarget", runtime.WithHTTPPathPattern("/v1/CreateChangeTarget"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CreateChangeTarget", runtime.WithHTTPPathPattern("/v1/Create_ChangeTarget"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2361,7 +2361,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/GetChangeTarget", runtime.WithHTTPPathPattern("/v1/GetChangeTarget"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/GetChangeTarget", runtime.WithHTTPPathPattern("/v1/Get_ChangeTarget"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2383,7 +2383,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CreateImages", runtime.WithHTTPPathPattern("/v1/CreateImages"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/CreateImages", runtime.WithHTTPPathPattern("/v1/Create_Images"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2405,7 +2405,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/GetImages", runtime.WithHTTPPathPattern("/v1/GetImages"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/GetImages", runtime.WithHTTPPathPattern("/v1/Get_Images"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2427,7 +2427,7 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/UpdateImages", runtime.WithHTTPPathPattern("/v1/UpdategetImagesResponse"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Backend/UpdateImages", runtime.WithHTTPPathPattern("/v1/Update_ImagesResponse"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2449,61 +2449,61 @@ func RegisterBackendHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 var (
 	pattern_Backend_LoginUser_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Login"}, ""))
 
-	pattern_Backend_CheckEmail_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "SignUp"}, ""))
+	pattern_Backend_CheckEmail_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Sign_Up"}, ""))
 
-	pattern_Backend_CheckEmailCode_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "CheckCode"}, ""))
+	pattern_Backend_CheckEmailCode_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Check_Code"}, ""))
 
-	pattern_Backend_InputPassword_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Password"}, ""))
+	pattern_Backend_InputPassword_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Password_Setup"}, ""))
 
-	pattern_Backend_EsetPassword_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "ResetPassword"}, ""))
+	pattern_Backend_ResetPassword_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Reset_Password"}, ""))
 
-	pattern_Backend_CreateFix_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "CreateFix"}, ""))
+	pattern_Backend_CreateFix_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Create_Fix"}, ""))
 
-	pattern_Backend_CreateCanChange_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "CreateCanChange"}, ""))
+	pattern_Backend_CreateCanChange_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Create_CanChange"}, ""))
 
-	pattern_Backend_GetCanChange_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "GetCanChange"}, ""))
+	pattern_Backend_GetCanChange_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Get_CanChange"}, ""))
 
-	pattern_Backend_UpdateCanChange_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "UpdateCanChange"}, ""))
+	pattern_Backend_UpdateCanChange_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Update_CanChange"}, ""))
 
-	pattern_Backend_CreateAccompany_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "CreateAccompany"}, ""))
+	pattern_Backend_CreateAccompany_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Create_Accompany"}, ""))
 
-	pattern_Backend_GetAccompany_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "GetAccompany"}, ""))
+	pattern_Backend_GetAccompany_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Get_Accompany"}, ""))
 
-	pattern_Backend_UpdateAccompany_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "UpdateAccompany"}, ""))
+	pattern_Backend_UpdateAccompany_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Update_Accompany"}, ""))
 
-	pattern_Backend_CreateHobby_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "CreateHobby"}, ""))
+	pattern_Backend_CreateHobby_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Create_Hobby"}, ""))
 
-	pattern_Backend_GetHobby_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "GetHobby"}, ""))
+	pattern_Backend_GetHobby_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Get_Hobby"}, ""))
 
-	pattern_Backend_UpdateHobby_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "UpdateHobby"}, ""))
+	pattern_Backend_UpdateHobby_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Update_Hobby"}, ""))
 
-	pattern_Backend_CreateLover_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "CreateLover"}, ""))
+	pattern_Backend_CreateLover_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Create_Lover"}, ""))
 
-	pattern_Backend_GetLover_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "GetLover"}, ""))
+	pattern_Backend_GetLover_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Get_Lover"}, ""))
 
-	pattern_Backend_UpdateLover_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "UpdateLover"}, ""))
+	pattern_Backend_UpdateLover_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Update_Lover"}, ""))
 
-	pattern_Backend_CreateComplaint_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "CreateComplaint"}, ""))
+	pattern_Backend_CreateComplaint_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Create_Complaint"}, ""))
 
-	pattern_Backend_GetComplaint_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "GetComplaint"}, ""))
+	pattern_Backend_GetComplaint_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Get_Complaint"}, ""))
 
-	pattern_Backend_UpdateComplaint_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "UpdateComplaint"}, ""))
+	pattern_Backend_UpdateComplaint_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Update_Complaint"}, ""))
 
-	pattern_Backend_CreateTargetList_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "CreateTargetList"}, ""))
+	pattern_Backend_CreateTargetList_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Create_TargetList"}, ""))
 
-	pattern_Backend_GetTargetList_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "GetTargetList"}, ""))
+	pattern_Backend_GetTargetList_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Get_TargetList"}, ""))
 
-	pattern_Backend_UpdateTargetList_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "UpdateTargetList"}, ""))
+	pattern_Backend_UpdateTargetList_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Update_TargetList"}, ""))
 
-	pattern_Backend_CreateChangeTarget_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "CreateChangeTarget"}, ""))
+	pattern_Backend_CreateChangeTarget_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Create_ChangeTarget"}, ""))
 
-	pattern_Backend_GetChangeTarget_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "GetChangeTarget"}, ""))
+	pattern_Backend_GetChangeTarget_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Get_ChangeTarget"}, ""))
 
-	pattern_Backend_CreateImages_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "CreateImages"}, ""))
+	pattern_Backend_CreateImages_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Create_Images"}, ""))
 
-	pattern_Backend_GetImages_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "GetImages"}, ""))
+	pattern_Backend_GetImages_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Get_Images"}, ""))
 
-	pattern_Backend_UpdateImages_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "UpdategetImagesResponse"}, ""))
+	pattern_Backend_UpdateImages_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Update_ImagesResponse"}, ""))
 )
 
 var (
@@ -2515,7 +2515,7 @@ var (
 
 	forward_Backend_InputPassword_0 = runtime.ForwardResponseMessage
 
-	forward_Backend_EsetPassword_0 = runtime.ForwardResponseMessage
+	forward_Backend_ResetPassword_0 = runtime.ForwardResponseMessage
 
 	forward_Backend_CreateFix_0 = runtime.ForwardResponseMessage
 

@@ -293,7 +293,7 @@ message Http {
 // specification](https://developers.google.com/protocol-buffers/docs/proto3#json).
 //
 // While the single segment variable follows the semantics of
-// [RFC 6570](https://tools.ietf.org/html/rfc6570) Section 3.2.2 Simple String
+// [RFC 6570](https://tools.ietf.org/html/rfc6570) Section 3.2.2 Simple string
 // Expansion, the multi segment variable **does not** follow RFC 6570 Section
 // 3.2.3 Reserved Expansion. The reason is that the Reserved Expansion
 // does not expand special characters like `?` and `#`, which would lead

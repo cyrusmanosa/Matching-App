@@ -23,7 +23,7 @@ const (
 	Backend_CheckEmail_FullMethodName         = "/pb.Backend/CheckEmail"
 	Backend_CheckEmailCode_FullMethodName     = "/pb.Backend/CheckEmailCode"
 	Backend_InputPassword_FullMethodName      = "/pb.Backend/InputPassword"
-	Backend_EsetPassword_FullMethodName       = "/pb.Backend/esetPassword"
+	Backend_ResetPassword_FullMethodName      = "/pb.Backend/ResetPassword"
 	Backend_CreateFix_FullMethodName          = "/pb.Backend/CreateFix"
 	Backend_CreateCanChange_FullMethodName    = "/pb.Backend/CreateCanChange"
 	Backend_GetCanChange_FullMethodName       = "/pb.Backend/GetCanChange"
@@ -58,7 +58,7 @@ type BackendClient interface {
 	CheckEmail(ctx context.Context, in *CheckEmailRequest, opts ...grpc.CallOption) (*CheckEmailResponse, error)
 	CheckEmailCode(ctx context.Context, in *SendEmailRequest, opts ...grpc.CallOption) (*CheckedEmailResponse, error)
 	InputPassword(ctx context.Context, in *InputPasswordRequest, opts ...grpc.CallOption) (*InputPasswordResponse, error)
-	EsetPassword(ctx context.Context, in *ResetPasswordRequest, opts ...grpc.CallOption) (*ResetPasswordResponse, error)
+	ResetPassword(ctx context.Context, in *ResetPasswordRequest, opts ...grpc.CallOption) (*ResetPasswordResponse, error)
 	// Fix Information
 	CreateFix(ctx context.Context, in *CreateFixRequest, opts ...grpc.CallOption) (*CreateFixResponse, error)
 	// Can Change Information
@@ -138,9 +138,9 @@ func (c *backendClient) InputPassword(ctx context.Context, in *InputPasswordRequ
 	return out, nil
 }
 
-func (c *backendClient) EsetPassword(ctx context.Context, in *ResetPasswordRequest, opts ...grpc.CallOption) (*ResetPasswordResponse, error) {
+func (c *backendClient) ResetPassword(ctx context.Context, in *ResetPasswordRequest, opts ...grpc.CallOption) (*ResetPasswordResponse, error) {
 	out := new(ResetPasswordResponse)
-	err := c.cc.Invoke(ctx, Backend_EsetPassword_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Backend_ResetPassword_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -371,7 +371,7 @@ type BackendServer interface {
 	CheckEmail(context.Context, *CheckEmailRequest) (*CheckEmailResponse, error)
 	CheckEmailCode(context.Context, *SendEmailRequest) (*CheckedEmailResponse, error)
 	InputPassword(context.Context, *InputPasswordRequest) (*InputPasswordResponse, error)
-	EsetPassword(context.Context, *ResetPasswordRequest) (*ResetPasswordResponse, error)
+	ResetPassword(context.Context, *ResetPasswordRequest) (*ResetPasswordResponse, error)
 	// Fix Information
 	CreateFix(context.Context, *CreateFixRequest) (*CreateFixResponse, error)
 	// Can Change Information
@@ -424,8 +424,8 @@ func (UnimplementedBackendServer) CheckEmailCode(context.Context, *SendEmailRequ
 func (UnimplementedBackendServer) InputPassword(context.Context, *InputPasswordRequest) (*InputPasswordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InputPassword not implemented")
 }
-func (UnimplementedBackendServer) EsetPassword(context.Context, *ResetPasswordRequest) (*ResetPasswordResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method EsetPassword not implemented")
+func (UnimplementedBackendServer) ResetPassword(context.Context, *ResetPasswordRequest) (*ResetPasswordResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResetPassword not implemented")
 }
 func (UnimplementedBackendServer) CreateFix(context.Context, *CreateFixRequest) (*CreateFixResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateFix not implemented")
@@ -584,20 +584,20 @@ func _Backend_InputPassword_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_EsetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Backend_ResetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ResetPasswordRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).EsetPassword(ctx, in)
+		return srv.(BackendServer).ResetPassword(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_EsetPassword_FullMethodName,
+		FullMethod: Backend_ResetPassword_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).EsetPassword(ctx, req.(*ResetPasswordRequest))
+		return srv.(BackendServer).ResetPassword(ctx, req.(*ResetPasswordRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1058,8 +1058,8 @@ var Backend_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Backend_InputPassword_Handler,
 		},
 		{
-			MethodName: "esetPassword",
-			Handler:    _Backend_EsetPassword_Handler,
+			MethodName: "ResetPassword",
+			Handler:    _Backend_ResetPassword_Handler,
 		},
 		{
 			MethodName: "CreateFix",

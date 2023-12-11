@@ -65,7 +65,7 @@ func CreateRandomUserFixInformaion(t *testing.T) Fixinformation {
 func TestGetUserFixInformation(t *testing.T) {
 	user1 := CreateRandomUserFixInformaion(t)
 
-	user2, err := testinfoQueries.GetUserFixInformation(context.Background(), user1.Email)
+	user2, err := testinfoQueries.GetUserFixInformation(context.Background(), user1.UserID)
 	require.NoError(t, err)
 	require.NotEmpty(t, user2)
 
@@ -103,7 +103,7 @@ func TestUpdatePassword(t *testing.T) {
 	require.NoError(t, err)
 
 	Nhashed := UpdatePasswordParams{
-		Email:          user.Email,
+		UserID:         user.UserID,
 		HashedPassword: NewPW,
 	}
 
@@ -119,4 +119,12 @@ func TestDeleteUser(t *testing.T) {
 
 	user1 := testinfoQueries.DeleteUser(context.Background(), user.UserID)
 	require.Empty(t, user1)
+}
+
+func TestLoginAtEmail(t *testing.T) {
+	user := CreateRandomUserFixInformaion(t)
+
+	Login, err := testinfoQueries.LoginAtEmail(context.Background(), user.Email)
+	require.NoError(t, err)
+	require.NotEmpty(t, Login)
 }
