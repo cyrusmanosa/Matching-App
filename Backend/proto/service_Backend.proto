@@ -31,9 +31,9 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 };
 
 service Backend {
-    rpc loginUser(loginUserRequest) returns (loginUserResponse){
+    rpc LoginUser(loginUserRequest) returns (loginUserResponse){
         option (google.api.http) = {
-            post: "/v1/Login"
+            post: "/v1/Login_User"
             body: "*"
         };
     }

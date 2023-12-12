@@ -13,6 +13,7 @@ import (
 
 func (server *Server) CreateCanChange(ctx context.Context, req *pb.CreateCanChangeRequest) (*pb.CreateCanChangeResponse, error) {
 
+	// change GlobalSessionID after login
 	token, err := server.store.GetSession(ctx, GlobalSessionID)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)

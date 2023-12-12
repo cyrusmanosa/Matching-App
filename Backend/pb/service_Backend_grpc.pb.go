@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Backend_LoginUser_FullMethodName          = "/pb.Backend/loginUser"
+	Backend_LoginUser_FullMethodName          = "/pb.Backend/LoginUser"
 	Backend_CheckEmail_FullMethodName         = "/pb.Backend/CheckEmail"
 	Backend_CheckEmailCode_FullMethodName     = "/pb.Backend/CheckEmailCode"
 	Backend_InputPassword_FullMethodName      = "/pb.Backend/InputPassword"
@@ -1042,7 +1042,7 @@ var Backend_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*BackendServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "loginUser",
+			MethodName: "LoginUser",
 			Handler:    _Backend_LoginUser_Handler,
 		},
 		{

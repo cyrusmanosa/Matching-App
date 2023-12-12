@@ -7,6 +7,7 @@ import (
 	"Backend/util"
 	"context"
 	"database/sql"
+	"fmt"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -14,11 +15,21 @@ import (
 )
 
 func (server *Server) InputPassword(ctx context.Context, req *pb.InputPasswordRequest) (*pb.InputPasswordResponse, error) {
+	// token, err := server.store.GetSession(ctx, GlobalSessionID)
+	// if err != nil {
+	// 	return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
+	// }
+	// _, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	// if err != nil {
+	// 	return nil, fmt.Errorf("invalid access token: %v", err)
+	// }
+
 	Hash, _ := util.HashPassword(req.GetPassword())
 	arg := info.UpdatePasswordParams{
 		UserID:         req.GetUserID(),
 		HashedPassword: Hash,
 	}
+
 	_, err := server.store.UpdatePassword(ctx, arg)
 	if err != nil {
 		errCode := db.ErrorCode(err)
@@ -45,13 +56,24 @@ func (server *Server) InputPassword(ctx context.Context, req *pb.InputPasswordRe
 }
 
 func (server *Server) ResetPassword(ctx context.Context, req *pb.ResetPasswordRequest) (*pb.ResetPasswordResponse, error) {
+
+	token, err := server.store.GetSession(ctx, GlobalSessionID)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
+	}
+
+	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	if err != nil {
+		return nil, fmt.Errorf("invalid access token: %v", err)
+	}
+
 	Hash, _ := util.HashPassword(req.GetPassword())
 
 	arg := info.UpdatePasswordParams{
 		UserID:         req.GetUserID(),
 		HashedPassword: Hash,
 	}
-	_, err := server.store.UpdatePassword(ctx, arg)
+	_, err = server.store.UpdatePassword(ctx, arg)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {

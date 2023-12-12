@@ -5,12 +5,24 @@ import (
 	info "Backend/db/sqlc/info"
 	"Backend/pb"
 	"context"
+	"fmt"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
 func (server *Server) CreateLover(ctx context.Context, req *pb.CreateLoverRequest) (*pb.CreateLoverResponse, error) {
+	// change GlobalSessionID after login
+	token, err := server.store.GetSession(ctx, GlobalSessionID)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
+	}
+
+	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	if err != nil {
+		return nil, fmt.Errorf("invalid access token: %v", err)
+	}
+
 	L := info.CreateLoverRequestParams{
 		UserID:        req.GetUserID(),
 		MinAge:        req.GetMinAge(),

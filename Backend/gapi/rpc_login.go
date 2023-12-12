@@ -12,7 +12,7 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
-func (server *Server) loginUser(ctx context.Context, req *pb.LoginUserRequest) (*pb.LoginUserResponse, error) {
+func (server *Server) LoginUser(ctx context.Context, req *pb.LoginUserRequest) (*pb.LoginUserResponse, error) {
 
 	user, err := server.store.LoginAtEmail(ctx, req.GetEmail())
 	if err != nil {
@@ -22,8 +22,8 @@ func (server *Server) loginUser(ctx context.Context, req *pb.LoginUserRequest) (
 		return nil, status.Errorf(codes.Internal, "failed to find user")
 	}
 
-	err = util.CheckPassword(req.Password, user.HashedPassword)
-	if err != nil {
+	CheckErr := util.CheckPassword(req.GetPassword(), user.HashedPassword)
+	if CheckErr != nil {
 		return nil, status.Errorf(codes.Internal, "incorrect password")
 	}
 
@@ -38,7 +38,7 @@ func (server *Server) loginUser(ctx context.Context, req *pb.LoginUserRequest) (
 
 	sessions, err := server.store.CreateSession(ctx, db.CreateSessionParams{
 		ID:          payload.ID,
-		Email:       Validate.Email,
+		Email:       user.Email,
 		AccessToken: accessToken,
 		IsBlocked:   false,
 		ExpiresAt:   payload.ExpiredAt,
