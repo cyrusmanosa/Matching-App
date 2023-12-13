@@ -12,6 +12,7 @@ import (
 )
 
 func (server *Server) CreateChangeTarget(ctx context.Context, req *pb.CreateChangeTargetRequest) (*pb.CreateChangeTargetResponse, error) {
+
 	// change GlobalSessionID after login
 	token, err := server.store.GetSession(ctx, GlobalSessionID)
 	if err != nil {

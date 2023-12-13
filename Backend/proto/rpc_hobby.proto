@@ -6,7 +6,7 @@ import "hobby.proto";
 
 option go_package = "Backend/pb";
 
-message createHobbyRequest {
+message CreateHobbyRequest {
     int32 UserID = 1;
     int32 Era = 2;
     string City = 3;
@@ -20,18 +20,18 @@ message createHobbyRequest {
     string Sociability = 11;
     bool Certification = 12;
 }
-message createHobbyResponse {
-    hobby h = 1;
+message CreateHobbyResponse {
+    Hobby h = 1;
 }
 
-message getHobbyRequest {
+message GetHobbyRequest {
     int32 UserID = 1;
 }
-message getHobbyResponse {
-    hobby h = 1;
+message GetHobbyResponse {
+    Hobby h = 1;
 }
 
-message updateHobbyRequest {
+message UpdateHobbyRequest {
     int32 UserID = 1;
     int32 Era = 2;
     string City = 3;
@@ -45,6 +45,6 @@ message updateHobbyRequest {
     string Sociability = 11;
     bool Certification = 12;
 }
-message updateHobbyResponse {
-    hobby h = 1;
+message UpdateHobbyResponse {
+    Hobby h = 1;
 }

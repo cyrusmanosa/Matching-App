@@ -6,7 +6,7 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "Backend/pb";
 
-message changeTarget {
+message ChangeTarget {
     int32 UserID = 1;
     int32 ChangeUserID = 2;
     string Reason = 3;

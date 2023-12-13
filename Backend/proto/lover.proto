@@ -7,7 +7,7 @@ import "google/protobuf/timestamp.proto";
 option go_package = "Backend/pb";
 
 
-message lover {
+message Lover {
     int32 UserID = 1;
     int32 MinAge = 2;
     int32 MaxAge = 3;

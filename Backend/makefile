@@ -67,7 +67,7 @@ server:
 mock:
 	mockgen -destination mock/store.go  Backend/db/sqlc/info InfoStore
 
-protob:
+GoProtob:
 	rm -f pb/*.go
 	rm -f doc/swagger/*.swagger.json
 	protoc --proto_path=proto --go_out=pb --go_opt=paths=source_relative \
@@ -75,6 +75,10 @@ protob:
 	--grpc-gateway_out=pb --grpc-gateway_opt paths=source_relative \
 	--openapiv2_out=doc/swagger --openapiv2_opt=allow_merge=true,merge_file_name=Backend\
     proto/*.proto
+
+# DartProtob:
+# rm -f lib/pb/*.dart
+# protoc --proto_path=lib/proto --dart_out=grpc:lib/pb lib/proto/*.proto google/protobuf/timestamp.proto
 
 evans:
 	evans --host localhost --port 9090 -r repl
@@ -88,6 +92,8 @@ resetdb:
 	make createdb_info 
 	make info_migrateup
 
+
+
 .PHONY: dockernetwork postgres createdb_info dropdb_info createdb_chat dropdb_chat test sqlc server 
 		createmigrate_info info_migrateup info_migrateup1 info_migrateup2 info_migratedown info_migratedown1 info_migratedown2
-		createmigrate_chat chat_migrateup chat_migratedown mock db_docs db_schema protob resetdb
+		createmigrate_chat chat_migrateup chat_migratedown mock db_docs db_schema GoProtob resetdb

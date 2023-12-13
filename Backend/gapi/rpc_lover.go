@@ -12,6 +12,7 @@ import (
 )
 
 func (server *Server) CreateLover(ctx context.Context, req *pb.CreateLoverRequest) (*pb.CreateLoverResponse, error) {
+
 	// change GlobalSessionID after login
 	token, err := server.store.GetSession(ctx, GlobalSessionID)
 	if err != nil {

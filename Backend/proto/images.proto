@@ -4,7 +4,7 @@ package pb;
 
 option go_package = "Backend/pb";
 
-message images {
+message Images {
     int32 UserID = 1;
     string Qr = 2;
     string Img1 = 3;

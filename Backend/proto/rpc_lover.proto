@@ -6,7 +6,7 @@ import "lover.proto";
 
 option go_package = "Backend/pb";
 
-message createLoverRequest {
+message CreateLoverRequest {
     int32 UserID = 1;
     int32 MinAge = 2;
     int32 MaxAge = 3;
@@ -23,18 +23,18 @@ message createLoverRequest {
     string Religious = 14;
     bool Certification = 15;
 }
-message createLoverResponse {
-    lover l = 1;
+message CreateLoverResponse {
+    Lover l = 1;
 }
 
-message getLoverRequest {
+message GetLoverRequest {
     int32 UserID = 1;
 }
-message getLoverResponse {
-    lover l = 1;
+message GetLoverResponse {
+    Lover l = 1;
 }
 
-message updateLoverRequest {
+message UpdateLoverRequest {
     int32 UserID = 1;
     int32 MinAge = 2;
     int32 MaxAge = 3;
@@ -51,6 +51,6 @@ message updateLoverRequest {
     string Religious = 14;
     bool Certification = 15;
 }
-message updateLoverResponse {
-    lover l = 1;
+message UpdateLoverResponse {
+    Lover l = 1;
 }

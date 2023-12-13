@@ -6,21 +6,21 @@ import "changeTarget.proto";
 
 option go_package = "Backend/pb";
 
-message createChangeTargetRequest {
+message CreateChangeTargetRequest {
     int32 UserID = 1;
     int32 ChangeUserID = 2;
     string Reason = 3;
 }
 
-message createChangeTargetResponse {
-    changeTarget ct = 1;
+message CreateChangeTargetResponse {
+    ChangeTarget ct = 1;
 }
 
-message getChangeTargetRequest {
+message GetChangeTargetRequest {
     int32 UserID = 1;
 }
 
-message getChangeTargetResponse {
-    changeTarget ct = 1;
+message GetChangeTargetResponse {
+    ChangeTarget ct = 1;
 }
 

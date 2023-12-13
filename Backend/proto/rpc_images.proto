@@ -6,7 +6,7 @@ import "images.proto";
 
 option go_package = "Backend/pb";
 
-message createImagesRequest {
+message CreateImagesRequest {
     int32 UserID = 1;
     string Qr = 2;
     string Img1 = 3;
@@ -15,19 +15,19 @@ message createImagesRequest {
     string Img4 = 6;
     string Img5 = 7;
 }
-message createImagesResponse {
-    images img = 1;
+message CreateImagesResponse {
+    Images img = 1;
 }
 
-message getImagesRequest {
+message GetImagesRequest {
     int32 UserID = 1;
 }
 
-message getImagesResponse {
-    images img = 1;
+message GetImagesResponse {
+    Images img = 1;
 }
 
-message updateImagesRequest {
+message UpdateImagesRequest {
     int32 UserID = 1;
     string Qr = 2;
     string Img1 = 3;
@@ -36,6 +36,6 @@ message updateImagesRequest {
     string Img4 = 6;
     string Img5 = 7;
 }
-message updateImagesResponse {
-    images img = 1;
+message UpdateImagesResponse {
+    Images img = 1;
 }

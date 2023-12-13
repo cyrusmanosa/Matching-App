@@ -12,6 +12,7 @@ import (
 )
 
 func (server *Server) CreateTargetList(ctx context.Context, req *pb.CreateTargetListRequest) (*pb.CreateTargetListResponse, error) {
+
 	// change GlobalSessionID after login
 	token, err := server.store.GetSession(ctx, GlobalSessionID)
 	if err != nil {

@@ -12,6 +12,7 @@ import (
 )
 
 func (server *Server) CreateComplaint(ctx context.Context, req *pb.CreateComplaintRequest) (*pb.CreateComplaintResponse, error) {
+
 	// change GlobalSessionID after login
 	token, err := server.store.GetSession(ctx, GlobalSessionID)
 	if err != nil {

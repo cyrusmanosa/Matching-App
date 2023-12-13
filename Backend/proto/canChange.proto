@@ -6,7 +6,7 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "Backend/pb";
 
-message canChange {
+message CanChange {
   int32 UserID = 1;
   string NickName = 2;
   string City = 3;

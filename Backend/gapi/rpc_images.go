@@ -12,6 +12,7 @@ import (
 )
 
 func (server *Server) CreateImages(ctx context.Context, req *pb.CreateImagesRequest) (*pb.CreateImagesResponse, error) {
+
 	// change GlobalSessionID after login
 	token, err := server.store.GetSession(ctx, GlobalSessionID)
 	if err != nil {

@@ -12,6 +12,7 @@ import (
 )
 
 func (server *Server) CreateAccompany(ctx context.Context, req *pb.CreateAccompanyRequest) (*pb.CreateAccompanyResponse, error) {
+
 	// change GlobalSessionID after login
 	token, err := server.store.GetSession(ctx, GlobalSessionID)
 	if err != nil {

@@ -28,7 +28,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbcheckedEmailResponse"
+              "$ref": "#/definitions/pbCheckedEmailResponse"
             }
           },
           "default": {
@@ -44,7 +44,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbsendEmailRequest"
+              "$ref": "#/definitions/pbSendEmailRequest"
             }
           }
         ],
@@ -61,7 +61,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbcreateAccompanyResponse"
+              "$ref": "#/definitions/pbCreateAccompanyResponse"
             }
           },
           "default": {
@@ -77,7 +77,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbcreateAccompanyRequest"
+              "$ref": "#/definitions/pbCreateAccompanyRequest"
             }
           }
         ],
@@ -94,7 +94,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbcreateCanChangeResponse"
+              "$ref": "#/definitions/pbCreateCanChangeResponse"
             }
           },
           "default": {
@@ -110,7 +110,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbcreateCanChangeRequest"
+              "$ref": "#/definitions/pbCreateCanChangeRequest"
             }
           }
         ],
@@ -127,7 +127,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbcreateChangeTargetResponse"
+              "$ref": "#/definitions/pbCreateChangeTargetResponse"
             }
           },
           "default": {
@@ -143,7 +143,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbcreateChangeTargetRequest"
+              "$ref": "#/definitions/pbCreateChangeTargetRequest"
             }
           }
         ],
@@ -160,7 +160,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbcreateComplaintResponse"
+              "$ref": "#/definitions/pbCreateComplaintResponse"
             }
           },
           "default": {
@@ -176,7 +176,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbcreateComplaintRequest"
+              "$ref": "#/definitions/pbCreateComplaintRequest"
             }
           }
         ],
@@ -193,7 +193,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbcreateFixResponse"
+              "$ref": "#/definitions/pbCreateFixResponse"
             }
           },
           "default": {
@@ -209,7 +209,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbcreateFixRequest"
+              "$ref": "#/definitions/pbCreateFixRequest"
             }
           }
         ],
@@ -226,7 +226,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbcreateHobbyResponse"
+              "$ref": "#/definitions/pbCreateHobbyResponse"
             }
           },
           "default": {
@@ -242,7 +242,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbcreateHobbyRequest"
+              "$ref": "#/definitions/pbCreateHobbyRequest"
             }
           }
         ],
@@ -259,7 +259,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbcreateImagesResponse"
+              "$ref": "#/definitions/pbCreateImagesResponse"
             }
           },
           "default": {
@@ -275,7 +275,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbcreateImagesRequest"
+              "$ref": "#/definitions/pbCreateImagesRequest"
             }
           }
         ],
@@ -292,7 +292,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbcreateLoverResponse"
+              "$ref": "#/definitions/pbCreateLoverResponse"
             }
           },
           "default": {
@@ -308,7 +308,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbcreateLoverRequest"
+              "$ref": "#/definitions/pbCreateLoverRequest"
             }
           }
         ],
@@ -325,7 +325,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbcreateTargetListResponse"
+              "$ref": "#/definitions/pbCreateTargetListResponse"
             }
           },
           "default": {
@@ -341,7 +341,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbcreateTargetListRequest"
+              "$ref": "#/definitions/pbCreateTargetListRequest"
             }
           }
         ],
@@ -357,7 +357,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbgetAccompanyResponse"
+              "$ref": "#/definitions/pbGetAccompanyResponse"
             }
           },
           "default": {
@@ -388,7 +388,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbgetCanChangeResponse"
+              "$ref": "#/definitions/pbGetCanChangeResponse"
             }
           },
           "default": {
@@ -419,7 +419,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbgetChangeTargetResponse"
+              "$ref": "#/definitions/pbGetChangeTargetResponse"
             }
           },
           "default": {
@@ -450,7 +450,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbgetComplaintResponse"
+              "$ref": "#/definitions/pbGetComplaintResponse"
             }
           },
           "default": {
@@ -481,7 +481,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbgetHobbyResponse"
+              "$ref": "#/definitions/pbGetHobbyResponse"
             }
           },
           "default": {
@@ -512,7 +512,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbgetImagesResponse"
+              "$ref": "#/definitions/pbGetImagesResponse"
             }
           },
           "default": {
@@ -543,7 +543,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbgetLoverResponse"
+              "$ref": "#/definitions/pbGetLoverResponse"
             }
           },
           "default": {
@@ -574,7 +574,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbgetTargetListResponse"
+              "$ref": "#/definitions/pbGetTargetListResponse"
             }
           },
           "default": {
@@ -605,7 +605,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbloginUserResponse"
+              "$ref": "#/definitions/pbLoginUserResponse"
             }
           },
           "default": {
@@ -621,7 +621,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbloginUserRequest"
+              "$ref": "#/definitions/pbLoginUserRequest"
             }
           }
         ],
@@ -637,7 +637,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbinputPasswordResponse"
+              "$ref": "#/definitions/pbInputPasswordResponse"
             }
           },
           "default": {
@@ -653,7 +653,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbinputPasswordRequest"
+              "$ref": "#/definitions/pbInputPasswordRequest"
             }
           }
         ],
@@ -669,7 +669,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbresetPasswordResponse"
+              "$ref": "#/definitions/pbResetPasswordResponse"
             }
           },
           "default": {
@@ -685,7 +685,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbresetPasswordRequest"
+              "$ref": "#/definitions/pbResetPasswordRequest"
             }
           }
         ],
@@ -701,7 +701,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbcheckEmailResponse"
+              "$ref": "#/definitions/pbCheckEmailResponse"
             }
           },
           "default": {
@@ -717,7 +717,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbcheckEmailRequest"
+              "$ref": "#/definitions/pbCheckEmailRequest"
             }
           }
         ],
@@ -733,7 +733,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbupdateAccompanyResponse"
+              "$ref": "#/definitions/pbUpdateAccompanyResponse"
             }
           },
           "default": {
@@ -749,7 +749,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbupdateAccompanyRequest"
+              "$ref": "#/definitions/pbUpdateAccompanyRequest"
             }
           }
         ],
@@ -765,7 +765,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbupdateCanChangeResponse"
+              "$ref": "#/definitions/pbUpdateCanChangeResponse"
             }
           },
           "default": {
@@ -781,7 +781,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbupdateCanChangeRequest"
+              "$ref": "#/definitions/pbUpdateCanChangeRequest"
             }
           }
         ],
@@ -797,7 +797,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbupdateComplaintResponse"
+              "$ref": "#/definitions/pbUpdateComplaintResponse"
             }
           },
           "default": {
@@ -813,7 +813,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbupdateComplaintRequest"
+              "$ref": "#/definitions/pbUpdateComplaintRequest"
             }
           }
         ],
@@ -829,7 +829,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbupdateHobbyResponse"
+              "$ref": "#/definitions/pbUpdateHobbyResponse"
             }
           },
           "default": {
@@ -845,7 +845,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbupdateHobbyRequest"
+              "$ref": "#/definitions/pbUpdateHobbyRequest"
             }
           }
         ],
@@ -861,7 +861,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbupdateImagesResponse"
+              "$ref": "#/definitions/pbUpdateImagesResponse"
             }
           },
           "default": {
@@ -877,7 +877,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbupdateImagesRequest"
+              "$ref": "#/definitions/pbUpdateImagesRequest"
             }
           }
         ],
@@ -893,7 +893,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbupdateLoverResponse"
+              "$ref": "#/definitions/pbUpdateLoverResponse"
             }
           },
           "default": {
@@ -909,7 +909,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbupdateLoverRequest"
+              "$ref": "#/definitions/pbUpdateLoverRequest"
             }
           }
         ],
@@ -925,7 +925,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbupdateTargetListResponse"
+              "$ref": "#/definitions/pbUpdateTargetListResponse"
             }
           },
           "default": {
@@ -941,7 +941,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbupdateTargetListRequest"
+              "$ref": "#/definitions/pbUpdateTargetListRequest"
             }
           }
         ],
@@ -952,7 +952,7 @@
     }
   },
   "definitions": {
-    "pbaccompany": {
+    "pbAccompany": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -990,7 +990,7 @@
         }
       }
     },
-    "pbcanChange": {
+    "pbCanChange": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -1042,7 +1042,7 @@
         }
       }
     },
-    "pbchangeTarget": {
+    "pbChangeTarget": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -1066,7 +1066,7 @@
         }
       }
     },
-    "pbcheckEmailRequest": {
+    "pbCheckEmailRequest": {
       "type": "object",
       "properties": {
         "Email": {
@@ -1074,7 +1074,7 @@
         }
       }
     },
-    "pbcheckEmailResponse": {
+    "pbCheckEmailResponse": {
       "type": "object",
       "properties": {
         "Email": {
@@ -1085,7 +1085,7 @@
         }
       }
     },
-    "pbcheckedEmailResponse": {
+    "pbCheckedEmailResponse": {
       "type": "object",
       "properties": {
         "Email": {
@@ -1096,7 +1096,7 @@
         }
       }
     },
-    "pbcomplaint": {
+    "pbComplaint": {
       "type": "object",
       "properties": {
         "CpID": {
@@ -1126,7 +1126,7 @@
         }
       }
     },
-    "pbcreateAccompanyRequest": {
+    "pbCreateAccompanyRequest": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -1160,15 +1160,15 @@
         }
       }
     },
-    "pbcreateAccompanyResponse": {
+    "pbCreateAccompanyResponse": {
       "type": "object",
       "properties": {
         "ac": {
-          "$ref": "#/definitions/pbaccompany"
+          "$ref": "#/definitions/pbAccompany"
         }
       }
     },
-    "pbcreateCanChangeRequest": {
+    "pbCreateCanChangeRequest": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -1216,15 +1216,15 @@
         }
       }
     },
-    "pbcreateCanChangeResponse": {
+    "pbCreateCanChangeResponse": {
       "type": "object",
       "properties": {
         "CanChangeInfo": {
-          "$ref": "#/definitions/pbcanChange"
+          "$ref": "#/definitions/pbCanChange"
         }
       }
     },
-    "pbcreateChangeTargetRequest": {
+    "pbCreateChangeTargetRequest": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -1240,15 +1240,15 @@
         }
       }
     },
-    "pbcreateChangeTargetResponse": {
+    "pbCreateChangeTargetResponse": {
       "type": "object",
       "properties": {
         "ct": {
-          "$ref": "#/definitions/pbchangeTarget"
+          "$ref": "#/definitions/pbChangeTarget"
         }
       }
     },
-    "pbcreateComplaintRequest": {
+    "pbCreateComplaintRequest": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -1267,15 +1267,15 @@
         }
       }
     },
-    "pbcreateComplaintResponse": {
+    "pbCreateComplaintResponse": {
       "type": "object",
       "properties": {
         "cp": {
-          "$ref": "#/definitions/pbcomplaint"
+          "$ref": "#/definitions/pbComplaint"
         }
       }
     },
-    "pbcreateFixRequest": {
+    "pbCreateFixRequest": {
       "type": "object",
       "properties": {
         "FirstName": {
@@ -1298,7 +1298,7 @@
         }
       }
     },
-    "pbcreateFixResponse": {
+    "pbCreateFixResponse": {
       "type": "object",
       "properties": {
         "SessionsID": {
@@ -1324,7 +1324,7 @@
         }
       }
     },
-    "pbcreateHobbyRequest": {
+    "pbCreateHobbyRequest": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -1370,15 +1370,15 @@
         }
       }
     },
-    "pbcreateHobbyResponse": {
+    "pbCreateHobbyResponse": {
       "type": "object",
       "properties": {
         "h": {
-          "$ref": "#/definitions/pbhobby"
+          "$ref": "#/definitions/pbHobby"
         }
       }
     },
-    "pbcreateImagesRequest": {
+    "pbCreateImagesRequest": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -1405,15 +1405,15 @@
         }
       }
     },
-    "pbcreateImagesResponse": {
+    "pbCreateImagesResponse": {
       "type": "object",
       "properties": {
         "img": {
-          "$ref": "#/definitions/pbimages"
+          "$ref": "#/definitions/pbImages"
         }
       }
     },
-    "pbcreateLoverRequest": {
+    "pbCreateLoverRequest": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -1469,15 +1469,15 @@
         }
       }
     },
-    "pbcreateLoverResponse": {
+    "pbCreateLoverResponse": {
       "type": "object",
       "properties": {
         "l": {
-          "$ref": "#/definitions/pblover"
+          "$ref": "#/definitions/pbLover"
         }
       }
     },
-    "pbcreateTargetListRequest": {
+    "pbCreateTargetListRequest": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -1498,79 +1498,79 @@
         }
       }
     },
-    "pbcreateTargetListResponse": {
+    "pbCreateTargetListResponse": {
       "type": "object",
       "properties": {
         "tl": {
-          "$ref": "#/definitions/pbtargetlist"
+          "$ref": "#/definitions/pbTargetlist"
         }
       }
     },
-    "pbgetAccompanyResponse": {
+    "pbGetAccompanyResponse": {
       "type": "object",
       "properties": {
         "ac": {
-          "$ref": "#/definitions/pbaccompany"
+          "$ref": "#/definitions/pbAccompany"
         }
       }
     },
-    "pbgetCanChangeResponse": {
+    "pbGetCanChangeResponse": {
       "type": "object",
       "properties": {
         "CanChangeInfo": {
-          "$ref": "#/definitions/pbcanChange"
+          "$ref": "#/definitions/pbCanChange"
         }
       }
     },
-    "pbgetChangeTargetResponse": {
+    "pbGetChangeTargetResponse": {
       "type": "object",
       "properties": {
         "ct": {
-          "$ref": "#/definitions/pbchangeTarget"
+          "$ref": "#/definitions/pbChangeTarget"
         }
       }
     },
-    "pbgetComplaintResponse": {
+    "pbGetComplaintResponse": {
       "type": "object",
       "properties": {
         "cp": {
-          "$ref": "#/definitions/pbcomplaint"
+          "$ref": "#/definitions/pbComplaint"
         }
       }
     },
-    "pbgetHobbyResponse": {
+    "pbGetHobbyResponse": {
       "type": "object",
       "properties": {
         "h": {
-          "$ref": "#/definitions/pbhobby"
+          "$ref": "#/definitions/pbHobby"
         }
       }
     },
-    "pbgetImagesResponse": {
+    "pbGetImagesResponse": {
       "type": "object",
       "properties": {
         "img": {
-          "$ref": "#/definitions/pbimages"
+          "$ref": "#/definitions/pbImages"
         }
       }
     },
-    "pbgetLoverResponse": {
+    "pbGetLoverResponse": {
       "type": "object",
       "properties": {
         "l": {
-          "$ref": "#/definitions/pblover"
+          "$ref": "#/definitions/pbLover"
         }
       }
     },
-    "pbgetTargetListResponse": {
+    "pbGetTargetListResponse": {
       "type": "object",
       "properties": {
         "tl": {
-          "$ref": "#/definitions/pbtargetlist"
+          "$ref": "#/definitions/pbTargetlist"
         }
       }
     },
-    "pbhobby": {
+    "pbHobby": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -1620,7 +1620,7 @@
         }
       }
     },
-    "pbimages": {
+    "pbImages": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -1647,7 +1647,7 @@
         }
       }
     },
-    "pbinputPasswordRequest": {
+    "pbInputPasswordRequest": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -1659,7 +1659,7 @@
         }
       }
     },
-    "pbinputPasswordResponse": {
+    "pbInputPasswordResponse": {
       "type": "object",
       "properties": {
         "Message": {
@@ -1671,7 +1671,7 @@
         }
       }
     },
-    "pbloginUserRequest": {
+    "pbLoginUserRequest": {
       "type": "object",
       "properties": {
         "Email": {
@@ -1682,7 +1682,7 @@
         }
       }
     },
-    "pbloginUserResponse": {
+    "pbLoginUserResponse": {
       "type": "object",
       "properties": {
         "SessionsID": {
@@ -1708,7 +1708,7 @@
         }
       }
     },
-    "pblover": {
+    "pbLover": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -1768,7 +1768,7 @@
         }
       }
     },
-    "pbresetPasswordRequest": {
+    "pbResetPasswordRequest": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -1780,7 +1780,7 @@
         }
       }
     },
-    "pbresetPasswordResponse": {
+    "pbResetPasswordResponse": {
       "type": "object",
       "properties": {
         "Message": {
@@ -1792,7 +1792,7 @@
         }
       }
     },
-    "pbsendEmailRequest": {
+    "pbSendEmailRequest": {
       "type": "object",
       "properties": {
         "CheckCode": {
@@ -1800,7 +1800,7 @@
         }
       }
     },
-    "pbtargetlist": {
+    "pbTargetlist": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -1825,7 +1825,7 @@
         }
       }
     },
-    "pbupdateAccompanyRequest": {
+    "pbUpdateAccompanyRequest": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -1859,15 +1859,15 @@
         }
       }
     },
-    "pbupdateAccompanyResponse": {
+    "pbUpdateAccompanyResponse": {
       "type": "object",
       "properties": {
         "ac": {
-          "$ref": "#/definitions/pbaccompany"
+          "$ref": "#/definitions/pbAccompany"
         }
       }
     },
-    "pbupdateCanChangeRequest": {
+    "pbUpdateCanChangeRequest": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -1915,15 +1915,15 @@
         }
       }
     },
-    "pbupdateCanChangeResponse": {
+    "pbUpdateCanChangeResponse": {
       "type": "object",
       "properties": {
         "CanChangeInfo": {
-          "$ref": "#/definitions/pbcanChange"
+          "$ref": "#/definitions/pbCanChange"
         }
       }
     },
-    "pbupdateComplaintRequest": {
+    "pbUpdateComplaintRequest": {
       "type": "object",
       "properties": {
         "CpID": {
@@ -1935,15 +1935,15 @@
         }
       }
     },
-    "pbupdateComplaintResponse": {
+    "pbUpdateComplaintResponse": {
       "type": "object",
       "properties": {
         "cp": {
-          "$ref": "#/definitions/pbcomplaint"
+          "$ref": "#/definitions/pbComplaint"
         }
       }
     },
-    "pbupdateHobbyRequest": {
+    "pbUpdateHobbyRequest": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -1989,15 +1989,15 @@
         }
       }
     },
-    "pbupdateHobbyResponse": {
+    "pbUpdateHobbyResponse": {
       "type": "object",
       "properties": {
         "h": {
-          "$ref": "#/definitions/pbhobby"
+          "$ref": "#/definitions/pbHobby"
         }
       }
     },
-    "pbupdateImagesRequest": {
+    "pbUpdateImagesRequest": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -2024,15 +2024,15 @@
         }
       }
     },
-    "pbupdateImagesResponse": {
+    "pbUpdateImagesResponse": {
       "type": "object",
       "properties": {
         "img": {
-          "$ref": "#/definitions/pbimages"
+          "$ref": "#/definitions/pbImages"
         }
       }
     },
-    "pbupdateLoverRequest": {
+    "pbUpdateLoverRequest": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -2088,15 +2088,15 @@
         }
       }
     },
-    "pbupdateLoverResponse": {
+    "pbUpdateLoverResponse": {
       "type": "object",
       "properties": {
         "l": {
-          "$ref": "#/definitions/pblover"
+          "$ref": "#/definitions/pbLover"
         }
       }
     },
-    "pbupdateTargetListRequest": {
+    "pbUpdateTargetListRequest": {
       "type": "object",
       "properties": {
         "UserID": {
@@ -2117,11 +2117,11 @@
         }
       }
     },
-    "pbupdateTargetListResponse": {
+    "pbUpdateTargetListResponse": {
       "type": "object",
       "properties": {
         "tl": {
-          "$ref": "#/definitions/pbtargetlist"
+          "$ref": "#/definitions/pbTargetlist"
         }
       }
     },

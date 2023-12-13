@@ -12,6 +12,7 @@ import (
 )
 
 func (server *Server) CreateHobby(ctx context.Context, req *pb.CreateHobbyRequest) (*pb.CreateHobbyResponse, error) {
+
 	// change GlobalSessionID after login
 	token, err := server.store.GetSession(ctx, GlobalSessionID)
 	if err != nil {

@@ -6,7 +6,7 @@ import "accompany.proto";
 
 option go_package = "Backend/pb";
 
-message createAccompanyRequest {
+message CreateAccompanyRequest {
     int32 UserID = 1;
     int32 Era = 2;
     string City = 3;
@@ -17,18 +17,18 @@ message createAccompanyRequest {
     string Sociability = 8;
     bool Certification = 9;
 }
-message createAccompanyResponse {
-    accompany ac = 1;
+message CreateAccompanyResponse {
+    Accompany ac = 1;
 }
 
-message getAccompanyRequest {
+message GetAccompanyRequest {
     int32 UserID = 1;
 }
-message getAccompanyResponse {
-    accompany ac = 1;
+message GetAccompanyResponse {
+    Accompany ac = 1;
 }
 
-message updateAccompanyRequest {
+message UpdateAccompanyRequest {
     int32 UserID = 1;
     int32 Era = 2;
     string City = 3;
@@ -39,6 +39,6 @@ message updateAccompanyRequest {
     string Sociability = 8;
     bool Certification = 9;
 }
-message updateAccompanyResponse {
-    accompany ac = 1;
+message UpdateAccompanyResponse {
+    Accompany ac = 1;
 }

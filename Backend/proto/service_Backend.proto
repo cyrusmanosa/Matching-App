@@ -31,34 +31,34 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 };
 
 service Backend {
-    rpc LoginUser(loginUserRequest) returns (loginUserResponse){
+    rpc LoginUser(LoginUserRequest) returns (LoginUserResponse){
         option (google.api.http) = {
             post: "/v1/Login_User"
             body: "*"
         };
     }
 
-    rpc CheckEmail(checkEmailRequest) returns (checkEmailResponse){
+    rpc CheckEmail(CheckEmailRequest) returns (CheckEmailResponse){
         option (google.api.http) = {
             post: "/v1/Sign_Up"
             body: "*"
         };
     }
 
-    rpc CheckEmailCode(sendEmailRequest) returns (checkedEmailResponse){
+    rpc CheckEmailCode(SendEmailRequest) returns (CheckedEmailResponse){
         option (google.api.http) = {
             post: "/v1/Check_Code"
             body: "*"
         };
     }
 
-    rpc InputPassword(inputPasswordRequest) returns (inputPasswordResponse){
+    rpc InputPassword(InputPasswordRequest) returns (InputPasswordResponse){
         option (google.api.http) = {
             put: "/v1/Password_Setup"
             body: "*"
         };
     }
-    rpc ResetPassword(resetPasswordRequest) returns (resetPasswordResponse){
+    rpc ResetPassword(ResetPasswordRequest) returns (ResetPasswordResponse){
         option (google.api.http) = {
             put: "/v1/Reset_Password"
             body: "*"
@@ -66,7 +66,7 @@ service Backend {
     }
 
     // Fix Information
-    rpc CreateFix(createFixRequest) returns (createFixResponse){
+    rpc CreateFix(CreateFixRequest) returns (CreateFixResponse){
         option (google.api.http) = {
             post: "/v1/Create_Fix"
             body: "*"
@@ -74,18 +74,18 @@ service Backend {
     }
 
     // Can Change Information
-    rpc CreateCanChange(createCanChangeRequest) returns (createCanChangeResponse){
+    rpc CreateCanChange(CreateCanChangeRequest) returns (CreateCanChangeResponse){
         option (google.api.http) = {
             post: "/v1/Create_CanChange"
             body: "*"
         };
     }
-    rpc GetCanChange(getCanChangeRequest) returns (getCanChangeResponse){
+    rpc GetCanChange(GetCanChangeRequest) returns (GetCanChangeResponse){
         option (google.api.http) = {
             get: "/v1/Get_CanChange"
         };
     }
-    rpc UpdateCanChange(updateCanChangeRequest) returns (updateCanChangeResponse){
+    rpc UpdateCanChange(UpdateCanChangeRequest) returns (UpdateCanChangeResponse){
         option (google.api.http) = {
             put: "/v1/Update_CanChange"
             body: "*"
@@ -93,18 +93,18 @@ service Backend {
     }
 
     // Accompany
-    rpc CreateAccompany(createAccompanyRequest) returns (createAccompanyResponse){
+    rpc CreateAccompany(CreateAccompanyRequest) returns (CreateAccompanyResponse){
         option (google.api.http) = {
             post: "/v1/Create_Accompany"
             body: "*"
         };
     }
-    rpc GetAccompany(getAccompanyRequest) returns (getAccompanyResponse){
+    rpc GetAccompany(GetAccompanyRequest) returns (GetAccompanyResponse){
         option (google.api.http) = {
             get: "/v1/Get_Accompany"
         };
     }
-    rpc UpdateAccompany(updateAccompanyRequest) returns (updateAccompanyResponse){
+    rpc UpdateAccompany(UpdateAccompanyRequest) returns (UpdateAccompanyResponse){
         option (google.api.http) = {
             put: "/v1/Update_Accompany"
             body: "*"
@@ -112,18 +112,18 @@ service Backend {
     }
 
     // Hobby
-    rpc CreateHobby(createHobbyRequest) returns (createHobbyResponse){
+    rpc CreateHobby(CreateHobbyRequest) returns (CreateHobbyResponse){
         option (google.api.http) = {
             post: "/v1/Create_Hobby"
             body: "*"
         };
     }
-    rpc GetHobby(getHobbyRequest) returns (getHobbyResponse){
+    rpc GetHobby(GetHobbyRequest) returns (GetHobbyResponse){
         option (google.api.http) = {
             get: "/v1/Get_Hobby"
         };
     }
-    rpc UpdateHobby(updateHobbyRequest) returns (updateHobbyResponse){
+    rpc UpdateHobby(UpdateHobbyRequest) returns (UpdateHobbyResponse){
         option (google.api.http) = {
             put: "/v1/Update_Hobby"
             body: "*"
@@ -131,18 +131,18 @@ service Backend {
     }
 
     // Lover
-    rpc CreateLover(createLoverRequest) returns (createLoverResponse){
+    rpc CreateLover(CreateLoverRequest) returns (CreateLoverResponse){
         option (google.api.http) = {
             post: "/v1/Create_Lover"
             body: "*"
         };
     }
-    rpc GetLover(getLoverRequest) returns (getLoverResponse){
+    rpc GetLover(GetLoverRequest) returns (GetLoverResponse){
         option (google.api.http) = {
             get: "/v1/Get_Lover"
         };
     }
-    rpc UpdateLover(updateLoverRequest) returns (updateLoverResponse){
+    rpc UpdateLover(UpdateLoverRequest) returns (UpdateLoverResponse){
         option (google.api.http) = {
             put: "/v1/Update_Lover"
             body: "*"
@@ -150,18 +150,18 @@ service Backend {
     }
 
     // Complaint
-    rpc CreateComplaint(createComplaintRequest) returns (createComplaintResponse){
+    rpc CreateComplaint(CreateComplaintRequest) returns (CreateComplaintResponse){
         option (google.api.http) = {
             post: "/v1/Create_Complaint"
             body: "*"
         };
     }
-    rpc GetComplaint(getComplaintRequest) returns (getComplaintResponse){
+    rpc GetComplaint(GetComplaintRequest) returns (GetComplaintResponse){
         option (google.api.http) = {
             get: "/v1/Get_Complaint"
         };
     }
-    rpc UpdateComplaint(updateComplaintRequest) returns (updateComplaintResponse){
+    rpc UpdateComplaint(UpdateComplaintRequest) returns (UpdateComplaintResponse){
         option (google.api.http) = {
             put: "/v1/Update_Complaint"
             body: "*"
@@ -169,18 +169,18 @@ service Backend {
     }
 
     // Target List
-    rpc CreateTargetList(createTargetListRequest) returns (createTargetListResponse){
+    rpc CreateTargetList(CreateTargetListRequest) returns (CreateTargetListResponse){
         option (google.api.http) = {
             post: "/v1/Create_TargetList"
             body: "*"
         };
     }
-    rpc GetTargetList(getTargetListRequest) returns (getTargetListResponse){
+    rpc GetTargetList(GetTargetListRequest) returns (GetTargetListResponse){
         option (google.api.http) = {
             get: "/v1/Get_TargetList"
         };
     }
-    rpc UpdateTargetList(updateTargetListRequest) returns (updateTargetListResponse){
+    rpc UpdateTargetList(UpdateTargetListRequest) returns (UpdateTargetListResponse){
         option (google.api.http) = {
             put: "/v1/Update_TargetList"
             body: "*"
@@ -188,32 +188,32 @@ service Backend {
     }
     
     // Change Target
-    rpc CreateChangeTarget(createChangeTargetRequest) returns (createChangeTargetResponse) {
+    rpc CreateChangeTarget(CreateChangeTargetRequest) returns (CreateChangeTargetResponse) {
         option (google.api.http) = {
             post: "/v1/Create_ChangeTarget"
             body: "*"
         };
     }
 
-    rpc GetChangeTarget(getChangeTargetRequest) returns (getChangeTargetResponse){
+    rpc GetChangeTarget(GetChangeTargetRequest) returns (GetChangeTargetResponse){
         option (google.api.http) = {
             get: "/v1/Get_ChangeTarget"
         };
     }
     
     // images
-    rpc CreateImages(createImagesRequest) returns (createImagesResponse){
+    rpc CreateImages(CreateImagesRequest) returns (CreateImagesResponse){
         option (google.api.http) = {
             post: "/v1/Create_Images"
             body: "*"
         };
     }
-    rpc GetImages(getImagesRequest) returns (getImagesResponse){
+    rpc GetImages(GetImagesRequest) returns (GetImagesResponse){
         option (google.api.http) = {
             get: "/v1/Get_Images"
         };
     }
-    rpc UpdateImages(updateImagesRequest) returns (updateImagesResponse){
+    rpc UpdateImages(UpdateImagesRequest) returns (UpdateImagesResponse){
         option (google.api.http) = {
             put: "/v1/Update_ImagesResponse"
             body: "*"

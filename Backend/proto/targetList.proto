@@ -6,7 +6,7 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "Backend/pb";
 
-message targetlist {
+message Targetlist {
     int32 UserID = 1;
     int32 Target1ID = 2;
     int32 Target2ID = 3;
