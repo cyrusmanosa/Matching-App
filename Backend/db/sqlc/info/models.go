@@ -18,7 +18,7 @@ type Accompanyrequest struct {
 	FindType      string             `json:"find_type"`
 	FindTarget    string             `json:"find_target"`
 	Sociability   string             `json:"sociability"`
-	Certification bool       `json:"certification"`
+	Certification bool        `json:"certification"`
 	InfoChangedAt pgtype.Timestamptz `json:"info_changed_at"`
 }
 
@@ -69,7 +69,7 @@ type Fixinformation struct {
 	Blood             string             `json:"blood"`
 	Age               int32              `json:"age"`
 	Constellation     string             `json:"constellation"`
-	Certification     bool       `json:"certification"`
+	Certification     bool        `json:"certification"`
 	CreatedAt         pgtype.Timestamptz `json:"created_at"`
 	PasswordChangedAt pgtype.Timestamptz `json:"password_changed_at"`
 	Role              string             `json:"role"`
@@ -87,7 +87,7 @@ type Hobbyrequest struct {
 	FindTarget    string             `json:"find_target"`
 	Experience    int32        `json:"experience"`
 	Sociability   string        `json:"sociability"`
-	Certification bool       `json:"certification"`
+	Certification bool        `json:"certification"`
 	InfoChangedAt pgtype.Timestamptz `json:"info_changed_at"`
 }
 
@@ -116,13 +116,13 @@ type Loverrequest struct {
 	AnnualSalary  int32              `json:"annual_salary"`
 	Sociability   string             `json:"sociability"`
 	Religious     string             `json:"religious"`
-	Certification bool       `json:"certification"`
+	Certification bool        `json:"certification"`
 	InfoChangedAt pgtype.Timestamptz `json:"info_changed_at"`
 }
 
 type Session struct {
 	ID          uuid.UUID          `json:"id"`
-	Email       string             `json:"email"`
+	UserID      int32              `json:"user_id"`
 	AccessToken string             `json:"access_token"`
 	IsBlocked   bool               `json:"is_blocked"`
 	ExpiresAt   pgtype.Timestamptz `json:"expires_at"`

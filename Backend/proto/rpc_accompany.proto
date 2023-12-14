@@ -6,8 +6,9 @@ import "accompany.proto";
 
 option go_package = "Backend/pb";
 
+// Create
 message CreateAccompanyRequest {
-    int32 UserID = 1;
+    string SessionID = 1; 
     int32 Era = 2;
     string City = 3;
     string Gender = 4;
@@ -21,15 +22,17 @@ message CreateAccompanyResponse {
     Accompany ac = 1;
 }
 
+// Get
 message GetAccompanyRequest {
-    int32 UserID = 1;
+    string SessionID = 1; 
 }
 message GetAccompanyResponse {
     Accompany ac = 1;
 }
 
+// Update
 message UpdateAccompanyRequest {
-    int32 UserID = 1;
+    string SessionID = 1; 
     int32 Era = 2;
     string City = 3;
     string Gender = 4;

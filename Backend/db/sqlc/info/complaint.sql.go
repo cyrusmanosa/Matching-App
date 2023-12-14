@@ -7,7 +7,6 @@ package db
 
 import (
 	"context"
-
 )
 
 const createComplaint = `-- name: CreateComplaint :one

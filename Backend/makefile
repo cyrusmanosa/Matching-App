@@ -67,7 +67,7 @@ server:
 mock:
 	mockgen -destination mock/store.go  Backend/db/sqlc/info InfoStore
 
-GoProtob:
+protob:
 	rm -f pb/*.go
 	rm -f doc/swagger/*.swagger.json
 	protoc --proto_path=proto --go_out=pb --go_opt=paths=source_relative \
@@ -96,4 +96,4 @@ resetdb:
 
 .PHONY: dockernetwork postgres createdb_info dropdb_info createdb_chat dropdb_chat test sqlc server 
 		createmigrate_info info_migrateup info_migrateup1 info_migrateup2 info_migratedown info_migratedown1 info_migratedown2
-		createmigrate_chat chat_migrateup chat_migratedown mock db_docs db_schema GoProtob resetdb
+		createmigrate_chat chat_migrateup chat_migratedown mock db_docs db_schema protob resetdb

@@ -7,14 +7,18 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/google/uuid"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
 func (server *Server) CreateCanChange(ctx context.Context, req *pb.CreateCanChangeRequest) (*pb.CreateCanChangeResponse, error) {
+	Gid, err := uuid.Parse(req.GetSessionID())
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
+	}
 
-	// change GlobalSessionID after login
-	token, err := server.store.GetSession(ctx, GlobalSessionID)
+	token, err := server.store.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -25,7 +29,7 @@ func (server *Server) CreateCanChange(ctx context.Context, req *pb.CreateCanChan
 	}
 
 	CC := info.CreateUserCanChangeInformationParams{
-		UserID:        req.GetUserID(),
+		UserID:        token.UserID,
 		Nickname:      req.GetNickName(),
 		City:          req.GetCity(),
 		Sexual:        req.GetSexual(),
@@ -57,7 +61,22 @@ func (server *Server) CreateCanChange(ctx context.Context, req *pb.CreateCanChan
 }
 
 func (server *Server) GetCanChange(ctx context.Context, req *pb.GetCanChangeRequest) (*pb.GetCanChangeResponse, error) {
-	canChange, err := server.store.GetUserCanChangeInformation(ctx, req.GetUserID())
+	Gid, err := uuid.Parse(req.GetSessionID())
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
+	}
+
+	token, err := server.store.GetSession(ctx, Gid)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
+	}
+
+	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	if err != nil {
+		return nil, fmt.Errorf("invalid access token: %v", err)
+	}
+
+	canChange, err := server.store.GetUserCanChangeInformation(ctx, token.UserID)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -73,8 +92,23 @@ func (server *Server) GetCanChange(ctx context.Context, req *pb.GetCanChangeRequ
 }
 
 func (server *Server) UpdateCanChange(ctx context.Context, req *pb.UpdateCanChangeRequest) (*pb.UpdateCanChangeResponse, error) {
+	Gid, err := uuid.Parse(req.GetSessionID())
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
+	}
+
+	token, err := server.store.GetSession(ctx, Gid)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
+	}
+
+	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	if err != nil {
+		return nil, fmt.Errorf("invalid access token: %v", err)
+	}
+
 	CC := info.UpdateInformationParams{
-		UserID:        req.GetUserID(),
+		UserID:        token.UserID,
 		Nickname:      req.GetNickName(),
 		City:          req.GetCity(),
 		Sexual:        req.GetSexual(),

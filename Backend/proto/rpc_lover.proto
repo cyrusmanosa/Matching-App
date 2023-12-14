@@ -6,8 +6,9 @@ import "lover.proto";
 
 option go_package = "Backend/pb";
 
+// Create
 message CreateLoverRequest {
-    int32 UserID = 1;
+    string SessionID = 1; 
     int32 MinAge = 2;
     int32 MaxAge = 3;
     string City = 4;
@@ -27,15 +28,17 @@ message CreateLoverResponse {
     Lover l = 1;
 }
 
+// Get
 message GetLoverRequest {
-    int32 UserID = 1;
+    string SessionID = 1; 
 }
 message GetLoverResponse {
     Lover l = 1;
 }
 
+// Update
 message UpdateLoverRequest {
-    int32 UserID = 1;
+    string SessionID = 1; 
     int32 MinAge = 2;
     int32 MaxAge = 3;
     string City = 4;

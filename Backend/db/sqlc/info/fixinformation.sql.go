@@ -38,7 +38,7 @@ type CreateUserFixInformationParams struct {
 	Blood          string      `json:"blood"`
 	Age            int32       `json:"age"`
 	Constellation  string      `json:"constellation"`
-	Certification  bool`json:"certification"`
+	Certification  bool `json:"certification"`
 }
 
 func (q *Queries) CreateUserFixInformation(ctx context.Context, arg CreateUserFixInformationParams) (Fixinformation, error) {

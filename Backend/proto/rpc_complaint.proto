@@ -6,8 +6,10 @@ import "complaint.proto";
 
 option go_package = "Backend/pb";
 
+
+// Create 
 message CreateComplaintRequest {
-    int32 UserID = 1;
+    string SessionID = 1; 
     int32 CpTargetID = 2;
     string CpType = 3;
     string CpMessage = 4;
@@ -16,16 +18,20 @@ message CreateComplaintResponse {
     Complaint cp = 1;
 }
 
+// Get
 message GetComplaintRequest {
-    int32 CpID = 1;
+    string SessionID = 1; 
+    int32 CpID = 2;
 }
 message GetComplaintResponse {
     Complaint cp = 1;
 }
 
+// Update
 message UpdateComplaintRequest {
-    int32 CpID = 1;
-    string Status = 2;
+    string SessionID = 1; 
+    int32 CpID = 2;
+    string Status = 3;
 }
 message UpdateComplaintResponse {
     Complaint cp = 1;

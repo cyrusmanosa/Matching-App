@@ -5,8 +5,10 @@ import "canChange.proto";
 
 option go_package = "Backend/pb";
 
+
+// Create 
 message CreateCanChangeRequest {
-  int32 UserID = 1;
+  string SessionID = 1;
   string NickName = 2;
   string City = 3;
   string Sexual = 4;
@@ -20,19 +22,22 @@ message CreateCanChangeRequest {
   string Religious = 12;
   string Introduce = 13;
 }
-
 message CreateCanChangeResponse {
   CanChange CanChangeInfo = 1;
 }
 
-message GetCanChangeRequest { int32 UserID = 1; }
 
+// Get
+message GetCanChangeRequest { 
+  string SessionID = 1;
+}
 message GetCanChangeResponse {
   CanChange CanChangeInfo = 1;
 }
 
+// Update
 message UpdateCanChangeRequest {
-  int32 UserID = 1;
+  string SessionID = 1;
   string NickName = 2;
   string City = 3;
   string Sexual = 4;
@@ -51,6 +56,8 @@ message UpdateCanChangeResponse {
   CanChange CanChangeInfo = 1;
 }
 
+
+// List
 message ListCanChangeResponse {
   CanChange CanChangeInfo = 1;
 }

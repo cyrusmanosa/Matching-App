@@ -7,14 +7,18 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/google/uuid"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
 func (server *Server) CreateLover(ctx context.Context, req *pb.CreateLoverRequest) (*pb.CreateLoverResponse, error) {
+	Gid, err := uuid.Parse(req.GetSessionID())
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
+	}
 
-	// change GlobalSessionID after login
-	token, err := server.store.GetSession(ctx, GlobalSessionID)
+	token, err := server.store.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -25,7 +29,7 @@ func (server *Server) CreateLover(ctx context.Context, req *pb.CreateLoverReques
 	}
 
 	L := info.CreateLoverRequestParams{
-		UserID:        req.GetUserID(),
+		UserID:        token.UserID,
 		MinAge:        req.GetMinAge(),
 		MaxAge:        req.GetMaxAge(),
 		City:          req.GetCity(),
@@ -57,7 +61,22 @@ func (server *Server) CreateLover(ctx context.Context, req *pb.CreateLoverReques
 }
 
 func (server *Server) GetLover(ctx context.Context, req *pb.GetLoverRequest) (*pb.GetLoverResponse, error) {
-	Lover, err := server.store.GetUserLover(ctx, req.UserID)
+	Gid, err := uuid.Parse(req.GetSessionID())
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
+	}
+
+	token, err := server.store.GetSession(ctx, Gid)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
+	}
+
+	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	if err != nil {
+		return nil, fmt.Errorf("invalid access token: %v", err)
+	}
+
+	Lover, err := server.store.GetUserLover(ctx, token.UserID)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -73,8 +92,23 @@ func (server *Server) GetLover(ctx context.Context, req *pb.GetLoverRequest) (*p
 }
 
 func (server *Server) UpdateLover(ctx context.Context, req *pb.UpdateLoverRequest) (*pb.UpdateLoverResponse, error) {
+	Gid, err := uuid.Parse(req.GetSessionID())
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
+	}
+
+	token, err := server.store.GetSession(ctx, Gid)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
+	}
+
+	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	if err != nil {
+		return nil, fmt.Errorf("invalid access token: %v", err)
+	}
+
 	L := info.UpdateUserLoverParams{
-		UserID:        req.GetUserID(),
+		UserID:        token.UserID,
 		MinAge:        req.GetMinAge(),
 		MaxAge:        req.GetMaxAge(),
 		City:          req.GetCity(),

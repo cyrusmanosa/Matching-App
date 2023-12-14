@@ -6,6 +6,7 @@ import "images.proto";
 
 option go_package = "Backend/pb";
 
+// Create 
 message CreateImagesRequest {
     int32 UserID = 1;
     string Qr = 2;
@@ -19,6 +20,7 @@ message CreateImagesResponse {
     Images img = 1;
 }
 
+// Get
 message GetImagesRequest {
     int32 UserID = 1;
 }
@@ -27,6 +29,7 @@ message GetImagesResponse {
     Images img = 1;
 }
 
+// Updat
 message UpdateImagesRequest {
     int32 UserID = 1;
     string Qr = 2;

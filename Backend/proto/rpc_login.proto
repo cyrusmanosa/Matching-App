@@ -6,6 +6,7 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "Backend/pb";
 
+
 message LoginUserRequest {
     string Email = 1;
     string Password = 2;
@@ -13,9 +14,6 @@ message LoginUserRequest {
 
 message LoginUserResponse {
     string SessionsID = 1;
-    int32 UserID = 2;
     string Email = 3;
-    google.protobuf.Timestamp CreateAt = 4;
-    string AccessToken = 5;
     google.protobuf.Timestamp  AccessTokenExpiresAt = 6;
 }

@@ -20,6 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Create
 type CreateTargetListRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -138,6 +139,7 @@ func (x *CreateTargetListResponse) GetTl() *Targetlist {
 	return nil
 }
 
+// Get
 type GetTargetListRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -232,6 +234,7 @@ func (x *GetTargetListResponse) GetTl() *Targetlist {
 	return nil
 }
 
+// Update
 type UpdateTargetListRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

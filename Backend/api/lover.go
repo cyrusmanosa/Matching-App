@@ -7,25 +7,26 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 // Create
 type CreateLoverRequest struct {
-	UserID        int32  `json:"user_id" binding:"required"`
-	MinAge        int32  `json:"min_age" binding:"numeric"`
-	MaxAge        int32  `json:"max_age" binding:"numeric"`
-	City          string `json:"city" binding:"required"`
-	Gender        string `json:"gender" binding:"required"`
-	Constellation string `json:"constellation" binding:"required"`
-	Sexual        string `json:"sexual" binding:"required"`
-	Height        int32  `json:"height"`
-	Weight        int32  `json:"weight"`
-	Speaklanguage string `json:"speak_language"`
-	Job           string `json:"job" binding:"required"`
-	AnnualSalary  int32  `json:"annual_salary" binding:"required"`
-	Sociability   string `json:"sociability"`
-	Religious     string `json:"religious" `
-	Certification bool   `json:"certification"`
+	SessionID     uuid.UUID `json:"session_id" binding:"required"`
+	MinAge        int32     `json:"min_age" binding:"numeric"`
+	MaxAge        int32     `json:"max_age" binding:"numeric"`
+	City          string    `json:"city" binding:"required"`
+	Gender        string    `json:"gender" binding:"required"`
+	Constellation string    `json:"constellation" binding:"required"`
+	Sexual        string    `json:"sexual" binding:"required"`
+	Height        int32     `json:"height"`
+	Weight        int32     `json:"weight"`
+	Speaklanguage string    `json:"speak_language"`
+	Job           string    `json:"job" binding:"required"`
+	AnnualSalary  int32     `json:"annual_salary" binding:"required"`
+	Sociability   string    `json:"sociability"`
+	Religious     string    `json:"religious" `
+	Certification bool      `json:"certification"`
 }
 
 func (server *Server) CreateLover(ctx *gin.Context) {
@@ -34,8 +35,21 @@ func (server *Server) CreateLover(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}
+
+	token, err := server.store.GetSession(ctx, req.SessionID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
 	L := info.CreateLoverRequestParams{
-		UserID:        req.UserID,
+		UserID:        token.UserID,
 		MinAge:        req.MinAge,
 		MaxAge:        req.MaxAge,
 		City:          req.City,
@@ -66,7 +80,7 @@ func (server *Server) CreateLover(ctx *gin.Context) {
 
 // Get
 type GetLoverRequest struct {
-	UserID int32 `json:"user_id" binding:"required"`
+	SessionID uuid.UUID `json:"session_id" binding:"required"`
 }
 
 func (server *Server) GetLover(ctx *gin.Context) {
@@ -75,7 +89,20 @@ func (server *Server) GetLover(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}
-	GetHobby, err := server.store.GetUserLover(ctx, req.UserID)
+
+	token, err := server.store.GetSession(ctx, req.SessionID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	GetHobby, err := server.store.GetUserLover(ctx, token.UserID)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -104,21 +131,21 @@ func (server *Server) ShowListLover(ctx *gin.Context) {
 
 // Update
 type UpdateLoverRequest struct {
-	UserID        int32  `json:"user_id" binding:"required"`
-	MinAge        int32  `json:"min_age" binding:"numeric"`
-	MaxAge        int32  `json:"max_age" binding:"numeric"`
-	City          string `json:"city" binding:"required"`
-	Gender        string `json:"gender" binding:"required"`
-	Constellation string `json:"constellation" binding:"required"`
-	Sexual        string `json:"sexual" binding:"required"`
-	Height        int32  `json:"height"`
-	Weight        int32  `json:"weight"`
-	Speaklanguage string `json:"speaklanguage"`
-	Job           string `json:"job" binding:"required"`
-	AnnualSalary  int32  `json:"annual_salary" binding:"required"`
-	Sociability   string `json:"sociability"`
-	Religious     string `json:"religious" `
-	Certification bool   `json:"certification"`
+	SessionID     uuid.UUID `json:"session_id" binding:"required"`
+	MinAge        int32     `json:"min_age" binding:"numeric"`
+	MaxAge        int32     `json:"max_age" binding:"numeric"`
+	City          string    `json:"city" binding:"required"`
+	Gender        string    `json:"gender" binding:"required"`
+	Constellation string    `json:"constellation" binding:"required"`
+	Sexual        string    `json:"sexual" binding:"required"`
+	Height        int32     `json:"height"`
+	Weight        int32     `json:"weight"`
+	Speaklanguage string    `json:"speaklanguage"`
+	Job           string    `json:"job" binding:"required"`
+	AnnualSalary  int32     `json:"annual_salary" binding:"required"`
+	Sociability   string    `json:"sociability"`
+	Religious     string    `json:"religious" `
+	Certification bool      `json:"certification"`
 }
 
 func (server *Server) UpdateLover(ctx *gin.Context) {
@@ -127,8 +154,21 @@ func (server *Server) UpdateLover(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}
+
+	token, err := server.store.GetSession(ctx, req.SessionID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
 	L := info.UpdateUserLoverParams{
-		UserID:        req.UserID,
+		UserID:        token.UserID,
 		MinAge:        req.MinAge,
 		MaxAge:        req.MaxAge,
 		City:          req.City,

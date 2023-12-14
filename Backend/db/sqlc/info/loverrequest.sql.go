@@ -7,7 +7,6 @@ package db
 
 import (
 	"context"
-
 )
 
 const createLoverRequest = `-- name: CreateLoverRequest :one
@@ -47,7 +46,7 @@ type CreateLoverRequestParams struct {
 	AnnualSalary  int32       `json:"annual_salary"`
 	Sociability   string      `json:"sociability"`
 	Religious     string      `json:"religious"`
-	Certification bool`json:"certification"`
+	Certification bool `json:"certification"`
 }
 
 func (q *Queries) CreateLoverRequest(ctx context.Context, arg CreateLoverRequestParams) (Loverrequest, error) {
@@ -206,7 +205,7 @@ type UpdateUserLoverParams struct {
 	AnnualSalary  int32       `json:"annual_salary"`
 	Sociability   string      `json:"sociability"`
 	Religious     string      `json:"religious"`
-	Certification bool`json:"certification"`
+	Certification bool `json:"certification"`
 }
 
 func (q *Queries) UpdateUserLover(ctx context.Context, arg UpdateUserLoverParams) (Loverrequest, error) {

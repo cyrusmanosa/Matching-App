@@ -7,13 +7,14 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 type CreateComplaint struct {
-	UserID     int32  `json:"user_id" binding:"required"`
-	CpTargetID int32  `json:"cp_target_id" binding:"required"`
-	CpType     string `json:"cp_type" binding:"alpha"`
-	CpMessage  string `json:"cp_message" binding:"required"`
+	SessionID  uuid.UUID `json:"session_id" binding:"required"`
+	CpTargetID int32     `json:"cp_target_id" binding:"required"`
+	CpType     string    `json:"cp_type" binding:"alpha"`
+	CpMessage  string    `json:"cp_message" binding:"required"`
 }
 
 func (server *Server) CreateComplaint(ctx *gin.Context) {
@@ -23,8 +24,20 @@ func (server *Server) CreateComplaint(ctx *gin.Context) {
 		return
 	}
 
+	token, err := server.store.GetSession(ctx, req.SessionID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
 	CP := info.CreateComplaintParams{
-		UserID:     req.UserID,
+		UserID:     token.UserID,
 		CpTargetID: req.CpTargetID,
 		CpType:     req.CpType,
 		CpMessage:  req.CpMessage,
@@ -44,7 +57,8 @@ func (server *Server) CreateComplaint(ctx *gin.Context) {
 
 // Get
 type GetComplaint struct {
-	UserID int32 `json:"user_id" binding:"numeric,required"`
+	SessionID uuid.UUID `json:"session_id" binding:"required"`
+	CpID      int32     `json:"cp_id" binding:"required"`
 }
 
 func (server *Server) GetComplaint(ctx *gin.Context) {
@@ -54,7 +68,19 @@ func (server *Server) GetComplaint(ctx *gin.Context) {
 		return
 	}
 
-	GetCP, err := server.store.GetUserComplaintList(ctx, req.UserID)
+	token, err := server.store.GetSession(ctx, req.SessionID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	GetCP, err := server.store.GetUserComplaintList(ctx, req.CpID)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -69,8 +95,9 @@ func (server *Server) GetComplaint(ctx *gin.Context) {
 
 // Update
 type UpdateComplaint struct {
-	UserID   int32  `json:"user_id" binding:"numeric,required"`
-	Cpstatus string `json:"cp_Status"`
+	SessionID uuid.UUID `json:"session_id" binding:"required"`
+	CpID      int32     `json:"cp_id" binding:"required"`
+	Cpstatus  string    `json:"cp_Status"`
 }
 
 func (server *Server) UpdateComplaint(ctx *gin.Context) {
@@ -80,8 +107,20 @@ func (server *Server) UpdateComplaint(ctx *gin.Context) {
 		return
 	}
 
+	token, err := server.store.GetSession(ctx, req.SessionID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
 	Up := info.UpdateUserComplaintParams{
-		CpID:   req.UserID,
+		CpID:   req.CpID,
 		Status: req.Cpstatus,
 	}
 

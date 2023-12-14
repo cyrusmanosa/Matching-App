@@ -18,11 +18,11 @@ message CreateFixRequest {
 
 message CreateFixResponse {
   string SessionsID = 1;
-  int32 UserID = 2;
   string Email = 3;
   google.protobuf.Timestamp CreateAt = 4;
-  string AccessToken = 5;
   google.protobuf.Timestamp  AccessTokenExpiresAt = 6;
 }
 
-message DelFix { int32 UserID = 1; }
+message DelFix { 
+  string SessionsID = 1;
+}

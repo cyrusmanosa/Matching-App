@@ -27,14 +27,6 @@ func (server *Server) CreateFix(ctx context.Context, req *pb.CreateFixRequest) (
 		return nil, status.Errorf(codes.Internal, "failed Code: %s", err)
 	}
 
-	sessions, err := server.store.CreateSession(ctx, info.CreateSessionParams{
-		ID:          payload.ID,
-		Email:       Mail,
-		AccessToken: aToken,
-		IsBlocked:   false,
-		ExpiresAt:   payload.ExpiredAt,
-	})
-
 	B, Berr := util.BirthstringtoInt(req.GetBirth())
 	if Berr != nil {
 		return nil, status.Errorf(codes.Internal, "Birth Error: %s", Berr)
@@ -46,7 +38,7 @@ func (server *Server) CreateFix(ctx context.Context, req *pb.CreateFixRequest) (
 	arg := info.CreateUserFixInformationParams{
 		FirstName:     req.GetFirstName(),
 		LastName:      req.GetLastName(),
-		Email:         sessions.Email,
+		Email:         payload.Email,
 		Birth:         req.GetBirth(),
 		Country:       req.GetCountry(),
 		Gender:        req.GetGender(),
@@ -67,12 +59,18 @@ func (server *Server) CreateFix(ctx context.Context, req *pb.CreateFixRequest) (
 		Validate.CheckCode = ""
 	}
 
+	sessions, err := server.store.CreateSession(ctx, info.CreateSessionParams{
+		ID:          payload.ID,
+		UserID:      fix.UserID,
+		AccessToken: aToken,
+		IsBlocked:   false,
+		ExpiresAt:   payload.ExpiredAt,
+	})
+
 	rsp := &pb.CreateFixResponse{
 		SessionsID:           sessions.ID.String(),
-		UserID:               fix.UserID,
-		Email:                sessions.Email,
+		Email:                fix.Email,
 		CreateAt:             timestamppb.New(fix.CreatedAt.Time),
-		AccessToken:          sessions.AccessToken,
 		AccessTokenExpiresAt: timestamppb.New(sessions.ExpiresAt.Time),
 	}
 

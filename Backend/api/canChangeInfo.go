@@ -7,23 +7,24 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 // Create
 type createCanChangeInfoRequest struct {
-	UserID        int32  `json:"user_id" binding:"required,numeric"`
-	Nickname      string `json:"nickname" binding:"required"`
-	City          string `json:"city" binding:"required,alpha"`
-	Sexual        string `json:"sexual" binding:"required,alpha"`
-	Height        int32  `json:"height" binding:"required,numeric"`
-	Weight        int32  `json:"weight" binding:"required,numeric"`
-	Speaklanguage string `json:"speak_language" binding:"required"`
-	Education     string `json:"education" binding:"required,alpha"`
-	Job           string `json:"job" binding:"required"`
-	AnnualSalary  int32  `json:"annual_salary" binding:"required,numeric"`
-	Sociability   string `json:"sociability" binding:"required,alpha"`
-	Religious     string `json:"religious" binding:"alpha"`
-	Introduce     string `json:"introduce" binding:"required"`
+	SessionID     uuid.UUID `json:"session_id" binding:"required"`
+	Nickname      string    `json:"nickname" binding:"required"`
+	City          string    `json:"city" binding:"required,alpha"`
+	Sexual        string    `json:"sexual" binding:"required,alpha"`
+	Height        int32     `json:"height" binding:"required,numeric"`
+	Weight        int32     `json:"weight" binding:"required,numeric"`
+	Speaklanguage string    `json:"speak_language" binding:"required"`
+	Education     string    `json:"education" binding:"required,alpha"`
+	Job           string    `json:"job" binding:"required"`
+	AnnualSalary  int32     `json:"annual_salary" binding:"required,numeric"`
+	Sociability   string    `json:"sociability" binding:"required,alpha"`
+	Religious     string    `json:"religious" binding:"alpha"`
+	Introduce     string    `json:"introduce" binding:"required"`
 }
 
 func (server *Server) CreateUserCanChangeInfo(ctx *gin.Context) {
@@ -33,8 +34,20 @@ func (server *Server) CreateUserCanChangeInfo(ctx *gin.Context) {
 		return
 	}
 
+	token, err := server.store.GetSession(ctx, req.SessionID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
 	arg := info.CreateUserCanChangeInformationParams{
-		UserID:        req.UserID,
+		UserID:        token.UserID,
 		Nickname:      req.Nickname,
 		City:          req.City,
 		Sexual:        req.Sexual,
@@ -63,7 +76,7 @@ func (server *Server) CreateUserCanChangeInfo(ctx *gin.Context) {
 
 // Get
 type GetCanChangeInfoRequest struct {
-	UserID int32 `json:"user_id" binding:"required"`
+	SessionID uuid.UUID `json:"session_id" binding:"required"`
 }
 
 func (server *Server) GetCanChangeInfo(ctx *gin.Context) {
@@ -72,7 +85,20 @@ func (server *Server) GetCanChangeInfo(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}
-	GetCanChangeInfo, err := server.store.GetUserCanChangeInformation(ctx, req.UserID)
+
+	token, err := server.store.GetSession(ctx, req.SessionID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	GetCanChangeInfo, err := server.store.GetUserCanChangeInformation(ctx, token.UserID)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -92,8 +118,21 @@ func (server *Server) UpdateCanChangeInfo(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}
+
+	token, err := server.store.GetSession(ctx, req.SessionID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
 	arg := info.UpdateInformationParams{
-		UserID:        req.UserID,
+		UserID:        token.UserID,
 		Nickname:      req.Nickname,
 		City:          req.City,
 		Sexual:        req.Sexual,

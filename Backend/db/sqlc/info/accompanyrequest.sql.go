@@ -7,7 +7,6 @@ package db
 
 import (
 	"context"
-
 )
 
 const createAccompanyRequest = `-- name: CreateAccompanyRequest :one
@@ -35,7 +34,7 @@ type CreateAccompanyRequestParams struct {
 	FindType      string      `json:"find_type"`
 	FindTarget    string      `json:"find_target"`
 	Sociability   string      `json:"sociability"`
-	Certification bool`json:"certification"`
+	Certification bool `json:"certification"`
 }
 
 func (q *Queries) CreateAccompanyRequest(ctx context.Context, arg CreateAccompanyRequestParams) (Accompanyrequest, error) {
@@ -158,7 +157,7 @@ type UpdateUserAccompanyParams struct {
 	FindType      string      `json:"find_type"`
 	FindTarget    string      `json:"find_target"`
 	Sociability   string      `json:"sociability"`
-	Certification bool`json:"certification"`
+	Certification bool `json:"certification"`
 }
 
 func (q *Queries) UpdateUserAccompany(ctx context.Context, arg UpdateUserAccompanyParams) (Accompanyrequest, error) {

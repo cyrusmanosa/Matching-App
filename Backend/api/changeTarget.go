@@ -6,13 +6,14 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 // Create
 type CreateChangeTargetRequest struct {
-	UserID       int32  `json:"user_id" binding:"required"`
-	ChangeUserID int32  `json:"change_user_id" binding:"required"`
-	Reason       string `json:"reason"`
+	SessionID    uuid.UUID `json:"session_id" binding:"required"`
+	ChangeUserID int32     `json:"change_user_id" binding:"required"`
+	Reason       string    `json:"reason"`
 }
 
 func (server *Server) CreateChangeTarget(ctx *gin.Context) {
@@ -22,8 +23,20 @@ func (server *Server) CreateChangeTarget(ctx *gin.Context) {
 		return
 	}
 
+	token, err := server.store.GetSession(ctx, req.SessionID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
 	arg := info.CreateChangeTargetUserParams{
-		UserID:       req.UserID,
+		UserID:       token.UserID,
 		ChangeUserID: req.ChangeUserID,
 		Reason:       req.Reason,
 	}
@@ -50,7 +63,7 @@ func (server *Server) CreateChangeTarget(ctx *gin.Context) {
 
 // Get
 type GetChangeTargetRequest struct {
-	UserID int32 `json:"user_id" binding:"required numeric"`
+	SessionID uuid.UUID `json:"session_id" binding:"required"`
 }
 
 func (server *Server) GetChangeTarget(ctx *gin.Context) {
@@ -60,7 +73,19 @@ func (server *Server) GetChangeTarget(ctx *gin.Context) {
 		return
 	}
 
-	GetCT, err := server.store.GetChangeTargetUserList(ctx, req.UserID)
+	token, err := server.store.GetSession(ctx, req.SessionID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	GetCT, err := server.store.GetChangeTargetUserList(ctx, token.UserID)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {

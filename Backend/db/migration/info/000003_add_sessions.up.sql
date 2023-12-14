@@ -1,6 +1,6 @@
 CREATE TABLE "sessions" (
   "id" uuid PRIMARY KEY,
-  "email" varchar NOT NULL,
+  "user_id" INT NOT NULL,
   "access_token" varchar NOT NULL,
   "is_blocked" boolean NOT NULL DEFAULT false,
   "expires_at" timestamptz NOT NULL,

@@ -9,13 +9,19 @@ import (
 	"database/sql"
 	"fmt"
 
+	"github.com/google/uuid"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (server *Server) InputPassword(ctx context.Context, req *pb.InputPasswordRequest) (*pb.InputPasswordResponse, error) {
-	token, err := server.store.GetSession(ctx, GlobalSessionID)
+	Gid, err := uuid.Parse(req.GetSessionID())
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
+	}
+
+	token, err := server.store.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -26,7 +32,7 @@ func (server *Server) InputPassword(ctx context.Context, req *pb.InputPasswordRe
 
 	Hash, _ := util.HashPassword(req.GetPassword())
 	arg := info.UpdatePasswordParams{
-		UserID:         req.GetUserID(),
+		UserID:         token.UserID,
 		HashedPassword: Hash,
 	}
 
@@ -39,7 +45,7 @@ func (server *Server) InputPassword(ctx context.Context, req *pb.InputPasswordRe
 		return nil, status.Errorf(codes.Internal, "failed to input password: %s", err)
 	}
 
-	user, err := server.store.GetUserFixInformation(ctx, req.UserID)
+	user, err := server.store.GetUserFixInformation(ctx, token.UserID)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, status.Errorf(codes.NotFound, "user not found")

@@ -28,14 +28,6 @@ type userResponse struct {
 	CreatedAt time.Time `json:"created_at"`
 }
 
-func newUserResponse(user info.Fixinformation) userResponse {
-	return userResponse{
-		UserID:    user.UserID,
-		Email:     user.Email,
-		CreatedAt: user.CreatedAt.Time,
-	}
-}
-
 func (server *Server) CreateUserFixInfo(ctx *gin.Context) {
 	var req createUserRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
@@ -61,22 +53,10 @@ func (server *Server) CreateUserFixInfo(ctx *gin.Context) {
 		return
 	}
 
-	sessions, err := server.store.CreateSession(ctx, info.CreateSessionParams{
-		ID:          payload.ID,
-		Email:       returnData.Email,
-		AccessToken: accessToken,
-		IsBlocked:   false,
-		ExpiresAt:   payload.ExpiredAt,
-	})
-	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
-		return
-	}
-
 	arg := info.CreateUserFixInformationParams{
 		FirstName:     req.FirstName,
 		LastName:      req.LastName,
-		Email:         sessions.Email,
+		Email:         payload.Email,
 		Birth:         req.Birth,
 		Country:       req.Country,
 		Gender:        req.Gender,
@@ -96,14 +76,31 @@ func (server *Server) CreateUserFixInfo(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
-	rsq := newUserResponse(user)
+
+	sessions, err := server.store.CreateSession(ctx, info.CreateSessionParams{
+		ID:          payload.ID,
+		UserID:      user.UserID,
+		AccessToken: accessToken,
+		IsBlocked:   false,
+		ExpiresAt:   payload.ExpiredAt,
+	})
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	rsq := userResponse{
+		UserID:    sessions.UserID,
+		Email:     user.Email,
+		CreatedAt: user.CreatedAt.Time,
+	}
 	ctx.JSON(http.StatusOK, rsq)
 }
 
 // input password
 type passwordRequest struct {
-	UserID   int32  `json:"userid" binding:"required"`
-	Password string `json:"password" binding:"required,min=6"`
+	SessionID uuid.UUID `json:"session_id" binding:"required"`
+	Password  string    `json:"password" binding:"required,min=6"`
 }
 
 func (server *Server) inputPassword(ctx *gin.Context) {
@@ -114,9 +111,21 @@ func (server *Server) inputPassword(ctx *gin.Context) {
 		return
 	}
 
+	token, err := server.store.GetSession(ctx, req.SessionID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
 	Hash, _ := util.HashPassword(req.Password)
 	arg := info.UpdatePasswordParams{
-		UserID:         req.UserID,
+		UserID:         token.UserID,
 		HashedPassword: Hash,
 	}
 
@@ -178,10 +187,9 @@ type loginUserRequest struct {
 	Password string `json:"password" binding:"required,min=6"`
 }
 type loginUserResponse struct {
-	SessionsID           uuid.UUID    `json:"sessionsid" binding:"required"`
-	AccessToken          string       `json:"access_token"`
-	AccessTokenExpiresAt time.Time    `json:"access_token_expires_at"`
-	User                 userResponse `json:"user"`
+	SessionsID           uuid.UUID `json:"sessionsid" binding:"required"`
+	Email                string    `json:"email" binding:"required,email"`
+	AccessTokenExpiresAt time.Time `json:"access_token_expires_at"`
 }
 
 func (server *Server) UserLogin(ctx *gin.Context) {
@@ -226,7 +234,7 @@ func (server *Server) UserLogin(ctx *gin.Context) {
 
 	sessions, err := server.store.CreateSession(ctx, info.CreateSessionParams{
 		ID:          payload.ID,
-		Email:       user.Email,
+		UserID:      user.UserID,
 		AccessToken: accessToken,
 		IsBlocked:   false,
 		ExpiresAt:   payload.ExpiredAt,
@@ -239,9 +247,8 @@ func (server *Server) UserLogin(ctx *gin.Context) {
 
 	rsp := loginUserResponse{
 		SessionsID:           sessions.ID,
-		AccessToken:          accessToken,
+		Email:                user.Email,
 		AccessTokenExpiresAt: payload.ExpiredAt,
-		User:                 newUserResponse(user),
 	}
 	ctx.JSON(http.StatusOK, rsp)
 }
@@ -262,7 +269,7 @@ func (server *Server) ShowListFixInfo(ctx *gin.Context) {
 
 // Delete
 type DeleteController struct {
-	UserID int32 `json:"user_id" binding:"required"`
+	SessionID uuid.UUID `json:"session_id" binding:"required"`
 }
 
 func (server *Server) DeleteUser(ctx *gin.Context) {
@@ -271,8 +278,21 @@ func (server *Server) DeleteUser(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
 		return
 	}
+
+	token, err := server.store.GetSession(ctx, req.SessionID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
 	// Fix
-	err := server.store.DeleteUser(ctx, req.UserID)
+	err = server.store.DeleteUser(ctx, token.UserID)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			ctx.JSON(http.StatusNotFound, errorResponse(err))
@@ -282,17 +302,17 @@ func (server *Server) DeleteUser(ctx *gin.Context) {
 		return
 	}
 	// Can
-	err = server.store.DeleteCanChangeInformation(ctx, req.UserID)
+	err = server.store.DeleteCanChangeInformation(ctx, token.UserID)
 	// Hobby
-	err = server.store.DeleteUserHobby(ctx, req.UserID)
+	err = server.store.DeleteUserHobby(ctx, token.UserID)
 	// Lover
-	err = server.store.DeleteUserLoverRequest(ctx, req.UserID)
+	err = server.store.DeleteUserLoverRequest(ctx, token.UserID)
 	// Accompany
-	err = server.store.DeleteUserAccompany(ctx, req.UserID)
+	err = server.store.DeleteUserAccompany(ctx, token.UserID)
 	// Image
-	err = server.store.DeleteImage(ctx, req.UserID)
+	err = server.store.DeleteImage(ctx, token.UserID)
 	// Target List
-	err = server.store.DeleteTargetList(ctx, req.UserID)
+	err = server.store.DeleteTargetList(ctx, token.UserID)
 	// Change Target
-	err = server.store.DeleteChangeTargetUser(ctx, req.UserID)
+	err = server.store.DeleteChangeTargetUser(ctx, token.UserID)
 }

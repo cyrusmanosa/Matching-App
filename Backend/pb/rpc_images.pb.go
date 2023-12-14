@@ -20,6 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Create
 type CreateImagesRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -162,6 +163,7 @@ func (x *CreateImagesResponse) GetImg() *Images {
 	return nil
 }
 
+// Get
 type GetImagesRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -256,6 +258,7 @@ func (x *GetImagesResponse) GetImg() *Images {
 	return nil
 }
 
+// Updat
 type UpdateImagesRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

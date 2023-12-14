@@ -7,7 +7,6 @@ package db
 
 import (
 	"context"
-
 )
 
 const createHobbyRequest = `-- name: CreateHobbyRequest :one
@@ -41,7 +40,7 @@ type CreateHobbyRequestParams struct {
 	FindTarget    string      `json:"find_target"`
 	Experience    int32 `json:"experience"`
 	Sociability   string `json:"sociability"`
-	Certification bool`json:"certification"`
+	Certification bool `json:"certification"`
 }
 
 func (q *Queries) CreateHobbyRequest(ctx context.Context, arg CreateHobbyRequestParams) (Hobbyrequest, error) {
@@ -182,7 +181,7 @@ type UpdateUserHobbyParams struct {
 	FindTarget    string      `json:"find_target"`
 	Experience    int32 `json:"experience"`
 	Sociability   string `json:"sociability"`
-	Certification bool`json:"certification"`
+	Certification bool `json:"certification"`
 }
 
 func (q *Queries) UpdateUserHobby(ctx context.Context, arg UpdateUserHobbyParams) (Hobbyrequest, error) {

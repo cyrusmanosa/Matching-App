@@ -6,6 +6,7 @@ import "targetList.proto";
 
 option go_package = "Backend/pb";
 
+// Create
 message CreateTargetListRequest {
     int32 UserID = 1;
     int32 Target1ID = 2;
@@ -17,6 +18,7 @@ message CreateTargetListResponse {
     Targetlist tl = 1;
 }
 
+// Get
 message GetTargetListRequest {
     int32 UserID = 1;
 }
@@ -24,6 +26,7 @@ message GetTargetListResponse {
     Targetlist tl = 1;
 }
 
+// Update
 message UpdateTargetListRequest {
     int32 UserID = 1;
     int32 Target1ID = 2;

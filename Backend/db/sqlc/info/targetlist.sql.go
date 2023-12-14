@@ -7,7 +7,6 @@ package db
 
 import (
 	"context"
-
 )
 
 const allTargetUserList = `-- name: AllTargetUserList :many

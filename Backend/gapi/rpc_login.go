@@ -13,7 +13,6 @@ import (
 )
 
 func (server *Server) LoginUser(ctx context.Context, req *pb.LoginUserRequest) (*pb.LoginUserResponse, error) {
-
 	user, err := server.store.LoginAtEmail(ctx, req.GetEmail())
 	if err != nil {
 		if err == sql.ErrNoRows {
@@ -38,7 +37,7 @@ func (server *Server) LoginUser(ctx context.Context, req *pb.LoginUserRequest) (
 
 	sessions, err := server.store.CreateSession(ctx, db.CreateSessionParams{
 		ID:          payload.ID,
-		Email:       user.Email,
+		UserID:      user.UserID,
 		AccessToken: accessToken,
 		IsBlocked:   false,
 		ExpiresAt:   payload.ExpiredAt,
@@ -46,10 +45,7 @@ func (server *Server) LoginUser(ctx context.Context, req *pb.LoginUserRequest) (
 
 	rsp := &pb.LoginUserResponse{
 		SessionsID:           sessions.ID.String(),
-		UserID:               user.UserID,
-		Email:                sessions.Email,
-		CreateAt:             timestamppb.New(user.CreatedAt.Time),
-		AccessToken:          accessToken,
+		Email:                user.Email,
 		AccessTokenExpiresAt: timestamppb.New(payload.ExpiredAt),
 	}
 
