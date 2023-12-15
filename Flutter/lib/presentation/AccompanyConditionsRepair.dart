@@ -1,4 +1,7 @@
+import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/global_variable/model.dart';
+import 'package:dating_your_date/pb/rpc_accompany.pb.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
@@ -6,6 +9,8 @@ import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
 import 'package:dating_your_date/widgets/custom_outlined_button.dart';
 import 'package:dating_your_date/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 // ignore: must_be_immutable, camel_case_types
 class AccompanyConditionsRepair extends StatelessWidget {
@@ -13,13 +18,76 @@ class AccompanyConditionsRepair extends StatelessWidget {
   AccompanyConditionsRepair(this.title, {Key? key}) : super(key: key);
 
   TextEditingController resetAccompanyEraController = TextEditingController();
-  TextEditingController resetAccompanyCountryController = TextEditingController();
   TextEditingController resetAccompanyCityController = TextEditingController();
   TextEditingController resetAccompanyGenderController = TextEditingController();
-  TextEditingController resetAccompanyAccompanyTypeController = TextEditingController();
+  TextEditingController resetAccompanySpeakLanguageController = TextEditingController();
+  TextEditingController resetAccompanyFindTypeController = TextEditingController();
   TextEditingController resetAccompanyFindTargetController = TextEditingController();
   TextEditingController resetAccompanySociabilityController = TextEditingController();
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
+
+// Http
+  void updateAccompanyHttpRequset(BuildContext context) async {
+    var url = "http://127.0.0.1:8080/UpdateAccompany";
+    var requestBody = {
+      "session_id": globalSessionID,
+      "Era": resetAccompanyEraController.text,
+      "City": resetAccompanyCityController.text,
+      "Gender": resetAccompanyGenderController.text,
+      "Speak_language": resetAccompanySpeakLanguageController.text,
+      "Find_Type": resetAccompanyFindTypeController.text,
+      "Find_Target": resetAccompanyFindTargetController.text,
+      "Sociability": resetAccompanySociabilityController.text,
+      "Certification": false
+    };
+    var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
+
+    if (response.statusCode == 200) {
+      onTaptf(context);
+    } else {
+      print("Era: ${resetAccompanyEraController.text}");
+      print("City: ${resetAccompanyCityController.text}");
+      print("Gender: ${resetAccompanyGenderController.text}");
+      print("Speak_language: ${resetAccompanySpeakLanguageController.text}");
+      print("Find_Type: ${resetAccompanyFindTypeController.text}");
+      print("Find_Target: ${resetAccompanyFindTargetController.text}");
+      print("Sociability: ${resetAccompanySociabilityController.text}");
+    }
+  }
+
+  // Grpc
+  void createAccompanyGrpcRequset(BuildContext context) async {
+    final request = UpdateAccompanyRequest(
+      sessionID: globalSessionID,
+      era: int.parse(resetAccompanyEraController.text),
+      city: resetAccompanyCityController.text,
+      gender: resetAccompanyGenderController.text,
+      speaklanguage: resetAccompanySpeakLanguageController.text,
+      findType: resetAccompanyFindTypeController.text,
+      findTarget: resetAccompanyFindTargetController.text,
+      sociability: resetAccompanySociabilityController.text,
+      certification: false,
+    );
+
+    final response = await GrpcService.client.updateAccompany(request);
+    // ignore: unnecessary_null_comparison
+    if (response != null) {
+      onTaptf(context);
+    } else {
+      showErrorDialog(context, "Error: Empty response");
+    }
+  }
+
+  void showErrorDialog(BuildContext context, String errorMessage) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Error'),
+        content: Text(errorMessage),
+        actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text('OK'))],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,16 +108,16 @@ class AccompanyConditionsRepair extends StatelessWidget {
                 CustomInputBar(titleName: "年代:", backendPart: _buildAccompanyResetEraInput(context)),
                 SizedBox(height: 15.v),
 
-                // Country
-                CustomInputBar(titleName: "国籍:", backendPart: _buildAccompanyResetCountryInput(context)),
-                SizedBox(height: 15.v),
-
                 // City
                 CustomInputBar(titleName: "居住地:", backendPart: _buildAccompanyResetCityInput(context)),
                 SizedBox(height: 15.v),
 
                 // Gender
                 CustomInputBar(titleName: "性別:", backendPart: _buildAccompanyResetGenderInput(context)),
+                SizedBox(height: 15.v),
+
+                // Language
+                CustomInputBar(titleName: "お喋れる言語:", backendPart: _buildAccompanyResetSpeakLanguageInput(context)),
                 SizedBox(height: 15.v),
 
                 // Accompany Type
@@ -121,14 +189,6 @@ class AccompanyConditionsRepair extends StatelessWidget {
   }
 
   /// Section Widget
-  Widget _buildAccompanyResetCountryInput(BuildContext context) {
-    return CustomTextFormField(
-      controller: resetAccompanyCountryController,
-      hintText: "日本",
-    );
-  }
-
-  /// Section Widget
   Widget _buildAccompanyResetCityInput(BuildContext context) {
     return CustomTextFormField(
       controller: resetAccompanyCityController,
@@ -147,7 +207,7 @@ class AccompanyConditionsRepair extends StatelessWidget {
   /// Section Widget
   Widget _buildAccompanyResetAccompanyTypeInput(BuildContext context) {
     return CustomTextFormField(
-      controller: resetAccompanyAccompanyTypeController,
+      controller: resetAccompanyFindTypeController,
       hintText: "おしゃべり",
     );
   }
@@ -157,6 +217,14 @@ class AccompanyConditionsRepair extends StatelessWidget {
     return CustomTextFormField(
       controller: resetAccompanyFindTargetController,
       hintText: "聞き役",
+    );
+  }
+
+  /// Accompany Type
+  Widget _buildAccompanyResetSpeakLanguageInput(BuildContext context) {
+    return CustomTextFormField(
+      controller: resetAccompanySpeakLanguageController,
+      hintText: "おしゃべり",
     );
   }
 

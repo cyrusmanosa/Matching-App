@@ -1,4 +1,3 @@
-export 'package:dating_your_date/core/constants/constants.dart';
 export 'package:dating_your_date/core/utils/image_constant.dart';
 export 'package:dating_your_date/core/utils/size_utils.dart';
 export 'package:dating_your_date/routes/app_routes.dart';

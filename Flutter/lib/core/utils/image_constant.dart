@@ -8,8 +8,7 @@ class ImageConstant {
   static String imgDevicongoogle = '$imagePath/img_devicongoogle.svg';
 
   // ターゲットを削除 images
-  static String imgSliderfortargetchange =
-      '$imagePath/img_sliderfortargetchange.png';
+  static String imgSliderfortargetchange = '$imagePath/img_sliderfortargetchange.png';
 
   // SignUp-PhoneOrEmail-PartOne images
   static String imgVector = '$imagePath/img_vector.svg';

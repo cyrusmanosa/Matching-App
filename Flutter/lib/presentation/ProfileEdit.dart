@@ -11,13 +11,13 @@ import 'package:flutter/material.dart';
 class ProfileEdit extends StatelessWidget {
   ProfileEdit({Key? key}) : super(key: key);
 
-  TextEditingController updateBasicNickNameInputController = TextEditingController();
-  TextEditingController updateBasicCityInputController = TextEditingController();
-  TextEditingController updateBasicSexualInputController = TextEditingController();
-  TextEditingController updateBasicHeightInputController = TextEditingController();
-  TextEditingController updateBasicWeightInputController = TextEditingController();
-  TextEditingController updateBasicEducationInputController = TextEditingController();
-  TextEditingController updateBasicJobInputController = TextEditingController();
+  TextEditingController updateBasicNickNameController = TextEditingController();
+  TextEditingController updateBasicCityController = TextEditingController();
+  TextEditingController updateBasicSexualController = TextEditingController();
+  TextEditingController updateBasicHeightController = TextEditingController();
+  TextEditingController updateBasicWeightController = TextEditingController();
+  TextEditingController updateBasicEducationController = TextEditingController();
+  TextEditingController updateBasicJobController = TextEditingController();
   TextEditingController updateBasicAnnualSalaryController = TextEditingController();
   TextEditingController updateBasicSociabilityController = TextEditingController();
   TextEditingController updateBasicReligiousController = TextEditingController();
@@ -135,7 +135,7 @@ class ProfileEdit extends StatelessWidget {
   /// Nickname
   Widget _buildUpdateBasicNickNameInput(BuildContext context) {
     return CustomTextFormField(
-      controller: updateBasicNickNameInputController,
+      controller: updateBasicNickNameController,
       hintText: "仆街",
     );
   }
@@ -143,7 +143,7 @@ class ProfileEdit extends StatelessWidget {
   /// City
   Widget _buildUpdateBasicCityInput(BuildContext context) {
     return CustomTextFormField(
-      controller: updateBasicCityInputController,
+      controller: updateBasicCityController,
       hintText: "大阪",
     );
   }
@@ -151,7 +151,7 @@ class ProfileEdit extends StatelessWidget {
   /// Sexual
   Widget _buildUpdateBasicSexualInput(BuildContext context) {
     return CustomTextFormField(
-      controller: updateBasicSexualInputController,
+      controller: updateBasicSexualController,
       hintText: "異性愛",
     );
   }
@@ -159,7 +159,7 @@ class ProfileEdit extends StatelessWidget {
   /// Height
   Widget _buildUpdateBasicHeightInput(BuildContext context) {
     return CustomTextFormField(
-      controller: updateBasicHeightInputController,
+      controller: updateBasicHeightController,
       hintText: "170cm",
     );
   }
@@ -167,7 +167,7 @@ class ProfileEdit extends StatelessWidget {
   /// Weight
   Widget _buildUpdateBasicWeightInput(BuildContext context) {
     return CustomTextFormField(
-      controller: updateBasicWeightInputController,
+      controller: updateBasicWeightController,
       hintText: "60kg",
     );
   }
@@ -175,7 +175,7 @@ class ProfileEdit extends StatelessWidget {
   /// Education
   Widget _buildUpdateBasicEducationInput(BuildContext context) {
     return CustomTextFormField(
-      controller: updateBasicEducationInputController,
+      controller: updateBasicEducationController,
       hintText: "高校生",
     );
   }
@@ -183,7 +183,7 @@ class ProfileEdit extends StatelessWidget {
   /// Job
   Widget _buildUpdateBasicJobInput(BuildContext context) {
     return CustomTextFormField(
-      controller: updateBasicJobInputController,
+      controller: updateBasicJobController,
       hintText: "ホスト",
       textInputAction: TextInputAction.done,
     );

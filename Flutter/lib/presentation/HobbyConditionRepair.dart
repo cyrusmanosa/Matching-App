@@ -1,4 +1,7 @@
+import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/global_variable/model.dart';
+import 'package:dating_your_date/pb/rpc_hobby.pb.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
@@ -6,6 +9,8 @@ import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
 import 'package:dating_your_date/widgets/custom_outlined_button.dart';
 import 'package:dating_your_date/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 // ignore: must_be_immutable, camel_case_types
 class HobbyConditionRepair extends StatelessWidget {
@@ -16,7 +21,8 @@ class HobbyConditionRepair extends StatelessWidget {
   TextEditingController resetHobbyCountryController = TextEditingController();
   TextEditingController resetHobbyCityController = TextEditingController();
   TextEditingController resetHobbyGenderController = TextEditingController();
-  TextEditingController resetHobbyTypeController = TextEditingController();
+  TextEditingController resetHobbySpeakLanguageController = TextEditingController();
+  TextEditingController resetHobbyFindTypeController = TextEditingController();
   TextEditingController resetHobbyFindTargetController = TextEditingController();
   TextEditingController resetHobbyExperienceController = TextEditingController();
   TextEditingController resetHobbySociabilityController = TextEditingController();
@@ -24,6 +30,76 @@ class HobbyConditionRepair extends StatelessWidget {
   TextEditingController resetHobbyWeightController = TextEditingController();
 
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
+
+// Http
+  void updateHobbyHttpRequset(BuildContext context) async {
+    var url = "http://127.0.0.1:8080/CreateHobby";
+    var requestBody = {
+      "session_id": globalSessionID,
+      "Era": resetHobbyEraController.text,
+      "City": resetHobbyCityController.text,
+      "Gender": resetHobbyGenderController.text,
+      "Height": resetHobbyHeightController.text,
+      "Weight": resetHobbyWeightController.text,
+      "Speak_language": resetHobbySpeakLanguageController.text,
+      "Find_Type": resetHobbyFindTypeController.text,
+      "Find_Target": resetHobbyFindTargetController.text,
+      "Experience": resetHobbyExperienceController.text,
+      "Sociability": resetHobbySociabilityController.text,
+      "Certification": false
+    };
+    var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
+
+    if (response.statusCode == 200) {
+      onTaptf(context);
+    } else {
+      print("Era: ${resetHobbyEraController.text}");
+      print("City: ${resetHobbyCityController.text}");
+      print("Gender: ${resetHobbyGenderController.text}");
+      print("Height: ${resetHobbyHeightController.text}");
+      print("Weight: ${resetHobbyWeightController.text}");
+      print("Speak_language: ${resetHobbySpeakLanguageController.text}");
+      print("Find_Type: ${resetHobbyFindTypeController.text}");
+      print("Find_Target: ${resetHobbyFindTargetController.text}");
+      print("Experience: ${resetHobbyExperienceController.text}");
+      print("Sociability: ${resetHobbySociabilityController.text}");
+    }
+  }
+
+  void updateHobbyGrpcRequset(BuildContext context) async {
+    final request = UpdateHobbyRequest(
+      sessionID: globalSessionID,
+      era: int.parse(resetHobbyEraController.text),
+      city: resetHobbyCityController.text,
+      gender: resetHobbyGenderController.text,
+      height: int.parse(resetHobbyHeightController.text),
+      weight: int.parse(resetHobbyWeightController.text),
+      speaklanguage: resetHobbySpeakLanguageController.text,
+      findType: resetHobbyFindTypeController.text,
+      findTarget: resetHobbyFindTargetController.text,
+      experience: int.parse(resetHobbyExperienceController.text),
+      sociability: resetHobbySociabilityController.text,
+    );
+
+    final response = await GrpcService.client.updateHobby(request);
+    // ignore: unnecessary_null_comparison
+    if (response != null) {
+      onTaptf(context);
+    } else {
+      showErrorDialog(context, "Error: Empty response");
+    }
+  }
+
+  void showErrorDialog(BuildContext context, String errorMessage) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Error'),
+        content: Text(errorMessage),
+        actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text('OK'))],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +135,11 @@ class HobbyConditionRepair extends StatelessWidget {
                   CustomInputBar(titleName: "性別:", backendPart: _buildHobbyResetGenderInput(context)),
                   SizedBox(height: 15.v),
 
-                  // Hobby
+                  // Language
+                  CustomInputBar(titleName: "お喋れる言語:", backendPart: _buildHobbySpeakLanguageInput(context)),
+                  SizedBox(height: 15.v),
+
+                  // Hobby Type
                   CustomInputBar(titleName: "趣味のタイプ:", backendPart: _buildHobbyResetHobbyTypeInput(context)),
                   SizedBox(height: 15.v),
 
@@ -67,7 +147,7 @@ class HobbyConditionRepair extends StatelessWidget {
                   CustomInputBar(titleName: "探す対象:", backendPart: _buildHobbyResetFindTargetInput(context)),
                   SizedBox(height: 15.v),
 
-                  // Experience of Hobby
+                  // Experience
                   CustomInputBar(titleName: "経験:", backendPart: _buildHobbyResetExperienceInput(context)),
                   SizedBox(height: 15.v),
 
@@ -170,10 +250,18 @@ class HobbyConditionRepair extends StatelessWidget {
     );
   }
 
+  /// Speak Language
+  Widget _buildHobbySpeakLanguageInput(BuildContext context) {
+    return CustomTextFormField(
+      controller: resetHobbySpeakLanguageController,
+      hintText: "日本語",
+    );
+  }
+
   /// Reset Hobby Type
   Widget _buildHobbyResetHobbyTypeInput(BuildContext context) {
     return CustomTextFormField(
-      controller: resetHobbyTypeController,
+      controller: resetHobbyFindTypeController,
       hintText: "サッカー",
     );
   }
@@ -229,7 +317,7 @@ class HobbyConditionRepair extends StatelessWidget {
       text: "条件確認",
       buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
-        onTaptf(context);
+        updateHobbyGrpcRequset(context);
       },
     );
   }

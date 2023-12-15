@@ -107,17 +107,17 @@ class AppNavigationScreen extends StatelessWidget {
                         _buildScreenTitle(
                           context,
                           userName: "SignUp-PhoneOrEmail-PartOne",
-                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.signUp_1),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.fixInformation),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "SignUp-PhoneOrEmail-PartTwo",
-                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.signUp_2),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.canChangeInformation_1),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "SignUp-PhoneOrEmail-PartThree",
-                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.signUp_3),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.canChangeInformation_2),
                         ),
                         _buildScreenTitle(
                           context,

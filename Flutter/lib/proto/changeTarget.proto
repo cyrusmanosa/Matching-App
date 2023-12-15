@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "Backend/pb";
+
+message ChangeTarget {
+    int32 UserID = 1;
+    int32 ChangeUserID = 2;
+    string Reason = 3;
+    int32 Frequency = 4;
+    google.protobuf.Timestamp ChangeTime = 5;
+}
+

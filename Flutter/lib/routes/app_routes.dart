@@ -7,14 +7,14 @@ import 'package:dating_your_date/presentation/Chat/Chat.dart';
 import 'package:dating_your_date/presentation/ChatBox.dart';
 import 'package:dating_your_date/presentation/AccompanyConditions.dart';
 import 'package:dating_your_date/presentation/AccompanyConditionsRepair.dart';
-import 'package:dating_your_date/presentation/ConfirmationCore.dart';
-import 'package:dating_your_date/presentation/ConfirmationCore_Error.dart';
+import 'package:dating_your_date/presentation/SignUp_ConfirmationCore.dart';
+import 'package:dating_your_date/presentation/SignUp_ConfirmationCore_Error.dart';
 import 'package:dating_your_date/presentation/ContainerScreen.dart';
 
 import 'package:dating_your_date/presentation/DeleteTarget.dart';
 
-import 'package:dating_your_date/presentation/EmailConfirmation.dart';
-import 'package:dating_your_date/presentation/EmailConfirmation_Error.dart';
+import 'package:dating_your_date/presentation/SignUp_EmailConfirmation.dart';
+import 'package:dating_your_date/presentation/SignUp_EmailConfirmation_Error.dart';
 
 import 'package:dating_your_date/presentation/Home/Home.dart';
 import 'package:dating_your_date/presentation/HobbyCondition.dart';
@@ -40,9 +40,9 @@ import 'package:dating_your_date/presentation/ProfileEdit.dart';
 import 'package:dating_your_date/presentation/SearchTitle.dart';
 
 import 'package:dating_your_date/presentation/SideBar.dart';
-import 'package:dating_your_date/presentation/Signup_1.dart';
-import 'package:dating_your_date/presentation/Signup_3.dart';
-import 'package:dating_your_date/presentation/Signup_2.dart';
+import 'package:dating_your_date/presentation/FixInformation.dart';
+import 'package:dating_your_date/presentation/CanChangeInformation_2.dart';
+import 'package:dating_your_date/presentation/CanChangeInformation_1.dart';
 import 'package:dating_your_date/presentation/TargetReady.dart';
 import 'package:dating_your_date/presentation/Target/Target.dart';
 import 'package:flutter/material.dart';
@@ -79,9 +79,9 @@ class AppRoutes {
   static const String profileEdit = '/profileEdit';
   static const String searchTitle = '/searchTitle';
   static const String sideBar = '/sideBar';
-  static const String signUp_1 = '/signUp_1';
-  static const String signUp_2 = '/signUp_2';
-  static const String signUp_3 = '/signUp_3';
+  static const String fixInformation = '/fixInformation';
+  static const String canChangeInformation_1 = '/canChangeInformation_1';
+  static const String canChangeInformation_2 = '/canChangeInformation_2';
   static const String target = '/target';
   static const String targetReady = '/targetReady';
   static const String warningMsgDeleteUser = '/WarningMsgDeleteUser';
@@ -119,9 +119,9 @@ class AppRoutes {
     profileEdit: (context) => ProfileEdit(),
     searchTitle: (context) => SearchTitle(),
     sideBar: (context) => SideBar(),
-    signUp_1: (context) => SignUp_1(),
-    signUp_2: (context) => SignUp_2(),
-    signUp_3: (context) => SignUp_3(),
+    fixInformation: (context) => FixInformation(),
+    canChangeInformation_1: (context) => CanChangeInformation_1(),
+    canChangeInformation_2: (context) => CanChangeInformation_2(),
     target: (context) => Target(),
     targetReady: (context) => TargetReady(),
     warningMsgDeleteUser: (context) => WarningMsgDeleteUser(),

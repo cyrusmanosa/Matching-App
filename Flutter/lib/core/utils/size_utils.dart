@@ -1,7 +1,6 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+
 // This functions are responsible to make UI responsive across all the mobile devices.
 
 // ignore: deprecated_member_use

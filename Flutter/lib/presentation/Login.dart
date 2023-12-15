@@ -1,39 +1,69 @@
 // ignore: avoid_web_libraries_in_flutter
 import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/pb/rpc_login.pb.dart';
+import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/custom_elevated_button.dart';
 import 'package:dating_your_date/widgets/custom_outlined_button.dart';
 import 'package:dating_your_date/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:dating_your_date/global_variable/model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-// ignore_for_file: must_be_immutable
+// ignore: must_be_immutable
 class Login extends StatelessWidget {
   Login({Key? key}) : super(key: key);
-
-  TextEditingController emailInputController = TextEditingController();
-  TextEditingController passwordInputController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  void loginRequset(BuildContext context) async {
-    var url = "http://127.0.0.1:8080/Login";
-    var requestBody = {
-      "Email": emailInputController.text,
-      "Password": passwordInputController.text,
-    };
+// HTTP
+  void loginHttpRequset(BuildContext context) async {
+    var url = "http://127.0.0.1:8080/UserLogin";
+    var requestBody = {"Email": emailController.text, "Password": passwordController.text};
     var response = await http.post(
       Uri.parse(url),
       body: jsonEncode(requestBody),
       headers: {"Content-Type": "application/json"},
     );
-
     if (response.statusCode == 200) {
       onTapLoginButton(context);
     } else {
-      print("Email: ${emailInputController.text}");
-      print("Password: ${passwordInputController.text}");
+      print("Email: ${emailController.text}");
+      print("Password: ${passwordController.text}");
     }
+  }
+
+// Grpc
+  void loginUser(BuildContext context) async {
+    final request = LoginUserRequest(email: emailController.text, password: passwordController.text);
+    try {
+      final response = await GrpcService.client.loginUser(request);
+      // ignore: unnecessary_null_comparison
+      if (response != null) {
+        globalSessionID = response.sessionsID;
+        print(globalSessionID);
+        onTapLoginButton(context);
+      } else {
+        showErrorDialog(context, "Error: Empty response");
+      }
+    } catch (e) {
+      print("Error: $e");
+    } finally {
+      await GrpcService.channel.shutdown();
+    }
+  }
+
+  void showErrorDialog(BuildContext context, String errorMessage) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Error'),
+        content: Text(errorMessage),
+        actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text('OK'))],
+      ),
+    );
   }
 
   @override
@@ -87,7 +117,7 @@ class Login extends StatelessWidget {
                   text: "ログイン",
                   buttonTextStyle: theme.textTheme.titleSmall,
                   onPressed: () {
-                    loginRequset(context);
+                    loginUser(context);
                   },
                 ),
                 SizedBox(height: 25.v),
@@ -180,7 +210,7 @@ class Login extends StatelessWidget {
     FocusNode _focusNode = FocusNode();
     return CustomTextFormField(
       autofocus: true,
-      controller: emailInputController,
+      controller: emailController,
       textInputType: TextInputType.emailAddress,
       hintText: "example@email.com",
       maxLines: 1,
@@ -194,7 +224,7 @@ class Login extends StatelessWidget {
   /// Password Input Backend
   Widget _buildPasswordInput(BuildContext context) {
     return CustomTextFormField(
-      controller: passwordInputController,
+      controller: passwordController,
       hintText: "Secret",
       textInputAction: TextInputAction.done,
       textInputType: TextInputType.visiblePassword,

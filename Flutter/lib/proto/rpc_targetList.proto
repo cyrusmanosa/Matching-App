@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package pb;
+
+import "targetList.proto";
+
+option go_package = "Backend/pb";
+
+message CreateTargetListRequest {
+    int32 UserID = 1;
+    int32 Target1ID = 2;
+    int32 Target2ID = 3;
+    int32 Target3ID = 4;
+}
+
+message CreateTargetListResponse {
+    Targetlist tl = 1;
+}
+
+message GetTargetListRequest {
+    int32 UserID = 1;
+}
+message GetTargetListResponse {
+    Targetlist tl = 1;
+}
+
+message UpdateTargetListRequest {
+    int32 UserID = 1;
+    int32 Target1ID = 2;
+    int32 Target2ID = 3;
+    int32 Target3ID = 4;
+}
+message UpdateTargetListResponse {
+    Targetlist tl = 1;
+}

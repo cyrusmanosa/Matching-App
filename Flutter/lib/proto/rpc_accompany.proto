@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package pb;
+
+import "accompany.proto";
+
+option go_package = "Backend/pb";
+
+// Create
+message CreateAccompanyRequest {
+    string SessionID = 1; 
+    int32 Era = 2;
+    string City = 3;
+    string Gender = 4;
+    string Speaklanguage = 5;
+    string FindType = 6;
+    string FindTarget = 7;
+    string Sociability = 8;
+    bool Certification = 9;
+}
+message CreateAccompanyResponse {
+    Accompany ac = 1;
+}
+
+// Get
+message GetAccompanyRequest {
+    string SessionID = 1; 
+}
+message GetAccompanyResponse {
+    Accompany ac = 1;
+}
+
+// Update
+message UpdateAccompanyRequest {
+    string SessionID = 1; 
+    int32 Era = 2;
+    string City = 3;
+    string Gender = 4;
+    string Speaklanguage = 5;
+    string FindType = 6;
+    string FindTarget = 7;
+    string Sociability = 8;
+    bool Certification = 9;
+}
+message UpdateAccompanyResponse {
+    Accompany ac = 1;
+}

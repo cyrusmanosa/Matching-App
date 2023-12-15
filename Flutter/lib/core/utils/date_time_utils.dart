@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 const String dateTimeFormatPattern = 'dd/MM/yyyy';
 
 extension DateTimeExtension on DateTime {
-  /// Return a string representing [date] formatted according to our locale
+  /// Return a String representing [date] formatted according to our locale
   String format([
     String pattern = dateTimeFormatPattern,
     String? locale,

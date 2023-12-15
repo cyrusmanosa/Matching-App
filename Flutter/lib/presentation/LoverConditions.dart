@@ -1,4 +1,7 @@
+import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/global_variable/model.dart';
+import 'package:dating_your_date/pb/rpc_lover.pb.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
@@ -6,15 +9,16 @@ import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
 import 'package:dating_your_date/widgets/custom_outlined_button.dart';
 import 'package:dating_your_date/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 // ignore: must_be_immutable, camel_case_types
 class LoverConditions extends StatelessWidget {
   final String title;
   LoverConditions(this.title, {Key? key}) : super(key: key);
 
-  TextEditingController loverMinAgeInputController = TextEditingController();
-  TextEditingController loverMaxAgeInputController = TextEditingController();
-  TextEditingController loverCountryController = TextEditingController();
+  TextEditingController loverMinAgeController = TextEditingController();
+  TextEditingController loverMaxAgeController = TextEditingController();
   TextEditingController loverCityController = TextEditingController();
   TextEditingController loverGenderController = TextEditingController();
   TextEditingController loverBloodController = TextEditingController();
@@ -22,11 +26,88 @@ class LoverConditions extends StatelessWidget {
   TextEditingController loverSexualController = TextEditingController();
   TextEditingController loverHeightController = TextEditingController();
   TextEditingController loverWeightController = TextEditingController();
+  TextEditingController loverSpeakLanguageController = TextEditingController();
   TextEditingController loverEducationController = TextEditingController();
   TextEditingController loverJobController = TextEditingController();
   TextEditingController loverAnnualSalaryController = TextEditingController();
   TextEditingController loverSociabilityController = TextEditingController();
   TextEditingController loverReligiousController = TextEditingController();
+
+// Http
+  void createLoverHttpRequset(BuildContext context) async {
+    var url = "http://127.0.0.1:8080/CreateLover";
+    var requestBody = {
+      "session_id": globalSessionID,
+      "MinAge": loverMinAgeController.text,
+      "MaxAge": loverMaxAgeController.text,
+      "City": loverCityController.text,
+      "Gender": loverGenderController.text,
+      "Constellation": loverConstellationController.text,
+      "Height": loverHeightController.text,
+      "Weight": loverWeightController.text,
+      "Speak_language": loverSpeakLanguageController.text,
+      "Job": loverJobController.text,
+      "AnnualSalary": loverAnnualSalaryController.text,
+      "Sociability": loverSociabilityController.text,
+      "Religious": loverReligiousController.text,
+      "Certification": false
+    };
+    var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
+
+    if (response.statusCode == 200) {
+      onTaptf(context);
+    } else {
+      print("MinAge: ${loverMinAgeController.text}");
+      print("MaxAge: ${loverMaxAgeController.text}");
+      print("City: ${loverCityController.text}");
+      print("Gender: ${loverGenderController.text}");
+      print("Constellation: ${loverConstellationController.text}");
+      print("Height: ${loverHeightController.text}");
+      print("Weight: ${loverWeightController.text}");
+      print("Speak Language: ${loverSpeakLanguageController.text}");
+      print("Job: ${loverJobController.text}");
+      print("AnnualSalary: ${loverAnnualSalaryController.text}");
+      print("Sociability: ${loverSociabilityController.text}");
+      print("Religious: ${loverReligiousController.text}");
+    }
+  }
+
+  void createLoverGrpcRequset(BuildContext context) async {
+    final request = CreateLoverRequest(
+      sessionID: globalSessionID,
+      minAge: int.parse(loverMinAgeController.text),
+      maxAge: int.parse(loverMaxAgeController.text),
+      city: loverCityController.text,
+      gender: loverGenderController.text,
+      constellation: loverConstellationController.text,
+      height: int.parse(loverHeightController.text),
+      weight: int.parse(loverWeightController.text),
+      speaklanguage: loverSpeakLanguageController.text,
+      job: loverJobController.text,
+      annualSalary: int.parse(loverAnnualSalaryController.text),
+      sociability: loverSociabilityController.text,
+      religious: loverReligiousController.text,
+    );
+
+    final response = await GrpcService.client.createLover(request);
+    // ignore: unnecessary_null_comparison
+    if (response != null) {
+      onTaptf(context);
+    } else {
+      showErrorDialog(context, "Error: Empty response");
+    }
+  }
+
+  void showErrorDialog(BuildContext context, String errorMessage) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Error'),
+        content: Text(errorMessage),
+        actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text('OK'))],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +125,6 @@ class LoverConditions extends StatelessWidget {
             child: Column(
               children: [
                 // _buildLoverAgeInput(context),
-                SizedBox(height: 15.v),
-
-                // Country
-                CustomInputBar(titleName: "国籍:", backendPart: _buildLoverCountryInput(context)),
                 SizedBox(height: 15.v),
 
                 // City
@@ -78,8 +155,8 @@ class LoverConditions extends StatelessWidget {
                 CustomInputBar(titleName: "体重:", backendPart: _buildLoverWeightInput(context)),
                 SizedBox(height: 15.v),
 
-                // Education
-                CustomInputBar(titleName: "学歴:", backendPart: _buildLoverEducationInput(context)),
+                // Speak Language
+                CustomInputBar(titleName: "言語:", backendPart: _buildLoverSpeakLanguageInput(context)),
                 SizedBox(height: 15.v),
 
                 // Job
@@ -152,7 +229,7 @@ class LoverConditions extends StatelessWidget {
   //   return CustomTextFormField(
   //     maxLength: 3,
   //     width: 60.h,
-  //     controller: loverMinAgeInputController,
+  //     controller: loverMinAgeController,
   //     hintText: "30",
   //     alignment: Alignment.bottomCenter,
   //   );
@@ -165,7 +242,7 @@ class LoverConditions extends StatelessWidget {
   //     maxLines: 1,
   //     width: 60,
   //     height: 20,
-  //     controller: loverMaxAgeInputController,
+  //     controller: loverMaxAgeController,
   //     hintText: "30",
   //   );
   // }
@@ -185,14 +262,6 @@ class LoverConditions extends StatelessWidget {
   //     ],
   //   );
   // }
-
-  /// Country
-  Widget _buildLoverCountryInput(BuildContext context) {
-    return CustomTextFormField(
-      controller: loverCountryController,
-      hintText: "日本",
-    );
-  }
 
   /// City
   Widget _buildLoverCityInput(BuildContext context) {
@@ -250,11 +319,11 @@ class LoverConditions extends StatelessWidget {
     );
   }
 
-  /// Education
-  Widget _buildLoverEducationInput(BuildContext context) {
+  /// Speak Language
+  Widget _buildLoverSpeakLanguageInput(BuildContext context) {
     return CustomTextFormField(
-      controller: loverEducationController,
-      hintText: "高校生",
+      controller: loverSpeakLanguageController,
+      hintText: "日本語",
     );
   }
 
@@ -299,7 +368,7 @@ class LoverConditions extends StatelessWidget {
       text: "条件確認",
       buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
-        onTaptf(context);
+        createLoverGrpcRequset(context);
       },
     );
   }

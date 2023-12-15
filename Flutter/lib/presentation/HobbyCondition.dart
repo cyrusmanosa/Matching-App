@@ -1,4 +1,7 @@
+import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/global_variable/model.dart';
+import 'package:dating_your_date/pb/rpc_hobby.pb.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
@@ -14,34 +17,35 @@ class HobbyCondition extends StatelessWidget {
   final String title;
   HobbyCondition(this.title, {Key? key}) : super(key: key);
 
-  TextEditingController hobbyEraInputController = TextEditingController();
-  TextEditingController hobbyCountryInputController = TextEditingController();
-  TextEditingController hobbyCityInputController = TextEditingController();
-  TextEditingController hobbyGenderInputController = TextEditingController();
-  TextEditingController hobbySpeakLanguageInputController = TextEditingController();
-  TextEditingController hobbyFindTypeInputController = TextEditingController();
-  TextEditingController hobbyFindTargetInputController = TextEditingController();
-  TextEditingController hobbyExperienceInputController = TextEditingController();
-  TextEditingController hobbyHeightInputController = TextEditingController();
-  TextEditingController hobbyWeightInputController = TextEditingController();
-  TextEditingController hobbySociabilityInputController = TextEditingController();
+  TextEditingController hobbyEraController = TextEditingController();
+  TextEditingController hobbyCountryController = TextEditingController();
+  TextEditingController hobbyCityController = TextEditingController();
+  TextEditingController hobbyGenderController = TextEditingController();
+  TextEditingController hobbySpeakLanguageController = TextEditingController();
+  TextEditingController hobbyFindTypeController = TextEditingController();
+  TextEditingController hobbyFindTargetController = TextEditingController();
+  TextEditingController hobbyExperienceController = TextEditingController();
+  TextEditingController hobbyHeightController = TextEditingController();
+  TextEditingController hobbyWeightController = TextEditingController();
+  TextEditingController hobbySociabilityController = TextEditingController();
 
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
-  void hobbyRequset(BuildContext context) async {
-    var url = "http://127.0.0.1:8080/SignUp";
+// Http
+  void createHobbyHttpRequset(BuildContext context) async {
+    var url = "http://127.0.0.1:8080/CreateHobby";
     var requestBody = {
-      "User_ID": 1,
-      "Era": hobbyEraInputController.text,
-      "City": hobbyCityInputController.text,
-      "Gender": hobbyGenderInputController.text,
-      "Height": hobbyHeightInputController.text,
-      "Weight": hobbyWeightInputController.text,
-      "Speak_language": hobbySpeakLanguageInputController.text,
-      "Find_Type": hobbyFindTypeInputController.text,
-      "Find_Target": hobbyFindTargetInputController.text,
-      "Experience": hobbyExperienceInputController.text,
-      "Sociability": hobbySociabilityInputController.text,
+      "session_id": globalSessionID,
+      "Era": hobbyEraController.text,
+      "City": hobbyCityController.text,
+      "Gender": hobbyGenderController.text,
+      "Height": hobbyHeightController.text,
+      "Weight": hobbyWeightController.text,
+      "Speak_language": hobbySpeakLanguageController.text,
+      "Find_Type": hobbyFindTypeController.text,
+      "Find_Target": hobbyFindTargetController.text,
+      "Experience": hobbyExperienceController.text,
+      "Sociability": hobbySociabilityController.text,
       "Certification": false
     };
     var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
@@ -49,17 +53,53 @@ class HobbyCondition extends StatelessWidget {
     if (response.statusCode == 200) {
       onTaptf(context);
     } else {
-      print("Era: ${hobbyEraInputController.text}");
-      print("City: ${hobbyCityInputController.text}");
-      print("Gender: ${hobbyGenderInputController.text}");
-      print("Height: ${hobbyHeightInputController.text}");
-      print("Weight: ${hobbyWeightInputController.text}");
-      print("Speak_language: ${hobbySpeakLanguageInputController.text}");
-      print("Find_Type: ${hobbyFindTypeInputController.text}");
-      print("Find_Target: ${hobbyFindTargetInputController.text}");
-      print("Experience: ${hobbyExperienceInputController.text}");
-      print("Sociability: ${hobbySociabilityInputController.text}");
+      print("Era: ${hobbyEraController.text}");
+      print("City: ${hobbyCityController.text}");
+      print("Gender: ${hobbyGenderController.text}");
+      print("Height: ${hobbyHeightController.text}");
+      print("Weight: ${hobbyWeightController.text}");
+      print("Speak_language: ${hobbySpeakLanguageController.text}");
+      print("Find_Type: ${hobbyFindTypeController.text}");
+      print("Find_Target: ${hobbyFindTargetController.text}");
+      print("Experience: ${hobbyExperienceController.text}");
+      print("Sociability: ${hobbySociabilityController.text}");
     }
+  }
+
+  void createHobbyGrpcRequset(BuildContext context) async {
+    final request = CreateHobbyRequest(
+      sessionID: globalSessionID,
+      era: int.parse(hobbyEraController.text),
+      city: hobbyCityController.text,
+      gender: hobbyGenderController.text,
+      height: int.parse(hobbyHeightController.text),
+      weight: int.parse(hobbyWeightController.text),
+      speaklanguage: hobbySpeakLanguageController.text,
+      findType: hobbyFindTypeController.text,
+      findTarget: hobbyFindTargetController.text,
+      experience: int.parse(hobbyExperienceController.text),
+      sociability: hobbySociabilityController.text,
+    );
+
+    final response = await GrpcService.client.createHobby(request);
+    // ignore: unnecessary_null_comparison
+    if (response != null) {
+      onTaptf(context);
+    } else {
+      print(globalSessionID);
+      showErrorDialog(context, "Error: Empty response");
+    }
+  }
+
+  void showErrorDialog(BuildContext context, String errorMessage) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Error'),
+        content: Text(errorMessage),
+        actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text('OK'))],
+      ),
+    );
   }
 
   @override
@@ -105,7 +145,7 @@ class HobbyCondition extends StatelessWidget {
                   CustomInputBar(titleName: "探す対象:", backendPart: _buildHobbyFindTargetInput(context)),
                   SizedBox(height: 15.v),
 
-                  // Experience of Hobby
+                  // Experience
                   CustomInputBar(titleName: "経験:", backendPart: _buildHobbyExperienceInput(context)),
                   SizedBox(height: 15.v),
 
@@ -177,7 +217,7 @@ class HobbyCondition extends StatelessWidget {
   /// Era
   Widget _buildHobbyEraInput(BuildContext context) {
     return CustomTextFormField(
-      controller: hobbyEraInputController,
+      controller: hobbyEraController,
       hintText: "３０代",
     );
   }
@@ -185,7 +225,7 @@ class HobbyCondition extends StatelessWidget {
   /// Country
   Widget _buildHobbyCountryInput(BuildContext context) {
     return CustomTextFormField(
-      controller: hobbyCountryInputController,
+      controller: hobbyCountryController,
       hintText: "日本",
     );
   }
@@ -193,7 +233,7 @@ class HobbyCondition extends StatelessWidget {
   /// City
   Widget _buildHobbyCityInput(BuildContext context) {
     return CustomTextFormField(
-      controller: hobbyCityInputController,
+      controller: hobbyCityController,
       hintText: "大阪",
     );
   }
@@ -201,15 +241,15 @@ class HobbyCondition extends StatelessWidget {
   /// Gender
   Widget _buildHobbyGenderInput(BuildContext context) {
     return CustomTextFormField(
-      controller: hobbyGenderInputController,
+      controller: hobbyGenderController,
       hintText: "男",
     );
   }
 
-  /// Hobby Type
+  /// Speak Language
   Widget _buildHobbySpeakLanguageInput(BuildContext context) {
     return CustomTextFormField(
-      controller: hobbySpeakLanguageInputController,
+      controller: hobbySpeakLanguageController,
       hintText: "日本語",
     );
   }
@@ -217,7 +257,7 @@ class HobbyCondition extends StatelessWidget {
   /// Hobby Type
   Widget _buildHobbyTypeInput(BuildContext context) {
     return CustomTextFormField(
-      controller: hobbyFindTypeInputController,
+      controller: hobbyFindTypeController,
       hintText: "サッカー",
     );
   }
@@ -225,7 +265,7 @@ class HobbyCondition extends StatelessWidget {
   /// Find Target
   Widget _buildHobbyFindTargetInput(BuildContext context) {
     return CustomTextFormField(
-      controller: hobbyFindTargetInputController,
+      controller: hobbyFindTargetController,
       hintText: "サッカーのチームメンバー",
     );
   }
@@ -233,7 +273,7 @@ class HobbyCondition extends StatelessWidget {
   /// Experience
   Widget _buildHobbyExperienceInput(BuildContext context) {
     return CustomTextFormField(
-      controller: hobbyExperienceInputController,
+      controller: hobbyExperienceController,
       hintText: "3年",
     );
   }
@@ -241,7 +281,7 @@ class HobbyCondition extends StatelessWidget {
   /// Height
   Widget _buildHobbyHeightInput(BuildContext context) {
     return CustomTextFormField(
-      controller: hobbyHeightInputController,
+      controller: hobbyHeightController,
       hintText: "170cm",
     );
   }
@@ -249,7 +289,7 @@ class HobbyCondition extends StatelessWidget {
   /// Section Widget
   Widget _buildHobbyWeightInput(BuildContext context) {
     return CustomTextFormField(
-      controller: hobbyWeightInputController,
+      controller: hobbyWeightController,
       hintText: "60Kg",
       textInputAction: TextInputAction.done,
     );
@@ -258,7 +298,7 @@ class HobbyCondition extends StatelessWidget {
   /// Sociability
   Widget _buildHobbySociabilityInput(BuildContext context) {
     return CustomTextFormField(
-      controller: hobbySociabilityInputController,
+      controller: hobbySociabilityController,
       hintText: "人たら神",
       textInputAction: TextInputAction.done,
     );
@@ -272,7 +312,7 @@ class HobbyCondition extends StatelessWidget {
       text: "条件確認",
       buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
-        hobbyRequset(context);
+        createHobbyGrpcRequset(context);
       },
     );
   }

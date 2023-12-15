@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "Backend/pb";
+
+
+message LoginUserRequest {
+    string Email = 1;
+    string Password = 2;
+}
+
+message LoginUserResponse {
+    string SessionsID = 1;
+    string Email = 3;
+    google.protobuf.Timestamp  AccessTokenExpiresAt = 6;
+}
