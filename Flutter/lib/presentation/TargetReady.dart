@@ -12,18 +12,18 @@ class TargetReady extends StatelessWidget {
       child: Scaffold(
         body: Container(
           width: double.maxFinite,
-          padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
+          padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
           child: Column(
             children: [
               // logo
-              CustomImageView(imagePath: ImageConstant.imgLogo, width: 110, alignment: Alignment.center),
+              CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 4, alignment: Alignment.center),
               SizedBox(height: 1.v),
 
               CustomImageView(imagePath: ImageConstant.imgSlogan, width: 150, alignment: Alignment.center),
               SizedBox(height: 75.v),
 
-              Text("ターゲットを準備します", style: theme.textTheme.headlineLarge),
-              SizedBox(height: 15.v),
+              Text("ターゲットを準備します", style: theme.textTheme.headlineMedium),
+              SizedBox(height: mediaQueryData.size.height / 50),
             ],
           ),
         ),

@@ -3,7 +3,7 @@ import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_trailing_return.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
-import 'package:dating_your_date/widgets/custom_text_form_field.dart';
+import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg_provider/flutter_svg_provider.dart' as fs;
@@ -24,7 +24,7 @@ class ChatBox extends StatelessWidget {
           width: double.maxFinite,
           child: Column(
             children: [
-              SizedBox(height: 15.v),
+              SizedBox(height: mediaQueryData.size.height / 50),
               _buildTwo(context),
               SizedBox(height: 7.v),
               _buildNinetySeven(context),
@@ -89,7 +89,7 @@ class ChatBox extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(bottom: 1.v),
-                    child: CustomTextFormField(
+                    child: CustomInputFormBar(
                       width: 300.h,
                       controller: secretController,
                       hintText: "Secret",

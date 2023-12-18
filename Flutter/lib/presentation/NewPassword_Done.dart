@@ -18,7 +18,7 @@ class NewPasswordDone extends StatelessWidget {
               // logo
               CustomImageView(
                 imagePath: ImageConstant.imgLogo,
-                width: 110,
+                width: mediaQueryData.size.width / 4,
                 alignment: Alignment.center,
               ),
               SizedBox(height: 1.v),
@@ -29,7 +29,7 @@ class NewPasswordDone extends StatelessWidget {
               SizedBox(height: 75.v),
 
               // Title 1
-              Text("新しいパスワード設定しました", style: TextStyle(fontSize: 25, color: appTheme.black900)),
+              Text("新しいパスワード設定しました", style: TextStyle(fontSize: 25, color: appTheme.black)),
               SizedBox(height: 25.v),
 
               // Tilte 2
@@ -40,7 +40,7 @@ class NewPasswordDone extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
-                  style: CustomTextStyles.titleLargeBlack900,
+                  style: CustomTextStyles.bodyMediumblack,
                 ),
               ),
             ],

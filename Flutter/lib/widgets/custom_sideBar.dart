@@ -25,7 +25,7 @@ class CustomSideBar extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(left: 10.h),
-            child: Text(item!, style: CustomTextStyles.headlineSmallRoundedMplus1cGray500),
+            child: Text(item!, style: CustomTextStyles.headlineMediumRoundedMplus1cGray500),
           ),
         ],
       ),

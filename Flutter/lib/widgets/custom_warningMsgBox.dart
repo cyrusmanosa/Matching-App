@@ -1,11 +1,11 @@
 import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/widgets/custom_outlined_button.dart';
+import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:flutter/material.dart';
 
 class CustomWarningMsgBox extends StatelessWidget {
-  const CustomWarningMsgBox({Key? key, this.title, this.msg, this.page}) : super(key: key);
+  const CustomWarningMsgBox({Key? key, this.btnTitle, this.msg, this.page}) : super(key: key);
 
-  final String? title;
+  final String? btnTitle;
   final String? msg;
   final Widget? page;
 
@@ -31,15 +31,15 @@ class CustomWarningMsgBox extends StatelessWidget {
                   children: [
                     CustomImageView(imagePath: ImageConstant.imgWarning, height: 40, width: 50, alignment: Alignment.center),
                     SizedBox(height: 10.v),
-                    Text(msg!, style: CustomTextStyles.bodyLargeBlack900),
-                    SizedBox(height: 15.v),
+                    Text(msg!, style: CustomTextStyles.bodyMediumblack),
+                    SizedBox(height: mediaQueryData.size.height / 50),
 
                     // button
                     CustomOutlinedButton(
                       height: 40,
                       width: 95,
-                      text: title!,
-                      buttonTextStyle: theme.textTheme.titleSmall!,
+                      text: btnTitle!,
+                      buttonTextStyle: theme.textTheme.titleMedium!,
                       onPressed: () {
                         // ignore: unnecessary_statements
                         page;

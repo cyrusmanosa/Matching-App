@@ -214,7 +214,7 @@ class AppNavigationScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          SizedBox(height: 15.v),
+          SizedBox(height: mediaQueryData.size.height / 50),
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
@@ -231,7 +231,7 @@ class AppNavigationScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 15.v),
+          SizedBox(height: mediaQueryData.size.height / 50),
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
@@ -275,7 +275,7 @@ class AppNavigationScreen extends StatelessWidget {
         ),
         child: Column(
           children: [
-            SizedBox(height: 15.v),
+            SizedBox(height: mediaQueryData.size.height / 50),
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
@@ -292,7 +292,7 @@ class AppNavigationScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 15.v),
+            SizedBox(height: mediaQueryData.size.height / 50),
             SizedBox(height: 5.v),
             Divider(
               height: 1.v,

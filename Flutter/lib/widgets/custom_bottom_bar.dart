@@ -129,9 +129,7 @@ class DefaultWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Please replace the respective Widget here', style: TextStyle(fontSize: 18)),
-          ],
+          children: [Text('Please replace the respective Widget here', style: TextStyle(fontSize: 18))],
         ),
       ),
     );

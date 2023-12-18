@@ -6,8 +6,8 @@ import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
-import 'package:dating_your_date/widgets/custom_outlined_button.dart';
-import 'package:dating_your_date/widgets/custom_text_form_field.dart';
+import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
+import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -35,7 +35,7 @@ class LoverConditionsRepair extends StatelessWidget {
   TextEditingController resetLoverReligiousController = TextEditingController();
 
 // Http
-  void updateLoverHttpRequset(BuildContext context) async {
+  void updateLoverHttpRequest(BuildContext context) async {
     var url = "http://127.0.0.1:8080/UpdateLover";
     var requestBody = {
       "session_id": globalSessionID,
@@ -56,7 +56,7 @@ class LoverConditionsRepair extends StatelessWidget {
     var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
 
     if (response.statusCode == 200) {
-      onTaptf(context);
+      onTapNextButton(context);
     } else {
       print("MinAge: ${resetLoverMinAgeController.text}");
       print("MaxAge: ${resetLoverMaxAgeController.text}");
@@ -73,7 +73,8 @@ class LoverConditionsRepair extends StatelessWidget {
     }
   }
 
-  void updateLoverGrpcRequset(BuildContext context) async {
+// Grpc
+  void updateLoverGrpcRequest(BuildContext context) async {
     final request = UpdateLoverRequest(
       sessionID: globalSessionID,
       minAge: int.parse(resetLoverMinAgeController.text),
@@ -93,7 +94,7 @@ class LoverConditionsRepair extends StatelessWidget {
     final response = await GrpcService.client.updateLover(request);
     // ignore: unnecessary_null_comparison
     if (response != null) {
-      onTaptf(context);
+      onTapNextButton(context);
     } else {
       showErrorDialog(context, "Error: Empty response");
     }
@@ -122,12 +123,12 @@ class LoverConditionsRepair extends StatelessWidget {
         body: SizedBox(
           width: double.maxFinite,
           child: SingleChildScrollView(
-            padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
+            padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
             child: Column(
               children: [
                 // Text(
                 //   "年齢:",
-                //   style: theme.textTheme.titleLarge,
+                //   style: theme.textTheme.titleMedium,
                 // ),
                 // // Age range
                 // Align(
@@ -158,7 +159,7 @@ class LoverConditionsRepair extends StatelessWidget {
                 //             top: 30.v,
                 //             bottom: 5,
                 //           ),
-                //           child: Text("から", style: theme.textTheme.titleLarge),
+                //           child: Text("から", style: theme.textTheme.titleMedium),
                 //         ),
 
                 //         // Max
@@ -176,59 +177,59 @@ class LoverConditionsRepair extends StatelessWidget {
                 //     ),
                 //   ),
                 // ),
-                // SizedBox(height: 15.v),
+                // SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Country
                 CustomInputBar(titleName: "国籍:", backendPart: _buildLoverResetCountryInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // City
                 CustomInputBar(titleName: "居住地:", backendPart: _buildLoverResetCityInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Gender
                 CustomInputBar(titleName: "性別:", backendPart: _buildLoverResetGenderInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Constellation
                 CustomInputBar(titleName: "星座:", backendPart: _buildLoverResetConstellationInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Blood
                 CustomInputBar(titleName: "血液型:", backendPart: _buildLoverResetBloodInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Sexual
                 CustomInputBar(titleName: "性的指向:", backendPart: _buildLoverResetSexualInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Height
                 CustomInputBar(titleName: "身長:", backendPart: _buildLoverResetHeightInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Wegiht
                 CustomInputBar(titleName: "体重:", backendPart: _buildLoverResetWeightInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Speak Language
                 CustomInputBar(titleName: "言語:", backendPart: _buildLoverSpeakLanguageInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Job
                 CustomInputBar(titleName: "職種:", backendPart: _buildLoverResetJobInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Annual Salary
                 CustomInputBar(titleName: "年収:", backendPart: _buildLoverResetAnnualSalaryInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Socialbility
                 CustomInputBar(titleName: "社交力:", backendPart: _buildLoverResetSociabilityInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Religious
                 CustomInputBar(titleName: "宗教:", backendPart: _buildLoverResetReligiousInput(context)),
-                SizedBox(height: 20.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // 本人
                 Align(
@@ -248,10 +249,10 @@ class LoverConditionsRepair extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(height: 40.v),
+                SizedBox(height: mediaQueryData.size.height / 25),
 
                 // button
-                _buildCertificationForCheck(context),
+                _buildNextPageButton(context),
                 SizedBox(height: 30.v)
               ],
             ),
@@ -282,7 +283,7 @@ class LoverConditionsRepair extends StatelessWidget {
 
   // /// Min Age
   // Widget _buildLoverMinAgeInput(BuildContext context) {
-  //   return CustomTextFormField(
+  //   return CustomInputFormBar(
   //     maxLength: 3,
   //     width: 60.h,
   //     controller: resetLoverMinAgeController,
@@ -293,7 +294,7 @@ class LoverConditionsRepair extends StatelessWidget {
 
   // /// Max Age
   // Widget _buildLoverMaxAgeInput(BuildContext context) {
-  //   return CustomTextFormField(
+  //   return CustomInputFormBar(
   //     maxLength: 3,
   //     width: 60,
   //     controller: resetLoverMaxAgeController,
@@ -304,7 +305,7 @@ class LoverConditionsRepair extends StatelessWidget {
 
   /// Country
   Widget _buildLoverResetCountryInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: resetLoverCountryController,
       hintText: "日本",
     );
@@ -312,7 +313,7 @@ class LoverConditionsRepair extends StatelessWidget {
 
   /// City
   Widget _buildLoverResetCityInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: resetLoverCityController,
       hintText: "大阪",
     );
@@ -320,7 +321,7 @@ class LoverConditionsRepair extends StatelessWidget {
 
   /// Gender
   Widget _buildLoverResetGenderInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: resetLoverGenderController,
       hintText: "男",
     );
@@ -328,7 +329,7 @@ class LoverConditionsRepair extends StatelessWidget {
 
   /// Constellation
   Widget _buildLoverResetConstellationInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: resetLoverConstellationController,
       hintText: "いて座",
     );
@@ -336,7 +337,7 @@ class LoverConditionsRepair extends StatelessWidget {
 
   /// Constellation
   Widget _buildLoverResetBloodInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: resetLoverBloodController,
       hintText: "A",
     );
@@ -344,7 +345,7 @@ class LoverConditionsRepair extends StatelessWidget {
 
   /// Sexual
   Widget _buildLoverResetSexualInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: resetLoverSexualController,
       hintText: "異性愛",
     );
@@ -352,7 +353,7 @@ class LoverConditionsRepair extends StatelessWidget {
 
   /// Height
   Widget _buildLoverResetHeightInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: resetLoverHeightController,
       hintText: "170cm",
     );
@@ -360,7 +361,7 @@ class LoverConditionsRepair extends StatelessWidget {
 
   /// Weight
   Widget _buildLoverResetWeightInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: resetLoverWeightController,
       hintText: "170cm",
     );
@@ -368,7 +369,7 @@ class LoverConditionsRepair extends StatelessWidget {
 
   /// Speak Language
   Widget _buildLoverSpeakLanguageInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: resetLoverSpeakLanguageController,
       hintText: "日本語",
     );
@@ -376,7 +377,7 @@ class LoverConditionsRepair extends StatelessWidget {
 
   /// Job
   Widget _buildLoverResetJobInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: resetLoverJobController,
       hintText: "ホスト",
     );
@@ -384,7 +385,7 @@ class LoverConditionsRepair extends StatelessWidget {
 
   /// Annual Salary
   Widget _buildLoverResetAnnualSalaryInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: resetLoverAnnualSalaryController,
       hintText: "4000",
     );
@@ -392,7 +393,7 @@ class LoverConditionsRepair extends StatelessWidget {
 
   /// Sociability
   Widget _buildLoverResetSociabilityInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: resetLoverSociabilityController,
       hintText: "人たら神",
     );
@@ -400,27 +401,27 @@ class LoverConditionsRepair extends StatelessWidget {
 
   /// Religious
   Widget _buildLoverResetReligiousInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: resetLoverReligiousController,
       hintText: "多神教",
       textInputAction: TextInputAction.done,
     );
   }
 
-  /// Certification For Check
-  Widget _buildCertificationForCheck(BuildContext context) {
+  /// Next Button
+  Widget _buildNextPageButton(BuildContext context) {
     return CustomOutlinedButton(
-      width: 110,
+      width: mediaQueryData.size.width / 4,
       height: 40,
       text: "条件確認",
       buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
-        updateLoverGrpcRequset(context);
+        updateLoverGrpcRequest(context);
       },
     );
   }
 
-  onTaptf(BuildContext context) {
+  onTapNextButton(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.payDone);
   }
 }

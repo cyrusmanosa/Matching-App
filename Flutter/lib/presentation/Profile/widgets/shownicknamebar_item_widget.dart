@@ -21,9 +21,9 @@ class ShownDataBaWidget extends StatelessWidget {
           // Under bar
           Align(alignment: Alignment.bottomCenter, child: SizedBox(width: 330.h, child: Divider())),
           // Data
-          Align(alignment: Alignment.centerRight, child: Text(data!, style: CustomTextStyles.bodyLargeBlack900)),
+          Align(alignment: Alignment.centerRight, child: Text(data!, style: CustomTextStyles.bodyMediumblack)),
           // Theme
-          Align(alignment: Alignment.centerLeft, child: Text(item!, style: CustomTextStyles.bodyLargePinkA100)),
+          Align(alignment: Alignment.centerLeft, child: Text(item!, style: CustomTextStyles.bodyMediumPinkA100)),
         ],
       ),
     );

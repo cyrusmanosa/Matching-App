@@ -41,8 +41,8 @@ class CustomElevatedButton extends BaseButton {
   }
 
   Widget get buildElevatedButtonWidget => Container(
-        height: this.height ?? 120.v,
-        width: this.width ?? double.maxFinite,
+        height: this.height ?? mediaQueryData.size.height / 20,
+        width: this.width ?? mediaQueryData.size.width / 1.5,
         margin: margin,
         decoration: decoration,
         child: ElevatedButton(
@@ -53,7 +53,7 @@ class CustomElevatedButton extends BaseButton {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               leftIcon ?? const SizedBox.shrink(),
-              Text(text, style: buttonTextStyle ?? theme.textTheme.displayMedium),
+              Text(text, style: buttonTextStyle ?? theme.textTheme.headlineMedium),
               rightIcon ?? const SizedBox.shrink(),
             ],
           ),

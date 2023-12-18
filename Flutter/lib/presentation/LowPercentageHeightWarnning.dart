@@ -1,5 +1,5 @@
 import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/widgets/custom_outlined_button.dart';
+import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:flutter/material.dart';
 
 class LowPercentageHeightWarnning extends StatelessWidget {
@@ -13,13 +13,13 @@ class LowPercentageHeightWarnning extends StatelessWidget {
       child: Scaffold(
         body: Container(
           width: double.maxFinite,
-          padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
+          padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
           child: Column(
             children: [
               // logo
               CustomImageView(
                 imagePath: ImageConstant.imgLogo,
-                width: 110,
+                width: mediaQueryData.size.width / 4,
                 alignment: Alignment.center,
               ),
               SizedBox(height: 1.v),
@@ -36,10 +36,10 @@ class LowPercentageHeightWarnning extends StatelessWidget {
                   maxLines: 4,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
-                  style: CustomTextStyles.headlineMediumBlack900,
+                  style: CustomTextStyles.headlineMediumblack,
                 ),
               ),
-              SizedBox(height: 30.v),
+              SizedBox(height: mediaQueryData.size.height / 25),
 
               // button
               Padding(
@@ -51,14 +51,14 @@ class LowPercentageHeightWarnning extends StatelessWidget {
                       width: 100,
                       height: 40,
                       text: "続ける",
-                      buttonTextStyle: theme.textTheme.titleLarge,
+                      buttonTextStyle: theme.textTheme.titleMedium,
                     ),
                     CustomOutlinedButton(
                       margin: EdgeInsets.only(left: 15.h),
                       width: 100,
                       height: 40,
                       text: "編集",
-                      buttonTextStyle: theme.textTheme.titleLarge,
+                      buttonTextStyle: theme.textTheme.titleMedium,
                     ),
                   ],
                 ),

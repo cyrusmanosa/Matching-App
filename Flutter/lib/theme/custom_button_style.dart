@@ -2,41 +2,40 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 class CustomButtonStyles {
-// Filled button style
-  // Dark Red BG and Shadow (onTap Color)
+// --------------------- Filled ---------------------
   static ButtonStyle get fillDarkRed => ElevatedButton.styleFrom(
         backgroundColor: appTheme.pink800,
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
       );
-  // Gray BG , black word
-  static ButtonStyle get fillGray => ElevatedButton.styleFrom(
+  static ButtonStyle get fillLightGray => ElevatedButton.styleFrom(
         backgroundColor: appTheme.gray500,
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
       );
-  // Pink BG and Shadow (not onTap Color)
+  static ButtonStyle get fillDarkGray => ElevatedButton.styleFrom(
+        backgroundColor: appTheme.gray800,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
+      );
   static ButtonStyle get fillPink => ElevatedButton.styleFrom(
         backgroundColor: appTheme.pinkA100,
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
       );
 
-  // Red BG and Shadow (not onTap Color)
   static ButtonStyle get fillRed => ElevatedButton.styleFrom(
         backgroundColor: appTheme.redA700,
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
       );
 
+  static ButtonStyle get fillBlue => ElevatedButton.styleFrom(
+        backgroundColor: appTheme.blueA400,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
+      );
+
+// --------------------- outline ---------------------
   // Dark Blue
   static ButtonStyle get outlineDarkBlue => ElevatedButton.styleFrom(
         backgroundColor: appTheme.blue800,
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
-        shadowColor: appTheme.black900.withOpacity(0.3),
-      );
-
-  // light Blue GB and Shadow
-  static ButtonStyle get outlineBlueBlueBG => OutlinedButton.styleFrom(
-        backgroundColor: appTheme.blueA400,
-        side: BorderSide(color: appTheme.blue800, width: 1),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
+        shadowColor: appTheme.black.withOpacity(0.3),
       );
 
   // while BG , gray border , Shadow

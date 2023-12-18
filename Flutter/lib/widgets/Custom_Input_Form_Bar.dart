@@ -1,8 +1,8 @@
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
-class CustomTextFormField extends StatelessWidget {
-  CustomTextFormField({
+class CustomInputFormBar extends StatelessWidget {
+  CustomInputFormBar({
     Key? key,
     this.alignment,
     this.borderDecoration,
@@ -22,11 +22,11 @@ class CustomTextFormField extends StatelessWidget {
     this.width,
     this.height,
     this.validator,
-    this.textInputAction = TextInputAction.next,
-    this.textInputType = TextInputType.text,
+    this.textInputAction,
+    this.textInputType,
     this.autofocus = true,
-    this.filled = false,
-    this.obscureText = false,
+    this.filled,
+    this.obscureText,
     this.onTap,
   }) : super(key: key);
 
@@ -57,27 +57,34 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return alignment != null ? Align(alignment: alignment ?? Alignment.center, child: textFormFieldWidget) : textFormFieldWidget;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return alignment != null ? Align(alignment: alignment ?? Alignment.center, child: textFormFieldWidget) : textFormFieldWidget;
+      },
+    );
   }
 
   Widget get textFormFieldWidget => SizedBox(
-        height: height,
-        width: double.maxFinite,
+        height: height ?? mediaQueryData.size.height / 25,
+        width: width ?? mediaQueryData.size.width / 1.2,
         child: TextFormField(
           autofocus: autofocus,
           controller: controller,
+          textAlign: TextAlign.start,
           // input complete
           decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(top: -10),
             hintText: hintText,
-            hintStyle: theme.textTheme.bodyLarge,
+            hintStyle: theme.textTheme.bodyMedium,
             border: InputBorder.none,
             prefix: Padding(padding: EdgeInsets.only(left: 15.0)),
           ),
+
           focusNode: focusNode,
           keyboardType: textInputType,
           maxLength: maxLength,
           maxLines: maxLines,
-          obscureText: obscureText!,
+          obscureText: obscureText ?? false,
           style: theme.textTheme.displayLarge,
           textInputAction: textInputAction,
           validator: validator,
@@ -86,7 +93,6 @@ class CustomTextFormField extends StatelessWidget {
       );
 
   InputDecoration get decoration => InputDecoration(
-        contentPadding: contentPadding ?? EdgeInsets.all(5),
         fillColor: fillColor,
         filled: filled,
         hintText: hintText,
@@ -97,29 +103,21 @@ class CustomTextFormField extends StatelessWidget {
         suffixIcon: suffix,
         suffixIconConstraints: suffixConstraints,
 
-        border: OutlineInputBorder(
-          borderRadius: BorderRadiusStyle.r5,
-          borderSide: BorderSide(color: appTheme.pinkA100, width: 1),
-        ),
+        border: OutlineInputBorder(borderRadius: BorderRadiusStyle.r5, borderSide: BorderSide(color: appTheme.pinkA100, width: 1)),
         enabledBorder: OutlineInputBorder(borderRadius: BorderRadiusStyle.r5),
 
         // Error Border
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadiusStyle.r5,
-          borderSide: BorderSide(color: appTheme.redA700, width: 1),
-        ),
+        errorBorder: OutlineInputBorder(borderRadius: BorderRadiusStyle.r5, borderSide: BorderSide(color: appTheme.redA700, width: 1)),
 
         // Focus Border
         focusedBorder: borderDecoration,
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadiusStyle.r5,
-          borderSide: BorderSide(color: appTheme.blue800, width: 1),
-        ),
+        focusedErrorBorder:
+            OutlineInputBorder(borderRadius: BorderRadiusStyle.r5, borderSide: BorderSide(color: appTheme.blue800, width: 1)),
       );
 }
 
-/// Extension on [CustomTextFormField] to facilitate inclusion of all types of border style etc
-extension TextFormFieldStyleHelper on CustomTextFormField {
+/// Extension on [CustomInputFormBar] to facilitate inclusion of all types of border style etc
+extension TextFormFieldStyleHelper on CustomInputFormBar {
   static OutlineInputBorder get fillGray => OutlineInputBorder(
         borderRadius: BorderRadiusStyle.r5,
         borderSide: BorderSide(color: appTheme.pinkA100),

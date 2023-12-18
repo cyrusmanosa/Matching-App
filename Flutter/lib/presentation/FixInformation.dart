@@ -6,8 +6,8 @@ import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
-import 'package:dating_your_date/widgets/custom_outlined_button.dart';
-import 'package:dating_your_date/widgets/custom_text_form_field.dart';
+import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
+import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
@@ -24,7 +24,7 @@ class FixInformation extends StatelessWidget {
   TextEditingController fixBloodController = TextEditingController();
 
   // Http
-  void fixInformationHttpRequset(BuildContext context) async {
+  void fixInformationHttpRequest(BuildContext context) async {
     var url = "http://127.0.0.1:8080/CreateFixInfo";
     var requestBody = {
       "FirstName": fixFirstNameController.text,
@@ -49,7 +49,7 @@ class FixInformation extends StatelessWidget {
   }
 
   // Grpc
-  void fixInformationGrpcRequset(BuildContext context) async {
+  void fixInformationGrpcRequest(BuildContext context) async {
     final request = CreateFixRequest(
       firstName: fixFirstNameController.text,
       lastName: fixLastNameController.text,
@@ -90,7 +90,7 @@ class FixInformation extends StatelessWidget {
           child: Container(
             width: double.maxFinite,
             child: SingleChildScrollView(
-              padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
+              padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
               child: Column(
                 children: [
                   // image
@@ -100,38 +100,38 @@ class FixInformation extends StatelessWidget {
                     width: 140.adaptSize,
                     alignment: Alignment.center,
                   ),
-                  SizedBox(height: 20.v),
+                  SizedBox(height: mediaQueryData.size.height / 50),
 
                   // msg
                   Align(
                     alignment: Alignment.center,
-                    child: Text("以下の項目は全部入力するのが必要です。", style: CustomTextStyles.bodyMediumBlack900),
+                    child: Text("以下の項目は全部入力するのが必要です。", style: CustomTextStyles.bodyMediumblack),
                   ),
                   SizedBox(height: 25.v),
 
                   // Last name
                   CustomInputBar(titleName: "姓:", backendPart: _buildfixLastNameInput(context)),
-                  SizedBox(height: 15.v),
+                  SizedBox(height: mediaQueryData.size.height / 50),
 
                   // First name
                   CustomInputBar(titleName: "名:", backendPart: _buildfixFirstNameInput(context)),
-                  SizedBox(height: 15.v),
+                  SizedBox(height: mediaQueryData.size.height / 50),
 
                   // Birth
                   CustomInputBar(titleName: "生年月日:", backendPart: _buildfixBirthInput(context)),
-                  SizedBox(height: 15.v),
+                  SizedBox(height: mediaQueryData.size.height / 50),
 
                   // Country
                   CustomInputBar(titleName: "国籍:", backendPart: _buildfixCountryInput(context)),
-                  SizedBox(height: 15.v),
+                  SizedBox(height: mediaQueryData.size.height / 50),
 
                   // Gender
                   CustomInputBar(titleName: "性別:", backendPart: _buildfixGenderInput(context)),
-                  SizedBox(height: 15.v),
+                  SizedBox(height: mediaQueryData.size.height / 50),
 
                   // 血液型
                   CustomInputBar(titleName: "血液型:", backendPart: _buildfixBloodInput(context)),
-                  SizedBox(height: 20.v),
+                  SizedBox(height: mediaQueryData.size.height / 50),
 
                   // 18
                   Align(
@@ -150,7 +150,7 @@ class FixInformation extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 15.v),
+                  SizedBox(height: mediaQueryData.size.height / 50),
 
                   // Agree
                   Align(
@@ -170,11 +170,11 @@ class FixInformation extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(height: 40.v),
+                  SizedBox(height: mediaQueryData.size.height / 25),
 
                   // Button
-                  _buildNextButton(context),
-                  SizedBox(height: 30.v),
+                  _buildNextPageButton(context),
+                  SizedBox(height: mediaQueryData.size.height / 25),
                 ],
               ),
             ),
@@ -186,7 +186,7 @@ class FixInformation extends StatelessWidget {
 
   /// Last Name
   Widget _buildfixLastNameInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: fixLastNameController,
       hintText: "山崎",
     );
@@ -194,7 +194,7 @@ class FixInformation extends StatelessWidget {
 
   /// First Name
   Widget _buildfixFirstNameInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: fixFirstNameController,
       hintText: "泰一",
     );
@@ -202,7 +202,7 @@ class FixInformation extends StatelessWidget {
 
   /// Birth
   Widget _buildfixBirthInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: fixBirthController,
       hintText: "1982−03−12",
       onTap: () async {
@@ -222,7 +222,7 @@ class FixInformation extends StatelessWidget {
 
   /// Country
   Widget _buildfixCountryInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: fixCountryController,
       hintText: "日本",
     );
@@ -230,7 +230,7 @@ class FixInformation extends StatelessWidget {
 
   /// Gender
   Widget _buildfixGenderInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: fixGenderController,
       hintText: "男",
     );
@@ -238,7 +238,7 @@ class FixInformation extends StatelessWidget {
 
   /// Blood
   Widget _buildfixBloodInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: fixBloodController,
       hintText: "O",
       textInputAction: TextInputAction.done,
@@ -246,14 +246,14 @@ class FixInformation extends StatelessWidget {
   }
 
   /// Next Button
-  Widget _buildNextButton(BuildContext context) {
+  Widget _buildNextPageButton(BuildContext context) {
     return CustomOutlinedButton(
-      width: 90,
-      height: 40,
+      width: mediaQueryData.size.width / 4,
+      height: mediaQueryData.size.height / 25,
       text: "次へ",
       buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
-        fixInformationGrpcRequset(context);
+        fixInformationGrpcRequest(context);
       },
     );
   }
@@ -279,6 +279,6 @@ class FixInformation extends StatelessWidget {
 
   /// Navigates to the signupPhoneoremailParttwoScreen when the action is triggered.
   onTapNextButton(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.canChangeInformation_1);
+    Navigator.pushNamed(context, AppRoutes.passwordSetup);
   }
 }

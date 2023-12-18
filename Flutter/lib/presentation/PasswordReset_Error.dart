@@ -1,7 +1,7 @@
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
-import 'package:dating_your_date/widgets/custom_outlined_button.dart';
-import 'package:dating_your_date/widgets/custom_text_form_field.dart';
+import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
+import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable, camel_case_types
@@ -22,7 +22,7 @@ class PasswordResetError extends StatelessWidget {
           key: _formKey,
           child: Container(
             width: double.maxFinite,
-            padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
+            padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
             child: Column(
               children: [
                 // logo
@@ -31,7 +31,7 @@ class PasswordResetError extends StatelessWidget {
 
                 // slogan
                 CustomImageView(imagePath: ImageConstant.imgSlogan, height: 17, width: 100),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // warning logo
                 CustomImageView(imagePath: ImageConstant.imgWarning, height: 40, width: 50),
@@ -45,23 +45,23 @@ class PasswordResetError extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
-                    style: CustomTextStyles.bodyMediumred700,
+                    style: CustomTextStyles.bodyMediumOnPrimary,
                   ),
                 ),
-                SizedBox(height: 20.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // input
                 CustomInputBar(titleName: "メールアドレス:", backendPart: _buildResetPasswordEmailInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // button
                 CustomOutlinedButton(
                   height: 40,
                   width: 95,
                   text: "送信する",
-                  buttonTextStyle: theme.textTheme.titleSmall!,
+                  buttonTextStyle: theme.textTheme.titleMedium!,
                 ),
-                SizedBox(height: 40.v),
+                SizedBox(height: mediaQueryData.size.height / 25),
 
                 // msg
                 SizedBox(
@@ -71,7 +71,7 @@ class PasswordResetError extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
-                    style: CustomTextStyles.bodyMediumBlack900,
+                    style: CustomTextStyles.bodyMediumblack,
                   ),
                 ),
               ],
@@ -84,7 +84,7 @@ class PasswordResetError extends StatelessWidget {
 
   /// Section Widget
   Widget _buildResetPasswordEmailInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: emailController,
       hintText: "example@email.com",
       textInputAction: TextInputAction.done,

@@ -13,9 +13,9 @@ class CustomInputBar extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(titleName!, style: theme.textTheme.titleLarge),
+        Text(titleName!, style: theme.textTheme.titleMedium),
         Container(
-          decoration: BoxDecoration(border: Border.all(color: appTheme.pinkA100), borderRadius: BorderRadiusStyle.r10),
+          decoration: BoxDecoration(border: Border.all(color: appTheme.pinkA100), borderRadius: BorderRadiusStyle.r15),
           child: backendPart,
         ),
       ],

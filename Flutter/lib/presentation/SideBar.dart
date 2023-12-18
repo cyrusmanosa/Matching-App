@@ -27,26 +27,26 @@ class SideBar extends StatelessWidget {
                 _buildUserRow(context),
                 SizedBox(height: 31.v),
                 _buildCheckPointRow(context),
-                SizedBox(height: 20.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // 写真解放
                 CustomSideBar(item: "写真解放"),
-                SizedBox(height: 30.v),
+                SizedBox(height: mediaQueryData.size.height / 25),
                 // 連絡解放
                 CustomSideBar(item: "連絡解放"),
-                SizedBox(height: 30.v),
+                SizedBox(height: mediaQueryData.size.height / 25),
 
                 // 位置共有
                 CustomSideBar(item: "位置共有"),
-                SizedBox(height: 30.v),
+                SizedBox(height: mediaQueryData.size.height / 25),
 
                 // デート解放
                 CustomSideBar(item: "デート解放"),
-                SizedBox(height: 30.v),
+                SizedBox(height: mediaQueryData.size.height / 25),
 
                 // SNS共有
                 CustomSideBar(item: "SNS共有"),
-                SizedBox(height: 30.v),
+                SizedBox(height: mediaQueryData.size.height / 25),
               ],
             ),
           ),
@@ -70,8 +70,8 @@ class SideBar extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("名前", style: CustomTextStyles.titleLargeBlack900),
-                Text("目的：", style: CustomTextStyles.titleLargeBlack900),
+                Text("名前", style: CustomTextStyles.bodyMediumblack),
+                Text("目的：", style: CustomTextStyles.bodyMediumblack),
               ],
             ),
           ),
@@ -92,7 +92,7 @@ class SideBar extends StatelessWidget {
           child: SizedBox(width: 50.h, child: Divider()),
         ),
         // title
-        Text("チェックポイント", style: CustomTextStyles.titleLargeBlack900),
+        Text("チェックポイント", style: CustomTextStyles.bodyMediumblack),
         // Link 2
         Padding(
           padding: EdgeInsets.only(top: 15.v, bottom: 15.v),

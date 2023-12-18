@@ -4,8 +4,8 @@ import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
-import 'package:dating_your_date/widgets/custom_outlined_button.dart';
-import 'package:dating_your_date/widgets/custom_text_form_field.dart';
+import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
+import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable,camel_case_types
@@ -30,40 +30,40 @@ class CanChangeInformation_1 extends StatelessWidget {
         body: SizedBox(
           width: double.maxFinite,
           child: SingleChildScrollView(
-            padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
+            padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
             child: Column(
               children: [
                 // Nick Name
                 CustomInputBar(titleName: "ニックネーム:", backendPart: _buildcanChangeNickNameInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // City
                 CustomInputBar(titleName: "居住地:", backendPart: _buildcanChangeCityInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Sexual
                 CustomInputBar(titleName: "性的指向:", backendPart: _buildcanChangeSexualInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Height
                 CustomInputBar(titleName: "身長:", backendPart: _buildcanChangeHeightInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Weight
                 CustomInputBar(titleName: "体重:", backendPart: _buildcanChangeWeightInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Speak Language
                 CustomInputBar(titleName: "言語:", backendPart: _buildcanChangeSpeakLanguageInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Job
                 CustomInputBar(titleName: "学歴:", backendPart: _buildcanChangeEducationInput(context)),
-                SizedBox(height: 40.v),
+                SizedBox(height: mediaQueryData.size.height / 25),
 
                 // Button
-                _buildNextButton(context),
-                SizedBox(height: 30.v),
+                _buildNextPageButton(context),
+                SizedBox(height: mediaQueryData.size.height / 25),
               ],
             ),
           ),
@@ -94,7 +94,7 @@ class CanChangeInformation_1 extends StatelessWidget {
 
   /// Nickname
   Widget _buildcanChangeNickNameInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: canChangeNickNameController,
       hintText: "仆街",
     );
@@ -102,7 +102,7 @@ class CanChangeInformation_1 extends StatelessWidget {
 
   /// City
   Widget _buildcanChangeCityInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: canChangeCityController,
       hintText: "大阪",
     );
@@ -110,7 +110,7 @@ class CanChangeInformation_1 extends StatelessWidget {
 
   /// Sexual
   Widget _buildcanChangeSexualInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: canChangeSexualController,
       hintText: "異性愛",
     );
@@ -118,7 +118,7 @@ class CanChangeInformation_1 extends StatelessWidget {
 
   /// Height
   Widget _buildcanChangeHeightInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: canChangeHeightController,
       hintText: "170cm",
     );
@@ -126,7 +126,7 @@ class CanChangeInformation_1 extends StatelessWidget {
 
   /// Weight
   Widget _buildcanChangeWeightInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: canChangeWeightController,
       hintText: "60kg",
     );
@@ -134,7 +134,7 @@ class CanChangeInformation_1 extends StatelessWidget {
 
   /// Education
   Widget _buildcanChangeEducationInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: canChangeEducationController,
       hintText: "高校生",
     );
@@ -142,17 +142,17 @@ class CanChangeInformation_1 extends StatelessWidget {
 
   /// Speak Language
   Widget _buildcanChangeSpeakLanguageInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: canChangeSpeakLanguageController,
       hintText: "EN,HK,CN,JP",
     );
   }
 
   /// Next Button
-  Widget _buildNextButton(BuildContext context) {
+  Widget _buildNextPageButton(BuildContext context) {
     return CustomOutlinedButton(
-      width: 90,
-      height: 40,
+      width: mediaQueryData.size.width / 4,
+      height: mediaQueryData.size.height / 25,
       text: "次へ",
       buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {

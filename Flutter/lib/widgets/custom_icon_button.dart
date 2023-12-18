@@ -37,9 +37,7 @@ class CustomIconButton extends StatelessWidget {
                 BoxDecoration(
                   color: theme.colorScheme.primary,
                   borderRadius: BorderRadiusStyle.r5,
-                  boxShadow: [
-                    BoxShadow(color: appTheme.black900.withOpacity(0.3), spreadRadius: 2.h, blurRadius: 2.h, offset: Offset(0, 1)),
-                  ],
+                  boxShadow: [BoxShadow(color: appTheme.black.withOpacity(0.3), spreadRadius: 2.h, blurRadius: 2.h, offset: Offset(0, 1))],
                 ),
           ),
           onPressed: onTap,
@@ -52,13 +50,6 @@ extension IconButtonStyleHelper on CustomIconButton {
   static BoxDecoration get outlineDarkBlueTL5 => BoxDecoration(
         color: appTheme.gray500,
         borderRadius: BorderRadiusStyle.r5,
-        boxShadow: [
-          BoxShadow(
-            color: appTheme.black900.withOpacity(0.3),
-            spreadRadius: 2.h,
-            blurRadius: 2.h,
-            offset: Offset(0, 1),
-          ),
-        ],
+        boxShadow: [BoxShadow(color: appTheme.black.withOpacity(0.3), spreadRadius: 2.h, blurRadius: 2.h, offset: Offset(0, 1))],
       );
 }

@@ -1,10 +1,14 @@
+import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/global_variable/model.dart';
+import 'package:dating_your_date/pb/canChange.pb.dart';
+import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
-import 'package:dating_your_date/widgets/custom_outlined_button.dart';
-import 'package:dating_your_date/widgets/custom_text_form_field.dart';
+import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
+import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable, camel_case_types
@@ -23,12 +27,34 @@ class ProfileEdit extends StatelessWidget {
   TextEditingController updateBasicReligiousController = TextEditingController();
   TextEditingController updateBasicIntroduceController = TextEditingController();
 
+  // Grpc
+  Future<CanChange> getCanChangeGrpcRequest(BuildContext context) async {
+    final request = GetCanChangeRequest(sessionID: globalSessionID);
+    final response = await GrpcService.client.getCanChange(request);
+    // ignore: unnecessary_null_comparison
+    if (response == null) {
+      showErrorDialog(context, "Error: validatable input data");
+    }
+    return response.canChangeInfo;
+  }
+
+  void showErrorDialog(BuildContext context, String errorMessage) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Error'),
+        content: Text(errorMessage),
+        actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text('OK'))],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
-
     return SafeArea(
       child: Scaffold(
+        // 鍵盤彈出時調整頁面
         resizeToAvoidBottomInset: false,
         appBar: _buildHeader(context),
         body: Container(
@@ -59,51 +85,51 @@ class ProfileEdit extends StatelessWidget {
 
                 // Introduce
                 CustomInputBar(titleName: "自己紹介:", backendPart: _buildUpdateBasicIntroduceInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Nickname
                 CustomInputBar(titleName: "ニックネーム:", backendPart: _buildUpdateBasicNickNameInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Height
                 CustomInputBar(titleName: "身長:", backendPart: _buildUpdateBasicHeightInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Weight
                 CustomInputBar(titleName: "体重:", backendPart: _buildUpdateBasicWeightInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // City
                 CustomInputBar(titleName: "居住地:", backendPart: _buildUpdateBasicCityInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Education
                 CustomInputBar(titleName: "学歴:", backendPart: _buildUpdateBasicEducationInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Job
                 CustomInputBar(titleName: "職種:", backendPart: _buildUpdateBasicJobInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Annual Salary
                 CustomInputBar(titleName: "年収:", backendPart: _buildUpdateBasicAnnualSalaryInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Sexual
                 CustomInputBar(titleName: "性的指向:", backendPart: _buildUpdateBasicSexualInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Sociability
                 CustomInputBar(titleName: "社交力:", backendPart: _buildUpdateBasicSociabilityInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Relighious
                 CustomInputBar(titleName: "宗教:", backendPart: _buildUpdateBasicReligiousInput(context)),
-                SizedBox(height: 40.v),
+                SizedBox(height: mediaQueryData.size.height / 25),
 
                 // button
                 _buildSubmitButton(context),
-                SizedBox(height: 30.v),
+                SizedBox(height: mediaQueryData.size.height / 25),
               ],
             ),
           ),
@@ -134,7 +160,7 @@ class ProfileEdit extends StatelessWidget {
 
   /// Nickname
   Widget _buildUpdateBasicNickNameInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: updateBasicNickNameController,
       hintText: "仆街",
     );
@@ -142,7 +168,7 @@ class ProfileEdit extends StatelessWidget {
 
   /// City
   Widget _buildUpdateBasicCityInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: updateBasicCityController,
       hintText: "大阪",
     );
@@ -150,7 +176,7 @@ class ProfileEdit extends StatelessWidget {
 
   /// Sexual
   Widget _buildUpdateBasicSexualInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: updateBasicSexualController,
       hintText: "異性愛",
     );
@@ -158,7 +184,7 @@ class ProfileEdit extends StatelessWidget {
 
   /// Height
   Widget _buildUpdateBasicHeightInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: updateBasicHeightController,
       hintText: "170cm",
     );
@@ -166,7 +192,7 @@ class ProfileEdit extends StatelessWidget {
 
   /// Weight
   Widget _buildUpdateBasicWeightInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: updateBasicWeightController,
       hintText: "60kg",
     );
@@ -174,7 +200,7 @@ class ProfileEdit extends StatelessWidget {
 
   /// Education
   Widget _buildUpdateBasicEducationInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: updateBasicEducationController,
       hintText: "高校生",
     );
@@ -182,7 +208,7 @@ class ProfileEdit extends StatelessWidget {
 
   /// Job
   Widget _buildUpdateBasicJobInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: updateBasicJobController,
       hintText: "ホスト",
       textInputAction: TextInputAction.done,
@@ -191,7 +217,7 @@ class ProfileEdit extends StatelessWidget {
 
   /// Annual Salary
   Widget _buildUpdateBasicAnnualSalaryInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: updateBasicAnnualSalaryController,
       hintText: "4000",
     );
@@ -199,7 +225,7 @@ class ProfileEdit extends StatelessWidget {
 
   /// Sociability
   Widget _buildUpdateBasicSociabilityInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: updateBasicSociabilityController,
       hintText: "人たら神",
     );
@@ -207,7 +233,7 @@ class ProfileEdit extends StatelessWidget {
 
   /// Religious
   Widget _buildUpdateBasicReligiousInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: updateBasicReligiousController,
       hintText: "多神教",
     );
@@ -215,7 +241,7 @@ class ProfileEdit extends StatelessWidget {
 
   /// Introduce
   Widget _buildUpdateBasicIntroduceInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: updateBasicIntroduceController,
       hintText: "亜dさdさだだ",
       textInputAction: TextInputAction.done,
@@ -227,7 +253,7 @@ class ProfileEdit extends StatelessWidget {
   /// button
   Widget _buildSubmitButton(BuildContext context) {
     return CustomOutlinedButton(
-      width: 110.h,
+      width: mediaQueryData.size.width / 4,
       height: 40,
       text: "確認",
       buttonTextStyle: theme.textTheme.titleMedium,

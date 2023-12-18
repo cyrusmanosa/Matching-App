@@ -6,32 +6,40 @@ import '../core/app_export.dart';
 /// Additionally, this class includes extensions on [TextStyle] to easily apply specific font families to text.
 
 class CustomTextStyles {
+  static get msgWordOfMsgBox => theme.textTheme.bodyMedium!.copyWith(color: appTheme.black, fontSize: 16);
+  static get wordOnlySmallButton => theme.textTheme.bodyMedium!.copyWith(color: appTheme.black, fontSize: 12);
+  static get titleOfUnderLogo => theme.textTheme.headlineMedium!.copyWith(color: appTheme.black, fontSize: 12);
+
   // Body text style
-  static get bodyLargeBlack900 => theme.textTheme.bodyLarge!.copyWith(color: appTheme.black900, fontSize: 18);
-  static get bodyLargePinkA100 => theme.textTheme.bodyLarge!.copyWith(color: appTheme.pinkA100, fontSize: 18);
-  static get bodyMediumBlack900 => theme.textTheme.bodyMedium!.copyWith(color: appTheme.black900, fontSize: 12.fSize);
+  static get bodyMediumblack => theme.textTheme.bodyMedium!.copyWith(color: appTheme.black, fontSize: 18);
+  static get bodyMediumPinkA100 => theme.textTheme.bodyMedium!.copyWith(color: appTheme.pinkA100, fontSize: 18);
+
+  // Color Only
   static get bodyMediumgray500 => theme.textTheme.bodyMedium!.copyWith(color: appTheme.gray500);
-  static get bodyMediumred700 => theme.textTheme.bodyMedium!.copyWith(color: appTheme.redA700);
+  static get bodyMediumgray800 => theme.textTheme.bodyMedium!.copyWith(color: appTheme.gray800);
   static get bodyMediumOnPrimary => theme.textTheme.bodyMedium!.copyWith(color: theme.colorScheme.onPrimary);
   static get bodyMediumPrimary => theme.textTheme.bodyMedium!.copyWith(color: theme.colorScheme.primary);
 
   // Headline text style
-  static get headlineMediumBlack900 => theme.textTheme.headlineMedium!.copyWith(
-        color: appTheme.black900,
+  static get headlineMediumblack => theme.textTheme.headlineMedium!.copyWith(
+        color: appTheme.black,
       );
 
   static get headlineMediumMontserratPinkA100 => theme.textTheme.headlineMedium!.montserrat.copyWith(
         color: appTheme.pinkA100,
         fontWeight: FontWeight.w600,
       );
-  static get headlineSmallRoundedMplus1c => theme.textTheme.headlineSmall!.roundedMplus1c.copyWith(
-        fontWeight: FontWeight.w400,
-        fontSize: 20.fSize,
-      );
-  static get headlineSmallRoundedMplus1cGray500 => theme.textTheme.headlineSmall!.roundedMplus1c.copyWith(
+
+  static get headlineMediumRoundedMplus1cGray500 => theme.textTheme.headlineMedium!.roundedMplus1c.copyWith(
         color: appTheme.gray500,
         fontWeight: FontWeight.w400,
       );
+
+  static get headlineMediumRoundedMplus1c => theme.textTheme.headlineMedium!.roundedMplus1c.copyWith(
+        fontWeight: FontWeight.w400,
+        fontSize: 20.fSize,
+      );
+
   // Rounded text style
   static get roundedMplus1cCyan600 => TextStyle(
         color: appTheme.cyan600,
@@ -44,9 +52,6 @@ class CustomTextStyles {
         fontSize: 7.fSize,
         fontWeight: FontWeight.w400,
       ).roundedMplus1c;
-
-  // Title text style
-  static get titleLargeBlack900 => theme.textTheme.titleLarge!.copyWith(color: appTheme.black900);
 }
 
 extension on TextStyle {

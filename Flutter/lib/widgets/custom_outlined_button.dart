@@ -23,7 +23,7 @@ class CustomOutlinedButton extends BaseButton {
           onPressed: onPressed,
           buttonStyle: buttonStyle,
           isDisabled: isDisabled,
-          buttonTextStyle: buttonTextStyle,
+          buttonTextStyle: buttonTextStyle ?? theme.textTheme.titleMedium,
           height: height,
           alignment: alignment,
           width: width,
@@ -43,8 +43,8 @@ class CustomOutlinedButton extends BaseButton {
   }
 
   Widget get buildOutlinedButtonWidget => Container(
-        height: height,
-        width: width,
+        height: height ?? mediaQueryData.size.height / 25,
+        width: width ?? mediaQueryData.size.width / 4,
         margin: margin,
         decoration: decoration,
         child: OutlinedButton(

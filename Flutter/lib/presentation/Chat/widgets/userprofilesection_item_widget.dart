@@ -25,8 +25,8 @@ class TargetSectionCheckWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("名前", style: CustomTextStyles.titleLargeBlack900),
-                Text("目的：", style: CustomTextStyles.titleLargeBlack900),
+                Text("名前", style: CustomTextStyles.bodyMediumblack),
+                Text("目的：", style: CustomTextStyles.bodyMediumblack),
               ],
             ),
           ),

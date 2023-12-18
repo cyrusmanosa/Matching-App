@@ -6,8 +6,8 @@ import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
-import 'package:dating_your_date/widgets/custom_outlined_button.dart';
-import 'package:dating_your_date/widgets/custom_text_form_field.dart';
+import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
+import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -32,7 +32,7 @@ class HobbyCondition extends StatelessWidget {
   GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
 // Http
-  void createHobbyHttpRequset(BuildContext context) async {
+  void createHobbyHttpRequest(BuildContext context) async {
     var url = "http://127.0.0.1:8080/CreateHobby";
     var requestBody = {
       "session_id": globalSessionID,
@@ -51,7 +51,7 @@ class HobbyCondition extends StatelessWidget {
     var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
 
     if (response.statusCode == 200) {
-      onTaptf(context);
+      onTapNextButton(context);
     } else {
       print("Era: ${hobbyEraController.text}");
       print("City: ${hobbyCityController.text}");
@@ -66,7 +66,7 @@ class HobbyCondition extends StatelessWidget {
     }
   }
 
-  void createHobbyGrpcRequset(BuildContext context) async {
+  void createHobbyGrpcRequest(BuildContext context) async {
     final request = CreateHobbyRequest(
       sessionID: globalSessionID,
       era: int.parse(hobbyEraController.text),
@@ -84,7 +84,7 @@ class HobbyCondition extends StatelessWidget {
     final response = await GrpcService.client.createHobby(request);
     // ignore: unnecessary_null_comparison
     if (response != null) {
-      onTaptf(context);
+      onTapNextButton(context);
     } else {
       print(globalSessionID);
       showErrorDialog(context, "Error: Empty response");
@@ -114,52 +114,52 @@ class HobbyCondition extends StatelessWidget {
           child: Container(
             width: double.maxFinite,
             child: SingleChildScrollView(
-              padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
+              padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
               child: Column(
                 children: [
                   // Era
                   CustomInputBar(titleName: "年代:", backendPart: _buildHobbyEraInput(context)),
-                  SizedBox(height: 15.v),
+                  SizedBox(height: mediaQueryData.size.height / 50),
 
                   // Country
                   CustomInputBar(titleName: "国籍:", backendPart: _buildHobbyCountryInput(context)),
-                  SizedBox(height: 15.v),
+                  SizedBox(height: mediaQueryData.size.height / 50),
 
                   // City
                   CustomInputBar(titleName: "居住地:", backendPart: _buildHobbyCityInput(context)),
-                  SizedBox(height: 15.v),
+                  SizedBox(height: mediaQueryData.size.height / 50),
 
                   // Gender
                   CustomInputBar(titleName: "性別:", backendPart: _buildHobbyGenderInput(context)),
-                  SizedBox(height: 15.v),
+                  SizedBox(height: mediaQueryData.size.height / 50),
 
                   // Language
                   CustomInputBar(titleName: "お喋れる言語:", backendPart: _buildHobbySpeakLanguageInput(context)),
-                  SizedBox(height: 15.v),
+                  SizedBox(height: mediaQueryData.size.height / 50),
 
                   // Hobby Type
                   CustomInputBar(titleName: "趣味のタイプ:", backendPart: _buildHobbyTypeInput(context)),
-                  SizedBox(height: 15.v),
+                  SizedBox(height: mediaQueryData.size.height / 50),
 
                   // Find Target
                   CustomInputBar(titleName: "探す対象:", backendPart: _buildHobbyFindTargetInput(context)),
-                  SizedBox(height: 15.v),
+                  SizedBox(height: mediaQueryData.size.height / 50),
 
                   // Experience
                   CustomInputBar(titleName: "経験:", backendPart: _buildHobbyExperienceInput(context)),
-                  SizedBox(height: 15.v),
+                  SizedBox(height: mediaQueryData.size.height / 50),
 
                   // Height
                   CustomInputBar(titleName: "身長:", backendPart: _buildHobbyHeightInput(context)),
-                  SizedBox(height: 15.v),
+                  SizedBox(height: mediaQueryData.size.height / 50),
 
                   // Weight
                   CustomInputBar(titleName: "体重:", backendPart: _buildHobbyWeightInput(context)),
-                  SizedBox(height: 15.v),
+                  SizedBox(height: mediaQueryData.size.height / 50),
 
                   // Sociability
                   CustomInputBar(titleName: "社交力:", backendPart: _buildHobbySociabilityInput(context)),
-                  SizedBox(height: 20.v),
+                  SizedBox(height: mediaQueryData.size.height / 50),
 
                   // 本人
                   Align(
@@ -179,11 +179,10 @@ class HobbyCondition extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(height: 40.v),
-
+                  SizedBox(height: mediaQueryData.size.height / 25),
                   // button
-                  _buildCertificationForCheck(context),
-                  SizedBox(height: 30.v)
+                  _buildNextPageButton(context),
+                  SizedBox(height: mediaQueryData.size.height / 25),
                 ],
               ),
             ),
@@ -216,7 +215,7 @@ class HobbyCondition extends StatelessWidget {
 
   /// Era
   Widget _buildHobbyEraInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: hobbyEraController,
       hintText: "３０代",
     );
@@ -224,7 +223,7 @@ class HobbyCondition extends StatelessWidget {
 
   /// Country
   Widget _buildHobbyCountryInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: hobbyCountryController,
       hintText: "日本",
     );
@@ -232,7 +231,7 @@ class HobbyCondition extends StatelessWidget {
 
   /// City
   Widget _buildHobbyCityInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: hobbyCityController,
       hintText: "大阪",
     );
@@ -240,7 +239,7 @@ class HobbyCondition extends StatelessWidget {
 
   /// Gender
   Widget _buildHobbyGenderInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: hobbyGenderController,
       hintText: "男",
     );
@@ -248,7 +247,7 @@ class HobbyCondition extends StatelessWidget {
 
   /// Speak Language
   Widget _buildHobbySpeakLanguageInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: hobbySpeakLanguageController,
       hintText: "日本語",
     );
@@ -256,7 +255,7 @@ class HobbyCondition extends StatelessWidget {
 
   /// Hobby Type
   Widget _buildHobbyTypeInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: hobbyFindTypeController,
       hintText: "サッカー",
     );
@@ -264,7 +263,7 @@ class HobbyCondition extends StatelessWidget {
 
   /// Find Target
   Widget _buildHobbyFindTargetInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: hobbyFindTargetController,
       hintText: "サッカーのチームメンバー",
     );
@@ -272,7 +271,7 @@ class HobbyCondition extends StatelessWidget {
 
   /// Experience
   Widget _buildHobbyExperienceInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: hobbyExperienceController,
       hintText: "3年",
     );
@@ -280,7 +279,7 @@ class HobbyCondition extends StatelessWidget {
 
   /// Height
   Widget _buildHobbyHeightInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: hobbyHeightController,
       hintText: "170cm",
     );
@@ -288,7 +287,7 @@ class HobbyCondition extends StatelessWidget {
 
   /// Section Widget
   Widget _buildHobbyWeightInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: hobbyWeightController,
       hintText: "60Kg",
       textInputAction: TextInputAction.done,
@@ -297,27 +296,26 @@ class HobbyCondition extends StatelessWidget {
 
   /// Sociability
   Widget _buildHobbySociabilityInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: hobbySociabilityController,
       hintText: "人たら神",
       textInputAction: TextInputAction.done,
     );
   }
 
-  /// Certification For Check
-  Widget _buildCertificationForCheck(BuildContext context) {
+  Widget _buildNextPageButton(BuildContext context) {
     return CustomOutlinedButton(
-      width: 110,
-      height: 40,
+      width: mediaQueryData.size.width / 4,
+      height: mediaQueryData.size.height / 20,
       text: "条件確認",
       buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
-        createHobbyGrpcRequset(context);
+        createHobbyGrpcRequest(context);
       },
     );
   }
 
-  onTaptf(BuildContext context) {
+  onTapNextButton(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.payDone);
   }
 }

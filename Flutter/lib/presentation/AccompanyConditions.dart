@@ -6,8 +6,8 @@ import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
-import 'package:dating_your_date/widgets/custom_outlined_button.dart';
-import 'package:dating_your_date/widgets/custom_text_form_field.dart';
+import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
+import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -26,7 +26,7 @@ class AccompanyConditions extends StatelessWidget {
   TextEditingController accompanySociabilityController = TextEditingController();
 
 // Http
-  void createAccompanyHttpRequset(BuildContext context) async {
+  void createAccompanyHttpRequest(BuildContext context) async {
     var url = "http://127.0.0.1:8080/CreateAccompany";
     var requestBody = {
       "session_id": globalSessionID,
@@ -42,7 +42,7 @@ class AccompanyConditions extends StatelessWidget {
     var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
 
     if (response.statusCode == 200) {
-      onTaptf(context);
+      onTapNextButton(context);
     } else {
       print("Era: ${accompanyEraController.text}");
       print("City: ${accompanyCityController.text}");
@@ -55,7 +55,7 @@ class AccompanyConditions extends StatelessWidget {
   }
 
   // Grpc
-  void createAccompanyGrpcRequset(BuildContext context) async {
+  void createAccompanyGrpcRequest(BuildContext context) async {
     final request = CreateAccompanyRequest(
       sessionID: globalSessionID,
       era: int.parse(accompanyEraController.text),
@@ -71,7 +71,7 @@ class AccompanyConditions extends StatelessWidget {
     final response = await GrpcService.client.createAccompany(request);
     // ignore: unnecessary_null_comparison
     if (response != null) {
-      onTaptf(context);
+      onTapNextButton(context);
     } else {
       showErrorDialog(context, "Error: Empty response");
     }
@@ -100,36 +100,36 @@ class AccompanyConditions extends StatelessWidget {
         body: Container(
           width: double.maxFinite,
           child: SingleChildScrollView(
-            padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
+            padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
             child: Column(
               children: [
                 // Era
                 CustomInputBar(titleName: "年代:", backendPart: _buildAccompanyEraInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // City
                 CustomInputBar(titleName: "居住地:", backendPart: _buildAccompanyCityInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Gender
                 CustomInputBar(titleName: "性別:", backendPart: _buildAccompanyGenderInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Language
                 CustomInputBar(titleName: "お喋れる言語:", backendPart: _buildAccompanySpeakLanguageInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Accompany Type
                 CustomInputBar(titleName: "お相伴のタイプ:", backendPart: _buildAccompanyFindTypeInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Find Target
                 CustomInputBar(titleName: "探す対象:", backendPart: _buildAccompanyFindTargetInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Sociability
                 CustomInputBar(titleName: "社交力:", backendPart: _buildAccompanySociabilityInput(context)),
-                SizedBox(height: 20.v),
+                SizedBox(height: mediaQueryData.size.height / 40),
 
                 // 本人
                 Align(
@@ -148,11 +148,9 @@ class AccompanyConditions extends StatelessWidget {
                     ],
                   ),
                 ),
+                SizedBox(height: mediaQueryData.size.height / 25),
 
-                SizedBox(height: 40),
-
-                _buildCertificationForCheck(context),
-                SizedBox(height: 30)
+                _buildNextPageButton(context),
               ],
             ),
           ),
@@ -183,7 +181,7 @@ class AccompanyConditions extends StatelessWidget {
 
   /// Era
   Widget _buildAccompanyEraInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: accompanyEraController,
       hintText: "３０代",
     );
@@ -191,7 +189,7 @@ class AccompanyConditions extends StatelessWidget {
 
   /// City
   Widget _buildAccompanyCityInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: accompanyCityController,
       hintText: "大阪",
     );
@@ -199,7 +197,7 @@ class AccompanyConditions extends StatelessWidget {
 
   /// Gender
   Widget _buildAccompanyGenderInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: accompanyGenderController,
       hintText: "男",
     );
@@ -207,7 +205,7 @@ class AccompanyConditions extends StatelessWidget {
 
   /// Speak Language
   Widget _buildAccompanySpeakLanguageInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: accompanySpeakLanguageController,
       hintText: "日本語",
     );
@@ -215,7 +213,7 @@ class AccompanyConditions extends StatelessWidget {
 
   /// Accompany Type
   Widget _buildAccompanyFindTypeInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: accompanyFindTypeController,
       hintText: "おしゃべり",
     );
@@ -223,7 +221,7 @@ class AccompanyConditions extends StatelessWidget {
 
   /// FindTarget
   Widget _buildAccompanyFindTargetInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: accompanyFindTargetController,
       hintText: "聞き役",
     );
@@ -231,27 +229,27 @@ class AccompanyConditions extends StatelessWidget {
 
   /// Sociability
   Widget _buildAccompanySociabilityInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: accompanySociabilityController,
       hintText: "人たら神",
       textInputAction: TextInputAction.done,
     );
   }
 
-  /// Certification For Check
-  Widget _buildCertificationForCheck(BuildContext context) {
+  /// Next Button
+  Widget _buildNextPageButton(BuildContext context) {
     return CustomOutlinedButton(
-      width: 110,
-      height: 40,
+      width: mediaQueryData.size.width / 4,
+      height: mediaQueryData.size.height / 25,
       text: "条件確認",
       buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
-        createAccompanyGrpcRequset(context);
+        createAccompanyGrpcRequest(context);
       },
     );
   }
 
-  onTaptf(BuildContext context) {
+  onTapNextButton(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.payDone);
   }
 }

@@ -12,7 +12,7 @@ class SearchTitle extends StatelessWidget {
       child: Scaffold(
         body: Container(
           width: double.maxFinite,
-          padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
+          padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
           child: Column(
             children: [
               // logo
@@ -23,35 +23,35 @@ class SearchTitle extends StatelessWidget {
               SizedBox(height: 25.v),
 
               // Tilte
-              Text("探すターゲットの種類", style: CustomTextStyles.headlineMediumBlack900),
+              Text("探すターゲットの種類", style: CustomTextStyles.headlineMediumblack),
               SizedBox(height: 25.v),
 
               // button 1
               CustomElevatedButton(
                 text: "趣味",
-                buttonStyle: CustomButtonStyles.fillGray,
+                buttonStyle: CustomButtonStyles.fillLightGray,
                 onPressed: () {
-                  onTaptFirstHobbyCondition(context);
+                  onTapNextButtonirstHobbyCondition(context);
                 },
               ),
-              SizedBox(height: 30.v),
+              SizedBox(height: mediaQueryData.size.height / 25),
 
               // button 2
               CustomElevatedButton(
                 text: "恋人",
                 buttonStyle: CustomButtonStyles.fillDarkRed,
                 onPressed: () {
-                  onTaptFirstLoverCondition(context);
+                  onTapNextButtonirstLoverCondition(context);
                 },
               ),
-              SizedBox(height: 30.v),
+              SizedBox(height: mediaQueryData.size.height / 25),
 
               // button 3
               CustomElevatedButton(
                 text: "お相伴",
                 buttonStyle: CustomButtonStyles.fillRed,
                 onPressed: () {
-                  onTaptFirstAccompanyCondition(context);
+                  onTapNextButtonirstAccompanyCondition(context);
                 },
               ),
             ],
@@ -61,15 +61,15 @@ class SearchTitle extends StatelessWidget {
     );
   }
 
-  onTaptFirstHobbyCondition(BuildContext context) {
+  onTapNextButtonirstHobbyCondition(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.hobbyCondition);
   }
 
-  onTaptFirstLoverCondition(BuildContext context) {
+  onTapNextButtonirstLoverCondition(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.loverConditions);
   }
 
-  onTaptFirstAccompanyCondition(BuildContext context) {
+  onTapNextButtonirstAccompanyCondition(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.accompanyConditions);
   }
 }

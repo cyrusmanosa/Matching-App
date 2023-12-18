@@ -22,9 +22,9 @@ class Target extends StatelessWidget {
               _buildHeader(context),
               // 題目
               SizedBox(height: 60.v),
-              Text("探すターゲットの種類", style: CustomTextStyles.headlineMediumBlack900),
+              Text("探すターゲットの種類", style: CustomTextStyles.headlineMediumblack),
               // 選択
-              SizedBox(height: 30.v),
+              SizedBox(height: mediaQueryData.size.height / 25),
               _buildTargetResetList(context)
             ],
           ),

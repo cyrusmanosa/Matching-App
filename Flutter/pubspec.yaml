@@ -30,6 +30,8 @@ flutter_launcher_icons:
   android_icon_background: "#FFFFFF"
   ios_icon_background: "#FFFFFF"
 
+# run command： flutter pub run flutter_launcher_icons:main
+
 dev_dependencies: 
   flutter_test: 
     sdk: flutter

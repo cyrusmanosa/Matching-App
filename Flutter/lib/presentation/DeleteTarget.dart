@@ -2,7 +2,7 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
-import 'package:dating_your_date/widgets/custom_outlined_button.dart';
+import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable
@@ -31,7 +31,7 @@ class DeleteTarget extends StatelessWidget {
                 text: "削除",
                 buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
                 onPressed: () {
-                  onTaptf(context);
+                  onTapNextButton(context);
                 },
               ),
               SizedBox(height: 5),
@@ -61,7 +61,7 @@ class DeleteTarget extends StatelessWidget {
     Navigator.pop(context);
   }
 
-  onTaptf(BuildContext context) {
+  onTapNextButton(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.warningMsgDeleteUser);
   }
 }

@@ -6,8 +6,8 @@ import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
-import 'package:dating_your_date/widgets/custom_outlined_button.dart';
-import 'package:dating_your_date/widgets/custom_text_form_field.dart';
+import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
+import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -22,7 +22,7 @@ class CanChangeInformation_2 extends StatelessWidget {
   TextEditingController canChangeIntroduceController = TextEditingController();
 
   // Http
-  void canChangeHttpRequset(BuildContext context) async {
+  void createCanChangeHttpRequest(BuildContext context) async {
     var url = "http://127.0.0.1:8080/CreateFixInfo";
     var requestBody = {
       "SessionID": globalSessionID,
@@ -42,7 +42,7 @@ class CanChangeInformation_2 extends StatelessWidget {
     var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
 
     if (response.statusCode == 200) {
-      onTaptf(context);
+      onTapNextButton(context);
     } else {
       print("Job: ${canChangeJobController.text}");
       print("AnnualSalary: ${canChangeAnnualSalaryController.text}");
@@ -53,7 +53,7 @@ class CanChangeInformation_2 extends StatelessWidget {
   }
 
   // Grpc
-  void canChangeGrpcRequset(BuildContext context) async {
+  void createCanChangeGrpcRequest(BuildContext context) async {
     final request = CreateCanChangeRequest(
       sessionID: globalSessionID,
       nickName: nickname,
@@ -73,7 +73,7 @@ class CanChangeInformation_2 extends StatelessWidget {
     final response = await GrpcService.client.createCanChange(request);
     // ignore: unnecessary_null_comparison
     if (response != null) {
-      onTaptf(context);
+      onTapNextButton(context);
     } else {
       showErrorDialog(context, "Error: validatable input data");
     }
@@ -97,30 +97,30 @@ class CanChangeInformation_2 extends StatelessWidget {
       child: Scaffold(
         appBar: _buildHeader(context),
         body: Padding(
-          padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
+          padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
           child: Column(
             children: [
               // Job
               CustomInputBar(titleName: "仕事:", backendPart: _buildcanChangeJobInput(context)),
-              SizedBox(height: 15.v),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
               // Annual Salary
               CustomInputBar(titleName: "年収:", backendPart: _buildcanChangeAnnualSalaryInput(context)),
-              SizedBox(height: 15.v),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
               // Sociability
               CustomInputBar(titleName: "社交力:", backendPart: _buildcanChangeSociabilityInput(context)),
-              SizedBox(height: 15.v),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
               // Religious
               CustomInputBar(titleName: "宗教:", backendPart: _buildcanChangeReligiousInput(context)),
-              SizedBox(height: 15.v),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
               // Introduce
               CustomInputBar(titleName: "自己紹介:", backendPart: _buildcanChangeIntroduceInput(context)),
 
               SizedBox(height: 40),
-              _buildNextButton(context),
+              _buildNextPageButton(context),
             ],
           ),
         ),
@@ -150,7 +150,7 @@ class CanChangeInformation_2 extends StatelessWidget {
 
   /// Job
   Widget _buildcanChangeJobInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: canChangeJobController,
       hintText: "ホスト",
       textInputAction: TextInputAction.done,
@@ -159,7 +159,7 @@ class CanChangeInformation_2 extends StatelessWidget {
 
   /// Annual Salary
   Widget _buildcanChangeAnnualSalaryInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: canChangeAnnualSalaryController,
       hintText: "4000",
     );
@@ -167,7 +167,7 @@ class CanChangeInformation_2 extends StatelessWidget {
 
   /// Sociability
   Widget _buildcanChangeSociabilityInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: canChangeSociabilityController,
       hintText: "人たら神",
     );
@@ -175,7 +175,7 @@ class CanChangeInformation_2 extends StatelessWidget {
 
   /// Religious
   Widget _buildcanChangeReligiousInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: canChangeReligiousController,
       hintText: "多神教",
     );
@@ -183,7 +183,7 @@ class CanChangeInformation_2 extends StatelessWidget {
 
   /// Introduce
   Widget _buildcanChangeIntroduceInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: canChangeIntroduceController,
       hintText: "亜dさdさだだ",
       textInputAction: TextInputAction.done,
@@ -193,20 +193,20 @@ class CanChangeInformation_2 extends StatelessWidget {
   }
 
   /// Next Button
-  Widget _buildNextButton(BuildContext context) {
+  Widget _buildNextPageButton(BuildContext context) {
     return CustomOutlinedButton(
-      width: 90,
-      height: 40,
+      width: mediaQueryData.size.width / 4,
+      height: mediaQueryData.size.height / 25,
       text: "次へ",
       buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
-        canChangeGrpcRequset(context);
+        createCanChangeGrpcRequest(context);
       },
     );
   }
 
   /// Navigates to the k26Screen when the action is triggered.
-  onTaptf(BuildContext context) {
+  onTapNextButton(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.searchTitle);
   }
 }

@@ -1,7 +1,5 @@
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 // ignore: must_be_immutable
 class MainframeItemWidget extends StatelessWidget {
@@ -16,8 +14,8 @@ class MainframeItemWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("観賞回数：", style: CustomTextStyles.bodyLargeBlack900),
-              Text("０", style: CustomTextStyles.bodyLargeBlack900),
+              Text("観賞回数：", style: CustomTextStyles.bodyMediumblack),
+              Text("０", style: CustomTextStyles.bodyMediumblack),
             ],
           ),
           Container(

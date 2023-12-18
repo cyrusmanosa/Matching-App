@@ -24,7 +24,7 @@ class NewTargetReady extends StatelessWidget {
               SizedBox(height: 75.v),
 
               // Title
-              Text("新しいターゲットを準備します", style: TextStyle(fontSize: 25, color: appTheme.black900)),
+              Text("新しいターゲットを準備します", style: TextStyle(fontSize: 25, color: appTheme.black)),
             ],
           ),
         ),

@@ -15,7 +15,7 @@ class PayDone extends StatelessWidget {
       child: Scaffold(
         body: Container(
           width: double.maxFinite,
-          padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
+          padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
           child: Column(
             children: [
               // Logn
@@ -27,7 +27,7 @@ class PayDone extends StatelessWidget {
               SizedBox(height: 75.v),
 
               // Title
-              Text("お支払いOK", style: TextStyle(fontSize: 40, color: appTheme.black900)),
+              Text("お支払いOK", style: TextStyle(fontSize: 40, color: appTheme.black)),
             ],
           ),
         ),

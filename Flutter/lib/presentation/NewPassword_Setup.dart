@@ -1,7 +1,7 @@
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
-import 'package:dating_your_date/widgets/custom_outlined_button.dart';
-import 'package:dating_your_date/widgets/custom_text_form_field.dart';
+import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
+import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable
@@ -20,7 +20,7 @@ class NewPasswordSetup extends StatelessWidget {
         body: Form(
           child: Container(
             width: double.maxFinite,
-            padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
+            padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
             child: Column(
               children: [
                 // Logo
@@ -29,7 +29,7 @@ class NewPasswordSetup extends StatelessWidget {
 
                 // Slogan
                 CustomImageView(imagePath: ImageConstant.imgSlogan, height: 17, width: 100),
-                SizedBox(height: 30.v),
+                SizedBox(height: mediaQueryData.size.height / 25),
 
                 // New Password
                 CustomInputBar(titleName: "新しいパスワード", backendPart: _buildNewPasswordInput(context)),
@@ -42,11 +42,11 @@ class NewPasswordSetup extends StatelessWidget {
                     child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.bodyMediumgray500),
                   ),
                 ),
-                SizedBox(height: 30.v),
+                SizedBox(height: mediaQueryData.size.height / 25),
 
                 // New Password Confirm
                 CustomInputBar(titleName: "新しいパスワード（確認）", backendPart: _buildNewPasswordConfirm(context)),
-                SizedBox(height: 40.v),
+                SizedBox(height: mediaQueryData.size.height / 25),
 
                 // Button
                 CustomOutlinedButton(
@@ -55,7 +55,7 @@ class NewPasswordSetup extends StatelessWidget {
                     text: "設定",
                     buttonTextStyle: theme.textTheme.titleMedium,
                     onPressed: () {
-                      onTaptf(context);
+                      onTapNextButton(context);
                     }),
               ],
             ),
@@ -67,7 +67,7 @@ class NewPasswordSetup extends StatelessWidget {
 
   /// Section Widget
   Widget _buildNewPasswordInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: newPasswordSetupController,
       hintText: "Ankdl2332",
     );
@@ -75,7 +75,7 @@ class NewPasswordSetup extends StatelessWidget {
 
   /// Section Widget
   Widget _buildNewPasswordConfirm(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: newPasswordSetupConfirmController,
       hintText: "Ankdl2332",
       textInputAction: TextInputAction.done,
@@ -83,7 +83,7 @@ class NewPasswordSetup extends StatelessWidget {
   }
 
   /// Navigates to the okScreen when the action is triggered.
-  onTaptf(BuildContext context) {
+  onTapNextButton(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.newPasswordDone);
   }
 }

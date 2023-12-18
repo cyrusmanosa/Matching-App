@@ -20,7 +20,6 @@ class ThemeHelper {
       throw Exception("$_appTheme is not found.Make sure you have added this theme class in JSON Try running flutter pub run build_runner");
     }
     //return theme from map
-
     return _supportedCustomColor[_appTheme] ?? PrimaryColors();
   }
 
@@ -42,7 +41,7 @@ class ThemeHelper {
         style: OutlinedButton.styleFrom(
           backgroundColor: Colors.transparent,
           side: BorderSide(color: appTheme.pinkA100, width: 1.h),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(19.h)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
           visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
           padding: EdgeInsets.zero,
         ),
@@ -50,12 +49,12 @@ class ThemeHelper {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: appTheme.blueGray100,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.h)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r30),
           visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
           padding: EdgeInsets.zero,
         ),
       ),
-      dividerTheme: DividerThemeData(thickness: 1, space: 1, color: appTheme.black900),
+      dividerTheme: DividerThemeData(thickness: 1, space: 1, color: appTheme.black),
     );
   }
 
@@ -70,72 +69,20 @@ class ThemeHelper {
 class TextThemes {
   static TextTheme textTheme(ColorScheme colorScheme) => TextTheme(
         // body
-        bodyLarge: TextStyle(
-          color: appTheme.gray500,
-          fontSize: 16.fSize,
-          fontFamily: 'Rounded Mplus 1c',
-          fontWeight: FontWeight.w400,
-        ),
         bodyMedium: TextStyle(
           color: appTheme.gray500,
-          fontSize: 14.fSize,
           fontFamily: 'Rounded Mplus 1c',
           fontWeight: FontWeight.w400,
         ),
-        bodySmall: TextStyle(
-          color: appTheme.black900,
-          fontSize: 12.fSize,
-          fontFamily: 'Rounded Mplus 1c',
-          fontWeight: FontWeight.w400,
-        ),
-
-        // display
-        displayMedium: TextStyle(
-          color: appTheme.black900,
-          fontSize: 40.fSize,
-          fontFamily: 'Rounded Mplus 1c',
-          fontWeight: FontWeight.w400,
-        ),
-
         // head
-        headlineLarge: TextStyle(
-          color: appTheme.black900,
-          fontSize: 30.fSize,
-          fontFamily: 'Rounded Mplus 1c',
-          fontWeight: FontWeight.w400,
-        ),
         headlineMedium: TextStyle(
-          color: colorScheme.onPrimary,
-          fontSize: 26.fSize,
+          color: appTheme.black,
           fontFamily: 'Rounded Mplus 1c',
           fontWeight: FontWeight.w400,
         ),
-        headlineSmall: TextStyle(
-          color: appTheme.black900,
-          fontSize: 24.fSize,
-          fontFamily: 'SF Pro Text',
-          fontWeight: FontWeight.w300,
-        ),
-
-        // title
-        titleLarge: TextStyle(
-          color: appTheme.pinkA100,
-          fontSize: 20.fSize,
-          fontFamily: 'Rounded Mplus 1c',
-          fontWeight: FontWeight.w400,
-        ),
-        titleMedium: TextStyle(
-          color: appTheme.pinkA100,
-          fontSize: 18.fSize,
-          fontFamily: 'Montserrat',
-          fontWeight: FontWeight.w600,
-        ),
-        titleSmall: TextStyle(
-          color: appTheme.pinkA100,
-          fontSize: 14.fSize,
-          fontFamily: 'Montserrat',
-          fontWeight: FontWeight.w600,
-        ),
+        // Pink
+        titleMedium: TextStyle(color: appTheme.pinkA100, fontFamily: 'Montserrat', fontWeight: FontWeight.w600, fontSize: 16),
+        titleLarge: TextStyle(color: appTheme.pinkA100, fontFamily: 'Montserrat', fontWeight: FontWeight.w600, fontSize: 18),
       );
 }
 
@@ -145,7 +92,6 @@ class ColorSchemes {
     // Primary colors
     primary: Color(0XFF454545),
     primaryContainer: Color(0XE5CDD1D8),
-    secondaryContainer: Color(0XFF3C3C3C),
 
     // Error colors
     errorContainer: Color(0XFF9C3C3C),
@@ -159,7 +105,7 @@ class ColorSchemes {
 /// Class containing custom colors for a primary theme.
 class PrimaryColors {
   // Black
-  Color get black900 => Color(0XFF000000);
+  Color get black => Color(0XFF000000);
 
   // Blue
   Color get blue800 => Color(0XFF1464CC);
@@ -175,6 +121,7 @@ class PrimaryColors {
   Color get gray500 => Color(0XFF909090);
   Color get gray800 => Color(0XFF454545);
 
+  // Red
   Color get redA700 => Color(0XFFFF0505);
 
   // Pink

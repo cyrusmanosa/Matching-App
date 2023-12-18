@@ -1,7 +1,7 @@
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
-import 'package:dating_your_date/widgets/custom_outlined_button.dart';
-import 'package:dating_your_date/widgets/custom_text_form_field.dart';
+import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
+import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable
@@ -22,7 +22,7 @@ class EmailConfirmationError extends StatelessWidget {
           key: _formKey,
           child: Container(
             width: double.maxFinite,
-            padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
+            padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
             child: Column(
               children: [
                 // Logo
@@ -31,11 +31,11 @@ class EmailConfirmationError extends StatelessWidget {
 
                 // Slogan
                 CustomImageView(imagePath: ImageConstant.imgSlogan, height: 17, width: 100),
-                SizedBox(height: 30.v),
+                SizedBox(height: mediaQueryData.size.height / 25),
 
                 //Warning Logo
                 CustomImageView(imagePath: ImageConstant.imgWarning, height: 41.v, width: 49.h),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Warning Msg
                 Container(
@@ -46,10 +46,10 @@ class EmailConfirmationError extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
-                    style: CustomTextStyles.bodyMediumred700,
+                    style: CustomTextStyles.bodyMediumOnPrimary,
                   ),
                 ),
-                SizedBox(height: 20.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // information note
                 Align(
@@ -60,27 +60,27 @@ class EmailConfirmationError extends StatelessWidget {
                     child: Text(
                       "・メールアドレスの受信確認が必須です。\n・ご登録済みのお客様は受信確認をお願いしております。",
                       overflow: TextOverflow.ellipsis,
-                      style: CustomTextStyles.bodyMediumBlack900,
+                      style: CustomTextStyles.bodyMediumblack,
                     ),
                   ),
                 ),
-                SizedBox(height: 20.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Input
                 CustomInputBar(titleName: "メールアドレス:", backendPart: _buildEmailInput(context)),
-                SizedBox(height: 30.v),
+                SizedBox(height: mediaQueryData.size.height / 25),
 
                 // send button
                 CustomOutlinedButton(
                   height: 40,
                   width: 95,
                   text: "送信する",
-                  buttonTextStyle: theme.textTheme.titleSmall!,
+                  buttonTextStyle: theme.textTheme.titleMedium!,
                   onPressed: () {
-                    onTaptf(context);
+                    onTapNextButton(context);
                   },
                 ),
-                SizedBox(height: 20.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // 手続き
                 Align(
@@ -90,7 +90,7 @@ class EmailConfirmationError extends StatelessWidget {
                     child: Text(
                       "（この手続きは1回のみで、以降表示されません）",
                       overflow: TextOverflow.ellipsis,
-                      style: CustomTextStyles.bodyMediumBlack900,
+                      style: CustomTextStyles.bodyMediumblack,
                     ),
                   ),
                 ),
@@ -104,7 +104,7 @@ class EmailConfirmationError extends StatelessWidget {
 
   /// Section Widget
   Widget _buildEmailInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: emailController,
       hintText: "example@email.com",
       textInputAction: TextInputAction.done,
@@ -113,7 +113,7 @@ class EmailConfirmationError extends StatelessWidget {
   }
 
   /// Navigates to the error3Screen when the action is triggered.
-  onTaptf(BuildContext context) {
+  onTapNextButton(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.profileEdit);
   }
 }

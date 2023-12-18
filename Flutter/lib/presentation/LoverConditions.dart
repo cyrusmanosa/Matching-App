@@ -6,8 +6,8 @@ import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
-import 'package:dating_your_date/widgets/custom_outlined_button.dart';
-import 'package:dating_your_date/widgets/custom_text_form_field.dart';
+import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
+import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -34,7 +34,7 @@ class LoverConditions extends StatelessWidget {
   TextEditingController loverReligiousController = TextEditingController();
 
 // Http
-  void createLoverHttpRequset(BuildContext context) async {
+  void createLoverHttpRequest(BuildContext context) async {
     var url = "http://127.0.0.1:8080/CreateLover";
     var requestBody = {
       "session_id": globalSessionID,
@@ -55,7 +55,7 @@ class LoverConditions extends StatelessWidget {
     var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
 
     if (response.statusCode == 200) {
-      onTaptf(context);
+      onTapNextButton(context);
     } else {
       print("MinAge: ${loverMinAgeController.text}");
       print("MaxAge: ${loverMaxAgeController.text}");
@@ -72,7 +72,8 @@ class LoverConditions extends StatelessWidget {
     }
   }
 
-  void createLoverGrpcRequset(BuildContext context) async {
+// Grpc
+  void createLoverGrpcRequest(BuildContext context) async {
     final request = CreateLoverRequest(
       sessionID: globalSessionID,
       minAge: int.parse(loverMinAgeController.text),
@@ -92,7 +93,7 @@ class LoverConditions extends StatelessWidget {
     final response = await GrpcService.client.createLover(request);
     // ignore: unnecessary_null_comparison
     if (response != null) {
-      onTaptf(context);
+      onTapNextButton(context);
     } else {
       showErrorDialog(context, "Error: Empty response");
     }
@@ -121,59 +122,59 @@ class LoverConditions extends StatelessWidget {
         body: SizedBox(
           width: double.maxFinite,
           child: SingleChildScrollView(
-            padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
+            padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
             child: Column(
               children: [
                 // _buildLoverAgeInput(context),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // City
                 CustomInputBar(titleName: "居住地:", backendPart: _buildLoverCityInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Gender
                 CustomInputBar(titleName: "性別:", backendPart: _buildLoverGenderInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Constellation
                 CustomInputBar(titleName: "星座:", backendPart: _buildLoverConstellationInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Blood
                 CustomInputBar(titleName: "血液型:", backendPart: _buildLoverBloodInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Sexual
                 CustomInputBar(titleName: "性的指向:", backendPart: _buildLoverSexualInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Height
                 CustomInputBar(titleName: "身長:", backendPart: _buildLoverHeightInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Wegiht
                 CustomInputBar(titleName: "体重:", backendPart: _buildLoverWeightInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Speak Language
                 CustomInputBar(titleName: "言語:", backendPart: _buildLoverSpeakLanguageInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Job
                 CustomInputBar(titleName: "職種:", backendPart: _buildLoverJobInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Annual Salary
                 CustomInputBar(titleName: "年収:", backendPart: _buildLoverAnnualSalaryInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Socialbility
                 CustomInputBar(titleName: "社交力:", backendPart: _buildLoverSociabilityInput(context)),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Religious
                 CustomInputBar(titleName: "宗教:", backendPart: _buildLoverReligiousInput(context)),
-                SizedBox(height: 20.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // 本人
                 Align(
@@ -192,10 +193,10 @@ class LoverConditions extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 40.v),
+                SizedBox(height: mediaQueryData.size.height / 25),
 
                 // button
-                _buildCertificationForCheck(context),
+                _buildNextPageButton(context),
                 SizedBox(height: 30.v)
               ],
             ),
@@ -226,7 +227,7 @@ class LoverConditions extends StatelessWidget {
 
   // /// Min Age
   // Widget _buildLoverMinAgeInput(BuildContext context) {
-  //   return CustomTextFormField(
+  //   return CustomInputFormBar(
   //     maxLength: 3,
   //     width: 60.h,
   //     controller: loverMinAgeController,
@@ -237,7 +238,7 @@ class LoverConditions extends StatelessWidget {
 
   // /// Max Age
   // Widget _buildLoverMaxAgeInput(BuildContext context) {
-  //   return CustomTextFormField(
+  //   return CustomInputFormBar(
   //     maxLength: 3,
   //     maxLines: 1,
   //     width: 60,
@@ -251,7 +252,7 @@ class LoverConditions extends StatelessWidget {
   //   return Column(
   //     crossAxisAlignment: CrossAxisAlignment.start,
   //     children: [
-  //       Text("年齢", style: theme.textTheme.titleLarge),
+  //       Text("年齢", style: theme.textTheme.titleMedium),
   //       Container(
   //         decoration: BoxDecoration(
   //           border: Border.all(color: appTheme.pinkA100),
@@ -265,7 +266,7 @@ class LoverConditions extends StatelessWidget {
 
   /// City
   Widget _buildLoverCityInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: loverCityController,
       hintText: "大阪",
     );
@@ -273,7 +274,7 @@ class LoverConditions extends StatelessWidget {
 
   /// Gender
   Widget _buildLoverGenderInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: loverGenderController,
       hintText: "男",
     );
@@ -281,7 +282,7 @@ class LoverConditions extends StatelessWidget {
 
   /// Constellation
   Widget _buildLoverConstellationInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: loverConstellationController,
       hintText: "いて座",
     );
@@ -289,7 +290,7 @@ class LoverConditions extends StatelessWidget {
 
   /// Constellation
   Widget _buildLoverBloodInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: loverBloodController,
       hintText: "A",
     );
@@ -297,7 +298,7 @@ class LoverConditions extends StatelessWidget {
 
   /// Sexual
   Widget _buildLoverSexualInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: loverSexualController,
       hintText: "異性愛",
     );
@@ -305,7 +306,7 @@ class LoverConditions extends StatelessWidget {
 
   /// Height
   Widget _buildLoverHeightInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: loverHeightController,
       hintText: "170cm",
     );
@@ -313,7 +314,7 @@ class LoverConditions extends StatelessWidget {
 
   /// Weight
   Widget _buildLoverWeightInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: loverWeightController,
       hintText: "170cm",
     );
@@ -321,7 +322,7 @@ class LoverConditions extends StatelessWidget {
 
   /// Speak Language
   Widget _buildLoverSpeakLanguageInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: loverSpeakLanguageController,
       hintText: "日本語",
     );
@@ -329,7 +330,7 @@ class LoverConditions extends StatelessWidget {
 
   /// Job
   Widget _buildLoverJobInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: loverJobController,
       hintText: "ホスト",
     );
@@ -337,7 +338,7 @@ class LoverConditions extends StatelessWidget {
 
   /// Annual Salary
   Widget _buildLoverAnnualSalaryInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: loverAnnualSalaryController,
       hintText: "4000",
     );
@@ -345,7 +346,7 @@ class LoverConditions extends StatelessWidget {
 
   /// Sociability
   Widget _buildLoverSociabilityInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: loverSociabilityController,
       hintText: "人たら神",
     );
@@ -353,27 +354,27 @@ class LoverConditions extends StatelessWidget {
 
   /// Religious
   Widget _buildLoverReligiousInput(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: loverReligiousController,
       hintText: "多神教",
       textInputAction: TextInputAction.done,
     );
   }
 
-  /// Certification For Check
-  Widget _buildCertificationForCheck(BuildContext context) {
+  /// Next Button
+  Widget _buildNextPageButton(BuildContext context) {
     return CustomOutlinedButton(
-      width: 110,
+      width: mediaQueryData.size.width / 4,
       height: 40,
       text: "条件確認",
       buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
-        createLoverGrpcRequset(context);
+        createLoverGrpcRequest(context);
       },
     );
   }
 
-  onTaptf(BuildContext context) {
+  onTapNextButton(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.payDone);
   }
 }

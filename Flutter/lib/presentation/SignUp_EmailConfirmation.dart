@@ -2,8 +2,8 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/pb/rpc_checkEmail.pb.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
-import 'package:dating_your_date/widgets/custom_outlined_button.dart';
-import 'package:dating_your_date/widgets/custom_text_form_field.dart';
+import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
+import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -16,7 +16,7 @@ class EmailConfirmation extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
 
   // Http
-  void signUpHttpRequset(BuildContext context) async {
+  void signUpHttpRequest(BuildContext context) async {
     var url = "http://127.0.0.1:8080/SignUpEmail";
     var requestBody = {"email": emailController.text};
     var response = await http.post(
@@ -26,7 +26,7 @@ class EmailConfirmation extends StatelessWidget {
     );
 
     if (response.statusCode == 200) {
-      onTaptf(context);
+      onTapNextButton(context);
     } else {
       print("email: ${emailController.text}");
     }
@@ -38,7 +38,7 @@ class EmailConfirmation extends StatelessWidget {
     final response = await GrpcService.client.checkEmail(request);
     // ignore: unnecessary_null_comparison
     if (response != null) {
-      onTaptf(context);
+      onTapNextButton(context);
     } else {
       showErrorDialog(context, "Error: Empty response");
     }
@@ -64,7 +64,7 @@ class EmailConfirmation extends StatelessWidget {
           key: _key,
           child: Container(
             width: double.maxFinite,
-            padding: EdgeInsets.only(left: 40.h, top: 65.v, right: 40.h),
+            padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
             child: Column(
               children: [
                 // Logo
@@ -73,39 +73,41 @@ class EmailConfirmation extends StatelessWidget {
 
                 // slogan
                 CustomImageView(imagePath: ImageConstant.imgSlogan, height: 17, width: 100),
-                SizedBox(height: 15.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
+
+                // 手続き
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    child: Text(
+                      "この手続きは1回のみで、以降表示されません",
+                      overflow: TextOverflow.ellipsis,
+                      style: CustomTextStyles.bodyMediumblack,
+                    ),
+                  ),
+                ),
+                SizedBox(height: mediaQueryData.size.height / 50),
+
+                // input
+                CustomInputBar(titleName: "メールアドレス", backendPart: _buildEmailInputSection(context)),
+                SizedBox(height: mediaQueryData.size.height / 150),
 
                 // information note
                 Align(
                   alignment: Alignment.topLeft,
                   child: Container(
-                    width: 350,
-                    margin: EdgeInsets.only(left: 20.h, right: 33.h),
                     child: Text(
                       "・メールアドレスの受信確認が必須です。\n・ご登録済みのお客様は受信確認をお願いしております。",
                       overflow: TextOverflow.ellipsis,
-                      style: CustomTextStyles.bodyMediumBlack900,
+                      style: CustomTextStyles.bodyMediumblack,
                     ),
                   ),
                 ),
-                SizedBox(height: 20.v),
-
-                // input
-                CustomInputBar(titleName: "メールアドレス", backendPart: _buildEmailInputSection(context)),
-                SizedBox(height: 30.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // send button
-                _buildNextButton(context),
-                SizedBox(height: 20.v),
-
-                // 手続き
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: 315,
-                    child: Text("（この手続きは1回のみで、以降表示されません）", overflow: TextOverflow.ellipsis, style: CustomTextStyles.bodyMediumBlack900),
-                  ),
-                ),
+                _buildNextPageButton(context),
+                SizedBox(height: mediaQueryData.size.height / 50),
               ],
             ),
           ),
@@ -116,7 +118,7 @@ class EmailConfirmation extends StatelessWidget {
 
   /// Section Widget
   Widget _buildEmailInputSection(BuildContext context) {
-    return CustomTextFormField(
+    return CustomInputFormBar(
       controller: emailController,
       hintText: "  example@email.com",
       textInputAction: TextInputAction.done,
@@ -126,19 +128,19 @@ class EmailConfirmation extends StatelessWidget {
   }
 
   /// Next Button
-  Widget _buildNextButton(BuildContext context) {
+  Widget _buildNextPageButton(BuildContext context) {
     return CustomOutlinedButton(
-      height: 40,
-      width: 95,
+      width: mediaQueryData.size.width / 4,
+      height: mediaQueryData.size.height / 25,
       text: "送信する",
-      buttonTextStyle: theme.textTheme.titleSmall!,
+      buttonTextStyle: theme.textTheme.titleMedium!,
       onPressed: () {
         signUpGrpcRequest(context);
       },
     );
   }
 
-  onTaptf(BuildContext context) {
+  onTapNextButton(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.confirmationCore);
   }
 }

@@ -10,7 +10,7 @@ class WarningMsgReturnResetPage extends StatelessWidget {
     mediaQueryData = MediaQuery.of(context);
 
     return CustomWarningMsgBox(
-      title: "了解",
+      btnTitle: "了解",
       msg: "一旦、確認するボタンを押したら、条件はもう一度設定しますのでお確認してください",
     );
   }
