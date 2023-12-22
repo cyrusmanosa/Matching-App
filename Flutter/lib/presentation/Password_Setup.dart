@@ -65,25 +65,17 @@ class PasswordSetup extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
             child: Column(
               children: [
-                // Logo
-                CustomImageView(imagePath: ImageConstant.imgLogo, height: 80, width: 95),
-                SizedBox(height: 1.v),
-
-                // Slogan
-                CustomImageView(imagePath: ImageConstant.imgSlogan, height: 17, width: 100),
-                SizedBox(height: mediaQueryData.size.height / 25),
+                // Logo and Slogan
+                SizedBox(height: mediaQueryData.size.height / 15),
+                CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 3.5),
+                CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3),
+                SizedBox(height: mediaQueryData.size.height / 30),
 
                 // New Password
                 CustomInputBar(titleName: "パスワード", backendPart: _buildNewPasswordInput(context)),
 
                 // msg
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 2.h),
-                    child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.bodyMediumgray500),
-                  ),
-                ),
+                Align(alignment: Alignment.centerLeft, child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.pwRuleGray500)),
                 SizedBox(height: mediaQueryData.size.height / 25),
 
                 // New Password Confirm

@@ -8,13 +8,12 @@ import 'package:flutter/material.dart';
 class PasswordResetEmail extends StatelessWidget {
   PasswordResetEmail({Key? key}) : super(key: key);
 
-  TextEditingController passwordResetEmailController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
-
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -25,20 +24,19 @@ class PasswordResetEmail extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
             child: Column(
               children: [
-                // Logo And Slogan
+                // Logo and Slogan
+                SizedBox(height: mediaQueryData.size.height / 30),
                 CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 4),
-                CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3),
-                SizedBox(height: mediaQueryData.size.height / 50),
+                CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3.5),
+                SizedBox(height: mediaQueryData.size.height / 30),
 
                 // msg
                 Container(
-                  width: 356.h,
-                  margin: EdgeInsets.only(left: 3.h, right: 10.h),
+                  alignment: Alignment.centerLeft,
                   child: Text(
                     "ご登録されているメールアドレスに認証キーを送します。",
-                    maxLines: 1,
+                    maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.left,
                     style: CustomTextStyles.titleOfUnderLogo,
                   ),
                 ),
@@ -49,15 +47,7 @@ class PasswordResetEmail extends StatelessWidget {
                 SizedBox(height: 25.v),
 
                 // button
-                CustomOutlinedButton(
-                  height: 40,
-                  width: 95,
-                  text: "送信する",
-                  buttonTextStyle: theme.textTheme.titleMedium,
-                  onPressed: () {
-                    onTapPasswordResetButton(context);
-                  },
-                ),
+                _buildNextPageButton(context)
               ],
             ),
           ),
@@ -69,7 +59,7 @@ class PasswordResetEmail extends StatelessWidget {
   /// _ResetPassword Email
   Widget _buildResetPasswordEmailInput(BuildContext context) {
     return CustomInputFormBar(
-      controller: passwordResetEmailController,
+      controller: emailController,
       hintText: "example@email.com",
       textInputAction: TextInputAction.done,
       textInputType: TextInputType.emailAddress,
@@ -78,7 +68,19 @@ class PasswordResetEmail extends StatelessWidget {
   }
 }
 
-/// PasswordResetEmail-Send
+/// Next Button
+Widget _buildNextPageButton(BuildContext context) {
+  return CustomOutlinedButton(
+    width: mediaQueryData.size.width / 4,
+    height: mediaQueryData.size.height / 25,
+    text: "送信",
+    buttonTextStyle: theme.textTheme.titleMedium,
+    onPressed: () {
+      onTapPasswordResetButton(context);
+    },
+  );
+}
+
 /// Send to Email for check user
 onTapPasswordResetButton(BuildContext context) {
   Navigator.pushNamed(context, AppRoutes.newPasswordSetup);

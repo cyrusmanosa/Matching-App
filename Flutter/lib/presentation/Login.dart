@@ -91,9 +91,9 @@ class Login extends StatelessWidget {
                 child: Column(
                   children: [
                     // Logo and Slogan
-                    SizedBox(height: mediaQueryData.size.height / 20),
-                    CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 3.3),
-                    CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 2.6),
+                    SizedBox(height: mediaQueryData.size.height / 15),
+                    CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 3.5),
+                    CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3),
                     SizedBox(height: mediaQueryData.size.height / 35),
 
                     // ID
@@ -102,7 +102,7 @@ class Login extends StatelessWidget {
 
                     // Password
                     CustomInputBar(titleName: "パスワード:", backendPart: _buildPasswordInput(context)),
-                    SizedBox(height: mediaQueryData.size.height / 150),
+                    SizedBox(height: mediaQueryData.size.height / 350),
 
                     // reset password
                     Align(
@@ -111,7 +111,10 @@ class Login extends StatelessWidget {
                         onTap: () {
                           onTapPasswordResetEmail(context);
                         },
-                        child: Text("パスワードを忘れた場合", style: CustomTextStyles.wordOnlySmallButton),
+                        child: Padding(
+                          padding: EdgeInsets.only(left: mediaQueryData.size.width / 100),
+                          child: Text("パスワードを忘れた場合", style: CustomTextStyles.wordOnlySmallButton),
+                        ),
                       ),
                     ),
                     SizedBox(height: mediaQueryData.size.height / 50),

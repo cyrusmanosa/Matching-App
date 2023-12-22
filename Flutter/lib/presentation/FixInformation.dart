@@ -38,13 +38,6 @@ class FixInformation extends StatelessWidget {
 
     if (response.statusCode == 200) {
       onTapNextButton(context);
-    } else {
-      print("FirstName: ${fixFirstNameController.text}");
-      print("LastName: ${fixLastNameController.text}");
-      print("Birth: ${fixBirthController.text}");
-      print("Country: ${fixCountryController.text}");
-      print("Gender: ${fixGenderController.text}");
-      print("Blood: ${fixBloodController.text}");
     }
   }
 

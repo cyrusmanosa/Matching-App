@@ -23,13 +23,11 @@ class NewPasswordSetup extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
             child: Column(
               children: [
-                // Logo
-                CustomImageView(imagePath: ImageConstant.imgLogo, height: 80, width: 95),
-                SizedBox(height: 1.v),
-
-                // Slogan
-                CustomImageView(imagePath: ImageConstant.imgSlogan, height: 17, width: 100),
-                SizedBox(height: mediaQueryData.size.height / 25),
+                // Logo and Slogan
+                SizedBox(height: mediaQueryData.size.height / 30),
+                CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 4),
+                CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3.5),
+                SizedBox(height: mediaQueryData.size.height / 30),
 
                 // New Password
                 CustomInputBar(titleName: "新しいパスワード", backendPart: _buildNewPasswordInput(context)),
@@ -38,8 +36,8 @@ class NewPasswordSetup extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 2.h),
-                    child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.bodyMediumgray500),
+                    padding: EdgeInsets.only(left: mediaQueryData.size.width / 100),
+                    child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.pwRuleGray500),
                   ),
                 ),
                 SizedBox(height: mediaQueryData.size.height / 25),
@@ -49,14 +47,7 @@ class NewPasswordSetup extends StatelessWidget {
                 SizedBox(height: mediaQueryData.size.height / 25),
 
                 // Button
-                CustomOutlinedButton(
-                    height: 40,
-                    width: 95,
-                    text: "設定",
-                    buttonTextStyle: theme.textTheme.titleMedium,
-                    onPressed: () {
-                      onTapNextButton(context);
-                    }),
+                _buildNextPageButton(context)
               ],
             ),
           ),
@@ -70,6 +61,19 @@ class NewPasswordSetup extends StatelessWidget {
     return CustomInputFormBar(
       controller: newPasswordSetupController,
       hintText: "Ankdl2332",
+    );
+  }
+
+  /// Next Button
+  Widget _buildNextPageButton(BuildContext context) {
+    return CustomOutlinedButton(
+      width: mediaQueryData.size.width / 4,
+      height: mediaQueryData.size.height / 25,
+      text: "送信",
+      buttonTextStyle: theme.textTheme.titleMedium,
+      onPressed: () {
+        onTapNextButton(context);
+      },
     );
   }
 

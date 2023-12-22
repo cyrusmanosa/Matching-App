@@ -68,21 +68,13 @@ class ThemeHelper {
 /// Class containing the supported text theme styles.
 class TextThemes {
   static TextTheme textTheme(ColorScheme colorScheme) => TextTheme(
-        // body
-        bodyMedium: TextStyle(
-          color: appTheme.gray500,
-          fontFamily: 'Rounded Mplus 1c',
-          fontWeight: FontWeight.w400,
-        ),
+        // input hint word
+        bodyMedium: TextStyle(color: appTheme.gray500, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
         // head
-        headlineMedium: TextStyle(
-          color: appTheme.black,
-          fontFamily: 'Rounded Mplus 1c',
-          fontWeight: FontWeight.w400,
-        ),
+        headlineMedium: TextStyle(color: appTheme.black, fontFamily: 'Montserrat', fontWeight: FontWeight.w400),
         // Pink
-        titleMedium: TextStyle(color: appTheme.pinkA100, fontFamily: 'Montserrat', fontWeight: FontWeight.w600, fontSize: 16),
-        titleLarge: TextStyle(color: appTheme.pinkA100, fontFamily: 'Montserrat', fontWeight: FontWeight.w600, fontSize: 18),
+        titleMedium: TextStyle(color: appTheme.pinkA100, fontFamily: 'Montserrat', fontWeight: FontWeight.w600),
+        titleLarge: TextStyle(color: appTheme.pinkA100, fontFamily: 'Montserrat', fontWeight: FontWeight.w600),
       );
 }
 

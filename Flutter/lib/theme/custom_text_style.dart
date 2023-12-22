@@ -6,16 +6,17 @@ import '../core/app_export.dart';
 /// Additionally, this class includes extensions on [TextStyle] to easily apply specific font families to text.
 
 class CustomTextStyles {
+  static get inputTitlePink => theme.textTheme.titleMedium!.copyWith(color: appTheme.pinkA100, fontSize: 16);
   static get msgWordOfMsgBox => theme.textTheme.bodyMedium!.copyWith(color: appTheme.black, fontSize: 16);
-  static get wordOnlySmallButton => theme.textTheme.bodyMedium!.copyWith(color: appTheme.black, fontSize: 12);
-  static get titleOfUnderLogo => theme.textTheme.headlineMedium!.copyWith(color: appTheme.black, fontSize: 12);
+  static get wordOnlySmallButton => theme.textTheme.bodyMedium!.copyWith(color: appTheme.black, fontSize: 11);
+  static get titleOfUnderLogo => theme.textTheme.headlineMedium!.copyWith(color: appTheme.black, fontSize: 13);
+  static get pwRuleGray500 => theme.textTheme.bodyMedium!.copyWith(color: appTheme.gray500, fontSize: 12);
 
   // Body text style
   static get bodyMediumblack => theme.textTheme.bodyMedium!.copyWith(color: appTheme.black, fontSize: 18);
   static get bodyMediumPinkA100 => theme.textTheme.bodyMedium!.copyWith(color: appTheme.pinkA100, fontSize: 18);
 
   // Color Only
-  static get bodyMediumgray500 => theme.textTheme.bodyMedium!.copyWith(color: appTheme.gray500);
   static get bodyMediumgray800 => theme.textTheme.bodyMedium!.copyWith(color: appTheme.gray800);
   static get bodyMediumOnPrimary => theme.textTheme.bodyMedium!.copyWith(color: theme.colorScheme.onPrimary);
   static get bodyMediumPrimary => theme.textTheme.bodyMedium!.copyWith(color: theme.colorScheme.primary);

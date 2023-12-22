@@ -56,8 +56,8 @@ class PasswordResetError extends StatelessWidget {
 
                 // button
                 CustomOutlinedButton(
-                  height: 40,
-                  width: 95,
+                  width: mediaQueryData.size.width / 4,
+                  height: mediaQueryData.size.height / 25,
                   text: "送信する",
                   buttonTextStyle: theme.textTheme.titleMedium!,
                 ),

@@ -47,11 +47,27 @@ class EmailConfirmation extends StatelessWidget {
   void showErrorDialog(BuildContext context, String errorMessage) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Error'),
-        content: Text(errorMessage),
-        actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text('OK'))],
-      ),
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
+          title: CustomImageView(imagePath: ImageConstant.imgWarning, height: 40, width: 50, alignment: Alignment.center),
+          content: Container(
+            width: mediaQueryData.size.width / 1.1,
+            height: mediaQueryData.size.height / 50,
+            child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
+          ),
+          actions: [
+            CustomOutlinedButton(
+              alignment: Alignment.center,
+              text: "OK",
+              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 80),
+              onPressed: () {
+                onTapTurnBack(context);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -67,13 +83,11 @@ class EmailConfirmation extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
             child: Column(
               children: [
-                // Logo
-                CustomImageView(imagePath: ImageConstant.imgLogo, height: 80, width: 95),
-                SizedBox(height: 1.v),
-
-                // slogan
-                CustomImageView(imagePath: ImageConstant.imgSlogan, height: 17, width: 100),
-                SizedBox(height: mediaQueryData.size.height / 50),
+                // Logo and Slogan
+                SizedBox(height: mediaQueryData.size.height / 30),
+                CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 4.5),
+                CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3.5),
+                SizedBox(height: mediaQueryData.size.height / 30),
 
                 // 手続き
                 Align(
@@ -82,7 +96,7 @@ class EmailConfirmation extends StatelessWidget {
                     child: Text(
                       "この手続きは1回のみで、以降表示されません",
                       overflow: TextOverflow.ellipsis,
-                      style: CustomTextStyles.bodyMediumblack,
+                      style: CustomTextStyles.titleOfUnderLogo,
                     ),
                   ),
                 ),
@@ -90,16 +104,26 @@ class EmailConfirmation extends StatelessWidget {
 
                 // input
                 CustomInputBar(titleName: "メールアドレス", backendPart: _buildEmailInputSection(context)),
-                SizedBox(height: mediaQueryData.size.height / 150),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // information note
                 Align(
                   alignment: Alignment.topLeft,
                   child: Container(
                     child: Text(
-                      "・メールアドレスの受信確認が必須です。\n・ご登録済みのお客様は受信確認をお願いしております。",
+                      "・メールアドレスの受信確認が必須です。",
                       overflow: TextOverflow.ellipsis,
-                      style: CustomTextStyles.bodyMediumblack,
+                      style: CustomTextStyles.titleOfUnderLogo,
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Container(
+                    child: Text(
+                      "・ご登録済みのお客様は受信確認をお願いします。",
+                      overflow: TextOverflow.ellipsis,
+                      style: CustomTextStyles.titleOfUnderLogo,
                     ),
                   ),
                 ),
@@ -132,15 +156,28 @@ class EmailConfirmation extends StatelessWidget {
     return CustomOutlinedButton(
       width: mediaQueryData.size.width / 4,
       height: mediaQueryData.size.height / 25,
-      text: "送信する",
-      buttonTextStyle: theme.textTheme.titleMedium!,
+      text: "送信",
+      buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
-        signUpGrpcRequest(context);
+        if (isEmailValid(emailController.text)) {
+          signUpGrpcRequest(context);
+        } else {
+          showErrorDialog(context, "無効的なメールアドレス");
+        }
       },
     );
   }
 
+  onTapTurnBack(BuildContext context) {
+    Navigator.pop(context);
+  }
+
   onTapNextButton(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.confirmationCore);
+  }
+
+  bool isEmailValid(String email) {
+    final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+    return emailRegex.hasMatch(email);
   }
 }
