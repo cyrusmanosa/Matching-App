@@ -12,11 +12,14 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-// ignore: must_be_immutable, camel_case_types
-class HobbyConditionRepair extends StatelessWidget {
-  final String title;
-  HobbyConditionRepair(this.title, {Key? key}) : super(key: key);
+class HobbyConditionRepair extends StatefulWidget {
+  HobbyConditionRepair({Key? key}) : super(key: key);
 
+  @override
+  _HobbyConditionRepairState createState() => _HobbyConditionRepairState();
+}
+
+class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
   TextEditingController resetHobbyEraController = TextEditingController();
   TextEditingController resetHobbyCountryController = TextEditingController();
   TextEditingController resetHobbyCityController = TextEditingController();
@@ -93,13 +96,38 @@ class HobbyConditionRepair extends StatelessWidget {
   void showErrorDialog(BuildContext context, String errorMessage) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Error'),
-        content: Text(errorMessage),
-        actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text('OK'))],
-      ),
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
+          // Error Logo
+          title: CustomImageView(
+            imagePath: ImageConstant.imgWarning,
+            height: mediaQueryData.size.height / 20,
+            width: mediaQueryData.size.width / 10,
+            alignment: Alignment.center,
+          ),
+
+          // Word
+          content: Container(
+            width: mediaQueryData.size.width / 1.1,
+            child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
+          ),
+          actions: [
+            CustomOutlinedButton(
+              alignment: Alignment.center,
+              text: "OK",
+              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
+              onPressed: () {
+                onTapReturn(context);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
+
+  bool confirmBtn = false;
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +137,7 @@ class HobbyConditionRepair extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         // Header
-        appBar: _buildHeader(context, title),
+        appBar: _buildHeader(context),
         body: Form(
           child: Container(
             width: double.maxFinite,
@@ -163,25 +191,26 @@ class HobbyConditionRepair extends StatelessWidget {
                   CustomInputBar(titleName: "社交力:", backendPart: _buildHobbyResetSociabilityInput(context)),
                   SizedBox(height: 5),
 
-                  // 本人
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 5),
-                      child: Row(
-                        children: [
-                          // 圓
-                          Container(
-                            height: 20.adaptSize,
-                            width: 20.adaptSize,
-                            decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 10.h),
-                            child: Text("本人認証を確認しました", style: theme.textTheme.bodyMedium),
-                          ),
-                        ],
-                      ),
+                  // 本人認証の丸
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        confirmBtn = !confirmBtn;
+                      });
+                    },
+                    child: Row(
+                      children: [
+                        Container(
+                          height: mediaQueryData.size.width / 25,
+                          width: mediaQueryData.size.width / 25,
+                          decoration:
+                              BoxDecoration(color: confirmBtn ? appTheme.green : appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
+                          child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.pwRuleGray500),
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(height: mediaQueryData.size.height / 25),
@@ -199,21 +228,20 @@ class HobbyConditionRepair extends StatelessWidget {
   }
 
   /// Header
-  PreferredSizeWidget _buildHeader(BuildContext context, String title) {
+  PreferredSizeWidget _buildHeader(BuildContext context) {
     return CustomAppBar(
       leading: AppbarLeadingImage(
         imagePath: ImageConstant.imgArrowLeft,
         margin: EdgeInsets.only(left: 25, top: 50, bottom: 10),
         onTap: () {
-          onTapArrowLeft(context);
+          onTapReturn(context);
         },
       ),
-      title: AppbarTitle(text: title, margin: EdgeInsets.only(top: 60, bottom: 20)),
-      styleType: Style.bgFill,
+      title: AppbarTitle(text: "趣味の条件更改", margin: EdgeInsets.only(top: 60, bottom: 20)),
     );
   }
 
-  onTapArrowLeft(BuildContext context) {
+  onTapReturn(BuildContext context) {
     Navigator.pop(context);
   }
 

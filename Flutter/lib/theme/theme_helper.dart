@@ -82,7 +82,7 @@ class TextThemes {
 class ColorSchemes {
   static final primaryColorScheme = ColorScheme.light(
     // Primary colors
-    primary: Color(0XFF454545),
+    primary: Color.fromARGB(255, 210, 50, 50),
     primaryContainer: Color(0XE5CDD1D8),
 
     // Error colors
@@ -102,6 +102,9 @@ class PrimaryColors {
   // Blue
   Color get blue800 => Color(0XFF1464CC);
   Color get blueA400 => Color(0XFF1877F2);
+
+  // Green
+  Color get green => Color.fromARGB(255, 21, 179, 0);
 
   // BlueGray
   Color get blueGray100 => Color(0XFFD9D9D9);

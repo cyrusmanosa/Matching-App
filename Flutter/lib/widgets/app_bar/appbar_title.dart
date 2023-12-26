@@ -1,4 +1,3 @@
-import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -17,7 +16,7 @@ class AppbarTitle extends StatelessWidget {
       },
       child: Padding(
         padding: margin ?? EdgeInsets.zero,
-        child: Text(text, style: theme.textTheme.headlineMedium!.copyWith(color: theme.colorScheme.onPrimary)),
+        child: Text(text),
       ),
     );
   }

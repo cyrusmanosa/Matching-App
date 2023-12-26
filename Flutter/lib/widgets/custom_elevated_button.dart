@@ -41,8 +41,8 @@ class CustomElevatedButton extends BaseButton {
   }
 
   Widget get buildElevatedButtonWidget => Container(
-        height: this.height ?? mediaQueryData.size.height / 20,
-        width: this.width ?? mediaQueryData.size.width / 1.5,
+        height: height ?? mediaQueryData.size.height / 20,
+        width: width ?? mediaQueryData.size.width / 1.5,
         margin: margin,
         decoration: decoration,
         child: ElevatedButton(

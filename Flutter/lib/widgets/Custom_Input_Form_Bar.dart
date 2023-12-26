@@ -71,48 +71,39 @@ class CustomInputFormBar extends StatelessWidget {
           autofocus: autofocus,
           controller: controller,
           textAlign: TextAlign.start,
-          // input complete
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.only(top: -10),
-            hintText: hintText,
-            hintStyle: theme.textTheme.bodyMedium,
-            border: InputBorder.none,
-            prefix: Padding(padding: EdgeInsets.only(left: 15.0)),
-          ),
-
+          decoration: decoration,
           focusNode: focusNode,
           keyboardType: textInputType,
           maxLength: maxLength,
-          maxLines: maxLines,
+          maxLines: maxLines ?? 1,
           obscureText: obscureText ?? false,
           style: theme.textTheme.displayLarge,
-          textInputAction: textInputAction,
+          textInputAction: textInputAction ?? TextInputAction.done,
           validator: validator,
           onTap: onTap,
         ),
       );
 
   InputDecoration get decoration => InputDecoration(
+        contentPadding: EdgeInsets.only(top: -10),
         fillColor: fillColor,
         filled: filled,
         hintText: hintText,
-        hintStyle: hintStyle,
+        hintStyle: theme.textTheme.bodyMedium,
         isDense: false,
-        prefix: prefix,
+        prefix: Padding(padding: EdgeInsets.only(left: 15.0)),
         prefixIconConstraints: prefixConstraints,
         suffixIcon: suffix,
         suffixIconConstraints: suffixConstraints,
-
-        border: OutlineInputBorder(borderRadius: BorderRadiusStyle.r5, borderSide: BorderSide(color: appTheme.pinkA100, width: 1)),
-        enabledBorder: OutlineInputBorder(borderRadius: BorderRadiusStyle.r5),
+        border: OutlineInputBorder(borderRadius: BorderRadiusStyle.r15, borderSide: BorderSide(color: appTheme.pinkA100)),
+        enabledBorder: OutlineInputBorder(borderRadius: BorderRadiusStyle.r15, borderSide: BorderSide(color: appTheme.pinkA100)),
 
         // Error Border
-        errorBorder: OutlineInputBorder(borderRadius: BorderRadiusStyle.r5, borderSide: BorderSide(color: appTheme.redA700, width: 1)),
+        errorBorder: OutlineInputBorder(borderRadius: BorderRadiusStyle.r15, borderSide: BorderSide(color: appTheme.redA700)),
 
         // Focus Border
         focusedBorder: borderDecoration,
-        focusedErrorBorder:
-            OutlineInputBorder(borderRadius: BorderRadiusStyle.r5, borderSide: BorderSide(color: appTheme.blue800, width: 1)),
+        focusedErrorBorder: OutlineInputBorder(borderRadius: BorderRadiusStyle.r15, borderSide: BorderSide(color: appTheme.blue800)),
       );
 }
 

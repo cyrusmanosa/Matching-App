@@ -147,12 +147,12 @@ class InputPasswordResponse extends $pb.GeneratedMessage {
 
 class ResetPasswordRequest extends $pb.GeneratedMessage {
   factory ResetPasswordRequest({
-    $core.int? userID,
+    $core.String? sessionID,
     $core.String? password,
   }) {
     final $result = create();
-    if (userID != null) {
-      $result.userID = userID;
+    if (sessionID != null) {
+      $result.sessionID = sessionID;
     }
     if (password != null) {
       $result.password = password;
@@ -164,7 +164,7 @@ class ResetPasswordRequest extends $pb.GeneratedMessage {
   factory ResetPasswordRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ResetPasswordRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'UserID', $pb.PbFieldType.O3, protoName: 'UserID')
+    ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
     ..aOS(2, _omitFieldNames ? '' : 'Password', protoName: 'Password')
     ..hasRequiredFields = false
   ;
@@ -191,13 +191,13 @@ class ResetPasswordRequest extends $pb.GeneratedMessage {
   static ResetPasswordRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get userID => $_getIZ(0);
+  $core.String get sessionID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set userID($core.int v) { $_setSignedInt32(0, v); }
+  set sessionID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasUserID() => $_has(0);
+  $core.bool hasSessionID() => $_has(0);
   @$pb.TagNumber(1)
-  void clearUserID() => clearField(1);
+  void clearSessionID() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.String get password => $_getSZ(1);

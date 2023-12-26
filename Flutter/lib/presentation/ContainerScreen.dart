@@ -1,10 +1,10 @@
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/presentation/Chat/Chat.dart';
-import 'package:dating_your_date/presentation/AccompanyConditionsRepair.dart';
+import 'package:dating_your_date/presentation/AccompanyConditionRepair.dart';
 import 'package:dating_your_date/presentation/DeleteTarget.dart';
 import 'package:dating_your_date/presentation/HobbyConditionRepair.dart';
 import 'package:dating_your_date/presentation/Home/Home.dart';
-import 'package:dating_your_date/presentation/LoverConditionsRepair.dart';
+import 'package:dating_your_date/presentation/LoverConditionRepair.dart';
 import 'package:dating_your_date/presentation/Profile/Profile.dart';
 import 'package:dating_your_date/presentation/ProfileEdit.dart';
 import 'package:dating_your_date/presentation/ChatBox.dart';
@@ -71,12 +71,12 @@ class ContainerScreen extends StatelessWidget {
         return ChatBox();
       case AppRoutes.profileEdit:
         return ProfileEdit();
-      case AppRoutes.accompanyConditionsRepair:
-        return AccompanyConditionsRepair("お相伴の条件更改");
+      case AppRoutes.accompanyConditionRepair:
+        return AccompanyConditionRepair();
       case AppRoutes.hobbyConditionRepair:
-        return HobbyConditionRepair("趣味の条件更改");
-      case AppRoutes.loverConditionsRepair:
-        return LoverConditionsRepair("恋人の条件更改");
+        return HobbyConditionRepair();
+      case AppRoutes.loverConditionRepair:
+        return LoverConditionRepair();
       case AppRoutes.deleteTarget:
         return DeleteTarget();
       default:

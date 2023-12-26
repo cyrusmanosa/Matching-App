@@ -22,18 +22,10 @@ class CanChangeInformation_2 extends StatelessWidget {
   TextEditingController canChangeIntroduceController = TextEditingController();
 
   // Http
-  void createCanChangeHttpRequest(BuildContext context) async {
+  void updateCanChangeHttpRequest(BuildContext context) async {
     var url = "http://127.0.0.1:8080/CreateFixInfo";
     var requestBody = {
-      "SessionID": globalSessionID,
-      "NickName": nickname,
-      "City": city,
-      "Sexual": sexual,
-      "Height": height,
-      "Weight": weight,
-      "Speaklanguage": speaklanguage,
-      "Education": education,
-      "Job": canChangeJobController,
+      "Job": canChangeJobController.text,
       "AnnualSalary": int.parse(canChangeAnnualSalaryController.text),
       "Sociability": canChangeSociabilityController.text,
       "Religious": canChangeReligiousController.text,
@@ -43,26 +35,13 @@ class CanChangeInformation_2 extends StatelessWidget {
 
     if (response.statusCode == 200) {
       onTapNextButton(context);
-    } else {
-      print("Job: ${canChangeJobController.text}");
-      print("AnnualSalary: ${canChangeAnnualSalaryController.text}");
-      print("Sociability: ${canChangeSociabilityController.text}");
-      print("Religious: ${canChangeReligiousController.text}");
-      print("Introduce: ${canChangeIntroduceController.text}");
     }
   }
 
   // Grpc
-  void createCanChangeGrpcRequest(BuildContext context) async {
-    final request = CreateCanChangeRequest(
+  void updateCanChangeGrpcRequest(BuildContext context) async {
+    final request = UpdateCanChangeRequest(
       sessionID: globalSessionID,
-      nickName: nickname,
-      city: city,
-      sexual: sexual,
-      height: height,
-      weight: weight,
-      speaklanguage: speaklanguage,
-      education: education,
       job: canChangeJobController.text,
       annualSalary: int.parse(canChangeAnnualSalaryController.text),
       sociability: canChangeSociabilityController.text,
@@ -70,29 +49,63 @@ class CanChangeInformation_2 extends StatelessWidget {
       introduce: canChangeIntroduceController.text,
     );
 
-    final response = await GrpcService.client.createCanChange(request);
-    // ignore: unnecessary_null_comparison
-    if (response != null) {
-      onTapNextButton(context);
+    if (canChangeJobController.text == "") {
+      showErrorDialog(context, "仕事がまだ入力されていません");
+    } else if (canChangeAnnualSalaryController.text == "") {
+      showErrorDialog(context, "年収がまだ入力されていません");
+    } else if (canChangeSociabilityController.text == "") {
+      showErrorDialog(context, "社交力がまだ入力されていません");
+    } else if (canChangeReligiousController.text == "") {
+      showErrorDialog(context, "宗教がまだ入力されていません");
+    } else if (canChangeIntroduceController.text == "") {
+      showErrorDialog(context, "自己紹介がまだ入力されていません");
     } else {
-      showErrorDialog(context, "Error: validatable input data");
+      final response = await GrpcService.client.updateCanChange(request);
+      // ignore: unnecessary_null_comparison
+      if (response != null) {
+        onTapNextButton(context);
+      } else {
+        showErrorDialog(context, "Error: validatable input data");
+      }
     }
   }
 
   void showErrorDialog(BuildContext context, String errorMessage) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Error'),
-        content: Text(errorMessage),
-        actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text('OK'))],
-      ),
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
+          // Error Logo
+          title: CustomImageView(
+            imagePath: ImageConstant.imgWarning,
+            height: mediaQueryData.size.height / 20,
+            width: mediaQueryData.size.width / 10,
+            alignment: Alignment.center,
+          ),
+
+          // Word
+          content: Container(
+            width: mediaQueryData.size.width / 1.1,
+            child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
+          ),
+          actions: [
+            CustomOutlinedButton(
+              alignment: Alignment.center,
+              text: "OK",
+              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
+              onPressed: () {
+                onTapReturn(context);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
     return SafeArea(
       child: Scaffold(
         appBar: _buildHeader(context),
@@ -135,16 +148,15 @@ class CanChangeInformation_2 extends StatelessWidget {
         imagePath: ImageConstant.imgArrowLeft,
         margin: EdgeInsets.only(left: 25, top: 50, bottom: 10),
         onTap: () {
-          onTapArrowLeft(context);
+          onTapReturn(context);
         },
       ),
       title: AppbarTitle(text: "基本個人情報 - C", margin: EdgeInsets.only(top: 60, bottom: 20)),
-      styleType: Style.bgFill,
     );
   }
 
   // turn back
-  onTapArrowLeft(BuildContext context) {
+  onTapReturn(BuildContext context) {
     Navigator.pop(context);
   }
 
@@ -200,7 +212,7 @@ class CanChangeInformation_2 extends StatelessWidget {
       text: "次へ",
       buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
-        createCanChangeGrpcRequest(context);
+        updateCanChangeGrpcRequest(context);
       },
     );
   }

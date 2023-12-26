@@ -46,15 +46,15 @@ final $typed_data.Uint8List inputPasswordResponseDescriptor = $convert.base64Dec
 const ResetPasswordRequest$json = {
   '1': 'ResetPasswordRequest',
   '2': [
-    {'1': 'UserID', '3': 1, '4': 1, '5': 5, '10': 'UserID'},
+    {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
     {'1': 'Password', '3': 2, '4': 1, '5': 9, '10': 'Password'},
   ],
 };
 
 /// Descriptor for `ResetPasswordRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List resetPasswordRequestDescriptor = $convert.base64Decode(
-    'ChRSZXNldFBhc3N3b3JkUmVxdWVzdBIWCgZVc2VySUQYASABKAVSBlVzZXJJRBIaCghQYXNzd2'
-    '9yZBgCIAEoCVIIUGFzc3dvcmQ=');
+    'ChRSZXNldFBhc3N3b3JkUmVxdWVzdBIcCglTZXNzaW9uSUQYASABKAlSCVNlc3Npb25JRBIaCg'
+    'hQYXNzd29yZBgCIAEoCVIIUGFzc3dvcmQ=');
 
 @$core.Deprecated('Use resetPasswordResponseDescriptor instead')
 const ResetPasswordResponse$json = {

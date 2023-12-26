@@ -1,10 +1,6 @@
-import 'package:dating_your_date/presentation/Target/widgets/ResetTargetButtonCompaionship.dart';
-import 'package:dating_your_date/presentation/Target/widgets/ResetTargetButtonLover.dart';
-import 'widgets/ResetTargetButtonHobby.dart';
+import 'package:dating_your_date/presentation/Target/widgets/ResetTargetButton.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class Target extends StatelessWidget {
   const Target({Key? key}) : super(key: key);
@@ -20,11 +16,11 @@ class Target extends StatelessWidget {
           child: Column(
             children: [
               _buildHeader(context),
-              // 題目
-              SizedBox(height: 60.v),
+              SizedBox(height: mediaQueryData.size.height / 30),
+
+              // title
               Text("探すターゲットの種類", style: CustomTextStyles.headlineMediumblack),
-              // 選択
-              SizedBox(height: mediaQueryData.size.height / 25),
+              SizedBox(height: mediaQueryData.size.height / 30),
               _buildTargetResetList(context)
             ],
           ),
@@ -49,18 +45,18 @@ class Target extends StatelessWidget {
   Widget _buildTargetResetList(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 40.h),
+        padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 15),
         child: ListView.separated(
           physics: BouncingScrollPhysics(),
           itemCount: 3,
-          separatorBuilder: (context, index) => SizedBox(height: 15), // 设置垂直间距
+          separatorBuilder: (context, index) => SizedBox(height: mediaQueryData.size.height / 30),
           itemBuilder: (context, index) {
             if (index == 0) {
-              return ResetTargetButtonHobby();
+              return ResetTargetButton(title: "趣味", color: CustomButtonStyles.fillLightGray, sendPage: AppRoutes.hobbyConditionRepair);
             } else if (index == 1) {
-              return ResetTargetButtonLover();
+              return ResetTargetButton(title: "恋人", color: CustomButtonStyles.fillDarkRed, sendPage: AppRoutes.loverConditionRepair);
             } else if (index == 2) {
-              return ResetTargetButtonCompaionship();
+              return ResetTargetButton(title: "お相伴", color: CustomButtonStyles.fillRed, sendPage: AppRoutes.accompanyConditionRepair);
             }
             return SizedBox();
           },

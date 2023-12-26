@@ -12,9 +12,13 @@ import 'package:grpc/grpc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-// ignore: must_be_immutable
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   Login({Key? key}) : super(key: key);
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -23,16 +27,9 @@ class Login extends StatelessWidget {
   void loginHttpRequest(BuildContext context) async {
     var url = "http://127.0.0.1:8080/UserLogin";
     var requestBody = {"Email": emailController.text, "Password": passwordController.text};
-    var response = await http.post(
-      Uri.parse(url),
-      body: jsonEncode(requestBody),
-      headers: {"Content-Type": "application/json"},
-    );
+    var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
     if (response.statusCode == 200) {
       onTapLoginButton(context);
-    } else {
-      print("Email: ${emailController.text}");
-      print("Password: ${passwordController.text}");
     }
   }
 
@@ -40,8 +37,9 @@ class Login extends StatelessWidget {
   void loginUser(BuildContext context) async {
     final request = LoginUserRequest(email: emailController.text, password: passwordController.text);
     try {
-      final response = await GrpcService.client.loginUser(request);
-      globalSessionID = response.sessionsID;
+      final loginResponse = await GrpcService.client.loginUser(request);
+      globalSessionID = loginResponse.sessionsID;
+      print(_formKey);
       onTapLoginButton(context);
     } on GrpcError catch (e) {
       showErrorDialog(context, "Email or Password have a ${e.codeName}");
@@ -54,19 +52,26 @@ class Login extends StatelessWidget {
       builder: (context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
-          title: CustomImageView(imagePath: ImageConstant.imgWarning, height: 40, width: 50, alignment: Alignment.center),
+          // Error Logo
+          title: CustomImageView(
+            imagePath: ImageConstant.imgWarning,
+            height: mediaQueryData.size.height / 20,
+            width: mediaQueryData.size.width / 10,
+            alignment: Alignment.center,
+          ),
+
+          // Word
           content: Container(
             width: mediaQueryData.size.width / 1.1,
-            height: mediaQueryData.size.height / 50,
             child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
           ),
           actions: [
             CustomOutlinedButton(
               alignment: Alignment.center,
               text: "OK",
-              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 80),
+              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
               onPressed: () {
-                onTapTurnBack(context);
+                onTapReturn(context);
               },
             ),
           ],
@@ -74,6 +79,8 @@ class Login extends StatelessWidget {
       },
     );
   }
+
+  bool passwordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +91,6 @@ class Login extends StatelessWidget {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             body: Form(
-              key: _formKey,
               child: Container(
                 width: double.maxFinite,
                 padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 10),
@@ -221,12 +227,20 @@ class Login extends StatelessWidget {
       hintText: "Secret",
       textInputAction: TextInputAction.done,
       textInputType: TextInputType.visiblePassword,
-      obscureText: true,
+      obscureText: passwordVisible ? false : true,
       maxLines: 1,
       focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
       },
+      suffix: IconButton(
+        icon: Icon(passwordVisible ? Icons.visibility : Icons.visibility_off),
+        onPressed: () {
+          setState(() {
+            passwordVisible = !passwordVisible;
+          });
+        },
+      ),
     );
   }
 
@@ -255,7 +269,7 @@ class Login extends StatelessWidget {
     Navigator.pushNamed(context, AppRoutes.emailConfirmation);
   }
 
-  onTapTurnBack(BuildContext context) {
+  onTapReturn(BuildContext context) {
     Navigator.pop(context);
   }
 }

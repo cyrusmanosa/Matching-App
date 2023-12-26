@@ -49,15 +49,14 @@ class DeleteTarget extends StatelessWidget {
         imagePath: ImageConstant.imgArrowLeft,
         margin: EdgeInsets.only(left: 25, top: 50, bottom: 10),
         onTap: () {
-          onTapArrowLeft(context);
+          onTapReturn(context);
         },
       ),
       title: AppbarTitle(text: "ターゲットを削除", margin: EdgeInsets.only(top: 60, bottom: 20)),
-      styleType: Style.bgFill,
     );
   }
 
-  onTapArrowLeft(BuildContext context) {
+  onTapReturn(BuildContext context) {
     Navigator.pop(context);
   }
 

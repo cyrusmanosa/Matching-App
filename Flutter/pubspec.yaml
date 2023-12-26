@@ -21,6 +21,8 @@ dependencies:
   grpc:
   protoc_plugin:
   uuid:
+  dropdown_button2:
+
 
 flutter_launcher_icons:
   android: true
@@ -30,7 +32,7 @@ flutter_launcher_icons:
   android_icon_background: "#FFFFFF"
   ios_icon_background: "#FFFFFF"
 
-# run command： flutter pub run flutter_launcher_icons:main
+# run command to using ： flutter pub run flutter_launcher_icons:main
 
 dev_dependencies: 
   flutter_test: 

@@ -25,26 +25,21 @@ class PasswordResetEmail extends StatelessWidget {
             child: Column(
               children: [
                 // Logo and Slogan
-                SizedBox(height: mediaQueryData.size.height / 30),
+                SizedBox(height: mediaQueryData.size.height / 15),
                 CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 4),
                 CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3.5),
-                SizedBox(height: mediaQueryData.size.height / 30),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // msg
                 Container(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    "ご登録されているメールアドレスに認証キーを送します。",
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: CustomTextStyles.titleOfUnderLogo,
-                  ),
+                  child: Text("ご登録されているメールアドレスに認証キーを送します", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
                 ),
                 SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Input
                 CustomInputBar(titleName: "メールアドレス:", backendPart: _buildResetPasswordEmailInput(context)),
-                SizedBox(height: 25.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // button
                 _buildNextPageButton(context)
@@ -61,9 +56,7 @@ class PasswordResetEmail extends StatelessWidget {
     return CustomInputFormBar(
       controller: emailController,
       hintText: "example@email.com",
-      textInputAction: TextInputAction.done,
       textInputType: TextInputType.emailAddress,
-      maxLines: 1,
     );
   }
 }
@@ -71,10 +64,7 @@ class PasswordResetEmail extends StatelessWidget {
 /// Next Button
 Widget _buildNextPageButton(BuildContext context) {
   return CustomOutlinedButton(
-    width: mediaQueryData.size.width / 4,
-    height: mediaQueryData.size.height / 25,
     text: "送信",
-    buttonTextStyle: theme.textTheme.titleMedium,
     onPressed: () {
       onTapPasswordResetButton(context);
     },

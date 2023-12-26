@@ -10,20 +10,11 @@ class AppDecoration {
   static BoxDecoration get fillOnPrimary => BoxDecoration(color: theme.colorScheme.onPrimary);
 
   // Outline decorations
-  static BoxDecoration get outlineDarkBlue => BoxDecoration(
-        color: theme.colorScheme.primary,
-        boxShadow: [BoxShadow(color: appTheme.black.withOpacity(0.3), spreadRadius: 2.h, blurRadius: 2.h, offset: Offset(0, 1))],
-      );
 
-  static BoxDecoration get outlineDarkBlue900 => BoxDecoration(
-        color: appTheme.gray500,
-        boxShadow: [BoxShadow(color: appTheme.black.withOpacity(0.3), spreadRadius: 2.h, blurRadius: 2.h, offset: Offset(0, 1))],
-      );
-  static BoxDecoration get outlineDarkBlue9001 => BoxDecoration(
+  static BoxDecoration get outlinePinkA100 => BoxDecoration(
         color: appTheme.pinkA100,
         boxShadow: [BoxShadow(color: appTheme.black.withOpacity(0.25), spreadRadius: 2.h, blurRadius: 2.h, offset: Offset(15, 0))],
       );
-  static BoxDecoration get outlinePinkA => BoxDecoration(border: Border.all(color: appTheme.pinkA100, width: 1.h));
 }
 
 class BorderRadiusStyle {
@@ -32,7 +23,3 @@ class BorderRadiusStyle {
   static BorderRadius get r15 => BorderRadius.circular(15);
   static BorderRadius get r5 => BorderRadius.circular(5);
 }
-
-double get strokeAlignInside => BorderSide.strokeAlignInside;
-double get strokeAlignCenter => BorderSide.strokeAlignCenter;
-double get strokeAlignOutside => BorderSide.strokeAlignOutside;

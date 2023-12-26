@@ -9,10 +9,14 @@ import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-// ignore_for_file: must_be_immutable
-class PasswordSetup extends StatelessWidget {
+class PasswordSetup extends StatefulWidget {
   PasswordSetup({Key? key}) : super(key: key);
 
+  @override
+  _PasswordSetupState createState() => _PasswordSetupState();
+}
+
+class _PasswordSetupState extends State<PasswordSetup> {
   TextEditingController passwordSetupController = TextEditingController();
   TextEditingController passwordSetupConfirmController = TextEditingController();
 
@@ -31,27 +35,66 @@ class PasswordSetup extends StatelessWidget {
 
   // Grpc
   void inputPasswordGrpcRequest(BuildContext context) async {
-    final request = InputPasswordRequest(
-      sessionID: globalSessionID,
-      password: passwordSetupController.text,
-    );
-    final response = await GrpcService.client.inputPassword(request);
-    // ignore: unnecessary_null_comparison
-    if (response != null) {
-      onTapNextButton(context);
+    if (passwordSetupController.text.length >= 8) {
+      final request = InputPasswordRequest(
+        sessionID: globalSessionID,
+        password: passwordSetupController.text,
+      );
+      final response = await GrpcService.client.inputPassword(request);
+      // ignore: unnecessary_null_comparison
+      if (response != null) {
+        onTapNextButton(context);
+      } else {
+        showErrorDialog(context, "Error: validatable input data");
+      }
     } else {
-      showErrorDialog(context, "Error: validatable input data");
+      showErrorDialog(context, "パスワードの長さは 8 以上です。");
     }
   }
 
   void showErrorDialog(BuildContext context, String errorMessage) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        content: Text(errorMessage),
-        actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text('OK'))],
-      ),
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
+          // Error Logo
+          title: CustomImageView(
+            imagePath: ImageConstant.imgWarning,
+            height: mediaQueryData.size.height / 20,
+            width: mediaQueryData.size.width / 10,
+            alignment: Alignment.center,
+          ),
+
+          // Word
+          content: Container(
+            width: mediaQueryData.size.width / 1.1,
+            child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
+          ),
+          actions: [
+            CustomOutlinedButton(
+              alignment: Alignment.center,
+              text: "OK",
+              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
+              onPressed: () {
+                onTapReturn(context);
+              },
+            ),
+          ],
+        );
+      },
     );
+  }
+
+  bool passwordVisible = false;
+  bool isPureText(String value) {
+    final pattern = RegExp(r'^[a-zA-Z]+$');
+    return pattern.hasMatch(value);
+  }
+
+  bool isPureNumber(String value) {
+    final pattern = RegExp(r'^\d+$');
+    return pattern.hasMatch(value);
   }
 
   @override
@@ -72,14 +115,14 @@ class PasswordSetup extends StatelessWidget {
                 SizedBox(height: mediaQueryData.size.height / 30),
 
                 // New Password
-                CustomInputBar(titleName: "パスワード", backendPart: _buildNewPasswordInput(context)),
+                CustomInputBar(titleName: "パスワード", backendPart: _buildPasswordInput(context)),
 
                 // msg
                 Align(alignment: Alignment.centerLeft, child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.pwRuleGray500)),
                 SizedBox(height: mediaQueryData.size.height / 25),
 
                 // New Password Confirm
-                CustomInputBar(titleName: "パスワード（確認）", backendPart: _buildNewPasswordConfirm(context)),
+                CustomInputBar(titleName: "パスワード（確認）", backendPart: _buildPasswordConfirm(context)),
                 SizedBox(height: mediaQueryData.size.height / 25),
 
                 // Button
@@ -92,38 +135,74 @@ class PasswordSetup extends StatelessWidget {
     );
   }
 
-  /// Section Widget
-  Widget _buildNewPasswordInput(BuildContext context) {
+  Widget _buildPasswordInput(BuildContext context) {
     return CustomInputFormBar(
       controller: passwordSetupController,
+      textInputAction: TextInputAction.done,
+      textInputType: TextInputType.visiblePassword,
       hintText: "Ankdl2332",
+      obscureText: passwordVisible ? false : true,
+      maxLines: 1,
+      focusNode: FocusNode(),
+      onTap: () {
+        FocusNode().requestFocus();
+      },
+      suffix: IconButton(
+        icon: Icon(passwordVisible ? Icons.visibility : Icons.visibility_off),
+        onPressed: () {
+          setState(() {
+            passwordVisible = !passwordVisible;
+          });
+        },
+      ),
     );
   }
 
   /// Section Widget
-  Widget _buildNewPasswordConfirm(BuildContext context) {
+  Widget _buildPasswordConfirm(BuildContext context) {
     return CustomInputFormBar(
       controller: passwordSetupConfirmController,
-      hintText: "Ankdl2332",
       textInputAction: TextInputAction.done,
+      textInputType: TextInputType.visiblePassword,
+      hintText: "Ankdl2332",
+      obscureText: passwordVisible ? false : true,
+      maxLines: 1,
+      focusNode: FocusNode(),
+      onTap: () {
+        FocusNode().requestFocus();
+      },
+      suffix: IconButton(
+        icon: Icon(passwordVisible ? Icons.visibility : Icons.visibility_off),
+        onPressed: () {
+          setState(() {
+            passwordVisible = !passwordVisible;
+          });
+        },
+      ),
     );
   }
 
   /// Next Button
   Widget _buildNextPageButton(BuildContext context) {
     return CustomOutlinedButton(
-      height: 40,
-      width: 95,
+      width: mediaQueryData.size.width / 4,
+      height: mediaQueryData.size.height / 25,
       text: "設定",
       buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
         if (passwordSetupController.text != passwordSetupConfirmController.text) {
-          showErrorDialog(context, "Error: password not same");
+          showErrorDialog(context, "パスワード（確認）とパスワードが一致しません");
+        } else if (isPureText(passwordSetupController.text) || isPureNumber(passwordSetupController.text)) {
+          showErrorDialog(context, "パスワードの組み合わせは英数字が必要です");
         } else {
           inputPasswordGrpcRequest(context);
         }
       },
     );
+  }
+
+  onTapReturn(BuildContext context) {
+    Navigator.pop(context);
   }
 
   /// Navigates to the okScreen when the action is triggered.

@@ -12,11 +12,14 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-// ignore: must_be_immutable, camel_case_types
-class HobbyCondition extends StatelessWidget {
-  final String title;
-  HobbyCondition(this.title, {Key? key}) : super(key: key);
+class HobbyCondition extends StatefulWidget {
+  HobbyCondition({Key? key}) : super(key: key);
 
+  @override
+  _HobbyConditionState createState() => _HobbyConditionState();
+}
+
+class _HobbyConditionState extends State<HobbyCondition> {
   TextEditingController hobbyEraController = TextEditingController();
   TextEditingController hobbyCountryController = TextEditingController();
   TextEditingController hobbyCityController = TextEditingController();
@@ -28,8 +31,6 @@ class HobbyCondition extends StatelessWidget {
   TextEditingController hobbyHeightController = TextEditingController();
   TextEditingController hobbyWeightController = TextEditingController();
   TextEditingController hobbySociabilityController = TextEditingController();
-
-  GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
 // Http
   void createHobbyHttpRequest(BuildContext context) async {
@@ -52,20 +53,10 @@ class HobbyCondition extends StatelessWidget {
 
     if (response.statusCode == 200) {
       onTapNextButton(context);
-    } else {
-      print("Era: ${hobbyEraController.text}");
-      print("City: ${hobbyCityController.text}");
-      print("Gender: ${hobbyGenderController.text}");
-      print("Height: ${hobbyHeightController.text}");
-      print("Weight: ${hobbyWeightController.text}");
-      print("Speak_language: ${hobbySpeakLanguageController.text}");
-      print("Find_Type: ${hobbyFindTypeController.text}");
-      print("Find_Target: ${hobbyFindTargetController.text}");
-      print("Experience: ${hobbyExperienceController.text}");
-      print("Sociability: ${hobbySociabilityController.text}");
     }
   }
 
+// Grpc
   void createHobbyGrpcRequest(BuildContext context) async {
     final request = CreateHobbyRequest(
       sessionID: globalSessionID,
@@ -94,13 +85,38 @@ class HobbyCondition extends StatelessWidget {
   void showErrorDialog(BuildContext context, String errorMessage) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Error'),
-        content: Text(errorMessage),
-        actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text('OK'))],
-      ),
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
+          // Error Logo
+          title: CustomImageView(
+            imagePath: ImageConstant.imgWarning,
+            height: mediaQueryData.size.height / 20,
+            width: mediaQueryData.size.width / 10,
+            alignment: Alignment.center,
+          ),
+
+          // Word
+          content: Container(
+            width: mediaQueryData.size.width / 1.1,
+            child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
+          ),
+          actions: [
+            CustomOutlinedButton(
+              alignment: Alignment.center,
+              text: "OK",
+              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
+              onPressed: () {
+                onTapReturn(context);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
+
+  bool confirmBtn = false;
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +125,7 @@ class HobbyCondition extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         // Header
-        appBar: _buildHeader(context, title),
+        appBar: _buildHeader(context),
         body: Form(
           child: Container(
             width: double.maxFinite,
@@ -161,19 +177,24 @@ class HobbyCondition extends StatelessWidget {
                   CustomInputBar(titleName: "社交力:", backendPart: _buildHobbySociabilityInput(context)),
                   SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // 本人
-                  Align(
-                    alignment: Alignment.centerLeft,
+                  // 本人認証の丸
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        confirmBtn = !confirmBtn;
+                      });
+                    },
                     child: Row(
                       children: [
                         Container(
-                          height: 20.adaptSize,
-                          width: 20.adaptSize,
-                          decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadius.circular(10.h)),
+                          height: mediaQueryData.size.width / 25,
+                          width: mediaQueryData.size.width / 25,
+                          decoration:
+                              BoxDecoration(color: confirmBtn ? appTheme.green : appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 10.h),
-                          child: Text("本人認証を確認しました", style: theme.textTheme.bodyMedium),
+                          padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
+                          child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.pwRuleGray500),
                         ),
                       ],
                     ),
@@ -195,21 +216,20 @@ class HobbyCondition extends StatelessWidget {
   /// Backend ----------------------------------------------------------------
 
   /// Header
-  PreferredSizeWidget _buildHeader(BuildContext context, String title) {
+  PreferredSizeWidget _buildHeader(BuildContext context) {
     return CustomAppBar(
       leading: AppbarLeadingImage(
         imagePath: ImageConstant.imgArrowLeft,
         margin: EdgeInsets.only(left: 25, top: 50, bottom: 10),
         onTap: () {
-          onTapArrowLeft(context);
+          onTapReturn(context);
         },
       ),
-      title: AppbarTitle(text: title, margin: EdgeInsets.only(top: 60, bottom: 20)),
-      styleType: Style.bgFill,
+      title: AppbarTitle(text: "趣味の条件設定", margin: EdgeInsets.only(top: 60, bottom: 20)),
     );
   }
 
-  onTapArrowLeft(BuildContext context) {
+  onTapReturn(BuildContext context) {
     Navigator.pop(context);
   }
 

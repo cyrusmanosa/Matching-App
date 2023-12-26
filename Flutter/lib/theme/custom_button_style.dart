@@ -31,12 +31,6 @@ class CustomButtonStyles {
       );
 
 // --------------------- outline ---------------------
-  // Dark Blue
-  static ButtonStyle get outlineDarkBlue => ElevatedButton.styleFrom(
-        backgroundColor: appTheme.blue800,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
-        shadowColor: appTheme.black.withOpacity(0.3),
-      );
 
   // while BG , gray border , Shadow
   static ButtonStyle get outlineGrayWhiteBG => OutlinedButton.styleFrom(
@@ -45,23 +39,10 @@ class CustomButtonStyles {
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
       );
 
-  // Dark gray BG , gray border , Shadow
-  static ButtonStyle get outlineBlackDGBG => OutlinedButton.styleFrom(
-        backgroundColor: appTheme.gray800,
-        side: BorderSide(color: theme.colorScheme.onErrorContainer, width: 1),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
-      );
-
   // Button
   static ButtonStyle get outlinePinkGrayBG => OutlinedButton.styleFrom(
         backgroundColor: Colors.transparent,
         side: BorderSide(color: appTheme.pinkA100, width: 2),
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r30),
-      );
-
-  // text button style
-  static ButtonStyle get none => ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
-        elevation: MaterialStateProperty.all<double>(0),
       );
 }

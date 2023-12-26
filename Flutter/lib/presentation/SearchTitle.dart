@@ -66,10 +66,10 @@ class SearchTitle extends StatelessWidget {
   }
 
   onTapNextButtonirstLoverCondition(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.loverConditions);
+    Navigator.pushNamed(context, AppRoutes.loverCondition);
   }
 
   onTapNextButtonirstAccompanyCondition(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.accompanyConditions);
+    Navigator.pushNamed(context, AppRoutes.accompanyCondition);
   }
 }

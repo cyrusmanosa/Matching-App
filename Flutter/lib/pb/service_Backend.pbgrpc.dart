@@ -32,12 +32,18 @@ export 'service_Backend.pb.dart';
 
 @$pb.GrpcServiceName('pb.Backend')
 class BackendClient extends $grpc.Client {
-  static final _$loginUser = $grpc.ClientMethod<$0.LoginUserRequest, $0.LoginUserResponse>('/pb.Backend/LoginUser',
-      ($0.LoginUserRequest value) => value.writeToBuffer(), ($core.List<$core.int> value) => $0.LoginUserResponse.fromBuffer(value));
-  static final _$checkEmail = $grpc.ClientMethod<$1.CheckEmailRequest, $1.CheckEmailResponse>('/pb.Backend/CheckEmail',
-      ($1.CheckEmailRequest value) => value.writeToBuffer(), ($core.List<$core.int> value) => $1.CheckEmailResponse.fromBuffer(value));
-  static final _$checkEmailCode = $grpc.ClientMethod<$1.SendEmailRequest, $1.CheckedEmailResponse>('/pb.Backend/CheckEmailCode',
-      ($1.SendEmailRequest value) => value.writeToBuffer(), ($core.List<$core.int> value) => $1.CheckedEmailResponse.fromBuffer(value));
+  static final _$loginUser = $grpc.ClientMethod<$0.LoginUserRequest, $0.LoginUserResponse>(
+      '/pb.Backend/LoginUser',
+      ($0.LoginUserRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.LoginUserResponse.fromBuffer(value));
+  static final _$checkEmail = $grpc.ClientMethod<$1.CheckEmailRequest, $1.CheckEmailResponse>(
+      '/pb.Backend/CheckEmail',
+      ($1.CheckEmailRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.CheckEmailResponse.fromBuffer(value));
+  static final _$checkEmailCode = $grpc.ClientMethod<$1.SendEmailRequest, $1.CheckedEmailResponse>(
+      '/pb.Backend/CheckEmailCode',
+      ($1.SendEmailRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $1.CheckedEmailResponse.fromBuffer(value));
   static final _$inputPassword = $grpc.ClientMethod<$2.InputPasswordRequest, $2.InputPasswordResponse>(
       '/pb.Backend/InputPassword',
       ($2.InputPasswordRequest value) => value.writeToBuffer(),
@@ -46,14 +52,18 @@ class BackendClient extends $grpc.Client {
       '/pb.Backend/ResetPassword',
       ($2.ResetPasswordRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $2.ResetPasswordResponse.fromBuffer(value));
-  static final _$createFix = $grpc.ClientMethod<$3.CreateFixRequest, $3.CreateFixResponse>('/pb.Backend/CreateFix',
-      ($3.CreateFixRequest value) => value.writeToBuffer(), ($core.List<$core.int> value) => $3.CreateFixResponse.fromBuffer(value));
+  static final _$createFix = $grpc.ClientMethod<$3.CreateFixRequest, $3.CreateFixResponse>(
+      '/pb.Backend/CreateFix',
+      ($3.CreateFixRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $3.CreateFixResponse.fromBuffer(value));
   static final _$createCanChange = $grpc.ClientMethod<$4.CreateCanChangeRequest, $4.CreateCanChangeResponse>(
       '/pb.Backend/CreateCanChange',
       ($4.CreateCanChangeRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $4.CreateCanChangeResponse.fromBuffer(value));
-  static final _$getCanChange = $grpc.ClientMethod<$4.GetCanChangeRequest, $4.GetCanChangeResponse>('/pb.Backend/GetCanChange',
-      ($4.GetCanChangeRequest value) => value.writeToBuffer(), ($core.List<$core.int> value) => $4.GetCanChangeResponse.fromBuffer(value));
+  static final _$getCanChange = $grpc.ClientMethod<$4.GetCanChangeRequest, $4.GetCanChangeResponse>(
+      '/pb.Backend/GetCanChange',
+      ($4.GetCanChangeRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $4.GetCanChangeResponse.fromBuffer(value));
   static final _$updateCanChange = $grpc.ClientMethod<$4.UpdateCanChangeRequest, $4.UpdateCanChangeResponse>(
       '/pb.Backend/UpdateCanChange',
       ($4.UpdateCanChangeRequest value) => value.writeToBuffer(),
@@ -62,30 +72,46 @@ class BackendClient extends $grpc.Client {
       '/pb.Backend/CreateAccompany',
       ($5.CreateAccompanyRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $5.CreateAccompanyResponse.fromBuffer(value));
-  static final _$getAccompany = $grpc.ClientMethod<$5.GetAccompanyRequest, $5.GetAccompanyResponse>('/pb.Backend/GetAccompany',
-      ($5.GetAccompanyRequest value) => value.writeToBuffer(), ($core.List<$core.int> value) => $5.GetAccompanyResponse.fromBuffer(value));
+  static final _$getAccompany = $grpc.ClientMethod<$5.GetAccompanyRequest, $5.GetAccompanyResponse>(
+      '/pb.Backend/GetAccompany',
+      ($5.GetAccompanyRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $5.GetAccompanyResponse.fromBuffer(value));
   static final _$updateAccompany = $grpc.ClientMethod<$5.UpdateAccompanyRequest, $5.UpdateAccompanyResponse>(
       '/pb.Backend/UpdateAccompany',
       ($5.UpdateAccompanyRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $5.UpdateAccompanyResponse.fromBuffer(value));
-  static final _$createHobby = $grpc.ClientMethod<$6.CreateHobbyRequest, $6.CreateHobbyResponse>('/pb.Backend/CreateHobby',
-      ($6.CreateHobbyRequest value) => value.writeToBuffer(), ($core.List<$core.int> value) => $6.CreateHobbyResponse.fromBuffer(value));
-  static final _$getHobby = $grpc.ClientMethod<$6.GetHobbyRequest, $6.GetHobbyResponse>('/pb.Backend/GetHobby',
-      ($6.GetHobbyRequest value) => value.writeToBuffer(), ($core.List<$core.int> value) => $6.GetHobbyResponse.fromBuffer(value));
-  static final _$updateHobby = $grpc.ClientMethod<$6.UpdateHobbyRequest, $6.UpdateHobbyResponse>('/pb.Backend/UpdateHobby',
-      ($6.UpdateHobbyRequest value) => value.writeToBuffer(), ($core.List<$core.int> value) => $6.UpdateHobbyResponse.fromBuffer(value));
-  static final _$createLover = $grpc.ClientMethod<$7.CreateLoverRequest, $7.CreateLoverResponse>('/pb.Backend/CreateLover',
-      ($7.CreateLoverRequest value) => value.writeToBuffer(), ($core.List<$core.int> value) => $7.CreateLoverResponse.fromBuffer(value));
-  static final _$getLover = $grpc.ClientMethod<$7.GetLoverRequest, $7.GetLoverResponse>('/pb.Backend/GetLover',
-      ($7.GetLoverRequest value) => value.writeToBuffer(), ($core.List<$core.int> value) => $7.GetLoverResponse.fromBuffer(value));
-  static final _$updateLover = $grpc.ClientMethod<$7.UpdateLoverRequest, $7.UpdateLoverResponse>('/pb.Backend/UpdateLover',
-      ($7.UpdateLoverRequest value) => value.writeToBuffer(), ($core.List<$core.int> value) => $7.UpdateLoverResponse.fromBuffer(value));
+  static final _$createHobby = $grpc.ClientMethod<$6.CreateHobbyRequest, $6.CreateHobbyResponse>(
+      '/pb.Backend/CreateHobby',
+      ($6.CreateHobbyRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $6.CreateHobbyResponse.fromBuffer(value));
+  static final _$getHobby = $grpc.ClientMethod<$6.GetHobbyRequest, $6.GetHobbyResponse>(
+      '/pb.Backend/GetHobby',
+      ($6.GetHobbyRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $6.GetHobbyResponse.fromBuffer(value));
+  static final _$updateHobby = $grpc.ClientMethod<$6.UpdateHobbyRequest, $6.UpdateHobbyResponse>(
+      '/pb.Backend/UpdateHobby',
+      ($6.UpdateHobbyRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $6.UpdateHobbyResponse.fromBuffer(value));
+  static final _$createLover = $grpc.ClientMethod<$7.CreateLoverRequest, $7.CreateLoverResponse>(
+      '/pb.Backend/CreateLover',
+      ($7.CreateLoverRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $7.CreateLoverResponse.fromBuffer(value));
+  static final _$getLover = $grpc.ClientMethod<$7.GetLoverRequest, $7.GetLoverResponse>(
+      '/pb.Backend/GetLover',
+      ($7.GetLoverRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $7.GetLoverResponse.fromBuffer(value));
+  static final _$updateLover = $grpc.ClientMethod<$7.UpdateLoverRequest, $7.UpdateLoverResponse>(
+      '/pb.Backend/UpdateLover',
+      ($7.UpdateLoverRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $7.UpdateLoverResponse.fromBuffer(value));
   static final _$createComplaint = $grpc.ClientMethod<$8.CreateComplaintRequest, $8.CreateComplaintResponse>(
       '/pb.Backend/CreateComplaint',
       ($8.CreateComplaintRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $8.CreateComplaintResponse.fromBuffer(value));
-  static final _$getComplaint = $grpc.ClientMethod<$8.GetComplaintRequest, $8.GetComplaintResponse>('/pb.Backend/GetComplaint',
-      ($8.GetComplaintRequest value) => value.writeToBuffer(), ($core.List<$core.int> value) => $8.GetComplaintResponse.fromBuffer(value));
+  static final _$getComplaint = $grpc.ClientMethod<$8.GetComplaintRequest, $8.GetComplaintResponse>(
+      '/pb.Backend/GetComplaint',
+      ($8.GetComplaintRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $8.GetComplaintResponse.fromBuffer(value));
   static final _$updateComplaint = $grpc.ClientMethod<$8.UpdateComplaintRequest, $8.UpdateComplaintResponse>(
       '/pb.Backend/UpdateComplaint',
       ($8.UpdateComplaintRequest value) => value.writeToBuffer(),
@@ -114,15 +140,20 @@ class BackendClient extends $grpc.Client {
       '/pb.Backend/CreateImages',
       ($11.CreateImagesRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $11.CreateImagesResponse.fromBuffer(value));
-  static final _$getImages = $grpc.ClientMethod<$11.GetImagesRequest, $11.GetImagesResponse>('/pb.Backend/GetImages',
-      ($11.GetImagesRequest value) => value.writeToBuffer(), ($core.List<$core.int> value) => $11.GetImagesResponse.fromBuffer(value));
+  static final _$getImages = $grpc.ClientMethod<$11.GetImagesRequest, $11.GetImagesResponse>(
+      '/pb.Backend/GetImages',
+      ($11.GetImagesRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $11.GetImagesResponse.fromBuffer(value));
   static final _$updateImages = $grpc.ClientMethod<$11.UpdateImagesRequest, $11.UpdateImagesResponse>(
       '/pb.Backend/UpdateImages',
       ($11.UpdateImagesRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $11.UpdateImagesResponse.fromBuffer(value));
 
-  BackendClient($grpc.ClientChannel channel, {$grpc.CallOptions? options, $core.Iterable<$grpc.ClientInterceptor>? interceptors})
-      : super(channel, options: options, interceptors: interceptors);
+  BackendClient($grpc.ClientChannel channel,
+      {$grpc.CallOptions? options,
+      $core.Iterable<$grpc.ClientInterceptor>? interceptors})
+      : super(channel, options: options,
+        interceptors: interceptors);
 
   $grpc.ResponseFuture<$0.LoginUserResponse> loginUser($0.LoginUserRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$loginUser, request, options: options);
@@ -220,8 +251,7 @@ class BackendClient extends $grpc.Client {
     return $createUnaryCall(_$updateTargetList, request, options: options);
   }
 
-  $grpc.ResponseFuture<$10.CreateChangeTargetResponse> createChangeTarget($10.CreateChangeTargetRequest request,
-      {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$10.CreateChangeTargetResponse> createChangeTarget($10.CreateChangeTargetRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createChangeTarget, request, options: options);
   }
 
@@ -247,12 +277,27 @@ abstract class BackendServiceBase extends $grpc.Service {
   $core.String get $name => 'pb.Backend';
 
   BackendServiceBase() {
-    $addMethod($grpc.ServiceMethod<$0.LoginUserRequest, $0.LoginUserResponse>('LoginUser', loginUser_Pre, false, false,
-        ($core.List<$core.int> value) => $0.LoginUserRequest.fromBuffer(value), ($0.LoginUserResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.CheckEmailRequest, $1.CheckEmailResponse>('CheckEmail', checkEmail_Pre, false, false,
-        ($core.List<$core.int> value) => $1.CheckEmailRequest.fromBuffer(value), ($1.CheckEmailResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$1.SendEmailRequest, $1.CheckedEmailResponse>('CheckEmailCode', checkEmailCode_Pre, false, false,
-        ($core.List<$core.int> value) => $1.SendEmailRequest.fromBuffer(value), ($1.CheckedEmailResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.LoginUserRequest, $0.LoginUserResponse>(
+        'LoginUser',
+        loginUser_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.LoginUserRequest.fromBuffer(value),
+        ($0.LoginUserResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.CheckEmailRequest, $1.CheckEmailResponse>(
+        'CheckEmail',
+        checkEmail_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.CheckEmailRequest.fromBuffer(value),
+        ($1.CheckEmailResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$1.SendEmailRequest, $1.CheckedEmailResponse>(
+        'CheckEmailCode',
+        checkEmailCode_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $1.SendEmailRequest.fromBuffer(value),
+        ($1.CheckedEmailResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$2.InputPasswordRequest, $2.InputPasswordResponse>(
         'InputPassword',
         inputPassword_Pre,
@@ -267,8 +312,13 @@ abstract class BackendServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $2.ResetPasswordRequest.fromBuffer(value),
         ($2.ResetPasswordResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$3.CreateFixRequest, $3.CreateFixResponse>('CreateFix', createFix_Pre, false, false,
-        ($core.List<$core.int> value) => $3.CreateFixRequest.fromBuffer(value), ($3.CreateFixResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$3.CreateFixRequest, $3.CreateFixResponse>(
+        'CreateFix',
+        createFix_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $3.CreateFixRequest.fromBuffer(value),
+        ($3.CreateFixResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$4.CreateCanChangeRequest, $4.CreateCanChangeResponse>(
         'CreateCanChange',
         createCanChange_Pre,
@@ -311,18 +361,48 @@ abstract class BackendServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $5.UpdateAccompanyRequest.fromBuffer(value),
         ($5.UpdateAccompanyResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$6.CreateHobbyRequest, $6.CreateHobbyResponse>('CreateHobby', createHobby_Pre, false, false,
-        ($core.List<$core.int> value) => $6.CreateHobbyRequest.fromBuffer(value), ($6.CreateHobbyResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$6.GetHobbyRequest, $6.GetHobbyResponse>('GetHobby', getHobby_Pre, false, false,
-        ($core.List<$core.int> value) => $6.GetHobbyRequest.fromBuffer(value), ($6.GetHobbyResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$6.UpdateHobbyRequest, $6.UpdateHobbyResponse>('UpdateHobby', updateHobby_Pre, false, false,
-        ($core.List<$core.int> value) => $6.UpdateHobbyRequest.fromBuffer(value), ($6.UpdateHobbyResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$7.CreateLoverRequest, $7.CreateLoverResponse>('CreateLover', createLover_Pre, false, false,
-        ($core.List<$core.int> value) => $7.CreateLoverRequest.fromBuffer(value), ($7.CreateLoverResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$7.GetLoverRequest, $7.GetLoverResponse>('GetLover', getLover_Pre, false, false,
-        ($core.List<$core.int> value) => $7.GetLoverRequest.fromBuffer(value), ($7.GetLoverResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$7.UpdateLoverRequest, $7.UpdateLoverResponse>('UpdateLover', updateLover_Pre, false, false,
-        ($core.List<$core.int> value) => $7.UpdateLoverRequest.fromBuffer(value), ($7.UpdateLoverResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.CreateHobbyRequest, $6.CreateHobbyResponse>(
+        'CreateHobby',
+        createHobby_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $6.CreateHobbyRequest.fromBuffer(value),
+        ($6.CreateHobbyResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.GetHobbyRequest, $6.GetHobbyResponse>(
+        'GetHobby',
+        getHobby_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $6.GetHobbyRequest.fromBuffer(value),
+        ($6.GetHobbyResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.UpdateHobbyRequest, $6.UpdateHobbyResponse>(
+        'UpdateHobby',
+        updateHobby_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $6.UpdateHobbyRequest.fromBuffer(value),
+        ($6.UpdateHobbyResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$7.CreateLoverRequest, $7.CreateLoverResponse>(
+        'CreateLover',
+        createLover_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $7.CreateLoverRequest.fromBuffer(value),
+        ($7.CreateLoverResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$7.GetLoverRequest, $7.GetLoverResponse>(
+        'GetLover',
+        getLover_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $7.GetLoverRequest.fromBuffer(value),
+        ($7.GetLoverResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$7.UpdateLoverRequest, $7.UpdateLoverResponse>(
+        'UpdateLover',
+        updateLover_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $7.UpdateLoverRequest.fromBuffer(value),
+        ($7.UpdateLoverResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$8.CreateComplaintRequest, $8.CreateComplaintResponse>(
         'CreateComplaint',
         createComplaint_Pre,
@@ -386,8 +466,13 @@ abstract class BackendServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $11.CreateImagesRequest.fromBuffer(value),
         ($11.CreateImagesResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$11.GetImagesRequest, $11.GetImagesResponse>('GetImages', getImages_Pre, false, false,
-        ($core.List<$core.int> value) => $11.GetImagesRequest.fromBuffer(value), ($11.GetImagesResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$11.GetImagesRequest, $11.GetImagesResponse>(
+        'GetImages',
+        getImages_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $11.GetImagesRequest.fromBuffer(value),
+        ($11.GetImagesResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$11.UpdateImagesRequest, $11.UpdateImagesResponse>(
         'UpdateImages',
         updateImages_Pre,
@@ -421,8 +506,7 @@ abstract class BackendServiceBase extends $grpc.Service {
     return createFix(call, await request);
   }
 
-  $async.Future<$4.CreateCanChangeResponse> createCanChange_Pre(
-      $grpc.ServiceCall call, $async.Future<$4.CreateCanChangeRequest> request) async {
+  $async.Future<$4.CreateCanChangeResponse> createCanChange_Pre($grpc.ServiceCall call, $async.Future<$4.CreateCanChangeRequest> request) async {
     return createCanChange(call, await request);
   }
 
@@ -430,13 +514,11 @@ abstract class BackendServiceBase extends $grpc.Service {
     return getCanChange(call, await request);
   }
 
-  $async.Future<$4.UpdateCanChangeResponse> updateCanChange_Pre(
-      $grpc.ServiceCall call, $async.Future<$4.UpdateCanChangeRequest> request) async {
+  $async.Future<$4.UpdateCanChangeResponse> updateCanChange_Pre($grpc.ServiceCall call, $async.Future<$4.UpdateCanChangeRequest> request) async {
     return updateCanChange(call, await request);
   }
 
-  $async.Future<$5.CreateAccompanyResponse> createAccompany_Pre(
-      $grpc.ServiceCall call, $async.Future<$5.CreateAccompanyRequest> request) async {
+  $async.Future<$5.CreateAccompanyResponse> createAccompany_Pre($grpc.ServiceCall call, $async.Future<$5.CreateAccompanyRequest> request) async {
     return createAccompany(call, await request);
   }
 
@@ -444,8 +526,7 @@ abstract class BackendServiceBase extends $grpc.Service {
     return getAccompany(call, await request);
   }
 
-  $async.Future<$5.UpdateAccompanyResponse> updateAccompany_Pre(
-      $grpc.ServiceCall call, $async.Future<$5.UpdateAccompanyRequest> request) async {
+  $async.Future<$5.UpdateAccompanyResponse> updateAccompany_Pre($grpc.ServiceCall call, $async.Future<$5.UpdateAccompanyRequest> request) async {
     return updateAccompany(call, await request);
   }
 
@@ -473,8 +554,7 @@ abstract class BackendServiceBase extends $grpc.Service {
     return updateLover(call, await request);
   }
 
-  $async.Future<$8.CreateComplaintResponse> createComplaint_Pre(
-      $grpc.ServiceCall call, $async.Future<$8.CreateComplaintRequest> request) async {
+  $async.Future<$8.CreateComplaintResponse> createComplaint_Pre($grpc.ServiceCall call, $async.Future<$8.CreateComplaintRequest> request) async {
     return createComplaint(call, await request);
   }
 
@@ -482,13 +562,11 @@ abstract class BackendServiceBase extends $grpc.Service {
     return getComplaint(call, await request);
   }
 
-  $async.Future<$8.UpdateComplaintResponse> updateComplaint_Pre(
-      $grpc.ServiceCall call, $async.Future<$8.UpdateComplaintRequest> request) async {
+  $async.Future<$8.UpdateComplaintResponse> updateComplaint_Pre($grpc.ServiceCall call, $async.Future<$8.UpdateComplaintRequest> request) async {
     return updateComplaint(call, await request);
   }
 
-  $async.Future<$9.CreateTargetListResponse> createTargetList_Pre(
-      $grpc.ServiceCall call, $async.Future<$9.CreateTargetListRequest> request) async {
+  $async.Future<$9.CreateTargetListResponse> createTargetList_Pre($grpc.ServiceCall call, $async.Future<$9.CreateTargetListRequest> request) async {
     return createTargetList(call, await request);
   }
 
@@ -496,18 +574,15 @@ abstract class BackendServiceBase extends $grpc.Service {
     return getTargetList(call, await request);
   }
 
-  $async.Future<$9.UpdateTargetListResponse> updateTargetList_Pre(
-      $grpc.ServiceCall call, $async.Future<$9.UpdateTargetListRequest> request) async {
+  $async.Future<$9.UpdateTargetListResponse> updateTargetList_Pre($grpc.ServiceCall call, $async.Future<$9.UpdateTargetListRequest> request) async {
     return updateTargetList(call, await request);
   }
 
-  $async.Future<$10.CreateChangeTargetResponse> createChangeTarget_Pre(
-      $grpc.ServiceCall call, $async.Future<$10.CreateChangeTargetRequest> request) async {
+  $async.Future<$10.CreateChangeTargetResponse> createChangeTarget_Pre($grpc.ServiceCall call, $async.Future<$10.CreateChangeTargetRequest> request) async {
     return createChangeTarget(call, await request);
   }
 
-  $async.Future<$10.GetChangeTargetResponse> getChangeTarget_Pre(
-      $grpc.ServiceCall call, $async.Future<$10.GetChangeTargetRequest> request) async {
+  $async.Future<$10.GetChangeTargetResponse> getChangeTarget_Pre($grpc.ServiceCall call, $async.Future<$10.GetChangeTargetRequest> request) async {
     return getChangeTarget(call, await request);
   }
 

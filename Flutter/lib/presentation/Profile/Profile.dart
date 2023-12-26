@@ -24,11 +24,34 @@ class Profile extends StatelessWidget {
   void showErrorDialog(BuildContext context, String errorMessage) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Error'),
-        content: Text(errorMessage),
-        actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text('OK'))],
-      ),
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
+          // Error Logo
+          title: CustomImageView(
+            imagePath: ImageConstant.imgWarning,
+            height: mediaQueryData.size.height / 20,
+            width: mediaQueryData.size.width / 10,
+            alignment: Alignment.center,
+          ),
+
+          // Word
+          content: Container(
+            width: mediaQueryData.size.width / 1.1,
+            child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
+          ),
+          actions: [
+            CustomOutlinedButton(
+              alignment: Alignment.center,
+              text: "OK",
+              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
+              onPressed: () {
+                onTapReturn(context);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -201,6 +224,10 @@ class Profile extends StatelessWidget {
 
   Widget _buildSendWord(BuildContext context) {
     return Column(children: [Text("伝送回数", style: theme.textTheme.titleMedium), Text("0", style: theme.textTheme.headlineMedium)]);
+  }
+
+  onTapReturn(BuildContext context) {
+    Navigator.pop(context);
   }
 
 // edit button

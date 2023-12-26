@@ -14,10 +14,7 @@ class CustomInputBar extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(titleName!, style: CustomTextStyles.inputTitlePink),
-        Container(
-          decoration: BoxDecoration(border: Border.all(color: appTheme.pinkA100), borderRadius: BorderRadiusStyle.r15),
-          child: backendPart,
-        ),
+        Container(child: backendPart),
       ],
     );
   }

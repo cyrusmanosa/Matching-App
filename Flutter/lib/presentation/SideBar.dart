@@ -16,7 +16,7 @@ class SideBar extends StatelessWidget {
           height: 850,
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 80.v),
-            decoration: AppDecoration.outlineDarkBlue9001,
+            decoration: AppDecoration.outlinePinkA100,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [

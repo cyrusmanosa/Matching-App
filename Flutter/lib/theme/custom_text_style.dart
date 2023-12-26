@@ -6,12 +6,21 @@ import '../core/app_export.dart';
 /// Additionally, this class includes extensions on [TextStyle] to easily apply specific font families to text.
 
 class CustomTextStyles {
+  // pink
   static get inputTitlePink => theme.textTheme.titleMedium!.copyWith(color: appTheme.pinkA100, fontSize: 16);
+
+  // black
   static get msgWordOfMsgBox => theme.textTheme.bodyMedium!.copyWith(color: appTheme.black, fontSize: 16);
-  static get wordOnlySmallButton => theme.textTheme.bodyMedium!.copyWith(color: appTheme.black, fontSize: 11);
   static get titleOfUnderLogo => theme.textTheme.headlineMedium!.copyWith(color: appTheme.black, fontSize: 13);
+  static get wordOnlySmallButton => theme.textTheme.bodyMedium!.copyWith(color: appTheme.black, fontSize: 11);
+
+  // gray
   static get pwRuleGray500 => theme.textTheme.bodyMedium!.copyWith(color: appTheme.gray500, fontSize: 12);
 
+  // green
+  static get confirmGreen => theme.textTheme.bodyMedium!.copyWith(color: appTheme.green, fontSize: 12, fontWeight: FontWeight.w800);
+
+  ///--------------------------------------------
   // Body text style
   static get bodyMediumblack => theme.textTheme.bodyMedium!.copyWith(color: appTheme.black, fontSize: 18);
   static get bodyMediumPinkA100 => theme.textTheme.bodyMedium!.copyWith(color: appTheme.pinkA100, fontSize: 18);

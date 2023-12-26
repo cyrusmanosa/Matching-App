@@ -5,6 +5,7 @@ import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
+import 'package:grpc/grpc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -23,75 +24,100 @@ class ConfirmationCore extends StatelessWidget {
       body: jsonEncode(requestBody),
       headers: {"Content-Type": "application/json"},
     );
-
     if (response.statusCode == 200) {
       onTapNextButton(context);
-    } else {
-      print("checkcode:");
-      print(confirmationCoreController.text);
     }
   }
 
   // Grpc
   void checkCodeGrpcRequest(BuildContext context) async {
     final request = SendEmailRequest(checkCode: confirmationCoreController.text);
-    final response = await GrpcService.client.checkEmailCode(request);
-    // ignore: unnecessary_null_comparison
-    if (response != null) {
+    try {
+      await GrpcService.client.checkEmailCode(request);
       onTapNextButton(context);
-    } else {
-      showErrorDialog(context, "Error: Empty response");
+    } on GrpcError catch (e) {
+      if (e.code != 1) showErrorDialog(context, "無効的なコードです。");
     }
   }
 
   void showErrorDialog(BuildContext context, String errorMessage) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Error'),
-        content: Text(errorMessage),
-        actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text('OK'))],
-      ),
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
+          // Error Logo
+          title: CustomImageView(
+            imagePath: ImageConstant.imgWarning,
+            height: mediaQueryData.size.height / 20,
+            width: mediaQueryData.size.width / 10,
+            alignment: Alignment.center,
+          ),
+
+          // Word
+          content: Container(
+            width: mediaQueryData.size.width / 1.1,
+            child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
+          ),
+          actions: [
+            CustomOutlinedButton(
+              alignment: Alignment.center,
+              text: "OK",
+              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
+              onPressed: () {
+                onTapReturn(context);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
     return SafeArea(
       child: Scaffold(
         body: Container(
           width: double.maxFinite,
           padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Logo
-              CustomImageView(imagePath: ImageConstant.imgLogo, height: 80, width: 95, alignment: Alignment.center),
-              SizedBox(height: 1.v),
-
-              // Slogan
-              CustomImageView(imagePath: ImageConstant.imgSlogan, height: 17, width: 100, alignment: Alignment.center),
+              // Logo and Slogan
+              SizedBox(height: mediaQueryData.size.height / 15),
+              CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 4.5),
+              CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3.5),
               SizedBox(height: mediaQueryData.size.height / 50),
 
               // Title
-              Text("以下にコードを認証してください。", style: theme.textTheme.headlineMedium),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "以下にコードを認証してください。",
+                  overflow: TextOverflow.ellipsis,
+                  style: CustomTextStyles.titleOfUnderLogo,
+                ),
+              ),
               SizedBox(height: mediaQueryData.size.height / 50),
 
               // Input
               CustomInputBar(titleName: "認証コード:", backendPart: _buildConfirmationCoreInput(context)),
-              SizedBox(height: 2.v),
+              SizedBox(height: mediaQueryData.size.height / 350),
+
               // reset password
               Align(
                 alignment: Alignment.centerLeft,
                 child: GestureDetector(
                   onTap: () {
-                    // checkcodeRequest(context);
+                    onTapReturn(context);
                   },
-                  child: Text("コードが届かない場合", style: CustomTextStyles.bodyMediumblack),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: mediaQueryData.size.width / 100),
+                    child: Text("コードが届かない場合", style: CustomTextStyles.wordOnlySmallButton),
+                  ),
                 ),
               ),
-              SizedBox(height: 25.v),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
               // button
               _buildNextPageButton(context),
@@ -104,21 +130,13 @@ class ConfirmationCore extends StatelessWidget {
 
   /// Era
   Widget _buildConfirmationCoreInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: confirmationCoreController,
-      hintText: "423198",
-      maxLines: 1,
-    );
+    return CustomInputFormBar(controller: confirmationCoreController, hintText: "423198");
   }
 
   /// Next Button
   Widget _buildNextPageButton(BuildContext context) {
     return CustomOutlinedButton(
-      alignment: Alignment.center,
-      height: 40,
-      width: 95,
       text: "認証",
-      buttonTextStyle: theme.textTheme.titleMedium!,
       onPressed: () {
         checkCodeGrpcRequest(context);
       },
@@ -129,7 +147,6 @@ class ConfirmationCore extends StatelessWidget {
     Navigator.pop(context);
   }
 
-  /// Navigates to the signupPhoneoremailPartoneScreen when the action is triggered.
   onTapNextButton(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.fixInformation);
   }

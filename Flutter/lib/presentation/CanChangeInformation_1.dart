@@ -1,5 +1,9 @@
+import 'dart:convert';
+
+import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/global_variable/model.dart';
+import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
@@ -7,6 +11,7 @@ import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 // ignore_for_file: must_be_immutable,camel_case_types
 class CanChangeInformation_1 extends StatelessWidget {
@@ -20,12 +25,100 @@ class CanChangeInformation_1 extends StatelessWidget {
   TextEditingController canChangeSpeakLanguageController = TextEditingController();
   TextEditingController canChangeEducationController = TextEditingController();
 
+  // Http
+  void createCanChangeHttpRequest(BuildContext context) async {
+    var url = "http://127.0.0.1:8080/CreateFixInfo";
+    var requestBody = {
+      "SessionID": globalSessionID,
+      "NickName": canChangeNickNameController.text,
+      "City": canChangeCityController.text,
+      "Sexual": canChangeSexualController.text,
+      "Height": int.parse(canChangeHeightController.text),
+      "Weight": int.parse(canChangeWeightController.text),
+      "Speaklanguage": canChangeSpeakLanguageController.text,
+      "Education": canChangeEducationController.text,
+    };
+    var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
+
+    if (response.statusCode == 200) {
+      onTapNextButton(context);
+    }
+  }
+
+  // Grpc
+  void createCanChangeGrpcRequest(BuildContext context) async {
+    final request = CreateCanChangeRequest(
+      sessionID: globalSessionID,
+      nickName: canChangeNickNameController.text,
+      city: canChangeCityController.text,
+      sexual: canChangeSexualController.text,
+      height: int.parse(canChangeHeightController.text),
+      weight: int.parse(canChangeWeightController.text),
+      speaklanguage: canChangeSpeakLanguageController.text,
+      education: canChangeEducationController.text,
+    );
+
+    if (canChangeNickNameController.text == "") {
+      showErrorDialog(context, "ニックネームがまだ入力されていません");
+    } else if (canChangeCityController.text == "") {
+      showErrorDialog(context, "居住地がまだ入力されていません");
+    } else if (canChangeSexualController.text == "") {
+      showErrorDialog(context, "性的指向がまだ入力されていません");
+    } else if (canChangeHeightController.text == "") {
+      showErrorDialog(context, "身長がまだ入力されていません");
+    } else if (canChangeWeightController.text == "") {
+      showErrorDialog(context, "体重がまだ入力されていません");
+    } else if (canChangeSpeakLanguageController.text == "") {
+      showErrorDialog(context, "学歴がまだ入力されていません");
+    } else {
+      final response = await GrpcService.client.createCanChange(request);
+      // ignore: unnecessary_null_comparison
+      if (response != null) {
+        onTapNextButton(context);
+      } else {
+        showErrorDialog(context, "Error: validatable input data");
+      }
+    }
+  }
+
+  void showErrorDialog(BuildContext context, String errorMessage) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
+          // Error Logo
+          title: CustomImageView(
+            imagePath: ImageConstant.imgWarning,
+            height: mediaQueryData.size.height / 20,
+            width: mediaQueryData.size.width / 10,
+            alignment: Alignment.center,
+          ),
+
+          // Word
+          content: Container(
+            width: mediaQueryData.size.width / 1.1,
+            child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
+          ),
+          actions: [
+            CustomOutlinedButton(
+              alignment: Alignment.center,
+              text: "OK",
+              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
+              onPressed: () {
+                onTapReturn(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
     return SafeArea(
       child: Scaffold(
-        // Header
         appBar: _buildHeader(context),
         body: SizedBox(
           width: double.maxFinite,
@@ -79,16 +172,15 @@ class CanChangeInformation_1 extends StatelessWidget {
         imagePath: ImageConstant.imgArrowLeft,
         margin: EdgeInsets.only(left: 25, top: 50, bottom: 10),
         onTap: () {
-          onTapArrowLeft(context);
+          onTapReturn(context);
         },
       ),
       title: AppbarTitle(text: "基本個人情報 - B", margin: EdgeInsets.only(top: 60, bottom: 20)),
-      styleType: Style.bgFill,
     );
   }
 
   // turn back
-  onTapArrowLeft(BuildContext context) {
+  onTapReturn(BuildContext context) {
     Navigator.pop(context);
   }
 
@@ -156,14 +248,7 @@ class CanChangeInformation_1 extends StatelessWidget {
       text: "次へ",
       buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
-        nickname = canChangeNickNameController.text;
-        city = canChangeCityController.text;
-        sexual = canChangeSexualController.text;
-        height = int.parse(canChangeHeightController.text);
-        weight = int.parse(canChangeWeightController.text);
-        speaklanguage = canChangeSpeakLanguageController.text;
-        education = canChangeEducationController.text;
-        onTapNextButton(context);
+        createCanChangeGrpcRequest(context);
       },
     );
   }

@@ -13,9 +13,14 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'dart:convert';
 
-// ignore_for_file: must_be_immutable, camel_case_types
-class FixInformation extends StatelessWidget {
+class FixInformation extends StatefulWidget {
   FixInformation({Key? key}) : super(key: key);
+
+  @override
+  _FixInformationState createState() => _FixInformationState();
+}
+
+class _FixInformationState extends State<FixInformation> {
   TextEditingController fixLastNameController = TextEditingController();
   TextEditingController fixFirstNameController = TextEditingController();
   TextEditingController fixBirthController = TextEditingController();
@@ -35,7 +40,6 @@ class FixInformation extends StatelessWidget {
       "Blood": fixBloodController.text,
     };
     var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
-
     if (response.statusCode == 200) {
       onTapNextButton(context);
     }
@@ -43,34 +47,79 @@ class FixInformation extends StatelessWidget {
 
   // Grpc
   void fixInformationGrpcRequest(BuildContext context) async {
-    final request = CreateFixRequest(
-      firstName: fixFirstNameController.text,
-      lastName: fixLastNameController.text,
-      birth: fixBirthController.text,
-      country: fixCountryController.text,
-      gender: fixGenderController.text,
-      blood: fixBloodController.text,
-    );
-    final response = await GrpcService.client.createFix(request);
-    // ignore: unnecessary_null_comparison
-    if (response != null) {
-      onTapNextButton(context);
-      globalSessionID = response.sessionsID;
-      print(globalSessionID);
+    if (fixFirstNameController.text == "") {
+      showErrorDialog(context, "姓がまだ入力されていません");
+    } else if (fixLastNameController.text == "") {
+      showErrorDialog(context, "名がまだ入力されていません");
+    } else if (fixBirthController.text == "") {
+      showErrorDialog(context, "生年月日がまだ入力されていません");
+    } else if (fixCountryController.text == "") {
+      showErrorDialog(context, "国籍がまだ入力されていません");
+    } else if (fixGenderController.text == "") {
+      showErrorDialog(context, "性別がまだ入力されていません");
+    } else if (fixBloodController.text == "") {
+      showErrorDialog(context, "血液型がまだ入力されていません");
+    } else if (confirm18Btn == false) {
+      showErrorDialog(context, "１８歳以上のボタンを押してください");
+    } else if (confirmAgreeBtn == false) {
+      showErrorDialog(context, "同意のボタンを押してください");
     } else {
-      showErrorDialog(context, "Error: validatable input data");
+      final request = CreateFixRequest(
+        firstName: fixFirstNameController.text,
+        lastName: fixLastNameController.text,
+        birth: fixBirthController.text,
+        country: fixCountryController.text,
+        gender: fixGenderController.text,
+        blood: fixBloodController.text,
+      );
+      final response = await GrpcService.client.createFix(request);
+      // ignore: unnecessary_null_comparison
+      if (response != null) {
+        onTapNextButton(context);
+        globalSessionID = response.sessionsID;
+        print(globalSessionID);
+      } else {
+        showErrorDialog(context, "Error: validatable input data");
+      }
     }
   }
 
   void showErrorDialog(BuildContext context, String errorMessage) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        content: Text(errorMessage),
-        actions: [TextButton(onPressed: () => Navigator.pop(context), child: Text('OK'))],
-      ),
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
+          // Error Logo
+          title: CustomImageView(
+            imagePath: ImageConstant.imgWarning,
+            height: mediaQueryData.size.height / 20,
+            width: mediaQueryData.size.width / 10,
+            alignment: Alignment.center,
+          ),
+
+          // Word
+          content: Container(
+            width: mediaQueryData.size.width / 1.1,
+            child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
+          ),
+          actions: [
+            CustomOutlinedButton(
+              alignment: Alignment.center,
+              text: "OK",
+              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
+              onPressed: () {
+                onTapReturn(context);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
+
+  bool confirm18Btn = false;
+  bool confirmAgreeBtn = false;
 
   @override
   Widget build(BuildContext context) {
@@ -97,8 +146,8 @@ class FixInformation extends StatelessWidget {
 
                   // msg
                   Align(
-                    alignment: Alignment.center,
-                    child: Text("以下の項目は全部入力するのが必要です。", style: CustomTextStyles.bodyMediumblack),
+                    alignment: Alignment.centerLeft,
+                    child: Text("以下の項目は全部入力するのが必要です。", style: CustomTextStyles.msgWordOfMsgBox),
                   ),
                   SizedBox(height: 25.v),
 
@@ -127,47 +176,60 @@ class FixInformation extends StatelessWidget {
                   SizedBox(height: mediaQueryData.size.height / 50),
 
                   // 18
-                  Align(
-                    alignment: Alignment.centerLeft,
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        confirm18Btn = !confirm18Btn;
+                      });
+                    },
                     child: Row(
                       children: [
                         Container(
-                          height: 20.adaptSize,
-                          width: 20.adaptSize,
-                          decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
+                          height: mediaQueryData.size.width / 25,
+                          width: mediaQueryData.size.width / 25,
+                          decoration:
+                              BoxDecoration(color: confirm18Btn ? appTheme.green : appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 10.h),
-                          child: Text("満18歳以上の独身であることを誓約します", style: theme.textTheme.bodyMedium),
-                        )
+                          padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
+                          child: Text("満18歳以上の独身であることを誓約します",
+                              style: confirm18Btn ? CustomTextStyles.confirmGreen : CustomTextStyles.pwRuleGray500),
+                        ),
                       ],
                     ),
                   ),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+                  SizedBox(height: mediaQueryData.size.height / 150),
 
-                  // Agree
-                  Align(
-                    alignment: Alignment.centerLeft,
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        confirmAgreeBtn = !confirmAgreeBtn;
+                      });
+                    },
                     child: Row(
                       children: [
                         Container(
-                          height: 20.adaptSize,
-                          width: 20.adaptSize,
-                          decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
+                          height: mediaQueryData.size.width / 25,
+                          width: mediaQueryData.size.width / 25,
+                          decoration: BoxDecoration(
+                            color: confirmAgreeBtn ? appTheme.green : appTheme.gray500,
+                            borderRadius: BorderRadiusStyle.r15,
+                          ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 10.h),
-                          child: Text("全ての規約に同意します", style: theme.textTheme.bodyMedium),
-                        )
+                          padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
+                          child: Text(
+                            "全ての規約に同意します",
+                            style: confirmAgreeBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.pwRuleGray500,
+                          ),
+                        ),
                       ],
                     ),
                   ),
-
                   SizedBox(height: mediaQueryData.size.height / 25),
 
                   // Button
                   _buildNextPageButton(context),
-                  SizedBox(height: mediaQueryData.size.height / 25),
                 ],
               ),
             ),
@@ -182,6 +244,10 @@ class FixInformation extends StatelessWidget {
     return CustomInputFormBar(
       controller: fixLastNameController,
       hintText: "山崎",
+      focusNode: FocusNode(),
+      onTap: () {
+        FocusNode().requestFocus();
+      },
     );
   }
 
@@ -190,6 +256,10 @@ class FixInformation extends StatelessWidget {
     return CustomInputFormBar(
       controller: fixFirstNameController,
       hintText: "泰一",
+      focusNode: FocusNode(),
+      onTap: () {
+        FocusNode().requestFocus();
+      },
     );
   }
 
@@ -258,15 +328,14 @@ class FixInformation extends StatelessWidget {
         imagePath: ImageConstant.imgArrowLeft,
         margin: EdgeInsets.only(left: 25, top: 50, bottom: 10),
         onTap: () {
-          onTapArrowLeft(context);
+          onTapReturn(context);
         },
       ),
       title: AppbarTitle(text: "基本個人情報 - A", margin: EdgeInsets.only(top: 60, bottom: 20)),
-      styleType: Style.bgFill,
     );
   }
 
-  onTapArrowLeft(BuildContext context) {
+  onTapReturn(BuildContext context) {
     Navigator.pop(context);
   }
 

@@ -43,13 +43,12 @@ class ChatBox extends StatelessWidget {
         imagePath: ImageConstant.imgArrowLeft,
         margin: EdgeInsets.only(left: 25, top: 60, bottom: 15),
         onTap: () {
-          onTapArrowLeft(context);
+          onTapReturn(context);
         },
       ),
       centerTitle: true,
       title: AppbarTitle(text: "ターゲット名前", margin: EdgeInsets.only(top: 60, bottom: 20)),
       actions: [AppbarTrailingReturn(imagePath: ImageConstant.imgMenu, margin: EdgeInsets.fromLTRB(35, 65, 35, 20))],
-      styleType: Style.bgFill,
     );
   }
 
@@ -114,7 +113,7 @@ class ChatBox extends StatelessWidget {
     );
   }
 
-  onTapArrowLeft(BuildContext context) {
+  onTapReturn(BuildContext context) {
     Navigator.pop(context);
   }
 }

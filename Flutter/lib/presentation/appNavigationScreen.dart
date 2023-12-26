@@ -46,16 +46,6 @@ class AppNavigationScreen extends StatelessWidget {
                         ),
                         _buildScreenTitle(
                           context,
-                          userName: "パスワード忘れーError",
-                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.passwordResetError),
-                        ),
-                        _buildScreenTitle(
-                          context,
-                          userName: "新しいパスワード設定ーError",
-                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.newPasswordError),
-                        ),
-                        _buildScreenTitle(
-                          context,
                           userName: "新しいパスワード設定",
                           onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.newPasswordSetup),
                         ),
@@ -132,32 +122,22 @@ class AppNavigationScreen extends StatelessWidget {
                         _buildScreenTitle(
                           context,
                           userName: "恋人の条件設定",
-                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.loverConditions),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.loverCondition),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "恋人の条件更改",
-                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.loverConditionsRepair),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.loverConditionRepair),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "相伴の条件設定",
-                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.accompanyConditions),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.accompanyCondition),
                         ),
                         _buildScreenTitle(
                           context,
                           userName: "相伴の条件更改",
-                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.accompanyConditionsRepair),
-                        ),
-                        _buildScreenTitle(
-                          context,
-                          userName: "メールアドレスを登録ーError",
-                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.emailConfirmationError),
-                        ),
-                        _buildScreenTitle(
-                          context,
-                          userName: "認証コードーError",
-                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.confirmationCoreError),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.accompanyConditionRepair),
                         ),
                         _buildScreenTitle(
                           context,
