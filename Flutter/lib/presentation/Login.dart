@@ -235,6 +235,7 @@ class _LoginState extends State<Login> {
       },
       suffix: IconButton(
         icon: Icon(passwordVisible ? Icons.visibility : Icons.visibility_off),
+        color: appTheme.gray500,
         onPressed: () {
           setState(() {
             passwordVisible = !passwordVisible;

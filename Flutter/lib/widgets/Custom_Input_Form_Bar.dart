@@ -95,22 +95,17 @@ class CustomInputFormBar extends StatelessWidget {
         prefixIconConstraints: prefixConstraints,
         suffixIcon: suffix,
         suffixIconConstraints: suffixConstraints,
-        border: OutlineInputBorder(borderRadius: BorderRadiusStyle.r15, borderSide: BorderSide(color: appTheme.pinkA100)),
-        enabledBorder: OutlineInputBorder(borderRadius: BorderRadiusStyle.r15, borderSide: BorderSide(color: appTheme.pinkA100)),
-
-        // Error Border
-        errorBorder: OutlineInputBorder(borderRadius: BorderRadiusStyle.r15, borderSide: BorderSide(color: appTheme.redA700)),
-
-        // Focus Border
-        focusedBorder: borderDecoration,
-        focusedErrorBorder: OutlineInputBorder(borderRadius: BorderRadiusStyle.r15, borderSide: BorderSide(color: appTheme.blue800)),
+        border: OutlineInputBorder(borderRadius: BorderRadiusStyle.r15, borderSide: BorderSide(width: 2)),
+        focusedBorder: OutlineInputBorder(borderRadius: BorderRadiusStyle.r15, borderSide: BorderSide(color: appTheme.pinkA100, width: 2)),
+        errorBorder: OutlineInputBorder(borderRadius: BorderRadiusStyle.r15, borderSide: BorderSide(color: appTheme.red, width: 2)),
+        focusedErrorBorder: OutlineInputBorder(borderRadius: BorderRadiusStyle.r15, borderSide: BorderSide(color: appTheme.red, width: 2)),
       );
 }
 
 /// Extension on [CustomInputFormBar] to facilitate inclusion of all types of border style etc
 extension TextFormFieldStyleHelper on CustomInputFormBar {
   static OutlineInputBorder get fillGray => OutlineInputBorder(
-        borderRadius: BorderRadiusStyle.r5,
+        borderRadius: BorderRadiusStyle.r15,
         borderSide: BorderSide(color: appTheme.pinkA100),
       );
 }

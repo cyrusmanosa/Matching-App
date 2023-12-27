@@ -24,6 +24,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       actions: actions,
+      backgroundColor: appTheme.pinkA100,
       centerTitle: true,
       elevation: 0,
       flexibleSpace: Container(height: mediaQueryData.size.height / 50, width: double.maxFinite),

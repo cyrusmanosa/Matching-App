@@ -48,7 +48,7 @@ class ThemeHelper {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: appTheme.blueGray100,
+          backgroundColor: appTheme.white,
           shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r30),
           visualDensity: const VisualDensity(vertical: -4, horizontal: -4),
           padding: EdgeInsets.zero,
@@ -82,32 +82,25 @@ class TextThemes {
 class ColorSchemes {
   static final primaryColorScheme = ColorScheme.light(
     // Primary colors
-    primary: Color.fromARGB(255, 210, 50, 50),
-    primaryContainer: Color(0XE5CDD1D8),
+    primary: Color(0XFF1877F2),
+    primaryContainer: Color(0XFF909090),
 
     // Error colors
-    errorContainer: Color(0XFF9C3C3C),
+    errorContainer: Color(0XFF9C3D3D),
 
     // On colors(text colors)
-    onPrimary: Color(0XFFFFFFFF),
-    onPrimaryContainer: Color(0XFFFF0000),
+    onPrimary: Colors.white,
+    onPrimaryContainer: Colors.red,
   );
 }
 
 /// Class containing custom colors for a primary theme.
 class PrimaryColors {
-  // Black
-  Color get black => Color(0XFF000000);
-
-  // Blue
-  Color get blue800 => Color(0XFF1464CC);
-  Color get blueA400 => Color(0XFF1877F2);
-
-  // Green
+  Color get black => Colors.black;
+  Color get white => Colors.white;
+  Color get blue => Color(0XFF1877F2);
   Color get green => Color.fromARGB(255, 21, 179, 0);
-
-  // BlueGray
-  Color get blueGray100 => Color(0XFFD9D9D9);
+  Color get red => Colors.red;
 
   // Cyan
   Color get cyan600 => Color(0XFF1AB4BE);
@@ -116,11 +109,8 @@ class PrimaryColors {
   Color get gray500 => Color(0XFF909090);
   Color get gray800 => Color(0XFF454545);
 
-  // Red
-  Color get redA700 => Color(0XFFFF0505);
-
   // Pink
-  Color get pink800 => Color(0XFF9C3D3D);
+  Color get maroon => Color(0XFF9C3D3D);
   Color get pinkA100 => Color(0XFFFF83A8);
   Color get pinkA400 => Color(0XFFFF00B7);
 }

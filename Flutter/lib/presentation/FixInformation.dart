@@ -2,6 +2,7 @@ import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/global_variable/model.dart';
 import 'package:dating_your_date/pb/rpc_fix.pb.dart';
+import 'package:dating_your_date/widgets/Custom_Input_Test.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
@@ -138,18 +139,18 @@ class _FixInformationState extends State<FixInformation> {
                   // image
                   CustomImageView(
                     imagePath: ImageConstant.imgVector,
-                    height: 140.adaptSize,
-                    width: 140.adaptSize,
+                    height: mediaQueryData.size.height / 7,
+                    width: mediaQueryData.size.width / 3,
                     alignment: Alignment.center,
                   ),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+                  SizedBox(height: mediaQueryData.size.height / 70),
 
                   // msg
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text("以下の項目は全部入力するのが必要です。", style: CustomTextStyles.msgWordOfMsgBox),
                   ),
-                  SizedBox(height: 25.v),
+                  SizedBox(height: mediaQueryData.size.height / 30),
 
                   // Last name
                   CustomInputBar(titleName: "姓:", backendPart: _buildfixLastNameInput(context)),
@@ -200,6 +201,7 @@ class _FixInformationState extends State<FixInformation> {
                   ),
                   SizedBox(height: mediaQueryData.size.height / 150),
 
+                  // Agree
                   InkWell(
                     onTap: () {
                       setState(() {
@@ -272,8 +274,8 @@ class _FixInformationState extends State<FixInformation> {
         DateTime? pickedDate = await showDatePicker(
           context: context,
           initialDate: DateTime.now(),
-          firstDate: DateTime(1950),
-          lastDate: DateTime(DateTime.now().year, 12, 31),
+          firstDate: DateTime(1923),
+          lastDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
         );
         if (pickedDate != null) {
           String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
@@ -286,15 +288,15 @@ class _FixInformationState extends State<FixInformation> {
   /// Country
   Widget _buildfixCountryInput(BuildContext context) {
     return CustomInputFormBar(
-      controller: fixCountryController,
       hintText: "日本",
     );
   }
 
   /// Gender
   Widget _buildfixGenderInput(BuildContext context) {
-    return CustomInputFormBar(
+    return CustomInputSelect(
       controller: fixGenderController,
+      mapData: gender,
       hintText: "男",
     );
   }
@@ -314,7 +316,6 @@ class _FixInformationState extends State<FixInformation> {
       width: mediaQueryData.size.width / 4,
       height: mediaQueryData.size.height / 25,
       text: "次へ",
-      buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
         fixInformationGrpcRequest(context);
       },

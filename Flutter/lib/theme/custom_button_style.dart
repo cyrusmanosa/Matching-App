@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class CustomButtonStyles {
 // --------------------- Filled ---------------------
   static ButtonStyle get fillDarkRed => ElevatedButton.styleFrom(
-        backgroundColor: appTheme.pink800,
+        backgroundColor: appTheme.maroon,
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
       );
   static ButtonStyle get fillLightGray => ElevatedButton.styleFrom(
@@ -21,12 +21,12 @@ class CustomButtonStyles {
       );
 
   static ButtonStyle get fillRed => ElevatedButton.styleFrom(
-        backgroundColor: appTheme.redA700,
+        backgroundColor: appTheme.red,
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
       );
 
   static ButtonStyle get fillBlue => ElevatedButton.styleFrom(
-        backgroundColor: appTheme.blueA400,
+        backgroundColor: appTheme.blue,
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
       );
 

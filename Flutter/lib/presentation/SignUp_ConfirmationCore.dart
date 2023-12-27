@@ -92,11 +92,7 @@ class ConfirmationCore extends StatelessWidget {
               // Title
               Align(
                 alignment: Alignment.centerLeft,
-                child: Text(
-                  "以下にコードを認証してください。",
-                  overflow: TextOverflow.ellipsis,
-                  style: CustomTextStyles.titleOfUnderLogo,
-                ),
+                child: Text("以下にコードを認証してください。", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
               ),
               SizedBox(height: mediaQueryData.size.height / 50),
 
@@ -130,7 +126,11 @@ class ConfirmationCore extends StatelessWidget {
 
   /// Era
   Widget _buildConfirmationCoreInput(BuildContext context) {
-    return CustomInputFormBar(controller: confirmationCoreController, hintText: "423198");
+    return CustomInputFormBar(
+      controller: confirmationCoreController,
+      hintText: "423198",
+      textInputType: TextInputType.text,
+    );
   }
 
   /// Next Button

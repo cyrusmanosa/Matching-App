@@ -69,9 +69,9 @@
     },
     {
       "name": "cli_util",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/cli_util-0.4.0",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/cli_util-0.4.1",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.0"
     },
     {
       "name": "clock",
@@ -153,13 +153,13 @@
     },
     {
       "name": "flutter_svg",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/flutter_svg-1.1.6",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/flutter_svg-2.0.9",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.19"
     },
     {
       "name": "flutter_svg_provider",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/flutter_svg_provider-1.0.3",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/flutter_svg_provider-1.0.6",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -183,7 +183,7 @@
     },
     {
       "name": "google_fonts",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/google_fonts-4.0.4",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/google_fonts-6.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -201,9 +201,9 @@
     },
     {
       "name": "http",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/http-0.13.6",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/http-1.1.0",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.0"
     },
     {
       "name": "http2",
@@ -225,9 +225,9 @@
     },
     {
       "name": "intl",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/intl-0.18.1",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/intl-0.19.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.0"
     },
     {
       "name": "js",
@@ -272,12 +272,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "path_drawing",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/path_drawing-1.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "path_parsing",
       "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/path_parsing-1.0.1",
       "packageUri": "lib/",
@@ -291,9 +285,9 @@
     },
     {
       "name": "path_provider_android",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/path_provider_android-2.2.1",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/path_provider_android-2.2.2",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.0"
     },
     {
       "name": "path_provider_foundation",
@@ -339,9 +333,9 @@
     },
     {
       "name": "plugin_platform_interface",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.6",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.7",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.0"
     },
     {
       "name": "pointycastle",
@@ -357,7 +351,7 @@
     },
     {
       "name": "postgres",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/postgres-3.0.0",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/postgres-3.0.4",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -459,7 +453,7 @@
     },
     {
       "name": "sqflite_common",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/sqflite_common-2.5.0",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/sqflite_common-2.5.0+2",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -483,9 +477,9 @@
     },
     {
       "name": "synchronized",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/synchronized-3.1.0",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/synchronized-3.1.0+1",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.0"
     },
     {
       "name": "term_glyph",
@@ -513,9 +507,27 @@
     },
     {
       "name": "uuid",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/uuid-4.1.0",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/uuid-4.2.2",
       "packageUri": "lib/",
       "languageVersion": "2.14"
+    },
+    {
+      "name": "vector_graphics",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/vector_graphics-1.1.9+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "vector_graphics_codec",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/vector_graphics_codec-1.1.9+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "vector_graphics_compiler",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/vector_graphics_compiler-1.1.9+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
     },
     {
       "name": "vector_math",
@@ -531,9 +543,9 @@
     },
     {
       "name": "win32",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/win32-5.0.9",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/win32-5.1.1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.1"
     },
     {
       "name": "xdg_directories",
@@ -560,7 +572,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2023-12-26T15:03:31.757169Z",
+  "generated": "2023-12-27T17:06:53.089009Z",
   "generator": "pub",
   "generatorVersion": "3.1.5"
 }

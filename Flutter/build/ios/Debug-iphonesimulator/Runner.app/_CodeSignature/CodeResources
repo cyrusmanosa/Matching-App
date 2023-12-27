@@ -18,7 +18,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		x56BvWGHpQoANCYp/9g1M4Arj78=
+		Y3Pn17cyrqkMWxiJYFeYFj3wXEI=
 		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		XqK9CbO8g1xyVl8UP0ZSkq2rnjU=
+		eRbWRCEb/lf+PAnp7DkCPXRjC1M=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		Z1TdbJX7PDbDkXpwtPpnZVxw8BY=
+		1m8ywts8WpFUfyknSRxQTIhYrYc=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
@@ -70,7 +70,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/NOTICES.Z</key>
 		<data>
-		QEYg/57DXu57SsKHDlM6Fvnp/Jg=
+		Fcw6m73zi4dQcmw4yZvqATJGk5Q=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/fonts/MontserratSemiBold.ttf</key>
 		<data>
@@ -230,7 +230,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		UZNCHJ804sJm5PMVDakrdNoNDC8=
+		0egICqGU7GmWGdpM8k+FK3u2F/s=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/shaders/ink_sparkle.frag</key>
 		<data>
@@ -420,7 +420,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			B2SlNlapVR8xkGNJF7Far/HuZPwj2Gcoa/1GNjdvG7U=
+			CK28BdV8ImvTVyqQApiXHu+Q39R6DBA02nrxqjPFsZo=
 			</data>
 		</dict>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
@@ -469,7 +469,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			O/6QVmtrEdFbChl+1KJBrK+YUhztJfS+IFxSrp2Dwuo=
+			rE/2880MGyLGnEXzg9jH1QFjfSflbV2BWwOJugzrVyM=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -483,7 +483,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			D0axbgSRavAkbu+GWfs1RAO2QMBU0iYPH0u7PM532YQ=
+			+8mAqwSW/rCxdrdAYBqSKFdKv299Ndx6pxY9WLcRhU0=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
@@ -511,7 +511,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			njCpfpIGIeQJRwJaCtjOC8dqPlrTH+6V/5F72fq7+LQ=
+			pJWMkqIOk+mX4fk2E782wi2WRKdKOM2/wT/0gzGXIAQ=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/fonts/MontserratSemiBold.ttf</key>
@@ -791,7 +791,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			/98yKCU6ZjOktxEVULBx6wBqQKFrO3Q5m/uphnImlTo=
+			KxOjZyoe54BqUhit94ZVnBWGxz4H6UGEEMSCqKnZozg=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/shaders/ink_sparkle.frag</key>
