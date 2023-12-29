@@ -11,5 +11,5 @@ message Images {
     string Img2 = 4;
     string Img3 = 5;
     string Img4 = 6;
-    string Img5 = 7;
+    string icon = 7;
 }

@@ -7,6 +7,7 @@ package db
 
 import (
 	"context"
+
 )
 
 const createUserCanChangeInformation = `-- name: CreateUserCanChangeInformation :one
@@ -30,16 +31,16 @@ INSERT INTO canchangeinformation (
 `
 
 type CreateUserCanChangeInformationParams struct {
-	UserID        int32  `json:"user_id"`
+	UserID        int32       `json:"user_id"`
 	Nickname      string `json:"nickname"`
 	City          string `json:"city"`
 	Sexual        string `json:"sexual"`
-	Height        int32  `json:"height"`
-	Weight        int32  `json:"weight"`
+	Height        int32 `json:"height"`
+	Weight        int32 `json:"weight"`
 	Speaklanguage string `json:"speaklanguage"`
 	Education     string `json:"education"`
 	Job           string `json:"job"`
-	AnnualSalary  int32  `json:"annual_salary"`
+	AnnualSalary  int32 `json:"annual_salary"`
 	Sociability   string `json:"sociability"`
 	Religious     string `json:"religious"`
 	Introduce     string `json:"introduce"`
@@ -177,16 +178,16 @@ RETURNING user_id, nickname, city, sexual, height, weight, speaklanguage, educat
 `
 
 type UpdateInformationParams struct {
-	UserID        int32  `json:"user_id"`
+	UserID        int32       `json:"user_id"`
 	Nickname      string `json:"nickname"`
 	City          string `json:"city"`
 	Sexual        string `json:"sexual"`
-	Height        int32  `json:"height"`
-	Weight        int32  `json:"weight"`
+	Height        int32 `json:"height"`
+	Weight        int32 `json:"weight"`
 	Speaklanguage string `json:"speaklanguage"`
 	Education     string `json:"education"`
 	Job           string `json:"job"`
-	AnnualSalary  int32  `json:"annual_salary"`
+	AnnualSalary  int32 `json:"annual_salary"`
 	Sociability   string `json:"sociability"`
 	Religious     string `json:"religious"`
 	Introduce     string `json:"introduce"`

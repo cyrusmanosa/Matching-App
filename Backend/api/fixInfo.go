@@ -100,7 +100,7 @@ func (server *Server) CreateUserFixInfo(ctx *gin.Context) {
 // input password
 type passwordRequest struct {
 	SessionID uuid.UUID `json:"session_id" binding:"required"`
-	Password  string    `json:"password" binding:"required,min=6"`
+	Password  string    `json:"password" binding:"required,min=8"`
 }
 
 func (server *Server) inputPassword(ctx *gin.Context) {
@@ -147,14 +147,25 @@ func (server *Server) inputPassword(ctx *gin.Context) {
 
 // Reset Password
 type ResetPasswordRequset struct {
-	UserID   int32  `json:"userid" binding:"required"`
-	Password string `json:"password" binding:"required"`
+	SessionID uuid.UUID `json:"session_id" binding:"required"`
+	Password  string    `json:"password" binding:"required"`
 }
 
 func (server *Server) ResetPassword(ctx *gin.Context) {
 	var req ResetPasswordRequset
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
+	token, err := server.store.GetSession(ctx, req.SessionID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
 
@@ -164,7 +175,7 @@ func (server *Server) ResetPassword(ctx *gin.Context) {
 	}
 
 	NewPassword := info.UpdatePasswordParams{
-		UserID:         req.UserID,
+		UserID:         token.UserID,
 		HashedPassword: hash,
 	}
 

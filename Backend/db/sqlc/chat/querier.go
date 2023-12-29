@@ -9,9 +9,10 @@ import (
 )
 
 type ChatQuerier interface {
-	Getrecord(ctx context.Context, userID int32) (Recordtest, error)
-	Listrecord(ctx context.Context) ([]Recordtest, error)
-	recordTest(ctx context.Context, arg recordTestParams) (Recordtest, error)
+	DeleteRecord(ctx context.Context, arg DeleteRecordParams) error
+	Getrecord(ctx context.Context, targetID int32) ([]Record, error)
+	InsertRecord(ctx context.Context, arg InsertRecordParams) (Record, error)
+	UpdateRecord(ctx context.Context, arg UpdateRecordParams) (Record, error)
 }
 
 var _ ChatQuerier = (*Queries)(nil)

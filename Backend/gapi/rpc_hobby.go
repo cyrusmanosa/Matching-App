@@ -18,7 +18,7 @@ func (server *Server) CreateHobby(ctx context.Context, req *pb.CreateHobbyReques
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
 	}
 
-	token, err := server.store.GetSession(ctx, Gid)
+	token, err := server.infoStore.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -42,7 +42,7 @@ func (server *Server) CreateHobby(ctx context.Context, req *pb.CreateHobbyReques
 		Sociability:   req.GetSociability(),
 		Certification: req.GetCertification(),
 	}
-	hobby, err := server.store.CreateHobbyRequest(ctx, H)
+	hobby, err := server.infoStore.CreateHobbyRequest(ctx, H)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -63,7 +63,7 @@ func (server *Server) GetHobby(ctx context.Context, req *pb.GetHobbyRequest) (*p
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
 	}
 
-	token, err := server.store.GetSession(ctx, Gid)
+	token, err := server.infoStore.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -73,7 +73,7 @@ func (server *Server) GetHobby(ctx context.Context, req *pb.GetHobbyRequest) (*p
 		return nil, fmt.Errorf("invalid access token: %v", err)
 	}
 
-	hobby, err := server.store.GetUserHobby(ctx, token.UserID)
+	hobby, err := server.infoStore.GetUserHobby(ctx, token.UserID)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -94,7 +94,7 @@ func (server *Server) UpdateHobby(ctx context.Context, req *pb.UpdateHobbyReques
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
 	}
 
-	token, err := server.store.GetSession(ctx, Gid)
+	token, err := server.infoStore.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -118,7 +118,7 @@ func (server *Server) UpdateHobby(ctx context.Context, req *pb.UpdateHobbyReques
 		Sociability:   req.GetSociability(),
 		Certification: req.GetCertification(),
 	}
-	hobby, err := server.store.UpdateUserHobby(ctx, H)
+	hobby, err := server.infoStore.UpdateUserHobby(ctx, H)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {

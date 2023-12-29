@@ -13,7 +13,7 @@ import (
 )
 
 func (server *Server) LoginUser(ctx context.Context, req *pb.LoginUserRequest) (*pb.LoginUserResponse, error) {
-	user, err := server.store.LoginAtEmail(ctx, req.GetEmail())
+	user, err := server.infoStore.LoginAtEmail(ctx, req.GetEmail())
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, status.Errorf(codes.NotFound, "user not found")
@@ -35,7 +35,7 @@ func (server *Server) LoginUser(ctx context.Context, req *pb.LoginUserRequest) (
 		return nil, status.Errorf(codes.Internal, "failed to create access token")
 	}
 
-	sessions, err := server.store.CreateSession(ctx, db.CreateSessionParams{
+	sessions, err := server.infoStore.CreateSession(ctx, db.CreateSessionParams{
 		ID:          payload.ID,
 		UserID:      user.UserID,
 		AccessToken: accessToken,

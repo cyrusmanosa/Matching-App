@@ -2,7 +2,8 @@ package main
 
 import (
 	"Backend/api"
-	db "Backend/db/sqlc/info"
+	chdb "Backend/db/sqlc/chat"
+	indb "Backend/db/sqlc/info"
 	"Backend/gapi"
 	"Backend/pb"
 	"Backend/util"
@@ -28,31 +29,45 @@ func main() {
 
 	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
 
-	// Information
+	// Info
 	info_conn, err := pgxpool.New(context.Background(), config.DBSourceInfo)
 	if err != nil {
-		log.Fatal().Msg("cannot connect to Info db")
+		log.Fatal().Msg("cannot connect to Info indb")
 	}
 	defer info_conn.Close()
 
-	store := db.NewInfoStore(info_conn)
+	instore := indb.NewInfoStore(info_conn)
 
-	runGrpcServer(config, store)
+	// Chat
+	chat_conn, err := pgxpool.New(context.Background(), config.DBSourceChat)
+	if err != nil {
+		log.Fatal().Msg("cannot connect to Info chdb")
+	}
+	defer info_conn.Close()
+
+	chstore := chdb.NewChatStore(chat_conn)
+
+	runGrpcServer(config, instore, chstore)
 	// runGinServer(config, store)
 }
 
 // Grpc
-func runGrpcServer(config util.Config, store db.InfoStore) {
-	server, err := gapi.NewServer(config, store)
+func runGrpcServer(config util.Config, inStore indb.InfoStore, chStore chdb.ChatStore) {
+	InfoServer, err := gapi.NewInfoServer(config, inStore)
+	if err != nil {
+		log.Print(err)
+	}
+	ChatServer, err := gapi.NewChatServer(config, chStore)
 	if err != nil {
 		log.Print(err)
 	}
 
 	// Logger
 	grpcLogger := grpc.UnaryInterceptor(gapi.GprcLogger)
-
 	grpcServer := grpc.NewServer(grpcLogger)
-	pb.RegisterBackendServer(grpcServer, server)
+
+	pb.RegisterBackendServer(grpcServer, InfoServer)
+	pb.RegisterBackendServer(grpcServer, ChatServer)
 	reflection.Register(grpcServer)
 
 	listener, err := net.Listen("tcp", config.GRPCServerAddress)
@@ -67,7 +82,7 @@ func runGrpcServer(config util.Config, store db.InfoStore) {
 	}
 }
 
-func runGinServer(config util.Config, store db.InfoStore) {
+func runGinServer(config util.Config, store indb.InfoStore) {
 	server, err := api.NewServer(config, store)
 	if err != nil {
 		log.Fatal().Err(err).Msg("cannot create server")

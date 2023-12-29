@@ -7,6 +7,7 @@ package db
 
 import (
 	"context"
+
 )
 
 const createUserFixInformation = `-- name: CreateUserFixInformation :one

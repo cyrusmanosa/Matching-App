@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/badoux/checkmail"
 	"github.com/gin-gonic/gin"
 )
 
@@ -25,12 +24,6 @@ func (server *Server) CheckEmail(ctx *gin.Context) {
 	var CE EmailRequset
 	if err := ctx.ShouldBindJSON(&CE); err != nil {
 		ctx.JSON(http.StatusBadRequest, errorResponse(err))
-		return
-	}
-
-	if err := checkmail.ValidateFormat(CE.Email); err != nil {
-		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
-		log.Println(err)
 		return
 	}
 

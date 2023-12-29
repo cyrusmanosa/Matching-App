@@ -18,7 +18,7 @@ func (server *Server) CreateAccompany(ctx context.Context, req *pb.CreateAccompa
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
 	}
 
-	token, err := server.store.GetSession(ctx, Gid)
+	token, err := server.infoStore.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -39,7 +39,7 @@ func (server *Server) CreateAccompany(ctx context.Context, req *pb.CreateAccompa
 		Sociability:   req.GetSociability(),
 		Certification: req.GetCertification(),
 	}
-	accompany, err := server.store.CreateAccompanyRequest(ctx, Ac)
+	accompany, err := server.infoStore.CreateAccompanyRequest(ctx, Ac)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -60,7 +60,7 @@ func (server *Server) GetAccompany(ctx context.Context, req *pb.GetAccompanyRequ
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
 	}
 
-	token, err := server.store.GetSession(ctx, Gid)
+	token, err := server.infoStore.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -70,7 +70,7 @@ func (server *Server) GetAccompany(ctx context.Context, req *pb.GetAccompanyRequ
 		return nil, fmt.Errorf("invalid access token: %v", err)
 	}
 
-	accompany, err := server.store.GetUserAccompany(ctx, token.UserID)
+	accompany, err := server.infoStore.GetUserAccompany(ctx, token.UserID)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -91,7 +91,7 @@ func (server *Server) UpdateAccompany(ctx context.Context, req *pb.UpdateAccompa
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
 	}
 
-	token, err := server.store.GetSession(ctx, Gid)
+	token, err := server.infoStore.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -112,7 +112,7 @@ func (server *Server) UpdateAccompany(ctx context.Context, req *pb.UpdateAccompa
 		Sociability:   req.GetSociability(),
 		Certification: req.GetCertification(),
 	}
-	accompany, err := server.store.UpdateUserAccompany(ctx, Ac)
+	accompany, err := server.infoStore.UpdateUserAccompany(ctx, Ac)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {

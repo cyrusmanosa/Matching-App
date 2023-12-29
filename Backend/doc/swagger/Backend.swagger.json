@@ -1394,7 +1394,7 @@
         "Img4": {
           "type": "string"
         },
-        "Img5": {
+        "icon": {
           "type": "string"
         }
       },
@@ -1638,7 +1638,7 @@
         "Img4": {
           "type": "string"
         },
-        "Img5": {
+        "icon": {
           "type": "string"
         }
       }
@@ -1755,9 +1755,8 @@
     "pbResetPasswordRequest": {
       "type": "object",
       "properties": {
-        "UserID": {
-          "type": "integer",
-          "format": "int32"
+        "SessionID": {
+          "type": "string"
         },
         "Password": {
           "type": "string"
@@ -2007,7 +2006,7 @@
         "Img4": {
           "type": "string"
         },
-        "Img5": {
+        "icon": {
           "type": "string"
         }
       },

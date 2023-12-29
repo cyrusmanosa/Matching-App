@@ -31,7 +31,7 @@ type Images struct {
 	Img2   string `protobuf:"bytes,4,opt,name=Img2,proto3" json:"Img2,omitempty"`
 	Img3   string `protobuf:"bytes,5,opt,name=Img3,proto3" json:"Img3,omitempty"`
 	Img4   string `protobuf:"bytes,6,opt,name=Img4,proto3" json:"Img4,omitempty"`
-	Img5   string `protobuf:"bytes,7,opt,name=Img5,proto3" json:"Img5,omitempty"`
+	Icon   string `protobuf:"bytes,7,opt,name=icon,proto3" json:"icon,omitempty"`
 }
 
 func (x *Images) Reset() {
@@ -108,9 +108,9 @@ func (x *Images) GetImg4() string {
 	return ""
 }
 
-func (x *Images) GetImg5() string {
+func (x *Images) Geticon() string {
 	if x != nil {
-		return x.Img5
+		return x.Icon
 	}
 	return ""
 }

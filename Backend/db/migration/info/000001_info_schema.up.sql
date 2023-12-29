@@ -17,18 +17,18 @@ CREATE TABLE "fixinformation" (
 
 CREATE TABLE "canchangeinformation" (
   "user_id" INT PRIMARY KEY,
-  "nickname" VARCHAR NOT NULL,
-  "city" VARCHAR NOT NULL,
-  "sexual" VARCHAR NOT NULL,
-  "height" INT NOT NULL,
-  "weight" INT NOT NULL,
-  "speaklanguage" VARCHAR NOT NULL,
-  "education" VARCHAR NOT NULL,
-  "job" VARCHAR NOT NULL,
-  "annual_salary" INT NOT NULL,
-  "sociability" VARCHAR NOT NULL,
-  "religious" VARCHAR NOT NULL,
-  "introduce" VARCHAR NOT NULL,
+  "nickname" VARCHAR,
+  "city" VARCHAR,
+  "sexual" VARCHAR,
+  "height" INT,
+  "weight" INT,
+  "speaklanguage" VARCHAR,
+  "education" VARCHAR,
+  "job" VARCHAR,
+  "annual_salary" INT,
+  "sociability" VARCHAR,
+  "religious" VARCHAR,
+  "introduce" VARCHAR,
   "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
 
@@ -87,7 +87,7 @@ CREATE TABLE "image" (
   "img2" VARCHAR,
   "img3" VARCHAR,
   "img4" VARCHAR,
-  "img5" VARCHAR
+  "icon" VARCHAR
 );
 
 CREATE TABLE "targetlist" (
@@ -115,7 +115,6 @@ CREATE TABLE "complaint" (
   "status" VARCHAR DEFAULT 'active',
   "complaint_time" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
-
 
 ALTER TABLE "canchangeinformation" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
 

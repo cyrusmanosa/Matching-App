@@ -48,7 +48,7 @@ func (server *Server) CreateFix(ctx context.Context, req *pb.CreateFixRequest) (
 		Certification: false,
 	}
 
-	fix, err := server.store.CreateUserFixInformation(ctx, arg)
+	fix, err := server.infoStore.CreateUserFixInformation(ctx, arg)
 	if err != nil {
 		if db.ErrorCode(err) == db.UniqueViolation {
 			return nil, status.Errorf(codes.AlreadyExists, err.Error())
@@ -59,7 +59,7 @@ func (server *Server) CreateFix(ctx context.Context, req *pb.CreateFixRequest) (
 		Validate.CheckCode = ""
 	}
 
-	sessions, err := server.store.CreateSession(ctx, info.CreateSessionParams{
+	sessions, err := server.infoStore.CreateSession(ctx, info.CreateSessionParams{
 		ID:          payload.ID,
 		UserID:      fix.UserID,
 		AccessToken: aToken,

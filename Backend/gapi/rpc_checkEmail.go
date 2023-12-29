@@ -5,7 +5,6 @@ import (
 	"Backend/util"
 	"context"
 
-	"github.com/badoux/checkmail"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -13,11 +12,8 @@ import (
 var Validate *pb.CheckEmailResponse
 
 func (server *Server) CheckEmail(ctx context.Context, req *pb.CheckEmailRequest) (*pb.CheckEmailResponse, error) {
-	if err := checkmail.ValidateFormat(req.GetEmail()); err != nil {
-		return nil, status.Errorf(codes.Internal, "failed to create user: %s", err)
-	}
 
-	_, err := server.store.LoginAtEmail(ctx, req.GetEmail())
+	_, err := server.infoStore.LoginAtEmail(ctx, req.GetEmail())
 	if err == nil {
 		return nil, status.Errorf(codes.AlreadyExists, "failed to create user: %s", err)
 	}

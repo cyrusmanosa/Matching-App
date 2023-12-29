@@ -19,6 +19,7 @@ type InfoQuerier interface {
 	CreateHobbyRequest(ctx context.Context, arg CreateHobbyRequestParams) (Hobbyrequest, error)
 	CreateImage(ctx context.Context, arg CreateImageParams) (Image, error)
 	CreateLoverRequest(ctx context.Context, arg CreateLoverRequestParams) (Loverrequest, error)
+	CreatePayment(ctx context.Context, arg CreatePaymentParams) (Payment, error)
 	CreateSession(ctx context.Context, arg CreateSessionParams) (Session, error)
 	CreateUserCanChangeInformation(ctx context.Context, arg CreateUserCanChangeInformationParams) (Canchangeinformation, error)
 	CreateUserFixInformation(ctx context.Context, arg CreateUserFixInformationParams) (Fixinformation, error)
@@ -32,6 +33,7 @@ type InfoQuerier interface {
 	DeleteUserHobby(ctx context.Context, userID int32) error
 	DeleteUserLoverRequest(ctx context.Context, userID int32) error
 	GetChangeTargetUserList(ctx context.Context, userID int32) (Changetargetuser, error)
+	GetPayment(ctx context.Context, payID uuid.UUID) (Payment, error)
 	GetRowCount(ctx context.Context, userID int32) (int32, error)
 	GetSession(ctx context.Context, id uuid.UUID) (Session, error)
 	GetTargetUserList(ctx context.Context, userID int32) (Targetlist, error)

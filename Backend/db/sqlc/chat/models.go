@@ -8,9 +8,9 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
-type Recordtest struct {
-	UserID    int32              `json:"user_id"`
+type Record struct {
 	TargetID  int32              `json:"target_id"`
+	MsgType   string             `json:"msg_type"`
 	Message   string        `json:"message"`
 	Images    string        `json:"images"`
 	CreatedAt pgtype.Timestamptz `json:"created_at"`

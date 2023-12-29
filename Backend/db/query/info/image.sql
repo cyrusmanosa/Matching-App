@@ -6,7 +6,7 @@ INSERT INTO image (
     img2,
     img3,
     img4,
-    img5
+    icon
 ) VALUES (
     $1,$2,$3,$4,$5,$6,$7
 ) RETURNING *;
@@ -25,7 +25,7 @@ SET img1 = $2,
     img2 = $3,
     img3 = $4,
     img4 = $5,
-    img5 = $6
+    icon = $6
 WHERE user_id = $1
 RETURNING *;
 

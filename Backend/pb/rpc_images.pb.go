@@ -32,7 +32,7 @@ type CreateImagesRequest struct {
 	Img2   string `protobuf:"bytes,4,opt,name=Img2,proto3" json:"Img2,omitempty"`
 	Img3   string `protobuf:"bytes,5,opt,name=Img3,proto3" json:"Img3,omitempty"`
 	Img4   string `protobuf:"bytes,6,opt,name=Img4,proto3" json:"Img4,omitempty"`
-	Img5   string `protobuf:"bytes,7,opt,name=Img5,proto3" json:"Img5,omitempty"`
+	icon   string `protobuf:"bytes,7,opt,name=icon,proto3" json:"icon,omitempty"`
 }
 
 func (x *CreateImagesRequest) Reset() {
@@ -109,9 +109,9 @@ func (x *CreateImagesRequest) GetImg4() string {
 	return ""
 }
 
-func (x *CreateImagesRequest) GetImg5() string {
+func (x *CreateImagesRequest) Geticon() string {
 	if x != nil {
-		return x.Img5
+		return x.icon
 	}
 	return ""
 }
@@ -270,7 +270,7 @@ type UpdateImagesRequest struct {
 	Img2   string `protobuf:"bytes,4,opt,name=Img2,proto3" json:"Img2,omitempty"`
 	Img3   string `protobuf:"bytes,5,opt,name=Img3,proto3" json:"Img3,omitempty"`
 	Img4   string `protobuf:"bytes,6,opt,name=Img4,proto3" json:"Img4,omitempty"`
-	Img5   string `protobuf:"bytes,7,opt,name=Img5,proto3" json:"Img5,omitempty"`
+	icon   string `protobuf:"bytes,7,opt,name=icon,proto3" json:"icon,omitempty"`
 }
 
 func (x *UpdateImagesRequest) Reset() {
@@ -347,9 +347,9 @@ func (x *UpdateImagesRequest) GetImg4() string {
 	return ""
 }
 
-func (x *UpdateImagesRequest) GetImg5() string {
+func (x *UpdateImagesRequest) Geticon() string {
 	if x != nil {
-		return x.Img5
+		return x.icon
 	}
 	return ""
 }

@@ -8,19 +8,19 @@ dockernetwork:
 postgres:
 	docker run --name postgres --network datingDate -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:latest
 
-# 建立DB information
+# 建立DB
 createdb_info:
 	docker exec -it postgres createdb --username=root --owner=root dating_date_info
-# 移除DB information
+createdb_chat:
+	docker exec -it postgres createdb --username=root --owner=root dating_date_chat
+
+
+# 刪除DB
+dropdb_chat:
+	docker exec -it postgres dropdb dating_date_chat
 dropdb_info:
 	docker exec -it postgres dropdb dating_date_info
 
-# 建立DB chat box
-createdb_chat:
-	docker exec -it postgres createdb --username=root --owner=root dating_date_chat
-# 移除DB chat box
-dropdb_chat:
-	docker exec -it postgres dropdb dating_date_chat
 
 # Create Migrate file  
 createmigrate_info:

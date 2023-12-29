@@ -98,7 +98,7 @@ Table image {
   img2 VARCHAR [not null]
   img3 VARCHAR [not null]
   img4 VARCHAR [not null]
-  img5 VARCHAR [not null]
+  icon VARCHAR [not null]
 }
 
 Table targetlist {

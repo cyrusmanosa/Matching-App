@@ -18,7 +18,7 @@ func (server *Server) CreateCanChange(ctx context.Context, req *pb.CreateCanChan
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
 	}
 
-	token, err := server.store.GetSession(ctx, Gid)
+	token, err := server.infoStore.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -45,7 +45,7 @@ func (server *Server) CreateCanChange(ctx context.Context, req *pb.CreateCanChan
 	}
 
 	// 寫入DataBase
-	canChange, err := server.store.CreateUserCanChangeInformation(ctx, CC)
+	canChange, err := server.infoStore.CreateUserCanChangeInformation(ctx, CC)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -66,7 +66,7 @@ func (server *Server) GetCanChange(ctx context.Context, req *pb.GetCanChangeRequ
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
 	}
 
-	token, err := server.store.GetSession(ctx, Gid)
+	token, err := server.infoStore.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -76,7 +76,7 @@ func (server *Server) GetCanChange(ctx context.Context, req *pb.GetCanChangeRequ
 		return nil, fmt.Errorf("invalid access token: %v", err)
 	}
 
-	canChange, err := server.store.GetUserCanChangeInformation(ctx, token.UserID)
+	canChange, err := server.infoStore.GetUserCanChangeInformation(ctx, token.UserID)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -97,7 +97,7 @@ func (server *Server) UpdateCanChange(ctx context.Context, req *pb.UpdateCanChan
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
 	}
 
-	token, err := server.store.GetSession(ctx, Gid)
+	token, err := server.infoStore.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -122,7 +122,7 @@ func (server *Server) UpdateCanChange(ctx context.Context, req *pb.UpdateCanChan
 		Religious:     req.GetReligious(),
 		Introduce:     req.GetIntroduce(),
 	}
-	canChange, err := server.store.UpdateInformation(ctx, CC)
+	canChange, err := server.infoStore.UpdateInformation(ctx, CC)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {

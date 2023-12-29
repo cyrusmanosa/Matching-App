@@ -18,7 +18,7 @@ func (server *Server) CreateComplaint(ctx context.Context, req *pb.CreateComplai
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
 	}
 
-	token, err := server.store.GetSession(ctx, Gid)
+	token, err := server.infoStore.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -34,7 +34,7 @@ func (server *Server) CreateComplaint(ctx context.Context, req *pb.CreateComplai
 		CpType:     req.GetCpType(),
 		CpMessage:  req.GetCpMessage(),
 	}
-	complaint, err := server.store.CreateComplaint(ctx, cp)
+	complaint, err := server.infoStore.CreateComplaint(ctx, cp)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -55,7 +55,7 @@ func (server *Server) GetComplaint(ctx context.Context, req *pb.GetComplaintRequ
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
 	}
 
-	token, err := server.store.GetSession(ctx, Gid)
+	token, err := server.infoStore.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -65,7 +65,7 @@ func (server *Server) GetComplaint(ctx context.Context, req *pb.GetComplaintRequ
 		return nil, fmt.Errorf("invalid access token: %v", err)
 	}
 
-	complaint, err := server.store.GetUserComplaintList(ctx, req.GetCpID())
+	complaint, err := server.infoStore.GetUserComplaintList(ctx, req.GetCpID())
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -86,7 +86,7 @@ func (server *Server) UpdateComplaint(ctx context.Context, req *pb.UpdateComplai
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
 	}
 
-	token, err := server.store.GetSession(ctx, Gid)
+	token, err := server.infoStore.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -100,7 +100,7 @@ func (server *Server) UpdateComplaint(ctx context.Context, req *pb.UpdateComplai
 		CpID:   req.GetCpID(),
 		Status: req.GetStatus(),
 	}
-	complaint, err := server.store.UpdateUserComplaint(ctx, cp)
+	complaint, err := server.infoStore.UpdateUserComplaint(ctx, cp)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {

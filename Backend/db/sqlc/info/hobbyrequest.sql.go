@@ -7,6 +7,7 @@ package db
 
 import (
 	"context"
+
 )
 
 const createHobbyRequest = `-- name: CreateHobbyRequest :one

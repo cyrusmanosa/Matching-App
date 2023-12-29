@@ -14,7 +14,7 @@ import (
 func (server *Server) CreateTargetList(ctx context.Context, req *pb.CreateTargetListRequest) (*pb.CreateTargetListResponse, error) {
 
 	// change GlobalSessionID after login
-	token, err := server.store.GetSession(ctx, GlobalSessionID)
+	token, err := server.infoStore.GetSession(ctx, GlobalSessionID)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -30,7 +30,7 @@ func (server *Server) CreateTargetList(ctx context.Context, req *pb.CreateTarget
 		Target2ID: req.GetTarget2ID(),
 		Target3ID: req.GetTarget3ID(),
 	}
-	targetlist, err := server.store.TargetUserList(ctx, tl)
+	targetlist, err := server.infoStore.TargetUserList(ctx, tl)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -46,7 +46,7 @@ func (server *Server) CreateTargetList(ctx context.Context, req *pb.CreateTarget
 }
 
 func (server *Server) GetTargetList(ctx context.Context, req *pb.GetTargetListRequest) (*pb.GetTargetListResponse, error) {
-	targetlist, err := server.store.GetTargetUserList(ctx, req.GetUserID())
+	targetlist, err := server.infoStore.GetTargetUserList(ctx, req.GetUserID())
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -68,7 +68,7 @@ func (server *Server) UpdateTargetList(ctx context.Context, req *pb.UpdateTarget
 		Target2ID: req.GetTarget2ID(),
 		Target3ID: req.GetTarget3ID(),
 	}
-	targetlist, err := server.store.UpdateTargetList(ctx, tl)
+	targetlist, err := server.infoStore.UpdateTargetList(ctx, tl)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {

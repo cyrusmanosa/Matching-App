@@ -21,7 +21,7 @@ func (server *Server) InputPassword(ctx context.Context, req *pb.InputPasswordRe
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
 	}
 
-	token, err := server.store.GetSession(ctx, Gid)
+	token, err := server.infoStore.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -36,7 +36,7 @@ func (server *Server) InputPassword(ctx context.Context, req *pb.InputPasswordRe
 		HashedPassword: Hash,
 	}
 
-	_, err = server.store.UpdatePassword(ctx, arg)
+	_, err = server.infoStore.UpdatePassword(ctx, arg)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -45,7 +45,7 @@ func (server *Server) InputPassword(ctx context.Context, req *pb.InputPasswordRe
 		return nil, status.Errorf(codes.Internal, "failed to input password: %s", err)
 	}
 
-	user, err := server.store.GetUserFixInformation(ctx, token.UserID)
+	user, err := server.infoStore.GetUserFixInformation(ctx, token.UserID)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, status.Errorf(codes.NotFound, "user not found")
@@ -63,7 +63,7 @@ func (server *Server) InputPassword(ctx context.Context, req *pb.InputPasswordRe
 
 func (server *Server) ResetPassword(ctx context.Context, req *pb.ResetPasswordRequest) (*pb.ResetPasswordResponse, error) {
 
-	token, err := server.store.GetSession(ctx, GlobalSessionID)
+	token, err := server.infoStore.GetSession(ctx, GlobalSessionID)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -76,10 +76,10 @@ func (server *Server) ResetPassword(ctx context.Context, req *pb.ResetPasswordRe
 	Hash, _ := util.HashPassword(req.GetPassword())
 
 	arg := info.UpdatePasswordParams{
-		UserID:         req.GetUserID(),
+		UserID:         token.UserID,
 		HashedPassword: Hash,
 	}
-	_, err = server.store.UpdatePassword(ctx, arg)
+	_, err = server.infoStore.UpdatePassword(ctx, arg)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -88,7 +88,7 @@ func (server *Server) ResetPassword(ctx context.Context, req *pb.ResetPasswordRe
 		return nil, status.Errorf(codes.Internal, "failed to reset password: %s", err)
 	}
 
-	user, err := server.store.GetUserFixInformation(ctx, req.UserID)
+	user, err := server.infoStore.GetUserFixInformation(ctx, token.UserID)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, status.Errorf(codes.NotFound, "user not found")

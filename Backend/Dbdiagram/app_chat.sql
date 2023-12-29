@@ -1,7 +1,7 @@
-CREATE TABLE "recordtest" (
-  "user_id" INT UNIQUE PRIMARY KEY NOT NULL,
+CREATE TABLE "userID" (
   "target_id" INT UNIQUE NOT NULL,
+  "msg_type" VARCHAR NOT NULL,
   "message" VARCHAR,
-  "images" BYTEA,
+  "images" img,
   "created_at" TIMESTAMPTZ NOT NULL DEFAULT (now())
 );

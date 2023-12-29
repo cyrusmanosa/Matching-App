@@ -18,7 +18,7 @@ func (server *Server) CreateLover(ctx context.Context, req *pb.CreateLoverReques
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
 	}
 
-	token, err := server.store.GetSession(ctx, Gid)
+	token, err := server.infoStore.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -45,7 +45,7 @@ func (server *Server) CreateLover(ctx context.Context, req *pb.CreateLoverReques
 		Religious:     req.GetReligious(),
 		Certification: req.GetCertification(),
 	}
-	Lover, err := server.store.CreateLoverRequest(ctx, L)
+	Lover, err := server.infoStore.CreateLoverRequest(ctx, L)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -66,7 +66,7 @@ func (server *Server) GetLover(ctx context.Context, req *pb.GetLoverRequest) (*p
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
 	}
 
-	token, err := server.store.GetSession(ctx, Gid)
+	token, err := server.infoStore.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -76,7 +76,7 @@ func (server *Server) GetLover(ctx context.Context, req *pb.GetLoverRequest) (*p
 		return nil, fmt.Errorf("invalid access token: %v", err)
 	}
 
-	Lover, err := server.store.GetUserLover(ctx, token.UserID)
+	Lover, err := server.infoStore.GetUserLover(ctx, token.UserID)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -97,7 +97,7 @@ func (server *Server) UpdateLover(ctx context.Context, req *pb.UpdateLoverReques
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
 	}
 
-	token, err := server.store.GetSession(ctx, Gid)
+	token, err := server.infoStore.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -124,7 +124,7 @@ func (server *Server) UpdateLover(ctx context.Context, req *pb.UpdateLoverReques
 		Religious:     req.GetReligious(),
 		Certification: req.GetCertification(),
 	}
-	Lover, err := server.store.UpdateUserLover(ctx, L)
+	Lover, err := server.infoStore.UpdateUserLover(ctx, L)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {

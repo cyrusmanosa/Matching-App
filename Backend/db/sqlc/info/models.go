@@ -24,18 +24,18 @@ type Accompanyrequest struct {
 
 type Canchangeinformation struct {
 	UserID        int32              `json:"user_id"`
-	Nickname      string             `json:"nickname"`
-	City          string             `json:"city"`
-	Sexual        string             `json:"sexual"`
-	Height        int32              `json:"height"`
-	Weight        int32              `json:"weight"`
-	Speaklanguage string             `json:"speaklanguage"`
-	Education     string             `json:"education"`
-	Job           string             `json:"job"`
-	AnnualSalary  int32              `json:"annual_salary"`
-	Sociability   string             `json:"sociability"`
-	Religious     string             `json:"religious"`
-	Introduce     string             `json:"introduce"`
+	Nickname      string        `json:"nickname"`
+	City          string        `json:"city"`
+	Sexual        string        `json:"sexual"`
+	Height        int32        `json:"height"`
+	Weight        int32        `json:"weight"`
+	Speaklanguage string        `json:"speaklanguage"`
+	Education     string        `json:"education"`
+	Job           string        `json:"job"`
+	AnnualSalary  int32        `json:"annual_salary"`
+	Sociability   string        `json:"sociability"`
+	Religious     string        `json:"religious"`
+	Introduce     string        `json:"introduce"`
 	InfoChangedAt pgtype.Timestamptz `json:"info_changed_at"`
 }
 
@@ -98,7 +98,7 @@ type Image struct {
 	Img2   string `json:"img2"`
 	Img3   string `json:"img3"`
 	Img4   string `json:"img4"`
-	Img5   string `json:"img5"`
+	Icon   string `json:"icon"`
 }
 
 type Loverrequest struct {
@@ -118,6 +118,15 @@ type Loverrequest struct {
 	Religious     string             `json:"religious"`
 	Certification bool        `json:"certification"`
 	InfoChangedAt pgtype.Timestamptz `json:"info_changed_at"`
+}
+
+type Payment struct {
+	PayID       uuid.UUID          `json:"pay_id"`
+	Fullname    string             `json:"fullname"`
+	PaymentType string             `json:"payment_type"`
+	Amount      int32              `json:"amount"`
+	Product     string             `json:"product"`
+	PayAt       pgtype.Timestamptz `json:"pay_at"`
 }
 
 type Session struct {

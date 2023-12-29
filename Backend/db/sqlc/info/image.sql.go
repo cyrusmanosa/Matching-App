@@ -7,6 +7,7 @@ package db
 
 import (
 	"context"
+
 )
 
 const createImage = `-- name: CreateImage :one
@@ -17,10 +18,10 @@ INSERT INTO image (
     img2,
     img3,
     img4,
-    img5
+    icon
 ) VALUES (
     $1,$2,$3,$4,$5,$6,$7
-) RETURNING user_id, qr, img1, img2, img3, img4, img5
+) RETURNING user_id, qr, img1, img2, img3, img4, icon
 `
 
 type CreateImageParams struct {
@@ -30,7 +31,7 @@ type CreateImageParams struct {
 	Img2   string `json:"img2"`
 	Img3   string `json:"img3"`
 	Img4   string `json:"img4"`
-	Img5   string `json:"img5"`
+	Icon   string `json:"icon"`
 }
 
 func (q *Queries) CreateImage(ctx context.Context, arg CreateImageParams) (Image, error) {
@@ -41,7 +42,7 @@ func (q *Queries) CreateImage(ctx context.Context, arg CreateImageParams) (Image
 		arg.Img2,
 		arg.Img3,
 		arg.Img4,
-		arg.Img5,
+		arg.Icon,
 	)
 	var i Image
 	err := row.Scan(
@@ -51,7 +52,7 @@ func (q *Queries) CreateImage(ctx context.Context, arg CreateImageParams) (Image
 		&i.Img2,
 		&i.Img3,
 		&i.Img4,
-		&i.Img5,
+		&i.Icon,
 	)
 	return i, err
 }
@@ -67,7 +68,7 @@ func (q *Queries) DeleteImage(ctx context.Context, userID int32) error {
 }
 
 const getUserimageData = `-- name: GetUserimageData :one
-SELECT user_id, qr, img1, img2, img3, img4, img5 FROM image
+SELECT user_id, qr, img1, img2, img3, img4, icon FROM image
 WHERE user_id = $1
 `
 
@@ -81,13 +82,13 @@ func (q *Queries) GetUserimageData(ctx context.Context, userID int32) (Image, er
 		&i.Img2,
 		&i.Img3,
 		&i.Img4,
-		&i.Img5,
+		&i.Icon,
 	)
 	return i, err
 }
 
 const listimagesList = `-- name: ListimagesList :many
-SELECT user_id, qr, img1, img2, img3, img4, img5 FROM image
+SELECT user_id, qr, img1, img2, img3, img4, icon FROM image
 ORDER BY user_id
 `
 
@@ -107,7 +108,7 @@ func (q *Queries) ListimagesList(ctx context.Context) ([]Image, error) {
 			&i.Img2,
 			&i.Img3,
 			&i.Img4,
-			&i.Img5,
+			&i.Icon,
 		); err != nil {
 			return nil, err
 		}
@@ -125,9 +126,9 @@ SET img1 = $2,
     img2 = $3,
     img3 = $4,
     img4 = $5,
-    img5 = $6
+    icon = $6
 WHERE user_id = $1
-RETURNING user_id, qr, img1, img2, img3, img4, img5
+RETURNING user_id, qr, img1, img2, img3, img4, icon
 `
 
 type UpdateImageParams struct {
@@ -136,7 +137,7 @@ type UpdateImageParams struct {
 	Img2   string `json:"img2"`
 	Img3   string `json:"img3"`
 	Img4   string `json:"img4"`
-	Img5   string `json:"img5"`
+	Icon   string `json:"icon"`
 }
 
 func (q *Queries) UpdateImage(ctx context.Context, arg UpdateImageParams) (Image, error) {
@@ -146,7 +147,7 @@ func (q *Queries) UpdateImage(ctx context.Context, arg UpdateImageParams) (Image
 		arg.Img2,
 		arg.Img3,
 		arg.Img4,
-		arg.Img5,
+		arg.Icon,
 	)
 	var i Image
 	err := row.Scan(
@@ -156,7 +157,7 @@ func (q *Queries) UpdateImage(ctx context.Context, arg UpdateImageParams) (Image
 		&i.Img2,
 		&i.Img3,
 		&i.Img4,
-		&i.Img5,
+		&i.Icon,
 	)
 	return i, err
 }

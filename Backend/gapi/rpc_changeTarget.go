@@ -18,7 +18,7 @@ func (server *Server) CreateChangeTarget(ctx context.Context, req *pb.CreateChan
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
 	}
 
-	token, err := server.store.GetSession(ctx, Gid)
+	token, err := server.infoStore.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -33,7 +33,7 @@ func (server *Server) CreateChangeTarget(ctx context.Context, req *pb.CreateChan
 		ChangeUserID: req.GetChangeUserID(),
 		Reason:       req.GetReason(),
 	}
-	changeTarget, err := server.store.CreateChangeTargetUser(ctx, Ct)
+	changeTarget, err := server.infoStore.CreateChangeTargetUser(ctx, Ct)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -54,7 +54,7 @@ func (server *Server) GetChangeTarget(ctx context.Context, req *pb.GetChangeTarg
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
 	}
 
-	token, err := server.store.GetSession(ctx, Gid)
+	token, err := server.infoStore.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -64,7 +64,7 @@ func (server *Server) GetChangeTarget(ctx context.Context, req *pb.GetChangeTarg
 		return nil, fmt.Errorf("invalid access token: %v", err)
 	}
 
-	changeTarget, err := server.store.GetChangeTargetUserList(ctx, token.UserID)
+	changeTarget, err := server.infoStore.GetChangeTargetUserList(ctx, token.UserID)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {

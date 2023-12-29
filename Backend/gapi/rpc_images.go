@@ -14,7 +14,7 @@ import (
 func (server *Server) CreateImages(ctx context.Context, req *pb.CreateImagesRequest) (*pb.CreateImagesResponse, error) {
 
 	// change GlobalSessionID after login
-	token, err := server.store.GetSession(ctx, GlobalSessionID)
+	token, err := server.infoStore.GetSession(ctx, GlobalSessionID)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
@@ -31,10 +31,10 @@ func (server *Server) CreateImages(ctx context.Context, req *pb.CreateImagesRequ
 		Img2:   req.GetImg2(),
 		Img3:   req.GetImg3(),
 		Img4:   req.GetImg4(),
-		Img5:   req.GetImg5(),
+		Icon:   req.Geticon(),
 	}
 
-	images, err := server.store.CreateImage(ctx, img)
+	images, err := server.infoStore.CreateImage(ctx, img)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -51,7 +51,7 @@ func (server *Server) CreateImages(ctx context.Context, req *pb.CreateImagesRequ
 
 func (server *Server) GetImages(ctx context.Context, req *pb.GetImagesRequest) (*pb.GetImagesResponse, error) {
 
-	images, err := server.store.GetUserimageData(ctx, req.GetUserID())
+	images, err := server.infoStore.GetUserimageData(ctx, req.GetUserID())
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -73,10 +73,10 @@ func (server *Server) UpdateImages(ctx context.Context, req *pb.UpdateImagesRequ
 		Img2:   req.GetImg2(),
 		Img3:   req.GetImg3(),
 		Img4:   req.GetImg4(),
-		Img5:   req.GetImg5(),
+		Icon:   req.Geticon(),
 	}
 
-	images, err := server.store.UpdateImage(ctx, img)
+	images, err := server.infoStore.UpdateImage(ctx, img)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {

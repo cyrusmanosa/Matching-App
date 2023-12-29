@@ -110,7 +110,7 @@ func convertImages(img info.Image) *pb.Images {
 		Img2:   img.Img2,
 		Img3:   img.Img3,
 		Img4:   img.Img4,
-		Img5:   img.Img5,
+		Icon:   img.Icon,
 	}
 }
 
