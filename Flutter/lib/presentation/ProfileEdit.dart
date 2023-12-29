@@ -1,6 +1,6 @@
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/global_variable/model.dart';
+import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
@@ -30,7 +30,7 @@ class ProfileEdit extends StatelessWidget {
   // Grpc
   Future<CanChange> getCanChangeGrpcRequest(BuildContext context) async {
     final request = GetCanChangeRequest(sessionID: globalSessionID);
-    final response = await GrpcService.client.getCanChange(request);
+    final response = await GrpcInfoService.client.getCanChange(request);
     // ignore: unnecessary_null_comparison
     if (response == null) {
       showErrorDialog(context, "Error: validatable input data");

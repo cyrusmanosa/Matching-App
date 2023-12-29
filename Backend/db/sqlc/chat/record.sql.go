@@ -7,33 +7,40 @@ package db
 
 import (
 	"context"
+	"fmt"
+	"time"
 
-	"github.com/jackc/pgx/v5/pgtype"
 )
 
-const deleteRecord = `-- name: DeleteRecord :exec
-DELETE FROM "record"
-WHERE target_id = $1
-AND created_at = $2
-`
 
 type DeleteRecordParams struct {
 	TargetID  int32              `json:"target_id"`
-	CreatedAt pgtype.Timestamptz `json:"created_at"`
+	CreatedAt time.Time `json:"created_at"`
 }
 
-func (q *Queries) DeleteRecord(ctx context.Context, arg DeleteRecordParams) error {
+func (q *Queries) DeleteRecord(ctx context.Context, arg DeleteRecordParams, tablename string) error {
+
+deleteRecord := fmt.Sprintf(`-- name: DeleteRecord :exec
+DELETE FROM %s
+WHERE target_id = $1
+AND created_at = $2
+`,tablename)
+
 	_, err := q.db.Exec(ctx, deleteRecord, arg.TargetID, arg.CreatedAt)
 	return err
 }
 
-const getrecord = `-- name: Getrecord :many
-SELECT target_id, msg_type, message, images, created_at FROM "record"
-WHERE target_id = $1
-ORDER BY created_at
-`
 
-func (q *Queries) Getrecord(ctx context.Context, targetID int32) ([]Record, error) {
+
+func (q *Queries) Getrecord(ctx context.Context, targetID int32,tablename string) ([]Record, error) {
+
+	getrecord := fmt.Sprintf(`-- name: Getrecord :many
+	SELECT target_id, msg_type, message, images, created_at FROM %s
+	WHERE target_id = $1
+	ORDER BY created_at
+	`,tablename)
+
+
 	rows, err := q.db.Query(ctx, getrecord, targetID)
 	if err != nil {
 		return nil, err
@@ -59,26 +66,27 @@ func (q *Queries) Getrecord(ctx context.Context, targetID int32) ([]Record, erro
 	return items, nil
 }
 
-const insertRecord = `-- name: InsertRecord :one
-INSERT INTO "record" (
-    target_id,
-    msg_type,
-    message,
-    images
-) VALUES (
-    $1,$2,$3,$4
-) RETURNING target_id, msg_type, message, images, created_at
-`
-
-type InsertRecordParams struct {
+type CreateRecordParams struct {
 	TargetID int32       `json:"target_id"`
 	MsgType  string      `json:"msg_type"`
 	Message  string `json:"message"`
 	Images   string `json:"images"`
 }
 
-func (q *Queries) InsertRecord(ctx context.Context, arg InsertRecordParams) (Record, error) {
-	row := q.db.QueryRow(ctx, insertRecord,
+func (q *Queries) CreateRecord(ctx context.Context, arg CreateRecordParams,tablename string) (Record, error) {
+
+	CreateRecord := fmt.Sprintf(`-- name: CreateRecord :one
+	INSERT INTO %s (
+		target_id,
+		msg_type,
+		message,
+		images
+	) VALUES (
+		$1,$2,$3,$4
+	) RETURNING target_id, msg_type, message, images, created_at
+	`,tablename)
+
+	row := q.db.QueryRow(ctx, CreateRecord,
 		arg.TargetID,
 		arg.MsgType,
 		arg.Message,
@@ -95,23 +103,22 @@ func (q *Queries) InsertRecord(ctx context.Context, arg InsertRecordParams) (Rec
 	return i, err
 }
 
-const updateRecord = `-- name: UpdateRecord :one
-UPDATE "record"
-SET message = $4
-WHERE target_id = $1
-  AND msg_type = $2
-  AND created_at = $3
-RETURNING target_id, msg_type, message, images, created_at
-`
-
 type UpdateRecordParams struct {
 	TargetID  int32              `json:"target_id"`
 	MsgType   string             `json:"msg_type"`
-	CreatedAt pgtype.Timestamptz `json:"created_at"`
 	Message   string        `json:"message"`
+	CreatedAt time.Time `json:"created_at"`
 }
 
-func (q *Queries) UpdateRecord(ctx context.Context, arg UpdateRecordParams) (Record, error) {
+func (q *Queries) UpdateRecord(ctx context.Context, arg UpdateRecordParams,tablename string) (Record, error) {
+	 updateRecord := fmt.Sprintf(`-- name: UpdateRecord :one
+	UPDATE %s
+	SET message = $4
+	WHERE target_id = $1
+	AND msg_type = $2
+	AND created_at = $3
+	RETURNING target_id, msg_type, message, images, created_at
+	`,tablename)
 	row := q.db.QueryRow(ctx, updateRecord,
 		arg.TargetID,
 		arg.MsgType,

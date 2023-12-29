@@ -70,8 +70,8 @@ class SideBar extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("名前", style: CustomTextStyles.bodyMediumblack),
-                Text("目的：", style: CustomTextStyles.bodyMediumblack),
+                Text("名前", style: CustomTextStyles.smallTitle20),
+                Text("目的：", style: CustomTextStyles.smallTitle20),
               ],
             ),
           ),
@@ -92,7 +92,7 @@ class SideBar extends StatelessWidget {
           child: SizedBox(width: 50.h, child: Divider()),
         ),
         // title
-        Text("チェックポイント", style: CustomTextStyles.bodyMediumblack),
+        Text("チェックポイント", style: CustomTextStyles.smallTitle20),
         // Link 2
         Padding(
           padding: EdgeInsets.only(top: 15.v, bottom: 15.v),

@@ -66,8 +66,8 @@ func runGrpcServer(config util.Config, inStore indb.InfoStore, chStore chdb.Chat
 	grpcLogger := grpc.UnaryInterceptor(gapi.GprcLogger)
 	grpcServer := grpc.NewServer(grpcLogger)
 
-	pb.RegisterBackendServer(grpcServer, InfoServer)
-	pb.RegisterBackendServer(grpcServer, ChatServer)
+	pb.RegisterInformationServer(grpcServer, InfoServer)
+	pb.RegisterChatServer(grpcServer, ChatServer)
 	reflection.Register(grpcServer)
 
 	listener, err := net.Listen("tcp", config.GRPCServerAddress)

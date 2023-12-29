@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $12;
+import 'google/protobuf/timestamp.pb.dart' as $14;
 
 class Accompany extends $pb.GeneratedMessage {
   factory Accompany({
@@ -26,7 +26,7 @@ class Accompany extends $pb.GeneratedMessage {
     $core.String? findTarget,
     $core.String? sociability,
     $core.bool? certification,
-    $12.Timestamp? infoChangedAt,
+    $14.Timestamp? infoChangedAt,
   }) {
     final $result = create();
     if (userID != null) {
@@ -75,7 +75,7 @@ class Accompany extends $pb.GeneratedMessage {
     ..aOS(7, _omitFieldNames ? '' : 'FindTarget', protoName: 'FindTarget')
     ..aOS(8, _omitFieldNames ? '' : 'Sociability', protoName: 'Sociability')
     ..aOB(9, _omitFieldNames ? '' : 'Certification', protoName: 'Certification')
-    ..aOM<$12.Timestamp>(10, _omitFieldNames ? '' : 'InfoChangedAt', protoName: 'InfoChangedAt', subBuilder: $12.Timestamp.create)
+    ..aOM<$14.Timestamp>(10, _omitFieldNames ? '' : 'InfoChangedAt', protoName: 'InfoChangedAt', subBuilder: $14.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -182,15 +182,15 @@ class Accompany extends $pb.GeneratedMessage {
   void clearCertification() => clearField(9);
 
   @$pb.TagNumber(10)
-  $12.Timestamp get infoChangedAt => $_getN(9);
+  $14.Timestamp get infoChangedAt => $_getN(9);
   @$pb.TagNumber(10)
-  set infoChangedAt($12.Timestamp v) { setField(10, v); }
+  set infoChangedAt($14.Timestamp v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasInfoChangedAt() => $_has(9);
   @$pb.TagNumber(10)
   void clearInfoChangedAt() => clearField(10);
   @$pb.TagNumber(10)
-  $12.Timestamp ensureInfoChangedAt() => $_ensure(9);
+  $14.Timestamp ensureInfoChangedAt() => $_ensure(9);
 }
 
 

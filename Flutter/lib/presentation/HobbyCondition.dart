@@ -1,6 +1,6 @@
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/global_variable/model.dart';
+import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/rpc_hobby.pb.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
@@ -72,7 +72,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
       sociability: hobbySociabilityController.text,
     );
 
-    final response = await GrpcService.client.createHobby(request);
+    final response = await GrpcInfoService.client.createHobby(request);
     // ignore: unnecessary_null_comparison
     if (response != null) {
       onTapNextButton(context);
@@ -325,10 +325,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
 
   Widget _buildNextPageButton(BuildContext context) {
     return CustomOutlinedButton(
-      width: mediaQueryData.size.width / 4,
-      height: mediaQueryData.size.height / 20,
       text: "条件確認",
-      buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
         createHobbyGrpcRequest(context);
       },

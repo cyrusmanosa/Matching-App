@@ -30,7 +30,7 @@ class EmailConfirmation extends StatelessWidget {
   void resetPasswordEmailGrpcRequest(BuildContext context) async {
     final request = CheckEmailRequest(email: emailController.text);
     try {
-      await GrpcService.client.checkEmail(request);
+      await GrpcInfoService.client.checkEmail(request);
       onTapNextButton(context);
     } on GrpcError catch (e) {
       if (e.code == 6) showErrorDialog(context, "このメールアドレスは登録できません。");

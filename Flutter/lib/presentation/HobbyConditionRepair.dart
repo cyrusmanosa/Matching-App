@@ -1,6 +1,6 @@
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/global_variable/model.dart';
+import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/rpc_hobby.pb.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
@@ -84,7 +84,7 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
       sociability: resetHobbySociabilityController.text,
     );
 
-    final response = await GrpcService.client.updateHobby(request);
+    final response = await GrpcInfoService.client.updateHobby(request);
     // ignore: unnecessary_null_comparison
     if (response != null) {
       onTapNextButton(context);
@@ -132,7 +132,6 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
   @override
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
-
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,

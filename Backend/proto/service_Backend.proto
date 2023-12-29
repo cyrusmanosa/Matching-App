@@ -12,8 +12,10 @@ import "rpc_hobby.proto";
 import "rpc_images.proto";
 import "rpc_lover.proto";
 import "rpc_login.proto";
+import "rpc_payment.proto";
 import "rpc_password.proto";
 import "rpc_checkEmail.proto";
+import "rpc_chatRecord.proto";
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
@@ -30,7 +32,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
     };
 };
 
-service Backend {
+service Information {
     rpc LoginUser(LoginUserRequest) returns (LoginUserResponse){
         option (google.api.http) = {
             post: "/v1/Login_User"
@@ -216,7 +218,43 @@ service Backend {
     }
     rpc UpdateImages(UpdateImagesRequest) returns (UpdateImagesResponse){
         option (google.api.http) = {
-            put: "/v1/Update_ImagesResponse"
+            put: "/v1/Update_Images"
+            body: "*"
+        };
+    }
+
+    // Payment
+
+    rpc CreatePayment(CreatePaymentRequest) returns (CreatePaymentResponse){
+        option (google.api.http) = {
+            post: "/v1/Create_Payment"
+            body: "*"
+        };
+    }
+    rpc GetPayment(GetPaymentRequest) returns (GetPaymentResponse){
+        option (google.api.http) = {
+            get: "/v1/Get_Payment"
+        };
+    }
+}
+
+/// -------- Chat --------------
+
+service Chat {
+    rpc CreateChatRecord(CreateChatRecordRequest) returns (CreateChatRecordResponse){
+        option (google.api.http) = {
+            post: "/v1/Create_ChatRecord"
+            body: "*"
+        };
+    }
+    rpc GetChatRecord(GetChatRecordRequest) returns (GetChatRecordResponse){
+        option (google.api.http) = {
+            get: "/v1/Get_ChatRecord"
+        };
+    }
+    rpc UpdateChatRecord(UpdateChatRecordRequest) returns (UpdateChatRecordResponse){
+        option (google.api.http) = {
+            put: "/v1/Update_ChatRecord"
             body: "*"
         };
     }

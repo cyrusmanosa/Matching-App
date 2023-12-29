@@ -14,10 +14,7 @@ class AppbarTitle extends StatelessWidget {
       onTap: () {
         onTap!.call();
       },
-      child: Padding(
-        padding: margin ?? EdgeInsets.zero,
-        child: Text(text),
-      ),
+      child: Padding(padding: margin ?? EdgeInsets.zero, child: Text(text)),
     );
   }
 }

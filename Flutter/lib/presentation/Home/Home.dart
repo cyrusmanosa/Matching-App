@@ -13,12 +13,7 @@ class Home extends StatelessWidget {
       child: Scaffold(
         body: Container(
           width: double.maxFinite,
-          child: Column(
-            children: [
-              _buildHeader(context),
-              Expanded(child: _buildMainFrame(context)),
-            ],
-          ),
+          child: Column(children: [_buildHeader(context), Expanded(child: _buildMainFrame(context))]),
         ),
       ),
     );
@@ -35,6 +30,7 @@ class Home extends StatelessWidget {
     );
   }
 
+// User Side Show
   Widget _buildMainFrame(BuildContext context) {
     return Column(
       children: [

@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'lover.pb.dart' as $19;
+import 'lover.pb.dart' as $22;
 
 /// Create
 class CreateLoverRequest extends $pb.GeneratedMessage {
@@ -264,7 +264,7 @@ class CreateLoverRequest extends $pb.GeneratedMessage {
 
 class CreateLoverResponse extends $pb.GeneratedMessage {
   factory CreateLoverResponse({
-    $19.Lover? l,
+    $22.Lover? l,
   }) {
     final $result = create();
     if (l != null) {
@@ -277,7 +277,7 @@ class CreateLoverResponse extends $pb.GeneratedMessage {
   factory CreateLoverResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateLoverResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$19.Lover>(1, _omitFieldNames ? '' : 'l', subBuilder: $19.Lover.create)
+    ..aOM<$22.Lover>(1, _omitFieldNames ? '' : 'l', subBuilder: $22.Lover.create)
     ..hasRequiredFields = false
   ;
 
@@ -303,15 +303,15 @@ class CreateLoverResponse extends $pb.GeneratedMessage {
   static CreateLoverResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $19.Lover get l => $_getN(0);
+  $22.Lover get l => $_getN(0);
   @$pb.TagNumber(1)
-  set l($19.Lover v) { setField(1, v); }
+  set l($22.Lover v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasL() => $_has(0);
   @$pb.TagNumber(1)
   void clearL() => clearField(1);
   @$pb.TagNumber(1)
-  $19.Lover ensureL() => $_ensure(0);
+  $22.Lover ensureL() => $_ensure(0);
 }
 
 /// Get
@@ -367,7 +367,7 @@ class GetLoverRequest extends $pb.GeneratedMessage {
 
 class GetLoverResponse extends $pb.GeneratedMessage {
   factory GetLoverResponse({
-    $19.Lover? l,
+    $22.Lover? l,
   }) {
     final $result = create();
     if (l != null) {
@@ -380,7 +380,7 @@ class GetLoverResponse extends $pb.GeneratedMessage {
   factory GetLoverResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetLoverResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$19.Lover>(1, _omitFieldNames ? '' : 'l', subBuilder: $19.Lover.create)
+    ..aOM<$22.Lover>(1, _omitFieldNames ? '' : 'l', subBuilder: $22.Lover.create)
     ..hasRequiredFields = false
   ;
 
@@ -406,15 +406,15 @@ class GetLoverResponse extends $pb.GeneratedMessage {
   static GetLoverResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $19.Lover get l => $_getN(0);
+  $22.Lover get l => $_getN(0);
   @$pb.TagNumber(1)
-  set l($19.Lover v) { setField(1, v); }
+  set l($22.Lover v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasL() => $_has(0);
   @$pb.TagNumber(1)
   void clearL() => clearField(1);
   @$pb.TagNumber(1)
-  $19.Lover ensureL() => $_ensure(0);
+  $22.Lover ensureL() => $_ensure(0);
 }
 
 /// Update
@@ -666,7 +666,7 @@ class UpdateLoverRequest extends $pb.GeneratedMessage {
 
 class UpdateLoverResponse extends $pb.GeneratedMessage {
   factory UpdateLoverResponse({
-    $19.Lover? l,
+    $22.Lover? l,
   }) {
     final $result = create();
     if (l != null) {
@@ -679,7 +679,7 @@ class UpdateLoverResponse extends $pb.GeneratedMessage {
   factory UpdateLoverResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateLoverResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$19.Lover>(1, _omitFieldNames ? '' : 'l', subBuilder: $19.Lover.create)
+    ..aOM<$22.Lover>(1, _omitFieldNames ? '' : 'l', subBuilder: $22.Lover.create)
     ..hasRequiredFields = false
   ;
 
@@ -705,15 +705,15 @@ class UpdateLoverResponse extends $pb.GeneratedMessage {
   static UpdateLoverResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $19.Lover get l => $_getN(0);
+  $22.Lover get l => $_getN(0);
   @$pb.TagNumber(1)
-  set l($19.Lover v) { setField(1, v); }
+  set l($22.Lover v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasL() => $_has(0);
   @$pb.TagNumber(1)
   void clearL() => clearField(1);
   @$pb.TagNumber(1)
-  $19.Lover ensureL() => $_ensure(0);
+  $22.Lover ensureL() => $_ensure(0);
 }
 
 

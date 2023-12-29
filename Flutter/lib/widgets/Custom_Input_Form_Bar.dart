@@ -89,7 +89,7 @@ class CustomInputFormBar extends StatelessWidget {
         fillColor: fillColor,
         filled: filled,
         hintText: hintText,
-        hintStyle: theme.textTheme.bodyMedium,
+        hintStyle: theme.textTheme.bodySmall,
         isDense: false,
         prefix: Padding(padding: EdgeInsets.only(left: 15.0)),
         prefixIconConstraints: prefixConstraints,

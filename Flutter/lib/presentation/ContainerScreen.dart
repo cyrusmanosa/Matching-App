@@ -25,10 +25,7 @@ class ContainerScreen extends StatelessWidget {
         body: Navigator(
           key: navigatorKey,
           initialRoute: AppRoutes.home,
-          onGenerateRoute: (routeSetting) => PageRouteBuilder(
-            pageBuilder: (ctx, ani, ani1) => getCurrentPage(routeSetting.name!),
-            transitionDuration: Duration(seconds: 0),
-          ),
+          onGenerateRoute: (routeSetting) => PageRouteBuilder(pageBuilder: (ctx, ani, ani1) => getCurrentPage(routeSetting.name!)),
         ),
         bottomNavigationBar: _buildBottomBar(context),
       ),
@@ -42,16 +39,16 @@ class ContainerScreen extends StatelessWidget {
     });
   }
 
-  ///Handling route based on bottom click actions
+  /// onTap to Page
   String getCurrentRoute(BottomBarEnum type) {
     switch (type) {
-      case BottomBarEnum.tf:
+      case BottomBarEnum.home:
         return AppRoutes.home;
-      case BottomBarEnum.tf1:
+      case BottomBarEnum.target:
         return AppRoutes.target;
-      case BottomBarEnum.tf2:
+      case BottomBarEnum.chat:
         return AppRoutes.chat;
-      case BottomBarEnum.tf3:
+      case BottomBarEnum.profile:
         return AppRoutes.profile;
     }
   }
@@ -67,8 +64,6 @@ class ContainerScreen extends StatelessWidget {
         return Chat();
       case AppRoutes.profile:
         return Profile();
-      case AppRoutes.chatBox:
-        return ChatBox();
       case AppRoutes.profileEdit:
         return ProfileEdit();
       case AppRoutes.accompanyConditionRepair:

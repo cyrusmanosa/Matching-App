@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $12;
+import 'google/protobuf/timestamp.pb.dart' as $14;
 
 class CreateFixRequest extends $pb.GeneratedMessage {
   factory CreateFixRequest({
@@ -139,8 +139,8 @@ class CreateFixResponse extends $pb.GeneratedMessage {
   factory CreateFixResponse({
     $core.String? sessionsID,
     $core.String? email,
-    $12.Timestamp? createAt,
-    $12.Timestamp? accessTokenExpiresAt,
+    $14.Timestamp? createAt,
+    $14.Timestamp? accessTokenExpiresAt,
   }) {
     final $result = create();
     if (sessionsID != null) {
@@ -164,8 +164,8 @@ class CreateFixResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateFixResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'SessionsID', protoName: 'SessionsID')
     ..aOS(3, _omitFieldNames ? '' : 'Email', protoName: 'Email')
-    ..aOM<$12.Timestamp>(4, _omitFieldNames ? '' : 'CreateAt', protoName: 'CreateAt', subBuilder: $12.Timestamp.create)
-    ..aOM<$12.Timestamp>(6, _omitFieldNames ? '' : 'AccessTokenExpiresAt', protoName: 'AccessTokenExpiresAt', subBuilder: $12.Timestamp.create)
+    ..aOM<$14.Timestamp>(4, _omitFieldNames ? '' : 'CreateAt', protoName: 'CreateAt', subBuilder: $14.Timestamp.create)
+    ..aOM<$14.Timestamp>(6, _omitFieldNames ? '' : 'AccessTokenExpiresAt', protoName: 'AccessTokenExpiresAt', subBuilder: $14.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -209,26 +209,26 @@ class CreateFixResponse extends $pb.GeneratedMessage {
   void clearEmail() => clearField(3);
 
   @$pb.TagNumber(4)
-  $12.Timestamp get createAt => $_getN(2);
+  $14.Timestamp get createAt => $_getN(2);
   @$pb.TagNumber(4)
-  set createAt($12.Timestamp v) { setField(4, v); }
+  set createAt($14.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasCreateAt() => $_has(2);
   @$pb.TagNumber(4)
   void clearCreateAt() => clearField(4);
   @$pb.TagNumber(4)
-  $12.Timestamp ensureCreateAt() => $_ensure(2);
+  $14.Timestamp ensureCreateAt() => $_ensure(2);
 
   @$pb.TagNumber(6)
-  $12.Timestamp get accessTokenExpiresAt => $_getN(3);
+  $14.Timestamp get accessTokenExpiresAt => $_getN(3);
   @$pb.TagNumber(6)
-  set accessTokenExpiresAt($12.Timestamp v) { setField(6, v); }
+  set accessTokenExpiresAt($14.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasAccessTokenExpiresAt() => $_has(3);
   @$pb.TagNumber(6)
   void clearAccessTokenExpiresAt() => clearField(6);
   @$pb.TagNumber(6)
-  $12.Timestamp ensureAccessTokenExpiresAt() => $_ensure(3);
+  $14.Timestamp ensureAccessTokenExpiresAt() => $_ensure(3);
 }
 
 class DelFix extends $pb.GeneratedMessage {

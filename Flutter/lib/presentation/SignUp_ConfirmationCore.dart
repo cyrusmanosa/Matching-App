@@ -33,7 +33,7 @@ class ConfirmationCore extends StatelessWidget {
   void checkCodeGrpcRequest(BuildContext context) async {
     final request = SendEmailRequest(checkCode: confirmationCoreController.text);
     try {
-      await GrpcService.client.checkEmailCode(request);
+      await GrpcInfoService.client.checkEmailCode(request);
       onTapNextButton(context);
     } on GrpcError catch (e) {
       if (e.code != 1) showErrorDialog(context, "無効的なコードです。");

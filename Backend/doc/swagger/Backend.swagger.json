@@ -11,7 +11,10 @@
   },
   "tags": [
     {
-      "name": "Backend"
+      "name": "Information"
+    },
+    {
+      "name": "Chat"
     }
   ],
   "consumes": [
@@ -23,7 +26,7 @@
   "paths": {
     "/v1/Check_Code": {
       "post": {
-        "operationId": "Backend_CheckEmailCode",
+        "operationId": "Information_CheckEmailCode",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -49,14 +52,14 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Create_Accompany": {
       "post": {
         "summary": "Accompany",
-        "operationId": "Backend_CreateAccompany",
+        "operationId": "Information_CreateAccompany",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -82,14 +85,14 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Create_CanChange": {
       "post": {
         "summary": "Can Change Information",
-        "operationId": "Backend_CreateCanChange",
+        "operationId": "Information_CreateCanChange",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -115,14 +118,14 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Create_ChangeTarget": {
       "post": {
         "summary": "Change Target",
-        "operationId": "Backend_CreateChangeTarget",
+        "operationId": "Information_CreateChangeTarget",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -148,14 +151,46 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
+        ]
+      }
+    },
+    "/v1/Create_ChatRecord": {
+      "post": {
+        "operationId": "Chat_CreateChatRecord",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbCreateChatRecordResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbCreateChatRecordRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Chat"
         ]
       }
     },
     "/v1/Create_Complaint": {
       "post": {
         "summary": "Complaint",
-        "operationId": "Backend_CreateComplaint",
+        "operationId": "Information_CreateComplaint",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -181,14 +216,14 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Create_Fix": {
       "post": {
         "summary": "Fix Information",
-        "operationId": "Backend_CreateFix",
+        "operationId": "Information_CreateFix",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -214,14 +249,14 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Create_Hobby": {
       "post": {
         "summary": "Hobby",
-        "operationId": "Backend_CreateHobby",
+        "operationId": "Information_CreateHobby",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -247,14 +282,14 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Create_Images": {
       "post": {
         "summary": "images",
-        "operationId": "Backend_CreateImages",
+        "operationId": "Information_CreateImages",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -280,14 +315,14 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Create_Lover": {
       "post": {
         "summary": "Lover",
-        "operationId": "Backend_CreateLover",
+        "operationId": "Information_CreateLover",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -313,14 +348,46 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
+        ]
+      }
+    },
+    "/v1/Create_Payment": {
+      "post": {
+        "operationId": "Information_CreatePayment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbCreatePaymentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbCreatePaymentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
         ]
       }
     },
     "/v1/Create_TargetList": {
       "post": {
         "summary": "Target List",
-        "operationId": "Backend_CreateTargetList",
+        "operationId": "Information_CreateTargetList",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -346,13 +413,13 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Get_Accompany": {
       "get": {
-        "operationId": "Backend_GetAccompany",
+        "operationId": "Information_GetAccompany",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -376,13 +443,13 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Get_CanChange": {
       "get": {
-        "operationId": "Backend_GetCanChange",
+        "operationId": "Information_GetCanChange",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -406,13 +473,13 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Get_ChangeTarget": {
       "get": {
-        "operationId": "Backend_GetChangeTarget",
+        "operationId": "Information_GetChangeTarget",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -436,13 +503,51 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
+        ]
+      }
+    },
+    "/v1/Get_ChatRecord": {
+      "get": {
+        "operationId": "Chat_GetChatRecord",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetChatRecordResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "UserID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "TargetID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Chat"
         ]
       }
     },
     "/v1/Get_Complaint": {
       "get": {
-        "operationId": "Backend_GetComplaint",
+        "operationId": "Information_GetComplaint",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -473,13 +578,13 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Get_Hobby": {
       "get": {
-        "operationId": "Backend_GetHobby",
+        "operationId": "Information_GetHobby",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -503,13 +608,13 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Get_Images": {
       "get": {
-        "operationId": "Backend_GetImages",
+        "operationId": "Information_GetImages",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -534,13 +639,13 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Get_Lover": {
       "get": {
-        "operationId": "Backend_GetLover",
+        "operationId": "Information_GetLover",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -564,13 +669,43 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
+        ]
+      }
+    },
+    "/v1/Get_Payment": {
+      "get": {
+        "operationId": "Information_GetPayment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetPaymentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "PayID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
         ]
       }
     },
     "/v1/Get_TargetList": {
       "get": {
-        "operationId": "Backend_GetTargetList",
+        "operationId": "Information_GetTargetList",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -595,13 +730,13 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Login_User": {
       "post": {
-        "operationId": "Backend_LoginUser",
+        "operationId": "Information_LoginUser",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -627,13 +762,13 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Password_Setup": {
       "put": {
-        "operationId": "Backend_InputPassword",
+        "operationId": "Information_InputPassword",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -659,13 +794,13 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Reset_Password": {
       "put": {
-        "operationId": "Backend_ResetPassword",
+        "operationId": "Information_ResetPassword",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -691,13 +826,13 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Sign_Up": {
       "post": {
-        "operationId": "Backend_CheckEmail",
+        "operationId": "Information_CheckEmail",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -723,13 +858,13 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Update_Accompany": {
       "put": {
-        "operationId": "Backend_UpdateAccompany",
+        "operationId": "Information_UpdateAccompany",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -755,13 +890,13 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Update_CanChange": {
       "put": {
-        "operationId": "Backend_UpdateCanChange",
+        "operationId": "Information_UpdateCanChange",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -787,13 +922,45 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
+        ]
+      }
+    },
+    "/v1/Update_ChatRecord": {
+      "put": {
+        "operationId": "Chat_UpdateChatRecord",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbUpdateChatRecordResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbUpdateChatRecordRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Chat"
         ]
       }
     },
     "/v1/Update_Complaint": {
       "put": {
-        "operationId": "Backend_UpdateComplaint",
+        "operationId": "Information_UpdateComplaint",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -819,13 +986,13 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Update_Hobby": {
       "put": {
-        "operationId": "Backend_UpdateHobby",
+        "operationId": "Information_UpdateHobby",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -851,13 +1018,13 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
-    "/v1/Update_ImagesResponse": {
+    "/v1/Update_Images": {
       "put": {
-        "operationId": "Backend_UpdateImages",
+        "operationId": "Information_UpdateImages",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -883,13 +1050,13 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Update_Lover": {
       "put": {
-        "operationId": "Backend_UpdateLover",
+        "operationId": "Information_UpdateLover",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -915,13 +1082,13 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     },
     "/v1/Update_TargetList": {
       "put": {
-        "operationId": "Backend_UpdateTargetList",
+        "operationId": "Information_UpdateTargetList",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -947,7 +1114,7 @@
           }
         ],
         "tags": [
-          "Backend"
+          "Information"
         ]
       }
     }
@@ -1062,6 +1229,28 @@
           "format": "int32"
         },
         "ChangeTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pbChatRecord": {
+      "type": "object",
+      "properties": {
+        "TargetID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MsgType": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "Images": {
+          "type": "string"
+        },
+        "CreatedAt": {
           "type": "string",
           "format": "date-time"
         }
@@ -1246,6 +1435,37 @@
       "properties": {
         "ct": {
           "$ref": "#/definitions/pbChangeTarget"
+        }
+      }
+    },
+    "pbCreateChatRecordRequest": {
+      "type": "object",
+      "properties": {
+        "UserID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "TargetID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MsgType": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "Images": {
+          "type": "string"
+        }
+      },
+      "title": "Create"
+    },
+    "pbCreateChatRecordResponse": {
+      "type": "object",
+      "properties": {
+        "ChatRecord": {
+          "$ref": "#/definitions/pbChatRecord"
         }
       }
     },
@@ -1472,6 +1692,32 @@
         }
       }
     },
+    "pbCreatePaymentRequest": {
+      "type": "object",
+      "properties": {
+        "SessionID": {
+          "type": "string"
+        },
+        "PaymentType": {
+          "type": "string"
+        },
+        "Amount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Product": {
+          "type": "string"
+        }
+      }
+    },
+    "pbCreatePaymentResponse": {
+      "type": "object",
+      "properties": {
+        "payment": {
+          "$ref": "#/definitions/pbPayment"
+        }
+      }
+    },
     "pbCreateTargetListRequest": {
       "type": "object",
       "properties": {
@@ -1526,6 +1772,18 @@
         }
       }
     },
+    "pbGetChatRecordResponse": {
+      "type": "object",
+      "properties": {
+        "ChatRecord": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/pbChatRecord"
+          }
+        }
+      }
+    },
     "pbGetComplaintResponse": {
       "type": "object",
       "properties": {
@@ -1555,6 +1813,14 @@
       "properties": {
         "l": {
           "$ref": "#/definitions/pbLover"
+        }
+      }
+    },
+    "pbGetPaymentResponse": {
+      "type": "object",
+      "properties": {
+        "payment": {
+          "$ref": "#/definitions/pbPayment"
         }
       }
     },
@@ -1752,6 +2018,31 @@
         }
       }
     },
+    "pbPayment": {
+      "type": "object",
+      "properties": {
+        "PayID": {
+          "type": "string"
+        },
+        "FullName": {
+          "type": "string"
+        },
+        "PaymentType": {
+          "type": "string"
+        },
+        "Amount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Product": {
+          "type": "string"
+        },
+        "PayAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "pbResetPasswordRequest": {
       "type": "object",
       "properties": {
@@ -1903,6 +2194,38 @@
       "properties": {
         "CanChangeInfo": {
           "$ref": "#/definitions/pbCanChange"
+        }
+      }
+    },
+    "pbUpdateChatRecordRequest": {
+      "type": "object",
+      "properties": {
+        "UserID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "TargetID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MsgType": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "CreateAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "Update"
+    },
+    "pbUpdateChatRecordResponse": {
+      "type": "object",
+      "properties": {
+        "ChatRecord": {
+          "$ref": "#/definitions/pbChatRecord"
         }
       }
     },

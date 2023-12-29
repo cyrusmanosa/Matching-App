@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'complaint.pb.dart' as $16;
+import 'complaint.pb.dart' as $19;
 
 /// Create
 class CreateComplaintRequest extends $pb.GeneratedMessage {
@@ -110,7 +110,7 @@ class CreateComplaintRequest extends $pb.GeneratedMessage {
 
 class CreateComplaintResponse extends $pb.GeneratedMessage {
   factory CreateComplaintResponse({
-    $16.Complaint? cp,
+    $19.Complaint? cp,
   }) {
     final $result = create();
     if (cp != null) {
@@ -123,7 +123,7 @@ class CreateComplaintResponse extends $pb.GeneratedMessage {
   factory CreateComplaintResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateComplaintResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$16.Complaint>(1, _omitFieldNames ? '' : 'cp', subBuilder: $16.Complaint.create)
+    ..aOM<$19.Complaint>(1, _omitFieldNames ? '' : 'cp', subBuilder: $19.Complaint.create)
     ..hasRequiredFields = false
   ;
 
@@ -149,15 +149,15 @@ class CreateComplaintResponse extends $pb.GeneratedMessage {
   static CreateComplaintResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $16.Complaint get cp => $_getN(0);
+  $19.Complaint get cp => $_getN(0);
   @$pb.TagNumber(1)
-  set cp($16.Complaint v) { setField(1, v); }
+  set cp($19.Complaint v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasCp() => $_has(0);
   @$pb.TagNumber(1)
   void clearCp() => clearField(1);
   @$pb.TagNumber(1)
-  $16.Complaint ensureCp() => $_ensure(0);
+  $19.Complaint ensureCp() => $_ensure(0);
 }
 
 /// Get
@@ -227,7 +227,7 @@ class GetComplaintRequest extends $pb.GeneratedMessage {
 
 class GetComplaintResponse extends $pb.GeneratedMessage {
   factory GetComplaintResponse({
-    $16.Complaint? cp,
+    $19.Complaint? cp,
   }) {
     final $result = create();
     if (cp != null) {
@@ -240,7 +240,7 @@ class GetComplaintResponse extends $pb.GeneratedMessage {
   factory GetComplaintResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetComplaintResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$16.Complaint>(1, _omitFieldNames ? '' : 'cp', subBuilder: $16.Complaint.create)
+    ..aOM<$19.Complaint>(1, _omitFieldNames ? '' : 'cp', subBuilder: $19.Complaint.create)
     ..hasRequiredFields = false
   ;
 
@@ -266,15 +266,15 @@ class GetComplaintResponse extends $pb.GeneratedMessage {
   static GetComplaintResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $16.Complaint get cp => $_getN(0);
+  $19.Complaint get cp => $_getN(0);
   @$pb.TagNumber(1)
-  set cp($16.Complaint v) { setField(1, v); }
+  set cp($19.Complaint v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasCp() => $_has(0);
   @$pb.TagNumber(1)
   void clearCp() => clearField(1);
   @$pb.TagNumber(1)
-  $16.Complaint ensureCp() => $_ensure(0);
+  $19.Complaint ensureCp() => $_ensure(0);
 }
 
 /// Update
@@ -358,7 +358,7 @@ class UpdateComplaintRequest extends $pb.GeneratedMessage {
 
 class UpdateComplaintResponse extends $pb.GeneratedMessage {
   factory UpdateComplaintResponse({
-    $16.Complaint? cp,
+    $19.Complaint? cp,
   }) {
     final $result = create();
     if (cp != null) {
@@ -371,7 +371,7 @@ class UpdateComplaintResponse extends $pb.GeneratedMessage {
   factory UpdateComplaintResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateComplaintResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$16.Complaint>(1, _omitFieldNames ? '' : 'cp', subBuilder: $16.Complaint.create)
+    ..aOM<$19.Complaint>(1, _omitFieldNames ? '' : 'cp', subBuilder: $19.Complaint.create)
     ..hasRequiredFields = false
   ;
 
@@ -397,15 +397,15 @@ class UpdateComplaintResponse extends $pb.GeneratedMessage {
   static UpdateComplaintResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $16.Complaint get cp => $_getN(0);
+  $19.Complaint get cp => $_getN(0);
   @$pb.TagNumber(1)
-  set cp($16.Complaint v) { setField(1, v); }
+  set cp($19.Complaint v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasCp() => $_has(0);
   @$pb.TagNumber(1)
   void clearCp() => clearField(1);
   @$pb.TagNumber(1)
-  $16.Complaint ensureCp() => $_ensure(0);
+  $19.Complaint ensureCp() => $_ensure(0);
 }
 
 

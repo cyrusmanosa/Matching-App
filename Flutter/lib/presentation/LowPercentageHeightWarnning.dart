@@ -36,7 +36,7 @@ class LowPercentageHeightWarnning extends StatelessWidget {
                   maxLines: 4,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
-                  style: CustomTextStyles.headlineMediumblack,
+                  style: theme.textTheme.headlineSmall,
                 ),
               ),
               SizedBox(height: mediaQueryData.size.height / 25),

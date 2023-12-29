@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/global_variable/model.dart';
+import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/rpc_password.pb.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
@@ -41,7 +41,7 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
       sessionID: globalSessionID,
       password: newPasswordSetupController.text,
     );
-    final response = await GrpcService.client.resetPassword(request);
+    final response = await GrpcInfoService.client.resetPassword(request);
     // ignore: unnecessary_null_comparison
     if (response != null) {
       onTapNextButton(context);

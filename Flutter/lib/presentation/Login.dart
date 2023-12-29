@@ -7,7 +7,7 @@ import 'package:dating_your_date/widgets/custom_elevated_button.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
-import 'package:dating_your_date/global_variable/model.dart';
+import 'package:dating_your_date/models/model.dart';
 import 'package:grpc/grpc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -37,7 +37,7 @@ class _LoginState extends State<Login> {
   void loginUser(BuildContext context) async {
     final request = LoginUserRequest(email: emailController.text, password: passwordController.text);
     try {
-      final loginResponse = await GrpcService.client.loginUser(request);
+      final loginResponse = await GrpcInfoService.client.loginUser(request);
       globalSessionID = loginResponse.sessionsID;
       print(_formKey);
       onTapLoginButton(context);
@@ -140,7 +140,7 @@ class _LoginState extends State<Login> {
                           child: SizedBox(width: mediaQueryData.size.width / 3.5, child: Divider()),
                         ),
                         // Word
-                        Text("または", style: theme.textTheme.titleLarge),
+                        Text("または", style: theme.textTheme.titleMedium),
                         // line 2
                         Padding(
                           padding: EdgeInsets.only(top: 10, bottom: 10, left: 10),
@@ -154,7 +154,7 @@ class _LoginState extends State<Login> {
                     CustomElevatedButton(
                       text: "メールアドレスで登録",
                       buttonStyle: CustomButtonStyles.fillPink,
-                      buttonTextStyle: CustomTextStyles.bodyMediumOnPrimary,
+                      buttonTextStyle: CustomTextStyles.outlineWhiteWordButton,
                       onPressed: () {
                         onTapEmailSignUpButton(context);
                       },
@@ -169,7 +169,7 @@ class _LoginState extends State<Login> {
                         child: CustomImageView(imagePath: ImageConstant.imgLogosfacebook, width: mediaQueryData.size.width / 23),
                       ),
                       buttonStyle: CustomButtonStyles.fillBlue,
-                      buttonTextStyle: CustomTextStyles.bodyMediumOnPrimary,
+                      buttonTextStyle: CustomTextStyles.outlineWhiteWordButton,
                     ),
                     SizedBox(height: mediaQueryData.size.height / 50),
 
@@ -181,7 +181,7 @@ class _LoginState extends State<Login> {
                         child: CustomImageView(imagePath: ImageConstant.imgClose, width: mediaQueryData.size.width / 14),
                       ),
                       buttonStyle: CustomButtonStyles.fillDarkGray,
-                      buttonTextStyle: CustomTextStyles.bodyMediumOnPrimary,
+                      buttonTextStyle: CustomTextStyles.outlineWhiteWordButton,
                     ),
                     SizedBox(height: mediaQueryData.size.height / 50),
 
@@ -192,8 +192,8 @@ class _LoginState extends State<Login> {
                         margin: EdgeInsets.only(right: mediaQueryData.size.width / 15),
                         child: CustomImageView(imagePath: ImageConstant.imgDevicongoogle, width: mediaQueryData.size.width / 13),
                       ),
-                      buttonStyle: CustomButtonStyles.outlineGrayWhiteBG,
-                      buttonTextStyle: CustomTextStyles.bodyMediumgray800,
+                      buttonStyle: CustomButtonStyles.outlineGoogleButton,
+                      buttonTextStyle: theme.textTheme.displaySmall,
                     ),
                   ],
                 ),

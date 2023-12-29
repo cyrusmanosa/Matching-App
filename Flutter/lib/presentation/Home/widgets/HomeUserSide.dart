@@ -14,8 +14,8 @@ class MainframeItemWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("観賞回数：", style: CustomTextStyles.bodyMediumblack),
-              Text("０", style: CustomTextStyles.bodyMediumblack),
+              Text("観賞回数：", style: CustomTextStyles.smallTitle20),
+              Text("０", style: CustomTextStyles.smallTitle20),
             ],
           ),
           Container(

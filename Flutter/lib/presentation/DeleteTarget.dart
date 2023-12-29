@@ -27,9 +27,7 @@ class DeleteTarget extends StatelessWidget {
 
               // Button
               CustomOutlinedButton(
-                width: 150.h,
                 text: "削除",
-                buttonStyle: CustomButtonStyles.outlinePinkGrayBG,
                 onPressed: () {
                   onTapNextButton(context);
                 },

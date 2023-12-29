@@ -14,7 +14,7 @@ message CreateImagesRequest {
     string Img2 = 4;
     string Img3 = 5;
     string Img4 = 6;
-    string Img5 = 7;
+    string Icon = 7;
 }
 message CreateImagesResponse {
     Images img = 1;
@@ -37,7 +37,7 @@ message UpdateImagesRequest {
     string Img2 = 4;
     string Img3 = 5;
     string Img4 = 6;
-    string Img5 = 7;
+    string Icon = 7;
 }
 message UpdateImagesResponse {
     Images img = 1;

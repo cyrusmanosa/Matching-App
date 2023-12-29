@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $12;
+import 'google/protobuf/timestamp.pb.dart' as $14;
 
 class Complaint extends $pb.GeneratedMessage {
   factory Complaint({
@@ -23,7 +23,7 @@ class Complaint extends $pb.GeneratedMessage {
     $core.String? cpType,
     $core.String? cpMessage,
     $core.String? status,
-    $12.Timestamp? complaintTime,
+    $14.Timestamp? complaintTime,
   }) {
     final $result = create();
     if (cpID != null) {
@@ -60,7 +60,7 @@ class Complaint extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'CpType', protoName: 'CpType')
     ..aOS(5, _omitFieldNames ? '' : 'CpMessage', protoName: 'CpMessage')
     ..aOS(6, _omitFieldNames ? '' : 'Status', protoName: 'Status')
-    ..aOM<$12.Timestamp>(7, _omitFieldNames ? '' : 'ComplaintTime', protoName: 'ComplaintTime', subBuilder: $12.Timestamp.create)
+    ..aOM<$14.Timestamp>(7, _omitFieldNames ? '' : 'ComplaintTime', protoName: 'ComplaintTime', subBuilder: $14.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -140,15 +140,15 @@ class Complaint extends $pb.GeneratedMessage {
   void clearStatus() => clearField(6);
 
   @$pb.TagNumber(7)
-  $12.Timestamp get complaintTime => $_getN(6);
+  $14.Timestamp get complaintTime => $_getN(6);
   @$pb.TagNumber(7)
-  set complaintTime($12.Timestamp v) { setField(7, v); }
+  set complaintTime($14.Timestamp v) { setField(7, v); }
   @$pb.TagNumber(7)
   $core.bool hasComplaintTime() => $_has(6);
   @$pb.TagNumber(7)
   void clearComplaintTime() => clearField(7);
   @$pb.TagNumber(7)
-  $12.Timestamp ensureComplaintTime() => $_ensure(6);
+  $14.Timestamp ensureComplaintTime() => $_ensure(6);
 }
 
 

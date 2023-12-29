@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package pb;
+
+import "chatRecord.proto";
+import "google/protobuf/timestamp.proto";
+
+
+option go_package = "Backend/pb";
+
+// Create
+message CreateChatRecordRequest {
+    int32 UserID = 1;
+    int32 TargetID = 2;
+    string MsgType = 3;
+    string Message = 4;
+    string Images = 5;
+}
+
+message CreateChatRecordResponse {
+    ChatRecord ChatRecord = 1;
+}
+
+// Get
+message GetChatRecordRequest {
+    int32 UserID = 1;
+    int32 TargetID = 2;
+}
+
+message GetChatRecordResponse {
+    repeated ChatRecord ChatRecord = 1;
+}
+
+
+// Update
+message UpdateChatRecordRequest {
+    int32 UserID = 1;
+    int32 TargetID = 2;
+    string MsgType = 3;
+    string Message = 4;
+    google.protobuf.Timestamp CreateAt = 5;
+}
+
+message UpdateChatRecordResponse {
+    ChatRecord ChatRecord = 1;
+}

@@ -7,19 +7,17 @@ class Target extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
     return SafeArea(
       child: Scaffold(
         body: Container(
           width: double.maxFinite,
-          decoration: AppDecoration.fillPrimary,
           child: Column(
             children: [
               _buildHeader(context),
               SizedBox(height: mediaQueryData.size.height / 30),
 
               // title
-              Text("探すターゲットの種類", style: CustomTextStyles.headlineMediumblack),
+              Text("探すターゲットの種類", style: theme.textTheme.headlineSmall),
               SizedBox(height: mediaQueryData.size.height / 30),
               _buildTargetResetList(context)
             ],

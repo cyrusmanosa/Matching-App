@@ -1,4 +1,4 @@
--- name: InsertRecord :one
+-- name: CreateRecord :one
 INSERT INTO "record" (
     target_id,
     msg_type,

@@ -19,41 +19,43 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Backend_LoginUser_FullMethodName          = "/pb.Backend/LoginUser"
-	Backend_CheckEmail_FullMethodName         = "/pb.Backend/CheckEmail"
-	Backend_CheckEmailCode_FullMethodName     = "/pb.Backend/CheckEmailCode"
-	Backend_InputPassword_FullMethodName      = "/pb.Backend/InputPassword"
-	Backend_ResetPassword_FullMethodName      = "/pb.Backend/ResetPassword"
-	Backend_CreateFix_FullMethodName          = "/pb.Backend/CreateFix"
-	Backend_CreateCanChange_FullMethodName    = "/pb.Backend/CreateCanChange"
-	Backend_GetCanChange_FullMethodName       = "/pb.Backend/GetCanChange"
-	Backend_UpdateCanChange_FullMethodName    = "/pb.Backend/UpdateCanChange"
-	Backend_CreateAccompany_FullMethodName    = "/pb.Backend/CreateAccompany"
-	Backend_GetAccompany_FullMethodName       = "/pb.Backend/GetAccompany"
-	Backend_UpdateAccompany_FullMethodName    = "/pb.Backend/UpdateAccompany"
-	Backend_CreateHobby_FullMethodName        = "/pb.Backend/CreateHobby"
-	Backend_GetHobby_FullMethodName           = "/pb.Backend/GetHobby"
-	Backend_UpdateHobby_FullMethodName        = "/pb.Backend/UpdateHobby"
-	Backend_CreateLover_FullMethodName        = "/pb.Backend/CreateLover"
-	Backend_GetLover_FullMethodName           = "/pb.Backend/GetLover"
-	Backend_UpdateLover_FullMethodName        = "/pb.Backend/UpdateLover"
-	Backend_CreateComplaint_FullMethodName    = "/pb.Backend/CreateComplaint"
-	Backend_GetComplaint_FullMethodName       = "/pb.Backend/GetComplaint"
-	Backend_UpdateComplaint_FullMethodName    = "/pb.Backend/UpdateComplaint"
-	Backend_CreateTargetList_FullMethodName   = "/pb.Backend/CreateTargetList"
-	Backend_GetTargetList_FullMethodName      = "/pb.Backend/GetTargetList"
-	Backend_UpdateTargetList_FullMethodName   = "/pb.Backend/UpdateTargetList"
-	Backend_CreateChangeTarget_FullMethodName = "/pb.Backend/CreateChangeTarget"
-	Backend_GetChangeTarget_FullMethodName    = "/pb.Backend/GetChangeTarget"
-	Backend_CreateImages_FullMethodName       = "/pb.Backend/CreateImages"
-	Backend_GetImages_FullMethodName          = "/pb.Backend/GetImages"
-	Backend_UpdateImages_FullMethodName       = "/pb.Backend/UpdateImages"
+	Information_LoginUser_FullMethodName          = "/pb.Information/LoginUser"
+	Information_CheckEmail_FullMethodName         = "/pb.Information/CheckEmail"
+	Information_CheckEmailCode_FullMethodName     = "/pb.Information/CheckEmailCode"
+	Information_InputPassword_FullMethodName      = "/pb.Information/InputPassword"
+	Information_ResetPassword_FullMethodName      = "/pb.Information/ResetPassword"
+	Information_CreateFix_FullMethodName          = "/pb.Information/CreateFix"
+	Information_CreateCanChange_FullMethodName    = "/pb.Information/CreateCanChange"
+	Information_GetCanChange_FullMethodName       = "/pb.Information/GetCanChange"
+	Information_UpdateCanChange_FullMethodName    = "/pb.Information/UpdateCanChange"
+	Information_CreateAccompany_FullMethodName    = "/pb.Information/CreateAccompany"
+	Information_GetAccompany_FullMethodName       = "/pb.Information/GetAccompany"
+	Information_UpdateAccompany_FullMethodName    = "/pb.Information/UpdateAccompany"
+	Information_CreateHobby_FullMethodName        = "/pb.Information/CreateHobby"
+	Information_GetHobby_FullMethodName           = "/pb.Information/GetHobby"
+	Information_UpdateHobby_FullMethodName        = "/pb.Information/UpdateHobby"
+	Information_CreateLover_FullMethodName        = "/pb.Information/CreateLover"
+	Information_GetLover_FullMethodName           = "/pb.Information/GetLover"
+	Information_UpdateLover_FullMethodName        = "/pb.Information/UpdateLover"
+	Information_CreateComplaint_FullMethodName    = "/pb.Information/CreateComplaint"
+	Information_GetComplaint_FullMethodName       = "/pb.Information/GetComplaint"
+	Information_UpdateComplaint_FullMethodName    = "/pb.Information/UpdateComplaint"
+	Information_CreateTargetList_FullMethodName   = "/pb.Information/CreateTargetList"
+	Information_GetTargetList_FullMethodName      = "/pb.Information/GetTargetList"
+	Information_UpdateTargetList_FullMethodName   = "/pb.Information/UpdateTargetList"
+	Information_CreateChangeTarget_FullMethodName = "/pb.Information/CreateChangeTarget"
+	Information_GetChangeTarget_FullMethodName    = "/pb.Information/GetChangeTarget"
+	Information_CreateImages_FullMethodName       = "/pb.Information/CreateImages"
+	Information_GetImages_FullMethodName          = "/pb.Information/GetImages"
+	Information_UpdateImages_FullMethodName       = "/pb.Information/UpdateImages"
+	Information_CreatePayment_FullMethodName      = "/pb.Information/CreatePayment"
+	Information_GetPayment_FullMethodName         = "/pb.Information/GetPayment"
 )
 
-// BackendClient is the client API for Backend service.
+// InformationClient is the client API for Information service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type BackendClient interface {
+type InformationClient interface {
 	LoginUser(ctx context.Context, in *LoginUserRequest, opts ...grpc.CallOption) (*LoginUserResponse, error)
 	CheckEmail(ctx context.Context, in *CheckEmailRequest, opts ...grpc.CallOption) (*CheckEmailResponse, error)
 	CheckEmailCode(ctx context.Context, in *SendEmailRequest, opts ...grpc.CallOption) (*CheckedEmailResponse, error)
@@ -92,281 +94,301 @@ type BackendClient interface {
 	CreateImages(ctx context.Context, in *CreateImagesRequest, opts ...grpc.CallOption) (*CreateImagesResponse, error)
 	GetImages(ctx context.Context, in *GetImagesRequest, opts ...grpc.CallOption) (*GetImagesResponse, error)
 	UpdateImages(ctx context.Context, in *UpdateImagesRequest, opts ...grpc.CallOption) (*UpdateImagesResponse, error)
+	CreatePayment(ctx context.Context, in *CreatePaymentRequest, opts ...grpc.CallOption) (*CreatePaymentResponse, error)
+	GetPayment(ctx context.Context, in *GetPaymentRequest, opts ...grpc.CallOption) (*GetPaymentResponse, error)
 }
 
-type backendClient struct {
+type informationClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewBackendClient(cc grpc.ClientConnInterface) BackendClient {
-	return &backendClient{cc}
+func NewInformationClient(cc grpc.ClientConnInterface) InformationClient {
+	return &informationClient{cc}
 }
 
-func (c *backendClient) LoginUser(ctx context.Context, in *LoginUserRequest, opts ...grpc.CallOption) (*LoginUserResponse, error) {
+func (c *informationClient) LoginUser(ctx context.Context, in *LoginUserRequest, opts ...grpc.CallOption) (*LoginUserResponse, error) {
 	out := new(LoginUserResponse)
-	err := c.cc.Invoke(ctx, Backend_LoginUser_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_LoginUser_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) CheckEmail(ctx context.Context, in *CheckEmailRequest, opts ...grpc.CallOption) (*CheckEmailResponse, error) {
+func (c *informationClient) CheckEmail(ctx context.Context, in *CheckEmailRequest, opts ...grpc.CallOption) (*CheckEmailResponse, error) {
 	out := new(CheckEmailResponse)
-	err := c.cc.Invoke(ctx, Backend_CheckEmail_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_CheckEmail_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) CheckEmailCode(ctx context.Context, in *SendEmailRequest, opts ...grpc.CallOption) (*CheckedEmailResponse, error) {
+func (c *informationClient) CheckEmailCode(ctx context.Context, in *SendEmailRequest, opts ...grpc.CallOption) (*CheckedEmailResponse, error) {
 	out := new(CheckedEmailResponse)
-	err := c.cc.Invoke(ctx, Backend_CheckEmailCode_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_CheckEmailCode_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) InputPassword(ctx context.Context, in *InputPasswordRequest, opts ...grpc.CallOption) (*InputPasswordResponse, error) {
+func (c *informationClient) InputPassword(ctx context.Context, in *InputPasswordRequest, opts ...grpc.CallOption) (*InputPasswordResponse, error) {
 	out := new(InputPasswordResponse)
-	err := c.cc.Invoke(ctx, Backend_InputPassword_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_InputPassword_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) ResetPassword(ctx context.Context, in *ResetPasswordRequest, opts ...grpc.CallOption) (*ResetPasswordResponse, error) {
+func (c *informationClient) ResetPassword(ctx context.Context, in *ResetPasswordRequest, opts ...grpc.CallOption) (*ResetPasswordResponse, error) {
 	out := new(ResetPasswordResponse)
-	err := c.cc.Invoke(ctx, Backend_ResetPassword_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_ResetPassword_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) CreateFix(ctx context.Context, in *CreateFixRequest, opts ...grpc.CallOption) (*CreateFixResponse, error) {
+func (c *informationClient) CreateFix(ctx context.Context, in *CreateFixRequest, opts ...grpc.CallOption) (*CreateFixResponse, error) {
 	out := new(CreateFixResponse)
-	err := c.cc.Invoke(ctx, Backend_CreateFix_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_CreateFix_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) CreateCanChange(ctx context.Context, in *CreateCanChangeRequest, opts ...grpc.CallOption) (*CreateCanChangeResponse, error) {
+func (c *informationClient) CreateCanChange(ctx context.Context, in *CreateCanChangeRequest, opts ...grpc.CallOption) (*CreateCanChangeResponse, error) {
 	out := new(CreateCanChangeResponse)
-	err := c.cc.Invoke(ctx, Backend_CreateCanChange_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_CreateCanChange_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) GetCanChange(ctx context.Context, in *GetCanChangeRequest, opts ...grpc.CallOption) (*GetCanChangeResponse, error) {
+func (c *informationClient) GetCanChange(ctx context.Context, in *GetCanChangeRequest, opts ...grpc.CallOption) (*GetCanChangeResponse, error) {
 	out := new(GetCanChangeResponse)
-	err := c.cc.Invoke(ctx, Backend_GetCanChange_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_GetCanChange_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) UpdateCanChange(ctx context.Context, in *UpdateCanChangeRequest, opts ...grpc.CallOption) (*UpdateCanChangeResponse, error) {
+func (c *informationClient) UpdateCanChange(ctx context.Context, in *UpdateCanChangeRequest, opts ...grpc.CallOption) (*UpdateCanChangeResponse, error) {
 	out := new(UpdateCanChangeResponse)
-	err := c.cc.Invoke(ctx, Backend_UpdateCanChange_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_UpdateCanChange_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) CreateAccompany(ctx context.Context, in *CreateAccompanyRequest, opts ...grpc.CallOption) (*CreateAccompanyResponse, error) {
+func (c *informationClient) CreateAccompany(ctx context.Context, in *CreateAccompanyRequest, opts ...grpc.CallOption) (*CreateAccompanyResponse, error) {
 	out := new(CreateAccompanyResponse)
-	err := c.cc.Invoke(ctx, Backend_CreateAccompany_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_CreateAccompany_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) GetAccompany(ctx context.Context, in *GetAccompanyRequest, opts ...grpc.CallOption) (*GetAccompanyResponse, error) {
+func (c *informationClient) GetAccompany(ctx context.Context, in *GetAccompanyRequest, opts ...grpc.CallOption) (*GetAccompanyResponse, error) {
 	out := new(GetAccompanyResponse)
-	err := c.cc.Invoke(ctx, Backend_GetAccompany_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_GetAccompany_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) UpdateAccompany(ctx context.Context, in *UpdateAccompanyRequest, opts ...grpc.CallOption) (*UpdateAccompanyResponse, error) {
+func (c *informationClient) UpdateAccompany(ctx context.Context, in *UpdateAccompanyRequest, opts ...grpc.CallOption) (*UpdateAccompanyResponse, error) {
 	out := new(UpdateAccompanyResponse)
-	err := c.cc.Invoke(ctx, Backend_UpdateAccompany_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_UpdateAccompany_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) CreateHobby(ctx context.Context, in *CreateHobbyRequest, opts ...grpc.CallOption) (*CreateHobbyResponse, error) {
+func (c *informationClient) CreateHobby(ctx context.Context, in *CreateHobbyRequest, opts ...grpc.CallOption) (*CreateHobbyResponse, error) {
 	out := new(CreateHobbyResponse)
-	err := c.cc.Invoke(ctx, Backend_CreateHobby_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_CreateHobby_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) GetHobby(ctx context.Context, in *GetHobbyRequest, opts ...grpc.CallOption) (*GetHobbyResponse, error) {
+func (c *informationClient) GetHobby(ctx context.Context, in *GetHobbyRequest, opts ...grpc.CallOption) (*GetHobbyResponse, error) {
 	out := new(GetHobbyResponse)
-	err := c.cc.Invoke(ctx, Backend_GetHobby_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_GetHobby_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) UpdateHobby(ctx context.Context, in *UpdateHobbyRequest, opts ...grpc.CallOption) (*UpdateHobbyResponse, error) {
+func (c *informationClient) UpdateHobby(ctx context.Context, in *UpdateHobbyRequest, opts ...grpc.CallOption) (*UpdateHobbyResponse, error) {
 	out := new(UpdateHobbyResponse)
-	err := c.cc.Invoke(ctx, Backend_UpdateHobby_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_UpdateHobby_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) CreateLover(ctx context.Context, in *CreateLoverRequest, opts ...grpc.CallOption) (*CreateLoverResponse, error) {
+func (c *informationClient) CreateLover(ctx context.Context, in *CreateLoverRequest, opts ...grpc.CallOption) (*CreateLoverResponse, error) {
 	out := new(CreateLoverResponse)
-	err := c.cc.Invoke(ctx, Backend_CreateLover_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_CreateLover_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) GetLover(ctx context.Context, in *GetLoverRequest, opts ...grpc.CallOption) (*GetLoverResponse, error) {
+func (c *informationClient) GetLover(ctx context.Context, in *GetLoverRequest, opts ...grpc.CallOption) (*GetLoverResponse, error) {
 	out := new(GetLoverResponse)
-	err := c.cc.Invoke(ctx, Backend_GetLover_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_GetLover_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) UpdateLover(ctx context.Context, in *UpdateLoverRequest, opts ...grpc.CallOption) (*UpdateLoverResponse, error) {
+func (c *informationClient) UpdateLover(ctx context.Context, in *UpdateLoverRequest, opts ...grpc.CallOption) (*UpdateLoverResponse, error) {
 	out := new(UpdateLoverResponse)
-	err := c.cc.Invoke(ctx, Backend_UpdateLover_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_UpdateLover_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) CreateComplaint(ctx context.Context, in *CreateComplaintRequest, opts ...grpc.CallOption) (*CreateComplaintResponse, error) {
+func (c *informationClient) CreateComplaint(ctx context.Context, in *CreateComplaintRequest, opts ...grpc.CallOption) (*CreateComplaintResponse, error) {
 	out := new(CreateComplaintResponse)
-	err := c.cc.Invoke(ctx, Backend_CreateComplaint_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_CreateComplaint_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) GetComplaint(ctx context.Context, in *GetComplaintRequest, opts ...grpc.CallOption) (*GetComplaintResponse, error) {
+func (c *informationClient) GetComplaint(ctx context.Context, in *GetComplaintRequest, opts ...grpc.CallOption) (*GetComplaintResponse, error) {
 	out := new(GetComplaintResponse)
-	err := c.cc.Invoke(ctx, Backend_GetComplaint_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_GetComplaint_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) UpdateComplaint(ctx context.Context, in *UpdateComplaintRequest, opts ...grpc.CallOption) (*UpdateComplaintResponse, error) {
+func (c *informationClient) UpdateComplaint(ctx context.Context, in *UpdateComplaintRequest, opts ...grpc.CallOption) (*UpdateComplaintResponse, error) {
 	out := new(UpdateComplaintResponse)
-	err := c.cc.Invoke(ctx, Backend_UpdateComplaint_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_UpdateComplaint_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) CreateTargetList(ctx context.Context, in *CreateTargetListRequest, opts ...grpc.CallOption) (*CreateTargetListResponse, error) {
+func (c *informationClient) CreateTargetList(ctx context.Context, in *CreateTargetListRequest, opts ...grpc.CallOption) (*CreateTargetListResponse, error) {
 	out := new(CreateTargetListResponse)
-	err := c.cc.Invoke(ctx, Backend_CreateTargetList_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_CreateTargetList_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) GetTargetList(ctx context.Context, in *GetTargetListRequest, opts ...grpc.CallOption) (*GetTargetListResponse, error) {
+func (c *informationClient) GetTargetList(ctx context.Context, in *GetTargetListRequest, opts ...grpc.CallOption) (*GetTargetListResponse, error) {
 	out := new(GetTargetListResponse)
-	err := c.cc.Invoke(ctx, Backend_GetTargetList_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_GetTargetList_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) UpdateTargetList(ctx context.Context, in *UpdateTargetListRequest, opts ...grpc.CallOption) (*UpdateTargetListResponse, error) {
+func (c *informationClient) UpdateTargetList(ctx context.Context, in *UpdateTargetListRequest, opts ...grpc.CallOption) (*UpdateTargetListResponse, error) {
 	out := new(UpdateTargetListResponse)
-	err := c.cc.Invoke(ctx, Backend_UpdateTargetList_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_UpdateTargetList_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) CreateChangeTarget(ctx context.Context, in *CreateChangeTargetRequest, opts ...grpc.CallOption) (*CreateChangeTargetResponse, error) {
+func (c *informationClient) CreateChangeTarget(ctx context.Context, in *CreateChangeTargetRequest, opts ...grpc.CallOption) (*CreateChangeTargetResponse, error) {
 	out := new(CreateChangeTargetResponse)
-	err := c.cc.Invoke(ctx, Backend_CreateChangeTarget_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_CreateChangeTarget_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) GetChangeTarget(ctx context.Context, in *GetChangeTargetRequest, opts ...grpc.CallOption) (*GetChangeTargetResponse, error) {
+func (c *informationClient) GetChangeTarget(ctx context.Context, in *GetChangeTargetRequest, opts ...grpc.CallOption) (*GetChangeTargetResponse, error) {
 	out := new(GetChangeTargetResponse)
-	err := c.cc.Invoke(ctx, Backend_GetChangeTarget_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_GetChangeTarget_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) CreateImages(ctx context.Context, in *CreateImagesRequest, opts ...grpc.CallOption) (*CreateImagesResponse, error) {
+func (c *informationClient) CreateImages(ctx context.Context, in *CreateImagesRequest, opts ...grpc.CallOption) (*CreateImagesResponse, error) {
 	out := new(CreateImagesResponse)
-	err := c.cc.Invoke(ctx, Backend_CreateImages_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_CreateImages_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) GetImages(ctx context.Context, in *GetImagesRequest, opts ...grpc.CallOption) (*GetImagesResponse, error) {
+func (c *informationClient) GetImages(ctx context.Context, in *GetImagesRequest, opts ...grpc.CallOption) (*GetImagesResponse, error) {
 	out := new(GetImagesResponse)
-	err := c.cc.Invoke(ctx, Backend_GetImages_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_GetImages_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *backendClient) UpdateImages(ctx context.Context, in *UpdateImagesRequest, opts ...grpc.CallOption) (*UpdateImagesResponse, error) {
+func (c *informationClient) UpdateImages(ctx context.Context, in *UpdateImagesRequest, opts ...grpc.CallOption) (*UpdateImagesResponse, error) {
 	out := new(UpdateImagesResponse)
-	err := c.cc.Invoke(ctx, Backend_UpdateImages_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_UpdateImages_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// BackendServer is the server API for Backend service.
-// All implementations must embed UnimplementedBackendServer
+func (c *informationClient) CreatePayment(ctx context.Context, in *CreatePaymentRequest, opts ...grpc.CallOption) (*CreatePaymentResponse, error) {
+	out := new(CreatePaymentResponse)
+	err := c.cc.Invoke(ctx, Information_CreatePayment_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *informationClient) GetPayment(ctx context.Context, in *GetPaymentRequest, opts ...grpc.CallOption) (*GetPaymentResponse, error) {
+	out := new(GetPaymentResponse)
+	err := c.cc.Invoke(ctx, Information_GetPayment_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// InformationServer is the server API for Information service.
+// All implementations must embed UnimplementedInformationServer
 // for forward compatibility
-type BackendServer interface {
+type InformationServer interface {
 	LoginUser(context.Context, *LoginUserRequest) (*LoginUserResponse, error)
 	CheckEmail(context.Context, *CheckEmailRequest) (*CheckEmailResponse, error)
 	CheckEmailCode(context.Context, *SendEmailRequest) (*CheckedEmailResponse, error)
@@ -405,757 +427,973 @@ type BackendServer interface {
 	CreateImages(context.Context, *CreateImagesRequest) (*CreateImagesResponse, error)
 	GetImages(context.Context, *GetImagesRequest) (*GetImagesResponse, error)
 	UpdateImages(context.Context, *UpdateImagesRequest) (*UpdateImagesResponse, error)
-	mustEmbedUnimplementedBackendServer()
+	CreatePayment(context.Context, *CreatePaymentRequest) (*CreatePaymentResponse, error)
+	GetPayment(context.Context, *GetPaymentRequest) (*GetPaymentResponse, error)
+	mustEmbedUnimplementedInformationServer()
 }
 
-// UnimplementedBackendServer must be embedded to have forward compatible implementations.
-type UnimplementedBackendServer struct {
+// UnimplementedInformationServer must be embedded to have forward compatible implementations.
+type UnimplementedInformationServer struct {
 }
 
-func (UnimplementedBackendServer) LoginUser(context.Context, *LoginUserRequest) (*LoginUserResponse, error) {
+func (UnimplementedInformationServer) LoginUser(context.Context, *LoginUserRequest) (*LoginUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoginUser not implemented")
 }
-func (UnimplementedBackendServer) CheckEmail(context.Context, *CheckEmailRequest) (*CheckEmailResponse, error) {
+func (UnimplementedInformationServer) CheckEmail(context.Context, *CheckEmailRequest) (*CheckEmailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckEmail not implemented")
 }
-func (UnimplementedBackendServer) CheckEmailCode(context.Context, *SendEmailRequest) (*CheckedEmailResponse, error) {
+func (UnimplementedInformationServer) CheckEmailCode(context.Context, *SendEmailRequest) (*CheckedEmailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckEmailCode not implemented")
 }
-func (UnimplementedBackendServer) InputPassword(context.Context, *InputPasswordRequest) (*InputPasswordResponse, error) {
+func (UnimplementedInformationServer) InputPassword(context.Context, *InputPasswordRequest) (*InputPasswordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InputPassword not implemented")
 }
-func (UnimplementedBackendServer) ResetPassword(context.Context, *ResetPasswordRequest) (*ResetPasswordResponse, error) {
+func (UnimplementedInformationServer) ResetPassword(context.Context, *ResetPasswordRequest) (*ResetPasswordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResetPassword not implemented")
 }
-func (UnimplementedBackendServer) CreateFix(context.Context, *CreateFixRequest) (*CreateFixResponse, error) {
+func (UnimplementedInformationServer) CreateFix(context.Context, *CreateFixRequest) (*CreateFixResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateFix not implemented")
 }
-func (UnimplementedBackendServer) CreateCanChange(context.Context, *CreateCanChangeRequest) (*CreateCanChangeResponse, error) {
+func (UnimplementedInformationServer) CreateCanChange(context.Context, *CreateCanChangeRequest) (*CreateCanChangeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCanChange not implemented")
 }
-func (UnimplementedBackendServer) GetCanChange(context.Context, *GetCanChangeRequest) (*GetCanChangeResponse, error) {
+func (UnimplementedInformationServer) GetCanChange(context.Context, *GetCanChangeRequest) (*GetCanChangeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCanChange not implemented")
 }
-func (UnimplementedBackendServer) UpdateCanChange(context.Context, *UpdateCanChangeRequest) (*UpdateCanChangeResponse, error) {
+func (UnimplementedInformationServer) UpdateCanChange(context.Context, *UpdateCanChangeRequest) (*UpdateCanChangeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCanChange not implemented")
 }
-func (UnimplementedBackendServer) CreateAccompany(context.Context, *CreateAccompanyRequest) (*CreateAccompanyResponse, error) {
+func (UnimplementedInformationServer) CreateAccompany(context.Context, *CreateAccompanyRequest) (*CreateAccompanyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAccompany not implemented")
 }
-func (UnimplementedBackendServer) GetAccompany(context.Context, *GetAccompanyRequest) (*GetAccompanyResponse, error) {
+func (UnimplementedInformationServer) GetAccompany(context.Context, *GetAccompanyRequest) (*GetAccompanyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccompany not implemented")
 }
-func (UnimplementedBackendServer) UpdateAccompany(context.Context, *UpdateAccompanyRequest) (*UpdateAccompanyResponse, error) {
+func (UnimplementedInformationServer) UpdateAccompany(context.Context, *UpdateAccompanyRequest) (*UpdateAccompanyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccompany not implemented")
 }
-func (UnimplementedBackendServer) CreateHobby(context.Context, *CreateHobbyRequest) (*CreateHobbyResponse, error) {
+func (UnimplementedInformationServer) CreateHobby(context.Context, *CreateHobbyRequest) (*CreateHobbyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateHobby not implemented")
 }
-func (UnimplementedBackendServer) GetHobby(context.Context, *GetHobbyRequest) (*GetHobbyResponse, error) {
+func (UnimplementedInformationServer) GetHobby(context.Context, *GetHobbyRequest) (*GetHobbyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetHobby not implemented")
 }
-func (UnimplementedBackendServer) UpdateHobby(context.Context, *UpdateHobbyRequest) (*UpdateHobbyResponse, error) {
+func (UnimplementedInformationServer) UpdateHobby(context.Context, *UpdateHobbyRequest) (*UpdateHobbyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateHobby not implemented")
 }
-func (UnimplementedBackendServer) CreateLover(context.Context, *CreateLoverRequest) (*CreateLoverResponse, error) {
+func (UnimplementedInformationServer) CreateLover(context.Context, *CreateLoverRequest) (*CreateLoverResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateLover not implemented")
 }
-func (UnimplementedBackendServer) GetLover(context.Context, *GetLoverRequest) (*GetLoverResponse, error) {
+func (UnimplementedInformationServer) GetLover(context.Context, *GetLoverRequest) (*GetLoverResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLover not implemented")
 }
-func (UnimplementedBackendServer) UpdateLover(context.Context, *UpdateLoverRequest) (*UpdateLoverResponse, error) {
+func (UnimplementedInformationServer) UpdateLover(context.Context, *UpdateLoverRequest) (*UpdateLoverResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateLover not implemented")
 }
-func (UnimplementedBackendServer) CreateComplaint(context.Context, *CreateComplaintRequest) (*CreateComplaintResponse, error) {
+func (UnimplementedInformationServer) CreateComplaint(context.Context, *CreateComplaintRequest) (*CreateComplaintResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateComplaint not implemented")
 }
-func (UnimplementedBackendServer) GetComplaint(context.Context, *GetComplaintRequest) (*GetComplaintResponse, error) {
+func (UnimplementedInformationServer) GetComplaint(context.Context, *GetComplaintRequest) (*GetComplaintResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetComplaint not implemented")
 }
-func (UnimplementedBackendServer) UpdateComplaint(context.Context, *UpdateComplaintRequest) (*UpdateComplaintResponse, error) {
+func (UnimplementedInformationServer) UpdateComplaint(context.Context, *UpdateComplaintRequest) (*UpdateComplaintResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateComplaint not implemented")
 }
-func (UnimplementedBackendServer) CreateTargetList(context.Context, *CreateTargetListRequest) (*CreateTargetListResponse, error) {
+func (UnimplementedInformationServer) CreateTargetList(context.Context, *CreateTargetListRequest) (*CreateTargetListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateTargetList not implemented")
 }
-func (UnimplementedBackendServer) GetTargetList(context.Context, *GetTargetListRequest) (*GetTargetListResponse, error) {
+func (UnimplementedInformationServer) GetTargetList(context.Context, *GetTargetListRequest) (*GetTargetListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTargetList not implemented")
 }
-func (UnimplementedBackendServer) UpdateTargetList(context.Context, *UpdateTargetListRequest) (*UpdateTargetListResponse, error) {
+func (UnimplementedInformationServer) UpdateTargetList(context.Context, *UpdateTargetListRequest) (*UpdateTargetListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTargetList not implemented")
 }
-func (UnimplementedBackendServer) CreateChangeTarget(context.Context, *CreateChangeTargetRequest) (*CreateChangeTargetResponse, error) {
+func (UnimplementedInformationServer) CreateChangeTarget(context.Context, *CreateChangeTargetRequest) (*CreateChangeTargetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateChangeTarget not implemented")
 }
-func (UnimplementedBackendServer) GetChangeTarget(context.Context, *GetChangeTargetRequest) (*GetChangeTargetResponse, error) {
+func (UnimplementedInformationServer) GetChangeTarget(context.Context, *GetChangeTargetRequest) (*GetChangeTargetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetChangeTarget not implemented")
 }
-func (UnimplementedBackendServer) CreateImages(context.Context, *CreateImagesRequest) (*CreateImagesResponse, error) {
+func (UnimplementedInformationServer) CreateImages(context.Context, *CreateImagesRequest) (*CreateImagesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateImages not implemented")
 }
-func (UnimplementedBackendServer) GetImages(context.Context, *GetImagesRequest) (*GetImagesResponse, error) {
+func (UnimplementedInformationServer) GetImages(context.Context, *GetImagesRequest) (*GetImagesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetImages not implemented")
 }
-func (UnimplementedBackendServer) UpdateImages(context.Context, *UpdateImagesRequest) (*UpdateImagesResponse, error) {
+func (UnimplementedInformationServer) UpdateImages(context.Context, *UpdateImagesRequest) (*UpdateImagesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateImages not implemented")
 }
-func (UnimplementedBackendServer) mustEmbedUnimplementedBackendServer() {}
+func (UnimplementedInformationServer) CreatePayment(context.Context, *CreatePaymentRequest) (*CreatePaymentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreatePayment not implemented")
+}
+func (UnimplementedInformationServer) GetPayment(context.Context, *GetPaymentRequest) (*GetPaymentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPayment not implemented")
+}
+func (UnimplementedInformationServer) mustEmbedUnimplementedInformationServer() {}
 
-// UnsafeBackendServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to BackendServer will
+// UnsafeInformationServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to InformationServer will
 // result in compilation errors.
-type UnsafeBackendServer interface {
-	mustEmbedUnimplementedBackendServer()
+type UnsafeInformationServer interface {
+	mustEmbedUnimplementedInformationServer()
 }
 
-func RegisterBackendServer(s grpc.ServiceRegistrar, srv BackendServer) {
-	s.RegisterService(&Backend_ServiceDesc, srv)
+func RegisterInformationServer(s grpc.ServiceRegistrar, srv InformationServer) {
+	s.RegisterService(&Information_ServiceDesc, srv)
 }
 
-func _Backend_LoginUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_LoginUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(LoginUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).LoginUser(ctx, in)
+		return srv.(InformationServer).LoginUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_LoginUser_FullMethodName,
+		FullMethod: Information_LoginUser_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).LoginUser(ctx, req.(*LoginUserRequest))
+		return srv.(InformationServer).LoginUser(ctx, req.(*LoginUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_CheckEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_CheckEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CheckEmailRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).CheckEmail(ctx, in)
+		return srv.(InformationServer).CheckEmail(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_CheckEmail_FullMethodName,
+		FullMethod: Information_CheckEmail_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).CheckEmail(ctx, req.(*CheckEmailRequest))
+		return srv.(InformationServer).CheckEmail(ctx, req.(*CheckEmailRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_CheckEmailCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_CheckEmailCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SendEmailRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).CheckEmailCode(ctx, in)
+		return srv.(InformationServer).CheckEmailCode(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_CheckEmailCode_FullMethodName,
+		FullMethod: Information_CheckEmailCode_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).CheckEmailCode(ctx, req.(*SendEmailRequest))
+		return srv.(InformationServer).CheckEmailCode(ctx, req.(*SendEmailRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_InputPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_InputPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(InputPasswordRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).InputPassword(ctx, in)
+		return srv.(InformationServer).InputPassword(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_InputPassword_FullMethodName,
+		FullMethod: Information_InputPassword_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).InputPassword(ctx, req.(*InputPasswordRequest))
+		return srv.(InformationServer).InputPassword(ctx, req.(*InputPasswordRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_ResetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_ResetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ResetPasswordRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).ResetPassword(ctx, in)
+		return srv.(InformationServer).ResetPassword(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_ResetPassword_FullMethodName,
+		FullMethod: Information_ResetPassword_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).ResetPassword(ctx, req.(*ResetPasswordRequest))
+		return srv.(InformationServer).ResetPassword(ctx, req.(*ResetPasswordRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_CreateFix_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_CreateFix_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateFixRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).CreateFix(ctx, in)
+		return srv.(InformationServer).CreateFix(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_CreateFix_FullMethodName,
+		FullMethod: Information_CreateFix_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).CreateFix(ctx, req.(*CreateFixRequest))
+		return srv.(InformationServer).CreateFix(ctx, req.(*CreateFixRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_CreateCanChange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_CreateCanChange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateCanChangeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).CreateCanChange(ctx, in)
+		return srv.(InformationServer).CreateCanChange(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_CreateCanChange_FullMethodName,
+		FullMethod: Information_CreateCanChange_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).CreateCanChange(ctx, req.(*CreateCanChangeRequest))
+		return srv.(InformationServer).CreateCanChange(ctx, req.(*CreateCanChangeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_GetCanChange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_GetCanChange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetCanChangeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).GetCanChange(ctx, in)
+		return srv.(InformationServer).GetCanChange(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_GetCanChange_FullMethodName,
+		FullMethod: Information_GetCanChange_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).GetCanChange(ctx, req.(*GetCanChangeRequest))
+		return srv.(InformationServer).GetCanChange(ctx, req.(*GetCanChangeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_UpdateCanChange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_UpdateCanChange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateCanChangeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).UpdateCanChange(ctx, in)
+		return srv.(InformationServer).UpdateCanChange(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_UpdateCanChange_FullMethodName,
+		FullMethod: Information_UpdateCanChange_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).UpdateCanChange(ctx, req.(*UpdateCanChangeRequest))
+		return srv.(InformationServer).UpdateCanChange(ctx, req.(*UpdateCanChangeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_CreateAccompany_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_CreateAccompany_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateAccompanyRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).CreateAccompany(ctx, in)
+		return srv.(InformationServer).CreateAccompany(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_CreateAccompany_FullMethodName,
+		FullMethod: Information_CreateAccompany_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).CreateAccompany(ctx, req.(*CreateAccompanyRequest))
+		return srv.(InformationServer).CreateAccompany(ctx, req.(*CreateAccompanyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_GetAccompany_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_GetAccompany_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetAccompanyRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).GetAccompany(ctx, in)
+		return srv.(InformationServer).GetAccompany(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_GetAccompany_FullMethodName,
+		FullMethod: Information_GetAccompany_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).GetAccompany(ctx, req.(*GetAccompanyRequest))
+		return srv.(InformationServer).GetAccompany(ctx, req.(*GetAccompanyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_UpdateAccompany_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_UpdateAccompany_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateAccompanyRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).UpdateAccompany(ctx, in)
+		return srv.(InformationServer).UpdateAccompany(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_UpdateAccompany_FullMethodName,
+		FullMethod: Information_UpdateAccompany_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).UpdateAccompany(ctx, req.(*UpdateAccompanyRequest))
+		return srv.(InformationServer).UpdateAccompany(ctx, req.(*UpdateAccompanyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_CreateHobby_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_CreateHobby_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateHobbyRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).CreateHobby(ctx, in)
+		return srv.(InformationServer).CreateHobby(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_CreateHobby_FullMethodName,
+		FullMethod: Information_CreateHobby_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).CreateHobby(ctx, req.(*CreateHobbyRequest))
+		return srv.(InformationServer).CreateHobby(ctx, req.(*CreateHobbyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_GetHobby_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_GetHobby_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetHobbyRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).GetHobby(ctx, in)
+		return srv.(InformationServer).GetHobby(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_GetHobby_FullMethodName,
+		FullMethod: Information_GetHobby_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).GetHobby(ctx, req.(*GetHobbyRequest))
+		return srv.(InformationServer).GetHobby(ctx, req.(*GetHobbyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_UpdateHobby_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_UpdateHobby_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateHobbyRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).UpdateHobby(ctx, in)
+		return srv.(InformationServer).UpdateHobby(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_UpdateHobby_FullMethodName,
+		FullMethod: Information_UpdateHobby_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).UpdateHobby(ctx, req.(*UpdateHobbyRequest))
+		return srv.(InformationServer).UpdateHobby(ctx, req.(*UpdateHobbyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_CreateLover_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_CreateLover_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateLoverRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).CreateLover(ctx, in)
+		return srv.(InformationServer).CreateLover(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_CreateLover_FullMethodName,
+		FullMethod: Information_CreateLover_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).CreateLover(ctx, req.(*CreateLoverRequest))
+		return srv.(InformationServer).CreateLover(ctx, req.(*CreateLoverRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_GetLover_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_GetLover_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetLoverRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).GetLover(ctx, in)
+		return srv.(InformationServer).GetLover(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_GetLover_FullMethodName,
+		FullMethod: Information_GetLover_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).GetLover(ctx, req.(*GetLoverRequest))
+		return srv.(InformationServer).GetLover(ctx, req.(*GetLoverRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_UpdateLover_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_UpdateLover_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateLoverRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).UpdateLover(ctx, in)
+		return srv.(InformationServer).UpdateLover(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_UpdateLover_FullMethodName,
+		FullMethod: Information_UpdateLover_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).UpdateLover(ctx, req.(*UpdateLoverRequest))
+		return srv.(InformationServer).UpdateLover(ctx, req.(*UpdateLoverRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_CreateComplaint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_CreateComplaint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateComplaintRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).CreateComplaint(ctx, in)
+		return srv.(InformationServer).CreateComplaint(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_CreateComplaint_FullMethodName,
+		FullMethod: Information_CreateComplaint_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).CreateComplaint(ctx, req.(*CreateComplaintRequest))
+		return srv.(InformationServer).CreateComplaint(ctx, req.(*CreateComplaintRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_GetComplaint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_GetComplaint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetComplaintRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).GetComplaint(ctx, in)
+		return srv.(InformationServer).GetComplaint(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_GetComplaint_FullMethodName,
+		FullMethod: Information_GetComplaint_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).GetComplaint(ctx, req.(*GetComplaintRequest))
+		return srv.(InformationServer).GetComplaint(ctx, req.(*GetComplaintRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_UpdateComplaint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_UpdateComplaint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateComplaintRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).UpdateComplaint(ctx, in)
+		return srv.(InformationServer).UpdateComplaint(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_UpdateComplaint_FullMethodName,
+		FullMethod: Information_UpdateComplaint_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).UpdateComplaint(ctx, req.(*UpdateComplaintRequest))
+		return srv.(InformationServer).UpdateComplaint(ctx, req.(*UpdateComplaintRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_CreateTargetList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_CreateTargetList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateTargetListRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).CreateTargetList(ctx, in)
+		return srv.(InformationServer).CreateTargetList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_CreateTargetList_FullMethodName,
+		FullMethod: Information_CreateTargetList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).CreateTargetList(ctx, req.(*CreateTargetListRequest))
+		return srv.(InformationServer).CreateTargetList(ctx, req.(*CreateTargetListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_GetTargetList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_GetTargetList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetTargetListRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).GetTargetList(ctx, in)
+		return srv.(InformationServer).GetTargetList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_GetTargetList_FullMethodName,
+		FullMethod: Information_GetTargetList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).GetTargetList(ctx, req.(*GetTargetListRequest))
+		return srv.(InformationServer).GetTargetList(ctx, req.(*GetTargetListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_UpdateTargetList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_UpdateTargetList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateTargetListRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).UpdateTargetList(ctx, in)
+		return srv.(InformationServer).UpdateTargetList(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_UpdateTargetList_FullMethodName,
+		FullMethod: Information_UpdateTargetList_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).UpdateTargetList(ctx, req.(*UpdateTargetListRequest))
+		return srv.(InformationServer).UpdateTargetList(ctx, req.(*UpdateTargetListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_CreateChangeTarget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_CreateChangeTarget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateChangeTargetRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).CreateChangeTarget(ctx, in)
+		return srv.(InformationServer).CreateChangeTarget(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_CreateChangeTarget_FullMethodName,
+		FullMethod: Information_CreateChangeTarget_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).CreateChangeTarget(ctx, req.(*CreateChangeTargetRequest))
+		return srv.(InformationServer).CreateChangeTarget(ctx, req.(*CreateChangeTargetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_GetChangeTarget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_GetChangeTarget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetChangeTargetRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).GetChangeTarget(ctx, in)
+		return srv.(InformationServer).GetChangeTarget(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_GetChangeTarget_FullMethodName,
+		FullMethod: Information_GetChangeTarget_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).GetChangeTarget(ctx, req.(*GetChangeTargetRequest))
+		return srv.(InformationServer).GetChangeTarget(ctx, req.(*GetChangeTargetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_CreateImages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_CreateImages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateImagesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).CreateImages(ctx, in)
+		return srv.(InformationServer).CreateImages(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_CreateImages_FullMethodName,
+		FullMethod: Information_CreateImages_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).CreateImages(ctx, req.(*CreateImagesRequest))
+		return srv.(InformationServer).CreateImages(ctx, req.(*CreateImagesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_GetImages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_GetImages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetImagesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).GetImages(ctx, in)
+		return srv.(InformationServer).GetImages(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_GetImages_FullMethodName,
+		FullMethod: Information_GetImages_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).GetImages(ctx, req.(*GetImagesRequest))
+		return srv.(InformationServer).GetImages(ctx, req.(*GetImagesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Backend_UpdateImages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Information_UpdateImages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateImagesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BackendServer).UpdateImages(ctx, in)
+		return srv.(InformationServer).UpdateImages(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Backend_UpdateImages_FullMethodName,
+		FullMethod: Information_UpdateImages_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BackendServer).UpdateImages(ctx, req.(*UpdateImagesRequest))
+		return srv.(InformationServer).UpdateImages(ctx, req.(*UpdateImagesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Backend_ServiceDesc is the grpc.ServiceDesc for Backend service.
+func _Information_CreatePayment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatePaymentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).CreatePayment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_CreatePayment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).CreatePayment(ctx, req.(*CreatePaymentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Information_GetPayment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPaymentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).GetPayment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_GetPayment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).GetPayment(ctx, req.(*GetPaymentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// Information_ServiceDesc is the grpc.ServiceDesc for Information service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Backend_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pb.Backend",
-	HandlerType: (*BackendServer)(nil),
+var Information_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pb.Information",
+	HandlerType: (*InformationServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "LoginUser",
-			Handler:    _Backend_LoginUser_Handler,
+			Handler:    _Information_LoginUser_Handler,
 		},
 		{
 			MethodName: "CheckEmail",
-			Handler:    _Backend_CheckEmail_Handler,
+			Handler:    _Information_CheckEmail_Handler,
 		},
 		{
 			MethodName: "CheckEmailCode",
-			Handler:    _Backend_CheckEmailCode_Handler,
+			Handler:    _Information_CheckEmailCode_Handler,
 		},
 		{
 			MethodName: "InputPassword",
-			Handler:    _Backend_InputPassword_Handler,
+			Handler:    _Information_InputPassword_Handler,
 		},
 		{
 			MethodName: "ResetPassword",
-			Handler:    _Backend_ResetPassword_Handler,
+			Handler:    _Information_ResetPassword_Handler,
 		},
 		{
 			MethodName: "CreateFix",
-			Handler:    _Backend_CreateFix_Handler,
+			Handler:    _Information_CreateFix_Handler,
 		},
 		{
 			MethodName: "CreateCanChange",
-			Handler:    _Backend_CreateCanChange_Handler,
+			Handler:    _Information_CreateCanChange_Handler,
 		},
 		{
 			MethodName: "GetCanChange",
-			Handler:    _Backend_GetCanChange_Handler,
+			Handler:    _Information_GetCanChange_Handler,
 		},
 		{
 			MethodName: "UpdateCanChange",
-			Handler:    _Backend_UpdateCanChange_Handler,
+			Handler:    _Information_UpdateCanChange_Handler,
 		},
 		{
 			MethodName: "CreateAccompany",
-			Handler:    _Backend_CreateAccompany_Handler,
+			Handler:    _Information_CreateAccompany_Handler,
 		},
 		{
 			MethodName: "GetAccompany",
-			Handler:    _Backend_GetAccompany_Handler,
+			Handler:    _Information_GetAccompany_Handler,
 		},
 		{
 			MethodName: "UpdateAccompany",
-			Handler:    _Backend_UpdateAccompany_Handler,
+			Handler:    _Information_UpdateAccompany_Handler,
 		},
 		{
 			MethodName: "CreateHobby",
-			Handler:    _Backend_CreateHobby_Handler,
+			Handler:    _Information_CreateHobby_Handler,
 		},
 		{
 			MethodName: "GetHobby",
-			Handler:    _Backend_GetHobby_Handler,
+			Handler:    _Information_GetHobby_Handler,
 		},
 		{
 			MethodName: "UpdateHobby",
-			Handler:    _Backend_UpdateHobby_Handler,
+			Handler:    _Information_UpdateHobby_Handler,
 		},
 		{
 			MethodName: "CreateLover",
-			Handler:    _Backend_CreateLover_Handler,
+			Handler:    _Information_CreateLover_Handler,
 		},
 		{
 			MethodName: "GetLover",
-			Handler:    _Backend_GetLover_Handler,
+			Handler:    _Information_GetLover_Handler,
 		},
 		{
 			MethodName: "UpdateLover",
-			Handler:    _Backend_UpdateLover_Handler,
+			Handler:    _Information_UpdateLover_Handler,
 		},
 		{
 			MethodName: "CreateComplaint",
-			Handler:    _Backend_CreateComplaint_Handler,
+			Handler:    _Information_CreateComplaint_Handler,
 		},
 		{
 			MethodName: "GetComplaint",
-			Handler:    _Backend_GetComplaint_Handler,
+			Handler:    _Information_GetComplaint_Handler,
 		},
 		{
 			MethodName: "UpdateComplaint",
-			Handler:    _Backend_UpdateComplaint_Handler,
+			Handler:    _Information_UpdateComplaint_Handler,
 		},
 		{
 			MethodName: "CreateTargetList",
-			Handler:    _Backend_CreateTargetList_Handler,
+			Handler:    _Information_CreateTargetList_Handler,
 		},
 		{
 			MethodName: "GetTargetList",
-			Handler:    _Backend_GetTargetList_Handler,
+			Handler:    _Information_GetTargetList_Handler,
 		},
 		{
 			MethodName: "UpdateTargetList",
-			Handler:    _Backend_UpdateTargetList_Handler,
+			Handler:    _Information_UpdateTargetList_Handler,
 		},
 		{
 			MethodName: "CreateChangeTarget",
-			Handler:    _Backend_CreateChangeTarget_Handler,
+			Handler:    _Information_CreateChangeTarget_Handler,
 		},
 		{
 			MethodName: "GetChangeTarget",
-			Handler:    _Backend_GetChangeTarget_Handler,
+			Handler:    _Information_GetChangeTarget_Handler,
 		},
 		{
 			MethodName: "CreateImages",
-			Handler:    _Backend_CreateImages_Handler,
+			Handler:    _Information_CreateImages_Handler,
 		},
 		{
 			MethodName: "GetImages",
-			Handler:    _Backend_GetImages_Handler,
+			Handler:    _Information_GetImages_Handler,
 		},
 		{
 			MethodName: "UpdateImages",
-			Handler:    _Backend_UpdateImages_Handler,
+			Handler:    _Information_UpdateImages_Handler,
+		},
+		{
+			MethodName: "CreatePayment",
+			Handler:    _Information_CreatePayment_Handler,
+		},
+		{
+			MethodName: "GetPayment",
+			Handler:    _Information_GetPayment_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "service_Backend.proto",
+}
+
+const (
+	Chat_CreateChatRecord_FullMethodName = "/pb.Chat/CreateChatRecord"
+	Chat_GetChatRecord_FullMethodName    = "/pb.Chat/GetChatRecord"
+	Chat_UpdateChatRecord_FullMethodName = "/pb.Chat/UpdateChatRecord"
+)
+
+// ChatClient is the client API for Chat service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type ChatClient interface {
+	CreateChatRecord(ctx context.Context, in *CreateChatRecordRequest, opts ...grpc.CallOption) (*CreateChatRecordResponse, error)
+	GetChatRecord(ctx context.Context, in *GetChatRecordRequest, opts ...grpc.CallOption) (*GetChatRecordResponse, error)
+	UpdateChatRecord(ctx context.Context, in *UpdateChatRecordRequest, opts ...grpc.CallOption) (*UpdateChatRecordResponse, error)
+}
+
+type chatClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewChatClient(cc grpc.ClientConnInterface) ChatClient {
+	return &chatClient{cc}
+}
+
+func (c *chatClient) CreateChatRecord(ctx context.Context, in *CreateChatRecordRequest, opts ...grpc.CallOption) (*CreateChatRecordResponse, error) {
+	out := new(CreateChatRecordResponse)
+	err := c.cc.Invoke(ctx, Chat_CreateChatRecord_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatClient) GetChatRecord(ctx context.Context, in *GetChatRecordRequest, opts ...grpc.CallOption) (*GetChatRecordResponse, error) {
+	out := new(GetChatRecordResponse)
+	err := c.cc.Invoke(ctx, Chat_GetChatRecord_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatClient) UpdateChatRecord(ctx context.Context, in *UpdateChatRecordRequest, opts ...grpc.CallOption) (*UpdateChatRecordResponse, error) {
+	out := new(UpdateChatRecordResponse)
+	err := c.cc.Invoke(ctx, Chat_UpdateChatRecord_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// ChatServer is the server API for Chat service.
+// All implementations must embed UnimplementedChatServer
+// for forward compatibility
+type ChatServer interface {
+	CreateChatRecord(context.Context, *CreateChatRecordRequest) (*CreateChatRecordResponse, error)
+	GetChatRecord(context.Context, *GetChatRecordRequest) (*GetChatRecordResponse, error)
+	UpdateChatRecord(context.Context, *UpdateChatRecordRequest) (*UpdateChatRecordResponse, error)
+	mustEmbedUnimplementedChatServer()
+}
+
+// UnimplementedChatServer must be embedded to have forward compatible implementations.
+type UnimplementedChatServer struct {
+}
+
+func (UnimplementedChatServer) CreateChatRecord(context.Context, *CreateChatRecordRequest) (*CreateChatRecordResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateChatRecord not implemented")
+}
+func (UnimplementedChatServer) GetChatRecord(context.Context, *GetChatRecordRequest) (*GetChatRecordResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetChatRecord not implemented")
+}
+func (UnimplementedChatServer) UpdateChatRecord(context.Context, *UpdateChatRecordRequest) (*UpdateChatRecordResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateChatRecord not implemented")
+}
+func (UnimplementedChatServer) mustEmbedUnimplementedChatServer() {}
+
+// UnsafeChatServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to ChatServer will
+// result in compilation errors.
+type UnsafeChatServer interface {
+	mustEmbedUnimplementedChatServer()
+}
+
+func RegisterChatServer(s grpc.ServiceRegistrar, srv ChatServer) {
+	s.RegisterService(&Chat_ServiceDesc, srv)
+}
+
+func _Chat_CreateChatRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateChatRecordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).CreateChatRecord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_CreateChatRecord_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).CreateChatRecord(ctx, req.(*CreateChatRecordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Chat_GetChatRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetChatRecordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).GetChatRecord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_GetChatRecord_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).GetChatRecord(ctx, req.(*GetChatRecordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Chat_UpdateChatRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateChatRecordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).UpdateChatRecord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_UpdateChatRecord_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).UpdateChatRecord(ctx, req.(*UpdateChatRecordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// Chat_ServiceDesc is the grpc.ServiceDesc for Chat service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var Chat_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "pb.Chat",
+	HandlerType: (*ChatServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateChatRecord",
+			Handler:    _Chat_CreateChatRecord_Handler,
+		},
+		{
+			MethodName: "GetChatRecord",
+			Handler:    _Chat_GetChatRecord_Handler,
+		},
+		{
+			MethodName: "UpdateChatRecord",
+			Handler:    _Chat_UpdateChatRecord_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

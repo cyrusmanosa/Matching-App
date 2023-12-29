@@ -1,119 +1,131 @@
-import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
-import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
-import 'package:dating_your_date/widgets/app_bar/appbar_trailing_return.dart';
-import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
-import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
+import 'package:dating_your_date/models/ChatMessage.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_svg_provider/flutter_svg_provider.dart' as fs;
+class ChatBox extends StatefulWidget {
+  ChatBox({Key? key, this.name}) : super(key: key);
 
-// ignore_for_file: must_be_immutable
-class ChatBox extends StatelessWidget {
-  ChatBox({Key? key}) : super(key: key);
-  TextEditingController secretController = TextEditingController();
-  GlobalKey<NavigatorState> navigatorKey = GlobalKey();
+  final String? name;
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _ChatBoxState createState() => _ChatBoxState();
+}
+
+class _ChatBoxState extends State<ChatBox> {
+  List<ChatMessage> messages = [
+    ChatMessage(messageContent: "Hello, Will", messageType: "receiver"),
+    ChatMessage(messageContent: "How have you been?", messageType: "receiver"),
+    ChatMessage(messageContent: "Hey Kriss, I am doing fine dude. wbu?", messageType: "sender"),
+    ChatMessage(messageContent: "ehhhh, doing OK.", messageType: "receiver"),
+    ChatMessage(messageContent: "Is there anything wrong?", messageType: "sender"),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
-    return SafeArea(
-      child: Scaffold(
-        appBar: _buildHeader(context),
-        body: SizedBox(
-          width: double.maxFinite,
-          child: Column(
-            children: [
-              SizedBox(height: mediaQueryData.size.height / 50),
-              _buildTwo(context),
-              SizedBox(height: 7.v),
-              _buildNinetySeven(context),
-            ],
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        flexibleSpace: SafeArea(
+          child: Container(
+            padding: EdgeInsets.only(right: 16),
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.arrow_back, color: Colors.black),
+                ),
+                SizedBox(width: 2),
+                CircleAvatar(backgroundImage: NetworkImage("https://randomuser.me/api/portraits/men/5.jpg"), maxRadius: 20),
+                SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Kriss ", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                      SizedBox(height: 6),
+                      Text("Online", style: TextStyle(color: Colors.grey.shade600, fontSize: 13)),
+                    ],
+                  ),
+                ),
+                Icon(Icons.settings, color: Colors.black54),
+              ],
+            ),
           ),
         ),
       ),
-    );
-  }
-
-  /// Header
-  PreferredSizeWidget _buildHeader(BuildContext context) {
-    return CustomAppBar(
-      leadingWidth: 60.h,
-      leading: AppbarLeadingImage(
-        imagePath: ImageConstant.imgArrowLeft,
-        margin: EdgeInsets.only(left: 25, top: 60, bottom: 15),
-        onTap: () {
-          onTapReturn(context);
-        },
-      ),
-      centerTitle: true,
-      title: AppbarTitle(text: "ターゲット名前", margin: EdgeInsets.only(top: 60, bottom: 20)),
-      actions: [AppbarTrailingReturn(imagePath: ImageConstant.imgMenu, margin: EdgeInsets.fromLTRB(35, 65, 35, 20))],
-    );
-  }
-
-  /// Section Widget
-  Widget _buildTwo(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 15.h),
-      decoration: BoxDecoration(image: DecorationImage(image: fs.Svg(ImageConstant.imgGroup2), fit: BoxFit.cover)),
-      child: CustomImageView(imagePath: ImageConstant.imgUserMessage, height: 450, width: 400),
-    );
-  }
-
-  /// Section Widget
-  Widget _buildNinetySeven(BuildContext context) {
-    return SizedBox(
-      height: 300.v,
-      width: double.maxFinite,
-      child: Stack(
-        alignment: Alignment.topCenter,
+      body: Stack(
         children: [
-          // input bar
-          Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              width: double.maxFinite,
-              margin: EdgeInsets.only(bottom: 239.v),
-              padding: EdgeInsets.symmetric(vertical: 7.v),
-              decoration: AppDecoration.fillPink,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  CustomImageView(
-                    imagePath: ImageConstant.imgCrossButton,
-                    height: 33.adaptSize,
-                    width: 33.adaptSize,
-                    margin: EdgeInsets.only(top: 1.v, bottom: 2.v),
+          ListView.builder(
+            itemCount: messages.length,
+            shrinkWrap: true,
+            padding: EdgeInsets.only(top: 10, bottom: 10),
+            physics: NeverScrollableScrollPhysics(),
+            itemBuilder: (context, index) {
+              return Container(
+                padding: EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
+                child: Align(
+                  alignment: (messages[index].messageType == "receiver" ? Alignment.topLeft : Alignment.topRight),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: (messages[index].messageType == "receiver" ? Colors.grey.shade200 : Colors.blue[200]),
+                    ),
+                    padding: EdgeInsets.all(16),
+                    child: Text(messages[index].messageContent, style: TextStyle(fontSize: 15)),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 1.v),
-                    child: CustomInputFormBar(
-                      width: 300.h,
-                      controller: secretController,
-                      hintText: "Secret",
-                      textInputAction: TextInputAction.done,
-                      borderDecoration: TextFormFieldStyleHelper.fillGray,
-                      filled: true,
-                      fillColor: appTheme.gray800,
+                ),
+              );
+            },
+          ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              height: 100,
+              width: double.infinity,
+              color: Colors.redAccent,
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      height: 30,
+                      width: 30,
+                      decoration: BoxDecoration(color: Colors.lightBlue, borderRadius: BorderRadius.circular(30)),
+                      child: Icon(Icons.add, color: Colors.white, size: 25),
                     ),
                   ),
-                  CustomImageView(
-                    imagePath: ImageConstant.imgSend,
-                    height: 33.adaptSize,
-                    width: 33.adaptSize,
-                    margin: EdgeInsets.only(top: 1.v, bottom: 2.v),
-                  )
+                  SizedBox(width: 20),
+                  Expanded(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "Write message...",
+                        hintStyle: TextStyle(color: Colors.black54),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 15),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      height: 35,
+                      width: 35,
+                      decoration: BoxDecoration(color: Colors.lightBlue, borderRadius: BorderRadius.circular(30)),
+                      child: Icon(Icons.send, color: Colors.white, size: 20),
+                    ),
+                  ),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
-  }
-
-  onTapReturn(BuildContext context) {
-    Navigator.pop(context);
   }
 }

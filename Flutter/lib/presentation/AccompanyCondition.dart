@@ -1,6 +1,6 @@
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/global_variable/model.dart';
+import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/rpc_accompany.pb.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
@@ -63,7 +63,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
       certification: false,
     );
 
-    final response = await GrpcService.client.createAccompany(request);
+    final response = await GrpcInfoService.client.createAccompany(request);
     // ignore: unnecessary_null_comparison
     if (response != null) {
       onTapNextButton(context);
@@ -256,17 +256,13 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
     return CustomInputFormBar(
       controller: accompanySociabilityController,
       hintText: "人たら神",
-      textInputAction: TextInputAction.done,
     );
   }
 
   /// Next Button
   Widget _buildNextPageButton(BuildContext context) {
     return CustomOutlinedButton(
-      width: mediaQueryData.size.width / 4,
-      height: mediaQueryData.size.height / 25,
       text: "条件確認",
-      buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
         createAccompanyGrpcRequest(context);
       },

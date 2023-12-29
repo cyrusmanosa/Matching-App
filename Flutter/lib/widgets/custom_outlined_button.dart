@@ -1,4 +1,5 @@
 import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/theme/theme_helper.dart';
 import 'package:dating_your_date/widgets/base_button.dart';
 import 'package:flutter/material.dart';
 
@@ -48,14 +49,13 @@ class CustomOutlinedButton extends BaseButton {
         margin: margin,
         decoration: decoration,
         child: OutlinedButton(
-          style: buttonStyle,
           onPressed: onPressed,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               leftIcon ?? const SizedBox.shrink(),
-              Text(text, style: buttonTextStyle ?? CustomTextStyles.headlineMediumMontserratPinkA100),
+              Text(text, style: buttonTextStyle ?? theme.textTheme.titleMedium),
               rightIcon ?? const SizedBox.shrink(),
             ],
           ),

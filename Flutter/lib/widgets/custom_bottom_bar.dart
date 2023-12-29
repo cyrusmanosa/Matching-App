@@ -13,44 +13,23 @@ class CustomBottomBarState extends State<CustomBottomBar> {
   int selectedIndex = 0;
   List<BottomMenuModel> bottomMenuList = [
     // ホーム
-    BottomMenuModel(
-      icon: ImageConstant.imgNav,
-      activeIcon: ImageConstant.imgNav,
-      label: "ホーム",
-      type: BottomBarEnum.tf,
-    ),
+    BottomMenuModel(icon: ImageConstant.imgHome, activeIcon: ImageConstant.imgHome, label: "ホーム", type: BottomBarEnum.home),
     // ターゲット
-    BottomMenuModel(
-      icon: ImageConstant.imgNavPrimary,
-      activeIcon: ImageConstant.imgNavPrimary,
-      label: "ターゲット",
-      type: BottomBarEnum.tf1,
-    ),
+    BottomMenuModel(icon: ImageConstant.imgTarget, activeIcon: ImageConstant.imgTarget, label: "ターゲット", type: BottomBarEnum.target),
     // チャット
-    BottomMenuModel(
-      icon: ImageConstant.imgNavPrimary41x41,
-      activeIcon: ImageConstant.imgNavPrimary41x41,
-      label: "チャット",
-      type: BottomBarEnum.tf2,
-    ),
+    BottomMenuModel(icon: ImageConstant.imgChat, activeIcon: ImageConstant.imgChat, label: "チャット", type: BottomBarEnum.chat),
     // プロフィール
-    BottomMenuModel(
-      icon: ImageConstant.imgNav41x41,
-      activeIcon: ImageConstant.imgNav41x41,
-      label: "プロフィール",
-      type: BottomBarEnum.tf3,
-    )
+    BottomMenuModel(icon: ImageConstant.imgProfile, activeIcon: ImageConstant.imgProfile, label: "プロフィール", type: BottomBarEnum.profile)
   ];
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80.v,
+      height: mediaQueryData.size.height / 13,
       decoration: BoxDecoration(color: appTheme.gray500),
+      padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 15),
       child: BottomNavigationBar(
         backgroundColor: Colors.transparent,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
         selectedFontSize: 0,
         elevation: 0,
         currentIndex: selectedIndex,
@@ -58,21 +37,17 @@ class CustomBottomBarState extends State<CustomBottomBar> {
         items: List.generate(bottomMenuList.length, (index) {
           // Footage
           return BottomNavigationBarItem(
-            // Icon bar
-            label: "Test",
+            label: "",
             icon: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CustomImageView(
-                    imagePath: bottomMenuList[index].icon, height: 41.adaptSize, width: 41.adaptSize, color: theme.colorScheme.primary),
-                Padding(
-                  padding: EdgeInsets.only(top: 2.v),
-                  child: Text(
-                    bottomMenuList[index].label!,
-                    style: CustomTextStyles.roundedMplus1cPrimary.copyWith(color: theme.colorScheme.primary),
-                  ),
+                  imagePath: bottomMenuList[index].icon,
+                  width: mediaQueryData.size.width / 20,
+                  color: appTheme.white,
                 ),
+                Padding(padding: EdgeInsets.only(top: 2.v), child: Text(bottomMenuList[index].label!, style: CustomTextStyles.mainButtonW)),
               ],
             ),
             // Icon OnTap
@@ -81,14 +56,11 @@ class CustomBottomBarState extends State<CustomBottomBar> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CustomImageView(
-                    imagePath: bottomMenuList[index].activeIcon, height: 41.adaptSize, width: 41.adaptSize, color: appTheme.cyan600),
-                Padding(
-                  padding: EdgeInsets.only(top: 2.v),
-                  child: Text(
-                    bottomMenuList[index].label!,
-                    style: CustomTextStyles.roundedMplus1cCyan600.copyWith(color: appTheme.cyan600),
-                  ),
+                  imagePath: bottomMenuList[index].activeIcon,
+                  width: mediaQueryData.size.width / 20,
+                  color: appTheme.cyan600,
                 ),
+                Padding(padding: EdgeInsets.only(top: 2.v), child: Text(bottomMenuList[index].label!, style: CustomTextStyles.mainButtonC)),
               ],
             ),
           );
@@ -103,16 +75,10 @@ class CustomBottomBarState extends State<CustomBottomBar> {
   }
 }
 
-enum BottomBarEnum { tf, tf1, tf2, tf3 }
+enum BottomBarEnum { home, target, chat, profile }
 
 class BottomMenuModel {
-  BottomMenuModel({
-    this.label,
-    this.activeIcon,
-    this.icon,
-    this.type,
-  });
-
+  BottomMenuModel({this.label, this.activeIcon, this.icon, this.type});
   String? activeIcon;
   String? icon;
   String? label;

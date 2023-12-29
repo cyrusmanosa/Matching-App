@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "Backend/pb";
+
+message ChatRecord{
+    int32 TargetID = 1;
+    string MsgType = 2;
+    string Message = 3;
+    string Images = 4;
+    google.protobuf.Timestamp CreatedAt = 5;
+}

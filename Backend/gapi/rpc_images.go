@@ -13,7 +13,6 @@ import (
 
 func (server *Server) CreateImages(ctx context.Context, req *pb.CreateImagesRequest) (*pb.CreateImagesResponse, error) {
 
-	// change GlobalSessionID after login
 	token, err := server.infoStore.GetSession(ctx, GlobalSessionID)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
@@ -31,7 +30,7 @@ func (server *Server) CreateImages(ctx context.Context, req *pb.CreateImagesRequ
 		Img2:   req.GetImg2(),
 		Img3:   req.GetImg3(),
 		Img4:   req.GetImg4(),
-		Icon:   req.Geticon(),
+		Icon:   req.GetIcon(),
 	}
 
 	images, err := server.infoStore.CreateImage(ctx, img)
@@ -73,7 +72,7 @@ func (server *Server) UpdateImages(ctx context.Context, req *pb.UpdateImagesRequ
 		Img2:   req.GetImg2(),
 		Img3:   req.GetImg3(),
 		Img4:   req.GetImg4(),
-		Icon:   req.Geticon(),
+		Icon:   req.GetIcon(),
 	}
 
 	images, err := server.infoStore.UpdateImage(ctx, img)

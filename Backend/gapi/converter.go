@@ -1,7 +1,9 @@
 package gapi
 
 import (
+	ch "Backend/db/sqlc/chat"
 	info "Backend/db/sqlc/info"
+
 	"Backend/pb"
 
 	"google.golang.org/protobuf/types/known/timestamppb"
@@ -122,4 +124,41 @@ func convertTargetList(tl info.Targetlist) *pb.Targetlist {
 		Target3ID: tl.Target3ID,
 		UpdatedAt: timestamppb.New(tl.UpdatedAt.Time),
 	}
+}
+
+func convertPay(p info.Payment) *pb.Payment {
+	return &pb.Payment{
+		PayID:       p.PayID.String(),
+		FullName:    p.Fullname,
+		PaymentType: p.PaymentType,
+		Amount:      p.Amount,
+		Product:     p.Product,
+		PayAt:       timestamppb.New(p.PayAt.Time),
+	}
+}
+
+func convertChat(chat ch.Record) *pb.ChatRecord {
+	return &pb.ChatRecord{
+		TargetID:  chat.TargetID,
+		MsgType:   chat.MsgType,
+		Message:   chat.Message,
+		Images:    chat.Images,
+		CreatedAt: timestamppb.New(chat.CreatedAt),
+	}
+}
+
+func convertChatList(chats []ch.Record) []*pb.ChatRecord {
+	pbChats := make([]*pb.ChatRecord, len(chats))
+
+	for i, chat := range chats {
+		pbChats[i] = &pb.ChatRecord{
+			TargetID:  chat.TargetID,
+			MsgType:   chat.MsgType,
+			Message:   chat.Message,
+			Images:    chat.Images,
+			CreatedAt: timestamppb.New(chat.CreatedAt),
+		}
+	}
+
+	return pbChats
 }

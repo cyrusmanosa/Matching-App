@@ -10,7 +10,8 @@ import (
 )
 
 type Server struct {
-	pb.UnimplementedBackendServer
+	pb.UnimplementedInformationServer
+	pb.UnimplementedChatServer
 	config     util.Config
 	infoStore  indb.InfoStore
 	chatStore  chdb.ChatStore

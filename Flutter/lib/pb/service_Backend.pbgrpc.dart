@@ -18,6 +18,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 import 'rpc_accompany.pb.dart' as $5;
 import 'rpc_canChange.pb.dart' as $4;
 import 'rpc_changeTarget.pb.dart' as $10;
+import 'rpc_chatRecord.pb.dart' as $13;
 import 'rpc_checkEmail.pb.dart' as $1;
 import 'rpc_complaint.pb.dart' as $8;
 import 'rpc_fix.pb.dart' as $3;
@@ -26,130 +27,139 @@ import 'rpc_images.pb.dart' as $11;
 import 'rpc_login.pb.dart' as $0;
 import 'rpc_lover.pb.dart' as $7;
 import 'rpc_password.pb.dart' as $2;
+import 'rpc_payment.pb.dart' as $12;
 import 'rpc_targetList.pb.dart' as $9;
 
 export 'service_Backend.pb.dart';
 
-@$pb.GrpcServiceName('pb.Backend')
-class BackendClient extends $grpc.Client {
+@$pb.GrpcServiceName('pb.Information')
+class InformationClient extends $grpc.Client {
   static final _$loginUser = $grpc.ClientMethod<$0.LoginUserRequest, $0.LoginUserResponse>(
-      '/pb.Backend/LoginUser',
+      '/pb.Information/LoginUser',
       ($0.LoginUserRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.LoginUserResponse.fromBuffer(value));
   static final _$checkEmail = $grpc.ClientMethod<$1.CheckEmailRequest, $1.CheckEmailResponse>(
-      '/pb.Backend/CheckEmail',
+      '/pb.Information/CheckEmail',
       ($1.CheckEmailRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $1.CheckEmailResponse.fromBuffer(value));
   static final _$checkEmailCode = $grpc.ClientMethod<$1.SendEmailRequest, $1.CheckedEmailResponse>(
-      '/pb.Backend/CheckEmailCode',
+      '/pb.Information/CheckEmailCode',
       ($1.SendEmailRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $1.CheckedEmailResponse.fromBuffer(value));
   static final _$inputPassword = $grpc.ClientMethod<$2.InputPasswordRequest, $2.InputPasswordResponse>(
-      '/pb.Backend/InputPassword',
+      '/pb.Information/InputPassword',
       ($2.InputPasswordRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $2.InputPasswordResponse.fromBuffer(value));
   static final _$resetPassword = $grpc.ClientMethod<$2.ResetPasswordRequest, $2.ResetPasswordResponse>(
-      '/pb.Backend/ResetPassword',
+      '/pb.Information/ResetPassword',
       ($2.ResetPasswordRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $2.ResetPasswordResponse.fromBuffer(value));
   static final _$createFix = $grpc.ClientMethod<$3.CreateFixRequest, $3.CreateFixResponse>(
-      '/pb.Backend/CreateFix',
+      '/pb.Information/CreateFix',
       ($3.CreateFixRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $3.CreateFixResponse.fromBuffer(value));
   static final _$createCanChange = $grpc.ClientMethod<$4.CreateCanChangeRequest, $4.CreateCanChangeResponse>(
-      '/pb.Backend/CreateCanChange',
+      '/pb.Information/CreateCanChange',
       ($4.CreateCanChangeRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $4.CreateCanChangeResponse.fromBuffer(value));
   static final _$getCanChange = $grpc.ClientMethod<$4.GetCanChangeRequest, $4.GetCanChangeResponse>(
-      '/pb.Backend/GetCanChange',
+      '/pb.Information/GetCanChange',
       ($4.GetCanChangeRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $4.GetCanChangeResponse.fromBuffer(value));
   static final _$updateCanChange = $grpc.ClientMethod<$4.UpdateCanChangeRequest, $4.UpdateCanChangeResponse>(
-      '/pb.Backend/UpdateCanChange',
+      '/pb.Information/UpdateCanChange',
       ($4.UpdateCanChangeRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $4.UpdateCanChangeResponse.fromBuffer(value));
   static final _$createAccompany = $grpc.ClientMethod<$5.CreateAccompanyRequest, $5.CreateAccompanyResponse>(
-      '/pb.Backend/CreateAccompany',
+      '/pb.Information/CreateAccompany',
       ($5.CreateAccompanyRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $5.CreateAccompanyResponse.fromBuffer(value));
   static final _$getAccompany = $grpc.ClientMethod<$5.GetAccompanyRequest, $5.GetAccompanyResponse>(
-      '/pb.Backend/GetAccompany',
+      '/pb.Information/GetAccompany',
       ($5.GetAccompanyRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $5.GetAccompanyResponse.fromBuffer(value));
   static final _$updateAccompany = $grpc.ClientMethod<$5.UpdateAccompanyRequest, $5.UpdateAccompanyResponse>(
-      '/pb.Backend/UpdateAccompany',
+      '/pb.Information/UpdateAccompany',
       ($5.UpdateAccompanyRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $5.UpdateAccompanyResponse.fromBuffer(value));
   static final _$createHobby = $grpc.ClientMethod<$6.CreateHobbyRequest, $6.CreateHobbyResponse>(
-      '/pb.Backend/CreateHobby',
+      '/pb.Information/CreateHobby',
       ($6.CreateHobbyRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $6.CreateHobbyResponse.fromBuffer(value));
   static final _$getHobby = $grpc.ClientMethod<$6.GetHobbyRequest, $6.GetHobbyResponse>(
-      '/pb.Backend/GetHobby',
+      '/pb.Information/GetHobby',
       ($6.GetHobbyRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $6.GetHobbyResponse.fromBuffer(value));
   static final _$updateHobby = $grpc.ClientMethod<$6.UpdateHobbyRequest, $6.UpdateHobbyResponse>(
-      '/pb.Backend/UpdateHobby',
+      '/pb.Information/UpdateHobby',
       ($6.UpdateHobbyRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $6.UpdateHobbyResponse.fromBuffer(value));
   static final _$createLover = $grpc.ClientMethod<$7.CreateLoverRequest, $7.CreateLoverResponse>(
-      '/pb.Backend/CreateLover',
+      '/pb.Information/CreateLover',
       ($7.CreateLoverRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $7.CreateLoverResponse.fromBuffer(value));
   static final _$getLover = $grpc.ClientMethod<$7.GetLoverRequest, $7.GetLoverResponse>(
-      '/pb.Backend/GetLover',
+      '/pb.Information/GetLover',
       ($7.GetLoverRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $7.GetLoverResponse.fromBuffer(value));
   static final _$updateLover = $grpc.ClientMethod<$7.UpdateLoverRequest, $7.UpdateLoverResponse>(
-      '/pb.Backend/UpdateLover',
+      '/pb.Information/UpdateLover',
       ($7.UpdateLoverRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $7.UpdateLoverResponse.fromBuffer(value));
   static final _$createComplaint = $grpc.ClientMethod<$8.CreateComplaintRequest, $8.CreateComplaintResponse>(
-      '/pb.Backend/CreateComplaint',
+      '/pb.Information/CreateComplaint',
       ($8.CreateComplaintRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $8.CreateComplaintResponse.fromBuffer(value));
   static final _$getComplaint = $grpc.ClientMethod<$8.GetComplaintRequest, $8.GetComplaintResponse>(
-      '/pb.Backend/GetComplaint',
+      '/pb.Information/GetComplaint',
       ($8.GetComplaintRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $8.GetComplaintResponse.fromBuffer(value));
   static final _$updateComplaint = $grpc.ClientMethod<$8.UpdateComplaintRequest, $8.UpdateComplaintResponse>(
-      '/pb.Backend/UpdateComplaint',
+      '/pb.Information/UpdateComplaint',
       ($8.UpdateComplaintRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $8.UpdateComplaintResponse.fromBuffer(value));
   static final _$createTargetList = $grpc.ClientMethod<$9.CreateTargetListRequest, $9.CreateTargetListResponse>(
-      '/pb.Backend/CreateTargetList',
+      '/pb.Information/CreateTargetList',
       ($9.CreateTargetListRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $9.CreateTargetListResponse.fromBuffer(value));
   static final _$getTargetList = $grpc.ClientMethod<$9.GetTargetListRequest, $9.GetTargetListResponse>(
-      '/pb.Backend/GetTargetList',
+      '/pb.Information/GetTargetList',
       ($9.GetTargetListRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $9.GetTargetListResponse.fromBuffer(value));
   static final _$updateTargetList = $grpc.ClientMethod<$9.UpdateTargetListRequest, $9.UpdateTargetListResponse>(
-      '/pb.Backend/UpdateTargetList',
+      '/pb.Information/UpdateTargetList',
       ($9.UpdateTargetListRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $9.UpdateTargetListResponse.fromBuffer(value));
   static final _$createChangeTarget = $grpc.ClientMethod<$10.CreateChangeTargetRequest, $10.CreateChangeTargetResponse>(
-      '/pb.Backend/CreateChangeTarget',
+      '/pb.Information/CreateChangeTarget',
       ($10.CreateChangeTargetRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $10.CreateChangeTargetResponse.fromBuffer(value));
   static final _$getChangeTarget = $grpc.ClientMethod<$10.GetChangeTargetRequest, $10.GetChangeTargetResponse>(
-      '/pb.Backend/GetChangeTarget',
+      '/pb.Information/GetChangeTarget',
       ($10.GetChangeTargetRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $10.GetChangeTargetResponse.fromBuffer(value));
   static final _$createImages = $grpc.ClientMethod<$11.CreateImagesRequest, $11.CreateImagesResponse>(
-      '/pb.Backend/CreateImages',
+      '/pb.Information/CreateImages',
       ($11.CreateImagesRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $11.CreateImagesResponse.fromBuffer(value));
   static final _$getImages = $grpc.ClientMethod<$11.GetImagesRequest, $11.GetImagesResponse>(
-      '/pb.Backend/GetImages',
+      '/pb.Information/GetImages',
       ($11.GetImagesRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $11.GetImagesResponse.fromBuffer(value));
   static final _$updateImages = $grpc.ClientMethod<$11.UpdateImagesRequest, $11.UpdateImagesResponse>(
-      '/pb.Backend/UpdateImages',
+      '/pb.Information/UpdateImages',
       ($11.UpdateImagesRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $11.UpdateImagesResponse.fromBuffer(value));
+  static final _$createPayment = $grpc.ClientMethod<$12.CreatePaymentRequest, $12.CreatePaymentResponse>(
+      '/pb.Information/CreatePayment',
+      ($12.CreatePaymentRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $12.CreatePaymentResponse.fromBuffer(value));
+  static final _$getPayment = $grpc.ClientMethod<$12.GetPaymentRequest, $12.GetPaymentResponse>(
+      '/pb.Information/GetPayment',
+      ($12.GetPaymentRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $12.GetPaymentResponse.fromBuffer(value));
 
-  BackendClient($grpc.ClientChannel channel,
+  InformationClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options,
@@ -270,13 +280,21 @@ class BackendClient extends $grpc.Client {
   $grpc.ResponseFuture<$11.UpdateImagesResponse> updateImages($11.UpdateImagesRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateImages, request, options: options);
   }
+
+  $grpc.ResponseFuture<$12.CreatePaymentResponse> createPayment($12.CreatePaymentRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$createPayment, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$12.GetPaymentResponse> getPayment($12.GetPaymentRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getPayment, request, options: options);
+  }
 }
 
-@$pb.GrpcServiceName('pb.Backend')
-abstract class BackendServiceBase extends $grpc.Service {
-  $core.String get $name => 'pb.Backend';
+@$pb.GrpcServiceName('pb.Information')
+abstract class InformationServiceBase extends $grpc.Service {
+  $core.String get $name => 'pb.Information';
 
-  BackendServiceBase() {
+  InformationServiceBase() {
     $addMethod($grpc.ServiceMethod<$0.LoginUserRequest, $0.LoginUserResponse>(
         'LoginUser',
         loginUser_Pre,
@@ -480,6 +498,20 @@ abstract class BackendServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $11.UpdateImagesRequest.fromBuffer(value),
         ($11.UpdateImagesResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$12.CreatePaymentRequest, $12.CreatePaymentResponse>(
+        'CreatePayment',
+        createPayment_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $12.CreatePaymentRequest.fromBuffer(value),
+        ($12.CreatePaymentResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$12.GetPaymentRequest, $12.GetPaymentResponse>(
+        'GetPayment',
+        getPayment_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $12.GetPaymentRequest.fromBuffer(value),
+        ($12.GetPaymentResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.LoginUserResponse> loginUser_Pre($grpc.ServiceCall call, $async.Future<$0.LoginUserRequest> request) async {
@@ -598,6 +630,14 @@ abstract class BackendServiceBase extends $grpc.Service {
     return updateImages(call, await request);
   }
 
+  $async.Future<$12.CreatePaymentResponse> createPayment_Pre($grpc.ServiceCall call, $async.Future<$12.CreatePaymentRequest> request) async {
+    return createPayment(call, await request);
+  }
+
+  $async.Future<$12.GetPaymentResponse> getPayment_Pre($grpc.ServiceCall call, $async.Future<$12.GetPaymentRequest> request) async {
+    return getPayment(call, await request);
+  }
+
   $async.Future<$0.LoginUserResponse> loginUser($grpc.ServiceCall call, $0.LoginUserRequest request);
   $async.Future<$1.CheckEmailResponse> checkEmail($grpc.ServiceCall call, $1.CheckEmailRequest request);
   $async.Future<$1.CheckedEmailResponse> checkEmailCode($grpc.ServiceCall call, $1.SendEmailRequest request);
@@ -627,4 +667,84 @@ abstract class BackendServiceBase extends $grpc.Service {
   $async.Future<$11.CreateImagesResponse> createImages($grpc.ServiceCall call, $11.CreateImagesRequest request);
   $async.Future<$11.GetImagesResponse> getImages($grpc.ServiceCall call, $11.GetImagesRequest request);
   $async.Future<$11.UpdateImagesResponse> updateImages($grpc.ServiceCall call, $11.UpdateImagesRequest request);
+  $async.Future<$12.CreatePaymentResponse> createPayment($grpc.ServiceCall call, $12.CreatePaymentRequest request);
+  $async.Future<$12.GetPaymentResponse> getPayment($grpc.ServiceCall call, $12.GetPaymentRequest request);
+}
+@$pb.GrpcServiceName('pb.Chat')
+class ChatClient extends $grpc.Client {
+  static final _$createChatRecord = $grpc.ClientMethod<$13.CreateChatRecordRequest, $13.CreateChatRecordResponse>(
+      '/pb.Chat/CreateChatRecord',
+      ($13.CreateChatRecordRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $13.CreateChatRecordResponse.fromBuffer(value));
+  static final _$getChatRecord = $grpc.ClientMethod<$13.GetChatRecordRequest, $13.GetChatRecordResponse>(
+      '/pb.Chat/GetChatRecord',
+      ($13.GetChatRecordRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $13.GetChatRecordResponse.fromBuffer(value));
+  static final _$updateChatRecord = $grpc.ClientMethod<$13.UpdateChatRecordRequest, $13.UpdateChatRecordResponse>(
+      '/pb.Chat/UpdateChatRecord',
+      ($13.UpdateChatRecordRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $13.UpdateChatRecordResponse.fromBuffer(value));
+
+  ChatClient($grpc.ClientChannel channel,
+      {$grpc.CallOptions? options,
+      $core.Iterable<$grpc.ClientInterceptor>? interceptors})
+      : super(channel, options: options,
+        interceptors: interceptors);
+
+  $grpc.ResponseFuture<$13.CreateChatRecordResponse> createChatRecord($13.CreateChatRecordRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$createChatRecord, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$13.GetChatRecordResponse> getChatRecord($13.GetChatRecordRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getChatRecord, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$13.UpdateChatRecordResponse> updateChatRecord($13.UpdateChatRecordRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateChatRecord, request, options: options);
+  }
+}
+
+@$pb.GrpcServiceName('pb.Chat')
+abstract class ChatServiceBase extends $grpc.Service {
+  $core.String get $name => 'pb.Chat';
+
+  ChatServiceBase() {
+    $addMethod($grpc.ServiceMethod<$13.CreateChatRecordRequest, $13.CreateChatRecordResponse>(
+        'CreateChatRecord',
+        createChatRecord_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $13.CreateChatRecordRequest.fromBuffer(value),
+        ($13.CreateChatRecordResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$13.GetChatRecordRequest, $13.GetChatRecordResponse>(
+        'GetChatRecord',
+        getChatRecord_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $13.GetChatRecordRequest.fromBuffer(value),
+        ($13.GetChatRecordResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$13.UpdateChatRecordRequest, $13.UpdateChatRecordResponse>(
+        'UpdateChatRecord',
+        updateChatRecord_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $13.UpdateChatRecordRequest.fromBuffer(value),
+        ($13.UpdateChatRecordResponse value) => value.writeToBuffer()));
+  }
+
+  $async.Future<$13.CreateChatRecordResponse> createChatRecord_Pre($grpc.ServiceCall call, $async.Future<$13.CreateChatRecordRequest> request) async {
+    return createChatRecord(call, await request);
+  }
+
+  $async.Future<$13.GetChatRecordResponse> getChatRecord_Pre($grpc.ServiceCall call, $async.Future<$13.GetChatRecordRequest> request) async {
+    return getChatRecord(call, await request);
+  }
+
+  $async.Future<$13.UpdateChatRecordResponse> updateChatRecord_Pre($grpc.ServiceCall call, $async.Future<$13.UpdateChatRecordRequest> request) async {
+    return updateChatRecord(call, await request);
+  }
+
+  $async.Future<$13.CreateChatRecordResponse> createChatRecord($grpc.ServiceCall call, $13.CreateChatRecordRequest request);
+  $async.Future<$13.GetChatRecordResponse> getChatRecord($grpc.ServiceCall call, $13.GetChatRecordRequest request);
+  $async.Future<$13.UpdateChatRecordResponse> updateChatRecord($grpc.ServiceCall call, $13.UpdateChatRecordRequest request);
 }

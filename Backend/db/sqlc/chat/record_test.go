@@ -11,18 +11,18 @@ import (
 
 const r1 = 47
 
-func TestInsertRecord(t *testing.T) {
+func TestCreateRecord(t *testing.T) {
 	CreateRandomRecord(t)
 }
 func CreateRandomRecord(t *testing.T) Record {
-	arg := InsertRecordParams{
+	arg := CreateRecordParams{
 		TargetID: r1,
 		MsgType:  util.Randomstring(3),
 		Message:  gofakeit.HackerPhrase(),
 		Images:   gofakeit.URL(),
 	}
 
-	InsertR, err := testChatQueries.InsertRecord(context.Background(), arg)
+	InsertR, err := testChatQueries.CreateRecord(context.Background(), arg, "u1")
 	require.NoError(t, err)
 	require.NotEmpty(t, InsertR)
 	require.Equal(t, InsertR.TargetID, arg.TargetID)
@@ -34,7 +34,7 @@ func CreateRandomRecord(t *testing.T) Record {
 }
 
 func TestGetrecord(t *testing.T) {
-	getR, err := testChatQueries.Getrecord(context.Background(), r1)
+	getR, err := testChatQueries.Getrecord(context.Background(), r1, "U1")
 	require.NoError(t, err)
 	require.NotEmpty(t, getR)
 }
@@ -48,7 +48,7 @@ func TestUpdateRecord(t *testing.T) {
 		CreatedAt: arg.CreatedAt,
 	}
 
-	UpR, err := testChatQueries.UpdateRecord(context.Background(), New)
+	UpR, err := testChatQueries.UpdateRecord(context.Background(), New, "u1")
 	require.NoError(t, err)
 	require.NotEmpty(t, UpR)
 	require.NotEqual(t, UpR.Message, arg.Message)
@@ -61,6 +61,6 @@ func TestDeleteRecord(t *testing.T) {
 		CreatedAt: R.CreatedAt,
 	}
 
-	err := testChatQueries.DeleteRecord(context.Background(), arg)
+	err := testChatQueries.DeleteRecord(context.Background(), arg, "u1")
 	require.NoError(t, err)
 }

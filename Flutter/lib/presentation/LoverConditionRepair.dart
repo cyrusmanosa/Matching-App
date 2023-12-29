@@ -1,6 +1,6 @@
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/global_variable/model.dart';
+import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/rpc_lover.pb.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
@@ -94,7 +94,7 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
       religious: resetLoverReligiousController.text,
     );
 
-    final response = await GrpcService.client.updateLover(request);
+    final response = await GrpcInfoService.client.updateLover(request);
     // ignore: unnecessary_null_comparison
     if (response != null) {
       onTapNextButton(context);

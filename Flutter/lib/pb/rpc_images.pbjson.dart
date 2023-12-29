@@ -23,7 +23,7 @@ const CreateImagesRequest$json = {
     {'1': 'Img2', '3': 4, '4': 1, '5': 9, '10': 'Img2'},
     {'1': 'Img3', '3': 5, '4': 1, '5': 9, '10': 'Img3'},
     {'1': 'Img4', '3': 6, '4': 1, '5': 9, '10': 'Img4'},
-    {'1': 'Img5', '3': 7, '4': 1, '5': 9, '10': 'Img5'},
+    {'1': 'Icon', '3': 7, '4': 1, '5': 9, '10': 'Icon'},
   ],
 };
 
@@ -31,7 +31,7 @@ const CreateImagesRequest$json = {
 final $typed_data.Uint8List createImagesRequestDescriptor = $convert.base64Decode(
     'ChNDcmVhdGVJbWFnZXNSZXF1ZXN0EhYKBlVzZXJJRBgBIAEoBVIGVXNlcklEEg4KAlFyGAIgAS'
     'gJUgJRchISCgRJbWcxGAMgASgJUgRJbWcxEhIKBEltZzIYBCABKAlSBEltZzISEgoESW1nMxgF'
-    'IAEoCVIESW1nMxISCgRJbWc0GAYgASgJUgRJbWc0EhIKBEltZzUYByABKAlSBEltZzU=');
+    'IAEoCVIESW1nMxISCgRJbWc0GAYgASgJUgRJbWc0EhIKBEljb24YByABKAlSBEljb24=');
 
 @$core.Deprecated('Use createImagesResponseDescriptor instead')
 const CreateImagesResponse$json = {
@@ -79,7 +79,7 @@ const UpdateImagesRequest$json = {
     {'1': 'Img2', '3': 4, '4': 1, '5': 9, '10': 'Img2'},
     {'1': 'Img3', '3': 5, '4': 1, '5': 9, '10': 'Img3'},
     {'1': 'Img4', '3': 6, '4': 1, '5': 9, '10': 'Img4'},
-    {'1': 'Img5', '3': 7, '4': 1, '5': 9, '10': 'Img5'},
+    {'1': 'Icon', '3': 7, '4': 1, '5': 9, '10': 'Icon'},
   ],
 };
 
@@ -87,7 +87,7 @@ const UpdateImagesRequest$json = {
 final $typed_data.Uint8List updateImagesRequestDescriptor = $convert.base64Decode(
     'ChNVcGRhdGVJbWFnZXNSZXF1ZXN0EhYKBlVzZXJJRBgBIAEoBVIGVXNlcklEEg4KAlFyGAIgAS'
     'gJUgJRchISCgRJbWcxGAMgASgJUgRJbWcxEhIKBEltZzIYBCABKAlSBEltZzISEgoESW1nMxgF'
-    'IAEoCVIESW1nMxISCgRJbWc0GAYgASgJUgRJbWc0EhIKBEltZzUYByABKAlSBEltZzU=');
+    'IAEoCVIESW1nMxISCgRJbWc0GAYgASgJUgRJbWc0EhIKBEljb24YByABKAlSBEljb24=');
 
 @$core.Deprecated('Use updateImagesResponseDescriptor instead')
 const UpdateImagesResponse$json = {

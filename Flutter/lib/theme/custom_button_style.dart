@@ -32,17 +32,10 @@ class CustomButtonStyles {
 
 // --------------------- outline ---------------------
 
-  // while BG , gray border , Shadow
-  static ButtonStyle get outlineGrayWhiteBG => OutlinedButton.styleFrom(
+  // Google Button
+  static ButtonStyle get outlineGoogleButton => OutlinedButton.styleFrom(
         backgroundColor: theme.colorScheme.onPrimary,
-        side: BorderSide(color: appTheme.gray500, width: 1),
+        side: BorderSide(color: appTheme.gray500),
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
-      );
-
-  // Button
-  static ButtonStyle get outlinePinkGrayBG => OutlinedButton.styleFrom(
-        backgroundColor: Colors.transparent,
-        side: BorderSide(color: appTheme.pinkA100, width: 2),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r30),
       );
 }

@@ -1,6 +1,6 @@
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/global_variable/model.dart';
+import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/rpc_accompany.pb.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
@@ -72,7 +72,7 @@ class _AccompanyConditionRepairState extends State<AccompanyConditionRepair> {
       certification: false,
     );
 
-    final response = await GrpcService.client.updateAccompany(request);
+    final response = await GrpcInfoService.client.updateAccompany(request);
     // ignore: unnecessary_null_comparison
     if (response != null) {
       onTapNextButton(context);

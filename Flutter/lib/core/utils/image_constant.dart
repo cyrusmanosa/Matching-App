@@ -27,11 +27,11 @@ class ImageConstant {
   // Common images
   static String imgLogo = '$imagePath/img_logo.png';
   static String imgSlogan = '$imagePath/img_slogan.png';
-  static String imgNav = '$imagePath/img_nav.svg';
-  static String imgNavPrimary = '$imagePath/img_nav_primary.svg';
-  static String imgNavPrimary41x41 = '$imagePath/img_nav_primary_41x41.svg';
-  static String imgNav41x41 = '$imagePath/img_nav_41x41.svg';
-  static String imgNavPrimary41x44 = '$imagePath/img_nav_primary_41x44.svg';
+  static String imgHome = '$imagePath/img_nav.svg';
+  static String imgTarget = '$imagePath/img_nav_primary.svg';
+  static String imgChat = '$imagePath/img_nav_primary_41x41.svg';
+  static String imgProfile = '$imagePath/img_nav_41x41.svg';
+  static String imgTarget41x44 = '$imagePath/img_nav_primary_41x44.svg';
   static String imgNavCyan600 = '$imagePath/img_nav_cyan_600.svg';
   static String imgWarning = '$imagePath/img_warning.svg';
   static String imgUser = '$imagePath/img_user.svg';

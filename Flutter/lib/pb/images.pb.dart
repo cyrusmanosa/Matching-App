@@ -21,7 +21,7 @@ class Images extends $pb.GeneratedMessage {
     $core.String? img2,
     $core.String? img3,
     $core.String? img4,
-    $core.String? img5,
+    $core.String? icon,
   }) {
     final $result = create();
     if (userID != null) {
@@ -42,8 +42,8 @@ class Images extends $pb.GeneratedMessage {
     if (img4 != null) {
       $result.img4 = img4;
     }
-    if (img5 != null) {
-      $result.img5 = img5;
+    if (icon != null) {
+      $result.icon = icon;
     }
     return $result;
   }
@@ -58,7 +58,7 @@ class Images extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'Img2', protoName: 'Img2')
     ..aOS(5, _omitFieldNames ? '' : 'Img3', protoName: 'Img3')
     ..aOS(6, _omitFieldNames ? '' : 'Img4', protoName: 'Img4')
-    ..aOS(7, _omitFieldNames ? '' : 'Img5', protoName: 'Img5')
+    ..aOS(7, _omitFieldNames ? '' : 'Icon', protoName: 'Icon')
     ..hasRequiredFields = false
   ;
 
@@ -138,13 +138,13 @@ class Images extends $pb.GeneratedMessage {
   void clearImg4() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.String get img5 => $_getSZ(6);
+  $core.String get icon => $_getSZ(6);
   @$pb.TagNumber(7)
-  set img5($core.String v) { $_setString(6, v); }
+  set icon($core.String v) { $_setString(6, v); }
   @$pb.TagNumber(7)
-  $core.bool hasImg5() => $_has(6);
+  $core.bool hasIcon() => $_has(6);
   @$pb.TagNumber(7)
-  void clearImg5() => clearField(7);
+  void clearIcon() => clearField(7);
 }
 
 

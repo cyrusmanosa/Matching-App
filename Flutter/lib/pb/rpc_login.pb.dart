@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $12;
+import 'google/protobuf/timestamp.pb.dart' as $14;
 
 class LoginUserRequest extends $pb.GeneratedMessage {
   factory LoginUserRequest({
@@ -83,7 +83,7 @@ class LoginUserResponse extends $pb.GeneratedMessage {
   factory LoginUserResponse({
     $core.String? sessionsID,
     $core.String? email,
-    $12.Timestamp? accessTokenExpiresAt,
+    $14.Timestamp? accessTokenExpiresAt,
   }) {
     final $result = create();
     if (sessionsID != null) {
@@ -104,7 +104,7 @@ class LoginUserResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'LoginUserResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'SessionsID', protoName: 'SessionsID')
     ..aOS(3, _omitFieldNames ? '' : 'Email', protoName: 'Email')
-    ..aOM<$12.Timestamp>(6, _omitFieldNames ? '' : 'AccessTokenExpiresAt', protoName: 'AccessTokenExpiresAt', subBuilder: $12.Timestamp.create)
+    ..aOM<$14.Timestamp>(6, _omitFieldNames ? '' : 'AccessTokenExpiresAt', protoName: 'AccessTokenExpiresAt', subBuilder: $14.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -148,15 +148,15 @@ class LoginUserResponse extends $pb.GeneratedMessage {
   void clearEmail() => clearField(3);
 
   @$pb.TagNumber(6)
-  $12.Timestamp get accessTokenExpiresAt => $_getN(2);
+  $14.Timestamp get accessTokenExpiresAt => $_getN(2);
   @$pb.TagNumber(6)
-  set accessTokenExpiresAt($12.Timestamp v) { setField(6, v); }
+  set accessTokenExpiresAt($14.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasAccessTokenExpiresAt() => $_has(2);
   @$pb.TagNumber(6)
   void clearAccessTokenExpiresAt() => clearField(6);
   @$pb.TagNumber(6)
-  $12.Timestamp ensureAccessTokenExpiresAt() => $_ensure(2);
+  $14.Timestamp ensureAccessTokenExpiresAt() => $_ensure(2);
 }
 
 

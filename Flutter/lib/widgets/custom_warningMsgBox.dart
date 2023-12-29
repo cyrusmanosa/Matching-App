@@ -31,7 +31,7 @@ class CustomWarningMsgBox extends StatelessWidget {
                   children: [
                     CustomImageView(imagePath: ImageConstant.imgWarning, height: 40, width: 50, alignment: Alignment.center),
                     SizedBox(height: 10.v),
-                    Text(msg!, style: CustomTextStyles.bodyMediumblack),
+                    Text(msg!, style: CustomTextStyles.smallTitle20),
                     SizedBox(height: mediaQueryData.size.height / 50),
 
                     // button

@@ -1,5 +1,5 @@
 import 'package:dating_your_date/client/grpc_services.dart';
-import 'package:dating_your_date/global_variable/model.dart';
+import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import '../Profile/widgets/shownicknamebar_item_widget.dart';
@@ -13,7 +13,7 @@ class Profile extends StatelessWidget {
   // Grpc
   Future<CanChange> getCanChangeGrpcRequest(BuildContext context) async {
     final request = GetCanChangeRequest(sessionID: globalSessionID);
-    final response = await GrpcService.client.getCanChange(request);
+    final response = await GrpcInfoService.client.getCanChange(request);
     // ignore: unnecessary_null_comparison
     if (response == null) {
       showErrorDialog(context, "Error: validatable input data");
@@ -109,57 +109,54 @@ class Profile extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("自己紹介", style: CustomTextStyles.bodyMediumPinkA100),
+                                  Text("自己紹介", style: CustomTextStyles.showDataTitle),
                                   Divider(),
-                                  Text(data.introduce, style: CustomTextStyles.bodyMediumblack),
+                                  Text(data.introduce, style: CustomTextStyles.smallTitle20),
                                 ],
                               ),
                             ),
                             SizedBox(height: 100.v),
 
                             // title
-                            Text("個人基本情報", style: CustomTextStyles.headlineMediumRoundedMplus1c),
+                            Text("個人基本情報", style: CustomTextStyles.smallTitle20),
                             SizedBox(height: 25.v),
 
                             // Nick Name
-                            ShownDataBaWidget(item: "ニックネーム", data: data.nickName),
+                            ShownDataBarWidget(item: "ニックネーム", data: data.nickName),
                             SizedBox(height: 25.v),
-                            ShownDataBaWidget(item: "身長", data: data.height.toString() + " CM"),
+                            ShownDataBarWidget(item: "身長", data: data.height.toString() + " CM"),
                             SizedBox(height: 25.v),
-                            ShownDataBaWidget(item: "体重", data: data.weight.toString() + " KG"),
+                            ShownDataBarWidget(item: "体重", data: data.weight.toString() + " KG"),
                             SizedBox(height: 25.v),
-                            ShownDataBaWidget(item: "居住地", data: data.city),
+                            ShownDataBarWidget(item: "居住地", data: data.city),
                             SizedBox(height: 25.v),
-                            ShownDataBaWidget(item: "学歴", data: data.education),
+                            ShownDataBarWidget(item: "学歴", data: data.education),
                             SizedBox(height: 25.v),
 
                             // TODO: 1
-                            ShownDataBaWidget(item: "趣味", data: "#################"),
+                            ShownDataBarWidget(item: "趣味", data: "#################"),
                             SizedBox(height: 25.v),
-                            ShownDataBaWidget(item: "職種", data: data.job),
+                            ShownDataBarWidget(item: "職種", data: data.job),
                             SizedBox(height: 25.v),
-                            ShownDataBaWidget(item: "性的指向", data: data.sexual),
+                            ShownDataBarWidget(item: "性的指向", data: data.sexual),
                             SizedBox(height: 25.v),
-                            ShownDataBaWidget(item: "社交力", data: data.sociability),
+                            ShownDataBarWidget(item: "社交力", data: data.sociability),
                             SizedBox(height: 25.v),
 
                             // TODO: 2
-                            ShownDataBaWidget(item: "探す対象", data: "#########"),
+                            ShownDataBarWidget(item: "探す対象", data: "#########"),
                             SizedBox(height: 25.v),
 
                             // TODO: 3
-                            ShownDataBaWidget(item: "目的", data: "############"),
+                            ShownDataBarWidget(item: "目的", data: "############"),
                             SizedBox(height: 25.v),
-                            ShownDataBaWidget(item: "宗教", data: data.religious),
+                            ShownDataBarWidget(item: "宗教", data: data.religious),
 
                             SizedBox(height: mediaQueryData.size.height / 25),
 
                             // edit button
                             CustomOutlinedButton(
-                              width: mediaQueryData.size.width / 4,
-                              height: 40,
                               text: "編集",
-                              buttonTextStyle: theme.textTheme.titleMedium,
                               onPressed: () {
                                 onTapNextButton(context);
                               },
@@ -194,36 +191,36 @@ class Profile extends StatelessWidget {
     );
   }
 
-  // Part2 All in one
+  // Part2
   Widget _buildInformationBar(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 35.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _buildChangeWord(context),
-          // link1
-          SizedBox(height: 65.v, child: VerticalDivider(width: 1.h, thickness: 1.v, indent: 17.h, endIndent: 18.h)),
-          _buildClaimWord(context),
-          // link1
-          SizedBox(height: 65.v, child: VerticalDivider(width: 1.h, thickness: 1.v, indent: 17.h, endIndent: 18.h)),
-          _buildSendWord(context)
+          Column(
+            children: [
+              Text("交換回数", style: theme.textTheme.titleMedium),
+              Text("0", style: theme.textTheme.headlineMedium),
+            ],
+          ),
+          SizedBox(height: 65.v, child: VerticalDivider(thickness: 1.v, indent: 17.h, endIndent: 18.h)),
+          Column(
+            children: [
+              Text("クレーム回数", style: theme.textTheme.titleMedium),
+              Text("0", style: theme.textTheme.headlineMedium),
+            ],
+          ),
+          SizedBox(height: 65.v, child: VerticalDivider(thickness: 1.v, indent: 17.h, endIndent: 18.h)),
+          Column(
+            children: [
+              Text("伝送回数", style: theme.textTheme.titleMedium),
+              Text("0", style: theme.textTheme.headlineMedium),
+            ],
+          ),
         ],
       ),
     );
-  }
-
-  // Part2 Backend
-  Widget _buildClaimWord(BuildContext context) {
-    return Column(children: [Text("クレーム回数", style: theme.textTheme.titleMedium), Text("0", style: theme.textTheme.headlineMedium)]);
-  }
-
-  Widget _buildChangeWord(BuildContext context) {
-    return Column(children: [Text("交換回数", style: theme.textTheme.titleMedium), Text("0", style: theme.textTheme.headlineMedium)]);
-  }
-
-  Widget _buildSendWord(BuildContext context) {
-    return Column(children: [Text("伝送回数", style: theme.textTheme.titleMedium), Text("0", style: theme.textTheme.headlineMedium)]);
   }
 
   onTapReturn(BuildContext context) {

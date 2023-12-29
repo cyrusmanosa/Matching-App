@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/global_variable/model.dart';
+import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
@@ -71,7 +71,7 @@ class CanChangeInformation_1 extends StatelessWidget {
     } else if (canChangeSpeakLanguageController.text == "") {
       showErrorDialog(context, "学歴がまだ入力されていません");
     } else {
-      final response = await GrpcService.client.createCanChange(request);
+      final response = await GrpcInfoService.client.createCanChange(request);
       // ignore: unnecessary_null_comparison
       if (response != null) {
         onTapNextButton(context);

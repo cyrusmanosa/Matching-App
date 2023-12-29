@@ -1,6 +1,6 @@
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/global_variable/model.dart';
+import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/rpc_fix.pb.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Test.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
@@ -73,7 +73,7 @@ class _FixInformationState extends State<FixInformation> {
         gender: fixGenderController.text,
         blood: fixBloodController.text,
       );
-      final response = await GrpcService.client.createFix(request);
+      final response = await GrpcInfoService.client.createFix(request);
       // ignore: unnecessary_null_comparison
       if (response != null) {
         onTapNextButton(context);
@@ -288,15 +288,15 @@ class _FixInformationState extends State<FixInformation> {
   /// Country
   Widget _buildfixCountryInput(BuildContext context) {
     return CustomInputFormBar(
+      controller: fixCountryController,
       hintText: "日本",
     );
   }
 
   /// Gender
   Widget _buildfixGenderInput(BuildContext context) {
-    return CustomInputSelect(
+    return CustomInputFormBar(
       controller: fixGenderController,
-      mapData: gender,
       hintText: "男",
     );
   }

@@ -23,7 +23,7 @@ class SearchTitle extends StatelessWidget {
               SizedBox(height: 25.v),
 
               // Tilte
-              Text("探すターゲットの種類", style: CustomTextStyles.headlineMediumblack),
+              Text("探すターゲットの種類", style: theme.textTheme.headlineSmall),
               SizedBox(height: 25.v),
 
               // button 1
