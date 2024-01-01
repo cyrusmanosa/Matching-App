@@ -33,7 +33,7 @@ import 'package:dating_your_date/presentation/PasswordReset_Email.dart';
 import 'package:dating_your_date/presentation/Profile/Profile.dart';
 import 'package:dating_your_date/presentation/ProfileEdit.dart';
 
-import 'package:dating_your_date/presentation/SearchTitle.dart';
+import 'package:dating_your_date/presentation/TargetFirstTime.dart';
 
 import 'package:dating_your_date/presentation/SideBar.dart';
 import 'package:dating_your_date/presentation/FixInformation.dart';
@@ -70,7 +70,7 @@ class AppRoutes {
   static const String payDone = '/payDone';
   static const String profile = '/profile';
   static const String profileEdit = '/profileEdit';
-  static const String searchTitle = '/searchTitle';
+  static const String targetFirstTime = '/sargetFirstTime';
   static const String sideBar = '/sideBar';
   static const String fixInformation = '/fixInformation';
   static const String canChangeInformation_1 = '/canChangeInformation_1';
@@ -106,7 +106,7 @@ class AppRoutes {
     payDone: (context) => PayDone(),
     profile: (context) => Profile(),
     profileEdit: (context) => ProfileEdit(),
-    searchTitle: (context) => SearchTitle(),
+    targetFirstTime: (context) => TargetFirstTime(),
     sideBar: (context) => SideBar(),
     fixInformation: (context) => FixInformation(),
     canChangeInformation_1: (context) => CanChangeInformation_1(),

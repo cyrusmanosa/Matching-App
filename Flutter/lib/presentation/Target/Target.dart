@@ -34,7 +34,7 @@ class Target extends StatelessWidget {
       decoration: AppDecoration.fillGray,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
-        children: [SizedBox(height: 40), Text("ターゲットの設定", style: theme.textTheme.headlineMedium)],
+        children: [SizedBox(height: mediaQueryData.size.height / 20), Text("ターゲットの設定", style: theme.textTheme.headlineMedium)],
       ),
     );
   }
@@ -43,7 +43,7 @@ class Target extends StatelessWidget {
   Widget _buildTargetResetList(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 15),
+        padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 10),
         child: ListView.separated(
           physics: BouncingScrollPhysics(),
           itemCount: 3,

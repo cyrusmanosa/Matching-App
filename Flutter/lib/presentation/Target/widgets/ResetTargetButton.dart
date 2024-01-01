@@ -13,10 +13,10 @@ class ResetTargetButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomElevatedButton(
-      width: mediaQueryData.size.width / 1.1,
-      height: mediaQueryData.size.height / 6,
+      width: mediaQueryData.size.width / 15,
+      height: mediaQueryData.size.height / 6.5,
       text: title!,
-      buttonTextStyle: TextStyle(),
+      buttonTextStyle: TextStyle(fontSize: mediaQueryData.size.width / 15, fontWeight: FontWeight.w500),
       buttonStyle: color,
       onPressed: () {
         onTapNextButton(context);

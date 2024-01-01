@@ -4,16 +4,20 @@ import 'package:flutter/material.dart';
 
 // ignore_for_file: must_be_immutable
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+  Home({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
     return SafeArea(
       child: Scaffold(
         body: Container(
           width: double.maxFinite,
-          child: Column(children: [_buildHeader(context), Expanded(child: _buildMainFrame(context))]),
+          child: Column(
+            children: [
+              _buildHeader(context),
+              Expanded(child: _buildMainFrame(context)),
+            ],
+          ),
         ),
       ),
     );
@@ -25,7 +29,7 @@ class Home extends StatelessWidget {
       decoration: AppDecoration.fillGray,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
-        children: [SizedBox(height: 40), Text("ホーム", style: theme.textTheme.headlineMedium)],
+        children: [SizedBox(height: mediaQueryData.size.height / 20), Text("ホーム", style: theme.textTheme.headlineMedium)],
       ),
     );
   }
@@ -34,15 +38,13 @@ class Home extends StatelessWidget {
   Widget _buildMainFrame(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 30),
+        SizedBox(height: mediaQueryData.size.height / 30),
         SizedBox(
-          height: 600,
+          height: mediaQueryData.size.height / 1.5,
           child: ListView.separated(
-            padding: EdgeInsets.symmetric(horizontal: 40),
+            padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 11),
             scrollDirection: Axis.horizontal,
-            separatorBuilder: (context, index) {
-              return SizedBox(width: 15.h);
-            },
+            separatorBuilder: (context, index) => SizedBox(width: mediaQueryData.size.width / 22),
             itemCount: 3,
             itemBuilder: (context, index) {
               return MainframeItemWidget();

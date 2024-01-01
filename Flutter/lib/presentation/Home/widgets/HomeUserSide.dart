@@ -7,10 +7,9 @@ class MainframeItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 350,
+      width: mediaQueryData.size.width / 1.2,
       child: Column(
         children: [
-          // 観賞回数
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -19,12 +18,9 @@ class MainframeItemWidget extends StatelessWidget {
             ],
           ),
           Container(
-            height: 570,
-            width: 350,
-            decoration: BoxDecoration(
-              color: appTheme.gray500,
-              borderRadius: BorderRadiusStyle.r30,
-            ),
+            height: mediaQueryData.size.height / 1.7,
+            width: mediaQueryData.size.width / 1.2,
+            decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadiusStyle.r30),
           ),
         ],
       ),

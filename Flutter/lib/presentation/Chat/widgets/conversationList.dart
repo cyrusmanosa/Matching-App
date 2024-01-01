@@ -20,9 +20,9 @@ class ConversationList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () {
-      //   Navigator.push(context, MaterialPageRoute(builder: (context) => const ChatDetailPage()));
-      // },
+      onTap: () {
+        onTapChatBox(context);
+      },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         child: Row(
@@ -52,4 +52,8 @@ class ConversationList extends StatelessWidget {
       ),
     );
   }
+}
+
+onTapChatBox(BuildContext context) {
+  Navigator.pushNamed(context, AppRoutes.chatBox);
 }

@@ -142,7 +142,7 @@ class AppNavigationScreen extends StatelessWidget {
                         _buildScreenTitle(
                           context,
                           userName: "ターゲットの最初設定",
-                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.searchTitle),
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.targetFirstTime),
                         ),
                         _buildScreenTitle(
                           context,
@@ -153,6 +153,11 @@ class AppNavigationScreen extends StatelessWidget {
                           context,
                           userName: "条件と合わせる条件は30％",
                           onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.lowPercentageLowWarnning),
+                        ),
+                        _buildScreenTitle(
+                          context,
+                          userName: "チャット",
+                          onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.chat),
                         ),
                         _buildScreenTitle(
                           context,

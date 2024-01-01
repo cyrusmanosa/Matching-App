@@ -168,7 +168,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
-                        child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.pwRuleGray500),
+                        child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
                       ),
                     ],
                   ),

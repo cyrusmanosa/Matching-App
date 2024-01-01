@@ -23,7 +23,7 @@ class DeleteTarget extends StatelessWidget {
           child: Column(
             children: [
               // Chooes
-              SizedBox(height: 5),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
               // Button
               CustomOutlinedButton(
@@ -32,7 +32,7 @@ class DeleteTarget extends StatelessWidget {
                   onTapNextButton(context);
                 },
               ),
-              SizedBox(height: 5),
+              SizedBox(height: mediaQueryData.size.height / 50),
             ],
           ),
         ),

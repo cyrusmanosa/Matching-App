@@ -15,12 +15,13 @@ class CustomTextStyles {
   static get msgWordOfMsgBox => theme.textTheme.headlineSmall!.copyWith(fontSize: 16);
   static get titleOfUnderLogo => theme.textTheme.headlineSmall!.copyWith(fontSize: 13);
   static get wordOnlySmallButton => theme.textTheme.headlineSmall!.copyWith(fontSize: 11);
+  static get chatBoxUserName => theme.textTheme.headlineMedium!.copyWith(fontSize: 16);
 
   // body
   static get pwRuleGray500 => theme.textTheme.bodySmall!.copyWith(fontSize: 12);
 
-  // Special
   static get outlineWhiteWordButton => TextStyle(color: theme.colorScheme.onPrimary, fontWeight: FontWeight.w400);
+  static get confirmGray => TextStyle(color: appTheme.gray500, fontSize: 12, fontWeight: FontWeight.w800);
   static get confirmGreen => TextStyle(color: appTheme.green, fontSize: 12, fontWeight: FontWeight.w800);
   static get mainButtonC => TextStyle(color: appTheme.cyan600, fontSize: 12, fontWeight: FontWeight.w800);
   static get mainButtonW => TextStyle(color: appTheme.white, fontSize: 12, fontWeight: FontWeight.w800);

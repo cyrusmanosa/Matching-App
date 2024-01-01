@@ -194,7 +194,7 @@ class _FixInformationState extends State<FixInformation> {
                         Padding(
                           padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
                           child: Text("満18歳以上の独身であることを誓約します",
-                              style: confirm18Btn ? CustomTextStyles.confirmGreen : CustomTextStyles.pwRuleGray500),
+                              style: confirm18Btn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
                         ),
                       ],
                     ),
@@ -220,10 +220,7 @@ class _FixInformationState extends State<FixInformation> {
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
-                          child: Text(
-                            "全ての規約に同意します",
-                            style: confirmAgreeBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.pwRuleGray500,
-                          ),
+                          child: Text("全ての規約に同意します", style: confirmAgreeBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
                         ),
                       ],
                     ),
@@ -287,34 +284,22 @@ class _FixInformationState extends State<FixInformation> {
 
   /// Country
   Widget _buildfixCountryInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: fixCountryController,
-      hintText: "日本",
-    );
+    return CustomInputFormBar(controller: fixCountryController, hintText: "日本");
   }
 
   /// Gender
   Widget _buildfixGenderInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: fixGenderController,
-      hintText: "男",
-    );
+    return CustomInputFormBar(controller: fixGenderController, hintText: "男");
   }
 
   /// Blood
   Widget _buildfixBloodInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: fixBloodController,
-      hintText: "O",
-      textInputAction: TextInputAction.done,
-    );
+    return CustomInputFormBar(controller: fixBloodController, hintText: "O");
   }
 
   /// Next Button
   Widget _buildNextPageButton(BuildContext context) {
     return CustomOutlinedButton(
-      width: mediaQueryData.size.width / 4,
-      height: mediaQueryData.size.height / 25,
       text: "次へ",
       onPressed: () {
         fixInformationGrpcRequest(context);
@@ -340,7 +325,6 @@ class _FixInformationState extends State<FixInformation> {
     Navigator.pop(context);
   }
 
-  /// Navigates to the signupPhoneoremailParttwoScreen when the action is triggered.
   onTapNextButton(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.passwordSetup);
   }

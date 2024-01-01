@@ -59,7 +59,6 @@ class ProfileEdit extends StatelessWidget {
           ),
           actions: [
             CustomOutlinedButton(
-              alignment: Alignment.center,
               text: "OK",
               margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
               onPressed: () {

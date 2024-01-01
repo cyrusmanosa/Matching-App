@@ -27,7 +27,6 @@ class _AccompanyConditionRepairState extends State<AccompanyConditionRepair> {
   TextEditingController resetAccompanyFindTypeController = TextEditingController();
   TextEditingController resetAccompanyFindTargetController = TextEditingController();
   TextEditingController resetAccompanySociabilityController = TextEditingController();
-  GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
 // Http
   void updateAccompanyHttpRequest(BuildContext context) async {
@@ -47,14 +46,6 @@ class _AccompanyConditionRepairState extends State<AccompanyConditionRepair> {
 
     if (response.statusCode == 200) {
       onTapNextButton(context);
-    } else {
-      print("Era: ${resetAccompanyEraController.text}");
-      print("City: ${resetAccompanyCityController.text}");
-      print("Gender: ${resetAccompanyGenderController.text}");
-      print("Speak_language: ${resetAccompanySpeakLanguageController.text}");
-      print("Find_Type: ${resetAccompanyFindTypeController.text}");
-      print("Find_Target: ${resetAccompanyFindTargetController.text}");
-      print("Sociability: ${resetAccompanySociabilityController.text}");
     }
   }
 
@@ -158,7 +149,7 @@ class _AccompanyConditionRepairState extends State<AccompanyConditionRepair> {
 
                 // Sociability
                 CustomInputBar(titleName: "社交力:", backendPart: _buildAccompanyResetSociabilityInput(context)),
-                SizedBox(height: 23.v),
+                SizedBox(height: mediaQueryData.size.height / 50),
 
                 // 本人認証の丸
                 InkWell(
@@ -177,15 +168,14 @@ class _AccompanyConditionRepairState extends State<AccompanyConditionRepair> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
-                        child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.pwRuleGray500),
+                        child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(height: 40),
+                SizedBox(height: mediaQueryData.size.height / 25),
 
                 _buildNextPageButton(context),
-                SizedBox(height: 30)
               ],
             ),
           ),
@@ -208,78 +198,53 @@ class _AccompanyConditionRepairState extends State<AccompanyConditionRepair> {
     );
   }
 
-  onTapReturn(BuildContext context) {
-    Navigator.pop(context);
-  }
-
   /// Section Widget
   Widget _buildAccompanyResetEraInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetAccompanyEraController,
-      hintText: "３０代",
-    );
+    return CustomInputFormBar(controller: resetAccompanyEraController, hintText: "３０代");
   }
 
   /// Section Widget
   Widget _buildAccompanyResetCityInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetAccompanyCityController,
-      hintText: "大阪",
-    );
+    return CustomInputFormBar(controller: resetAccompanyCityController, hintText: "大阪");
   }
 
   /// Section Widget
   Widget _buildAccompanyResetGenderInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetAccompanyGenderController,
-      hintText: "男",
-    );
+    return CustomInputFormBar(controller: resetAccompanyGenderController, hintText: "男");
   }
 
   /// Section Widget
   Widget _buildAccompanyResetAccompanyTypeInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetAccompanyFindTypeController,
-      hintText: "おしゃべり",
-    );
+    return CustomInputFormBar(controller: resetAccompanyFindTypeController, hintText: "おしゃべり");
   }
 
   /// Section Widget
   Widget _buildAccompanyResetFindTargetInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetAccompanyFindTargetController,
-      hintText: "聞き役",
-    );
+    return CustomInputFormBar(controller: resetAccompanyFindTargetController, hintText: "聞き役");
   }
 
   /// Accompany Type
   Widget _buildAccompanyResetSpeakLanguageInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetAccompanySpeakLanguageController,
-      hintText: "おしゃべり",
-    );
+    return CustomInputFormBar(controller: resetAccompanySpeakLanguageController, hintText: "おしゃべり");
   }
 
   /// Section Widget
   Widget _buildAccompanyResetSociabilityInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetAccompanySociabilityController,
-      hintText: "人たら神",
-      textInputAction: TextInputAction.done,
-    );
+    return CustomInputFormBar(controller: resetAccompanySociabilityController, hintText: "人たら神");
   }
 
   /// Next Button
   Widget _buildNextPageButton(BuildContext context) {
     return CustomOutlinedButton(
-      width: mediaQueryData.size.width / 4,
-      height: mediaQueryData.size.height / 25,
       text: "条件確認",
-      buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
         createAccompanyGrpcRequest(context);
       },
     );
+  }
+
+  onTapReturn(BuildContext context) {
+    Navigator.pop(context);
   }
 
   onTapNextButton(BuildContext context) {

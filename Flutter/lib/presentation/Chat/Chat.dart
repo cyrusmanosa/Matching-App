@@ -12,15 +12,43 @@ class Chat extends StatefulWidget {
 
 class _ChatState extends State<Chat> {
   List<ChatUsers> chatUsers = [
-    ChatUsers(name: "Jane Russel", messageText: "Awesome Setup", imageURL: "images/userImage1.jpeg", time: "Now"),
-    ChatUsers(name: "Glady's Murphy", messageText: "That's Great", imageURL: "images/userImage2.jpeg", time: "Yesterday"),
-    ChatUsers(name: "Jorge Henry", messageText: "Hey where are you?", imageURL: "images/userImage3.jpeg", time: "31 Mar"),
-    ChatUsers(name: "Philip Fox", messageText: "Busy! Call me in 20 mins", imageURL: "images/userImage4.jpeg", time: "28 Mar"),
-    ChatUsers(name: "Debra Hawkins", messageText: "Thankyou, It's awesome", imageURL: "images/userImage5.jpeg", time: "23 Mar"),
-    ChatUsers(name: "Jacob Pena", messageText: "will update you in evening", imageURL: "images/userImage6.jpeg", time: "17 Mar"),
+    ChatUsers(
+      name: "Jane Russel",
+      messageText: "Awesome Setup",
+      imageURL: "https://randomuser.me/api/portraits/men/1.jpg",
+      time: "Now",
+    ),
+    ChatUsers(
+      name: "Glady's Murphy",
+      messageText: "That's Great",
+      imageURL: "https://randomuser.me/api/portraits/women/2.jpg",
+      time: "Yesterday",
+    ),
+    ChatUsers(
+      name: "Jorge Henry",
+      messageText: "Hey where are you?",
+      imageURL: "https://randomuser.me/api/portraits/men/3.jpg",
+      time: "31 Mar",
+    ),
+    ChatUsers(
+      name: "Philip Fox",
+      messageText: "Busy! Call me in 20 mins",
+      imageURL: "https://randomuser.me/api/portraits/women/1.jpg",
+      time: "28 Mar",
+    ),
+    ChatUsers(
+      name: "Debra Hawkins",
+      messageText: "Thankyou, It's awesome",
+      imageURL: "https://randomuser.me/api/portraits/women/4.jpg",
+      time: "23 Mar",
+    ),
+    ChatUsers(
+      name: "Jacob Pena",
+      messageText: "will update you in evening",
+      imageURL: "https://randomuser.me/api/portraits/men/5.jpg",
+      time: "17 Mar",
+    ),
   ];
-
-  TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +69,7 @@ class _ChatState extends State<Chat> {
               physics: NeverScrollableScrollPhysics(),
               // 分線
               separatorBuilder: (context, index) => Divider(),
+
               itemBuilder: (context, index) {
                 return ConversationList(
                   name: chatUsers[index].name,

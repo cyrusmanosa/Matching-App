@@ -60,19 +60,6 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
 
     if (response.statusCode == 200) {
       onTapNextButton(context);
-    } else {
-      print("MinAge: ${resetLoverMinAgeController.text}");
-      print("MaxAge: ${resetLoverMaxAgeController.text}");
-      print("City: ${resetLoverCityController.text}");
-      print("Gender: ${resetLoverGenderController.text}");
-      print("Constellation: ${resetLoverConstellationController.text}");
-      print("Height: ${resetLoverHeightController.text}");
-      print("Weight: ${resetLoverWeightController.text}");
-      print("Speak Language: ${resetLoverSpeakLanguageController.text}");
-      print("Job: ${resetLoverJobController.text}");
-      print("AnnualSalary: ${resetLoverAnnualSalaryController.text}");
-      print("Sociability: ${resetLoverSociabilityController.text}");
-      print("Religious: ${resetLoverReligiousController.text}");
     }
   }
 
@@ -154,59 +141,16 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
             padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
             child: Column(
               children: [
-                // Text(
-                //   "年齢:",
-                //   style: theme.textTheme.titleMedium,
-                // ),
-                // // Age range
-                // Align(
-                //   alignment: Alignment.centerLeft,
-                //   child: Padding(
-                //     padding: EdgeInsets.only(left: 30.h),
-                //     child: Row(
-                //       children: [
-                //         // Min
-                //         Container(
-                //           height: 65.h,
-                //           width: 60.v,
-                //           decoration: BoxDecoration(
-                //             border: Border.all(color: Colors.red, width: 2),
-                //           ),
-                //           child: Stack(
-                //             children: [
-                //               _buildLoverMinAgeInput(context),
-                //             ],
-                //           ),
-                //         ),
-
-                //         // から
-                //         Padding(
-                //           padding: EdgeInsets.only(
-                //             left: 10.h,
-                //             right: 10.h,
-                //             top: 30.v,
-                //             bottom: 5,
-                //           ),
-                //           child: Text("から", style: theme.textTheme.titleMedium),
-                //         ),
-
-                //         // Max
-                //         Container(
-                //           height: 40,
-                //           width: 60,
-                //           decoration: BoxDecoration(
-                //             border: Border.all(color: Colors.red, width: 2),
-                //           ),
-                //           child: Stack(
-                //             children: [_buildLoverMaxAgeInput(context)],
-                //           ),
-                //         )
-                //       ],
-                //     ),
-                //   ),
-                // ),
-                // SizedBox(height: mediaQueryData.size.height / 50),
-
+                Row(
+                  children: [
+                    CustomInputBar(titleName: "年齢:", backendPart: _buildLoverMinAgeInput(context)),
+                    SizedBox(width: mediaQueryData.size.width / 30),
+                    Text("から"),
+                    SizedBox(width: mediaQueryData.size.width / 30),
+                    CustomInputBar(titleName: "", backendPart: _buildLoverMaxAgeInput(context)),
+                  ],
+                ),
+                SizedBox(height: mediaQueryData.size.height / 100),
                 // Country
                 CustomInputBar(titleName: "国籍:", backendPart: _buildLoverResetCountryInput(context)),
                 SizedBox(height: mediaQueryData.size.height / 50),
@@ -276,7 +220,7 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
                       ),
                       Padding(
                         padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
-                        child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.pwRuleGray500),
+                        child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
                       ),
                     ],
                   ),
@@ -286,7 +230,6 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
 
                 // button
                 _buildNextPageButton(context),
-                SizedBox(height: 30.v)
               ],
             ),
           ),
@@ -309,148 +252,107 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
     );
   }
 
-  onTapReturn(BuildContext context) {
-    Navigator.pop(context);
+  /// Min Age
+  Widget _buildLoverMinAgeInput(BuildContext context) {
+    return CustomInputFormBar(
+      alignment: Alignment.centerLeft,
+      height: mediaQueryData.size.height / 16,
+      width: mediaQueryData.size.width / 7.5,
+      maxLength: 3,
+      controller: resetLoverMaxAgeController,
+      hintText: "20",
+    );
   }
 
-  // /// Min Age
-  // Widget _buildLoverMinAgeInput(BuildContext context) {
-  //   return CustomInputFormBar(
-  //     maxLength: 3,
-  //     width: 60.h,
-  //     controller: resetLoverMinAgeController,
-  //     hintText: "30",
-  //     alignment: Alignment.bottomCenter,
-  //   );
-  // }
-
-  // /// Max Age
-  // Widget _buildLoverMaxAgeInput(BuildContext context) {
-  //   return CustomInputFormBar(
-  //     maxLength: 3,
-  //     width: 60,
-  //     controller: resetLoverMaxAgeController,
-  //     hintText: "30",
-  //     alignment: Alignment.bottomCenter,
-  //   );
-  // }
+  /// Min Age
+  Widget _buildLoverMaxAgeInput(BuildContext context) {
+    return CustomInputFormBar(
+      alignment: Alignment.centerLeft,
+      height: mediaQueryData.size.height / 16,
+      width: mediaQueryData.size.width / 7.5,
+      maxLength: 3,
+      controller: resetLoverMinAgeController,
+      hintText: "20",
+    );
+  }
 
   /// Country
   Widget _buildLoverResetCountryInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetLoverCountryController,
-      hintText: "日本",
-    );
+    return CustomInputFormBar(controller: resetLoverCountryController, hintText: "日本");
   }
 
   /// City
   Widget _buildLoverResetCityInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetLoverCityController,
-      hintText: "大阪",
-    );
+    return CustomInputFormBar(controller: resetLoverCityController, hintText: "大阪");
   }
 
   /// Gender
   Widget _buildLoverResetGenderInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetLoverGenderController,
-      hintText: "男",
-    );
+    return CustomInputFormBar(controller: resetLoverGenderController, hintText: "男");
   }
 
   /// Constellation
   Widget _buildLoverResetConstellationInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetLoverConstellationController,
-      hintText: "いて座",
-    );
+    return CustomInputFormBar(controller: resetLoverConstellationController, hintText: "いて座");
   }
 
   /// Constellation
   Widget _buildLoverResetBloodInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetLoverBloodController,
-      hintText: "A",
-    );
+    return CustomInputFormBar(controller: resetLoverBloodController, hintText: "A");
   }
 
   /// Sexual
   Widget _buildLoverResetSexualInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetLoverSexualController,
-      hintText: "異性愛",
-    );
+    return CustomInputFormBar(controller: resetLoverSexualController, hintText: "異性愛");
   }
 
   /// Height
   Widget _buildLoverResetHeightInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetLoverHeightController,
-      hintText: "170cm",
-    );
+    return CustomInputFormBar(controller: resetLoverHeightController, hintText: "170cm");
   }
 
   /// Weight
   Widget _buildLoverResetWeightInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetLoverWeightController,
-      hintText: "170cm",
-    );
+    return CustomInputFormBar(controller: resetLoverWeightController, hintText: "170cm");
   }
 
   /// Speak Language
   Widget _buildLoverSpeakLanguageInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetLoverSpeakLanguageController,
-      hintText: "日本語",
-    );
+    return CustomInputFormBar(controller: resetLoverSpeakLanguageController, hintText: "日本語");
   }
 
   /// Job
   Widget _buildLoverResetJobInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetLoverJobController,
-      hintText: "ホスト",
-    );
+    return CustomInputFormBar(controller: resetLoverJobController, hintText: "ホスト");
   }
 
   /// Annual Salary
   Widget _buildLoverResetAnnualSalaryInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetLoverAnnualSalaryController,
-      hintText: "4000",
-    );
+    return CustomInputFormBar(controller: resetLoverAnnualSalaryController, hintText: "4000");
   }
 
   /// Sociability
   Widget _buildLoverResetSociabilityInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetLoverSociabilityController,
-      hintText: "人たら神",
-    );
+    return CustomInputFormBar(controller: resetLoverSociabilityController, hintText: "人たら神");
   }
 
   /// Religious
   Widget _buildLoverResetReligiousInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetLoverReligiousController,
-      hintText: "多神教",
-      textInputAction: TextInputAction.done,
-    );
+    return CustomInputFormBar(controller: resetLoverReligiousController, hintText: "多神教");
   }
 
   /// Next Button
   Widget _buildNextPageButton(BuildContext context) {
     return CustomOutlinedButton(
-      width: mediaQueryData.size.width / 4,
-      height: 40,
       text: "条件確認",
-      buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
         updateLoverGrpcRequest(context);
       },
     );
+  }
+
+  onTapReturn(BuildContext context) {
+    Navigator.pop(context);
   }
 
   onTapNextButton(BuildContext context) {

@@ -186,7 +186,7 @@ class Profile extends StatelessWidget {
       decoration: AppDecoration.fillGray,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
-        children: [SizedBox(height: 40), Text("プロフィール", style: theme.textTheme.headlineMedium)],
+        children: [SizedBox(height: mediaQueryData.size.height / 20), Text("プロフィール", style: theme.textTheme.headlineMedium)],
       ),
     );
   }

@@ -1,13 +1,12 @@
 import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/presentation/Chat/Chat.dart';
 import 'package:dating_your_date/presentation/AccompanyConditionRepair.dart';
+import 'package:dating_your_date/presentation/Chat/Chat.dart';
 import 'package:dating_your_date/presentation/DeleteTarget.dart';
 import 'package:dating_your_date/presentation/HobbyConditionRepair.dart';
 import 'package:dating_your_date/presentation/Home/Home.dart';
 import 'package:dating_your_date/presentation/LoverConditionRepair.dart';
 import 'package:dating_your_date/presentation/Profile/Profile.dart';
 import 'package:dating_your_date/presentation/ProfileEdit.dart';
-import 'package:dating_your_date/presentation/ChatBox.dart';
 import 'package:dating_your_date/presentation/Target/Target.dart';
 import 'package:dating_your_date/widgets/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +18,6 @@ class ContainerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
     return SafeArea(
       child: Scaffold(
         body: Navigator(
@@ -53,7 +51,6 @@ class ContainerScreen extends StatelessWidget {
     }
   }
 
-  ///Handling page based on route
   Widget getCurrentPage(String currentRoute) {
     switch (currentRoute) {
       case AppRoutes.home:
@@ -64,6 +61,8 @@ class ContainerScreen extends StatelessWidget {
         return Chat();
       case AppRoutes.profile:
         return Profile();
+
+      ///-----------------------------------------------
       case AppRoutes.profileEdit:
         return ProfileEdit();
       case AppRoutes.accompanyConditionRepair:
@@ -74,6 +73,8 @@ class ContainerScreen extends StatelessWidget {
         return LoverConditionRepair();
       case AppRoutes.deleteTarget:
         return DeleteTarget();
+
+      ///------------------------------------------------
       default:
         return DefaultWidget();
     }

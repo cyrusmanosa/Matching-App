@@ -132,7 +132,7 @@ class CanChangeInformation_2 extends StatelessWidget {
               // Introduce
               CustomInputBar(titleName: "自己紹介:", backendPart: _buildcanChangeIntroduceInput(context)),
 
-              SizedBox(height: 40),
+              SizedBox(height: mediaQueryData.size.height / 20),
               _buildNextPageButton(context),
             ],
           ),
@@ -162,63 +162,47 @@ class CanChangeInformation_2 extends StatelessWidget {
 
   /// Job
   Widget _buildcanChangeJobInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: canChangeJobController,
-      hintText: "ホスト",
-      textInputAction: TextInputAction.done,
-    );
+    return CustomInputFormBar(controller: canChangeJobController, hintText: "ホスト");
   }
 
   /// Annual Salary
   Widget _buildcanChangeAnnualSalaryInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: canChangeAnnualSalaryController,
-      hintText: "4000",
-    );
+    return CustomInputFormBar(controller: canChangeAnnualSalaryController, hintText: "4000");
   }
 
   /// Sociability
   Widget _buildcanChangeSociabilityInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: canChangeSociabilityController,
-      hintText: "人たら神",
-    );
+    return CustomInputFormBar(controller: canChangeSociabilityController, hintText: "人たら神");
   }
 
   /// Religious
   Widget _buildcanChangeReligiousInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: canChangeReligiousController,
-      hintText: "多神教",
-    );
+    return CustomInputFormBar(controller: canChangeReligiousController, hintText: "多神教");
   }
 
   /// Introduce
   Widget _buildcanChangeIntroduceInput(BuildContext context) {
     return CustomInputFormBar(
+      prefix: Padding(padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 75)),
+      height: mediaQueryData.size.height / 5,
       controller: canChangeIntroduceController,
       hintText: "亜dさdさだだ",
       textInputAction: TextInputAction.done,
       maxLines: 8,
-      contentPadding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 20.v),
+      contentPadding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.height / 200, vertical: mediaQueryData.size.width / 50),
     );
   }
 
-  /// Next Button
   Widget _buildNextPageButton(BuildContext context) {
     return CustomOutlinedButton(
-      width: mediaQueryData.size.width / 4,
-      height: mediaQueryData.size.height / 25,
       text: "次へ",
-      buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
         updateCanChangeGrpcRequest(context);
       },
     );
   }
 
-  /// Navigates to the k26Screen when the action is triggered.
   onTapNextButton(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.searchTitle);
+    Navigator.pushNamed(context, AppRoutes.targetFirstTime);
   }
 }

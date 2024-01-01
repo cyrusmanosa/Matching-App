@@ -42,11 +42,7 @@ class CustomBottomBarState extends State<CustomBottomBar> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CustomImageView(
-                  imagePath: bottomMenuList[index].icon,
-                  width: mediaQueryData.size.width / 20,
-                  color: appTheme.white,
-                ),
+                CustomImageView(imagePath: bottomMenuList[index].icon, width: mediaQueryData.size.width / 20, color: appTheme.white),
                 Padding(padding: EdgeInsets.only(top: 2.v), child: Text(bottomMenuList[index].label!, style: CustomTextStyles.mainButtonW)),
               ],
             ),

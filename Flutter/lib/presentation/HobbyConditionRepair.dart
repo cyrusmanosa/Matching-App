@@ -55,17 +55,6 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
 
     if (response.statusCode == 200) {
       onTapNextButton(context);
-    } else {
-      print("Era: ${resetHobbyEraController.text}");
-      print("City: ${resetHobbyCityController.text}");
-      print("Gender: ${resetHobbyGenderController.text}");
-      print("Height: ${resetHobbyHeightController.text}");
-      print("Weight: ${resetHobbyWeightController.text}");
-      print("Speak_language: ${resetHobbySpeakLanguageController.text}");
-      print("Find_Type: ${resetHobbyFindTypeController.text}");
-      print("Find_Target: ${resetHobbyFindTargetController.text}");
-      print("Experience: ${resetHobbyExperienceController.text}");
-      print("Sociability: ${resetHobbySociabilityController.text}");
     }
   }
 
@@ -135,7 +124,6 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        // Header
         appBar: _buildHeader(context),
         body: Form(
           child: Container(
@@ -144,8 +132,6 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
               padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
               child: Column(
                 children: [
-                  SizedBox(height: 50.v),
-
                   // Era
                   CustomInputBar(titleName: "年代:", backendPart: _buildHobbyResetEraInput(context)),
                   SizedBox(height: mediaQueryData.size.height / 50),
@@ -188,7 +174,7 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
 
                   // Sociability
                   CustomInputBar(titleName: "社交力:", backendPart: _buildHobbyResetSociabilityInput(context)),
-                  SizedBox(height: 5),
+                  SizedBox(height: mediaQueryData.size.height / 50),
 
                   // 本人認証の丸
                   InkWell(
@@ -207,7 +193,7 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
-                          child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.pwRuleGray500),
+                          child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
                         ),
                       ],
                     ),
@@ -216,7 +202,6 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
 
                   // button
                   _buildNextPageButton(context),
-                  SizedBox(height: 30.v)
                 ],
               ),
             ),
@@ -246,102 +231,63 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
 
   /// Reset Era
   Widget _buildHobbyResetEraInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetHobbyEraController,
-      hintText: "３０代",
-    );
+    return CustomInputFormBar(controller: resetHobbyEraController, hintText: "３０代");
   }
 
   /// Reset Country
   Widget _buildHobbyResetCountryInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetHobbyCountryController,
-      hintText: "日本",
-    );
+    return CustomInputFormBar(controller: resetHobbyCountryController, hintText: "日本");
   }
 
   /// Reset City
   Widget _buildHobbyResetCityInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetHobbyCityController,
-      hintText: "大阪",
-    );
+    return CustomInputFormBar(controller: resetHobbyCityController, hintText: "大阪");
   }
 
   /// Reset Gender
   Widget _buildHobbyResetGenderInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetHobbyGenderController,
-      hintText: "男",
-    );
+    return CustomInputFormBar(controller: resetHobbyGenderController, hintText: "男");
   }
 
   /// Speak Language
   Widget _buildHobbySpeakLanguageInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetHobbySpeakLanguageController,
-      hintText: "日本語",
-    );
+    return CustomInputFormBar(controller: resetHobbySpeakLanguageController, hintText: "日本語");
   }
 
   /// Reset Hobby Type
   Widget _buildHobbyResetHobbyTypeInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetHobbyFindTypeController,
-      hintText: "サッカー",
-    );
+    return CustomInputFormBar(controller: resetHobbyFindTypeController, hintText: "サッカー");
   }
 
   /// Reset Find Target
   Widget _buildHobbyResetFindTargetInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetHobbyFindTargetController,
-      hintText: "サッカーのチームメンバー",
-    );
+    return CustomInputFormBar(controller: resetHobbyFindTargetController, hintText: "サッカーのチームメンバー");
   }
 
   /// Reset Experience
   Widget _buildHobbyResetExperienceInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetHobbyExperienceController,
-      hintText: "3年",
-    );
+    return CustomInputFormBar(controller: resetHobbyExperienceController, hintText: "3年");
   }
 
   /// Reset Sociability
   Widget _buildHobbyResetSociabilityInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetHobbySociabilityController,
-      hintText: "人たら神",
-      textInputAction: TextInputAction.done,
-    );
+    return CustomInputFormBar(controller: resetHobbySociabilityController, hintText: "人たら神");
   }
 
   /// Reset Height
   Widget _buildHobbyResetHeightInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetHobbyHeightController,
-      hintText: "172",
-      textInputAction: TextInputAction.done,
-    );
+    return CustomInputFormBar(controller: resetHobbyHeightController, hintText: "172");
   }
 
   /// Reset Weight
   Widget _buildHobbyResetWeightInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: resetHobbyWeightController,
-      hintText: "65Kg",
-      textInputAction: TextInputAction.done,
-    );
+    return CustomInputFormBar(controller: resetHobbyWeightController, hintText: "65Kg");
   }
 
   /// Next Button
   Widget _buildNextPageButton(BuildContext context) {
     return CustomOutlinedButton(
-      width: mediaQueryData.size.width / 4,
-      height: mediaQueryData.size.height / 25,
       text: "条件確認",
-      buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
         updateHobbyGrpcRequest(context);
       },

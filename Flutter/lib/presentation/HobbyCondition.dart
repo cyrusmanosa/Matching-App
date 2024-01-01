@@ -194,7 +194,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
-                          child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.pwRuleGray500),
+                          child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
                         ),
                       ],
                     ),
@@ -235,92 +235,57 @@ class _HobbyConditionState extends State<HobbyCondition> {
 
   /// Era
   Widget _buildHobbyEraInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: hobbyEraController,
-      hintText: "３０代",
-    );
+    return CustomInputFormBar(controller: hobbyEraController, hintText: "３０代");
   }
 
   /// Country
   Widget _buildHobbyCountryInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: hobbyCountryController,
-      hintText: "日本",
-    );
+    return CustomInputFormBar(controller: hobbyCountryController, hintText: "日本");
   }
 
   /// City
   Widget _buildHobbyCityInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: hobbyCityController,
-      hintText: "大阪",
-    );
+    return CustomInputFormBar(controller: hobbyCityController, hintText: "大阪");
   }
 
   /// Gender
   Widget _buildHobbyGenderInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: hobbyGenderController,
-      hintText: "男",
-    );
+    return CustomInputFormBar(controller: hobbyGenderController, hintText: "男");
   }
 
   /// Speak Language
   Widget _buildHobbySpeakLanguageInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: hobbySpeakLanguageController,
-      hintText: "日本語",
-    );
+    return CustomInputFormBar(controller: hobbySpeakLanguageController, hintText: "日本語");
   }
 
   /// Hobby Type
   Widget _buildHobbyTypeInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: hobbyFindTypeController,
-      hintText: "サッカー",
-    );
+    return CustomInputFormBar(controller: hobbyFindTypeController, hintText: "サッカー");
   }
 
   /// Find Target
   Widget _buildHobbyFindTargetInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: hobbyFindTargetController,
-      hintText: "サッカーのチームメンバー",
-    );
+    return CustomInputFormBar(controller: hobbyFindTargetController, hintText: "サッカーのチームメンバー");
   }
 
   /// Experience
   Widget _buildHobbyExperienceInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: hobbyExperienceController,
-      hintText: "3年",
-    );
+    return CustomInputFormBar(controller: hobbyExperienceController, hintText: "3年");
   }
 
   /// Height
   Widget _buildHobbyHeightInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: hobbyHeightController,
-      hintText: "170cm",
-    );
+    return CustomInputFormBar(controller: hobbyHeightController, hintText: "170cm");
   }
 
   /// Section Widget
   Widget _buildHobbyWeightInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: hobbyWeightController,
-      hintText: "60Kg",
-      textInputAction: TextInputAction.done,
-    );
+    return CustomInputFormBar(controller: hobbyWeightController, hintText: "60Kg");
   }
 
   /// Sociability
   Widget _buildHobbySociabilityInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: hobbySociabilityController,
-      hintText: "人たら神",
-      textInputAction: TextInputAction.done,
-    );
+    return CustomInputFormBar(controller: hobbySociabilityController, hintText: "人たら神");
   }
 
   Widget _buildNextPageButton(BuildContext context) {

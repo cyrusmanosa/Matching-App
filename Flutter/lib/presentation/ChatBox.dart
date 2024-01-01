@@ -1,3 +1,4 @@
+import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/ChatMessage.dart';
 import 'package:flutter/material.dart';
 
@@ -29,26 +30,25 @@ class _ChatBoxState extends State<ChatBox> {
         backgroundColor: Colors.white,
         flexibleSpace: SafeArea(
           child: Container(
-            padding: EdgeInsets.only(right: 16),
+            padding: EdgeInsets.only(right: mediaQueryData.size.width / 30),
             child: Row(
               children: [
                 IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    onTapReturn(context);
                   },
                   icon: Icon(Icons.arrow_back, color: Colors.black),
                 ),
-                SizedBox(width: 2),
+                SizedBox(width: mediaQueryData.size.width / 100),
                 CircleAvatar(backgroundImage: NetworkImage("https://randomuser.me/api/portraits/men/5.jpg"), maxRadius: 20),
-                SizedBox(width: 12),
+                SizedBox(width: mediaQueryData.size.width / 50),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Kriss ", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-                      SizedBox(height: 6),
-                      Text("Online", style: TextStyle(color: Colors.grey.shade600, fontSize: 13)),
+                      Text("Kriss ", style: CustomTextStyles.msgWordOfMsgBox),
+                      Text("Online", style: CustomTextStyles.pwRuleGray500),
                     ],
                   ),
                 ),
@@ -63,11 +63,11 @@ class _ChatBoxState extends State<ChatBox> {
           ListView.builder(
             itemCount: messages.length,
             shrinkWrap: true,
-            padding: EdgeInsets.only(top: 10, bottom: 10),
+            padding: EdgeInsets.symmetric(vertical: mediaQueryData.size.height / 100),
             physics: NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               return Container(
-                padding: EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
+                padding: EdgeInsets.symmetric(vertical: mediaQueryData.size.height / 150, horizontal: mediaQueryData.size.width / 30),
                 child: Align(
                   alignment: (messages[index].messageType == "receiver" ? Alignment.topLeft : Alignment.topRight),
                   child: Container(
@@ -75,20 +75,25 @@ class _ChatBoxState extends State<ChatBox> {
                       borderRadius: BorderRadius.circular(20),
                       color: (messages[index].messageType == "receiver" ? Colors.grey.shade200 : Colors.blue[200]),
                     ),
-                    padding: EdgeInsets.all(16),
+                    padding: EdgeInsets.symmetric(vertical: mediaQueryData.size.height / 100, horizontal: mediaQueryData.size.width / 30),
                     child: Text(messages[index].messageContent, style: TextStyle(fontSize: 15)),
                   ),
                 ),
               );
             },
           ),
+
+          // input
           Align(
             alignment: Alignment.bottomLeft,
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              height: 100,
-              width: double.infinity,
-              color: Colors.redAccent,
+              padding: EdgeInsets.only(
+                left: mediaQueryData.size.width / 20,
+                right: mediaQueryData.size.width / 20,
+                bottom: mediaQueryData.size.height / 40,
+              ),
+              height: mediaQueryData.size.height / 12,
+              color: Colors.green,
               child: Row(
                 children: [
                   GestureDetector(
@@ -96,11 +101,11 @@ class _ChatBoxState extends State<ChatBox> {
                     child: Container(
                       height: 30,
                       width: 30,
-                      decoration: BoxDecoration(color: Colors.lightBlue, borderRadius: BorderRadius.circular(30)),
-                      child: Icon(Icons.add, color: Colors.white, size: 25),
+                      decoration: BoxDecoration(color: Color.fromARGB(255, 244, 3, 3), borderRadius: BorderRadius.circular(30)),
+                      child: Icon(Icons.add, color: Colors.white, size: 30),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  SizedBox(width: mediaQueryData.size.width / 30),
                   Expanded(
                     child: TextField(
                       decoration: InputDecoration(
@@ -110,7 +115,7 @@ class _ChatBoxState extends State<ChatBox> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 15),
+                  SizedBox(width: mediaQueryData.size.width / 30),
                   GestureDetector(
                     onTap: () {},
                     child: Container(
@@ -128,4 +133,8 @@ class _ChatBoxState extends State<ChatBox> {
       ),
     );
   }
+}
+
+onTapReturn(BuildContext context) {
+  Navigator.pop(context);
 }

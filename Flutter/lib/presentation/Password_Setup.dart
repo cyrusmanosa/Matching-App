@@ -205,7 +205,6 @@ class _PasswordSetupState extends State<PasswordSetup> {
     Navigator.pop(context);
   }
 
-  /// Navigates to the okScreen when the action is triggered.
   onTapNextButton(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.canChangeInformation_1);
   }
