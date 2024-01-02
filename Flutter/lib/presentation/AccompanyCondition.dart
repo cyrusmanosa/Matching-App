@@ -45,7 +45,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
     var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
 
     if (response.statusCode == 200) {
-      onTapNextButton(context);
+      onTapNextPage(context);
     }
   }
 
@@ -66,7 +66,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
     final response = await GrpcInfoService.client.createAccompany(request);
     // ignore: unnecessary_null_comparison
     if (response != null) {
-      onTapNextButton(context);
+      onTapNextPage(context);
     } else {
       showErrorDialog(context, "Error: Empty response");
     }
@@ -175,7 +175,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
                 ),
                 SizedBox(height: mediaQueryData.size.height / 25),
 
-                _buildNextPageButton(context),
+                _buildNextButton(context),
               ],
             ),
           ),
@@ -260,7 +260,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
   }
 
   /// Next Button
-  Widget _buildNextPageButton(BuildContext context) {
+  Widget _buildNextButton(BuildContext context) {
     return CustomOutlinedButton(
       text: "条件確認",
       onPressed: () {
@@ -269,7 +269,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
     );
   }
 
-  onTapNextButton(BuildContext context) {
+  onTapNextPage(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.payDone);
   }
 }

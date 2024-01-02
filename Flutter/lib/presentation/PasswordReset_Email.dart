@@ -42,7 +42,7 @@ class PasswordResetEmail extends StatelessWidget {
                 SizedBox(height: mediaQueryData.size.height / 50),
 
                 // button
-                _buildNextPageButton(context)
+                _buildNextButton(context)
               ],
             ),
           ),
@@ -62,7 +62,7 @@ class PasswordResetEmail extends StatelessWidget {
 }
 
 /// Next Button
-Widget _buildNextPageButton(BuildContext context) {
+Widget _buildNextButton(BuildContext context) {
   return CustomOutlinedButton(
     text: "送信",
     onPressed: () {

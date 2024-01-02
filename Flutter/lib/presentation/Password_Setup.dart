@@ -7,6 +7,7 @@ import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
+import 'package:grpc/grpc.dart';
 import 'package:http/http.dart' as http;
 
 class PasswordSetup extends StatefulWidget {
@@ -29,26 +30,26 @@ class _PasswordSetupState extends State<PasswordSetup> {
     };
     var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
     if (response.statusCode == 200) {
-      onTapNextButton(context);
+      onTapNextPage(context);
     }
   }
 
   // Grpc
   void inputPasswordGrpcRequest(BuildContext context) async {
-    if (passwordSetupController.text.length >= 8) {
-      final request = InputPasswordRequest(
-        sessionID: globalSessionID,
-        password: passwordSetupController.text,
-      );
-      final response = await GrpcInfoService.client.inputPassword(request);
-      // ignore: unnecessary_null_comparison
-      if (response != null) {
-        onTapNextButton(context);
-      } else {
-        showErrorDialog(context, "Error: validatable input data");
-      }
-    } else {
+    if (passwordSetupController.text != passwordSetupConfirmController.text) {
+      showErrorDialog(context, "パスワード（確認）とパスワードは一致しません");
+    } else if (isPureText(passwordSetupController.text) || isPureNumber(passwordSetupController.text)) {
+      showErrorDialog(context, "パスワードの組み合わせは英数字は必要です");
+    } else if (passwordSetupController.text.length < 8) {
       showErrorDialog(context, "パスワードの長さは 8 以上です。");
+    } else {
+      try {
+        final request = InputPasswordRequest(sessionID: globalSessionID, password: passwordSetupController.text);
+        await GrpcInfoService.client.inputPassword(request);
+        onTapNextPage(context);
+      } on GrpcError catch (e) {
+        showErrorDialog(context, "Error: ${e.codeName}");
+      }
     }
   }
 
@@ -73,8 +74,8 @@ class _PasswordSetupState extends State<PasswordSetup> {
           ),
           actions: [
             CustomOutlinedButton(
-              alignment: Alignment.center,
               text: "OK",
+              alignment: Alignment.center,
               margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
               onPressed: () {
                 onTapReturn(context);
@@ -99,36 +100,32 @@ class _PasswordSetupState extends State<PasswordSetup> {
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
     return SafeArea(
       child: Scaffold(
-        body: Form(
-          child: Container(
-            width: double.maxFinite,
-            padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
-            child: Column(
-              children: [
-                // Logo and Slogan
-                SizedBox(height: mediaQueryData.size.height / 15),
-                CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 3.5),
-                CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3),
-                SizedBox(height: mediaQueryData.size.height / 30),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+          child: Column(
+            children: [
+              // Logo and Slogan
+              SizedBox(height: mediaQueryData.size.height / 15),
+              CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 3.5),
+              CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3),
+              SizedBox(height: mediaQueryData.size.height / 30),
 
-                // New Password
-                CustomInputBar(titleName: "パスワード", backendPart: _buildPasswordInput(context)),
+              // New Password
+              CustomInputBar(titleName: "パスワード", backendPart: _buildPasswordInput(context)),
 
-                // msg
-                Align(alignment: Alignment.centerLeft, child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.pwRuleGray500)),
-                SizedBox(height: mediaQueryData.size.height / 25),
+              // msg
+              Align(alignment: Alignment.centerLeft, child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.pwRuleGray500)),
+              SizedBox(height: mediaQueryData.size.height / 25),
 
-                // New Password Confirm
-                CustomInputBar(titleName: "パスワード（確認）", backendPart: _buildPasswordConfirm(context)),
-                SizedBox(height: mediaQueryData.size.height / 25),
+              // New Password Confirm
+              CustomInputBar(titleName: "パスワード（確認）", backendPart: _buildPasswordConfirm(context)),
+              SizedBox(height: mediaQueryData.size.height / 25),
 
-                // Button
-                _buildNextPageButton(context)
-              ],
-            ),
+              // Button
+              _buildNextButton(context)
+            ],
           ),
         ),
       ),
@@ -142,7 +139,6 @@ class _PasswordSetupState extends State<PasswordSetup> {
       textInputType: TextInputType.visiblePassword,
       hintText: "Ankdl2332",
       obscureText: passwordVisible ? false : true,
-      maxLines: 1,
       focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
@@ -166,7 +162,6 @@ class _PasswordSetupState extends State<PasswordSetup> {
       textInputType: TextInputType.visiblePassword,
       hintText: "Ankdl2332",
       obscureText: passwordVisible ? false : true,
-      maxLines: 1,
       focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
@@ -183,20 +178,11 @@ class _PasswordSetupState extends State<PasswordSetup> {
   }
 
   /// Next Button
-  Widget _buildNextPageButton(BuildContext context) {
+  Widget _buildNextButton(BuildContext context) {
     return CustomOutlinedButton(
-      width: mediaQueryData.size.width / 4,
-      height: mediaQueryData.size.height / 25,
       text: "設定",
-      buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
-        if (passwordSetupController.text != passwordSetupConfirmController.text) {
-          showErrorDialog(context, "パスワード（確認）とパスワードが一致しません");
-        } else if (isPureText(passwordSetupController.text) || isPureNumber(passwordSetupController.text)) {
-          showErrorDialog(context, "パスワードの組み合わせは英数字が必要です");
-        } else {
-          inputPasswordGrpcRequest(context);
-        }
+        inputPasswordGrpcRequest(context);
       },
     );
   }
@@ -205,7 +191,7 @@ class _PasswordSetupState extends State<PasswordSetup> {
     Navigator.pop(context);
   }
 
-  onTapNextButton(BuildContext context) {
+  onTapNextPage(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.canChangeInformation_1);
   }
 }

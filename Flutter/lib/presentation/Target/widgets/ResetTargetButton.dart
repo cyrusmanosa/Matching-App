@@ -19,12 +19,12 @@ class ResetTargetButton extends StatelessWidget {
       buttonTextStyle: TextStyle(fontSize: mediaQueryData.size.width / 15, fontWeight: FontWeight.w500),
       buttonStyle: color,
       onPressed: () {
-        onTapNextButton(context);
+        onTapNextPage(context);
       },
     );
   }
 
-  void onTapNextButton(BuildContext context) {
+  void onTapNextPage(BuildContext context) {
     Navigator.pushNamed(context, sendPage!);
   }
 }

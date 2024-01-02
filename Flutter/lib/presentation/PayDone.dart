@@ -2,14 +2,21 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 class PayDone extends StatelessWidget {
-  const PayDone({Key? key}) : super(key: key);
+  PayDone({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // auto move
-    Future.delayed(Duration(seconds: 3), () {
-      Navigator.pushNamed(context, AppRoutes.containerScreen);
-    });
+    bool isPageNavigated = false;
+
+    Future.delayed(
+      Duration(seconds: 3),
+      () {
+        if (!isPageNavigated) {
+          isPageNavigated = true;
+          Navigator.pushNamed(context, AppRoutes.containerScreen);
+        }
+      },
+    );
 
     return SafeArea(
       child: Scaffold(
@@ -18,13 +25,11 @@ class PayDone extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
           child: Column(
             children: [
-              // Logn
-              CustomImageView(imagePath: ImageConstant.imgLogo, width: 130),
-              SizedBox(height: 2.v),
-
-              // Slogan
-              CustomImageView(imagePath: ImageConstant.imgSlogan, width: 170),
-              SizedBox(height: 75.v),
+              // Logo and Slogan
+              SizedBox(height: mediaQueryData.size.height / 30),
+              CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 3.5),
+              CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3),
+              SizedBox(height: mediaQueryData.size.height / 30),
 
               // Title
               Text("お支払いOK", style: TextStyle(fontSize: 40, color: appTheme.black)),

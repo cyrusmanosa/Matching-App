@@ -12,13 +12,9 @@ class CustomBottomBar extends StatefulWidget {
 class CustomBottomBarState extends State<CustomBottomBar> {
   int selectedIndex = 0;
   List<BottomMenuModel> bottomMenuList = [
-    // ホーム
     BottomMenuModel(icon: ImageConstant.imgHome, activeIcon: ImageConstant.imgHome, label: "ホーム", type: BottomBarEnum.home),
-    // ターゲット
     BottomMenuModel(icon: ImageConstant.imgTarget, activeIcon: ImageConstant.imgTarget, label: "ターゲット", type: BottomBarEnum.target),
-    // チャット
     BottomMenuModel(icon: ImageConstant.imgChat, activeIcon: ImageConstant.imgChat, label: "チャット", type: BottomBarEnum.chat),
-    // プロフィール
     BottomMenuModel(icon: ImageConstant.imgProfile, activeIcon: ImageConstant.imgProfile, label: "プロフィール", type: BottomBarEnum.profile)
   ];
 

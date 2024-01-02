@@ -16,24 +16,32 @@ class EmailConfirmation extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
 
   // Http
-  void resetPasswordEmailHttpRequest(BuildContext context) async {
+  void emailConfirmationHttpRequest(BuildContext context) async {
     var url = "http://127.0.0.1:8080/SignUpEmail";
     var requestBody = {"email": emailController.text};
     var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
-
     if (response.statusCode == 200) {
-      onTapNextButton(context);
+      onTapNextPage(context);
     }
   }
 
+  bool isEmailValid(String email) {
+    final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+    return emailRegex.hasMatch(email);
+  }
+
 // Grpc
-  void resetPasswordEmailGrpcRequest(BuildContext context) async {
-    final request = CheckEmailRequest(email: emailController.text);
-    try {
-      await GrpcInfoService.client.checkEmail(request);
-      onTapNextButton(context);
-    } on GrpcError catch (e) {
-      if (e.code == 6) showErrorDialog(context, "このメールアドレスは登録できません。");
+  void emailConfirmationGrpcRequest(BuildContext context) async {
+    if (!isEmailValid(emailController.text)) {
+      showErrorDialog(context, "無効なメールアドレス");
+    } else {
+      try {
+        final request = CheckEmailRequest(email: emailController.text);
+        await GrpcInfoService.client.checkEmail(request);
+        onTapNextPage(context);
+      } on GrpcError catch (e) {
+        if (e.code == 6) showErrorDialog(context, "このメールアドレスは登録できません。");
+      }
     }
   }
 
@@ -58,8 +66,8 @@ class EmailConfirmation extends StatelessWidget {
           ),
           actions: [
             CustomOutlinedButton(
-              alignment: Alignment.center,
               text: "OK",
+              alignment: Alignment.center,
               margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
               onPressed: () {
                 onTapReturn(context);
@@ -76,48 +84,45 @@ class EmailConfirmation extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Form(
-          child: Container(
-            width: double.maxFinite,
-            padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
-            child: Column(
-              children: [
-                // Logo and Slogan
-                SizedBox(height: mediaQueryData.size.height / 15),
-                CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 4.5),
-                CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3.5),
-                SizedBox(height: mediaQueryData.size.height / 30),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+          child: Column(
+            children: [
+              // Logo and Slogan
+              SizedBox(height: mediaQueryData.size.height / 15),
+              CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 4.5),
+              CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3.5),
+              SizedBox(height: mediaQueryData.size.height / 30),
 
-                // input
-                CustomInputBar(titleName: "メールアドレス", backendPart: _buildEmailInputSection(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
+              // input
+              CustomInputBar(titleName: "メールアドレス", backendPart: _buildEmailInputSection(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                // send button
-                _buildNextPageButton(context),
-                SizedBox(height: mediaQueryData.size.height / 30),
+              // send button
+              _buildNextButton(context),
+              SizedBox(height: mediaQueryData.size.height / 30),
 
-                // 手続き
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Container(child: Text("・ご手続きは1回のみです", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo)),
+              // 手続き
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(child: Text("・ご手続きは1回のみです", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo)),
+              ),
+
+              // information note
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  child: Text("・メールアドレスの受信確認は必須です。", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
                 ),
-
-                // information note
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Container(
-                    child: Text("・メールアドレスの受信確認が必須です。", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
-                  ),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  child: Text("・ご登録済みのお客様は受信確認をお願いします。", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
                 ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Container(
-                    child: Text("・ご登録済みのお客様は受信確認をお願いします。", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
-                  ),
-                ),
-                SizedBox(height: mediaQueryData.size.height / 50),
-              ],
-            ),
+              ),
+              SizedBox(height: mediaQueryData.size.height / 50),
+            ],
           ),
         ),
       ),
@@ -130,19 +135,19 @@ class EmailConfirmation extends StatelessWidget {
       controller: emailController,
       hintText: " example@email.com",
       textInputType: TextInputType.emailAddress,
+      focusNode: FocusNode(),
+      onTap: () {
+        FocusNode().requestFocus();
+      },
     );
   }
 
   // Next Button
-  Widget _buildNextPageButton(BuildContext context) {
+  Widget _buildNextButton(BuildContext context) {
     return CustomOutlinedButton(
       text: "送信",
       onPressed: () {
-        if (isEmailValid(emailController.text)) {
-          resetPasswordEmailGrpcRequest(context);
-        } else {
-          showErrorDialog(context, "無効なメールアドレス");
-        }
+        emailConfirmationGrpcRequest(context);
       },
     );
   }
@@ -151,12 +156,7 @@ class EmailConfirmation extends StatelessWidget {
     Navigator.pop(context);
   }
 
-  onTapNextButton(BuildContext context) {
+  onTapNextPage(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.confirmationCore);
-  }
-
-  bool isEmailValid(String email) {
-    final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
-    return emailRegex.hasMatch(email);
   }
 }

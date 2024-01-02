@@ -34,9 +34,9 @@ class _LoginState extends State<Login> {
   }
 
 // Grpc
-  void loginUser(BuildContext context) async {
-    final request = LoginUserRequest(email: emailController.text, password: passwordController.text);
+  void loginGrpcUser(BuildContext context) async {
     try {
+      final request = LoginUserRequest(email: emailController.text, password: passwordController.text);
       final loginResponse = await GrpcInfoService.client.loginUser(request);
       globalSessionID = loginResponse.sessionsID;
       print(_formKey);
@@ -67,8 +67,8 @@ class _LoginState extends State<Login> {
           ),
           actions: [
             CustomOutlinedButton(
-              alignment: Alignment.center,
               text: "OK",
+              alignment: Alignment.center,
               margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
               onPressed: () {
                 onTapReturn(context);
@@ -126,7 +126,7 @@ class _LoginState extends State<Login> {
                     SizedBox(height: mediaQueryData.size.height / 50),
 
                     // login button
-                    _buildNextPageButton(context),
+                    _buildNextButton(context),
                     SizedBox(height: mediaQueryData.size.height / 35),
 
                     // or
@@ -212,7 +212,6 @@ class _LoginState extends State<Login> {
       controller: emailController,
       textInputType: TextInputType.emailAddress,
       hintText: "example@email.com",
-      maxLines: 1,
       focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
@@ -228,7 +227,6 @@ class _LoginState extends State<Login> {
       textInputAction: TextInputAction.done,
       textInputType: TextInputType.visiblePassword,
       obscureText: passwordVisible ? false : true,
-      maxLines: 1,
       focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
@@ -246,11 +244,11 @@ class _LoginState extends State<Login> {
   }
 
   /// Next Button
-  Widget _buildNextPageButton(BuildContext context) {
+  Widget _buildNextButton(BuildContext context) {
     return CustomOutlinedButton(
       text: "ログイン",
       onPressed: () {
-        loginUser(context);
+        loginGrpcUser(context);
       },
     );
   }

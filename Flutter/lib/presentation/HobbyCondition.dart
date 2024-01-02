@@ -9,6 +9,7 @@ import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
+import 'package:grpc/grpc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -32,6 +33,11 @@ class _HobbyConditionState extends State<HobbyCondition> {
   TextEditingController hobbyWeightController = TextEditingController();
   TextEditingController hobbySociabilityController = TextEditingController();
 
+  bool isPureNumber(String value) {
+    final pattern = RegExp(r'^\d+$');
+    return pattern.hasMatch(value);
+  }
+
 // Http
   void createHobbyHttpRequest(BuildContext context) async {
     var url = "http://127.0.0.1:8080/CreateHobby";
@@ -50,35 +56,66 @@ class _HobbyConditionState extends State<HobbyCondition> {
       "Certification": false
     };
     var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
-
     if (response.statusCode == 200) {
-      onTapNextButton(context);
+      onTapNextPage(context);
     }
   }
 
 // Grpc
   void createHobbyGrpcRequest(BuildContext context) async {
-    final request = CreateHobbyRequest(
-      sessionID: globalSessionID,
-      era: int.parse(hobbyEraController.text),
-      city: hobbyCityController.text,
-      gender: hobbyGenderController.text,
-      height: int.parse(hobbyHeightController.text),
-      weight: int.parse(hobbyWeightController.text),
-      speaklanguage: hobbySpeakLanguageController.text,
-      findType: hobbyFindTypeController.text,
-      findTarget: hobbyFindTargetController.text,
-      experience: int.parse(hobbyExperienceController.text),
-      sociability: hobbySociabilityController.text,
-    );
-
-    final response = await GrpcInfoService.client.createHobby(request);
-    // ignore: unnecessary_null_comparison
-    if (response != null) {
-      onTapNextButton(context);
+    if (hobbyEraController.text.isEmpty) {
+      showErrorDialog(context, "年代はまだ入力されていません");
+    } else if (!isPureNumber(hobbyEraController.text)) {
+      showErrorDialog(context, "入力した年代は数字じゃありません");
+    } else if (hobbyCountryController.text.isEmpty) {
+      showErrorDialog(context, "国籍はまだ入力されていません");
+    } else if (hobbyCityController.text.isEmpty) {
+      showErrorDialog(context, "居住地はまだ入力されていません");
+    } else if (hobbyGenderController.text.isEmpty) {
+      showErrorDialog(context, "性別はまだ入力されていません");
+    } else if (hobbyHeightController.text.isEmpty) {
+      showErrorDialog(context, "身長はまだ入力されていません");
+    } else if (!isPureNumber(hobbyHeightController.text)) {
+      showErrorDialog(context, "入力した身長は数字じゃありません");
+    } else if (hobbyWeightController.text.isEmpty) {
+      showErrorDialog(context, "体重はまだ入力されていません");
+    } else if (!isPureNumber(hobbyWeightController.text)) {
+      showErrorDialog(context, "入力した体重は数字じゃありません");
+    } else if (hobbySpeakLanguageController.text.isEmpty) {
+      showErrorDialog(context, "喋れる言語はまだ入力されていません");
+    } else if (hobbyFindTypeController.text.isEmpty) {
+      showErrorDialog(context, "趣味のタイプはまだ入力されていません");
+    } else if (hobbyFindTargetController.text.isEmpty) {
+      showErrorDialog(context, "探す対象はまだ入力されていません");
+    } else if (hobbyExperienceController.text.isEmpty) {
+      showErrorDialog(context, "経験はまだ入力されていません");
+    } else if (!isPureNumber(hobbyExperienceController.text)) {
+      showErrorDialog(context, "入力した経験は数字じゃありません");
+    } else if (hobbySociabilityController.text.isEmpty) {
+      showErrorDialog(context, "社交力はまだ入力されていません");
+    } else if (!confirmBtn) {
+      showErrorDialog(context, "本人認証のボタンはまだ押していません");
     } else {
-      print(globalSessionID);
-      showErrorDialog(context, "Error: Empty response");
+      final request = CreateHobbyRequest(
+        sessionID: globalSessionID,
+        era: int.parse(hobbyEraController.text),
+        city: hobbyCityController.text,
+        gender: hobbyGenderController.text,
+        height: int.parse(hobbyHeightController.text),
+        weight: int.parse(hobbyWeightController.text),
+        speaklanguage: hobbySpeakLanguageController.text,
+        findType: hobbyFindTypeController.text,
+        findTarget: hobbyFindTargetController.text,
+        experience: int.parse(hobbyExperienceController.text),
+        sociability: hobbySociabilityController.text,
+      );
+
+      try {
+        await GrpcInfoService.client.createHobby(request);
+        onTapNextPage(context);
+      } on GrpcError catch (e) {
+        showErrorDialog(context, "Error: ${e.codeName}");
+      }
     }
   }
 
@@ -103,8 +140,8 @@ class _HobbyConditionState extends State<HobbyCondition> {
           ),
           actions: [
             CustomOutlinedButton(
-              alignment: Alignment.center,
               text: "OK",
+              alignment: Alignment.center,
               margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
               onPressed: () {
                 onTapReturn(context);
@@ -126,87 +163,80 @@ class _HobbyConditionState extends State<HobbyCondition> {
         resizeToAvoidBottomInset: false,
         // Header
         appBar: _buildHeader(context),
-        body: Form(
-          child: Container(
-            width: double.maxFinite,
-            child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
-              child: Column(
-                children: [
-                  // Era
-                  CustomInputBar(titleName: "年代:", backendPart: _buildHobbyEraInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+          child: Column(
+            children: [
+              // Era
+              CustomInputBar(titleName: "年代:", backendPart: _buildHobbyEraInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // Country
-                  CustomInputBar(titleName: "国籍:", backendPart: _buildHobbyCountryInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+              // Country
+              CustomInputBar(titleName: "国籍:", backendPart: _buildHobbyCountryInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // City
-                  CustomInputBar(titleName: "居住地:", backendPart: _buildHobbyCityInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+              // City
+              CustomInputBar(titleName: "居住地:", backendPart: _buildHobbyCityInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // Gender
-                  CustomInputBar(titleName: "性別:", backendPart: _buildHobbyGenderInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+              // Gender
+              CustomInputBar(titleName: "性別:", backendPart: _buildHobbyGenderInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // Language
-                  CustomInputBar(titleName: "お喋れる言語:", backendPart: _buildHobbySpeakLanguageInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+              // Language
+              CustomInputBar(titleName: "お喋れる言語:", backendPart: _buildHobbySpeakLanguageInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // Hobby Type
-                  CustomInputBar(titleName: "趣味のタイプ:", backendPart: _buildHobbyTypeInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+              // Hobby Type
+              CustomInputBar(titleName: "趣味のタイプ:", backendPart: _buildHobbyTypeInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // Find Target
-                  CustomInputBar(titleName: "探す対象:", backendPart: _buildHobbyFindTargetInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+              // Find Target
+              CustomInputBar(titleName: "探す対象:", backendPart: _buildHobbyFindTargetInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // Experience
-                  CustomInputBar(titleName: "経験:", backendPart: _buildHobbyExperienceInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+              // Experience
+              CustomInputBar(titleName: "経験:", backendPart: _buildHobbyExperienceInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // Height
-                  CustomInputBar(titleName: "身長:", backendPart: _buildHobbyHeightInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+              // Height
+              CustomInputBar(titleName: "身長:", backendPart: _buildHobbyHeightInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // Weight
-                  CustomInputBar(titleName: "体重:", backendPart: _buildHobbyWeightInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+              // Weight
+              CustomInputBar(titleName: "体重:", backendPart: _buildHobbyWeightInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // Sociability
-                  CustomInputBar(titleName: "社交力:", backendPart: _buildHobbySociabilityInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+              // Sociability
+              CustomInputBar(titleName: "社交力:", backendPart: _buildHobbySociabilityInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // 本人認証の丸
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        confirmBtn = !confirmBtn;
-                      });
-                    },
-                    child: Row(
-                      children: [
-                        Container(
-                          height: mediaQueryData.size.width / 25,
-                          width: mediaQueryData.size.width / 25,
-                          decoration:
-                              BoxDecoration(color: confirmBtn ? appTheme.green : appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
-                          child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
-                        ),
-                      ],
+              // 本人認証の丸
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    confirmBtn = !confirmBtn;
+                  });
+                },
+                child: Row(
+                  children: [
+                    Container(
+                      height: mediaQueryData.size.width / 25,
+                      width: mediaQueryData.size.width / 25,
+                      decoration: BoxDecoration(color: confirmBtn ? appTheme.green : appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
                     ),
-                  ),
-
-                  SizedBox(height: mediaQueryData.size.height / 25),
-                  // button
-                  _buildNextPageButton(context),
-                  SizedBox(height: mediaQueryData.size.height / 25),
-                ],
+                    Padding(
+                      padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
+                      child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
+                    ),
+                  ],
+                ),
               ),
-            ),
+
+              SizedBox(height: mediaQueryData.size.height / 25),
+              // button
+              _buildNextButton(context),
+            ],
           ),
         ),
       ),
@@ -235,7 +265,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
 
   /// Era
   Widget _buildHobbyEraInput(BuildContext context) {
-    return CustomInputFormBar(controller: hobbyEraController, hintText: "３０代");
+    return CustomInputFormBar(controller: hobbyEraController, hintText: "30代");
   }
 
   /// Country
@@ -275,7 +305,10 @@ class _HobbyConditionState extends State<HobbyCondition> {
 
   /// Height
   Widget _buildHobbyHeightInput(BuildContext context) {
-    return CustomInputFormBar(controller: hobbyHeightController, hintText: "170cm");
+    return CustomInputFormBar(
+      controller: hobbyHeightController,
+      hintText: "170cm",
+    );
   }
 
   /// Section Widget
@@ -288,7 +321,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
     return CustomInputFormBar(controller: hobbySociabilityController, hintText: "人たら神");
   }
 
-  Widget _buildNextPageButton(BuildContext context) {
+  Widget _buildNextButton(BuildContext context) {
     return CustomOutlinedButton(
       text: "条件確認",
       onPressed: () {
@@ -297,7 +330,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
     );
   }
 
-  onTapNextButton(BuildContext context) {
+  onTapNextPage(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.payDone);
   }
 }

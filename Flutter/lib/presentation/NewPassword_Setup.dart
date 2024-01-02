@@ -31,7 +31,7 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
     };
     var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
     if (response.statusCode == 200) {
-      onTapNextButton(context);
+      onTapNextPage(context);
     }
   }
 
@@ -44,7 +44,7 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
     final response = await GrpcInfoService.client.resetPassword(request);
     // ignore: unnecessary_null_comparison
     if (response != null) {
-      onTapNextButton(context);
+      onTapNextPage(context);
     } else {
       showErrorDialog(context, "Error: validatable input data");
     }
@@ -125,7 +125,7 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
                 SizedBox(height: mediaQueryData.size.height / 25),
 
                 // Button
-                _buildNextPageButton(context)
+                _buildNextButton(context)
               ],
             ),
           ),
@@ -183,7 +183,7 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
   }
 
   /// Next Button
-  Widget _buildNextPageButton(BuildContext context) {
+  Widget _buildNextButton(BuildContext context) {
     return CustomOutlinedButton(
       width: mediaQueryData.size.width / 4,
       height: mediaQueryData.size.height / 25,
@@ -191,9 +191,9 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
       buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
         if (newPasswordSetupController.text != newPasswordSetupConfirmController.text) {
-          showErrorDialog(context, "パスワード（確認）とパスワードが一致しません");
+          showErrorDialog(context, "パスワード（確認）とパスワードは一致しません");
         } else if (isPureText(newPasswordSetupController.text) || isPureNumber(newPasswordSetupController.text)) {
-          showErrorDialog(context, "パスワードの組み合わせは英数字が必要です");
+          showErrorDialog(context, "パスワードの組み合わせは英数字は必要です");
         } else {
           resetPasswordGrpcRequest(context);
         }
@@ -206,7 +206,7 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
   }
 
   /// Navigates to the okScreen when the action is triggered.
-  onTapNextButton(BuildContext context) {
+  onTapNextPage(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.newPasswordDone);
   }
 }

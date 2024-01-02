@@ -23,7 +23,7 @@ class WarningMsgDeleteUser extends StatelessWidget {
               text: "削除確認",
               buttonTextStyle: theme.textTheme.titleMedium!,
               onPressed: () {
-                onTapNextButton(context);
+                onTapNextPage(context);
               },
               margin: EdgeInsets.only(bottom: 15, top: 10),
             ),
@@ -39,11 +39,11 @@ class WarningMsgDeleteUser extends StatelessWidget {
     return CustomWarningMsgBox(
       btnTitle: "削除確認",
       msg: "一旦、確認するボタンを押したら、ご選択のユーザーを削除しましたので、もう一度お確認してください",
-      page: onTapNextButton(context),
+      page: onTapNextPage(context),
     );
   }
 
-  onTapNextButton(BuildContext context) {
+  onTapNextPage(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.newTargetReady);
   }
 }

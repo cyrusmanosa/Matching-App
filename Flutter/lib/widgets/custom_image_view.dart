@@ -38,12 +38,7 @@ class CustomImageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return alignment != null
-        ? Align(
-            alignment: alignment!,
-            child: _buildWidget(),
-          )
-        : _buildWidget();
+    return alignment != null ? Align(alignment: alignment!, child: _buildWidget()) : _buildWidget();
   }
 
   Widget _buildWidget() {
@@ -92,7 +87,7 @@ class CustomImageView extends StatelessWidget {
             placeholder: (context, url) => Container(
               height: 30,
               width: 30,
-              child: LinearProgressIndicator(color: Colors.grey.shade200, backgroundColor: Colors.grey.shade100),
+              child: LinearProgressIndicator(color: Colors.white, backgroundColor: Colors.white),
             ),
             errorWidget: (context, url, error) => Image.asset(placeHolder, height: height, width: width, fit: fit ?? BoxFit.cover),
           );

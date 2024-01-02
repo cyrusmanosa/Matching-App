@@ -29,7 +29,7 @@ class DeleteTarget extends StatelessWidget {
               CustomOutlinedButton(
                 text: "削除",
                 onPressed: () {
-                  onTapNextButton(context);
+                  onTapNextPage(context);
                 },
               ),
               SizedBox(height: mediaQueryData.size.height / 50),
@@ -58,7 +58,7 @@ class DeleteTarget extends StatelessWidget {
     Navigator.pop(context);
   }
 
-  onTapNextButton(BuildContext context) {
+  onTapNextPage(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.warningMsgDeleteUser);
   }
 }

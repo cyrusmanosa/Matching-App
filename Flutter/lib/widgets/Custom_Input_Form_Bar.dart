@@ -12,6 +12,7 @@ class CustomInputFormBar extends StatelessWidget {
     this.focusNode,
     this.hintText,
     this.hintStyle,
+    this.initialValue,
     this.maxLines,
     this.maxLength,
     this.prefix,
@@ -46,6 +47,7 @@ class CustomInputFormBar extends StatelessWidget {
   final int? maxLength;
   final InputBorder? borderDecoration;
   final String? hintText;
+  final String? initialValue;
   final TextEditingController? controller;
   final TextInputAction? textInputAction;
   final TextInputType? textInputType;

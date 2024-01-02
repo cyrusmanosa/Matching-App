@@ -9,21 +9,30 @@ import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
+import 'package:grpc/grpc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 // ignore_for_file: must_be_immutable,camel_case_types
 class CanChangeInformation_2 extends StatelessWidget {
-  CanChangeInformation_2({Key? key}) : super(key: key);
+  CanChangeInformation_2({Key? key, this.can1}) : super(key: key);
+
+  final CreateCanChangeRequest? can1;
+
   TextEditingController canChangeJobController = TextEditingController();
   TextEditingController canChangeAnnualSalaryController = TextEditingController();
   TextEditingController canChangeSociabilityController = TextEditingController();
   TextEditingController canChangeReligiousController = TextEditingController();
   TextEditingController canChangeIntroduceController = TextEditingController();
 
+  bool isPureNumber(String value) {
+    final pattern = RegExp(r'^\d+$');
+    return pattern.hasMatch(value);
+  }
+
   // Http
   void updateCanChangeHttpRequest(BuildContext context) async {
-    var url = "http://127.0.0.1:8080/CreateFixInfo";
+    var url = "http://127.0.0.1:8080/CreateCanChangeInfo";
     var requestBody = {
       "Job": canChangeJobController.text,
       "AnnualSalary": int.parse(canChangeAnnualSalaryController.text),
@@ -32,40 +41,45 @@ class CanChangeInformation_2 extends StatelessWidget {
       "Introduce": canChangeIntroduceController.text,
     };
     var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
-
     if (response.statusCode == 200) {
-      onTapNextButton(context);
+      onTapNextPage(context);
     }
   }
 
   // Grpc
-  void updateCanChangeGrpcRequest(BuildContext context) async {
-    final request = UpdateCanChangeRequest(
-      sessionID: globalSessionID,
-      job: canChangeJobController.text,
-      annualSalary: int.parse(canChangeAnnualSalaryController.text),
-      sociability: canChangeSociabilityController.text,
-      religious: canChangeReligiousController.text,
-      introduce: canChangeIntroduceController.text,
-    );
-
-    if (canChangeJobController.text == "") {
-      showErrorDialog(context, "仕事がまだ入力されていません");
-    } else if (canChangeAnnualSalaryController.text == "") {
-      showErrorDialog(context, "年収がまだ入力されていません");
-    } else if (canChangeSociabilityController.text == "") {
-      showErrorDialog(context, "社交力がまだ入力されていません");
-    } else if (canChangeReligiousController.text == "") {
-      showErrorDialog(context, "宗教がまだ入力されていません");
-    } else if (canChangeIntroduceController.text == "") {
-      showErrorDialog(context, "自己紹介がまだ入力されていません");
+  void createCanChangeGrpcRequest(BuildContext context) async {
+    if (canChangeJobController.text.isEmpty) {
+      showErrorDialog(context, "仕事はまだ入力されていません");
+    } else if (!isPureNumber(canChangeAnnualSalaryController.text)) {
+      showErrorDialog(context, "入力した年収は数字じゃありません");
+    } else if (canChangeSociabilityController.text.isEmpty) {
+      showErrorDialog(context, "社交力はまだ入力されていません");
+    } else if (canChangeReligiousController.text.isEmpty) {
+      showErrorDialog(context, "宗教はまだ入力されていません");
+    } else if (canChangeIntroduceController.text.isEmpty) {
+      showErrorDialog(context, "自己紹介はまだ入力されていません");
     } else {
-      final response = await GrpcInfoService.client.updateCanChange(request);
-      // ignore: unnecessary_null_comparison
-      if (response != null) {
-        onTapNextButton(context);
-      } else {
-        showErrorDialog(context, "Error: validatable input data");
+      final request = CreateCanChangeRequest(
+        sessionID: globalSessionID,
+        nickName: can1?.nickName,
+        city: can1?.city,
+        sexual: can1?.sexual,
+        height: can1?.height,
+        weight: can1?.weight,
+        speaklanguage: can1?.speaklanguage,
+        education: can1?.education,
+        job: canChangeJobController.text,
+        annualSalary: int.parse(canChangeAnnualSalaryController.text),
+        sociability: canChangeSociabilityController.text,
+        religious: canChangeReligiousController.text,
+        introduce: canChangeIntroduceController.text,
+      );
+
+      try {
+        await GrpcInfoService.client.createCanChange(request);
+        onTapNextPage(context);
+      } on GrpcError catch (e) {
+        showErrorDialog(context, "Error: ${e.codeName}");
       }
     }
   }
@@ -91,8 +105,8 @@ class CanChangeInformation_2 extends StatelessWidget {
           ),
           actions: [
             CustomOutlinedButton(
-              alignment: Alignment.center,
               text: "OK",
+              alignment: Alignment.center,
               margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
               onPressed: () {
                 onTapReturn(context);
@@ -119,6 +133,13 @@ class CanChangeInformation_2 extends StatelessWidget {
 
               // Annual Salary
               CustomInputBar(titleName: "年収:", backendPart: _buildcanChangeAnnualSalaryInput(context)),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: EdgeInsets.only(left: mediaQueryData.size.width / 100),
+                  child: Text("＊入力しなくても大丈夫です。", style: CustomTextStyles.wordOnlySmallButton),
+                ),
+              ),
               SizedBox(height: mediaQueryData.size.height / 50),
 
               // Sociability
@@ -131,9 +152,9 @@ class CanChangeInformation_2 extends StatelessWidget {
 
               // Introduce
               CustomInputBar(titleName: "自己紹介:", backendPart: _buildcanChangeIntroduceInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 25),
 
-              SizedBox(height: mediaQueryData.size.height / 20),
-              _buildNextPageButton(context),
+              _buildNextButton(context),
             ],
           ),
         ),
@@ -189,20 +210,24 @@ class CanChangeInformation_2 extends StatelessWidget {
       hintText: "亜dさdさだだ",
       textInputAction: TextInputAction.done,
       maxLines: 8,
+      focusNode: FocusNode(),
+      onTap: () {
+        FocusNode().requestFocus();
+      },
       contentPadding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.height / 200, vertical: mediaQueryData.size.width / 50),
     );
   }
 
-  Widget _buildNextPageButton(BuildContext context) {
+  Widget _buildNextButton(BuildContext context) {
     return CustomOutlinedButton(
       text: "次へ",
       onPressed: () {
-        updateCanChangeGrpcRequest(context);
+        createCanChangeGrpcRequest(context);
       },
     );
   }
 
-  onTapNextButton(BuildContext context) {
+  onTapNextPage(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.targetFirstTime);
   }
 }

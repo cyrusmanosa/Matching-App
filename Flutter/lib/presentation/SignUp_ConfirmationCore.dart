@@ -19,22 +19,18 @@ class ConfirmationCore extends StatelessWidget {
   void checkCodeHttpRequest(BuildContext context) async {
     var url = "http://127.0.0.1:8080/SignUpCheckCode";
     var requestBody = {"checkcode": confirmationCoreController.text};
-    var response = await http.post(
-      Uri.parse(url),
-      body: jsonEncode(requestBody),
-      headers: {"Content-Type": "application/json"},
-    );
+    var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
     if (response.statusCode == 200) {
-      onTapNextButton(context);
+      onTapNextPage(context);
     }
   }
 
   // Grpc
   void checkCodeGrpcRequest(BuildContext context) async {
-    final request = SendEmailRequest(checkCode: confirmationCoreController.text);
     try {
+      final request = SendEmailRequest(checkCode: confirmationCoreController.text);
       await GrpcInfoService.client.checkEmailCode(request);
-      onTapNextButton(context);
+      onTapNextPage(context);
     } on GrpcError catch (e) {
       if (e.code != 1) showErrorDialog(context, "無効的なコードです。");
     }
@@ -61,8 +57,8 @@ class ConfirmationCore extends StatelessWidget {
           ),
           actions: [
             CustomOutlinedButton(
-              alignment: Alignment.center,
               text: "OK",
+              alignment: Alignment.center,
               margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
               onPressed: () {
                 onTapReturn(context);
@@ -78,8 +74,7 @@ class ConfirmationCore extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          width: double.maxFinite,
+        body: Padding(
           padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
           child: Column(
             children: [
@@ -109,14 +104,14 @@ class ConfirmationCore extends StatelessWidget {
                   },
                   child: Padding(
                     padding: EdgeInsets.only(left: mediaQueryData.size.width / 100),
-                    child: Text("コードが届かない場合", style: CustomTextStyles.wordOnlySmallButton),
+                    child: Text("コードは届かない場合", style: CustomTextStyles.wordOnlySmallButton),
                   ),
                 ),
               ),
               SizedBox(height: mediaQueryData.size.height / 50),
 
               // button
-              _buildNextPageButton(context),
+              _buildNextButton(context),
             ],
           ),
         ),
@@ -130,11 +125,15 @@ class ConfirmationCore extends StatelessWidget {
       controller: confirmationCoreController,
       hintText: "423198",
       textInputType: TextInputType.text,
+      focusNode: FocusNode(),
+      onTap: () {
+        FocusNode().requestFocus();
+      },
     );
   }
 
   /// Next Button
-  Widget _buildNextPageButton(BuildContext context) {
+  Widget _buildNextButton(BuildContext context) {
     return CustomOutlinedButton(
       text: "認証",
       onPressed: () {
@@ -147,7 +146,7 @@ class ConfirmationCore extends StatelessWidget {
     Navigator.pop(context);
   }
 
-  onTapNextButton(BuildContext context) {
+  onTapNextPage(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.fixInformation);
   }
 }

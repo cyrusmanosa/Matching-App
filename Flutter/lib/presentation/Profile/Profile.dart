@@ -2,7 +2,8 @@ import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
-import '../Profile/widgets/shownicknamebar_item_widget.dart';
+import 'package:dating_your_date/presentation/ProfileEdit.dart';
+import 'widgets/showDataBar.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:flutter/material.dart';
@@ -42,8 +43,8 @@ class Profile extends StatelessWidget {
           ),
           actions: [
             CustomOutlinedButton(
-              alignment: Alignment.center,
               text: "OK",
+              alignment: Alignment.center,
               margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
               onPressed: () {
                 onTapReturn(context);
@@ -158,7 +159,7 @@ class Profile extends StatelessWidget {
                             CustomOutlinedButton(
                               text: "編集",
                               onPressed: () {
-                                onTapNextButton(context);
+                                onTapNextPage(context, data);
                               },
                             ),
                             SizedBox(height: mediaQueryData.size.height / 25),
@@ -227,8 +228,7 @@ class Profile extends StatelessWidget {
     Navigator.pop(context);
   }
 
-// edit button
-  onTapNextButton(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.profileEdit);
+  onTapNextPage(BuildContext context, CanChange request) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileEdit(canData: request)));
   }
 }

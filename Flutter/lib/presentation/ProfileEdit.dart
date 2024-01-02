@@ -10,32 +10,138 @@ import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
+import 'package:grpc/grpc.dart';
 
-// ignore: must_be_immutable, camel_case_types
-class ProfileEdit extends StatelessWidget {
-  ProfileEdit({Key? key}) : super(key: key);
+class ProfileEdit extends StatefulWidget {
+  ProfileEdit({Key? key, this.canData}) : super(key: key);
+  final CanChange? canData;
 
-  TextEditingController updateBasicNickNameController = TextEditingController();
-  TextEditingController updateBasicCityController = TextEditingController();
-  TextEditingController updateBasicSexualController = TextEditingController();
-  TextEditingController updateBasicHeightController = TextEditingController();
-  TextEditingController updateBasicWeightController = TextEditingController();
-  TextEditingController updateBasicEducationController = TextEditingController();
-  TextEditingController updateBasicJobController = TextEditingController();
-  TextEditingController updateBasicAnnualSalaryController = TextEditingController();
-  TextEditingController updateBasicSociabilityController = TextEditingController();
-  TextEditingController updateBasicReligiousController = TextEditingController();
-  TextEditingController updateBasicIntroduceController = TextEditingController();
+  @override
+  _ProfileEditState createState() => _ProfileEditState();
+}
+
+class _ProfileEditState extends State<ProfileEdit> {
+  TextEditingController updateNickNameController = TextEditingController();
+  TextEditingController updateCityController = TextEditingController();
+  TextEditingController updateSexualController = TextEditingController();
+  TextEditingController updateHeightController = TextEditingController();
+  TextEditingController updateWeightController = TextEditingController();
+  TextEditingController updateEducationController = TextEditingController();
+  TextEditingController updateJobController = TextEditingController();
+  TextEditingController updateSpeakLanguageController = TextEditingController();
+  TextEditingController updateAnnualSalaryController = TextEditingController();
+  TextEditingController updateSociabilityController = TextEditingController();
+  TextEditingController updateReligiousController = TextEditingController();
+  TextEditingController updateIntroduceController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    updateNickNameController = TextEditingController(text: widget.canData?.nickName);
+    updateCityController = TextEditingController(text: widget.canData?.city);
+    updateSexualController = TextEditingController(text: widget.canData?.sexual);
+    updateHeightController = TextEditingController(text: widget.canData?.height.toString());
+    updateWeightController = TextEditingController(text: widget.canData?.weight.toString());
+    updateEducationController = TextEditingController(text: widget.canData?.education);
+    updateSpeakLanguageController = TextEditingController(text: widget.canData?.speaklanguage);
+    updateJobController = TextEditingController(text: widget.canData?.job);
+    updateAnnualSalaryController = TextEditingController(text: widget.canData?.annualSalary.toString());
+    updateSociabilityController = TextEditingController(text: widget.canData?.sociability);
+    updateReligiousController = TextEditingController(text: widget.canData?.religious);
+    updateIntroduceController = TextEditingController(text: widget.canData?.introduce);
+  }
+
+  bool isPureNumber(String value) {
+    final pattern = RegExp(r'^\d+$');
+    return pattern.hasMatch(value);
+  }
 
   // Grpc
-  Future<CanChange> getCanChangeGrpcRequest(BuildContext context) async {
-    final request = GetCanChangeRequest(sessionID: globalSessionID);
-    final response = await GrpcInfoService.client.getCanChange(request);
-    // ignore: unnecessary_null_comparison
-    if (response == null) {
-      showErrorDialog(context, "Error: validatable input data");
+  void updateDataGrpcRequest(BuildContext context) async {
+    if (updateNickNameController.text.isEmpty) {
+      showErrorDialog(context, "ニックネームはまだ入力されていません");
+    } else if (updateCityController.text.isEmpty) {
+      showErrorDialog(context, "居住地はまだ入力されていません");
+    } else if (updateSexualController.text.isEmpty) {
+      showErrorDialog(context, "性的指向はまだ入力されていません");
+    } else if (updateHeightController.text.isEmpty) {
+      showErrorDialog(context, "身長はまだ入力されていません");
+    } else if (!isPureNumber(updateHeightController.text)) {
+      showErrorDialog(context, "入力した身長は数字じゃありません");
+    } else if (updateWeightController.text.isEmpty) {
+      showErrorDialog(context, "体重はまだ入力されていません");
+    } else if (!isPureNumber(updateWeightController.text)) {
+      showErrorDialog(context, "入力した体重は数字じゃありません");
+    } else if (updateSpeakLanguageController.text.isEmpty) {
+      showErrorDialog(context, "学歴はまだ入力されていません");
+    } else if (updateJobController.text.isEmpty) {
+      showErrorDialog(context, "仕事はまだ入力されていません");
+    } else if (!isPureNumber(updateAnnualSalaryController.text)) {
+      showErrorDialog(context, "入力した年収は数字じゃありません");
+    } else if (updateSociabilityController.text.isEmpty) {
+      showErrorDialog(context, "社交力はまだ入力されていません");
+    } else if (updateReligiousController.text.isEmpty) {
+      showErrorDialog(context, "宗教はまだ入力されていません");
+    } else if (updateIntroduceController.text.isEmpty) {
+      showErrorDialog(context, "自己紹介はまだ入力されていません");
+    } else {
+      final request = UpdateCanChangeRequest(
+        sessionID: globalSessionID,
+        nickName: updateNickNameController.text,
+        city: updateCityController.text,
+        sexual: updateSexualController.text,
+        height: int.parse(updateHeightController.text),
+        weight: int.parse(updateWeightController.text),
+        speaklanguage: updateSpeakLanguageController.text,
+        education: updateEducationController.text,
+        job: updateJobController.text,
+        annualSalary: int.parse(updateAnnualSalaryController.text),
+        sociability: updateSociabilityController.text,
+        religious: updateReligiousController.text,
+        introduce: updateIntroduceController.text,
+      );
+
+      try {
+        await GrpcInfoService.client.updateCanChange(request);
+        onTapNextPage(context);
+        showDoneDialog(context, "個人情報もアップしました");
+      } on GrpcError catch (e) {
+        showErrorDialog(context, "Error: ${e.codeName}");
+      }
     }
-    return response.canChangeInfo;
+  }
+
+  void showDoneDialog(BuildContext context, String doneMessage) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
+          title: CustomImageView(
+            imagePath: ImageConstant.imgLogo,
+            height: mediaQueryData.size.height / 18,
+            width: mediaQueryData.size.width / 7,
+            alignment: Alignment.center,
+          ),
+
+          // Word
+          content: Container(
+            width: mediaQueryData.size.width / 1.1,
+            child: Text(doneMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
+          ),
+          actions: [
+            CustomOutlinedButton(
+              text: "OK",
+              alignment: Alignment.center,
+              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
+              onPressed: () {
+                onTapReturn(context);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void showErrorDialog(BuildContext context, String errorMessage) {
@@ -60,6 +166,7 @@ class ProfileEdit extends StatelessWidget {
           actions: [
             CustomOutlinedButton(
               text: "OK",
+              alignment: Alignment.center,
               margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
               onPressed: () {
                 onTapReturn(context);
@@ -76,13 +183,12 @@ class ProfileEdit extends StatelessWidget {
     mediaQueryData = MediaQuery.of(context);
     return SafeArea(
       child: Scaffold(
-        // 鍵盤彈出時調整頁面
         resizeToAvoidBottomInset: false,
         appBar: _buildHeader(context),
         body: Container(
           width: double.maxFinite,
           child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 40),
+            padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
             child: Column(
               children: [
                 // photos
@@ -106,52 +212,55 @@ class ProfileEdit extends StatelessWidget {
                 ),
 
                 // Introduce
-                CustomInputBar(titleName: "自己紹介:", backendPart: _buildUpdateBasicIntroduceInput(context)),
+                CustomInputBar(titleName: "自己紹介:", backendPart: _buildUpdateIntroduceInput(context)),
                 SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Nickname
-                CustomInputBar(titleName: "ニックネーム:", backendPart: _buildUpdateBasicNickNameInput(context)),
+                CustomInputBar(titleName: "ニックネーム:", backendPart: _buildUpdateNickNameInput(context)),
                 SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Height
-                CustomInputBar(titleName: "身長:", backendPart: _buildUpdateBasicHeightInput(context)),
+                CustomInputBar(titleName: "身長:", backendPart: _buildUpdateHeightInput(context)),
                 SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Weight
-                CustomInputBar(titleName: "体重:", backendPart: _buildUpdateBasicWeightInput(context)),
+                CustomInputBar(titleName: "体重:", backendPart: _buildUpdateWeightInput(context)),
                 SizedBox(height: mediaQueryData.size.height / 50),
 
                 // City
-                CustomInputBar(titleName: "居住地:", backendPart: _buildUpdateBasicCityInput(context)),
+                CustomInputBar(titleName: "居住地:", backendPart: _buildUpdateCityInput(context)),
                 SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Education
-                CustomInputBar(titleName: "学歴:", backendPart: _buildUpdateBasicEducationInput(context)),
+                CustomInputBar(titleName: "学歴:", backendPart: _buildUpdateEducationInput(context)),
+                SizedBox(height: mediaQueryData.size.height / 50),
+
+                // Speak Language
+                CustomInputBar(titleName: "言語:", backendPart: _buildUpdateSpeakLanguageInput(context)),
                 SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Job
-                CustomInputBar(titleName: "職種:", backendPart: _buildUpdateBasicJobInput(context)),
+                CustomInputBar(titleName: "職種:", backendPart: _buildUpdateJobInput(context)),
                 SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Annual Salary
-                CustomInputBar(titleName: "年収:", backendPart: _buildUpdateBasicAnnualSalaryInput(context)),
+                CustomInputBar(titleName: "年収:", backendPart: _buildUpdateAnnualSalaryInput(context)),
                 SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Sexual
-                CustomInputBar(titleName: "性的指向:", backendPart: _buildUpdateBasicSexualInput(context)),
+                CustomInputBar(titleName: "性的指向:", backendPart: _buildUpdateSexualInput(context)),
                 SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Sociability
-                CustomInputBar(titleName: "社交力:", backendPart: _buildUpdateBasicSociabilityInput(context)),
+                CustomInputBar(titleName: "社交力:", backendPart: _buildUpdateSociabilityInput(context)),
                 SizedBox(height: mediaQueryData.size.height / 50),
 
                 // Relighious
-                CustomInputBar(titleName: "宗教:", backendPart: _buildUpdateBasicReligiousInput(context)),
+                CustomInputBar(titleName: "宗教:", backendPart: _buildUpdateReligiousInput(context)),
                 SizedBox(height: mediaQueryData.size.height / 25),
 
                 // button
                 _buildSubmitButton(context),
-                SizedBox(height: mediaQueryData.size.height / 25),
               ],
             ),
           ),
@@ -180,104 +289,87 @@ class ProfileEdit extends StatelessWidget {
   }
 
   /// Nickname
-  Widget _buildUpdateBasicNickNameInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: updateBasicNickNameController,
-      hintText: "仆街",
-    );
+  Widget _buildUpdateNickNameInput(BuildContext context) {
+    return CustomInputFormBar(controller: updateNickNameController, hintText: "仆街");
   }
 
   /// City
-  Widget _buildUpdateBasicCityInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: updateBasicCityController,
-      hintText: "大阪",
-    );
+  Widget _buildUpdateCityInput(BuildContext context) {
+    return CustomInputFormBar(controller: updateCityController, hintText: "大阪");
   }
 
   /// Sexual
-  Widget _buildUpdateBasicSexualInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: updateBasicSexualController,
-      hintText: "異性愛",
-    );
+  Widget _buildUpdateSexualInput(BuildContext context) {
+    return CustomInputFormBar(controller: updateSexualController, hintText: "異性愛");
   }
 
   /// Height
-  Widget _buildUpdateBasicHeightInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: updateBasicHeightController,
-      hintText: "170cm",
-    );
+  Widget _buildUpdateHeightInput(BuildContext context) {
+    return CustomInputFormBar(controller: updateHeightController, hintText: "170cm");
   }
 
   /// Weight
-  Widget _buildUpdateBasicWeightInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: updateBasicWeightController,
-      hintText: "60kg",
-    );
+  Widget _buildUpdateWeightInput(BuildContext context) {
+    return CustomInputFormBar(controller: updateWeightController, hintText: "60kg");
   }
 
   /// Education
-  Widget _buildUpdateBasicEducationInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: updateBasicEducationController,
-      hintText: "高校生",
-    );
+  Widget _buildUpdateEducationInput(BuildContext context) {
+    return CustomInputFormBar(controller: updateEducationController, hintText: "高校生");
+  }
+
+  /// Speak Language
+  Widget _buildUpdateSpeakLanguageInput(BuildContext context) {
+    return CustomInputFormBar(controller: updateSpeakLanguageController, hintText: "言語");
   }
 
   /// Job
-  Widget _buildUpdateBasicJobInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: updateBasicJobController,
-      hintText: "ホスト",
-      textInputAction: TextInputAction.done,
-    );
+  Widget _buildUpdateJobInput(BuildContext context) {
+    return CustomInputFormBar(controller: updateJobController, hintText: "ホスト");
   }
 
   /// Annual Salary
-  Widget _buildUpdateBasicAnnualSalaryInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: updateBasicAnnualSalaryController,
-      hintText: "4000",
-    );
+  Widget _buildUpdateAnnualSalaryInput(BuildContext context) {
+    return CustomInputFormBar(controller: updateAnnualSalaryController, hintText: "4000");
   }
 
   /// Sociability
-  Widget _buildUpdateBasicSociabilityInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: updateBasicSociabilityController,
-      hintText: "人たら神",
-    );
+  Widget _buildUpdateSociabilityInput(BuildContext context) {
+    return CustomInputFormBar(controller: updateSociabilityController, hintText: "人たら神");
   }
 
   /// Religious
-  Widget _buildUpdateBasicReligiousInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: updateBasicReligiousController,
-      hintText: "多神教",
-    );
+  Widget _buildUpdateReligiousInput(BuildContext context) {
+    return CustomInputFormBar(controller: updateReligiousController, hintText: "多神教");
   }
 
   /// Introduce
-  Widget _buildUpdateBasicIntroduceInput(BuildContext context) {
+  Widget _buildUpdateIntroduceInput(BuildContext context) {
     return CustomInputFormBar(
-      controller: updateBasicIntroduceController,
+      prefix: Padding(padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 75)),
+      height: mediaQueryData.size.height / 5,
+      controller: updateIntroduceController,
       hintText: "亜dさdさだだ",
-      textInputAction: TextInputAction.done,
-      maxLines: 5,
-      contentPadding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 20.v),
+      maxLines: 8,
+      focusNode: FocusNode(),
+      onTap: () {
+        FocusNode().requestFocus();
+      },
+      contentPadding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.height / 200, vertical: mediaQueryData.size.width / 50),
     );
   }
 
   /// button
   Widget _buildSubmitButton(BuildContext context) {
     return CustomOutlinedButton(
-      width: mediaQueryData.size.width / 4,
-      height: 40,
-      text: "確認",
-      buttonTextStyle: theme.textTheme.titleMedium,
+      text: "送信",
+      onPressed: () {
+        updateDataGrpcRequest(context);
+      },
     );
+  }
+
+  onTapNextPage(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.profile);
   }
 }

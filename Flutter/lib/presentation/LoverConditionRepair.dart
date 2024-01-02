@@ -59,7 +59,7 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
     var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
 
     if (response.statusCode == 200) {
-      onTapNextButton(context);
+      onTapNextPage(context);
     }
   }
 
@@ -84,7 +84,7 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
     final response = await GrpcInfoService.client.updateLover(request);
     // ignore: unnecessary_null_comparison
     if (response != null) {
-      onTapNextButton(context);
+      onTapNextPage(context);
     } else {
       showErrorDialog(context, "Error: Empty response");
     }
@@ -229,7 +229,7 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
                 SizedBox(height: mediaQueryData.size.height / 25),
 
                 // button
-                _buildNextPageButton(context),
+                _buildNextButton(context),
               ],
             ),
           ),
@@ -342,7 +342,7 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
   }
 
   /// Next Button
-  Widget _buildNextPageButton(BuildContext context) {
+  Widget _buildNextButton(BuildContext context) {
     return CustomOutlinedButton(
       text: "条件確認",
       onPressed: () {
@@ -355,7 +355,7 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
     Navigator.pop(context);
   }
 
-  onTapNextButton(BuildContext context) {
+  onTapNextPage(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.payDone);
   }
 }

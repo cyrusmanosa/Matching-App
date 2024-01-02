@@ -7,7 +7,6 @@ class TargetFirstTime extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -19,44 +18,47 @@ class TargetFirstTime extends StatelessWidget {
               SizedBox(height: mediaQueryData.size.height / 30),
               CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 3.5),
               CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3),
-              SizedBox(height: mediaQueryData.size.height / 30),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
               // Tilte
-              Text("探すターゲットの種類", style: theme.textTheme.headlineSmall),
+              Text("探すターゲットの種類", style: CustomTextStyles.smallTitle20),
               SizedBox(height: mediaQueryData.size.height / 30),
 
               // button 1
               CustomElevatedButton(
-                height: mediaQueryData.size.height / 10,
+                height: mediaQueryData.size.height / 9,
+                width: mediaQueryData.size.width / 1.4,
                 text: "趣味",
                 buttonTextStyle: TextStyle(fontSize: mediaQueryData.size.width / 20),
                 buttonStyle: CustomButtonStyles.fillLightGray,
                 onPressed: () {
-                  onTapNextButtonirstHobbyCondition(context);
+                  onTapNextPageirstHobbyCondition(context);
                 },
               ),
               SizedBox(height: mediaQueryData.size.height / 25),
 
               // button 2
               CustomElevatedButton(
-                height: mediaQueryData.size.height / 10,
+                height: mediaQueryData.size.height / 9,
+                width: mediaQueryData.size.width / 1.4,
                 text: "恋人",
                 buttonTextStyle: TextStyle(fontSize: mediaQueryData.size.width / 20),
                 buttonStyle: CustomButtonStyles.fillDarkRed,
                 onPressed: () {
-                  onTapNextButtonirstLoverCondition(context);
+                  onTapNextPageirstLoverCondition(context);
                 },
               ),
               SizedBox(height: mediaQueryData.size.height / 25),
 
               // button 3
               CustomElevatedButton(
-                height: mediaQueryData.size.height / 10,
+                height: mediaQueryData.size.height / 9,
+                width: mediaQueryData.size.width / 1.4,
                 text: "お相伴",
                 buttonTextStyle: TextStyle(fontSize: mediaQueryData.size.width / 20),
                 buttonStyle: CustomButtonStyles.fillRed,
                 onPressed: () {
-                  onTapNextButtonirstAccompanyCondition(context);
+                  onTapNextPageirstAccompanyCondition(context);
                 },
               ),
             ],
@@ -66,15 +68,15 @@ class TargetFirstTime extends StatelessWidget {
     );
   }
 
-  onTapNextButtonirstHobbyCondition(BuildContext context) {
+  onTapNextPageirstHobbyCondition(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.hobbyCondition);
   }
 
-  onTapNextButtonirstLoverCondition(BuildContext context) {
+  onTapNextPageirstLoverCondition(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.loverCondition);
   }
 
-  onTapNextButtonirstAccompanyCondition(BuildContext context) {
+  onTapNextPageirstAccompanyCondition(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.accompanyCondition);
   }
 }
