@@ -2,10 +2,8 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/presentation/CanChangeInformation_2.dart';
-import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
-import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
@@ -61,6 +59,7 @@ class CanChangeInformation_1 extends StatelessWidget {
   }
 
   void showErrorDialog(BuildContext context, String errorMessage) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     showDialog(
       context: context,
       builder: (context) {
@@ -96,45 +95,45 @@ class CanChangeInformation_1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: _buildHeader(context),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
-          child: Column(
-            children: [
-              // Nick Name
-              CustomInputBar(titleName: "ニックネーム:", backendPart: _buildcanChangeNickNameInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+    return Scaffold(
+      appBar: _buildHeader(context),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+        child: Column(
+          children: [
+            // _buildHeader(context),
+            // Nick Name
+            CustomInputBar(titleName: "ニックネーム:", backendPart: _buildcanChangeNickNameInput(context)),
+            SizedBox(height: mediaQueryData.size.height / 50),
 
-              // City
-              CustomInputBar(titleName: "居住地:", backendPart: _buildcanChangeCityInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+            // City
+            CustomInputBar(titleName: "居住地:", backendPart: _buildcanChangeCityInput(context)),
+            SizedBox(height: mediaQueryData.size.height / 50),
 
-              // Sexual
-              CustomInputBar(titleName: "性的指向:", backendPart: _buildcanChangeSexualInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+            // Sexual
+            CustomInputBar(titleName: "性的指向:", backendPart: _buildcanChangeSexualInput(context)),
+            SizedBox(height: mediaQueryData.size.height / 50),
 
-              // Height
-              CustomInputBar(titleName: "身長:", backendPart: _buildcanChangeHeightInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+            // Height
+            CustomInputBar(titleName: "身長:", backendPart: _buildcanChangeHeightInput(context)),
+            SizedBox(height: mediaQueryData.size.height / 50),
 
-              // Weight
-              CustomInputBar(titleName: "体重:", backendPart: _buildcanChangeWeightInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+            // Weight
+            CustomInputBar(titleName: "体重:", backendPart: _buildcanChangeWeightInput(context)),
+            SizedBox(height: mediaQueryData.size.height / 50),
 
-              // Speak Language
-              CustomInputBar(titleName: "言語:", backendPart: _buildcanChangeSpeakLanguageInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+            // Speak Language
+            CustomInputBar(titleName: "言語:", backendPart: _buildcanChangeSpeakLanguageInput(context)),
+            SizedBox(height: mediaQueryData.size.height / 50),
 
-              // Job
-              CustomInputBar(titleName: "学歴:", backendPart: _buildcanChangeEducationInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 25),
+            // Job
+            CustomInputBar(titleName: "学歴:", backendPart: _buildcanChangeEducationInput(context)),
+            SizedBox(height: mediaQueryData.size.height / 25),
 
-              // Button
-              _buildNextButton(context),
-            ],
-          ),
+            // Button
+            _buildNextButton(context),
+          ],
         ),
       ),
     );
@@ -142,16 +141,7 @@ class CanChangeInformation_1 extends StatelessWidget {
 
   /// Header
   PreferredSizeWidget _buildHeader(BuildContext context) {
-    return CustomAppBar(
-      leading: AppbarLeadingImage(
-        imagePath: ImageConstant.imgArrowLeft,
-        margin: EdgeInsets.only(left: 25, top: 50, bottom: 10),
-        onTap: () {
-          onTapReturn(context);
-        },
-      ),
-      title: AppbarTitle(text: "基本個人情報 - B", margin: EdgeInsets.only(top: 60, bottom: 20)),
-    );
+    return AppBar(automaticallyImplyLeading: true, title: AppbarTitle(text: "基本個人情報 - B"));
   }
 
   // turn back

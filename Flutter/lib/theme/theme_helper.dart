@@ -24,7 +24,7 @@ class ThemeHelper {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           backgroundColor: Colors.transparent,
-          side: BorderSide(color: appTheme.pinkA100, width: 1.h),
+          side: BorderSide(color: appTheme.pinkA100, width: 1),
           shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
           visualDensity: VisualDensity(vertical: -4, horizontal: -4),
           padding: EdgeInsets.zero,

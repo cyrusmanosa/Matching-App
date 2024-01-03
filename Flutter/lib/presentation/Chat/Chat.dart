@@ -1,4 +1,3 @@
-import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/chatUsers.dart';
 import 'package:dating_your_date/presentation/Chat/widgets/conversationList.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +51,7 @@ class _ChatState extends State<Chat> {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     return Scaffold(
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -59,7 +59,7 @@ class _ChatState extends State<Chat> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.only(left: mediaQueryData.size.width / 20, top: mediaQueryData.size.height / 30),
+              padding: EdgeInsets.only(left: mediaQueryData.size.width / 20, top: mediaQueryData.size.height / 15),
               child: Text("Conversations", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
             ),
             ListView.separated(
@@ -67,9 +67,7 @@ class _ChatState extends State<Chat> {
               shrinkWrap: true,
               padding: EdgeInsets.only(top: mediaQueryData.size.height / 50),
               physics: NeverScrollableScrollPhysics(),
-              // 分線
               separatorBuilder: (context, index) => Divider(),
-
               itemBuilder: (context, index) {
                 return ConversationList(
                   name: chatUsers[index].name,

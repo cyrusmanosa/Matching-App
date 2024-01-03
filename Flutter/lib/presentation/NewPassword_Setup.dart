@@ -7,6 +7,7 @@ import 'package:dating_your_date/pb/rpc_password.pb.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
+import 'package:dating_your_date/widgets/Custom_WarningMsgBox.dart';
 import 'package:flutter/material.dart';
 
 class NewPasswordSetup extends StatefulWidget {
@@ -50,40 +51,6 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
     }
   }
 
-  void showErrorDialog(BuildContext context, String errorMessage) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
-          // Error Logo
-          title: CustomImageView(
-            imagePath: ImageConstant.imgWarning,
-            height: mediaQueryData.size.height / 20,
-            width: mediaQueryData.size.width / 10,
-            alignment: Alignment.center,
-          ),
-
-          // Word
-          content: Container(
-            width: mediaQueryData.size.width / 1.1,
-            child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
-          ),
-          actions: [
-            CustomOutlinedButton(
-              alignment: Alignment.center,
-              text: "OK",
-              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
-              onPressed: () {
-                onTapReturn(context);
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   bool passwordVisible = false;
   bool isPureText(String value) {
     final pattern = RegExp(r'^[a-zA-Z]+$');
@@ -97,37 +64,36 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     mediaQueryData = MediaQuery.of(context);
 
-    return SafeArea(
-      child: Scaffold(
-        body: Form(
-          child: Container(
-            width: double.maxFinite,
-            padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
-            child: Column(
-              children: [
-                // Logo and Slogan
-                SizedBox(height: mediaQueryData.size.height / 15),
-                CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 4),
-                CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3.5),
-                SizedBox(height: mediaQueryData.size.height / 30),
+    return Scaffold(
+      body: Form(
+        child: Container(
+          width: double.maxFinite,
+          padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+          child: Column(
+            children: [
+              // Logo and Slogan
+              SizedBox(height: mediaQueryData.size.height / 15),
+              CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 4),
+              CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3.5),
+              SizedBox(height: mediaQueryData.size.height / 30),
 
-                // New Password
-                CustomInputBar(titleName: "新しいパスワード", backendPart: _buildNewPasswordInput(context)),
+              // New Password
+              CustomInputBar(titleName: "新しいパスワード", backendPart: _buildNewPasswordInput(context)),
 
-                // msg
-                Align(alignment: Alignment.centerLeft, child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.pwRuleGray500)),
-                SizedBox(height: mediaQueryData.size.height / 25),
+              // msg
+              Align(alignment: Alignment.centerLeft, child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.pwRuleGray500)),
+              SizedBox(height: mediaQueryData.size.height / 25),
 
-                // New Password Confirm
-                CustomInputBar(titleName: "新しいパスワード（確認）", backendPart: _buildNewPasswordConfirm(context)),
-                SizedBox(height: mediaQueryData.size.height / 25),
+              // New Password Confirm
+              CustomInputBar(titleName: "新しいパスワード（確認）", backendPart: _buildNewPasswordConfirm(context)),
+              SizedBox(height: mediaQueryData.size.height / 25),
 
-                // Button
-                _buildNextButton(context)
-              ],
-            ),
+              // Button
+              _buildNextButton(context)
+            ],
           ),
         ),
       ),
@@ -184,6 +150,7 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
 
   /// Next Button
   Widget _buildNextButton(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     return CustomOutlinedButton(
       width: mediaQueryData.size.width / 4,
       height: mediaQueryData.size.height / 25,

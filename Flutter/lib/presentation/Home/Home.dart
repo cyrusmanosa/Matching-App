@@ -34,6 +34,7 @@ class _HomeState extends State<Home> {
   }
 
   void showErrorDialog(BuildContext context, String errorMessage) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     showDialog(
       context: context,
       builder: (context) {
@@ -69,34 +70,22 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
-          width: double.maxFinite,
-          child: Column(
-            children: [
-              _buildHeader(context),
-              Expanded(child: _buildMainFrame(context)),
-            ],
-          ),
-        ),
+    return Scaffold(
+      appBar: _buildHeader(context),
+      body: Container(
+        width: double.maxFinite,
+        child: Column(children: [Expanded(child: _buildMainFrame(context))]),
       ),
     );
   }
 
-  Widget _buildHeader(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 176, vertical: 11),
-      decoration: AppDecoration.fillGray,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [SizedBox(height: mediaQueryData.size.height / 20), Text("ホーム", style: theme.textTheme.headlineMedium)],
-      ),
-    );
+  PreferredSizeWidget _buildHeader(BuildContext context) {
+    return AppBar(automaticallyImplyLeading: false, title: Text("ホーム", style: theme.textTheme.headlineMedium));
   }
 
 // User Side Show
   Widget _buildMainFrame(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     return Column(
       children: [
         SizedBox(height: mediaQueryData.size.height / 30),

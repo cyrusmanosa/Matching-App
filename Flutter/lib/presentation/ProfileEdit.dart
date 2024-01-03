@@ -3,12 +3,11 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
-import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
-import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
+import 'package:dating_your_date/widgets/Custom_WarningMsgBox.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
@@ -111,158 +110,88 @@ class _ProfileEditState extends State<ProfileEdit> {
     }
   }
 
-  void showDoneDialog(BuildContext context, String doneMessage) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
-          title: CustomImageView(
-            imagePath: ImageConstant.imgLogo,
-            height: mediaQueryData.size.height / 18,
-            width: mediaQueryData.size.width / 7,
-            alignment: Alignment.center,
-          ),
-
-          // Word
-          content: Container(
-            width: mediaQueryData.size.width / 1.1,
-            child: Text(doneMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
-          ),
-          actions: [
-            CustomOutlinedButton(
-              text: "OK",
-              alignment: Alignment.center,
-              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
-              onPressed: () {
-                onTapReturn(context);
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void showErrorDialog(BuildContext context, String errorMessage) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
-          // Error Logo
-          title: CustomImageView(
-            imagePath: ImageConstant.imgWarning,
-            height: mediaQueryData.size.height / 20,
-            width: mediaQueryData.size.width / 10,
-            alignment: Alignment.center,
-          ),
-
-          // Word
-          content: Container(
-            width: mediaQueryData.size.width / 1.1,
-            child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
-          ),
-          actions: [
-            CustomOutlinedButton(
-              text: "OK",
-              alignment: Alignment.center,
-              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
-              onPressed: () {
-                onTapReturn(context);
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: _buildHeader(context),
-        body: Container(
-          width: double.maxFinite,
-          child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
-            child: Column(
-              children: [
-                // photos
-                SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomImageView(
-                      imagePath: ImageConstant.imgVectorgray500,
-                      height: 150.adaptSize,
-                      width: 150.adaptSize,
-                      margin: EdgeInsets.symmetric(vertical: 10),
-                    ),
-                    CustomImageView(
-                      imagePath: ImageConstant.imgPhotoSet,
-                      height: 170.v,
-                      width: 50.h,
-                      margin: EdgeInsets.only(left: 22.h),
-                    ),
-                  ],
-                ),
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+    return Scaffold(
+      appBar: _buildHeader(context),
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        width: double.maxFinite,
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+          child: Column(
+            children: [
+              // photos
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomImageView(
+                    imagePath: ImageConstant.imgVectorgray500,
+                    height: 150,
+                    width: 150,
+                    margin: EdgeInsets.symmetric(vertical: 10),
+                  ),
+                  CustomImageView(
+                    imagePath: ImageConstant.imgPhotoSet,
+                    height: 170,
+                    width: 50,
+                    margin: EdgeInsets.only(left: 22),
+                  ),
+                ],
+              ),
 
-                // Introduce
-                CustomInputBar(titleName: "自己紹介:", backendPart: _buildUpdateIntroduceInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
+              // Introduce
+              CustomInputBar(titleName: "自己紹介:", backendPart: _buildUpdateIntroduceInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                // Nickname
-                CustomInputBar(titleName: "ニックネーム:", backendPart: _buildUpdateNickNameInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
+              // Nickname
+              CustomInputBar(titleName: "ニックネーム:", backendPart: _buildUpdateNickNameInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                // Height
-                CustomInputBar(titleName: "身長:", backendPart: _buildUpdateHeightInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
+              // Height
+              CustomInputBar(titleName: "身長:", backendPart: _buildUpdateHeightInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                // Weight
-                CustomInputBar(titleName: "体重:", backendPart: _buildUpdateWeightInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
+              // Weight
+              CustomInputBar(titleName: "体重:", backendPart: _buildUpdateWeightInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                // City
-                CustomInputBar(titleName: "居住地:", backendPart: _buildUpdateCityInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
+              // City
+              CustomInputBar(titleName: "居住地:", backendPart: _buildUpdateCityInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                // Education
-                CustomInputBar(titleName: "学歴:", backendPart: _buildUpdateEducationInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
+              // Education
+              CustomInputBar(titleName: "学歴:", backendPart: _buildUpdateEducationInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                // Speak Language
-                CustomInputBar(titleName: "言語:", backendPart: _buildUpdateSpeakLanguageInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
+              // Speak Language
+              CustomInputBar(titleName: "言語:", backendPart: _buildUpdateSpeakLanguageInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                // Job
-                CustomInputBar(titleName: "職種:", backendPart: _buildUpdateJobInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
+              // Job
+              CustomInputBar(titleName: "職種:", backendPart: _buildUpdateJobInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                // Annual Salary
-                CustomInputBar(titleName: "年収:", backendPart: _buildUpdateAnnualSalaryInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
+              // Annual Salary
+              CustomInputBar(titleName: "年収:", backendPart: _buildUpdateAnnualSalaryInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                // Sexual
-                CustomInputBar(titleName: "性的指向:", backendPart: _buildUpdateSexualInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
+              // Sexual
+              CustomInputBar(titleName: "性的指向:", backendPart: _buildUpdateSexualInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                // Sociability
-                CustomInputBar(titleName: "社交力:", backendPart: _buildUpdateSociabilityInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
+              // Sociability
+              CustomInputBar(titleName: "社交力:", backendPart: _buildUpdateSociabilityInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                // Relighious
-                CustomInputBar(titleName: "宗教:", backendPart: _buildUpdateReligiousInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 25),
+              // Relighious
+              CustomInputBar(titleName: "宗教:", backendPart: _buildUpdateReligiousInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 25),
 
-                // button
-                _buildSubmitButton(context),
-              ],
-            ),
+              // button
+              _buildSubmitButton(context),
+            ],
           ),
         ),
       ),
@@ -271,21 +200,7 @@ class _ProfileEditState extends State<ProfileEdit> {
 
   /// Header
   PreferredSizeWidget _buildHeader(BuildContext context) {
-    return CustomAppBar(
-      leading: AppbarLeadingImage(
-        imagePath: ImageConstant.imgArrowLeft,
-        margin: EdgeInsets.only(left: 25, top: 50, bottom: 20),
-        onTap: () {
-          onTapReturn(context);
-        },
-      ),
-      title: AppbarTitle(text: "プロフィール編集", margin: EdgeInsets.only(top: 60, bottom: 20)),
-    );
-  }
-
-  // turn back
-  onTapReturn(BuildContext context) {
-    Navigator.pop(context);
+    return AppBar(automaticallyImplyLeading: true, title: AppbarTitle(text: "プロフィール編集"));
   }
 
   /// Nickname
@@ -345,6 +260,7 @@ class _ProfileEditState extends State<ProfileEdit> {
 
   /// Introduce
   Widget _buildUpdateIntroduceInput(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     return CustomInputFormBar(
       prefix: Padding(padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 75)),
       height: mediaQueryData.size.height / 5,
@@ -372,4 +288,6 @@ class _ProfileEditState extends State<ProfileEdit> {
   onTapNextPage(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.profile);
   }
+
+  void showDoneDialog(BuildContext context, String s) {}
 }

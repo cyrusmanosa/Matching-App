@@ -54,6 +54,7 @@ class _PasswordSetupState extends State<PasswordSetup> {
   }
 
   void showErrorDialog(BuildContext context, String errorMessage) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     showDialog(
       context: context,
       builder: (context) {
@@ -100,33 +101,32 @@ class _PasswordSetupState extends State<PasswordSetup> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
-          child: Column(
-            children: [
-              // Logo and Slogan
-              SizedBox(height: mediaQueryData.size.height / 15),
-              CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 3.5),
-              CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3),
-              SizedBox(height: mediaQueryData.size.height / 30),
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+        child: Column(
+          children: [
+            // Logo and Slogan
+            SizedBox(height: mediaQueryData.size.height / 15),
+            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 3.5),
+            CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3),
+            SizedBox(height: mediaQueryData.size.height / 30),
 
-              // New Password
-              CustomInputBar(titleName: "パスワード", backendPart: _buildPasswordInput(context)),
+            // New Password
+            CustomInputBar(titleName: "パスワード", backendPart: _buildPasswordInput(context)),
 
-              // msg
-              Align(alignment: Alignment.centerLeft, child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.pwRuleGray500)),
-              SizedBox(height: mediaQueryData.size.height / 25),
+            // msg
+            Align(alignment: Alignment.centerLeft, child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.pwRuleGray500)),
+            SizedBox(height: mediaQueryData.size.height / 25),
 
-              // New Password Confirm
-              CustomInputBar(titleName: "パスワード（確認）", backendPart: _buildPasswordConfirm(context)),
-              SizedBox(height: mediaQueryData.size.height / 25),
+            // New Password Confirm
+            CustomInputBar(titleName: "パスワード（確認）", backendPart: _buildPasswordConfirm(context)),
+            SizedBox(height: mediaQueryData.size.height / 25),
 
-              // Button
-              _buildNextButton(context)
-            ],
-          ),
+            // Button
+            _buildNextButton(context)
+          ],
         ),
       ),
     );

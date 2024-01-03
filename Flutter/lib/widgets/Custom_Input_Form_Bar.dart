@@ -59,32 +59,38 @@ class CustomInputFormBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+
     return LayoutBuilder(
       builder: (context, constraints) {
-        return alignment != null ? Align(alignment: alignment ?? Alignment.center, child: textFormFieldWidget) : textFormFieldWidget;
+        return alignment != null
+            ? Align(alignment: alignment ?? Alignment.center, child: textFormFieldWidget(mediaQueryData))
+            : textFormFieldWidget(mediaQueryData);
       },
     );
   }
 
-  Widget get textFormFieldWidget => Container(
-        height: height ?? mediaQueryData.size.height / 25,
-        width: width ?? mediaQueryData.size.width / 1.2,
-        child: TextFormField(
-          autofocus: autofocus,
-          controller: controller,
-          textAlign: TextAlign.start,
-          decoration: decoration,
-          focusNode: focusNode,
-          keyboardType: textInputType,
-          maxLength: maxLength,
-          maxLines: maxLines ?? 1,
-          obscureText: obscureText ?? false,
-          style: theme.textTheme.displayLarge,
-          textInputAction: textInputAction ?? TextInputAction.done,
-          validator: validator,
-          onTap: onTap,
-        ),
-      );
+  Widget textFormFieldWidget(MediaQueryData mediaQueryData) {
+    return Container(
+      height: height ?? mediaQueryData.size.height / 25,
+      width: width ?? mediaQueryData.size.width / 1.2,
+      child: TextFormField(
+        autofocus: autofocus,
+        controller: controller,
+        textAlign: TextAlign.start,
+        decoration: decoration,
+        focusNode: focusNode,
+        keyboardType: textInputType,
+        maxLength: maxLength,
+        maxLines: maxLines ?? 1,
+        obscureText: obscureText ?? false,
+        style: theme.textTheme.displayLarge,
+        textInputAction: textInputAction ?? TextInputAction.done,
+        validator: validator,
+        onTap: onTap,
+      ),
+    );
+  }
 
   InputDecoration get decoration => InputDecoration(
         contentPadding: contentPadding ?? EdgeInsets.only(top: -10),

@@ -1,7 +1,5 @@
 import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
-import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:flutter/material.dart';
 
@@ -13,28 +11,26 @@ class DeleteTarget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
-    return SafeArea(
-      child: Scaffold(
-        appBar: _buildHeader(context),
-        body: Container(
-          width: double.maxFinite,
-          decoration: AppDecoration.fillPrimary,
-          child: Column(
-            children: [
-              // Chooes
-              SizedBox(height: mediaQueryData.size.height / 50),
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+    return Scaffold(
+      appBar: _buildHeader(context),
+      body: Container(
+        width: double.maxFinite,
+        decoration: AppDecoration.fillPrimary,
+        child: Column(
+          children: [
+            // Chooes
+            SizedBox(height: mediaQueryData.size.height / 50),
 
-              // Button
-              CustomOutlinedButton(
-                text: "削除",
-                onPressed: () {
-                  onTapNextPage(context);
-                },
-              ),
-              SizedBox(height: mediaQueryData.size.height / 50),
-            ],
-          ),
+            // Button
+            CustomOutlinedButton(
+              text: "削除",
+              onPressed: () {
+                onTapNextPage(context);
+              },
+            ),
+            SizedBox(height: mediaQueryData.size.height / 50),
+          ],
         ),
       ),
     );
@@ -42,16 +38,7 @@ class DeleteTarget extends StatelessWidget {
 
   /// Header
   PreferredSizeWidget _buildHeader(BuildContext context) {
-    return CustomAppBar(
-      leading: AppbarLeadingImage(
-        imagePath: ImageConstant.imgArrowLeft,
-        margin: EdgeInsets.only(left: 25, top: 50, bottom: 10),
-        onTap: () {
-          onTapReturn(context);
-        },
-      ),
-      title: AppbarTitle(text: "ターゲットを削除", margin: EdgeInsets.only(top: 60, bottom: 20)),
-    );
+    return AppBar(automaticallyImplyLeading: true, title: AppbarTitle(text: "ターゲットを削除"));
   }
 
   onTapReturn(BuildContext context) {

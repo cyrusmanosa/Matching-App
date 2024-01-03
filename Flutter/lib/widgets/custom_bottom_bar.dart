@@ -2,94 +2,72 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class CustomBottomBar extends StatefulWidget {
-  CustomBottomBar({this.onChanged});
-  Function(BottomBarEnum)? onChanged;
-  @override
-  CustomBottomBarState createState() => CustomBottomBarState();
-}
+class CustomBottomBar extends StatelessWidget {
+  CustomBottomBar({required this.selectedIndex, required this.onChanged});
 
-class CustomBottomBarState extends State<CustomBottomBar> {
-  int selectedIndex = 0;
+  final int selectedIndex;
+  final Function(int) onChanged;
+
   List<BottomMenuModel> bottomMenuList = [
-    BottomMenuModel(icon: ImageConstant.imgHome, activeIcon: ImageConstant.imgHome, label: "ホーム", type: BottomBarEnum.home),
-    BottomMenuModel(icon: ImageConstant.imgTarget, activeIcon: ImageConstant.imgTarget, label: "ターゲット", type: BottomBarEnum.target),
-    BottomMenuModel(icon: ImageConstant.imgChat, activeIcon: ImageConstant.imgChat, label: "チャット", type: BottomBarEnum.chat),
-    BottomMenuModel(icon: ImageConstant.imgProfile, activeIcon: ImageConstant.imgProfile, label: "プロフィール", type: BottomBarEnum.profile)
+    BottomMenuModel(icon: ImageConstant.imgHome, activeIcon: ImageConstant.imgHome, label: "ホーム"),
+    BottomMenuModel(icon: ImageConstant.imgTarget, activeIcon: ImageConstant.imgTarget, label: "ターゲット"),
+    BottomMenuModel(icon: ImageConstant.imgChat, activeIcon: ImageConstant.imgChat, label: "チャット"),
+    BottomMenuModel(icon: ImageConstant.imgProfile, activeIcon: ImageConstant.imgProfile, label: "プロフィール"),
   ];
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     return Container(
-      height: mediaQueryData.size.height / 13,
+      height: mediaQueryData.size.height / 10.5,
       decoration: BoxDecoration(color: appTheme.gray500),
-      padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 15),
+      padding: EdgeInsets.only(
+        left: mediaQueryData.size.width / 20,
+        right: mediaQueryData.size.width / 20,
+      ),
       child: BottomNavigationBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Color.fromARGB(0, 255, 0, 0),
         selectedFontSize: 0,
         elevation: 0,
         currentIndex: selectedIndex,
         type: BottomNavigationBarType.fixed,
         items: List.generate(bottomMenuList.length, (index) {
-          // Footage
           return BottomNavigationBarItem(
             label: "",
+
+            // before
             icon: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Padding(padding: EdgeInsets.only(top: mediaQueryData.size.height / 100)),
                 CustomImageView(imagePath: bottomMenuList[index].icon, width: mediaQueryData.size.width / 20, color: appTheme.white),
-                Padding(padding: EdgeInsets.only(top: 2.v), child: Text(bottomMenuList[index].label!, style: CustomTextStyles.mainButtonW)),
+                Padding(padding: EdgeInsets.only(top: 2), child: Text(bottomMenuList[index].label!, style: CustomTextStyles.mainButtonW)),
               ],
             ),
-            // Icon OnTap
+
+            // after
             activeIcon: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Padding(padding: EdgeInsets.only(top: mediaQueryData.size.height / 100)),
                 CustomImageView(
                   imagePath: bottomMenuList[index].activeIcon,
                   width: mediaQueryData.size.width / 20,
                   color: appTheme.cyan600,
                 ),
-                Padding(padding: EdgeInsets.only(top: 2.v), child: Text(bottomMenuList[index].label!, style: CustomTextStyles.mainButtonC)),
+                Padding(padding: EdgeInsets.only(top: 2), child: Text(bottomMenuList[index].label!, style: CustomTextStyles.mainButtonC)),
               ],
             ),
           );
         }),
-        onTap: (index) {
-          selectedIndex = index;
-          widget.onChanged?.call(bottomMenuList[index].type!);
-          setState(() {});
-        },
+        onTap: onChanged,
       ),
     );
   }
 }
 
-enum BottomBarEnum { home, target, chat, profile }
-
 class BottomMenuModel {
-  BottomMenuModel({this.label, this.activeIcon, this.icon, this.type});
+  BottomMenuModel({this.label, this.activeIcon, this.icon});
+
   String? activeIcon;
   String? icon;
   String? label;
-  BottomBarEnum? type;
-}
-
-class DefaultWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      padding: EdgeInsets.all(10),
-      child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text('Please replace the respective Widget here', style: TextStyle(fontSize: 18))],
-        ),
-      ),
-    );
-  }
 }

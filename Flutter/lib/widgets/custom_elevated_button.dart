@@ -35,28 +35,31 @@ class CustomElevatedButton extends BaseButton {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     return alignment != null
-        ? Align(alignment: alignment ?? Alignment.center, child: buildElevatedButtonWidget)
-        : buildElevatedButtonWidget;
+        ? Align(alignment: alignment ?? Alignment.center, child: buildElevatedButtonWidget(mediaQueryData))
+        : buildElevatedButtonWidget(mediaQueryData);
   }
 
-  Widget get buildElevatedButtonWidget => Container(
-        height: height ?? mediaQueryData.size.height / 20,
-        width: width ?? mediaQueryData.size.width / 1.5,
-        margin: margin,
-        decoration: decoration,
-        child: ElevatedButton(
-          style: buttonStyle,
-          onPressed: isDisabled ?? false ? null : onPressed ?? () {},
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              leftIcon ?? const SizedBox.shrink(),
-              Text(text, style: buttonTextStyle ?? theme.textTheme.headlineMedium),
-              rightIcon ?? const SizedBox.shrink(),
-            ],
-          ),
+  Widget buildElevatedButtonWidget(MediaQueryData mediaQueryData) {
+    return Container(
+      height: height ?? mediaQueryData.size.height / 20,
+      width: width ?? mediaQueryData.size.width / 1.5,
+      margin: margin,
+      decoration: decoration,
+      child: ElevatedButton(
+        style: buttonStyle,
+        onPressed: isDisabled ?? false ? null : onPressed ?? () {},
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            leftIcon ?? const SizedBox.shrink(),
+            Text(text, style: buttonTextStyle ?? theme.textTheme.headlineMedium),
+            rightIcon ?? const SizedBox.shrink(),
+          ],
         ),
-      );
+      ),
+    );
+  }
 }

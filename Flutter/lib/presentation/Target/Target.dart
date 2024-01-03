@@ -7,40 +7,34 @@ class Target extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
-          width: double.maxFinite,
-          child: Column(
-            children: [
-              _buildHeader(context),
-              SizedBox(height: mediaQueryData.size.height / 30),
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+    return Scaffold(
+      appBar: _buildHeader(context),
+      body: Container(
+        width: double.maxFinite,
+        child: Column(
+          children: [
+            // _buildHeader(context),
+            SizedBox(height: mediaQueryData.size.height / 30),
 
-              // title
-              Text("探すターゲットの種類", style: theme.textTheme.headlineSmall),
-              SizedBox(height: mediaQueryData.size.height / 30),
-              _buildTargetResetList(context)
-            ],
-          ),
+            // title
+            Text("探すターゲットの種類", style: theme.textTheme.headlineSmall),
+            SizedBox(height: mediaQueryData.size.height / 30),
+            _buildTargetResetList(context)
+          ],
         ),
       ),
     );
   }
 
-  /// Header
-  Widget _buildHeader(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 111, vertical: 11),
-      decoration: AppDecoration.fillGray,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [SizedBox(height: mediaQueryData.size.height / 20), Text("ターゲットの設定", style: theme.textTheme.headlineMedium)],
-      ),
-    );
+  PreferredSizeWidget _buildHeader(BuildContext context) {
+    return AppBar(automaticallyImplyLeading: false, title: Text("ターゲットの設定", style: theme.textTheme.headlineMedium));
   }
 
   /// Section Widget
   Widget _buildTargetResetList(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+
     return Expanded(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 10),

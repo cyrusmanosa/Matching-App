@@ -2,12 +2,11 @@ import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/rpc_lover.pb.dart';
-import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
-import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
+import 'package:dating_your_date/widgets/Custom_WarningMsgBox.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -90,148 +89,111 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
     }
   }
 
-  void showErrorDialog(BuildContext context, String errorMessage) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
-          // Error Logo
-          title: CustomImageView(
-            imagePath: ImageConstant.imgWarning,
-            height: mediaQueryData.size.height / 20,
-            width: mediaQueryData.size.width / 10,
-            alignment: Alignment.center,
-          ),
-
-          // Word
-          content: Container(
-            width: mediaQueryData.size.width / 1.1,
-            child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
-          ),
-          actions: [
-            CustomOutlinedButton(
-              alignment: Alignment.center,
-              text: "OK",
-              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
-              onPressed: () {
-                onTapReturn(context);
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   bool confirmBtn = false;
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     mediaQueryData = MediaQuery.of(context);
 
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        // Header
-        appBar: _buildHeader(context),
-        body: SizedBox(
-          width: double.maxFinite,
-          child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
-            child: Column(
-              children: [
-                Row(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: _buildHeader(context),
+      body: SizedBox(
+        width: double.maxFinite,
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  CustomInputBar(titleName: "年齢:", backendPart: _buildLoverMinAgeInput(context)),
+                  SizedBox(width: mediaQueryData.size.width / 30),
+                  Text("から"),
+                  SizedBox(width: mediaQueryData.size.width / 30),
+                  CustomInputBar(titleName: "", backendPart: _buildLoverMaxAgeInput(context)),
+                ],
+              ),
+              SizedBox(height: mediaQueryData.size.height / 100),
+              // Country
+              CustomInputBar(titleName: "国籍:", backendPart: _buildLoverResetCountryInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
+
+              // City
+              CustomInputBar(titleName: "居住地:", backendPart: _buildLoverResetCityInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
+
+              // Gender
+              CustomInputBar(titleName: "性別:", backendPart: _buildLoverResetGenderInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
+
+              // Constellation
+              CustomInputBar(titleName: "星座:", backendPart: _buildLoverResetConstellationInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
+
+              // Blood
+              CustomInputBar(titleName: "血液型:", backendPart: _buildLoverResetBloodInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
+
+              // Sexual
+              CustomInputBar(titleName: "性的指向:", backendPart: _buildLoverResetSexualInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
+
+              // Height
+              CustomInputBar(titleName: "身長:", backendPart: _buildLoverResetHeightInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
+
+              // Wegiht
+              CustomInputBar(titleName: "体重:", backendPart: _buildLoverResetWeightInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
+
+              // Speak Language
+              CustomInputBar(titleName: "言語:", backendPart: _buildLoverSpeakLanguageInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
+
+              // Job
+              CustomInputBar(titleName: "職種:", backendPart: _buildLoverResetJobInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
+
+              // Annual Salary
+              CustomInputBar(titleName: "年収:", backendPart: _buildLoverResetAnnualSalaryInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
+
+              // Socialbility
+              CustomInputBar(titleName: "社交力:", backendPart: _buildLoverResetSociabilityInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
+
+              // Religious
+              CustomInputBar(titleName: "宗教:", backendPart: _buildLoverResetReligiousInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
+
+              // 本人認証の丸
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    confirmBtn = !confirmBtn;
+                  });
+                },
+                child: Row(
                   children: [
-                    CustomInputBar(titleName: "年齢:", backendPart: _buildLoverMinAgeInput(context)),
-                    SizedBox(width: mediaQueryData.size.width / 30),
-                    Text("から"),
-                    SizedBox(width: mediaQueryData.size.width / 30),
-                    CustomInputBar(titleName: "", backendPart: _buildLoverMaxAgeInput(context)),
+                    Container(
+                      height: mediaQueryData.size.width / 25,
+                      width: mediaQueryData.size.width / 25,
+                      decoration: BoxDecoration(color: confirmBtn ? appTheme.green : appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
+                      child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
+                    ),
                   ],
                 ),
-                SizedBox(height: mediaQueryData.size.height / 100),
-                // Country
-                CustomInputBar(titleName: "国籍:", backendPart: _buildLoverResetCountryInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
+              ),
 
-                // City
-                CustomInputBar(titleName: "居住地:", backendPart: _buildLoverResetCityInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaQueryData.size.height / 25),
 
-                // Gender
-                CustomInputBar(titleName: "性別:", backendPart: _buildLoverResetGenderInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
-
-                // Constellation
-                CustomInputBar(titleName: "星座:", backendPart: _buildLoverResetConstellationInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
-
-                // Blood
-                CustomInputBar(titleName: "血液型:", backendPart: _buildLoverResetBloodInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
-
-                // Sexual
-                CustomInputBar(titleName: "性的指向:", backendPart: _buildLoverResetSexualInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
-
-                // Height
-                CustomInputBar(titleName: "身長:", backendPart: _buildLoverResetHeightInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
-
-                // Wegiht
-                CustomInputBar(titleName: "体重:", backendPart: _buildLoverResetWeightInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
-
-                // Speak Language
-                CustomInputBar(titleName: "言語:", backendPart: _buildLoverSpeakLanguageInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
-
-                // Job
-                CustomInputBar(titleName: "職種:", backendPart: _buildLoverResetJobInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
-
-                // Annual Salary
-                CustomInputBar(titleName: "年収:", backendPart: _buildLoverResetAnnualSalaryInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
-
-                // Socialbility
-                CustomInputBar(titleName: "社交力:", backendPart: _buildLoverResetSociabilityInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
-
-                // Religious
-                CustomInputBar(titleName: "宗教:", backendPart: _buildLoverResetReligiousInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
-
-                // 本人認証の丸
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      confirmBtn = !confirmBtn;
-                    });
-                  },
-                  child: Row(
-                    children: [
-                      Container(
-                        height: mediaQueryData.size.width / 25,
-                        width: mediaQueryData.size.width / 25,
-                        decoration:
-                            BoxDecoration(color: confirmBtn ? appTheme.green : appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
-                        child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
-                      ),
-                    ],
-                  ),
-                ),
-
-                SizedBox(height: mediaQueryData.size.height / 25),
-
-                // button
-                _buildNextButton(context),
-              ],
-            ),
+              // button
+              _buildNextButton(context),
+            ],
           ),
         ),
       ),
@@ -240,20 +202,12 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
 
   /// Header
   PreferredSizeWidget _buildHeader(BuildContext context) {
-    return CustomAppBar(
-      leading: AppbarLeadingImage(
-        imagePath: ImageConstant.imgArrowLeft,
-        margin: EdgeInsets.only(left: 25, top: 50, bottom: 10),
-        onTap: () {
-          onTapReturn(context);
-        },
-      ),
-      title: AppbarTitle(text: "恋人の条件更改", margin: EdgeInsets.only(top: 60, bottom: 20)),
-    );
+    return AppBar(automaticallyImplyLeading: true, title: AppbarTitle(text: "恋人の条件更改"));
   }
 
   /// Min Age
   Widget _buildLoverMinAgeInput(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     return CustomInputFormBar(
       alignment: Alignment.centerLeft,
       height: mediaQueryData.size.height / 16,
@@ -266,6 +220,7 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
 
   /// Min Age
   Widget _buildLoverMaxAgeInput(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     return CustomInputFormBar(
       alignment: Alignment.centerLeft,
       height: mediaQueryData.size.height / 16,

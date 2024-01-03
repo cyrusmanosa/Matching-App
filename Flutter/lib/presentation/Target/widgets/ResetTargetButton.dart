@@ -12,6 +12,7 @@ class ResetTargetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     return CustomElevatedButton(
       width: mediaQueryData.size.width / 15,
       height: mediaQueryData.size.height / 6.5,

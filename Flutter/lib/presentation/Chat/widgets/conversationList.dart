@@ -1,4 +1,5 @@
 import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/presentation/ChatBox.dart';
 import 'package:flutter/material.dart';
 
 class ConversationList extends StatelessWidget {
@@ -19,9 +20,18 @@ class ConversationList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     return GestureDetector(
       onTap: () {
-        onTapChatBox(context);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ChatBox(
+                    name: name,
+                    time: time,
+                    imageUrl: imageUrl,
+                  )),
+        );
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
@@ -52,8 +62,4 @@ class ConversationList extends StatelessWidget {
       ),
     );
   }
-}
-
-onTapChatBox(BuildContext context) {
-  Navigator.pushNamed(context, AppRoutes.chatBox);
 }

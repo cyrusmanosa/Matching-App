@@ -2,10 +2,8 @@ import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/rpc_fix.pb.dart';
-import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
-import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
@@ -84,6 +82,7 @@ class _FixInformationState extends State<FixInformation> {
   }
 
   void showErrorDialog(BuildContext context, String errorMessage) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     showDialog(
       context: context,
       builder: (context) {
@@ -122,110 +121,108 @@ class _FixInformationState extends State<FixInformation> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        // Header
-        appBar: _buildHeader(context),
-        body: Container(
-          width: double.maxFinite,
-          child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
-            child: Column(
-              children: [
-                // image
-                CustomImageView(
-                  imagePath: ImageConstant.imgVector,
-                  height: mediaQueryData.size.height / 7,
-                  width: mediaQueryData.size.width / 3,
-                  alignment: Alignment.center,
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+    return Scaffold(
+      appBar: _buildHeader(context),
+      body: Container(
+        width: double.maxFinite,
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+          child: Column(
+            children: [
+              // image
+              CustomImageView(
+                imagePath: ImageConstant.imgVector,
+                height: mediaQueryData.size.height / 7,
+                width: mediaQueryData.size.width / 3,
+                alignment: Alignment.center,
+              ),
+              SizedBox(height: mediaQueryData.size.height / 70),
+
+              // msg
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text("以下の項目は全部入力するのは必要です。", style: CustomTextStyles.msgWordOfMsgBox),
+              ),
+              SizedBox(height: mediaQueryData.size.height / 30),
+
+              // Last name
+              CustomInputBar(titleName: "姓:", backendPart: _buildfixLastNameInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
+
+              // First name
+              CustomInputBar(titleName: "名:", backendPart: _buildfixFirstNameInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
+
+              // Birth
+              CustomInputBar(titleName: "生年月日:", backendPart: _buildfixBirthInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
+
+              // Country
+              CustomInputBar(titleName: "国籍:", backendPart: _buildfixCountryInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
+
+              // Gender
+              CustomInputBar(titleName: "性別:", backendPart: _buildfixGenderInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
+
+              // 血液型
+              CustomInputBar(titleName: "血液型:", backendPart: _buildfixBloodInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
+
+              // 18
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    confirm18Btn = !confirm18Btn;
+                  });
+                },
+                child: Row(
+                  children: [
+                    Container(
+                      height: mediaQueryData.size.width / 25,
+                      width: mediaQueryData.size.width / 25,
+                      decoration:
+                          BoxDecoration(color: confirm18Btn ? appTheme.green : appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
+                      child:
+                          Text("満18歳以上の独身であることを誓約します", style: confirm18Btn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
+                    ),
+                  ],
                 ),
-                SizedBox(height: mediaQueryData.size.height / 70),
+              ),
+              SizedBox(height: mediaQueryData.size.height / 150),
 
-                // msg
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text("以下の項目は全部入力するのは必要です。", style: CustomTextStyles.msgWordOfMsgBox),
+              // Agree
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    confirmAgreeBtn = !confirmAgreeBtn;
+                  });
+                },
+                child: Row(
+                  children: [
+                    Container(
+                      height: mediaQueryData.size.width / 25,
+                      width: mediaQueryData.size.width / 25,
+                      decoration: BoxDecoration(
+                        color: confirmAgreeBtn ? appTheme.green : appTheme.gray500,
+                        borderRadius: BorderRadiusStyle.r15,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
+                      child: Text("全ての規約に同意します", style: confirmAgreeBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
+                    ),
+                  ],
                 ),
-                SizedBox(height: mediaQueryData.size.height / 30),
-
-                // Last name
-                CustomInputBar(titleName: "姓:", backendPart: _buildfixLastNameInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
-
-                // First name
-                CustomInputBar(titleName: "名:", backendPart: _buildfixFirstNameInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
-
-                // Birth
-                CustomInputBar(titleName: "生年月日:", backendPart: _buildfixBirthInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
-
-                // Country
-                CustomInputBar(titleName: "国籍:", backendPart: _buildfixCountryInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
-
-                // Gender
-                CustomInputBar(titleName: "性別:", backendPart: _buildfixGenderInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
-
-                // 血液型
-                CustomInputBar(titleName: "血液型:", backendPart: _buildfixBloodInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
-
-                // 18
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      confirm18Btn = !confirm18Btn;
-                    });
-                  },
-                  child: Row(
-                    children: [
-                      Container(
-                        height: mediaQueryData.size.width / 25,
-                        width: mediaQueryData.size.width / 25,
-                        decoration:
-                            BoxDecoration(color: confirm18Btn ? appTheme.green : appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
-                        child: Text("満18歳以上の独身であることを誓約します",
-                            style: confirm18Btn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: mediaQueryData.size.height / 150),
-
-                // Agree
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      confirmAgreeBtn = !confirmAgreeBtn;
-                    });
-                  },
-                  child: Row(
-                    children: [
-                      Container(
-                        height: mediaQueryData.size.width / 25,
-                        width: mediaQueryData.size.width / 25,
-                        decoration: BoxDecoration(
-                          color: confirmAgreeBtn ? appTheme.green : appTheme.gray500,
-                          borderRadius: BorderRadiusStyle.r15,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
-                        child: Text("全ての規約に同意します", style: confirmAgreeBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: mediaQueryData.size.height / 25),
-                // Button
-                _buildNextButton(context),
-              ],
-            ),
+              ),
+              SizedBox(height: mediaQueryData.size.height / 25),
+              // Button
+              _buildNextButton(context),
+            ],
           ),
         ),
       ),
@@ -234,16 +231,7 @@ class _FixInformationState extends State<FixInformation> {
 
   /// Header
   PreferredSizeWidget _buildHeader(BuildContext context) {
-    return CustomAppBar(
-      leading: AppbarLeadingImage(
-        imagePath: ImageConstant.imgArrowLeft,
-        margin: EdgeInsets.only(left: 25, top: 50, bottom: 10),
-        onTap: () {
-          onTapReturn(context);
-        },
-      ),
-      title: AppbarTitle(text: "基本個人情報 - A", margin: EdgeInsets.only(top: 60, bottom: 20)),
-    );
+    return AppBar(automaticallyImplyLeading: true, title: AppbarTitle(text: "基本個人情報 - A"));
   }
 
   /// Last Name

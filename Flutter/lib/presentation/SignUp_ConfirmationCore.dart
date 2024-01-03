@@ -37,6 +37,7 @@ class ConfirmationCore extends StatelessWidget {
   }
 
   void showErrorDialog(BuildContext context, String errorMessage) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     showDialog(
       context: context,
       builder: (context) {
@@ -72,48 +73,47 @@ class ConfirmationCore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
-          child: Column(
-            children: [
-              // Logo and Slogan
-              SizedBox(height: mediaQueryData.size.height / 15),
-              CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 4.5),
-              CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3.5),
-              SizedBox(height: mediaQueryData.size.height / 50),
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+        child: Column(
+          children: [
+            // Logo and Slogan
+            SizedBox(height: mediaQueryData.size.height / 15),
+            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 4.5),
+            CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3.5),
+            SizedBox(height: mediaQueryData.size.height / 50),
 
-              // Title
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text("以下にコードを認証してください。", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
-              ),
-              SizedBox(height: mediaQueryData.size.height / 50),
+            // Title
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text("以下にコードを認証してください。", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
+            ),
+            SizedBox(height: mediaQueryData.size.height / 50),
 
-              // Input
-              CustomInputBar(titleName: "認証コード:", backendPart: _buildConfirmationCoreInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 350),
+            // Input
+            CustomInputBar(titleName: "認証コード:", backendPart: _buildConfirmationCoreInput(context)),
+            SizedBox(height: mediaQueryData.size.height / 350),
 
-              // reset password
-              Align(
-                alignment: Alignment.centerLeft,
-                child: GestureDetector(
-                  onTap: () {
-                    onTapReturn(context);
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.only(left: mediaQueryData.size.width / 100),
-                    child: Text("コードは届かない場合", style: CustomTextStyles.wordOnlySmallButton),
-                  ),
+            // reset password
+            Align(
+              alignment: Alignment.centerLeft,
+              child: GestureDetector(
+                onTap: () {
+                  onTapReturn(context);
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(left: mediaQueryData.size.width / 100),
+                  child: Text("コードは届かない場合", style: CustomTextStyles.wordOnlySmallButton),
                 ),
               ),
-              SizedBox(height: mediaQueryData.size.height / 50),
+            ),
+            SizedBox(height: mediaQueryData.size.height / 50),
 
-              // button
-              _buildNextButton(context),
-            ],
-          ),
+            // button
+            _buildNextButton(context),
+          ],
         ),
       ),
     );

@@ -13,38 +13,37 @@ class PasswordResetEmail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     mediaQueryData = MediaQuery.of(context);
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Form(
-          key: _formKey,
-          child: Container(
-            width: double.maxFinite,
-            padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
-            child: Column(
-              children: [
-                // Logo and Slogan
-                SizedBox(height: mediaQueryData.size.height / 15),
-                CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 4),
-                CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3.5),
-                SizedBox(height: mediaQueryData.size.height / 50),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Form(
+        key: _formKey,
+        child: Container(
+          width: double.maxFinite,
+          padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+          child: Column(
+            children: [
+              // Logo and Slogan
+              SizedBox(height: mediaQueryData.size.height / 15),
+              CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 4),
+              CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3.5),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                // msg
-                Container(
-                  alignment: Alignment.centerLeft,
-                  child: Text("ご登録されているメールアドレスに認証キーを送します", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
-                ),
-                SizedBox(height: mediaQueryData.size.height / 50),
+              // msg
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Text("ご登録されているメールアドレスに認証キーを送します", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
+              ),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                // Input
-                CustomInputBar(titleName: "メールアドレス:", backendPart: _buildResetPasswordEmailInput(context)),
-                SizedBox(height: mediaQueryData.size.height / 50),
+              // Input
+              CustomInputBar(titleName: "メールアドレス:", backendPart: _buildResetPasswordEmailInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                // button
-                _buildNextButton(context)
-              ],
-            ),
+              // button
+              _buildNextButton(context)
+            ],
           ),
         ),
       ),

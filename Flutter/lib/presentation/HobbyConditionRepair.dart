@@ -2,12 +2,11 @@ import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/rpc_hobby.pb.dart';
-import 'package:dating_your_date/widgets/app_bar/appbar_leading_image.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
-import 'package:dating_your_date/widgets/app_bar/custom_app_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
+import 'package:dating_your_date/widgets/Custom_WarningMsgBox.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -82,129 +81,90 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
     }
   }
 
-  void showErrorDialog(BuildContext context, String errorMessage) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
-          // Error Logo
-          title: CustomImageView(
-            imagePath: ImageConstant.imgWarning,
-            height: mediaQueryData.size.height / 20,
-            width: mediaQueryData.size.width / 10,
-            alignment: Alignment.center,
-          ),
-
-          // Word
-          content: Container(
-            width: mediaQueryData.size.width / 1.1,
-            child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
-          ),
-          actions: [
-            CustomOutlinedButton(
-              alignment: Alignment.center,
-              text: "OK",
-              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
-              onPressed: () {
-                onTapReturn(context);
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   bool confirmBtn = false;
 
   @override
   Widget build(BuildContext context) {
-    mediaQueryData = MediaQuery.of(context);
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: _buildHeader(context),
-        body: Form(
-          child: Container(
-            width: double.maxFinite,
-            child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
-              child: Column(
-                children: [
-                  // Era
-                  CustomInputBar(titleName: "年代:", backendPart: _buildHobbyResetEraInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+    return Scaffold(
+      appBar: _buildHeader(context),
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        width: double.maxFinite,
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+          child: Column(
+            children: [
+              // Era
+              CustomInputBar(titleName: "年代:", backendPart: _buildHobbyResetEraInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // Country
-                  CustomInputBar(titleName: "国籍:", backendPart: _buildHobbyResetCountryInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+              // Country
+              CustomInputBar(titleName: "国籍:", backendPart: _buildHobbyResetCountryInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // City
-                  CustomInputBar(titleName: "居住地:", backendPart: _buildHobbyResetCityInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+              // City
+              CustomInputBar(titleName: "居住地:", backendPart: _buildHobbyResetCityInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // Gender
-                  CustomInputBar(titleName: "性別:", backendPart: _buildHobbyResetGenderInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+              // Gender
+              CustomInputBar(titleName: "性別:", backendPart: _buildHobbyResetGenderInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // Language
-                  CustomInputBar(titleName: "お喋れる言語:", backendPart: _buildHobbySpeakLanguageInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+              // Language
+              CustomInputBar(titleName: "お喋れる言語:", backendPart: _buildHobbySpeakLanguageInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // Hobby Type
-                  CustomInputBar(titleName: "趣味のタイプ:", backendPart: _buildHobbyResetHobbyTypeInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+              // Hobby Type
+              CustomInputBar(titleName: "趣味のタイプ:", backendPart: _buildHobbyResetHobbyTypeInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // Find Target
-                  CustomInputBar(titleName: "探す対象:", backendPart: _buildHobbyResetFindTargetInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+              // Find Target
+              CustomInputBar(titleName: "探す対象:", backendPart: _buildHobbyResetFindTargetInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // Experience
-                  CustomInputBar(titleName: "経験:", backendPart: _buildHobbyResetExperienceInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+              // Experience
+              CustomInputBar(titleName: "経験:", backendPart: _buildHobbyResetExperienceInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // Height
-                  CustomInputBar(titleName: "身長:", backendPart: _buildHobbyResetHeightInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+              // Height
+              CustomInputBar(titleName: "身長:", backendPart: _buildHobbyResetHeightInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // Weight
-                  CustomInputBar(titleName: "体重:", backendPart: _buildHobbyResetWeightInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+              // Weight
+              CustomInputBar(titleName: "体重:", backendPart: _buildHobbyResetWeightInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // Sociability
-                  CustomInputBar(titleName: "社交力:", backendPart: _buildHobbyResetSociabilityInput(context)),
-                  SizedBox(height: mediaQueryData.size.height / 50),
+              // Sociability
+              CustomInputBar(titleName: "社交力:", backendPart: _buildHobbyResetSociabilityInput(context)),
+              SizedBox(height: mediaQueryData.size.height / 50),
 
-                  // 本人認証の丸
-                  InkWell(
-                    onTap: () {
-                      setState(() {
-                        confirmBtn = !confirmBtn;
-                      });
-                    },
-                    child: Row(
-                      children: [
-                        Container(
-                          height: mediaQueryData.size.width / 25,
-                          width: mediaQueryData.size.width / 25,
-                          decoration:
-                              BoxDecoration(color: confirmBtn ? appTheme.green : appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
-                          child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
-                        ),
-                      ],
+              // 本人認証の丸
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    confirmBtn = !confirmBtn;
+                  });
+                },
+                child: Row(
+                  children: [
+                    Container(
+                      height: mediaQueryData.size.width / 25,
+                      width: mediaQueryData.size.width / 25,
+                      decoration: BoxDecoration(color: confirmBtn ? appTheme.green : appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
                     ),
-                  ),
-                  SizedBox(height: mediaQueryData.size.height / 25),
-
-                  // button
-                  _buildNextButton(context),
-                ],
+                    Padding(
+                      padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
+                      child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
+                    ),
+                  ],
+                ),
               ),
-            ),
+              SizedBox(height: mediaQueryData.size.height / 25),
+
+              // button
+              _buildNextButton(context),
+            ],
           ),
         ),
       ),
@@ -213,16 +173,7 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
 
   /// Header
   PreferredSizeWidget _buildHeader(BuildContext context) {
-    return CustomAppBar(
-      leading: AppbarLeadingImage(
-        imagePath: ImageConstant.imgArrowLeft,
-        margin: EdgeInsets.only(left: 25, top: 50, bottom: 10),
-        onTap: () {
-          onTapReturn(context);
-        },
-      ),
-      title: AppbarTitle(text: "趣味の条件更改", margin: EdgeInsets.only(top: 60, bottom: 20)),
-    );
+    return AppBar(automaticallyImplyLeading: true, title: AppbarTitle(text: "趣味の条件更改"));
   }
 
   onTapReturn(BuildContext context) {

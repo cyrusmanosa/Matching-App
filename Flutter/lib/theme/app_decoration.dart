@@ -7,13 +7,6 @@ class AppDecoration {
   static BoxDecoration get fillPink => BoxDecoration(color: appTheme.pinkA100);
   static BoxDecoration get fillPrimary => BoxDecoration(color: theme.colorScheme.primary);
   static BoxDecoration get fillOnPrimary => BoxDecoration(color: theme.colorScheme.onPrimary);
-
-  // Outline decorations
-
-  static BoxDecoration get outlinePinkA100 => BoxDecoration(
-        color: appTheme.pinkA100,
-        boxShadow: [BoxShadow(color: appTheme.black.withOpacity(0.25), spreadRadius: 2.h, blurRadius: 2.h, offset: Offset(15, 0))],
-      );
 }
 
 class BorderRadiusStyle {

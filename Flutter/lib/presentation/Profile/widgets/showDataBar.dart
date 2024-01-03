@@ -10,6 +10,7 @@ class ShownDataBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     return SizedBox(
       height: mediaQueryData.size.height / 35,
       width: mediaQueryData.size.width / 1.3,

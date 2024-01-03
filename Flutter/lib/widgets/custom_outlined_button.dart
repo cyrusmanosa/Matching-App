@@ -38,27 +38,30 @@ class CustomOutlinedButton extends BaseButton {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     return alignment != null
-        ? Align(alignment: alignment ?? Alignment.center, child: buildOutlinedButtonWidget)
-        : buildOutlinedButtonWidget;
+        ? Align(alignment: alignment ?? Alignment.center, child: buildOutlinedButtonWidget(mediaQueryData))
+        : buildOutlinedButtonWidget(mediaQueryData);
   }
 
-  Widget get buildOutlinedButtonWidget => Container(
-        height: height ?? mediaQueryData.size.height / 25,
-        width: width ?? mediaQueryData.size.width / 4,
-        margin: margin,
-        decoration: decoration,
-        child: OutlinedButton(
-          onPressed: onPressed,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              leftIcon ?? const SizedBox.shrink(),
-              Text(text, style: buttonTextStyle ?? theme.textTheme.titleMedium),
-              rightIcon ?? const SizedBox.shrink(),
-            ],
-          ),
+  Widget buildOutlinedButtonWidget(MediaQueryData mediaQueryData) {
+    return Container(
+      height: height ?? mediaQueryData.size.height / 25,
+      width: width ?? mediaQueryData.size.width / 4,
+      margin: margin,
+      decoration: decoration,
+      child: OutlinedButton(
+        onPressed: onPressed,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            leftIcon ?? const SizedBox.shrink(),
+            Text(text, style: buttonTextStyle ?? theme.textTheme.titleMedium),
+            rightIcon ?? const SizedBox.shrink(),
+          ],
         ),
-      );
+      ),
+    );
+  }
 }

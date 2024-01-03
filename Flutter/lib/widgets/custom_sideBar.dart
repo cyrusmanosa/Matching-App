@@ -18,13 +18,13 @@ class CustomSideBar extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 25),
             child: Container(
-              height: 25.adaptSize,
-              width: 25.adaptSize,
+              height: 25,
+              width: 25,
               decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 10.h),
+            padding: EdgeInsets.only(left: 10),
             child: Text(item!, style: theme.textTheme.bodySmall),
           ),
         ],
