@@ -545,6 +545,54 @@ func (x *ListCanChangeResponse) GetCanChangeInfo() *CanChange {
 	return nil
 }
 
+// Delete
+type DeleteCanChangeRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	SessionID string `protobuf:"bytes,1,opt,name=SessionID,proto3" json:"SessionID,omitempty"`
+}
+
+func (x *DeleteCanChangeRequest) Reset() {
+	*x = DeleteCanChangeRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_rpc_canChange_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteCanChangeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteCanChangeRequest) ProtoMessage() {}
+
+func (x *DeleteCanChangeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_rpc_canChange_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteCanChangeRequest.ProtoReflect.Descriptor instead.
+func (*DeleteCanChangeRequest) Descriptor() ([]byte, []int) {
+	return file_rpc_canChange_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *DeleteCanChangeRequest) GetSessionID() string {
+	if x != nil {
+		return x.SessionID
+	}
+	return ""
+}
+
 var File_rpc_canChange_proto protoreflect.FileDescriptor
 
 var file_rpc_canChange_proto_rawDesc = []byte{
@@ -622,9 +670,12 @@ var file_rpc_canChange_proto_rawDesc = []byte{
 	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x33, 0x0a, 0x0d, 0x43, 0x61, 0x6e, 0x43, 0x68,
 	0x61, 0x6e, 0x67, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0d,
 	0x2e, 0x70, 0x62, 0x2e, 0x43, 0x61, 0x6e, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x52, 0x0d, 0x43,
-	0x61, 0x6e, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x42, 0x0c, 0x5a, 0x0a,
-	0x42, 0x61, 0x63, 0x6b, 0x65, 0x6e, 0x64, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x61, 0x6e, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x22, 0x36, 0x0a, 0x16,
+	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x61, 0x6e, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f,
+	0x6e, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x53, 0x65, 0x73, 0x73, 0x69,
+	0x6f, 0x6e, 0x49, 0x44, 0x42, 0x0c, 0x5a, 0x0a, 0x42, 0x61, 0x63, 0x6b, 0x65, 0x6e, 0x64, 0x2f,
+	0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -639,7 +690,7 @@ func file_rpc_canChange_proto_rawDescGZIP() []byte {
 	return file_rpc_canChange_proto_rawDescData
 }
 
-var file_rpc_canChange_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_rpc_canChange_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_rpc_canChange_proto_goTypes = []interface{}{
 	(*CreateCanChangeRequest)(nil),  // 0: pb.CreateCanChangeRequest
 	(*CreateCanChangeResponse)(nil), // 1: pb.CreateCanChangeResponse
@@ -648,13 +699,14 @@ var file_rpc_canChange_proto_goTypes = []interface{}{
 	(*UpdateCanChangeRequest)(nil),  // 4: pb.UpdateCanChangeRequest
 	(*UpdateCanChangeResponse)(nil), // 5: pb.UpdateCanChangeResponse
 	(*ListCanChangeResponse)(nil),   // 6: pb.ListCanChangeResponse
-	(*CanChange)(nil),               // 7: pb.CanChange
+	(*DeleteCanChangeRequest)(nil),  // 7: pb.DeleteCanChangeRequest
+	(*CanChange)(nil),               // 8: pb.CanChange
 }
 var file_rpc_canChange_proto_depIdxs = []int32{
-	7, // 0: pb.CreateCanChangeResponse.CanChangeInfo:type_name -> pb.CanChange
-	7, // 1: pb.GetCanChangeResponse.CanChangeInfo:type_name -> pb.CanChange
-	7, // 2: pb.UpdateCanChangeResponse.CanChangeInfo:type_name -> pb.CanChange
-	7, // 3: pb.ListCanChangeResponse.CanChangeInfo:type_name -> pb.CanChange
+	8, // 0: pb.CreateCanChangeResponse.CanChangeInfo:type_name -> pb.CanChange
+	8, // 1: pb.GetCanChangeResponse.CanChangeInfo:type_name -> pb.CanChange
+	8, // 2: pb.UpdateCanChangeResponse.CanChangeInfo:type_name -> pb.CanChange
+	8, // 3: pb.ListCanChangeResponse.CanChangeInfo:type_name -> pb.CanChange
 	4, // [4:4] is the sub-list for method output_type
 	4, // [4:4] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name
@@ -753,6 +805,18 @@ func file_rpc_canChange_proto_init() {
 				return nil
 			}
 		}
+		file_rpc_canChange_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteCanChangeRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -760,7 +824,7 @@ func file_rpc_canChange_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_rpc_canChange_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -9,6 +9,7 @@ import (
 )
 
 type ChatQuerier interface {
+	CreateChatTable(ctx context.Context, tablename string) error
 	DeleteRecord(ctx context.Context, arg DeleteRecordParams,tablename string) error
 	Getrecord(ctx context.Context, targetID int32,tablename string) ([]Record, error)
 	CreateRecord(ctx context.Context, arg CreateRecordParams,tablename string) (Record, error)

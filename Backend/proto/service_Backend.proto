@@ -17,6 +17,7 @@ import "rpc_password.proto";
 import "rpc_checkEmail.proto";
 import "rpc_chatRecord.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 option go_package = "Backend/pb";
@@ -68,15 +69,25 @@ service Information {
         };
     }
 
-    // Fix Information
+    /// Fix Information
     rpc CreateFix(CreateFixRequest) returns (CreateFixResponse){
         option (google.api.http) = {
             post: "/v1/Create_Fix"
             body: "*"
         };
     }
+    rpc GetFix(GetFixRequest) returns (GetFixResponse){
+        option (google.api.http) = {
+            get: "/v1/Get_Fix"
+        };
+    }
+    rpc DeleteFix(DeleteFixRequest) returns (google.protobuf.Empty){
+        option (google.api.http) = {
+            delete: "/v1/Del_Fix"
+        };
+    }
 
-    // Can Change Information
+    /// Can Change Information
     rpc CreateCanChange(CreateCanChangeRequest) returns (CreateCanChangeResponse){
         option (google.api.http) = {
             post: "/v1/Create_CanChange"
@@ -94,8 +105,13 @@ service Information {
             body: "*"
         };
     }
+    rpc DeleteCanChange(DeleteCanChangeRequest) returns (google.protobuf.Empty){
+        option (google.api.http) = {
+            delete: "/v1/Del_CanChange"
+        };
+    }
 
-    // Accompany
+    /// Accompany
     rpc CreateAccompany(CreateAccompanyRequest) returns (CreateAccompanyResponse){
         option (google.api.http) = {
             post: "/v1/Create_Accompany"
@@ -111,6 +127,11 @@ service Information {
         option (google.api.http) = {
             put: "/v1/Update_Accompany"
             body: "*"
+        };
+    }
+    rpc DeleteAccompany(DeleteAccompanyRequest) returns (google.protobuf.Empty){
+        option (google.api.http) = {
+            delete: "/v1/Del_Accompany"
         };
     }
 
@@ -132,6 +153,11 @@ service Information {
             body: "*"
         };
     }
+    rpc DeleteHobby(DeleteHobbyRequest) returns (google.protobuf.Empty){
+        option (google.api.http) = {
+            delete: "/v1/Hobby"
+        };
+    }
 
     // Lover
     rpc CreateLover(CreateLoverRequest) returns (CreateLoverResponse){
@@ -149,6 +175,11 @@ service Information {
         option (google.api.http) = {
             put: "/v1/Update_Lover"
             body: "*"
+        };
+    }
+    rpc DeleteLover(DeleteLoverRequest) returns (google.protobuf.Empty){
+        option (google.api.http) = {
+            delete: "/v1/Del_Lover"
         };
     }
 
@@ -170,6 +201,11 @@ service Information {
             body: "*"
         };
     }
+    rpc DeleteComplaint(DeleteComplaintRequest) returns (google.protobuf.Empty){
+        option (google.api.http) = {
+            delete: "/v1/Del_Complaint"
+        };
+    }
 
     // Target List
     rpc CreateTargetList(CreateTargetListRequest) returns (CreateTargetListResponse){
@@ -189,7 +225,12 @@ service Information {
             body: "*"
         };
     }
-    
+    rpc DeleteTargetList(DeleteTargetListRequest) returns (google.protobuf.Empty){
+        option (google.api.http) = {
+            delete: "/v1/TargetList"
+        };
+    }
+
     // Change Target
     rpc CreateChangeTarget(CreateChangeTargetRequest) returns (CreateChangeTargetResponse) {
         option (google.api.http) = {
@@ -201,6 +242,11 @@ service Information {
     rpc GetChangeTarget(GetChangeTargetRequest) returns (GetChangeTargetResponse){
         option (google.api.http) = {
             get: "/v1/Get_ChangeTarget"
+        };
+    }
+    rpc DeleteChangeTarget(DeleteChangeTargetRequest) returns (google.protobuf.Empty){
+        option (google.api.http) = {
+            delete: "/v1/Del_ChangeTarget"
         };
     }
     
@@ -222,6 +268,11 @@ service Information {
             body: "*"
         };
     }
+    rpc DeleteImages(DeleteImagesRequest) returns (google.protobuf.Empty){
+        option (google.api.http) = {
+            delete: "/v1/Del_Images"
+        };
+    }
 
     // Payment
 
@@ -241,6 +292,13 @@ service Information {
 /// -------- Chat --------------
 
 service Chat {
+    rpc CreateChatTable(CreateChatTableRequest) returns (google.protobuf.Empty){
+        option (google.api.http) = {
+            post: "/v1/Create_ChatTable"
+            body: "*"
+        };
+    }
+
     rpc CreateChatRecord(CreateChatRecordRequest) returns (CreateChatRecordResponse){
         option (google.api.http) = {
             post: "/v1/Create_ChatRecord"
@@ -256,6 +314,11 @@ service Chat {
         option (google.api.http) = {
             put: "/v1/Update_ChatRecord"
             body: "*"
+        };
+    }
+    rpc DeleteChatRecord(DeleteChatRecordRequest) returns (google.protobuf.Empty){
+        option (google.api.http) = {
+            delete: "/v1/Del_ChatRecord"
         };
     }
 }

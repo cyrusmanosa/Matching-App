@@ -8,7 +8,7 @@ option go_package = "Backend/pb";
 
 // Create
 message CreateTargetListRequest {
-    int32 UserID = 1;
+    string SessionID = 1; 
     int32 Target1ID = 2;
     int32 Target2ID = 3;
     int32 Target3ID = 4;
@@ -20,7 +20,7 @@ message CreateTargetListResponse {
 
 // Get
 message GetTargetListRequest {
-    int32 UserID = 1;
+    string SessionID = 1;
 }
 message GetTargetListResponse {
     Targetlist tl = 1;
@@ -28,11 +28,16 @@ message GetTargetListResponse {
 
 // Update
 message UpdateTargetListRequest {
-    int32 UserID = 1;
+    string SessionID = 1;
     int32 Target1ID = 2;
     int32 Target2ID = 3;
     int32 Target3ID = 4;
 }
 message UpdateTargetListResponse {
     Targetlist tl = 1;
+}
+
+// Delete
+message DeleteTargetListRequest {
+    string SessionID = 1;
 }

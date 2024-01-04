@@ -68,7 +68,6 @@ func TestGetUserFixInformation(t *testing.T) {
 	user2, err := testinfoQueries.GetUserFixInformation(context.Background(), user1.UserID)
 	require.NoError(t, err)
 	require.NotEmpty(t, user2)
-
 	require.Equal(t, user1.FirstName, user2.FirstName)
 	require.Equal(t, user1.LastName, user2.LastName)
 	require.Equal(t, user1.Email, user2.Email)

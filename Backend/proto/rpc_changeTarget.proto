@@ -26,3 +26,8 @@ message GetChangeTargetResponse {
     ChangeTarget ct = 1;
 }
 
+// Delete
+message DeleteChangeTargetRequest {
+    string SessionID = 1; 
+}
+ 

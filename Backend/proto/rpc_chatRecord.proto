@@ -8,6 +8,11 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "Backend/pb";
 
+// Create Chat Table
+message CreateChatTableRequest {
+    int32 UserID = 1;
+}
+
 // Create
 message CreateChatRecordRequest {
     int32 UserID = 1;
@@ -43,4 +48,9 @@ message UpdateChatRecordRequest {
 
 message UpdateChatRecordResponse {
     ChatRecord ChatRecord = 1;
+}
+
+// Delete
+message DeleteChatRecordRequest {
+    int32 UserID = 1;
 }

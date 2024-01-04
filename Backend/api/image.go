@@ -15,7 +15,7 @@ type CreateImageRequset struct {
 	Img2   string `json:"img2"`
 	Img3   string `json:"img3"`
 	Img4   string `json:"img4"`
-	icon   string `json:"icon"`
+	Img5   string `json:"Img5"`
 }
 
 func (server Server) CreateImage(ctx *gin.Context) {
@@ -31,7 +31,7 @@ func (server Server) CreateImage(ctx *gin.Context) {
 		Img2:   req.Img2,
 		Img3:   req.Img3,
 		Img4:   req.Img4,
-		Icon:   req.icon,
+		Img5:   req.Img5,
 	}
 
 	CreateImg, err := server.store.CreateImage(ctx, arg)
@@ -93,7 +93,7 @@ type UpdateImageRequest struct {
 	Img2   string `json:"img2" binding:"URL"`
 	Img3   string `json:"img3" binding:"URL"`
 	Img4   string `json:"img4" binding:"URL"`
-	icon   string `json:"icon" binding:"URL"`
+	Img5   string `json:"Img5" binding:"URL"`
 }
 
 func (server *Server) UpdateImg(ctx *gin.Context) {
@@ -109,7 +109,7 @@ func (server *Server) UpdateImg(ctx *gin.Context) {
 		Img2:   req.Img2,
 		Img3:   req.Img3,
 		Img4:   req.Img4,
-		Icon:   req.icon,
+		Img5:   req.Img5,
 	}
 
 	UpdateImg, err := server.store.UpdateImage(ctx, arg)

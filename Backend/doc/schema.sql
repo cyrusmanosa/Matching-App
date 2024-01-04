@@ -91,7 +91,7 @@ CREATE TABLE "image" (
   "img2" VARCHAR NOT NULL,
   "img3" VARCHAR NOT NULL,
   "img4" VARCHAR NOT NULL,
-  "icon" VARCHAR NOT NULL
+  "img5" VARCHAR NOT NULL
 );
 
 CREATE TABLE "targetlist" (

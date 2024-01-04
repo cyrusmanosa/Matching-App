@@ -9,20 +9,21 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-const r1 = 47
+const TId = 1
+const TableId = "u32"
 
 func TestCreateRecord(t *testing.T) {
 	CreateRandomRecord(t)
 }
 func CreateRandomRecord(t *testing.T) Record {
 	arg := CreateRecordParams{
-		TargetID: r1,
+		TargetID: TId,
 		MsgType:  util.Randomstring(3),
 		Message:  gofakeit.HackerPhrase(),
 		Images:   gofakeit.URL(),
 	}
 
-	InsertR, err := testChatQueries.CreateRecord(context.Background(), arg, "u1")
+	InsertR, err := testChatQueries.CreateRecord(context.Background(), arg, TableId)
 	require.NoError(t, err)
 	require.NotEmpty(t, InsertR)
 	require.Equal(t, InsertR.TargetID, arg.TargetID)
@@ -34,7 +35,7 @@ func CreateRandomRecord(t *testing.T) Record {
 }
 
 func TestGetrecord(t *testing.T) {
-	getR, err := testChatQueries.Getrecord(context.Background(), r1, "U1")
+	getR, err := testChatQueries.Getrecord(context.Background(), TId, TableId)
 	require.NoError(t, err)
 	require.NotEmpty(t, getR)
 }
@@ -48,19 +49,20 @@ func TestUpdateRecord(t *testing.T) {
 		CreatedAt: arg.CreatedAt,
 	}
 
-	UpR, err := testChatQueries.UpdateRecord(context.Background(), New, "u1")
+	UpR, err := testChatQueries.UpdateRecord(context.Background(), New, TableId)
 	require.NoError(t, err)
 	require.NotEmpty(t, UpR)
 	require.NotEqual(t, UpR.Message, arg.Message)
 }
+
 func TestDeleteRecord(t *testing.T) {
 	R := CreateRandomRecord(t)
 
 	arg := DeleteRecordParams{
-		TargetID:  r1,
+		TargetID:  TId,
 		CreatedAt: R.CreatedAt,
 	}
 
-	err := testChatQueries.DeleteRecord(context.Background(), arg, "u1")
+	err := testChatQueries.DeleteRecord(context.Background(), arg, TableId)
 	require.NoError(t, err)
 }

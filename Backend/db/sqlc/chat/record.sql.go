@@ -12,6 +12,21 @@ import (
 
 )
 
+func (q *Queries) CreateChatTable(ctx context.Context, tablename string) error {
+
+	createTable := fmt.Sprintf(`CREATE TABLE %s (
+		"target_id" INT NOT NULL,
+		"msg_type" VARCHAR NOT NULL,
+		"message" VARCHAR,
+		"images" VARCHAR,
+		"created_at" TIMESTAMPTZ NOT NULL DEFAULT (now())
+	  );`,tablename)
+	
+		_, err := q.db.Exec(ctx, createTable)
+		return err
+	}
+
+
 
 type DeleteRecordParams struct {
 	TargetID  int32              `json:"target_id"`

@@ -98,7 +98,7 @@ type Image struct {
 	Img2   string `json:"img2"`
 	Img3   string `json:"img3"`
 	Img4   string `json:"img4"`
-	Icon   string `json:"icon"`
+	Img5   string `json:"img5"`
 }
 
 type Loverrequest struct {

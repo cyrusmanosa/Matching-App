@@ -57,3 +57,9 @@ message UpdateLoverRequest {
 message UpdateLoverResponse {
     Lover l = 1;
 }
+
+// Delete
+message DeleteLoverRequest {
+    string SessionID = 1; 
+}
+ 

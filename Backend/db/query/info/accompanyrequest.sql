@@ -1,4 +1,4 @@
--- name: CreateAccompanyRequest :one
+-- name: CreateAccompany :one
 INSERT INTO accompanyrequest (
     user_id,
     era,
@@ -13,15 +13,15 @@ INSERT INTO accompanyrequest (
     $1,$2,$3,$4,$5,$6,$7,$8,$9
 ) RETURNING *;
 
--- name: GetUserAccompany :one
+-- name: GetAccompany :one
 SELECT * FROM accompanyrequest
 WHERE user_id = $1 LIMIT 1;
 
--- name: ListUserAccompany :many
+-- name: ListAccompany :many
 SELECT * FROM accompanyrequest
 ORDER BY user_id;
 
--- name: UpdateUserAccompany :one
+-- name: UpdateAccompany :one
 UPDATE accompanyrequest
 SET era = $2,
     city = $3,
@@ -34,6 +34,6 @@ SET era = $2,
 WHERE user_id = $1
 RETURNING *;
 
--- name: DeleteUserAccompany :exec
+-- name: DeleteAccompany :exec
 DELETE FROM accompanyrequest 
 WHERE user_id = $1;

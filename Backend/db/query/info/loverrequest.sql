@@ -1,4 +1,4 @@
--- name: CreateLoverRequest :one
+-- name: CreateLover :one
 INSERT INTO loverrequest (
     user_id,
     min_age,
@@ -19,15 +19,15 @@ INSERT INTO loverrequest (
     $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15
 ) RETURNING *;
 
--- name: GetUserLover :one
+-- name: GetLover :one
 SELECT * FROM loverrequest
 WHERE user_id = $1 LIMIT 1;
 
--- name: ListUserLover :many
+-- name: ListLover :many
 SELECT * FROM loverrequest
 ORDER BY user_id;
 
--- name: UpdateUserLover :one
+-- name: UpdateLover :one
 UPDATE loverrequest
 SET min_age = $2,
     max_age = $3,
@@ -46,6 +46,6 @@ SET min_age = $2,
 WHERE user_id = $1
 RETURNING *;
 
--- name: DeleteUserLoverRequest :exec
+-- name: DeleteLover :exec
 DELETE FROM loverrequest 
 WHERE user_id = $1;

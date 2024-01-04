@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -25,29 +26,39 @@ const (
 	Information_InputPassword_FullMethodName      = "/pb.Information/InputPassword"
 	Information_ResetPassword_FullMethodName      = "/pb.Information/ResetPassword"
 	Information_CreateFix_FullMethodName          = "/pb.Information/CreateFix"
+	Information_GetFix_FullMethodName             = "/pb.Information/GetFix"
+	Information_DeleteFix_FullMethodName          = "/pb.Information/DeleteFix"
 	Information_CreateCanChange_FullMethodName    = "/pb.Information/CreateCanChange"
 	Information_GetCanChange_FullMethodName       = "/pb.Information/GetCanChange"
 	Information_UpdateCanChange_FullMethodName    = "/pb.Information/UpdateCanChange"
+	Information_DeleteCanChange_FullMethodName    = "/pb.Information/DeleteCanChange"
 	Information_CreateAccompany_FullMethodName    = "/pb.Information/CreateAccompany"
 	Information_GetAccompany_FullMethodName       = "/pb.Information/GetAccompany"
 	Information_UpdateAccompany_FullMethodName    = "/pb.Information/UpdateAccompany"
+	Information_DeleteAccompany_FullMethodName    = "/pb.Information/DeleteAccompany"
 	Information_CreateHobby_FullMethodName        = "/pb.Information/CreateHobby"
 	Information_GetHobby_FullMethodName           = "/pb.Information/GetHobby"
 	Information_UpdateHobby_FullMethodName        = "/pb.Information/UpdateHobby"
+	Information_DeleteHobby_FullMethodName        = "/pb.Information/DeleteHobby"
 	Information_CreateLover_FullMethodName        = "/pb.Information/CreateLover"
 	Information_GetLover_FullMethodName           = "/pb.Information/GetLover"
 	Information_UpdateLover_FullMethodName        = "/pb.Information/UpdateLover"
+	Information_DeleteLover_FullMethodName        = "/pb.Information/DeleteLover"
 	Information_CreateComplaint_FullMethodName    = "/pb.Information/CreateComplaint"
 	Information_GetComplaint_FullMethodName       = "/pb.Information/GetComplaint"
 	Information_UpdateComplaint_FullMethodName    = "/pb.Information/UpdateComplaint"
+	Information_DeleteComplaint_FullMethodName    = "/pb.Information/DeleteComplaint"
 	Information_CreateTargetList_FullMethodName   = "/pb.Information/CreateTargetList"
 	Information_GetTargetList_FullMethodName      = "/pb.Information/GetTargetList"
 	Information_UpdateTargetList_FullMethodName   = "/pb.Information/UpdateTargetList"
+	Information_DeleteTargetList_FullMethodName   = "/pb.Information/DeleteTargetList"
 	Information_CreateChangeTarget_FullMethodName = "/pb.Information/CreateChangeTarget"
 	Information_GetChangeTarget_FullMethodName    = "/pb.Information/GetChangeTarget"
+	Information_DeleteChangeTarget_FullMethodName = "/pb.Information/DeleteChangeTarget"
 	Information_CreateImages_FullMethodName       = "/pb.Information/CreateImages"
 	Information_GetImages_FullMethodName          = "/pb.Information/GetImages"
 	Information_UpdateImages_FullMethodName       = "/pb.Information/UpdateImages"
+	Information_DeleteImages_FullMethodName       = "/pb.Information/DeleteImages"
 	Information_CreatePayment_FullMethodName      = "/pb.Information/CreatePayment"
 	Information_GetPayment_FullMethodName         = "/pb.Information/GetPayment"
 )
@@ -61,39 +72,49 @@ type InformationClient interface {
 	CheckEmailCode(ctx context.Context, in *SendEmailRequest, opts ...grpc.CallOption) (*CheckedEmailResponse, error)
 	InputPassword(ctx context.Context, in *InputPasswordRequest, opts ...grpc.CallOption) (*InputPasswordResponse, error)
 	ResetPassword(ctx context.Context, in *ResetPasswordRequest, opts ...grpc.CallOption) (*ResetPasswordResponse, error)
-	// Fix Information
+	// / Fix Information
 	CreateFix(ctx context.Context, in *CreateFixRequest, opts ...grpc.CallOption) (*CreateFixResponse, error)
-	// Can Change Information
+	GetFix(ctx context.Context, in *GetFixRequest, opts ...grpc.CallOption) (*GetFixResponse, error)
+	DeleteFix(ctx context.Context, in *DeleteFixRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// / Can Change Information
 	CreateCanChange(ctx context.Context, in *CreateCanChangeRequest, opts ...grpc.CallOption) (*CreateCanChangeResponse, error)
 	GetCanChange(ctx context.Context, in *GetCanChangeRequest, opts ...grpc.CallOption) (*GetCanChangeResponse, error)
 	UpdateCanChange(ctx context.Context, in *UpdateCanChangeRequest, opts ...grpc.CallOption) (*UpdateCanChangeResponse, error)
-	// Accompany
+	DeleteCanChange(ctx context.Context, in *DeleteCanChangeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// / Accompany
 	CreateAccompany(ctx context.Context, in *CreateAccompanyRequest, opts ...grpc.CallOption) (*CreateAccompanyResponse, error)
 	GetAccompany(ctx context.Context, in *GetAccompanyRequest, opts ...grpc.CallOption) (*GetAccompanyResponse, error)
 	UpdateAccompany(ctx context.Context, in *UpdateAccompanyRequest, opts ...grpc.CallOption) (*UpdateAccompanyResponse, error)
+	DeleteAccompany(ctx context.Context, in *DeleteAccompanyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Hobby
 	CreateHobby(ctx context.Context, in *CreateHobbyRequest, opts ...grpc.CallOption) (*CreateHobbyResponse, error)
 	GetHobby(ctx context.Context, in *GetHobbyRequest, opts ...grpc.CallOption) (*GetHobbyResponse, error)
 	UpdateHobby(ctx context.Context, in *UpdateHobbyRequest, opts ...grpc.CallOption) (*UpdateHobbyResponse, error)
+	DeleteHobby(ctx context.Context, in *DeleteHobbyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lover
 	CreateLover(ctx context.Context, in *CreateLoverRequest, opts ...grpc.CallOption) (*CreateLoverResponse, error)
 	GetLover(ctx context.Context, in *GetLoverRequest, opts ...grpc.CallOption) (*GetLoverResponse, error)
 	UpdateLover(ctx context.Context, in *UpdateLoverRequest, opts ...grpc.CallOption) (*UpdateLoverResponse, error)
+	DeleteLover(ctx context.Context, in *DeleteLoverRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Complaint
 	CreateComplaint(ctx context.Context, in *CreateComplaintRequest, opts ...grpc.CallOption) (*CreateComplaintResponse, error)
 	GetComplaint(ctx context.Context, in *GetComplaintRequest, opts ...grpc.CallOption) (*GetComplaintResponse, error)
 	UpdateComplaint(ctx context.Context, in *UpdateComplaintRequest, opts ...grpc.CallOption) (*UpdateComplaintResponse, error)
+	DeleteComplaint(ctx context.Context, in *DeleteComplaintRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Target List
 	CreateTargetList(ctx context.Context, in *CreateTargetListRequest, opts ...grpc.CallOption) (*CreateTargetListResponse, error)
 	GetTargetList(ctx context.Context, in *GetTargetListRequest, opts ...grpc.CallOption) (*GetTargetListResponse, error)
 	UpdateTargetList(ctx context.Context, in *UpdateTargetListRequest, opts ...grpc.CallOption) (*UpdateTargetListResponse, error)
+	DeleteTargetList(ctx context.Context, in *DeleteTargetListRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Change Target
 	CreateChangeTarget(ctx context.Context, in *CreateChangeTargetRequest, opts ...grpc.CallOption) (*CreateChangeTargetResponse, error)
 	GetChangeTarget(ctx context.Context, in *GetChangeTargetRequest, opts ...grpc.CallOption) (*GetChangeTargetResponse, error)
+	DeleteChangeTarget(ctx context.Context, in *DeleteChangeTargetRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// images
 	CreateImages(ctx context.Context, in *CreateImagesRequest, opts ...grpc.CallOption) (*CreateImagesResponse, error)
 	GetImages(ctx context.Context, in *GetImagesRequest, opts ...grpc.CallOption) (*GetImagesResponse, error)
 	UpdateImages(ctx context.Context, in *UpdateImagesRequest, opts ...grpc.CallOption) (*UpdateImagesResponse, error)
+	DeleteImages(ctx context.Context, in *DeleteImagesRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	CreatePayment(ctx context.Context, in *CreatePaymentRequest, opts ...grpc.CallOption) (*CreatePaymentResponse, error)
 	GetPayment(ctx context.Context, in *GetPaymentRequest, opts ...grpc.CallOption) (*GetPaymentResponse, error)
 }
@@ -160,6 +181,24 @@ func (c *informationClient) CreateFix(ctx context.Context, in *CreateFixRequest,
 	return out, nil
 }
 
+func (c *informationClient) GetFix(ctx context.Context, in *GetFixRequest, opts ...grpc.CallOption) (*GetFixResponse, error) {
+	out := new(GetFixResponse)
+	err := c.cc.Invoke(ctx, Information_GetFix_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *informationClient) DeleteFix(ctx context.Context, in *DeleteFixRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Information_DeleteFix_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *informationClient) CreateCanChange(ctx context.Context, in *CreateCanChangeRequest, opts ...grpc.CallOption) (*CreateCanChangeResponse, error) {
 	out := new(CreateCanChangeResponse)
 	err := c.cc.Invoke(ctx, Information_CreateCanChange_FullMethodName, in, out, opts...)
@@ -181,6 +220,15 @@ func (c *informationClient) GetCanChange(ctx context.Context, in *GetCanChangeRe
 func (c *informationClient) UpdateCanChange(ctx context.Context, in *UpdateCanChangeRequest, opts ...grpc.CallOption) (*UpdateCanChangeResponse, error) {
 	out := new(UpdateCanChangeResponse)
 	err := c.cc.Invoke(ctx, Information_UpdateCanChange_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *informationClient) DeleteCanChange(ctx context.Context, in *DeleteCanChangeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Information_DeleteCanChange_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -214,6 +262,15 @@ func (c *informationClient) UpdateAccompany(ctx context.Context, in *UpdateAccom
 	return out, nil
 }
 
+func (c *informationClient) DeleteAccompany(ctx context.Context, in *DeleteAccompanyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Information_DeleteAccompany_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *informationClient) CreateHobby(ctx context.Context, in *CreateHobbyRequest, opts ...grpc.CallOption) (*CreateHobbyResponse, error) {
 	out := new(CreateHobbyResponse)
 	err := c.cc.Invoke(ctx, Information_CreateHobby_FullMethodName, in, out, opts...)
@@ -235,6 +292,15 @@ func (c *informationClient) GetHobby(ctx context.Context, in *GetHobbyRequest, o
 func (c *informationClient) UpdateHobby(ctx context.Context, in *UpdateHobbyRequest, opts ...grpc.CallOption) (*UpdateHobbyResponse, error) {
 	out := new(UpdateHobbyResponse)
 	err := c.cc.Invoke(ctx, Information_UpdateHobby_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *informationClient) DeleteHobby(ctx context.Context, in *DeleteHobbyRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Information_DeleteHobby_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -268,6 +334,15 @@ func (c *informationClient) UpdateLover(ctx context.Context, in *UpdateLoverRequ
 	return out, nil
 }
 
+func (c *informationClient) DeleteLover(ctx context.Context, in *DeleteLoverRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Information_DeleteLover_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *informationClient) CreateComplaint(ctx context.Context, in *CreateComplaintRequest, opts ...grpc.CallOption) (*CreateComplaintResponse, error) {
 	out := new(CreateComplaintResponse)
 	err := c.cc.Invoke(ctx, Information_CreateComplaint_FullMethodName, in, out, opts...)
@@ -289,6 +364,15 @@ func (c *informationClient) GetComplaint(ctx context.Context, in *GetComplaintRe
 func (c *informationClient) UpdateComplaint(ctx context.Context, in *UpdateComplaintRequest, opts ...grpc.CallOption) (*UpdateComplaintResponse, error) {
 	out := new(UpdateComplaintResponse)
 	err := c.cc.Invoke(ctx, Information_UpdateComplaint_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *informationClient) DeleteComplaint(ctx context.Context, in *DeleteComplaintRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Information_DeleteComplaint_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -322,6 +406,15 @@ func (c *informationClient) UpdateTargetList(ctx context.Context, in *UpdateTarg
 	return out, nil
 }
 
+func (c *informationClient) DeleteTargetList(ctx context.Context, in *DeleteTargetListRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Information_DeleteTargetList_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *informationClient) CreateChangeTarget(ctx context.Context, in *CreateChangeTargetRequest, opts ...grpc.CallOption) (*CreateChangeTargetResponse, error) {
 	out := new(CreateChangeTargetResponse)
 	err := c.cc.Invoke(ctx, Information_CreateChangeTarget_FullMethodName, in, out, opts...)
@@ -334,6 +427,15 @@ func (c *informationClient) CreateChangeTarget(ctx context.Context, in *CreateCh
 func (c *informationClient) GetChangeTarget(ctx context.Context, in *GetChangeTargetRequest, opts ...grpc.CallOption) (*GetChangeTargetResponse, error) {
 	out := new(GetChangeTargetResponse)
 	err := c.cc.Invoke(ctx, Information_GetChangeTarget_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *informationClient) DeleteChangeTarget(ctx context.Context, in *DeleteChangeTargetRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Information_DeleteChangeTarget_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -367,6 +469,15 @@ func (c *informationClient) UpdateImages(ctx context.Context, in *UpdateImagesRe
 	return out, nil
 }
 
+func (c *informationClient) DeleteImages(ctx context.Context, in *DeleteImagesRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Information_DeleteImages_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *informationClient) CreatePayment(ctx context.Context, in *CreatePaymentRequest, opts ...grpc.CallOption) (*CreatePaymentResponse, error) {
 	out := new(CreatePaymentResponse)
 	err := c.cc.Invoke(ctx, Information_CreatePayment_FullMethodName, in, out, opts...)
@@ -394,39 +505,49 @@ type InformationServer interface {
 	CheckEmailCode(context.Context, *SendEmailRequest) (*CheckedEmailResponse, error)
 	InputPassword(context.Context, *InputPasswordRequest) (*InputPasswordResponse, error)
 	ResetPassword(context.Context, *ResetPasswordRequest) (*ResetPasswordResponse, error)
-	// Fix Information
+	// / Fix Information
 	CreateFix(context.Context, *CreateFixRequest) (*CreateFixResponse, error)
-	// Can Change Information
+	GetFix(context.Context, *GetFixRequest) (*GetFixResponse, error)
+	DeleteFix(context.Context, *DeleteFixRequest) (*emptypb.Empty, error)
+	// / Can Change Information
 	CreateCanChange(context.Context, *CreateCanChangeRequest) (*CreateCanChangeResponse, error)
 	GetCanChange(context.Context, *GetCanChangeRequest) (*GetCanChangeResponse, error)
 	UpdateCanChange(context.Context, *UpdateCanChangeRequest) (*UpdateCanChangeResponse, error)
-	// Accompany
+	DeleteCanChange(context.Context, *DeleteCanChangeRequest) (*emptypb.Empty, error)
+	// / Accompany
 	CreateAccompany(context.Context, *CreateAccompanyRequest) (*CreateAccompanyResponse, error)
 	GetAccompany(context.Context, *GetAccompanyRequest) (*GetAccompanyResponse, error)
 	UpdateAccompany(context.Context, *UpdateAccompanyRequest) (*UpdateAccompanyResponse, error)
+	DeleteAccompany(context.Context, *DeleteAccompanyRequest) (*emptypb.Empty, error)
 	// Hobby
 	CreateHobby(context.Context, *CreateHobbyRequest) (*CreateHobbyResponse, error)
 	GetHobby(context.Context, *GetHobbyRequest) (*GetHobbyResponse, error)
 	UpdateHobby(context.Context, *UpdateHobbyRequest) (*UpdateHobbyResponse, error)
+	DeleteHobby(context.Context, *DeleteHobbyRequest) (*emptypb.Empty, error)
 	// Lover
 	CreateLover(context.Context, *CreateLoverRequest) (*CreateLoverResponse, error)
 	GetLover(context.Context, *GetLoverRequest) (*GetLoverResponse, error)
 	UpdateLover(context.Context, *UpdateLoverRequest) (*UpdateLoverResponse, error)
+	DeleteLover(context.Context, *DeleteLoverRequest) (*emptypb.Empty, error)
 	// Complaint
 	CreateComplaint(context.Context, *CreateComplaintRequest) (*CreateComplaintResponse, error)
 	GetComplaint(context.Context, *GetComplaintRequest) (*GetComplaintResponse, error)
 	UpdateComplaint(context.Context, *UpdateComplaintRequest) (*UpdateComplaintResponse, error)
+	DeleteComplaint(context.Context, *DeleteComplaintRequest) (*emptypb.Empty, error)
 	// Target List
 	CreateTargetList(context.Context, *CreateTargetListRequest) (*CreateTargetListResponse, error)
 	GetTargetList(context.Context, *GetTargetListRequest) (*GetTargetListResponse, error)
 	UpdateTargetList(context.Context, *UpdateTargetListRequest) (*UpdateTargetListResponse, error)
+	DeleteTargetList(context.Context, *DeleteTargetListRequest) (*emptypb.Empty, error)
 	// Change Target
 	CreateChangeTarget(context.Context, *CreateChangeTargetRequest) (*CreateChangeTargetResponse, error)
 	GetChangeTarget(context.Context, *GetChangeTargetRequest) (*GetChangeTargetResponse, error)
+	DeleteChangeTarget(context.Context, *DeleteChangeTargetRequest) (*emptypb.Empty, error)
 	// images
 	CreateImages(context.Context, *CreateImagesRequest) (*CreateImagesResponse, error)
 	GetImages(context.Context, *GetImagesRequest) (*GetImagesResponse, error)
 	UpdateImages(context.Context, *UpdateImagesRequest) (*UpdateImagesResponse, error)
+	DeleteImages(context.Context, *DeleteImagesRequest) (*emptypb.Empty, error)
 	CreatePayment(context.Context, *CreatePaymentRequest) (*CreatePaymentResponse, error)
 	GetPayment(context.Context, *GetPaymentRequest) (*GetPaymentResponse, error)
 	mustEmbedUnimplementedInformationServer()
@@ -454,6 +575,12 @@ func (UnimplementedInformationServer) ResetPassword(context.Context, *ResetPassw
 func (UnimplementedInformationServer) CreateFix(context.Context, *CreateFixRequest) (*CreateFixResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateFix not implemented")
 }
+func (UnimplementedInformationServer) GetFix(context.Context, *GetFixRequest) (*GetFixResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFix not implemented")
+}
+func (UnimplementedInformationServer) DeleteFix(context.Context, *DeleteFixRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteFix not implemented")
+}
 func (UnimplementedInformationServer) CreateCanChange(context.Context, *CreateCanChangeRequest) (*CreateCanChangeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCanChange not implemented")
 }
@@ -462,6 +589,9 @@ func (UnimplementedInformationServer) GetCanChange(context.Context, *GetCanChang
 }
 func (UnimplementedInformationServer) UpdateCanChange(context.Context, *UpdateCanChangeRequest) (*UpdateCanChangeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCanChange not implemented")
+}
+func (UnimplementedInformationServer) DeleteCanChange(context.Context, *DeleteCanChangeRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCanChange not implemented")
 }
 func (UnimplementedInformationServer) CreateAccompany(context.Context, *CreateAccompanyRequest) (*CreateAccompanyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAccompany not implemented")
@@ -472,6 +602,9 @@ func (UnimplementedInformationServer) GetAccompany(context.Context, *GetAccompan
 func (UnimplementedInformationServer) UpdateAccompany(context.Context, *UpdateAccompanyRequest) (*UpdateAccompanyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccompany not implemented")
 }
+func (UnimplementedInformationServer) DeleteAccompany(context.Context, *DeleteAccompanyRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccompany not implemented")
+}
 func (UnimplementedInformationServer) CreateHobby(context.Context, *CreateHobbyRequest) (*CreateHobbyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateHobby not implemented")
 }
@@ -480,6 +613,9 @@ func (UnimplementedInformationServer) GetHobby(context.Context, *GetHobbyRequest
 }
 func (UnimplementedInformationServer) UpdateHobby(context.Context, *UpdateHobbyRequest) (*UpdateHobbyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateHobby not implemented")
+}
+func (UnimplementedInformationServer) DeleteHobby(context.Context, *DeleteHobbyRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteHobby not implemented")
 }
 func (UnimplementedInformationServer) CreateLover(context.Context, *CreateLoverRequest) (*CreateLoverResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateLover not implemented")
@@ -490,6 +626,9 @@ func (UnimplementedInformationServer) GetLover(context.Context, *GetLoverRequest
 func (UnimplementedInformationServer) UpdateLover(context.Context, *UpdateLoverRequest) (*UpdateLoverResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateLover not implemented")
 }
+func (UnimplementedInformationServer) DeleteLover(context.Context, *DeleteLoverRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteLover not implemented")
+}
 func (UnimplementedInformationServer) CreateComplaint(context.Context, *CreateComplaintRequest) (*CreateComplaintResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateComplaint not implemented")
 }
@@ -498,6 +637,9 @@ func (UnimplementedInformationServer) GetComplaint(context.Context, *GetComplain
 }
 func (UnimplementedInformationServer) UpdateComplaint(context.Context, *UpdateComplaintRequest) (*UpdateComplaintResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateComplaint not implemented")
+}
+func (UnimplementedInformationServer) DeleteComplaint(context.Context, *DeleteComplaintRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteComplaint not implemented")
 }
 func (UnimplementedInformationServer) CreateTargetList(context.Context, *CreateTargetListRequest) (*CreateTargetListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateTargetList not implemented")
@@ -508,11 +650,17 @@ func (UnimplementedInformationServer) GetTargetList(context.Context, *GetTargetL
 func (UnimplementedInformationServer) UpdateTargetList(context.Context, *UpdateTargetListRequest) (*UpdateTargetListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTargetList not implemented")
 }
+func (UnimplementedInformationServer) DeleteTargetList(context.Context, *DeleteTargetListRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTargetList not implemented")
+}
 func (UnimplementedInformationServer) CreateChangeTarget(context.Context, *CreateChangeTargetRequest) (*CreateChangeTargetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateChangeTarget not implemented")
 }
 func (UnimplementedInformationServer) GetChangeTarget(context.Context, *GetChangeTargetRequest) (*GetChangeTargetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetChangeTarget not implemented")
+}
+func (UnimplementedInformationServer) DeleteChangeTarget(context.Context, *DeleteChangeTargetRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteChangeTarget not implemented")
 }
 func (UnimplementedInformationServer) CreateImages(context.Context, *CreateImagesRequest) (*CreateImagesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateImages not implemented")
@@ -522,6 +670,9 @@ func (UnimplementedInformationServer) GetImages(context.Context, *GetImagesReque
 }
 func (UnimplementedInformationServer) UpdateImages(context.Context, *UpdateImagesRequest) (*UpdateImagesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateImages not implemented")
+}
+func (UnimplementedInformationServer) DeleteImages(context.Context, *DeleteImagesRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteImages not implemented")
 }
 func (UnimplementedInformationServer) CreatePayment(context.Context, *CreatePaymentRequest) (*CreatePaymentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePayment not implemented")
@@ -650,6 +801,42 @@ func _Information_CreateFix_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Information_GetFix_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFixRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).GetFix(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_GetFix_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).GetFix(ctx, req.(*GetFixRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Information_DeleteFix_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteFixRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).DeleteFix(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_DeleteFix_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).DeleteFix(ctx, req.(*DeleteFixRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Information_CreateCanChange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateCanChangeRequest)
 	if err := dec(in); err != nil {
@@ -700,6 +887,24 @@ func _Information_UpdateCanChange_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(InformationServer).UpdateCanChange(ctx, req.(*UpdateCanChangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Information_DeleteCanChange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCanChangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).DeleteCanChange(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_DeleteCanChange_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).DeleteCanChange(ctx, req.(*DeleteCanChangeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -758,6 +963,24 @@ func _Information_UpdateAccompany_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Information_DeleteAccompany_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAccompanyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).DeleteAccompany(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_DeleteAccompany_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).DeleteAccompany(ctx, req.(*DeleteAccompanyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Information_CreateHobby_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateHobbyRequest)
 	if err := dec(in); err != nil {
@@ -808,6 +1031,24 @@ func _Information_UpdateHobby_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(InformationServer).UpdateHobby(ctx, req.(*UpdateHobbyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Information_DeleteHobby_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteHobbyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).DeleteHobby(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_DeleteHobby_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).DeleteHobby(ctx, req.(*DeleteHobbyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -866,6 +1107,24 @@ func _Information_UpdateLover_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Information_DeleteLover_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteLoverRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).DeleteLover(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_DeleteLover_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).DeleteLover(ctx, req.(*DeleteLoverRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Information_CreateComplaint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateComplaintRequest)
 	if err := dec(in); err != nil {
@@ -916,6 +1175,24 @@ func _Information_UpdateComplaint_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(InformationServer).UpdateComplaint(ctx, req.(*UpdateComplaintRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Information_DeleteComplaint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteComplaintRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).DeleteComplaint(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_DeleteComplaint_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).DeleteComplaint(ctx, req.(*DeleteComplaintRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -974,6 +1251,24 @@ func _Information_UpdateTargetList_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Information_DeleteTargetList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTargetListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).DeleteTargetList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_DeleteTargetList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).DeleteTargetList(ctx, req.(*DeleteTargetListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Information_CreateChangeTarget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateChangeTargetRequest)
 	if err := dec(in); err != nil {
@@ -1006,6 +1301,24 @@ func _Information_GetChangeTarget_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(InformationServer).GetChangeTarget(ctx, req.(*GetChangeTargetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Information_DeleteChangeTarget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteChangeTargetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).DeleteChangeTarget(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_DeleteChangeTarget_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).DeleteChangeTarget(ctx, req.(*DeleteChangeTargetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1060,6 +1373,24 @@ func _Information_UpdateImages_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(InformationServer).UpdateImages(ctx, req.(*UpdateImagesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Information_DeleteImages_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteImagesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).DeleteImages(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_DeleteImages_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).DeleteImages(ctx, req.(*DeleteImagesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1132,6 +1463,14 @@ var Information_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Information_CreateFix_Handler,
 		},
 		{
+			MethodName: "GetFix",
+			Handler:    _Information_GetFix_Handler,
+		},
+		{
+			MethodName: "DeleteFix",
+			Handler:    _Information_DeleteFix_Handler,
+		},
+		{
 			MethodName: "CreateCanChange",
 			Handler:    _Information_CreateCanChange_Handler,
 		},
@@ -1142,6 +1481,10 @@ var Information_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateCanChange",
 			Handler:    _Information_UpdateCanChange_Handler,
+		},
+		{
+			MethodName: "DeleteCanChange",
+			Handler:    _Information_DeleteCanChange_Handler,
 		},
 		{
 			MethodName: "CreateAccompany",
@@ -1156,6 +1499,10 @@ var Information_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Information_UpdateAccompany_Handler,
 		},
 		{
+			MethodName: "DeleteAccompany",
+			Handler:    _Information_DeleteAccompany_Handler,
+		},
+		{
 			MethodName: "CreateHobby",
 			Handler:    _Information_CreateHobby_Handler,
 		},
@@ -1166,6 +1513,10 @@ var Information_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateHobby",
 			Handler:    _Information_UpdateHobby_Handler,
+		},
+		{
+			MethodName: "DeleteHobby",
+			Handler:    _Information_DeleteHobby_Handler,
 		},
 		{
 			MethodName: "CreateLover",
@@ -1180,6 +1531,10 @@ var Information_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Information_UpdateLover_Handler,
 		},
 		{
+			MethodName: "DeleteLover",
+			Handler:    _Information_DeleteLover_Handler,
+		},
+		{
 			MethodName: "CreateComplaint",
 			Handler:    _Information_CreateComplaint_Handler,
 		},
@@ -1190,6 +1545,10 @@ var Information_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateComplaint",
 			Handler:    _Information_UpdateComplaint_Handler,
+		},
+		{
+			MethodName: "DeleteComplaint",
+			Handler:    _Information_DeleteComplaint_Handler,
 		},
 		{
 			MethodName: "CreateTargetList",
@@ -1204,12 +1563,20 @@ var Information_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Information_UpdateTargetList_Handler,
 		},
 		{
+			MethodName: "DeleteTargetList",
+			Handler:    _Information_DeleteTargetList_Handler,
+		},
+		{
 			MethodName: "CreateChangeTarget",
 			Handler:    _Information_CreateChangeTarget_Handler,
 		},
 		{
 			MethodName: "GetChangeTarget",
 			Handler:    _Information_GetChangeTarget_Handler,
+		},
+		{
+			MethodName: "DeleteChangeTarget",
+			Handler:    _Information_DeleteChangeTarget_Handler,
 		},
 		{
 			MethodName: "CreateImages",
@@ -1222,6 +1589,10 @@ var Information_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateImages",
 			Handler:    _Information_UpdateImages_Handler,
+		},
+		{
+			MethodName: "DeleteImages",
+			Handler:    _Information_DeleteImages_Handler,
 		},
 		{
 			MethodName: "CreatePayment",
@@ -1237,18 +1608,22 @@ var Information_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
+	Chat_CreateChatTable_FullMethodName  = "/pb.Chat/CreateChatTable"
 	Chat_CreateChatRecord_FullMethodName = "/pb.Chat/CreateChatRecord"
 	Chat_GetChatRecord_FullMethodName    = "/pb.Chat/GetChatRecord"
 	Chat_UpdateChatRecord_FullMethodName = "/pb.Chat/UpdateChatRecord"
+	Chat_DeleteChatRecord_FullMethodName = "/pb.Chat/DeleteChatRecord"
 )
 
 // ChatClient is the client API for Chat service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ChatClient interface {
+	CreateChatTable(ctx context.Context, in *CreateChatTableRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	CreateChatRecord(ctx context.Context, in *CreateChatRecordRequest, opts ...grpc.CallOption) (*CreateChatRecordResponse, error)
 	GetChatRecord(ctx context.Context, in *GetChatRecordRequest, opts ...grpc.CallOption) (*GetChatRecordResponse, error)
 	UpdateChatRecord(ctx context.Context, in *UpdateChatRecordRequest, opts ...grpc.CallOption) (*UpdateChatRecordResponse, error)
+	DeleteChatRecord(ctx context.Context, in *DeleteChatRecordRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type chatClient struct {
@@ -1257,6 +1632,15 @@ type chatClient struct {
 
 func NewChatClient(cc grpc.ClientConnInterface) ChatClient {
 	return &chatClient{cc}
+}
+
+func (c *chatClient) CreateChatTable(ctx context.Context, in *CreateChatTableRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Chat_CreateChatTable_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *chatClient) CreateChatRecord(ctx context.Context, in *CreateChatRecordRequest, opts ...grpc.CallOption) (*CreateChatRecordResponse, error) {
@@ -1286,13 +1670,24 @@ func (c *chatClient) UpdateChatRecord(ctx context.Context, in *UpdateChatRecordR
 	return out, nil
 }
 
+func (c *chatClient) DeleteChatRecord(ctx context.Context, in *DeleteChatRecordRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Chat_DeleteChatRecord_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ChatServer is the server API for Chat service.
 // All implementations must embed UnimplementedChatServer
 // for forward compatibility
 type ChatServer interface {
+	CreateChatTable(context.Context, *CreateChatTableRequest) (*emptypb.Empty, error)
 	CreateChatRecord(context.Context, *CreateChatRecordRequest) (*CreateChatRecordResponse, error)
 	GetChatRecord(context.Context, *GetChatRecordRequest) (*GetChatRecordResponse, error)
 	UpdateChatRecord(context.Context, *UpdateChatRecordRequest) (*UpdateChatRecordResponse, error)
+	DeleteChatRecord(context.Context, *DeleteChatRecordRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedChatServer()
 }
 
@@ -1300,6 +1695,9 @@ type ChatServer interface {
 type UnimplementedChatServer struct {
 }
 
+func (UnimplementedChatServer) CreateChatTable(context.Context, *CreateChatTableRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateChatTable not implemented")
+}
 func (UnimplementedChatServer) CreateChatRecord(context.Context, *CreateChatRecordRequest) (*CreateChatRecordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateChatRecord not implemented")
 }
@@ -1308,6 +1706,9 @@ func (UnimplementedChatServer) GetChatRecord(context.Context, *GetChatRecordRequ
 }
 func (UnimplementedChatServer) UpdateChatRecord(context.Context, *UpdateChatRecordRequest) (*UpdateChatRecordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateChatRecord not implemented")
+}
+func (UnimplementedChatServer) DeleteChatRecord(context.Context, *DeleteChatRecordRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteChatRecord not implemented")
 }
 func (UnimplementedChatServer) mustEmbedUnimplementedChatServer() {}
 
@@ -1320,6 +1721,24 @@ type UnsafeChatServer interface {
 
 func RegisterChatServer(s grpc.ServiceRegistrar, srv ChatServer) {
 	s.RegisterService(&Chat_ServiceDesc, srv)
+}
+
+func _Chat_CreateChatTable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateChatTableRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).CreateChatTable(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_CreateChatTable_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).CreateChatTable(ctx, req.(*CreateChatTableRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Chat_CreateChatRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -1376,6 +1795,24 @@ func _Chat_UpdateChatRecord_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Chat_DeleteChatRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteChatRecordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).DeleteChatRecord(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_DeleteChatRecord_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).DeleteChatRecord(ctx, req.(*DeleteChatRecordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Chat_ServiceDesc is the grpc.ServiceDesc for Chat service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1383,6 +1820,10 @@ var Chat_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "pb.Chat",
 	HandlerType: (*ChatServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateChatTable",
+			Handler:    _Chat_CreateChatTable_Handler,
+		},
 		{
 			MethodName: "CreateChatRecord",
 			Handler:    _Chat_CreateChatRecord_Handler,
@@ -1394,6 +1835,10 @@ var Chat_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateChatRecord",
 			Handler:    _Chat_UpdateChatRecord_Handler,
+		},
+		{
+			MethodName: "DeleteChatRecord",
+			Handler:    _Chat_DeleteChatRecord_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

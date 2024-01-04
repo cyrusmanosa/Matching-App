@@ -58,7 +58,7 @@
     },
     "/v1/Create_Accompany": {
       "post": {
-        "summary": "Accompany",
+        "summary": "/ Accompany",
         "operationId": "Information_CreateAccompany",
         "responses": {
           "200": {
@@ -91,7 +91,7 @@
     },
     "/v1/Create_CanChange": {
       "post": {
-        "summary": "Can Change Information",
+        "summary": "/ Can Change Information",
         "operationId": "Information_CreateCanChange",
         "responses": {
           "200": {
@@ -187,6 +187,39 @@
         ]
       }
     },
+    "/v1/Create_ChatTable": {
+      "post": {
+        "operationId": "Chat_CreateChatTable",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbCreateChatTableRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Chat"
+        ]
+      }
+    },
     "/v1/Create_Complaint": {
       "post": {
         "summary": "Complaint",
@@ -222,7 +255,7 @@
     },
     "/v1/Create_Fix": {
       "post": {
-        "summary": "Fix Information",
+        "summary": "/ Fix Information",
         "operationId": "Information_CreateFix",
         "responses": {
           "200": {
@@ -417,6 +450,255 @@
         ]
       }
     },
+    "/v1/Del_Accompany": {
+      "delete": {
+        "operationId": "Information_DeleteAccompany",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Del_CanChange": {
+      "delete": {
+        "operationId": "Information_DeleteCanChange",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Del_ChangeTarget": {
+      "delete": {
+        "operationId": "Information_DeleteChangeTarget",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Del_ChatRecord": {
+      "delete": {
+        "operationId": "Chat_DeleteChatRecord",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "UserID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Chat"
+        ]
+      }
+    },
+    "/v1/Del_Complaint": {
+      "delete": {
+        "operationId": "Information_DeleteComplaint",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Del_Fix": {
+      "delete": {
+        "operationId": "Information_DeleteFix",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Del_Images": {
+      "delete": {
+        "operationId": "Information_DeleteImages",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Del_Lover": {
+      "delete": {
+        "operationId": "Information_DeleteLover",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
     "/v1/Get_Accompany": {
       "get": {
         "operationId": "Information_GetAccompany",
@@ -582,6 +864,36 @@
         ]
       }
     },
+    "/v1/Get_Fix": {
+      "get": {
+        "operationId": "Information_GetFix",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetFixResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
     "/v1/Get_Hobby": {
       "get": {
         "operationId": "Information_GetHobby",
@@ -631,11 +943,10 @@
         },
         "parameters": [
           {
-            "name": "UserID",
+            "name": "SessionID",
             "in": "query",
             "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
           }
         ],
         "tags": [
@@ -722,11 +1033,41 @@
         },
         "parameters": [
           {
-            "name": "UserID",
+            "name": "SessionID",
             "in": "query",
             "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Hobby": {
+      "delete": {
+        "operationId": "Information_DeleteHobby",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -855,6 +1196,37 @@
             "schema": {
               "$ref": "#/definitions/pbCheckEmailRequest"
             }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/TargetList": {
+      "delete": {
+        "operationId": "Information_DeleteTargetList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -1469,6 +1841,16 @@
         }
       }
     },
+    "pbCreateChatTableRequest": {
+      "type": "object",
+      "properties": {
+        "UserID": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Create Chat Table"
+    },
     "pbCreateComplaintRequest": {
       "type": "object",
       "properties": {
@@ -1517,7 +1899,8 @@
         "Blood": {
           "type": "string"
         }
-      }
+      },
+      "title": "Create"
     },
     "pbCreateFixResponse": {
       "type": "object",
@@ -1595,9 +1978,8 @@
     "pbCreateImagesRequest": {
       "type": "object",
       "properties": {
-        "UserID": {
-          "type": "integer",
-          "format": "int32"
+        "SessionID": {
+          "type": "string"
         },
         "Qr": {
           "type": "string"
@@ -1614,7 +1996,7 @@
         "Img4": {
           "type": "string"
         },
-        "icon": {
+        "Img5": {
           "type": "string"
         }
       },
@@ -1623,7 +2005,7 @@
     "pbCreateImagesResponse": {
       "type": "object",
       "properties": {
-        "img": {
+        "Img": {
           "$ref": "#/definitions/pbImages"
         }
       }
@@ -1721,9 +2103,8 @@
     "pbCreateTargetListRequest": {
       "type": "object",
       "properties": {
-        "UserID": {
-          "type": "integer",
-          "format": "int32"
+        "SessionID": {
+          "type": "string"
         },
         "Target1ID": {
           "type": "integer",
@@ -1792,6 +2173,39 @@
         }
       }
     },
+    "pbGetFixResponse": {
+      "type": "object",
+      "properties": {
+        "FirstName": {
+          "type": "string"
+        },
+        "LastName": {
+          "type": "string"
+        },
+        "Birth": {
+          "type": "string"
+        },
+        "Country": {
+          "type": "string"
+        },
+        "Gender": {
+          "type": "string"
+        },
+        "Blood": {
+          "type": "string"
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "constellation": {
+          "type": "string"
+        },
+        "certification": {
+          "type": "boolean"
+        }
+      }
+    },
     "pbGetHobbyResponse": {
       "type": "object",
       "properties": {
@@ -1803,7 +2217,7 @@
     "pbGetImagesResponse": {
       "type": "object",
       "properties": {
-        "img": {
+        "Img": {
           "$ref": "#/definitions/pbImages"
         }
       }
@@ -1904,7 +2318,7 @@
         "Img4": {
           "type": "string"
         },
-        "icon": {
+        "img5": {
           "type": "string"
         }
       }
@@ -2310,9 +2724,8 @@
     "pbUpdateImagesRequest": {
       "type": "object",
       "properties": {
-        "UserID": {
-          "type": "integer",
-          "format": "int32"
+        "SessionID": {
+          "type": "string"
         },
         "Qr": {
           "type": "string"
@@ -2329,7 +2742,7 @@
         "Img4": {
           "type": "string"
         },
-        "icon": {
+        "Img5": {
           "type": "string"
         }
       },
@@ -2338,7 +2751,7 @@
     "pbUpdateImagesResponse": {
       "type": "object",
       "properties": {
-        "img": {
+        "Img": {
           "$ref": "#/definitions/pbImages"
         }
       }
@@ -2410,9 +2823,8 @@
     "pbUpdateTargetListRequest": {
       "type": "object",
       "properties": {
-        "UserID": {
-          "type": "integer",
-          "format": "int32"
+        "SessionID": {
+          "type": "string"
         },
         "Target1ID": {
           "type": "integer",

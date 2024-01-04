@@ -21,7 +21,7 @@ func CreateRandomImage(t *testing.T, arg Fixinformation) Image {
 		Img2:   gofakeit.URL(),
 		Img3:   gofakeit.URL(),
 		Img4:   gofakeit.URL(),
-		Icon:   gofakeit.URL(),
+		Img5:   gofakeit.URL(),
 	}
 
 	image, err := testinfoQueries.CreateImage(context.Background(), Img)
@@ -33,7 +33,7 @@ func CreateRandomImage(t *testing.T, arg Fixinformation) Image {
 	require.Equal(t, image.Img2, Img.Img2)
 	require.Equal(t, image.Img3, Img.Img3)
 	require.Equal(t, image.Img4, Img.Img4)
-	require.Equal(t, image.Icon, Img.Icon)
+	require.Equal(t, image.Img5, Img.Img5)
 
 	return image
 }
@@ -44,11 +44,11 @@ func TestUpdateImage(t *testing.T) {
 
 	NewImg := UpdateImageParams{
 		UserID: Img.UserID,
-		Img1:   gofakeit.ImageURL(200, 300),
-		Img2:   gofakeit.ImageURL(200, 300),
-		Img3:   gofakeit.ImageURL(200, 300),
-		Img4:   gofakeit.ImageURL(200, 300),
-		Icon:   gofakeit.ImageURL(200, 300),
+		Img1:   "https://source.unsplash.com/random/200x300",
+		Img2:   "https://source.unsplash.com/random/200x300",
+		Img3:   "https://source.unsplash.com/random/200x300",
+		Img4:   "https://source.unsplash.com/random/200x300",
+		Img5:   "https://source.unsplash.com/random/200x300",
 	}
 	UpdateImg, err := testinfoQueries.UpdateImage(context.Background(), NewImg)
 	require.NoError(t, err)
@@ -68,7 +68,7 @@ func TestGetUserimageData(t *testing.T) {
 	require.Equal(t, GetImg.Img2, Img.Img2)
 	require.Equal(t, GetImg.Img3, Img.Img3)
 	require.Equal(t, GetImg.Img4, Img.Img4)
-	require.Equal(t, GetImg.Icon, Img.Icon)
+	require.Equal(t, GetImg.Img5, Img.Img5)
 }
 
 func TestListimagesList(t *testing.T) {

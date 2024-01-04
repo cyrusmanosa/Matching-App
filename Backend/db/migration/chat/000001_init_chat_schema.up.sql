@@ -1,4 +1,4 @@
-CREATE TABLE U1 (
+CREATE TABLE u1 (
   "target_id" INT NOT NULL,
   "msg_type" VARCHAR NOT NULL,
   "message" VARCHAR,

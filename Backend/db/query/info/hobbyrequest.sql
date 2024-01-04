@@ -1,4 +1,4 @@
--- name: CreateHobbyRequest :one
+-- name: CreateHobby :one
 INSERT INTO hobbyrequest (
     user_id,
     era,
@@ -16,15 +16,15 @@ INSERT INTO hobbyrequest (
     $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12
 ) RETURNING *;
 
--- name: GetUserHobby :one
+-- name: GetHobby :one
 SELECT * FROM hobbyrequest
 WHERE user_id = $1;
 
--- name: ListUserHobby :many
+-- name: ListHobby :many
 SELECT * FROM hobbyrequest
 ORDER BY user_id;
 
--- name: UpdateUserHobby :one
+-- name: UpdateHobby :one
 UPDATE hobbyrequest
 SET era = $2,
     city = $3,
@@ -40,6 +40,6 @@ SET era = $2,
 WHERE user_id = $1
 RETURNING *;
 
--- name: DeleteUserHobby :exec
+-- name: DeleteHobby :exec
 DELETE FROM hobbyrequest 
 WHERE user_id = $1;
