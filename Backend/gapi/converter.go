@@ -140,9 +140,9 @@ func convertPay(p info.Payment) *pb.Payment {
 func convertChat(chat ch.Record) *pb.ChatRecord {
 	return &pb.ChatRecord{
 		TargetID:  chat.TargetID,
-		MsgType:   chat.MsgType,
+		MediaType: chat.MediaType,
 		Message:   chat.Message,
-		Images:    chat.Images,
+		Media:     chat.Media,
 		CreatedAt: timestamppb.New(chat.CreatedAt),
 	}
 }
@@ -153,9 +153,9 @@ func convertChatList(chats []ch.Record) []*pb.ChatRecord {
 	for i, chat := range chats {
 		pbChats[i] = &pb.ChatRecord{
 			TargetID:  chat.TargetID,
-			MsgType:   chat.MsgType,
+			MediaType: chat.MediaType,
 			Message:   chat.Message,
-			Images:    chat.Images,
+			Media:     chat.Media,
 			CreatedAt: timestamppb.New(chat.CreatedAt),
 		}
 	}

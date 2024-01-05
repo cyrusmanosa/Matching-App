@@ -1,7 +1,8 @@
 CREATE TABLE u1 (
-  "target_id" INT NOT NULL,
-  "msg_type" VARCHAR NOT NULL,
+  "target_id" INT UNIQUE NOT NULL,
+  "role_type" VARCHAR NOT NULL,
+  "media_type" VARCHAR NOT NULL,
   "message" VARCHAR,
-  "images" VARCHAR,
+  "media" VARCHAR,
   "created_at" TIMESTAMPTZ NOT NULL DEFAULT (now())
 );

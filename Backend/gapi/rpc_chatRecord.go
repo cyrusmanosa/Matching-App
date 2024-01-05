@@ -24,25 +24,13 @@ func (server *Server) CreateChatTable(ctx context.Context, req *pb.CreateChatTab
 }
 
 func (server *Server) CreateChatRecord(ctx context.Context, req *pb.CreateChatRecordRequest) (*pb.CreateChatRecordResponse, error) {
-	// Gid, err := uuid.Parse(req.GetSessionID())
-	// if err != nil {
-	// 	return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
-	// }
-	// token, err := server.infoStore.GetSession(ctx, Gid)
-	// if err != nil {
-	// 	return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
-	// }
-	// _, err = server.tokenMaker.VerifyToken(token.AccessToken)
-	// if err != nil {
-	// 	return nil, fmt.Errorf("invalid access token: %v", err)
-	// }
 
 	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
 	chat := ch.CreateRecordParams{
-		TargetID: req.GetTargetID(),
-		MsgType:  req.GetMsgType(),
-		Message:  req.GetMessage(),
-		Images:   req.GetImages(),
+		TargetID:  req.GetTargetID(),
+		MediaType: req.GetMediaType(),
+		Message:   req.GetMessage(),
+		Media:     req.GetMedia(),
 	}
 
 	chatR, err := server.chatStore.CreateRecord(ctx, chat, tablename)
@@ -62,22 +50,9 @@ func (server *Server) CreateChatRecord(ctx context.Context, req *pb.CreateChatRe
 }
 
 func (server *Server) GetChatRecord(ctx context.Context, req *pb.GetChatRecordRequest) (*pb.GetChatRecordResponse, error) {
-	// Gid, err := uuid.Parse(req.GetSessionID())
-	// if err != nil {
-	// 	return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
-	// }
-	// token, err := server.infoStore.GetSession(ctx, Gid)
-	// if err != nil {
-	// 	return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
-	// }
-	// _, err = server.tokenMaker.VerifyToken(token.AccessToken)
-	// if err != nil {
-	// 	return nil, fmt.Errorf("invalid access token: %v", err)
-	// }
-
 	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
 
-	GetC, err := server.chatStore.Getrecord(ctx, req.TargetID, tablename)
+	GetC, err := server.chatStore.GetRecord(ctx, req.TargetID, tablename)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -94,19 +69,6 @@ func (server *Server) GetChatRecord(ctx context.Context, req *pb.GetChatRecordRe
 }
 
 func (server *Server) UpdateChatRecord(ctx context.Context, req *pb.UpdateChatRecordRequest) (*pb.UpdateChatRecordResponse, error) {
-	// Gid, err := uuid.Parse(req.GetSessionID())
-	// if err != nil {
-	// 	return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
-	// }
-	// token, err := server.infoStore.GetSession(ctx, Gid)
-	// if err != nil {
-	// 	return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
-	// }
-	// _, err = server.tokenMaker.VerifyToken(token.AccessToken)
-	// if err != nil {
-	// 	return nil, fmt.Errorf("invalid access token: %v", err)
-	// }
-
 	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
 
 	pbTimestamp := req.GetCreateAt()
@@ -114,7 +76,7 @@ func (server *Server) UpdateChatRecord(ctx context.Context, req *pb.UpdateChatRe
 
 	chat := ch.UpdateRecordParams{
 		TargetID:  req.GetTargetID(),
-		MsgType:   req.GetMsgType(),
+		MediaType: req.GetMediaType(),
 		Message:   req.GetMessage(),
 		CreatedAt: timeValue,
 	}

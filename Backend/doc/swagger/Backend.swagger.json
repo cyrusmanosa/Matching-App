@@ -1613,13 +1613,16 @@
           "type": "integer",
           "format": "int32"
         },
-        "MsgType": {
+        "RoleType": {
+          "type": "string"
+        },
+        "MediaType": {
           "type": "string"
         },
         "Message": {
           "type": "string"
         },
-        "Images": {
+        "Media": {
           "type": "string"
         },
         "CreatedAt": {
@@ -1821,13 +1824,16 @@
           "type": "integer",
           "format": "int32"
         },
-        "MsgType": {
+        "RoleType": {
+          "type": "string"
+        },
+        "MediaType": {
           "type": "string"
         },
         "Message": {
           "type": "string"
         },
-        "Images": {
+        "Media": {
           "type": "string"
         }
       },
@@ -2622,7 +2628,10 @@
           "type": "integer",
           "format": "int32"
         },
-        "MsgType": {
+        "RoleType": {
+          "type": "string"
+        },
+        "MediaType": {
           "type": "string"
         },
         "Message": {

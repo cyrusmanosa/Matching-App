@@ -1,27 +1,28 @@
 -- name: CreateRecord :one
-INSERT INTO "record" (
+INSERT INTO "u1" (
     target_id,
-    msg_type,
+    role_type,
+    media_type,
     message,
-    images
+    media
 ) VALUES (
-    $1,$2,$3,$4
+    $1,$2,$3,$4,$5
 ) RETURNING *;
 
--- name: Getrecord :many
-SELECT * FROM "record"
+-- name: GetRecord :many
+SELECT * FROM "u1"
 WHERE target_id = $1
-ORDER BY created_at
+ORDER BY created_at;
 
 -- name: UpdateRecord :one
-UPDATE "record"
+UPDATE "u1"
 SET message = $4
 WHERE target_id = $1
-  AND msg_type = $2
+  AND media_type = $2
   AND created_at = $3
 RETURNING *;
 
 -- name: DeleteRecord :exec
-DELETE FROM "record"
+DELETE FROM "u1"
 WHERE target_id = $1
 AND created_at = $2;

@@ -24,6 +24,13 @@ func Randomstring(n int) string {
 	return sb.String()
 }
 
+func RandomRole() string {
+	role := []string{"sender", "receiver"}
+	r := rand.Intn(2)
+	return role[r]
+
+}
+
 func RandomBlood() string {
 	r := rand.Intn(4)
 	Gender := []string{"A", "B", "AB", "O"}
