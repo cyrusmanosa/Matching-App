@@ -9,11 +9,11 @@ import (
 )
 
 type ChatQuerier interface {
-	CreateChatTable(ctx context.Context, tablename string) error
-	CreateRecord(ctx context.Context, arg CreateRecordParams, tablename string) (Record, error)
-	DeleteRecord(ctx context.Context, arg DeleteRecordParams, tablename string) error
-	GetRecord(ctx context.Context, targetID int32, tablename string) ([]Record, error)
-	UpdateRecord(ctx context.Context, arg UpdateRecordParams, tablename string) (Record, error)
+	CreateRecord(ctx context.Context, arg CreateRecordParams) (Record, error)
+	DeleteRecord(ctx context.Context, arg DeleteRecordParams) error
+	GetRecord(ctx context.Context, targetID int32) ([]Record, error)
+	GetTargetID(ctx context.Context) ([]int32, error)
+	UpdateRecord(ctx context.Context, arg UpdateRecordParams) (Record, error)
 }
 
-var _ChatQuerier = (*Queries)(nil)
+var _ ChatQuerier = (*Queries)(nil)

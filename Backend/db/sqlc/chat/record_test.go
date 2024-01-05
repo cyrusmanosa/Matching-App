@@ -9,8 +9,8 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-const TId = 1
-const TableId = "u32"
+const TId = 47
+const TN = "u1"
 
 func TestCreateRecord(t *testing.T) {
 	CreateRandomRecord(t)
@@ -25,7 +25,7 @@ func CreateRandomRecord(t *testing.T) Record {
 		Media:     gofakeit.URL(),
 	}
 
-	InsertR, err := testChatQueries.CreateRecord(context.Background(), arg, TableId)
+	InsertR, err := testChatQueries.CreateRecord(context.Background(), arg, TN)
 	require.NoError(t, err)
 	require.NotEmpty(t, InsertR)
 	require.Equal(t, InsertR.TargetID, arg.TargetID)
@@ -38,7 +38,7 @@ func CreateRandomRecord(t *testing.T) Record {
 }
 
 func TestGetrecord(t *testing.T) {
-	getR, err := testChatQueries.GetRecord(context.Background(), TId, TableId)
+	getR, err := testChatQueries.GetRecord(context.Background(), TId, TN)
 	require.NoError(t, err)
 	require.NotEmpty(t, getR)
 }
@@ -52,7 +52,7 @@ func TestUpdateRecord(t *testing.T) {
 		CreatedAt: arg.CreatedAt,
 	}
 
-	UpR, err := testChatQueries.UpdateRecord(context.Background(), New, TableId)
+	UpR, err := testChatQueries.UpdateRecord(context.Background(), New, TN)
 	require.NoError(t, err)
 	require.NotEmpty(t, UpR)
 	require.NotEqual(t, UpR.Message, arg.Message)
@@ -66,6 +66,6 @@ func TestDeleteRecord(t *testing.T) {
 		CreatedAt: R.CreatedAt,
 	}
 
-	err := testChatQueries.DeleteRecord(context.Background(), arg, TableId)
+	err := testChatQueries.DeleteRecord(context.Background(), arg, TN)
 	require.NoError(t, err)
 }

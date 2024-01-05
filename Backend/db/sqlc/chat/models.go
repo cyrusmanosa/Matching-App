@@ -5,14 +5,14 @@
 package db
 
 import (
-	"time"
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 type Record struct {
 	TargetID  int32              `json:"target_id"`
 	RoleType  string             `json:"role_type"`
 	MediaType string             `json:"media_type"`
-	Message   string        `json:"message"`
-	Media     string        `json:"media"`
-	CreatedAt time.Time `json:"created_at"`
+	Message   pgtype.Text        `json:"message"`
+	Media     pgtype.Text        `json:"media"`
+	CreatedAt pgtype.Timestamptz `json:"created_at"`
 }

@@ -14,6 +14,11 @@ SELECT * FROM "u1"
 WHERE target_id = $1
 ORDER BY created_at;
 
+-- name: GetTargetID :many
+SELECT target_id FROM "u1"
+GROUP BY target_id
+HAVING COUNT(*) > 1;
+
 -- name: UpdateRecord :one
 UPDATE "u1"
 SET message = $4
@@ -26,3 +31,4 @@ RETURNING *;
 DELETE FROM "u1"
 WHERE target_id = $1
 AND created_at = $2;
+
