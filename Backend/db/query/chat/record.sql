@@ -4,9 +4,10 @@ INSERT INTO "u1" (
     role_type,
     media_type,
     message,
-    media
+    media,
+    isread
 ) VALUES (
-    $1,$2,$3,$4,$5
+    $1,$2,$3,$4,$5,$6
 ) RETURNING *;
 
 -- name: GetRecord :many
@@ -15,9 +16,14 @@ WHERE target_id = $1
 ORDER BY created_at;
 
 -- name: GetTargetID :many
-SELECT target_id FROM "u1"
-GROUP BY target_id
-HAVING COUNT(*) > 1;
+SELECT DISTINCT target_id FROM u1;
+
+-- name: GetLastMsg :one
+SELECT message,media_type,isread FROM "u1"
+WHERE target_id = $1
+ORDER BY created_at DESC
+LIMIT 1;
+
 
 -- name: UpdateRecord :one
 UPDATE "u1"

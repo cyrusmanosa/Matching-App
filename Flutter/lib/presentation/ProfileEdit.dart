@@ -84,8 +84,9 @@ class _ProfileEditState extends State<ProfileEdit> {
     } else if (updateIntroduceController.text.isEmpty) {
       showErrorDialog(context, "自己紹介はまだ入力されていません");
     } else {
+      String? apiKeyS = await globalSession.read(key: 'SessionId');
       final request = UpdateCanChangeRequest(
-        sessionID: globalSessionID,
+        sessionID: apiKeyS,
         nickName: updateNickNameController.text,
         city: updateCityController.text,
         sexual: updateSexualController.text,
@@ -286,7 +287,7 @@ class _ProfileEditState extends State<ProfileEdit> {
   }
 
   onTapNextPage(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.profile);
+    Navigator.pop(context);
   }
 
   void showDoneDialog(BuildContext context, String s) {}

@@ -23,8 +23,12 @@ class _HomeState extends State<Home> {
 
 // Grpc
   void checkDataGrpcRequest(BuildContext context) async {
-    final request = GetCanChangeRequest(sessionID: globalSessionID);
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
+
     try {
+      final request = GetCanChangeRequest(sessionID: apiKeyS, userID: userid);
       await GrpcInfoService.client.getCanChange(request);
     } on GrpcError catch (e) {
       if (e.code == 13) {

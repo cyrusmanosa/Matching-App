@@ -39,9 +39,10 @@ class _HobbyConditionState extends State<HobbyCondition> {
 
 // Http
   void createHobbyHttpRequest(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
     var url = "http://127.0.0.1:8080/CreateHobby";
     var requestBody = {
-      "session_id": globalSessionID,
+      "session_id": apiKeyS,
       "Era": hobbyEraController.text,
       "City": hobbyCityController.text,
       "Gender": hobbyGenderController.text,
@@ -95,8 +96,9 @@ class _HobbyConditionState extends State<HobbyCondition> {
     } else if (!confirmBtn) {
       showErrorDialog(context, "本人認証のボタンはまだ押していません");
     } else {
+      String? apiKeyS = await globalSession.read(key: 'SessionId');
       final request = CreateHobbyRequest(
-        sessionID: globalSessionID,
+        sessionID: apiKeyS,
         era: int.parse(hobbyEraController.text),
         city: hobbyCityController.text,
         gender: hobbyGenderController.text,

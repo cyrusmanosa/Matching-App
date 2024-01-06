@@ -44,8 +44,9 @@ class CanChangeInformation_1 extends StatelessWidget {
     } else if (canChangeSpeakLanguageController.text.isEmpty) {
       showErrorDialog(context, "学歴はまだ入力されていません");
     } else {
+      String? apiKeyS = await globalSession.read(key: 'SessionId');
       final request = CreateCanChangeRequest(
-        sessionID: globalSessionID,
+        sessionID: apiKeyS,
         nickName: canChangeNickNameController.text,
         city: canChangeCityController.text,
         sexual: canChangeSexualController.text,

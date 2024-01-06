@@ -77,7 +77,7 @@ func (server *Server) GetCanChange(ctx context.Context, req *pb.GetCanChangeRequ
 		return nil, fmt.Errorf("invalid access token: %v", err)
 	}
 
-	canChange, err := server.infoStore.GetUserCanChangeInformation(ctx, token.UserID)
+	canChange, err := server.infoStore.GetUserCanChangeInformation(ctx, req.GetUserID())
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {

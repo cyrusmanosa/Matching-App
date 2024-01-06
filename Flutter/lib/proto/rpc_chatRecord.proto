@@ -3,44 +3,80 @@ syntax = "proto3";
 package pb;
 
 import "chatRecord.proto";
+import "chatRecordNoID.proto";
 import "google/protobuf/timestamp.proto";
 
 
 option go_package = "Backend/pb";
 
+// Create Chat Table
+message CreateChatTableRequest {
+    int32 UserID = 1;
+}
+
 // Create
 message CreateChatRecordRequest {
     int32 UserID = 1;
     int32 TargetID = 2;
-    string MsgType = 3;
-    string Message = 4;
-    string Images = 5;
+    string RoleType = 3;
+    string MediaType = 4;
+    string Message = 5;
+    string Media = 6;
 }
 
 message CreateChatRecordResponse {
     ChatRecord ChatRecord = 1;
 }
 
-// Get
+// GetRecord
 message GetChatRecordRequest {
     int32 UserID = 1;
     int32 TargetID = 2;
 }
 
 message GetChatRecordResponse {
-    repeated ChatRecord ChatRecord = 1;
+    repeated ChatRecordNoID ChatRecordNoID = 1;
 }
 
+// GetTargetID
+message GetTargetIDRequest {
+    int32 UserID = 1;
+}
+
+message GetTargetIDResponse {
+    repeated int32 TargetID = 1;
+}
+
+// GetLastMsg
+message GetLastMsgRequest{
+    int32 UserID = 1;
+    int32 TargetID = 2;
+}
+
+message GetLastMsgResponse{
+    string MediaType = 1;
+    string Message = 2;
+    bool Isread = 3;
+}
 
 // Update
 message UpdateChatRecordRequest {
     int32 UserID = 1;
     int32 TargetID = 2;
-    string MsgType = 3;
-    string Message = 4;
-    google.protobuf.Timestamp CreateAt = 5;
+    string RoleType = 3;
+    string MediaType = 4;
+    string Message = 5;
+    google.protobuf.Timestamp CreateAt = 6;
 }
 
 message UpdateChatRecordResponse {
     ChatRecord ChatRecord = 1;
 }
+
+// Delete
+message DeleteChatRecordRequest {
+    int32 UserID = 1;
+    int32 TargetID = 2;
+    google.protobuf.Timestamp CreateAt = 3;
+}
+

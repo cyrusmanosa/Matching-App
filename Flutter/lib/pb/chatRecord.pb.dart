@@ -13,28 +13,36 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $14;
+import 'google/protobuf/timestamp.pb.dart' as $16;
 
 class ChatRecord extends $pb.GeneratedMessage {
   factory ChatRecord({
     $core.int? targetID,
-    $core.String? msgType,
+    $core.String? roleType,
+    $core.String? mediaType,
     $core.String? message,
-    $core.String? images,
-    $14.Timestamp? createdAt,
+    $core.String? media,
+    $core.bool? isread,
+    $16.Timestamp? createdAt,
   }) {
     final $result = create();
     if (targetID != null) {
       $result.targetID = targetID;
     }
-    if (msgType != null) {
-      $result.msgType = msgType;
+    if (roleType != null) {
+      $result.roleType = roleType;
+    }
+    if (mediaType != null) {
+      $result.mediaType = mediaType;
     }
     if (message != null) {
       $result.message = message;
     }
-    if (images != null) {
-      $result.images = images;
+    if (media != null) {
+      $result.media = media;
+    }
+    if (isread != null) {
+      $result.isread = isread;
     }
     if (createdAt != null) {
       $result.createdAt = createdAt;
@@ -47,10 +55,12 @@ class ChatRecord extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChatRecord', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'TargetID', $pb.PbFieldType.O3, protoName: 'TargetID')
-    ..aOS(2, _omitFieldNames ? '' : 'MsgType', protoName: 'MsgType')
-    ..aOS(3, _omitFieldNames ? '' : 'Message', protoName: 'Message')
-    ..aOS(4, _omitFieldNames ? '' : 'Images', protoName: 'Images')
-    ..aOM<$14.Timestamp>(5, _omitFieldNames ? '' : 'CreatedAt', protoName: 'CreatedAt', subBuilder: $14.Timestamp.create)
+    ..aOS(2, _omitFieldNames ? '' : 'RoleType', protoName: 'RoleType')
+    ..aOS(3, _omitFieldNames ? '' : 'MediaType', protoName: 'MediaType')
+    ..aOS(4, _omitFieldNames ? '' : 'Message', protoName: 'Message')
+    ..aOS(5, _omitFieldNames ? '' : 'Media', protoName: 'Media')
+    ..aOB(6, _omitFieldNames ? '' : 'Isread', protoName: 'Isread')
+    ..aOM<$16.Timestamp>(7, _omitFieldNames ? '' : 'CreatedAt', protoName: 'CreatedAt', subBuilder: $16.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -85,42 +95,60 @@ class ChatRecord extends $pb.GeneratedMessage {
   void clearTargetID() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get msgType => $_getSZ(1);
+  $core.String get roleType => $_getSZ(1);
   @$pb.TagNumber(2)
-  set msgType($core.String v) { $_setString(1, v); }
+  set roleType($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasMsgType() => $_has(1);
+  $core.bool hasRoleType() => $_has(1);
   @$pb.TagNumber(2)
-  void clearMsgType() => clearField(2);
+  void clearRoleType() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get message => $_getSZ(2);
+  $core.String get mediaType => $_getSZ(2);
   @$pb.TagNumber(3)
-  set message($core.String v) { $_setString(2, v); }
+  set mediaType($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasMessage() => $_has(2);
+  $core.bool hasMediaType() => $_has(2);
   @$pb.TagNumber(3)
-  void clearMessage() => clearField(3);
+  void clearMediaType() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get images => $_getSZ(3);
+  $core.String get message => $_getSZ(3);
   @$pb.TagNumber(4)
-  set images($core.String v) { $_setString(3, v); }
+  set message($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasImages() => $_has(3);
+  $core.bool hasMessage() => $_has(3);
   @$pb.TagNumber(4)
-  void clearImages() => clearField(4);
+  void clearMessage() => clearField(4);
 
   @$pb.TagNumber(5)
-  $14.Timestamp get createdAt => $_getN(4);
+  $core.String get media => $_getSZ(4);
   @$pb.TagNumber(5)
-  set createdAt($14.Timestamp v) { setField(5, v); }
+  set media($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasCreatedAt() => $_has(4);
+  $core.bool hasMedia() => $_has(4);
   @$pb.TagNumber(5)
-  void clearCreatedAt() => clearField(5);
-  @$pb.TagNumber(5)
-  $14.Timestamp ensureCreatedAt() => $_ensure(4);
+  void clearMedia() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.bool get isread => $_getBF(5);
+  @$pb.TagNumber(6)
+  set isread($core.bool v) { $_setBool(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasIsread() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearIsread() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $16.Timestamp get createdAt => $_getN(6);
+  @$pb.TagNumber(7)
+  set createdAt($16.Timestamp v) { setField(7, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasCreatedAt() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearCreatedAt() => clearField(7);
+  @$pb.TagNumber(7)
+  $16.Timestamp ensureCreatedAt() => $_ensure(6);
 }
 
 

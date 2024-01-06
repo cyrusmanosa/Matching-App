@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "Backend/pb";
+
+message ChatRecordNoID{
+    string RoleType = 1;
+    string MediaType = 2;
+    string Message = 3;
+    string Media = 4;
+    bool Isread = 5;
+    google.protobuf.Timestamp CreatedAt = 6;
+}

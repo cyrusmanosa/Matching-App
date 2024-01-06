@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'lover.pb.dart' as $22;
+import 'lover.pb.dart' as $25;
 
 /// Create
 class CreateLoverRequest extends $pb.GeneratedMessage {
@@ -264,7 +264,7 @@ class CreateLoverRequest extends $pb.GeneratedMessage {
 
 class CreateLoverResponse extends $pb.GeneratedMessage {
   factory CreateLoverResponse({
-    $22.Lover? l,
+    $25.Lover? l,
   }) {
     final $result = create();
     if (l != null) {
@@ -277,7 +277,7 @@ class CreateLoverResponse extends $pb.GeneratedMessage {
   factory CreateLoverResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateLoverResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$22.Lover>(1, _omitFieldNames ? '' : 'l', subBuilder: $22.Lover.create)
+    ..aOM<$25.Lover>(1, _omitFieldNames ? '' : 'l', subBuilder: $25.Lover.create)
     ..hasRequiredFields = false
   ;
 
@@ -303,15 +303,15 @@ class CreateLoverResponse extends $pb.GeneratedMessage {
   static CreateLoverResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $22.Lover get l => $_getN(0);
+  $25.Lover get l => $_getN(0);
   @$pb.TagNumber(1)
-  set l($22.Lover v) { setField(1, v); }
+  set l($25.Lover v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasL() => $_has(0);
   @$pb.TagNumber(1)
   void clearL() => clearField(1);
   @$pb.TagNumber(1)
-  $22.Lover ensureL() => $_ensure(0);
+  $25.Lover ensureL() => $_ensure(0);
 }
 
 /// Get
@@ -367,7 +367,7 @@ class GetLoverRequest extends $pb.GeneratedMessage {
 
 class GetLoverResponse extends $pb.GeneratedMessage {
   factory GetLoverResponse({
-    $22.Lover? l,
+    $25.Lover? l,
   }) {
     final $result = create();
     if (l != null) {
@@ -380,7 +380,7 @@ class GetLoverResponse extends $pb.GeneratedMessage {
   factory GetLoverResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetLoverResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$22.Lover>(1, _omitFieldNames ? '' : 'l', subBuilder: $22.Lover.create)
+    ..aOM<$25.Lover>(1, _omitFieldNames ? '' : 'l', subBuilder: $25.Lover.create)
     ..hasRequiredFields = false
   ;
 
@@ -406,15 +406,15 @@ class GetLoverResponse extends $pb.GeneratedMessage {
   static GetLoverResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $22.Lover get l => $_getN(0);
+  $25.Lover get l => $_getN(0);
   @$pb.TagNumber(1)
-  set l($22.Lover v) { setField(1, v); }
+  set l($25.Lover v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasL() => $_has(0);
   @$pb.TagNumber(1)
   void clearL() => clearField(1);
   @$pb.TagNumber(1)
-  $22.Lover ensureL() => $_ensure(0);
+  $25.Lover ensureL() => $_ensure(0);
 }
 
 /// Update
@@ -666,7 +666,7 @@ class UpdateLoverRequest extends $pb.GeneratedMessage {
 
 class UpdateLoverResponse extends $pb.GeneratedMessage {
   factory UpdateLoverResponse({
-    $22.Lover? l,
+    $25.Lover? l,
   }) {
     final $result = create();
     if (l != null) {
@@ -679,7 +679,7 @@ class UpdateLoverResponse extends $pb.GeneratedMessage {
   factory UpdateLoverResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateLoverResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$22.Lover>(1, _omitFieldNames ? '' : 'l', subBuilder: $22.Lover.create)
+    ..aOM<$25.Lover>(1, _omitFieldNames ? '' : 'l', subBuilder: $25.Lover.create)
     ..hasRequiredFields = false
   ;
 
@@ -705,15 +705,66 @@ class UpdateLoverResponse extends $pb.GeneratedMessage {
   static UpdateLoverResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $22.Lover get l => $_getN(0);
+  $25.Lover get l => $_getN(0);
   @$pb.TagNumber(1)
-  set l($22.Lover v) { setField(1, v); }
+  set l($25.Lover v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasL() => $_has(0);
   @$pb.TagNumber(1)
   void clearL() => clearField(1);
   @$pb.TagNumber(1)
-  $22.Lover ensureL() => $_ensure(0);
+  $25.Lover ensureL() => $_ensure(0);
+}
+
+/// Delete
+class DeleteLoverRequest extends $pb.GeneratedMessage {
+  factory DeleteLoverRequest({
+    $core.String? sessionID,
+  }) {
+    final $result = create();
+    if (sessionID != null) {
+      $result.sessionID = sessionID;
+    }
+    return $result;
+  }
+  DeleteLoverRequest._() : super();
+  factory DeleteLoverRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DeleteLoverRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteLoverRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DeleteLoverRequest clone() => DeleteLoverRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DeleteLoverRequest copyWith(void Function(DeleteLoverRequest) updates) => super.copyWith((message) => updates(message as DeleteLoverRequest)) as DeleteLoverRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeleteLoverRequest create() => DeleteLoverRequest._();
+  DeleteLoverRequest createEmptyInstance() => create();
+  static $pb.PbList<DeleteLoverRequest> createRepeated() => $pb.PbList<DeleteLoverRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteLoverRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteLoverRequest>(create);
+  static DeleteLoverRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get sessionID => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set sessionID($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSessionID() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSessionID() => clearField(1);
 }
 
 

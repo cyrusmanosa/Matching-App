@@ -129,3 +129,15 @@ const UpdateLoverResponse$json = {
 final $typed_data.Uint8List updateLoverResponseDescriptor = $convert.base64Decode(
     'ChNVcGRhdGVMb3ZlclJlc3BvbnNlEhcKAWwYASABKAsyCS5wYi5Mb3ZlclIBbA==');
 
+@$core.Deprecated('Use deleteLoverRequestDescriptor instead')
+const DeleteLoverRequest$json = {
+  '1': 'DeleteLoverRequest',
+  '2': [
+    {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
+  ],
+};
+
+/// Descriptor for `DeleteLoverRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteLoverRequestDescriptor = $convert.base64Decode(
+    'ChJEZWxldGVMb3ZlclJlcXVlc3QSHAoJU2Vzc2lvbklEGAEgASgJUglTZXNzaW9uSUQ=');
+

@@ -67,3 +67,16 @@ final $typed_data.Uint8List getChangeTargetResponseDescriptor = $convert.base64D
     'ChdHZXRDaGFuZ2VUYXJnZXRSZXNwb25zZRIgCgJjdBgBIAEoCzIQLnBiLkNoYW5nZVRhcmdldF'
     'ICY3Q=');
 
+@$core.Deprecated('Use deleteChangeTargetRequestDescriptor instead')
+const DeleteChangeTargetRequest$json = {
+  '1': 'DeleteChangeTargetRequest',
+  '2': [
+    {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
+  ],
+};
+
+/// Descriptor for `DeleteChangeTargetRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteChangeTargetRequestDescriptor = $convert.base64Decode(
+    'ChlEZWxldGVDaGFuZ2VUYXJnZXRSZXF1ZXN0EhwKCVNlc3Npb25JRBgBIAEoCVIJU2Vzc2lvbk'
+    'lE');
+

@@ -51,15 +51,51 @@ final $typed_data.Uint8List createFixResponseDescriptor = $convert.base64Decode(
     'aW1lc3RhbXBSCENyZWF0ZUF0Ek4KFEFjY2Vzc1Rva2VuRXhwaXJlc0F0GAYgASgLMhouZ29vZ2'
     'xlLnByb3RvYnVmLlRpbWVzdGFtcFIUQWNjZXNzVG9rZW5FeHBpcmVzQXQ=');
 
-@$core.Deprecated('Use delFixDescriptor instead')
-const DelFix$json = {
-  '1': 'DelFix',
+@$core.Deprecated('Use getFixRequestDescriptor instead')
+const GetFixRequest$json = {
+  '1': 'GetFixRequest',
   '2': [
-    {'1': 'SessionsID', '3': 1, '4': 1, '5': 9, '10': 'SessionsID'},
+    {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
   ],
 };
 
-/// Descriptor for `DelFix`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List delFixDescriptor = $convert.base64Decode(
-    'CgZEZWxGaXgSHgoKU2Vzc2lvbnNJRBgBIAEoCVIKU2Vzc2lvbnNJRA==');
+/// Descriptor for `GetFixRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getFixRequestDescriptor = $convert.base64Decode(
+    'Cg1HZXRGaXhSZXF1ZXN0EhwKCVNlc3Npb25JRBgBIAEoCVIJU2Vzc2lvbklE');
+
+@$core.Deprecated('Use getFixResponseDescriptor instead')
+const GetFixResponse$json = {
+  '1': 'GetFixResponse',
+  '2': [
+    {'1': 'FirstName', '3': 1, '4': 1, '5': 9, '10': 'FirstName'},
+    {'1': 'LastName', '3': 2, '4': 1, '5': 9, '10': 'LastName'},
+    {'1': 'Birth', '3': 3, '4': 1, '5': 9, '10': 'Birth'},
+    {'1': 'Country', '3': 4, '4': 1, '5': 9, '10': 'Country'},
+    {'1': 'Gender', '3': 5, '4': 1, '5': 9, '10': 'Gender'},
+    {'1': 'Blood', '3': 6, '4': 1, '5': 9, '10': 'Blood'},
+    {'1': 'age', '3': 7, '4': 1, '5': 5, '10': 'age'},
+    {'1': 'constellation', '3': 8, '4': 1, '5': 9, '10': 'constellation'},
+    {'1': 'certification', '3': 9, '4': 1, '5': 8, '10': 'certification'},
+  ],
+};
+
+/// Descriptor for `GetFixResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getFixResponseDescriptor = $convert.base64Decode(
+    'Cg5HZXRGaXhSZXNwb25zZRIcCglGaXJzdE5hbWUYASABKAlSCUZpcnN0TmFtZRIaCghMYXN0Tm'
+    'FtZRgCIAEoCVIITGFzdE5hbWUSFAoFQmlydGgYAyABKAlSBUJpcnRoEhgKB0NvdW50cnkYBCAB'
+    'KAlSB0NvdW50cnkSFgoGR2VuZGVyGAUgASgJUgZHZW5kZXISFAoFQmxvb2QYBiABKAlSBUJsb2'
+    '9kEhAKA2FnZRgHIAEoBVIDYWdlEiQKDWNvbnN0ZWxsYXRpb24YCCABKAlSDWNvbnN0ZWxsYXRp'
+    'b24SJAoNY2VydGlmaWNhdGlvbhgJIAEoCFINY2VydGlmaWNhdGlvbg==');
+
+@$core.Deprecated('Use deleteFixRequestDescriptor instead')
+const DeleteFixRequest$json = {
+  '1': 'DeleteFixRequest',
+  '2': [
+    {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
+  ],
+};
+
+/// Descriptor for `DeleteFixRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteFixRequestDescriptor = $convert.base64Decode(
+    'ChBEZWxldGVGaXhSZXF1ZXN0EhwKCVNlc3Npb25JRBgBIAEoCVIJU2Vzc2lvbklE');
 

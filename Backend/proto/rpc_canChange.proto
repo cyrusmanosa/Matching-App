@@ -28,8 +28,9 @@ message CreateCanChangeResponse {
 
 
 // Get
-message GetCanChangeRequest { 
+message GetCanChangeRequest {
   string SessionID = 1;
+  int32 UserID = 2;
 }
 message GetCanChangeResponse {
   CanChange CanChangeInfo = 1;
@@ -56,11 +57,6 @@ message UpdateCanChangeResponse {
   CanChange CanChangeInfo = 1;
 }
 
-
-// List
-message ListCanChangeResponse {
-  CanChange CanChangeInfo = 1;
-}
 
 // Delete
 message DeleteCanChangeRequest {

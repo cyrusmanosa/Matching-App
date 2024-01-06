@@ -61,6 +61,7 @@ const (
 	Information_DeleteImages_FullMethodName       = "/pb.Information/DeleteImages"
 	Information_CreatePayment_FullMethodName      = "/pb.Information/CreatePayment"
 	Information_GetPayment_FullMethodName         = "/pb.Information/GetPayment"
+	Information_GetUserID_FullMethodName          = "/pb.Information/GetUserID"
 )
 
 // InformationClient is the client API for Information service.
@@ -115,8 +116,11 @@ type InformationClient interface {
 	GetImages(ctx context.Context, in *GetImagesRequest, opts ...grpc.CallOption) (*GetImagesResponse, error)
 	UpdateImages(ctx context.Context, in *UpdateImagesRequest, opts ...grpc.CallOption) (*UpdateImagesResponse, error)
 	DeleteImages(ctx context.Context, in *DeleteImagesRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Payment
 	CreatePayment(ctx context.Context, in *CreatePaymentRequest, opts ...grpc.CallOption) (*CreatePaymentResponse, error)
 	GetPayment(ctx context.Context, in *GetPaymentRequest, opts ...grpc.CallOption) (*GetPaymentResponse, error)
+	// Session
+	GetUserID(ctx context.Context, in *GetUserIDRequest, opts ...grpc.CallOption) (*GetUserIDResponse, error)
 }
 
 type informationClient struct {
@@ -496,6 +500,15 @@ func (c *informationClient) GetPayment(ctx context.Context, in *GetPaymentReques
 	return out, nil
 }
 
+func (c *informationClient) GetUserID(ctx context.Context, in *GetUserIDRequest, opts ...grpc.CallOption) (*GetUserIDResponse, error) {
+	out := new(GetUserIDResponse)
+	err := c.cc.Invoke(ctx, Information_GetUserID_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // InformationServer is the server API for Information service.
 // All implementations must embed UnimplementedInformationServer
 // for forward compatibility
@@ -548,8 +561,11 @@ type InformationServer interface {
 	GetImages(context.Context, *GetImagesRequest) (*GetImagesResponse, error)
 	UpdateImages(context.Context, *UpdateImagesRequest) (*UpdateImagesResponse, error)
 	DeleteImages(context.Context, *DeleteImagesRequest) (*emptypb.Empty, error)
+	// Payment
 	CreatePayment(context.Context, *CreatePaymentRequest) (*CreatePaymentResponse, error)
 	GetPayment(context.Context, *GetPaymentRequest) (*GetPaymentResponse, error)
+	// Session
+	GetUserID(context.Context, *GetUserIDRequest) (*GetUserIDResponse, error)
 	mustEmbedUnimplementedInformationServer()
 }
 
@@ -679,6 +695,9 @@ func (UnimplementedInformationServer) CreatePayment(context.Context, *CreatePaym
 }
 func (UnimplementedInformationServer) GetPayment(context.Context, *GetPaymentRequest) (*GetPaymentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPayment not implemented")
+}
+func (UnimplementedInformationServer) GetUserID(context.Context, *GetUserIDRequest) (*GetUserIDResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserID not implemented")
 }
 func (UnimplementedInformationServer) mustEmbedUnimplementedInformationServer() {}
 
@@ -1431,6 +1450,24 @@ func _Information_GetPayment_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Information_GetUserID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserIDRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).GetUserID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_GetUserID_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).GetUserID(ctx, req.(*GetUserIDRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Information_ServiceDesc is the grpc.ServiceDesc for Information service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1602,6 +1639,10 @@ var Information_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "GetPayment",
 			Handler:    _Information_GetPayment_Handler,
 		},
+		{
+			MethodName: "GetUserID",
+			Handler:    _Information_GetUserID_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "service_Backend.proto",
@@ -1613,6 +1654,8 @@ const (
 	Chat_GetChatRecord_FullMethodName    = "/pb.Chat/GetChatRecord"
 	Chat_UpdateChatRecord_FullMethodName = "/pb.Chat/UpdateChatRecord"
 	Chat_DeleteChatRecord_FullMethodName = "/pb.Chat/DeleteChatRecord"
+	Chat_GetTargetID_FullMethodName      = "/pb.Chat/GetTargetID"
+	Chat_GetLastMsg_FullMethodName       = "/pb.Chat/GetLastMsg"
 )
 
 // ChatClient is the client API for Chat service.
@@ -1624,6 +1667,8 @@ type ChatClient interface {
 	GetChatRecord(ctx context.Context, in *GetChatRecordRequest, opts ...grpc.CallOption) (*GetChatRecordResponse, error)
 	UpdateChatRecord(ctx context.Context, in *UpdateChatRecordRequest, opts ...grpc.CallOption) (*UpdateChatRecordResponse, error)
 	DeleteChatRecord(ctx context.Context, in *DeleteChatRecordRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GetTargetID(ctx context.Context, in *GetTargetIDRequest, opts ...grpc.CallOption) (*GetTargetIDResponse, error)
+	GetLastMsg(ctx context.Context, in *GetLastMsgRequest, opts ...grpc.CallOption) (*GetLastMsgResponse, error)
 }
 
 type chatClient struct {
@@ -1679,6 +1724,24 @@ func (c *chatClient) DeleteChatRecord(ctx context.Context, in *DeleteChatRecordR
 	return out, nil
 }
 
+func (c *chatClient) GetTargetID(ctx context.Context, in *GetTargetIDRequest, opts ...grpc.CallOption) (*GetTargetIDResponse, error) {
+	out := new(GetTargetIDResponse)
+	err := c.cc.Invoke(ctx, Chat_GetTargetID_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatClient) GetLastMsg(ctx context.Context, in *GetLastMsgRequest, opts ...grpc.CallOption) (*GetLastMsgResponse, error) {
+	out := new(GetLastMsgResponse)
+	err := c.cc.Invoke(ctx, Chat_GetLastMsg_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ChatServer is the server API for Chat service.
 // All implementations must embed UnimplementedChatServer
 // for forward compatibility
@@ -1688,6 +1751,8 @@ type ChatServer interface {
 	GetChatRecord(context.Context, *GetChatRecordRequest) (*GetChatRecordResponse, error)
 	UpdateChatRecord(context.Context, *UpdateChatRecordRequest) (*UpdateChatRecordResponse, error)
 	DeleteChatRecord(context.Context, *DeleteChatRecordRequest) (*emptypb.Empty, error)
+	GetTargetID(context.Context, *GetTargetIDRequest) (*GetTargetIDResponse, error)
+	GetLastMsg(context.Context, *GetLastMsgRequest) (*GetLastMsgResponse, error)
 	mustEmbedUnimplementedChatServer()
 }
 
@@ -1709,6 +1774,12 @@ func (UnimplementedChatServer) UpdateChatRecord(context.Context, *UpdateChatReco
 }
 func (UnimplementedChatServer) DeleteChatRecord(context.Context, *DeleteChatRecordRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteChatRecord not implemented")
+}
+func (UnimplementedChatServer) GetTargetID(context.Context, *GetTargetIDRequest) (*GetTargetIDResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTargetID not implemented")
+}
+func (UnimplementedChatServer) GetLastMsg(context.Context, *GetLastMsgRequest) (*GetLastMsgResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLastMsg not implemented")
 }
 func (UnimplementedChatServer) mustEmbedUnimplementedChatServer() {}
 
@@ -1813,6 +1884,42 @@ func _Chat_DeleteChatRecord_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Chat_GetTargetID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTargetIDRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).GetTargetID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_GetTargetID_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).GetTargetID(ctx, req.(*GetTargetIDRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Chat_GetLastMsg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLastMsgRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).GetLastMsg(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_GetLastMsg_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).GetLastMsg(ctx, req.(*GetLastMsgRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Chat_ServiceDesc is the grpc.ServiceDesc for Chat service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1839,6 +1946,14 @@ var Chat_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteChatRecord",
 			Handler:    _Chat_DeleteChatRecord_Handler,
+		},
+		{
+			MethodName: "GetTargetID",
+			Handler:    _Chat_GetTargetID_Handler,
+		},
+		{
+			MethodName: "GetLastMsg",
+			Handler:    _Chat_GetLastMsg_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

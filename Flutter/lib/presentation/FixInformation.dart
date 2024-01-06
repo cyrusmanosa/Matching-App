@@ -2,6 +2,7 @@ import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/rpc_fix.pb.dart';
+import 'package:dating_your_date/pb/rpc_session.pb.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
@@ -73,8 +74,13 @@ class _FixInformationState extends State<FixInformation> {
       );
       try {
         final response = await GrpcInfoService.client.createFix(request);
+        await globalSession.write(key: 'SessionId', value: response.sessionsID);
+        // take user id
+        String? apiKeyS = await globalSession.read(key: 'SessionId');
+        final useridRequest = GetUserIDRequest(sessionID: apiKeyS);
+        final useridResponse = await GrpcInfoService.client.getUserID(useridRequest);
+        await globalUserId.write(key: 'UserID', value: '${useridResponse.userID}');
         onTapNextPage(context);
-        globalSessionID = response.sessionsID;
       } on GrpcError catch (e) {
         showErrorDialog(context, "Error: ${e.codeName}");
       }

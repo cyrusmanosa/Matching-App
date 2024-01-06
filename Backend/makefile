@@ -1,4 +1,5 @@
-DB_URL = postgresql://root:secret@localhost:5432/dating_date_info?sslmode=disable
+DB_INFO_URL = postgresql://root:secret@localhost:5432/dating_date_info?sslmode=disable
+DB_CHAT_URL = postgresql://root:secret@localhost:5432/dating_date_chat?sslmode=disable
 
 # 建立PSQL
 dockernetwork:
@@ -30,24 +31,28 @@ createmigrate_chat:
 
 # info 
 info_migrateup:
-	migrate -path db/migration/info -database "${DB_URL}" -verbose up
+	migrate -path db/migration/info -database "${DB_INFO_URL}" -verbose up
 info_migratedown:
-	migrate -path db/migration/info -database "${DB_URL}" -verbose down
+	migrate -path db/migration/info -database "${DB_INFO_URL}" -verbose down
 info_migrateup1:
-	migrate -path db/migration/info -database "${DB_URL}" -verbose up 1
+	migrate -path db/migration/info -database "${DB_INFO_URL}" -verbose up 1
 info_migratedown1:
-	migrate -path db/migration/info -database "${DB_URL}" -verbose down 1
+	migrate -path db/migration/info -database "${DB_INFO_URL}" -verbose down 1
 info_migrateup2:
-	migrate -path db/migration/info -database "${DB_URL}" -verbose up 2
+	migrate -path db/migration/info -database "${DB_INFO_URL}" -verbose up 2
 info_migratedown2:
-	migrate -path db/migration/info -database "${DB_URL}" -verbose down 2
+	migrate -path db/migration/info -database "${DB_INFO_URL}" -verbose down 2
 
 
 # chat 
 chat_migrateup:
-	migrate -path db/migration/chat -database "postgresql://root:secret@localhost:5432/dating_date_chat?sslmode=disable" -verbose up
+	migrate -path db/migration/chat -database "${DB_CHAT_URL}" -verbose up
 chat_migratedown:
-	migrate -path db/migration/chat -database "postgresql://root:secret@localhost:5432/dating_date_chat?sslmode=disable" -verbose down
+	migrate -path db/migration/chat -database "${DB_CHAT_URL}" -verbose down
+chat_migrateup1:
+	migrate -path db/migration/chat -database "${DB_CHAT_URL}" -verbose up 1
+chat_migratedown1:
+	migrate -path db/migration/chat -database "${DB_CHAT_URL}" -verbose down 1
 
 sqlc:
 	sqlc generate
@@ -96,4 +101,4 @@ resetdb:
 
 .PHONY: dockernetwork postgres createdb_info dropdb_info createdb_chat dropdb_chat test sqlc server 
 		createmigrate_info info_migrateup info_migrateup1 info_migrateup2 info_migratedown info_migratedown1 info_migratedown2
-		createmigrate_chat chat_migrateup chat_migratedown mock db_docs db_schema protob resetdb
+		createmigrate_chat chat_migrateup chat_migratedown chat_migrateup1 chat_migratedown1 mock db_docs db_schema protob resetdb

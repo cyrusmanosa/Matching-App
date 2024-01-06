@@ -45,3 +45,9 @@ message UpdateAccompanyRequest {
 message UpdateAccompanyResponse {
     Accompany ac = 1;
 }
+
+// Delete
+message DeleteAccompanyRequest {
+    string SessionID = 1; 
+}
+ 

@@ -25,9 +25,10 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
 
   // Http
   void resetPasswordHttpRequest(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
     var url = "http://127.0.0.1:8080/ChangePassword";
     var requestBody = {
-      "session_id": globalSessionID,
+      "session_id": apiKeyS,
       "password": newPasswordSetupController.text,
     };
     var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
@@ -38,8 +39,9 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
 
   // Grpc
   void resetPasswordGrpcRequest(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
     final request = ResetPasswordRequest(
-      sessionID: globalSessionID,
+      sessionID: apiKeyS,
       password: newPasswordSetupController.text,
     );
     final response = await GrpcInfoService.client.resetPassword(request);

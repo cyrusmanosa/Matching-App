@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'accompany.pb.dart' as $15;
+import 'accompany.pb.dart' as $17;
 
 /// Create
 class CreateAccompanyRequest extends $pb.GeneratedMessage {
@@ -180,7 +180,7 @@ class CreateAccompanyRequest extends $pb.GeneratedMessage {
 
 class CreateAccompanyResponse extends $pb.GeneratedMessage {
   factory CreateAccompanyResponse({
-    $15.Accompany? ac,
+    $17.Accompany? ac,
   }) {
     final $result = create();
     if (ac != null) {
@@ -193,7 +193,7 @@ class CreateAccompanyResponse extends $pb.GeneratedMessage {
   factory CreateAccompanyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateAccompanyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$15.Accompany>(1, _omitFieldNames ? '' : 'ac', subBuilder: $15.Accompany.create)
+    ..aOM<$17.Accompany>(1, _omitFieldNames ? '' : 'ac', subBuilder: $17.Accompany.create)
     ..hasRequiredFields = false
   ;
 
@@ -219,15 +219,15 @@ class CreateAccompanyResponse extends $pb.GeneratedMessage {
   static CreateAccompanyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $15.Accompany get ac => $_getN(0);
+  $17.Accompany get ac => $_getN(0);
   @$pb.TagNumber(1)
-  set ac($15.Accompany v) { setField(1, v); }
+  set ac($17.Accompany v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAc() => $_has(0);
   @$pb.TagNumber(1)
   void clearAc() => clearField(1);
   @$pb.TagNumber(1)
-  $15.Accompany ensureAc() => $_ensure(0);
+  $17.Accompany ensureAc() => $_ensure(0);
 }
 
 /// Get
@@ -283,7 +283,7 @@ class GetAccompanyRequest extends $pb.GeneratedMessage {
 
 class GetAccompanyResponse extends $pb.GeneratedMessage {
   factory GetAccompanyResponse({
-    $15.Accompany? ac,
+    $17.Accompany? ac,
   }) {
     final $result = create();
     if (ac != null) {
@@ -296,7 +296,7 @@ class GetAccompanyResponse extends $pb.GeneratedMessage {
   factory GetAccompanyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetAccompanyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$15.Accompany>(1, _omitFieldNames ? '' : 'ac', subBuilder: $15.Accompany.create)
+    ..aOM<$17.Accompany>(1, _omitFieldNames ? '' : 'ac', subBuilder: $17.Accompany.create)
     ..hasRequiredFields = false
   ;
 
@@ -322,15 +322,15 @@ class GetAccompanyResponse extends $pb.GeneratedMessage {
   static GetAccompanyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $15.Accompany get ac => $_getN(0);
+  $17.Accompany get ac => $_getN(0);
   @$pb.TagNumber(1)
-  set ac($15.Accompany v) { setField(1, v); }
+  set ac($17.Accompany v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAc() => $_has(0);
   @$pb.TagNumber(1)
   void clearAc() => clearField(1);
   @$pb.TagNumber(1)
-  $15.Accompany ensureAc() => $_ensure(0);
+  $17.Accompany ensureAc() => $_ensure(0);
 }
 
 /// Update
@@ -498,7 +498,7 @@ class UpdateAccompanyRequest extends $pb.GeneratedMessage {
 
 class UpdateAccompanyResponse extends $pb.GeneratedMessage {
   factory UpdateAccompanyResponse({
-    $15.Accompany? ac,
+    $17.Accompany? ac,
   }) {
     final $result = create();
     if (ac != null) {
@@ -511,7 +511,7 @@ class UpdateAccompanyResponse extends $pb.GeneratedMessage {
   factory UpdateAccompanyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateAccompanyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$15.Accompany>(1, _omitFieldNames ? '' : 'ac', subBuilder: $15.Accompany.create)
+    ..aOM<$17.Accompany>(1, _omitFieldNames ? '' : 'ac', subBuilder: $17.Accompany.create)
     ..hasRequiredFields = false
   ;
 
@@ -537,15 +537,66 @@ class UpdateAccompanyResponse extends $pb.GeneratedMessage {
   static UpdateAccompanyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $15.Accompany get ac => $_getN(0);
+  $17.Accompany get ac => $_getN(0);
   @$pb.TagNumber(1)
-  set ac($15.Accompany v) { setField(1, v); }
+  set ac($17.Accompany v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAc() => $_has(0);
   @$pb.TagNumber(1)
   void clearAc() => clearField(1);
   @$pb.TagNumber(1)
-  $15.Accompany ensureAc() => $_ensure(0);
+  $17.Accompany ensureAc() => $_ensure(0);
+}
+
+/// Delete
+class DeleteAccompanyRequest extends $pb.GeneratedMessage {
+  factory DeleteAccompanyRequest({
+    $core.String? sessionID,
+  }) {
+    final $result = create();
+    if (sessionID != null) {
+      $result.sessionID = sessionID;
+    }
+    return $result;
+  }
+  DeleteAccompanyRequest._() : super();
+  factory DeleteAccompanyRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DeleteAccompanyRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteAccompanyRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DeleteAccompanyRequest clone() => DeleteAccompanyRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DeleteAccompanyRequest copyWith(void Function(DeleteAccompanyRequest) updates) => super.copyWith((message) => updates(message as DeleteAccompanyRequest)) as DeleteAccompanyRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeleteAccompanyRequest create() => DeleteAccompanyRequest._();
+  DeleteAccompanyRequest createEmptyInstance() => create();
+  static $pb.PbList<DeleteAccompanyRequest> createRepeated() => $pb.PbList<DeleteAccompanyRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteAccompanyRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteAccompanyRequest>(create);
+  static DeleteAccompanyRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get sessionID => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set sessionID($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSessionID() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSessionID() => clearField(1);
 }
 
 

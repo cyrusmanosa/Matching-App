@@ -13,18 +13,19 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'targetList.pb.dart' as $24;
+import 'targetList.pb.dart' as $27;
 
+/// Create
 class CreateTargetListRequest extends $pb.GeneratedMessage {
   factory CreateTargetListRequest({
-    $core.int? userID,
+    $core.String? sessionID,
     $core.int? target1ID,
     $core.int? target2ID,
     $core.int? target3ID,
   }) {
     final $result = create();
-    if (userID != null) {
-      $result.userID = userID;
+    if (sessionID != null) {
+      $result.sessionID = sessionID;
     }
     if (target1ID != null) {
       $result.target1ID = target1ID;
@@ -42,7 +43,7 @@ class CreateTargetListRequest extends $pb.GeneratedMessage {
   factory CreateTargetListRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateTargetListRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'UserID', $pb.PbFieldType.O3, protoName: 'UserID')
+    ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'Target1ID', $pb.PbFieldType.O3, protoName: 'Target1ID')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'Target2ID', $pb.PbFieldType.O3, protoName: 'Target2ID')
     ..a<$core.int>(4, _omitFieldNames ? '' : 'Target3ID', $pb.PbFieldType.O3, protoName: 'Target3ID')
@@ -71,13 +72,13 @@ class CreateTargetListRequest extends $pb.GeneratedMessage {
   static CreateTargetListRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get userID => $_getIZ(0);
+  $core.String get sessionID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set userID($core.int v) { $_setSignedInt32(0, v); }
+  set sessionID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasUserID() => $_has(0);
+  $core.bool hasSessionID() => $_has(0);
   @$pb.TagNumber(1)
-  void clearUserID() => clearField(1);
+  void clearSessionID() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.int get target1ID => $_getIZ(1);
@@ -109,7 +110,7 @@ class CreateTargetListRequest extends $pb.GeneratedMessage {
 
 class CreateTargetListResponse extends $pb.GeneratedMessage {
   factory CreateTargetListResponse({
-    $24.Targetlist? tl,
+    $27.Targetlist? tl,
   }) {
     final $result = create();
     if (tl != null) {
@@ -122,7 +123,7 @@ class CreateTargetListResponse extends $pb.GeneratedMessage {
   factory CreateTargetListResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateTargetListResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$24.Targetlist>(1, _omitFieldNames ? '' : 'tl', subBuilder: $24.Targetlist.create)
+    ..aOM<$27.Targetlist>(1, _omitFieldNames ? '' : 'tl', subBuilder: $27.Targetlist.create)
     ..hasRequiredFields = false
   ;
 
@@ -148,24 +149,25 @@ class CreateTargetListResponse extends $pb.GeneratedMessage {
   static CreateTargetListResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $24.Targetlist get tl => $_getN(0);
+  $27.Targetlist get tl => $_getN(0);
   @$pb.TagNumber(1)
-  set tl($24.Targetlist v) { setField(1, v); }
+  set tl($27.Targetlist v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTl() => $_has(0);
   @$pb.TagNumber(1)
   void clearTl() => clearField(1);
   @$pb.TagNumber(1)
-  $24.Targetlist ensureTl() => $_ensure(0);
+  $27.Targetlist ensureTl() => $_ensure(0);
 }
 
+/// Get
 class GetTargetListRequest extends $pb.GeneratedMessage {
   factory GetTargetListRequest({
-    $core.int? userID,
+    $core.String? sessionID,
   }) {
     final $result = create();
-    if (userID != null) {
-      $result.userID = userID;
+    if (sessionID != null) {
+      $result.sessionID = sessionID;
     }
     return $result;
   }
@@ -174,7 +176,7 @@ class GetTargetListRequest extends $pb.GeneratedMessage {
   factory GetTargetListRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetTargetListRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'UserID', $pb.PbFieldType.O3, protoName: 'UserID')
+    ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
     ..hasRequiredFields = false
   ;
 
@@ -200,18 +202,18 @@ class GetTargetListRequest extends $pb.GeneratedMessage {
   static GetTargetListRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get userID => $_getIZ(0);
+  $core.String get sessionID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set userID($core.int v) { $_setSignedInt32(0, v); }
+  set sessionID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasUserID() => $_has(0);
+  $core.bool hasSessionID() => $_has(0);
   @$pb.TagNumber(1)
-  void clearUserID() => clearField(1);
+  void clearSessionID() => clearField(1);
 }
 
 class GetTargetListResponse extends $pb.GeneratedMessage {
   factory GetTargetListResponse({
-    $24.Targetlist? tl,
+    $27.Targetlist? tl,
   }) {
     final $result = create();
     if (tl != null) {
@@ -224,7 +226,7 @@ class GetTargetListResponse extends $pb.GeneratedMessage {
   factory GetTargetListResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetTargetListResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$24.Targetlist>(1, _omitFieldNames ? '' : 'tl', subBuilder: $24.Targetlist.create)
+    ..aOM<$27.Targetlist>(1, _omitFieldNames ? '' : 'tl', subBuilder: $27.Targetlist.create)
     ..hasRequiredFields = false
   ;
 
@@ -250,27 +252,28 @@ class GetTargetListResponse extends $pb.GeneratedMessage {
   static GetTargetListResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $24.Targetlist get tl => $_getN(0);
+  $27.Targetlist get tl => $_getN(0);
   @$pb.TagNumber(1)
-  set tl($24.Targetlist v) { setField(1, v); }
+  set tl($27.Targetlist v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTl() => $_has(0);
   @$pb.TagNumber(1)
   void clearTl() => clearField(1);
   @$pb.TagNumber(1)
-  $24.Targetlist ensureTl() => $_ensure(0);
+  $27.Targetlist ensureTl() => $_ensure(0);
 }
 
+/// Update
 class UpdateTargetListRequest extends $pb.GeneratedMessage {
   factory UpdateTargetListRequest({
-    $core.int? userID,
+    $core.String? sessionID,
     $core.int? target1ID,
     $core.int? target2ID,
     $core.int? target3ID,
   }) {
     final $result = create();
-    if (userID != null) {
-      $result.userID = userID;
+    if (sessionID != null) {
+      $result.sessionID = sessionID;
     }
     if (target1ID != null) {
       $result.target1ID = target1ID;
@@ -288,7 +291,7 @@ class UpdateTargetListRequest extends $pb.GeneratedMessage {
   factory UpdateTargetListRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateTargetListRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'UserID', $pb.PbFieldType.O3, protoName: 'UserID')
+    ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'Target1ID', $pb.PbFieldType.O3, protoName: 'Target1ID')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'Target2ID', $pb.PbFieldType.O3, protoName: 'Target2ID')
     ..a<$core.int>(4, _omitFieldNames ? '' : 'Target3ID', $pb.PbFieldType.O3, protoName: 'Target3ID')
@@ -317,13 +320,13 @@ class UpdateTargetListRequest extends $pb.GeneratedMessage {
   static UpdateTargetListRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get userID => $_getIZ(0);
+  $core.String get sessionID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set userID($core.int v) { $_setSignedInt32(0, v); }
+  set sessionID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasUserID() => $_has(0);
+  $core.bool hasSessionID() => $_has(0);
   @$pb.TagNumber(1)
-  void clearUserID() => clearField(1);
+  void clearSessionID() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.int get target1ID => $_getIZ(1);
@@ -355,7 +358,7 @@ class UpdateTargetListRequest extends $pb.GeneratedMessage {
 
 class UpdateTargetListResponse extends $pb.GeneratedMessage {
   factory UpdateTargetListResponse({
-    $24.Targetlist? tl,
+    $27.Targetlist? tl,
   }) {
     final $result = create();
     if (tl != null) {
@@ -368,7 +371,7 @@ class UpdateTargetListResponse extends $pb.GeneratedMessage {
   factory UpdateTargetListResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateTargetListResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$24.Targetlist>(1, _omitFieldNames ? '' : 'tl', subBuilder: $24.Targetlist.create)
+    ..aOM<$27.Targetlist>(1, _omitFieldNames ? '' : 'tl', subBuilder: $27.Targetlist.create)
     ..hasRequiredFields = false
   ;
 
@@ -394,15 +397,66 @@ class UpdateTargetListResponse extends $pb.GeneratedMessage {
   static UpdateTargetListResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $24.Targetlist get tl => $_getN(0);
+  $27.Targetlist get tl => $_getN(0);
   @$pb.TagNumber(1)
-  set tl($24.Targetlist v) { setField(1, v); }
+  set tl($27.Targetlist v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTl() => $_has(0);
   @$pb.TagNumber(1)
   void clearTl() => clearField(1);
   @$pb.TagNumber(1)
-  $24.Targetlist ensureTl() => $_ensure(0);
+  $27.Targetlist ensureTl() => $_ensure(0);
+}
+
+/// Delete
+class DeleteTargetListRequest extends $pb.GeneratedMessage {
+  factory DeleteTargetListRequest({
+    $core.String? sessionID,
+  }) {
+    final $result = create();
+    if (sessionID != null) {
+      $result.sessionID = sessionID;
+    }
+    return $result;
+  }
+  DeleteTargetListRequest._() : super();
+  factory DeleteTargetListRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DeleteTargetListRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteTargetListRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DeleteTargetListRequest clone() => DeleteTargetListRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DeleteTargetListRequest copyWith(void Function(DeleteTargetListRequest) updates) => super.copyWith((message) => updates(message as DeleteTargetListRequest)) as DeleteTargetListRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeleteTargetListRequest create() => DeleteTargetListRequest._();
+  DeleteTargetListRequest createEmptyInstance() => create();
+  static $pb.PbList<DeleteTargetListRequest> createRepeated() => $pb.PbList<DeleteTargetListRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteTargetListRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteTargetListRequest>(create);
+  static DeleteTargetListRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get sessionID => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set sessionID($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSessionID() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSessionID() => clearField(1);
 }
 
 

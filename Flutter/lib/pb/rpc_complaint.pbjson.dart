@@ -97,3 +97,15 @@ final $typed_data.Uint8List updateComplaintResponseDescriptor = $convert.base64D
     'ChdVcGRhdGVDb21wbGFpbnRSZXNwb25zZRIdCgJjcBgBIAEoCzINLnBiLkNvbXBsYWludFICY3'
     'A=');
 
+@$core.Deprecated('Use deleteComplaintRequestDescriptor instead')
+const DeleteComplaintRequest$json = {
+  '1': 'DeleteComplaintRequest',
+  '2': [
+    {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
+  ],
+};
+
+/// Descriptor for `DeleteComplaintRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteComplaintRequestDescriptor = $convert.base64Decode(
+    'ChZEZWxldGVDb21wbGFpbnRSZXF1ZXN0EhwKCVNlc3Npb25JRBgBIAEoCVIJU2Vzc2lvbklE');
+

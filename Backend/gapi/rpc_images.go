@@ -56,7 +56,6 @@ func (server *Server) CreateImages(ctx context.Context, req *pb.CreateImagesRequ
 }
 
 func (server *Server) GetImages(ctx context.Context, req *pb.GetImagesRequest) (*pb.GetImagesResponse, error) {
-
 	Gid, err := uuid.Parse(req.GetSessionID())
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
@@ -72,7 +71,7 @@ func (server *Server) GetImages(ctx context.Context, req *pb.GetImagesRequest) (
 		return nil, fmt.Errorf("invalid access token: %v", err)
 	}
 
-	images, err := server.infoStore.GetUserimageData(ctx, token.UserID)
+	images, err := server.infoStore.GetUserimageData(ctx, req.GetUserID())
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {

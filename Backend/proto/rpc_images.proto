@@ -22,7 +22,8 @@ message CreateImagesResponse {
 
 // Get
 message GetImagesRequest {
-    string SessionID = 1; 
+    string SessionID = 1;
+    int32 UserID = 2; 
 }
 
 message GetImagesResponse {

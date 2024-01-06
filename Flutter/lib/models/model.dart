@@ -2,7 +2,10 @@
 
 library user;
 
-String globalSessionID = "";
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+final globalSession = const FlutterSecureStorage();
+final globalUserId = const FlutterSecureStorage();
 
 final Map<String, String> gender = {
   '男性': "M",

@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $14;
+import 'google/protobuf/timestamp.pb.dart' as $16;
 
 class ChangeTarget extends $pb.GeneratedMessage {
   factory ChangeTarget({
@@ -21,7 +21,7 @@ class ChangeTarget extends $pb.GeneratedMessage {
     $core.int? changeUserID,
     $core.String? reason,
     $core.int? frequency,
-    $14.Timestamp? changeTime,
+    $16.Timestamp? changeTime,
   }) {
     final $result = create();
     if (userID != null) {
@@ -50,7 +50,7 @@ class ChangeTarget extends $pb.GeneratedMessage {
     ..a<$core.int>(2, _omitFieldNames ? '' : 'ChangeUserID', $pb.PbFieldType.O3, protoName: 'ChangeUserID')
     ..aOS(3, _omitFieldNames ? '' : 'Reason', protoName: 'Reason')
     ..a<$core.int>(4, _omitFieldNames ? '' : 'Frequency', $pb.PbFieldType.O3, protoName: 'Frequency')
-    ..aOM<$14.Timestamp>(5, _omitFieldNames ? '' : 'ChangeTime', protoName: 'ChangeTime', subBuilder: $14.Timestamp.create)
+    ..aOM<$16.Timestamp>(5, _omitFieldNames ? '' : 'ChangeTime', protoName: 'ChangeTime', subBuilder: $16.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -112,15 +112,15 @@ class ChangeTarget extends $pb.GeneratedMessage {
   void clearFrequency() => clearField(4);
 
   @$pb.TagNumber(5)
-  $14.Timestamp get changeTime => $_getN(4);
+  $16.Timestamp get changeTime => $_getN(4);
   @$pb.TagNumber(5)
-  set changeTime($14.Timestamp v) { setField(5, v); }
+  set changeTime($16.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasChangeTime() => $_has(4);
   @$pb.TagNumber(5)
   void clearChangeTime() => clearField(5);
   @$pb.TagNumber(5)
-  $14.Timestamp ensureChangeTime() => $_ensure(4);
+  $16.Timestamp ensureChangeTime() => $_ensure(4);
 }
 
 

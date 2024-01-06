@@ -8,8 +8,10 @@ option go_package = "Backend/pb";
 
 message ChatRecord{
     int32 TargetID = 1;
-    string MsgType = 2;
-    string Message = 3;
-    string Images = 4;
-    google.protobuf.Timestamp CreatedAt = 5;
+    string RoleType = 2;
+    string MediaType = 3;
+    string Message = 4;
+    string Media = 5;
+    bool Isread = 6;
+    google.protobuf.Timestamp CreatedAt = 7;
 }

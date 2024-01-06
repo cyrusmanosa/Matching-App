@@ -143,22 +143,22 @@ func convertChat(chat ch.Record) *pb.ChatRecord {
 		MediaType: chat.MediaType,
 		Message:   chat.Message,
 		Media:     chat.Media,
+		Isread:    chat.Isread,
 		CreatedAt: timestamppb.New(chat.CreatedAt),
 	}
 }
 
-func convertChatList(chats []ch.Record) []*pb.ChatRecord {
-	pbChats := make([]*pb.ChatRecord, len(chats))
+func convertChatList(chats []ch.Record) []*pb.ChatRecordNoID {
+	pbChats := make([]*pb.ChatRecordNoID, len(chats))
 
 	for i, chat := range chats {
-		pbChats[i] = &pb.ChatRecord{
-			TargetID:  chat.TargetID,
+		pbChats[i] = &pb.ChatRecordNoID{
 			MediaType: chat.MediaType,
 			Message:   chat.Message,
 			Media:     chat.Media,
+			Isread:    chat.Isread,
 			CreatedAt: timestamppb.New(chat.CreatedAt),
 		}
 	}
-
 	return pbChats
 }

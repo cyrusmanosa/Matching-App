@@ -387,6 +387,7 @@
     },
     "/v1/Create_Payment": {
       "post": {
+        "summary": "Payment",
         "operationId": "Information_CreatePayment",
         "responses": {
           "200": {
@@ -568,6 +569,20 @@
             "required": false,
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "name": "TargetID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "CreateAt",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
           }
         ],
         "tags": [
@@ -752,6 +767,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "UserID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "tags": [
@@ -816,6 +838,37 @@
           },
           {
             "name": "TargetID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Chat"
+        ]
+      }
+    },
+    "/v1/Get_ChatTargetID": {
+      "get": {
+        "operationId": "Chat_GetTargetID",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetTargetIDResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "UserID",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -947,10 +1000,55 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "UserID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "tags": [
           "Information"
+        ]
+      }
+    },
+    "/v1/Get_LastMsg": {
+      "get": {
+        "operationId": "Chat_GetLastMsg",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetLastMsgResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "UserID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "TargetID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Chat"
         ]
       }
     },
@@ -1022,6 +1120,37 @@
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/pbGetTargetListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Get_UserID": {
+      "get": {
+        "summary": "Session",
+        "operationId": "Information_GetUserID",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetUserIDResponse"
             }
           },
           "default": {
@@ -1625,6 +1754,33 @@
         "Media": {
           "type": "string"
         },
+        "Isread": {
+          "type": "boolean"
+        },
+        "CreatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pbChatRecordNoID": {
+      "type": "object",
+      "properties": {
+        "RoleType": {
+          "type": "string"
+        },
+        "MediaType": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "Media": {
+          "type": "string"
+        },
+        "Isread": {
+          "type": "boolean"
+        },
         "CreatedAt": {
           "type": "string",
           "format": "date-time"
@@ -2162,11 +2318,11 @@
     "pbGetChatRecordResponse": {
       "type": "object",
       "properties": {
-        "ChatRecord": {
+        "ChatRecordNoID": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/pbChatRecord"
+            "$ref": "#/definitions/pbChatRecordNoID"
           }
         }
       }
@@ -2228,6 +2384,20 @@
         }
       }
     },
+    "pbGetLastMsgResponse": {
+      "type": "object",
+      "properties": {
+        "MediaType": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "Isread": {
+          "type": "boolean"
+        }
+      }
+    },
     "pbGetLoverResponse": {
       "type": "object",
       "properties": {
@@ -2244,11 +2414,32 @@
         }
       }
     },
+    "pbGetTargetIDResponse": {
+      "type": "object",
+      "properties": {
+        "TargetID": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    },
     "pbGetTargetListResponse": {
       "type": "object",
       "properties": {
         "tl": {
           "$ref": "#/definitions/pbTargetlist"
+        }
+      }
+    },
+    "pbGetUserIDResponse": {
+      "type": "object",
+      "properties": {
+        "UserID": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

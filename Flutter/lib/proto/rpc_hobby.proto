@@ -51,3 +51,9 @@ message UpdateHobbyRequest {
 message UpdateHobbyResponse {
     Hobby h = 1;
 }
+
+// Delete
+message DeleteHobbyRequest {
+    string SessionID = 1; 
+}
+ 

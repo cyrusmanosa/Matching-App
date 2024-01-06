@@ -39,9 +39,8 @@ class EmailConfirmation extends StatelessWidget {
         final request = CheckEmailRequest(email: emailController.text);
         await GrpcInfoService.client.checkEmail(request);
         onTapNextPage(context);
-      } on GrpcError catch (e) {
-        if (e.code == 6) showErrorDialog(context, "このメールアドレスは登録できません。");
-        showErrorDialog(context, "Error: ${e.codeName}");
+      } on GrpcError {
+        showErrorDialog(context, "このメールアドレスは登録できません。");
       }
     }
   }

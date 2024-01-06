@@ -1,0 +1,1 @@
+ALTER TABLE u1 DROP COLUMN "isread";

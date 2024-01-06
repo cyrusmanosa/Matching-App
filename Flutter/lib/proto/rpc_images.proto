@@ -8,37 +8,46 @@ option go_package = "Backend/pb";
 
 // Create 
 message CreateImagesRequest {
-    int32 UserID = 1;
+    string SessionID = 1; 
     string Qr = 2;
     string Img1 = 3;
     string Img2 = 4;
     string Img3 = 5;
     string Img4 = 6;
-    string Icon = 7;
+    string Img5 = 7;
 }
 message CreateImagesResponse {
-    Images img = 1;
+    Images Img = 1;
 }
 
 // Get
 message GetImagesRequest {
-    int32 UserID = 1;
+    string SessionID = 1;
+    int32 UserID = 2; 
 }
 
 message GetImagesResponse {
-    Images img = 1;
+    Images Img = 1;
 }
 
 // Updat
 message UpdateImagesRequest {
-    int32 UserID = 1;
+    string SessionID = 1; 
     string Qr = 2;
     string Img1 = 3;
     string Img2 = 4;
     string Img3 = 5;
     string Img4 = 6;
-    string Icon = 7;
+    string Img5 = 7;
 }
 message UpdateImagesResponse {
-    Images img = 1;
+    Images Img = 1;
+}
+
+// Delete
+message DeleteImagesRequest {
+    string SessionID = 1; 
+}
+message DeleteResponse {
+    string msg = 1;
 }

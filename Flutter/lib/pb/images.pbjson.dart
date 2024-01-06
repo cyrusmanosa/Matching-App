@@ -23,7 +23,7 @@ const Images$json = {
     {'1': 'Img2', '3': 4, '4': 1, '5': 9, '10': 'Img2'},
     {'1': 'Img3', '3': 5, '4': 1, '5': 9, '10': 'Img3'},
     {'1': 'Img4', '3': 6, '4': 1, '5': 9, '10': 'Img4'},
-    {'1': 'Icon', '3': 7, '4': 1, '5': 9, '10': 'Icon'},
+    {'1': 'img5', '3': 7, '4': 1, '5': 9, '10': 'img5'},
   ],
 };
 
@@ -31,5 +31,5 @@ const Images$json = {
 final $typed_data.Uint8List imagesDescriptor = $convert.base64Decode(
     'CgZJbWFnZXMSFgoGVXNlcklEGAEgASgFUgZVc2VySUQSDgoCUXIYAiABKAlSAlFyEhIKBEltZz'
     'EYAyABKAlSBEltZzESEgoESW1nMhgEIAEoCVIESW1nMhISCgRJbWczGAUgASgJUgRJbWczEhIK'
-    'BEltZzQYBiABKAlSBEltZzQSEgoESWNvbhgHIAEoCVIESWNvbg==');
+    'BEltZzQYBiABKAlSBEltZzQSEgoEaW1nNRgHIAEoCVIEaW1nNQ==');
 

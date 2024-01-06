@@ -29,9 +29,10 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
 
 // Http
   void createAccompanyHttpRequest(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
     var url = "http://127.0.0.1:8080/CreateAccompany";
     var requestBody = {
-      "session_id": globalSessionID,
+      "session_id": apiKeyS,
       "Era": accompanyEraController.text,
       "City": accompanyCityController.text,
       "Gender": accompanyGenderController.text,
@@ -50,8 +51,9 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
 
   // Grpc
   void createAccompanyGrpcRequest(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
     final request = CreateAccompanyRequest(
-      sessionID: globalSessionID,
+      sessionID: apiKeyS,
       era: int.parse(accompanyEraController.text),
       city: accompanyCityController.text,
       gender: accompanyGenderController.text,

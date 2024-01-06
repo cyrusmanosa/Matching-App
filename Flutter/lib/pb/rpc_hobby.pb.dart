@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'hobby.pb.dart' as $20;
+import 'hobby.pb.dart' as $23;
 
 /// Create
 class CreateHobbyRequest extends $pb.GeneratedMessage {
@@ -222,7 +222,7 @@ class CreateHobbyRequest extends $pb.GeneratedMessage {
 
 class CreateHobbyResponse extends $pb.GeneratedMessage {
   factory CreateHobbyResponse({
-    $20.Hobby? h,
+    $23.Hobby? h,
   }) {
     final $result = create();
     if (h != null) {
@@ -235,7 +235,7 @@ class CreateHobbyResponse extends $pb.GeneratedMessage {
   factory CreateHobbyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateHobbyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$20.Hobby>(1, _omitFieldNames ? '' : 'h', subBuilder: $20.Hobby.create)
+    ..aOM<$23.Hobby>(1, _omitFieldNames ? '' : 'h', subBuilder: $23.Hobby.create)
     ..hasRequiredFields = false
   ;
 
@@ -261,15 +261,15 @@ class CreateHobbyResponse extends $pb.GeneratedMessage {
   static CreateHobbyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $20.Hobby get h => $_getN(0);
+  $23.Hobby get h => $_getN(0);
   @$pb.TagNumber(1)
-  set h($20.Hobby v) { setField(1, v); }
+  set h($23.Hobby v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasH() => $_has(0);
   @$pb.TagNumber(1)
   void clearH() => clearField(1);
   @$pb.TagNumber(1)
-  $20.Hobby ensureH() => $_ensure(0);
+  $23.Hobby ensureH() => $_ensure(0);
 }
 
 /// Get
@@ -325,7 +325,7 @@ class GetHobbyRequest extends $pb.GeneratedMessage {
 
 class GetHobbyResponse extends $pb.GeneratedMessage {
   factory GetHobbyResponse({
-    $20.Hobby? h,
+    $23.Hobby? h,
   }) {
     final $result = create();
     if (h != null) {
@@ -338,7 +338,7 @@ class GetHobbyResponse extends $pb.GeneratedMessage {
   factory GetHobbyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetHobbyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$20.Hobby>(1, _omitFieldNames ? '' : 'h', subBuilder: $20.Hobby.create)
+    ..aOM<$23.Hobby>(1, _omitFieldNames ? '' : 'h', subBuilder: $23.Hobby.create)
     ..hasRequiredFields = false
   ;
 
@@ -364,15 +364,15 @@ class GetHobbyResponse extends $pb.GeneratedMessage {
   static GetHobbyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $20.Hobby get h => $_getN(0);
+  $23.Hobby get h => $_getN(0);
   @$pb.TagNumber(1)
-  set h($20.Hobby v) { setField(1, v); }
+  set h($23.Hobby v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasH() => $_has(0);
   @$pb.TagNumber(1)
   void clearH() => clearField(1);
   @$pb.TagNumber(1)
-  $20.Hobby ensureH() => $_ensure(0);
+  $23.Hobby ensureH() => $_ensure(0);
 }
 
 /// Update
@@ -582,7 +582,7 @@ class UpdateHobbyRequest extends $pb.GeneratedMessage {
 
 class UpdateHobbyResponse extends $pb.GeneratedMessage {
   factory UpdateHobbyResponse({
-    $20.Hobby? h,
+    $23.Hobby? h,
   }) {
     final $result = create();
     if (h != null) {
@@ -595,7 +595,7 @@ class UpdateHobbyResponse extends $pb.GeneratedMessage {
   factory UpdateHobbyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateHobbyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$20.Hobby>(1, _omitFieldNames ? '' : 'h', subBuilder: $20.Hobby.create)
+    ..aOM<$23.Hobby>(1, _omitFieldNames ? '' : 'h', subBuilder: $23.Hobby.create)
     ..hasRequiredFields = false
   ;
 
@@ -621,15 +621,66 @@ class UpdateHobbyResponse extends $pb.GeneratedMessage {
   static UpdateHobbyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $20.Hobby get h => $_getN(0);
+  $23.Hobby get h => $_getN(0);
   @$pb.TagNumber(1)
-  set h($20.Hobby v) { setField(1, v); }
+  set h($23.Hobby v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasH() => $_has(0);
   @$pb.TagNumber(1)
   void clearH() => clearField(1);
   @$pb.TagNumber(1)
-  $20.Hobby ensureH() => $_ensure(0);
+  $23.Hobby ensureH() => $_ensure(0);
+}
+
+/// Delete
+class DeleteHobbyRequest extends $pb.GeneratedMessage {
+  factory DeleteHobbyRequest({
+    $core.String? sessionID,
+  }) {
+    final $result = create();
+    if (sessionID != null) {
+      $result.sessionID = sessionID;
+    }
+    return $result;
+  }
+  DeleteHobbyRequest._() : super();
+  factory DeleteHobbyRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DeleteHobbyRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteHobbyRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DeleteHobbyRequest clone() => DeleteHobbyRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DeleteHobbyRequest copyWith(void Function(DeleteHobbyRequest) updates) => super.copyWith((message) => updates(message as DeleteHobbyRequest)) as DeleteHobbyRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeleteHobbyRequest create() => DeleteHobbyRequest._();
+  DeleteHobbyRequest createEmptyInstance() => create();
+  static $pb.PbList<DeleteHobbyRequest> createRepeated() => $pb.PbList<DeleteHobbyRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteHobbyRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteHobbyRequest>(create);
+  static DeleteHobbyRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get sessionID => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set sessionID($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSessionID() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSessionID() => clearField(1);
 }
 
 

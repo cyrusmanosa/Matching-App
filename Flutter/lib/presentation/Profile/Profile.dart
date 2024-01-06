@@ -4,6 +4,7 @@ import 'package:dating_your_date/pb/canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/presentation/ProfileEdit.dart';
 import 'package:dating_your_date/widgets/Custom_WarningMsgBox.dart';
+import 'package:grpc/grpc.dart';
 import 'widgets/showDataBar.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
@@ -14,13 +15,19 @@ class Profile extends StatelessWidget {
 
   // Grpc
   Future<CanChange> getCanChangeGrpcRequest(BuildContext context) async {
-    final request = GetCanChangeRequest(sessionID: globalSessionID);
-    final response = await GrpcInfoService.client.getCanChange(request);
-    // ignore: unnecessary_null_comparison
-    if (response == null) {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
+
+    try {
+      final request = GetCanChangeRequest(sessionID: apiKeyS, userID: userid);
+      await GrpcInfoService.client.getCanChange(request);
+      final response = await GrpcInfoService.client.getCanChange(request);
+      return response.canChangeInfo;
+    } on GrpcError {
       showErrorDialog(context, "Error: validatable input data");
+      throw Exception("Error occurred while fetching canChangeInfo.");
     }
-    return response.canChangeInfo;
   }
 
   @override

@@ -30,8 +30,9 @@ class _AccompanyConditionRepairState extends State<AccompanyConditionRepair> {
 // Http
   void updateAccompanyHttpRequest(BuildContext context) async {
     var url = "http://127.0.0.1:8080/UpdateAccompany";
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
     var requestBody = {
-      "session_id": globalSessionID,
+      "session_id": apiKeyS,
       "Era": resetAccompanyEraController.text,
       "City": resetAccompanyCityController.text,
       "Gender": resetAccompanyGenderController.text,
@@ -50,8 +51,9 @@ class _AccompanyConditionRepairState extends State<AccompanyConditionRepair> {
 
   // Grpc
   void createAccompanyGrpcRequest(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
     final request = UpdateAccompanyRequest(
-      sessionID: globalSessionID,
+      sessionID: apiKeyS,
       era: int.parse(resetAccompanyEraController.text),
       city: resetAccompanyCityController.text,
       gender: resetAccompanyGenderController.text,

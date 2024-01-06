@@ -23,9 +23,10 @@ class _PasswordSetupState extends State<PasswordSetup> {
 
   // Http
   void inputPasswordHttpRequest(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
     var url = "http://127.0.0.1:8080/InputPassword";
     var requestBody = {
-      "session_id": globalSessionID,
+      "session_id": apiKeyS,
       "password": passwordSetupController.text,
     };
     var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
@@ -43,8 +44,9 @@ class _PasswordSetupState extends State<PasswordSetup> {
     } else if (passwordSetupController.text.length < 8) {
       showErrorDialog(context, "パスワードの長さは 8 以上です。");
     } else {
+      String? apiKeyS = await globalSession.read(key: 'SessionId');
       try {
-        final request = InputPasswordRequest(sessionID: globalSessionID, password: passwordSetupController.text);
+        final request = InputPasswordRequest(sessionID: apiKeyS, password: passwordSetupController.text);
         await GrpcInfoService.client.inputPassword(request);
         onTapNextPage(context);
       } on GrpcError catch (e) {

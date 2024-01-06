@@ -52,17 +52,57 @@ func (server *Server) CreateChatRecord(ctx context.Context, req *pb.CreateChatRe
 func (server *Server) GetChatRecord(ctx context.Context, req *pb.GetChatRecordRequest) (*pb.GetChatRecordResponse, error) {
 	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
 
-	GetC, err := server.chatStore.GetRecord(ctx, req.TargetID, tablename)
+	GetC, err := server.chatStore.GetRecord(ctx, req.GetTargetID(), tablename)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
 			return nil, status.Errorf(codes.NotFound, "chat record not found")
 		}
-		return nil, status.Errorf(codes.Internal, "failed to find UserID: %s", err)
+		return nil, status.Errorf(codes.Internal, "failed: %s And tablename %s at targetid %d", err, tablename, req.GetTargetID())
 	}
 
 	rsp := &pb.GetChatRecordResponse{
-		ChatRecord: convertChatList(GetC),
+		ChatRecordNoID: convertChatList(GetC),
+	}
+
+	return rsp, nil
+}
+
+func (server *Server) GetTargetID(ctx context.Context, req *pb.GetTargetIDRequest) (*pb.GetTargetIDResponse, error) {
+	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
+
+	tid, err := server.chatStore.GetTargetID(ctx, tablename)
+	if err != nil {
+		errCode := db.ErrorCode(err)
+		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+			return nil, status.Errorf(codes.NotFound, "table not found")
+		}
+		return nil, status.Errorf(codes.Internal, "failed to get data: %s", err)
+	}
+
+	rsp := &pb.GetTargetIDResponse{
+		TargetID: tid,
+	}
+
+	return rsp, nil
+}
+
+func (server *Server) GetLastMsg(ctx context.Context, req *pb.GetLastMsgRequest) (*pb.GetLastMsgResponse, error) {
+	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
+
+	lmsg, err := server.chatStore.GetLastMsg(ctx, req.GetTargetID(), tablename)
+	if err != nil {
+		errCode := db.ErrorCode(err)
+		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+			return nil, status.Errorf(codes.NotFound, "table not found")
+		}
+		return nil, status.Errorf(codes.Internal, "failed to get data: %s", err)
+	}
+
+	rsp := &pb.GetLastMsgResponse{
+		MediaType: lmsg.MediaType,
+		Message:   lmsg.Message,
+		Isread:    lmsg.Isread,
 	}
 
 	return rsp, nil
@@ -98,7 +138,15 @@ func (server *Server) UpdateChatRecord(ctx context.Context, req *pb.UpdateChatRe
 }
 
 func (server *Server) DeleteChatRecord(ctx context.Context, req *pb.DeleteChatRecordRequest) (*emptypb.Empty, error) {
-	err := server.infoStore.DeleteComplaint(ctx, req.GetUserID())
+
+	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
+
+	d := ch.DeleteRecordParams{
+		TargetID:  req.GetTargetID(),
+		CreatedAt: req.GetCreateAt().AsTime(),
+	}
+
+	err := server.chatStore.DeleteRecord(ctx, d, tablename)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {

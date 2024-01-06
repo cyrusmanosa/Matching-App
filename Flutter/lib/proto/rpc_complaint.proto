@@ -36,3 +36,9 @@ message UpdateComplaintRequest {
 message UpdateComplaintResponse {
     Complaint cp = 1;
 }
+
+// Delete
+message DeleteComplaintRequest {
+    string SessionID = 1; 
+}
+ 

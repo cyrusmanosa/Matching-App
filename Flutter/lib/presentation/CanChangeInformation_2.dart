@@ -57,8 +57,9 @@ class CanChangeInformation_2 extends StatelessWidget {
     } else if (canChangeIntroduceController.text.isEmpty) {
       showErrorDialog(context, "自己紹介はまだ入力されていません");
     } else {
+      String? apiKeyS = await globalSession.read(key: 'SessionId');
       final request = CreateCanChangeRequest(
-        sessionID: globalSessionID,
+        sessionID: apiKeyS,
         nickName: can1?.nickName,
         city: can1?.city,
         sexual: can1?.sexual,

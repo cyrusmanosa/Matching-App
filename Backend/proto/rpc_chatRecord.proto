@@ -3,6 +3,7 @@ syntax = "proto3";
 package pb;
 
 import "chatRecord.proto";
+import "chatRecordNoID.proto";
 import "google/protobuf/timestamp.proto";
 
 
@@ -27,16 +28,36 @@ message CreateChatRecordResponse {
     ChatRecord ChatRecord = 1;
 }
 
-// Get
+// GetRecord
 message GetChatRecordRequest {
     int32 UserID = 1;
     int32 TargetID = 2;
 }
 
 message GetChatRecordResponse {
-    repeated ChatRecord ChatRecord = 1;
+    repeated ChatRecordNoID ChatRecordNoID = 1;
 }
 
+// GetTargetID
+message GetTargetIDRequest {
+    int32 UserID = 1;
+}
+
+message GetTargetIDResponse {
+    repeated int32 TargetID = 1;
+}
+
+// GetLastMsg
+message GetLastMsgRequest{
+    int32 UserID = 1;
+    int32 TargetID = 2;
+}
+
+message GetLastMsgResponse{
+    string MediaType = 1;
+    string Message = 2;
+    bool Isread = 3;
+}
 
 // Update
 message UpdateChatRecordRequest {
@@ -55,4 +76,7 @@ message UpdateChatRecordResponse {
 // Delete
 message DeleteChatRecordRequest {
     int32 UserID = 1;
+    int32 TargetID = 2;
+    google.protobuf.Timestamp CreateAt = 3;
 }
+

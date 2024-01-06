@@ -1,6 +1,13 @@
+import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/models/chatUsers.dart';
+import 'package:dating_your_date/models/model.dart';
+import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
+import 'package:dating_your_date/pb/rpc_chatRecord.pb.dart';
+import 'package:dating_your_date/pb/rpc_images.pb.dart';
 import 'package:dating_your_date/presentation/Chat/widgets/conversationList.dart';
+import 'package:dating_your_date/widgets/Custom_WarningMsgBox.dart';
 import 'package:flutter/material.dart';
+import 'package:grpc/grpc.dart';
 
 class Chat extends StatefulWidget {
   const Chat({Key? key}) : super(key: key);
@@ -10,76 +17,99 @@ class Chat extends StatefulWidget {
 }
 
 class _ChatState extends State<Chat> {
-  List<ChatUsers> chatUsers = [
-    ChatUsers(
-      name: "Jane Russel",
-      messageText: "Awesome Setup",
-      imageURL: "https://randomuser.me/api/portraits/men/1.jpg",
-      time: "Now",
-    ),
-    ChatUsers(
-      name: "Glady's Murphy",
-      messageText: "That's Great",
-      imageURL: "https://randomuser.me/api/portraits/women/2.jpg",
-      time: "Yesterday",
-    ),
-    ChatUsers(
-      name: "Jorge Henry",
-      messageText: "Hey where are you?",
-      imageURL: "https://randomuser.me/api/portraits/men/3.jpg",
-      time: "31 Mar",
-    ),
-    ChatUsers(
-      name: "Philip Fox",
-      messageText: "Busy! Call me in 20 mins",
-      imageURL: "https://randomuser.me/api/portraits/women/1.jpg",
-      time: "28 Mar",
-    ),
-    ChatUsers(
-      name: "Debra Hawkins",
-      messageText: "Thankyou, It's awesome",
-      imageURL: "https://randomuser.me/api/portraits/women/4.jpg",
-      time: "23 Mar",
-    ),
-    ChatUsers(
-      name: "Jacob Pena",
-      messageText: "will update you in evening",
-      imageURL: "https://randomuser.me/api/portraits/men/5.jpg",
-      time: "17 Mar",
-    ),
-  ];
+  // Grpc
+  Future getTargetID(BuildContext context) async {
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
+
+    try {
+      final targetIDRequest = GetTargetIDRequest(userID: userid);
+      final tid = await GrpcChatService.client.getTargetID(targetIDRequest);
+      return tid.targetID;
+    } on GrpcError {
+      showErrorDialog(context, "Error: validatable input data of Target");
+      throw Exception("Error occurred while fetching target list.");
+    }
+  }
+
+  Future<List<TargetInfos>> getUserInfoGrpcRequest(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
+
+    List<int> targetID = await getTargetID(context);
+    List<TargetInfos> users = [];
+
+    for (int i = 0; i < targetID.length; i++) {
+      try {
+        // take info
+        final infoRequest = GetCanChangeRequest(sessionID: apiKeyS, userID: targetID[i]);
+        final infoResponse = await GrpcInfoService.client.getCanChange(infoRequest);
+        // take icon
+        final imgRequest = GetImagesRequest(sessionID: apiKeyS, userID: targetID[i]);
+        final imgResponse = await GrpcInfoService.client.getImages(imgRequest);
+        // take last msg
+        final lmsgRequest = GetLastMsgRequest(userID: userid!, targetID: targetID[i]);
+        final lmsgResponse = await GrpcChatService.client.getLastMsg(lmsgRequest);
+
+        users.add(TargetInfos(
+          userid: targetID[i],
+          img: imgResponse.img.img1,
+          info: infoResponse.canChangeInfo,
+          lastMsg: lmsgResponse.message,
+          isRead: lmsgResponse.isread,
+        ));
+      } on GrpcError {
+        showErrorDialog(context, "Error: validatable input data of Info");
+        throw Exception("Error occurred while fetching canChangeInfo.");
+      }
+    }
+    return users;
+  }
+
+  List<ChatUsers> chatUsers = [ChatUsers(time: "Now"), ChatUsers(time: "23 Mar"), ChatUsers(time: "17 Mar")];
 
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     return Scaffold(
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: mediaQueryData.size.width / 20, top: mediaQueryData.size.height / 15),
-              child: Text("Conversations", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-            ),
-            ListView.separated(
-              itemCount: chatUsers.length,
-              shrinkWrap: true,
-              padding: EdgeInsets.only(top: mediaQueryData.size.height / 50),
-              physics: NeverScrollableScrollPhysics(),
-              separatorBuilder: (context, index) => Divider(),
-              itemBuilder: (context, index) {
-                return ConversationList(
-                  name: chatUsers[index].name,
-                  messageText: chatUsers[index].messageText,
-                  imageUrl: chatUsers[index].imageURL,
-                  time: chatUsers[index].time,
-                  isMessageRead: (index == 0 || index == 3),
-                );
-              },
-            ),
-          ],
-        ),
+      body: FutureBuilder<List<TargetInfos>>(
+        future: getUserInfoGrpcRequest(context),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final data = snapshot.data!;
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: mediaQueryData.size.width / 20, top: mediaQueryData.size.height / 15),
+                    child: Text("Conversations", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                  ),
+                  ListView.separated(
+                    itemCount: data.length,
+                    shrinkWrap: true,
+                    padding: EdgeInsets.only(top: mediaQueryData.size.height / 50),
+                    physics: NeverScrollableScrollPhysics(),
+                    separatorBuilder: (context, index) => Divider(),
+                    itemBuilder: (context, index) {
+                      return ConversationList(
+                        targetid: data[index].userid,
+                        name: data[index].info.nickName,
+                        messageText: data[index].lastMsg,
+                        imageUrl: data[index].img,
+                        time: chatUsers[index].time,
+                        isMessageRead: data[index].isRead,
+                      );
+                    },
+                  ),
+                ],
+              ),
+            );
+          } else {
+            return Container();
+          }
+        },
       ),
     );
   }

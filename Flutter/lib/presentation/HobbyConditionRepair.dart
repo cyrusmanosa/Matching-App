@@ -35,9 +35,10 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
 
 // Http
   void updateHobbyHttpRequest(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
     var url = "http://127.0.0.1:8080/CreateHobby";
     var requestBody = {
-      "session_id": globalSessionID,
+      "session_id": apiKeyS,
       "Era": resetHobbyEraController.text,
       "City": resetHobbyCityController.text,
       "Gender": resetHobbyGenderController.text,
@@ -58,8 +59,9 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
   }
 
   void updateHobbyGrpcRequest(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
     final request = UpdateHobbyRequest(
-      sessionID: globalSessionID,
+      sessionID: apiKeyS,
       era: int.parse(resetHobbyEraController.text),
       city: resetHobbyCityController.text,
       gender: resetHobbyGenderController.text,

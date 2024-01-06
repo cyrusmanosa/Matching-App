@@ -3,20 +3,21 @@ import 'package:dating_your_date/presentation/ChatBox.dart';
 import 'package:flutter/material.dart';
 
 class ConversationList extends StatelessWidget {
-  final String name;
-  final String messageText;
-  final String imageUrl;
-  final String time;
-  final bool isMessageRead;
-
-  const ConversationList({
+  ConversationList({
     Key? key,
+    required this.targetid,
     required this.name,
     required this.messageText,
     required this.imageUrl,
     required this.time,
     required this.isMessageRead,
   }) : super(key: key);
+  final int targetid;
+  final String name;
+  final String messageText;
+  final String imageUrl;
+  final String time;
+  final bool isMessageRead;
 
   @override
   Widget build(BuildContext context) {
@@ -26,19 +27,21 @@ class ConversationList extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => ChatBox(
-                    name: name,
-                    time: time,
-                    imageUrl: imageUrl,
-                  )),
+            builder: (context) => ChatBox(
+              name: name,
+              time: time,
+              imageUrl: imageUrl,
+              targetid: targetid,
+            ),
+          ),
         );
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 20, vertical: mediaQueryData.size.height / 60),
         child: Row(
           children: [
             CircleAvatar(backgroundImage: NetworkImage(imageUrl), maxRadius: 30),
-            SizedBox(width: 16),
+            SizedBox(width: mediaQueryData.size.width / 25),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,15 +50,18 @@ class ConversationList extends StatelessWidget {
                   SizedBox(height: mediaQueryData.size.height / 300),
                   Text(
                     messageText,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 13,
-                      color: Colors.grey.shade600,
-                      fontWeight: isMessageRead ? FontWeight.w900 : FontWeight.normal,
+                      color: appTheme.gray800,
+                      fontWeight: !isMessageRead ? FontWeight.w900 : FontWeight.normal,
                     ),
                   ),
                 ],
               ),
             ),
+            Padding(padding: EdgeInsets.only(left: mediaQueryData.size.width / 50)),
             Text(time, style: TextStyle(fontSize: 12, fontWeight: isMessageRead ? FontWeight.bold : FontWeight.normal)),
           ],
         ),

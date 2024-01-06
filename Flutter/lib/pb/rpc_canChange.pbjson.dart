@@ -62,12 +62,14 @@ const GetCanChangeRequest$json = {
   '1': 'GetCanChangeRequest',
   '2': [
     {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
+    {'1': 'UserID', '3': 2, '4': 1, '5': 5, '10': 'UserID'},
   ],
 };
 
 /// Descriptor for `GetCanChangeRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getCanChangeRequestDescriptor = $convert.base64Decode(
-    'ChNHZXRDYW5DaGFuZ2VSZXF1ZXN0EhwKCVNlc3Npb25JRBgBIAEoCVIJU2Vzc2lvbklE');
+    'ChNHZXRDYW5DaGFuZ2VSZXF1ZXN0EhwKCVNlc3Npb25JRBgBIAEoCVIJU2Vzc2lvbklEEhYKBl'
+    'VzZXJJRBgCIAEoBVIGVXNlcklE');
 
 @$core.Deprecated('Use getCanChangeResponseDescriptor instead')
 const GetCanChangeResponse$json = {
@@ -126,16 +128,15 @@ final $typed_data.Uint8List updateCanChangeResponseDescriptor = $convert.base64D
     'ChdVcGRhdGVDYW5DaGFuZ2VSZXNwb25zZRIzCg1DYW5DaGFuZ2VJbmZvGAEgASgLMg0ucGIuQ2'
     'FuQ2hhbmdlUg1DYW5DaGFuZ2VJbmZv');
 
-@$core.Deprecated('Use listCanChangeResponseDescriptor instead')
-const ListCanChangeResponse$json = {
-  '1': 'ListCanChangeResponse',
+@$core.Deprecated('Use deleteCanChangeRequestDescriptor instead')
+const DeleteCanChangeRequest$json = {
+  '1': 'DeleteCanChangeRequest',
   '2': [
-    {'1': 'CanChangeInfo', '3': 1, '4': 1, '5': 11, '6': '.pb.CanChange', '10': 'CanChangeInfo'},
+    {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
   ],
 };
 
-/// Descriptor for `ListCanChangeResponse`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List listCanChangeResponseDescriptor = $convert.base64Decode(
-    'ChVMaXN0Q2FuQ2hhbmdlUmVzcG9uc2USMwoNQ2FuQ2hhbmdlSW5mbxgBIAEoCzINLnBiLkNhbk'
-    'NoYW5nZVINQ2FuQ2hhbmdlSW5mbw==');
+/// Descriptor for `DeleteCanChangeRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteCanChangeRequestDescriptor = $convert.base64Decode(
+    'ChZEZWxldGVDYW5DaGFuZ2VSZXF1ZXN0EhwKCVNlc3Npb25JRBgBIAEoCVIJU2Vzc2lvbklE');
 

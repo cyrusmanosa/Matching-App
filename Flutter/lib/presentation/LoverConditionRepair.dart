@@ -38,9 +38,10 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
 
 // Http
   void updateLoverHttpRequest(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
     var url = "http://127.0.0.1:8080/UpdateLover";
     var requestBody = {
-      "session_id": globalSessionID,
+      "session_id": apiKeyS,
       "MinAge": resetLoverMinAgeController.text,
       "MaxAge": resetLoverMaxAgeController.text,
       "City": resetLoverCityController.text,
@@ -64,8 +65,9 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
 
 // Grpc
   void updateLoverGrpcRequest(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
     final request = UpdateLoverRequest(
-      sessionID: globalSessionID,
+      sessionID: apiKeyS,
       minAge: int.parse(resetLoverMinAgeController.text),
       maxAge: int.parse(resetLoverMaxAgeController.text),
       city: resetLoverCityController.text,

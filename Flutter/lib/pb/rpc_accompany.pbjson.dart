@@ -113,3 +113,15 @@ final $typed_data.Uint8List updateAccompanyResponseDescriptor = $convert.base64D
     'ChdVcGRhdGVBY2NvbXBhbnlSZXNwb25zZRIdCgJhYxgBIAEoCzINLnBiLkFjY29tcGFueVICYW'
     'M=');
 
+@$core.Deprecated('Use deleteAccompanyRequestDescriptor instead')
+const DeleteAccompanyRequest$json = {
+  '1': 'DeleteAccompanyRequest',
+  '2': [
+    {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
+  ],
+};
+
+/// Descriptor for `DeleteAccompanyRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteAccompanyRequestDescriptor = $convert.base64Decode(
+    'ChZEZWxldGVBY2NvbXBhbnlSZXF1ZXN0EhwKCVNlc3Npb25JRBgBIAEoCVIJU2Vzc2lvbklE');
+

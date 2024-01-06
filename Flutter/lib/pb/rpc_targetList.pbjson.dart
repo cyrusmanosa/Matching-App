@@ -17,7 +17,7 @@ import 'dart:typed_data' as $typed_data;
 const CreateTargetListRequest$json = {
   '1': 'CreateTargetListRequest',
   '2': [
-    {'1': 'UserID', '3': 1, '4': 1, '5': 5, '10': 'UserID'},
+    {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
     {'1': 'Target1ID', '3': 2, '4': 1, '5': 5, '10': 'Target1ID'},
     {'1': 'Target2ID', '3': 3, '4': 1, '5': 5, '10': 'Target2ID'},
     {'1': 'Target3ID', '3': 4, '4': 1, '5': 5, '10': 'Target3ID'},
@@ -26,9 +26,9 @@ const CreateTargetListRequest$json = {
 
 /// Descriptor for `CreateTargetListRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createTargetListRequestDescriptor = $convert.base64Decode(
-    'ChdDcmVhdGVUYXJnZXRMaXN0UmVxdWVzdBIWCgZVc2VySUQYASABKAVSBlVzZXJJRBIcCglUYX'
-    'JnZXQxSUQYAiABKAVSCVRhcmdldDFJRBIcCglUYXJnZXQySUQYAyABKAVSCVRhcmdldDJJRBIc'
-    'CglUYXJnZXQzSUQYBCABKAVSCVRhcmdldDNJRA==');
+    'ChdDcmVhdGVUYXJnZXRMaXN0UmVxdWVzdBIcCglTZXNzaW9uSUQYASABKAlSCVNlc3Npb25JRB'
+    'IcCglUYXJnZXQxSUQYAiABKAVSCVRhcmdldDFJRBIcCglUYXJnZXQySUQYAyABKAVSCVRhcmdl'
+    'dDJJRBIcCglUYXJnZXQzSUQYBCABKAVSCVRhcmdldDNJRA==');
 
 @$core.Deprecated('Use createTargetListResponseDescriptor instead')
 const CreateTargetListResponse$json = {
@@ -47,13 +47,13 @@ final $typed_data.Uint8List createTargetListResponseDescriptor = $convert.base64
 const GetTargetListRequest$json = {
   '1': 'GetTargetListRequest',
   '2': [
-    {'1': 'UserID', '3': 1, '4': 1, '5': 5, '10': 'UserID'},
+    {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
   ],
 };
 
 /// Descriptor for `GetTargetListRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getTargetListRequestDescriptor = $convert.base64Decode(
-    'ChRHZXRUYXJnZXRMaXN0UmVxdWVzdBIWCgZVc2VySUQYASABKAVSBlVzZXJJRA==');
+    'ChRHZXRUYXJnZXRMaXN0UmVxdWVzdBIcCglTZXNzaW9uSUQYASABKAlSCVNlc3Npb25JRA==');
 
 @$core.Deprecated('Use getTargetListResponseDescriptor instead')
 const GetTargetListResponse$json = {
@@ -72,7 +72,7 @@ final $typed_data.Uint8List getTargetListResponseDescriptor = $convert.base64Dec
 const UpdateTargetListRequest$json = {
   '1': 'UpdateTargetListRequest',
   '2': [
-    {'1': 'UserID', '3': 1, '4': 1, '5': 5, '10': 'UserID'},
+    {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
     {'1': 'Target1ID', '3': 2, '4': 1, '5': 5, '10': 'Target1ID'},
     {'1': 'Target2ID', '3': 3, '4': 1, '5': 5, '10': 'Target2ID'},
     {'1': 'Target3ID', '3': 4, '4': 1, '5': 5, '10': 'Target3ID'},
@@ -81,9 +81,9 @@ const UpdateTargetListRequest$json = {
 
 /// Descriptor for `UpdateTargetListRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateTargetListRequestDescriptor = $convert.base64Decode(
-    'ChdVcGRhdGVUYXJnZXRMaXN0UmVxdWVzdBIWCgZVc2VySUQYASABKAVSBlVzZXJJRBIcCglUYX'
-    'JnZXQxSUQYAiABKAVSCVRhcmdldDFJRBIcCglUYXJnZXQySUQYAyABKAVSCVRhcmdldDJJRBIc'
-    'CglUYXJnZXQzSUQYBCABKAVSCVRhcmdldDNJRA==');
+    'ChdVcGRhdGVUYXJnZXRMaXN0UmVxdWVzdBIcCglTZXNzaW9uSUQYASABKAlSCVNlc3Npb25JRB'
+    'IcCglUYXJnZXQxSUQYAiABKAVSCVRhcmdldDFJRBIcCglUYXJnZXQySUQYAyABKAVSCVRhcmdl'
+    'dDJJRBIcCglUYXJnZXQzSUQYBCABKAVSCVRhcmdldDNJRA==');
 
 @$core.Deprecated('Use updateTargetListResponseDescriptor instead')
 const UpdateTargetListResponse$json = {
@@ -97,4 +97,17 @@ const UpdateTargetListResponse$json = {
 final $typed_data.Uint8List updateTargetListResponseDescriptor = $convert.base64Decode(
     'ChhVcGRhdGVUYXJnZXRMaXN0UmVzcG9uc2USHgoCdGwYASABKAsyDi5wYi5UYXJnZXRsaXN0Ug'
     'J0bA==');
+
+@$core.Deprecated('Use deleteTargetListRequestDescriptor instead')
+const DeleteTargetListRequest$json = {
+  '1': 'DeleteTargetListRequest',
+  '2': [
+    {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
+  ],
+};
+
+/// Descriptor for `DeleteTargetListRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteTargetListRequestDescriptor = $convert.base64Decode(
+    'ChdEZWxldGVUYXJnZXRMaXN0UmVxdWVzdBIcCglTZXNzaW9uSUQYASABKAlSCVNlc3Npb25JRA'
+    '==');
 

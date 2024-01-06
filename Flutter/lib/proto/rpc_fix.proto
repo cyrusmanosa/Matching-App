@@ -7,6 +7,7 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "Backend/pb";
 
+// Create
 message CreateFixRequest {
   string FirstName = 1;
   string LastName = 2;
@@ -15,7 +16,6 @@ message CreateFixRequest {
   string Gender = 5;
   string Blood = 6;
 }
-
 message CreateFixResponse {
   string SessionsID = 1;
   string Email = 3;
@@ -23,6 +23,23 @@ message CreateFixResponse {
   google.protobuf.Timestamp  AccessTokenExpiresAt = 6;
 }
 
-message DelFix {
-  string SessionsID = 1;
+// Get
+message GetFixRequest {
+  string SessionID = 1;
+}
+message GetFixResponse {
+  string FirstName = 1;
+  string LastName = 2;
+  string Birth = 3;
+  string Country = 4;
+  string Gender = 5;
+  string Blood = 6;
+  int32 age = 7;
+  string constellation = 8;
+  bool certification = 9;
+}
+
+// Delete
+message DeleteFixRequest { 
+  string SessionID = 1;
 }

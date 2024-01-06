@@ -119,3 +119,15 @@ const UpdateHobbyResponse$json = {
 final $typed_data.Uint8List updateHobbyResponseDescriptor = $convert.base64Decode(
     'ChNVcGRhdGVIb2JieVJlc3BvbnNlEhcKAWgYASABKAsyCS5wYi5Ib2JieVIBaA==');
 
+@$core.Deprecated('Use deleteHobbyRequestDescriptor instead')
+const DeleteHobbyRequest$json = {
+  '1': 'DeleteHobbyRequest',
+  '2': [
+    {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
+  ],
+};
+
+/// Descriptor for `DeleteHobbyRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteHobbyRequestDescriptor = $convert.base64Decode(
+    'ChJEZWxldGVIb2JieVJlcXVlc3QSHAoJU2Vzc2lvbklEGAEgASgJUglTZXNzaW9uSUQ=');
+

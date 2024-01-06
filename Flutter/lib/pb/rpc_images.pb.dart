@@ -13,22 +13,22 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'images.pb.dart' as $21;
+import 'images.pb.dart' as $24;
 
 /// Create
 class CreateImagesRequest extends $pb.GeneratedMessage {
   factory CreateImagesRequest({
-    $core.int? userID,
+    $core.String? sessionID,
     $core.String? qr,
     $core.String? img1,
     $core.String? img2,
     $core.String? img3,
     $core.String? img4,
-    $core.String? icon,
+    $core.String? img5,
   }) {
     final $result = create();
-    if (userID != null) {
-      $result.userID = userID;
+    if (sessionID != null) {
+      $result.sessionID = sessionID;
     }
     if (qr != null) {
       $result.qr = qr;
@@ -45,8 +45,8 @@ class CreateImagesRequest extends $pb.GeneratedMessage {
     if (img4 != null) {
       $result.img4 = img4;
     }
-    if (icon != null) {
-      $result.icon = icon;
+    if (img5 != null) {
+      $result.img5 = img5;
     }
     return $result;
   }
@@ -55,13 +55,13 @@ class CreateImagesRequest extends $pb.GeneratedMessage {
   factory CreateImagesRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateImagesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'UserID', $pb.PbFieldType.O3, protoName: 'UserID')
+    ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
     ..aOS(2, _omitFieldNames ? '' : 'Qr', protoName: 'Qr')
     ..aOS(3, _omitFieldNames ? '' : 'Img1', protoName: 'Img1')
     ..aOS(4, _omitFieldNames ? '' : 'Img2', protoName: 'Img2')
     ..aOS(5, _omitFieldNames ? '' : 'Img3', protoName: 'Img3')
     ..aOS(6, _omitFieldNames ? '' : 'Img4', protoName: 'Img4')
-    ..aOS(7, _omitFieldNames ? '' : 'Icon', protoName: 'Icon')
+    ..aOS(7, _omitFieldNames ? '' : 'Img5', protoName: 'Img5')
     ..hasRequiredFields = false
   ;
 
@@ -87,13 +87,13 @@ class CreateImagesRequest extends $pb.GeneratedMessage {
   static CreateImagesRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get userID => $_getIZ(0);
+  $core.String get sessionID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set userID($core.int v) { $_setSignedInt32(0, v); }
+  set sessionID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasUserID() => $_has(0);
+  $core.bool hasSessionID() => $_has(0);
   @$pb.TagNumber(1)
-  void clearUserID() => clearField(1);
+  void clearSessionID() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.String get qr => $_getSZ(1);
@@ -141,18 +141,18 @@ class CreateImagesRequest extends $pb.GeneratedMessage {
   void clearImg4() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.String get icon => $_getSZ(6);
+  $core.String get img5 => $_getSZ(6);
   @$pb.TagNumber(7)
-  set icon($core.String v) { $_setString(6, v); }
+  set img5($core.String v) { $_setString(6, v); }
   @$pb.TagNumber(7)
-  $core.bool hasIcon() => $_has(6);
+  $core.bool hasImg5() => $_has(6);
   @$pb.TagNumber(7)
-  void clearIcon() => clearField(7);
+  void clearImg5() => clearField(7);
 }
 
 class CreateImagesResponse extends $pb.GeneratedMessage {
   factory CreateImagesResponse({
-    $21.Images? img,
+    $24.Images? img,
   }) {
     final $result = create();
     if (img != null) {
@@ -165,7 +165,7 @@ class CreateImagesResponse extends $pb.GeneratedMessage {
   factory CreateImagesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateImagesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$21.Images>(1, _omitFieldNames ? '' : 'img', subBuilder: $21.Images.create)
+    ..aOM<$24.Images>(1, _omitFieldNames ? '' : 'Img', protoName: 'Img', subBuilder: $24.Images.create)
     ..hasRequiredFields = false
   ;
 
@@ -191,23 +191,27 @@ class CreateImagesResponse extends $pb.GeneratedMessage {
   static CreateImagesResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $21.Images get img => $_getN(0);
+  $24.Images get img => $_getN(0);
   @$pb.TagNumber(1)
-  set img($21.Images v) { setField(1, v); }
+  set img($24.Images v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasImg() => $_has(0);
   @$pb.TagNumber(1)
   void clearImg() => clearField(1);
   @$pb.TagNumber(1)
-  $21.Images ensureImg() => $_ensure(0);
+  $24.Images ensureImg() => $_ensure(0);
 }
 
 /// Get
 class GetImagesRequest extends $pb.GeneratedMessage {
   factory GetImagesRequest({
+    $core.String? sessionID,
     $core.int? userID,
   }) {
     final $result = create();
+    if (sessionID != null) {
+      $result.sessionID = sessionID;
+    }
     if (userID != null) {
       $result.userID = userID;
     }
@@ -218,7 +222,8 @@ class GetImagesRequest extends $pb.GeneratedMessage {
   factory GetImagesRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetImagesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'UserID', $pb.PbFieldType.O3, protoName: 'UserID')
+    ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'UserID', $pb.PbFieldType.O3, protoName: 'UserID')
     ..hasRequiredFields = false
   ;
 
@@ -244,18 +249,27 @@ class GetImagesRequest extends $pb.GeneratedMessage {
   static GetImagesRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get userID => $_getIZ(0);
+  $core.String get sessionID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set userID($core.int v) { $_setSignedInt32(0, v); }
+  set sessionID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasUserID() => $_has(0);
+  $core.bool hasSessionID() => $_has(0);
   @$pb.TagNumber(1)
-  void clearUserID() => clearField(1);
+  void clearSessionID() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get userID => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set userID($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasUserID() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUserID() => clearField(2);
 }
 
 class GetImagesResponse extends $pb.GeneratedMessage {
   factory GetImagesResponse({
-    $21.Images? img,
+    $24.Images? img,
   }) {
     final $result = create();
     if (img != null) {
@@ -268,7 +282,7 @@ class GetImagesResponse extends $pb.GeneratedMessage {
   factory GetImagesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetImagesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$21.Images>(1, _omitFieldNames ? '' : 'img', subBuilder: $21.Images.create)
+    ..aOM<$24.Images>(1, _omitFieldNames ? '' : 'Img', protoName: 'Img', subBuilder: $24.Images.create)
     ..hasRequiredFields = false
   ;
 
@@ -294,31 +308,31 @@ class GetImagesResponse extends $pb.GeneratedMessage {
   static GetImagesResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $21.Images get img => $_getN(0);
+  $24.Images get img => $_getN(0);
   @$pb.TagNumber(1)
-  set img($21.Images v) { setField(1, v); }
+  set img($24.Images v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasImg() => $_has(0);
   @$pb.TagNumber(1)
   void clearImg() => clearField(1);
   @$pb.TagNumber(1)
-  $21.Images ensureImg() => $_ensure(0);
+  $24.Images ensureImg() => $_ensure(0);
 }
 
 /// Updat
 class UpdateImagesRequest extends $pb.GeneratedMessage {
   factory UpdateImagesRequest({
-    $core.int? userID,
+    $core.String? sessionID,
     $core.String? qr,
     $core.String? img1,
     $core.String? img2,
     $core.String? img3,
     $core.String? img4,
-    $core.String? icon,
+    $core.String? img5,
   }) {
     final $result = create();
-    if (userID != null) {
-      $result.userID = userID;
+    if (sessionID != null) {
+      $result.sessionID = sessionID;
     }
     if (qr != null) {
       $result.qr = qr;
@@ -335,8 +349,8 @@ class UpdateImagesRequest extends $pb.GeneratedMessage {
     if (img4 != null) {
       $result.img4 = img4;
     }
-    if (icon != null) {
-      $result.icon = icon;
+    if (img5 != null) {
+      $result.img5 = img5;
     }
     return $result;
   }
@@ -345,13 +359,13 @@ class UpdateImagesRequest extends $pb.GeneratedMessage {
   factory UpdateImagesRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateImagesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..a<$core.int>(1, _omitFieldNames ? '' : 'UserID', $pb.PbFieldType.O3, protoName: 'UserID')
+    ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
     ..aOS(2, _omitFieldNames ? '' : 'Qr', protoName: 'Qr')
     ..aOS(3, _omitFieldNames ? '' : 'Img1', protoName: 'Img1')
     ..aOS(4, _omitFieldNames ? '' : 'Img2', protoName: 'Img2')
     ..aOS(5, _omitFieldNames ? '' : 'Img3', protoName: 'Img3')
     ..aOS(6, _omitFieldNames ? '' : 'Img4', protoName: 'Img4')
-    ..aOS(7, _omitFieldNames ? '' : 'Icon', protoName: 'Icon')
+    ..aOS(7, _omitFieldNames ? '' : 'Img5', protoName: 'Img5')
     ..hasRequiredFields = false
   ;
 
@@ -377,13 +391,13 @@ class UpdateImagesRequest extends $pb.GeneratedMessage {
   static UpdateImagesRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get userID => $_getIZ(0);
+  $core.String get sessionID => $_getSZ(0);
   @$pb.TagNumber(1)
-  set userID($core.int v) { $_setSignedInt32(0, v); }
+  set sessionID($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasUserID() => $_has(0);
+  $core.bool hasSessionID() => $_has(0);
   @$pb.TagNumber(1)
-  void clearUserID() => clearField(1);
+  void clearSessionID() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.String get qr => $_getSZ(1);
@@ -431,18 +445,18 @@ class UpdateImagesRequest extends $pb.GeneratedMessage {
   void clearImg4() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.String get icon => $_getSZ(6);
+  $core.String get img5 => $_getSZ(6);
   @$pb.TagNumber(7)
-  set icon($core.String v) { $_setString(6, v); }
+  set img5($core.String v) { $_setString(6, v); }
   @$pb.TagNumber(7)
-  $core.bool hasIcon() => $_has(6);
+  $core.bool hasImg5() => $_has(6);
   @$pb.TagNumber(7)
-  void clearIcon() => clearField(7);
+  void clearImg5() => clearField(7);
 }
 
 class UpdateImagesResponse extends $pb.GeneratedMessage {
   factory UpdateImagesResponse({
-    $21.Images? img,
+    $24.Images? img,
   }) {
     final $result = create();
     if (img != null) {
@@ -455,7 +469,7 @@ class UpdateImagesResponse extends $pb.GeneratedMessage {
   factory UpdateImagesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateImagesResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$21.Images>(1, _omitFieldNames ? '' : 'img', subBuilder: $21.Images.create)
+    ..aOM<$24.Images>(1, _omitFieldNames ? '' : 'Img', protoName: 'Img', subBuilder: $24.Images.create)
     ..hasRequiredFields = false
   ;
 
@@ -481,15 +495,116 @@ class UpdateImagesResponse extends $pb.GeneratedMessage {
   static UpdateImagesResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $21.Images get img => $_getN(0);
+  $24.Images get img => $_getN(0);
   @$pb.TagNumber(1)
-  set img($21.Images v) { setField(1, v); }
+  set img($24.Images v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasImg() => $_has(0);
   @$pb.TagNumber(1)
   void clearImg() => clearField(1);
   @$pb.TagNumber(1)
-  $21.Images ensureImg() => $_ensure(0);
+  $24.Images ensureImg() => $_ensure(0);
+}
+
+/// Delete
+class DeleteImagesRequest extends $pb.GeneratedMessage {
+  factory DeleteImagesRequest({
+    $core.String? sessionID,
+  }) {
+    final $result = create();
+    if (sessionID != null) {
+      $result.sessionID = sessionID;
+    }
+    return $result;
+  }
+  DeleteImagesRequest._() : super();
+  factory DeleteImagesRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DeleteImagesRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteImagesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DeleteImagesRequest clone() => DeleteImagesRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DeleteImagesRequest copyWith(void Function(DeleteImagesRequest) updates) => super.copyWith((message) => updates(message as DeleteImagesRequest)) as DeleteImagesRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeleteImagesRequest create() => DeleteImagesRequest._();
+  DeleteImagesRequest createEmptyInstance() => create();
+  static $pb.PbList<DeleteImagesRequest> createRepeated() => $pb.PbList<DeleteImagesRequest>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteImagesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteImagesRequest>(create);
+  static DeleteImagesRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get sessionID => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set sessionID($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSessionID() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSessionID() => clearField(1);
+}
+
+class DeleteResponse extends $pb.GeneratedMessage {
+  factory DeleteResponse({
+    $core.String? msg,
+  }) {
+    final $result = create();
+    if (msg != null) {
+      $result.msg = msg;
+    }
+    return $result;
+  }
+  DeleteResponse._() : super();
+  factory DeleteResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory DeleteResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'DeleteResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
+    ..aOS(1, _omitFieldNames ? '' : 'msg')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  DeleteResponse clone() => DeleteResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  DeleteResponse copyWith(void Function(DeleteResponse) updates) => super.copyWith((message) => updates(message as DeleteResponse)) as DeleteResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static DeleteResponse create() => DeleteResponse._();
+  DeleteResponse createEmptyInstance() => create();
+  static $pb.PbList<DeleteResponse> createRepeated() => $pb.PbList<DeleteResponse>();
+  @$core.pragma('dart2js:noInline')
+  static DeleteResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteResponse>(create);
+  static DeleteResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get msg => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set msg($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMsg() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMsg() => clearField(1);
 }
 
 

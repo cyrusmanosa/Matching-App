@@ -12,5 +12,6 @@ message ChatRecord{
     string MediaType = 3;
     string Message = 4;
     string Media = 5;
-    google.protobuf.Timestamp CreatedAt = 6;
+    bool Isread = 6;
+    google.protobuf.Timestamp CreatedAt = 7;
 }

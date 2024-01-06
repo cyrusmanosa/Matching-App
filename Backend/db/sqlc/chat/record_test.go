@@ -23,6 +23,7 @@ func CreateRandomRecord(t *testing.T) Record {
 		MediaType: util.Randomstring(3),
 		Message:   gofakeit.HackerPhrase(),
 		Media:     gofakeit.URL(),
+		Isread:    gofakeit.Bool(),
 	}
 
 	InsertR, err := testChatQueries.CreateRecord(context.Background(), arg, TN)
@@ -33,6 +34,7 @@ func CreateRandomRecord(t *testing.T) Record {
 	require.Equal(t, InsertR.MediaType, arg.MediaType)
 	require.Equal(t, InsertR.Message, arg.Message)
 	require.Equal(t, InsertR.Media, arg.Media)
+	require.Equal(t, InsertR.Isread, arg.Isread)
 	require.NotEmpty(t, InsertR.CreatedAt)
 	return InsertR
 }
@@ -41,6 +43,18 @@ func TestGetrecord(t *testing.T) {
 	getR, err := testChatQueries.GetRecord(context.Background(), TId, TN)
 	require.NoError(t, err)
 	require.NotEmpty(t, getR)
+}
+
+func TestGetTargetID(t *testing.T) {
+	tid, err := testChatQueries.GetTargetID(context.Background(), TN)
+	require.NoError(t, err)
+	require.NotEmpty(t, tid)
+}
+
+func TestGetLastMsg(t *testing.T) {
+	lmsg, err := testChatQueries.GetLastMsg(context.Background(), TId, TN)
+	require.NoError(t, err)
+	require.NotEmpty(t, lmsg)
 }
 
 func TestUpdateRecord(t *testing.T) {

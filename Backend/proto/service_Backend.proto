@@ -14,6 +14,7 @@ import "rpc_lover.proto";
 import "rpc_login.proto";
 import "rpc_payment.proto";
 import "rpc_password.proto";
+import "rpc_session.proto";
 import "rpc_checkEmail.proto";
 import "rpc_chatRecord.proto";
 import "google/api/annotations.proto";
@@ -275,7 +276,6 @@ service Information {
     }
 
     // Payment
-
     rpc CreatePayment(CreatePaymentRequest) returns (CreatePaymentResponse){
         option (google.api.http) = {
             post: "/v1/Create_Payment"
@@ -285,6 +285,13 @@ service Information {
     rpc GetPayment(GetPaymentRequest) returns (GetPaymentResponse){
         option (google.api.http) = {
             get: "/v1/Get_Payment"
+        };
+    }
+
+    // Session
+    rpc GetUserID(GetUserIDRequest) returns (GetUserIDResponse){
+        option (google.api.http) = {
+            get: "/v1/Get_UserID"
         };
     }
 }
@@ -319,6 +326,18 @@ service Chat {
     rpc DeleteChatRecord(DeleteChatRecordRequest) returns (google.protobuf.Empty){
         option (google.api.http) = {
             delete: "/v1/Del_ChatRecord"
+        };
+    }
+
+    rpc GetTargetID(GetTargetIDRequest) returns (GetTargetIDResponse){
+        option (google.api.http) = {
+            get: "/v1/Get_ChatTargetID"
+        };
+    }
+
+    rpc GetLastMsg(GetLastMsgRequest) returns (GetLastMsgResponse){
+        option (google.api.http) = {
+            get: "/v1/Get_LastMsg"
         };
     }
 }

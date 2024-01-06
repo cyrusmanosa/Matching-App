@@ -37,9 +37,10 @@ class _LoverConditionState extends State<LoverCondition> {
 
 // Http
   void createLoverHttpRequest(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
     var url = "http://127.0.0.1:8080/CreateLover";
     var requestBody = {
-      "session_id": globalSessionID,
+      "session_id": apiKeyS,
       "MinAge": loverMinAgeController.text,
       "MaxAge": loverMaxAgeController.text,
       "City": loverCityController.text,
@@ -63,8 +64,9 @@ class _LoverConditionState extends State<LoverCondition> {
 
 // Grpc
   void createLoverGrpcRequest(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
     final request = CreateLoverRequest(
-      sessionID: globalSessionID,
+      sessionID: apiKeyS,
       minAge: int.parse(loverMinAgeController.text),
       maxAge: int.parse(loverMaxAgeController.text),
       city: loverCityController.text,
