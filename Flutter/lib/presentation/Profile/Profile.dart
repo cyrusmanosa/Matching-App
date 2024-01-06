@@ -3,7 +3,7 @@ import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/presentation/ProfileEdit.dart';
-import 'package:dating_your_date/widgets/Custom_WarningMsgBox.dart';
+import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:grpc/grpc.dart';
 import 'widgets/showDataBar.dart';
 import 'package:dating_your_date/core/app_export.dart';
@@ -33,6 +33,8 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return Scaffold(
       appBar: _buildHeader(context),
       body: FutureBuilder<CanChange>(
@@ -44,7 +46,7 @@ class Profile extends StatelessWidget {
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+                    padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
                     child: Column(
                       children: [
                         // img
@@ -68,11 +70,11 @@ class Profile extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: mediaQueryData.size.height / 50),
+                        SizedBox(height: mediaH / 50),
 
                         // Part 2 - data
                         _buildInformationBar(context),
-                        SizedBox(height: mediaQueryData.size.height / 50),
+                        SizedBox(height: mediaH / 50),
 
                         // intro
                         Padding(
@@ -90,47 +92,47 @@ class Profile extends StatelessWidget {
 
                         // title
                         Text("個人基本情報", style: CustomTextStyles.smallTitle20),
-                        SizedBox(height: mediaQueryData.size.height / 40),
+                        SizedBox(height: mediaH / 40),
 
                         // Nick Name
                         ShownDataBarWidget(item: "ニックネーム", data: data.nickName),
-                        SizedBox(height: mediaQueryData.size.height / 40),
+                        SizedBox(height: mediaH / 40),
                         // height
                         ShownDataBarWidget(item: "身長", data: data.height.toString() + " CM"),
-                        SizedBox(height: mediaQueryData.size.height / 40),
+                        SizedBox(height: mediaH / 40),
                         // weight
                         ShownDataBarWidget(item: "体重", data: data.weight.toString() + " KG"),
-                        SizedBox(height: mediaQueryData.size.height / 40),
+                        SizedBox(height: mediaH / 40),
                         // address
                         ShownDataBarWidget(item: "居住地", data: data.city),
-                        SizedBox(height: mediaQueryData.size.height / 40),
+                        SizedBox(height: mediaH / 40),
                         // education
                         ShownDataBarWidget(item: "学歴", data: data.education),
-                        SizedBox(height: mediaQueryData.size.height / 40),
+                        SizedBox(height: mediaH / 40),
                         // hobby
                         // TODO: 1
                         ShownDataBarWidget(item: "趣味", data: "#################"),
-                        SizedBox(height: mediaQueryData.size.height / 40),
+                        SizedBox(height: mediaH / 40),
                         // job
                         ShownDataBarWidget(item: "職種", data: data.job),
-                        SizedBox(height: mediaQueryData.size.height / 40),
+                        SizedBox(height: mediaH / 40),
                         // sexual
                         ShownDataBarWidget(item: "性的指向", data: data.sexual),
-                        SizedBox(height: mediaQueryData.size.height / 40),
+                        SizedBox(height: mediaH / 40),
                         // sociability
                         ShownDataBarWidget(item: "社交力", data: data.sociability),
-                        SizedBox(height: mediaQueryData.size.height / 40),
+                        SizedBox(height: mediaH / 40),
                         // find target
                         // TODO: 2
                         ShownDataBarWidget(item: "探す対象", data: "#########"),
-                        SizedBox(height: mediaQueryData.size.height / 40),
+                        SizedBox(height: mediaH / 40),
                         // find reason
                         // TODO: 3
                         ShownDataBarWidget(item: "目的", data: "############"),
-                        SizedBox(height: mediaQueryData.size.height / 40),
+                        SizedBox(height: mediaH / 40),
                         // religious
                         ShownDataBarWidget(item: "宗教", data: data.religious),
-                        SizedBox(height: mediaQueryData.size.height / 40),
+                        SizedBox(height: mediaH / 40),
                         // edit button
                         _buildEditButton(context, data)
                       ],
@@ -156,8 +158,10 @@ class Profile extends StatelessWidget {
   // Part2
   Widget _buildInformationBar(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 15),
+      padding: EdgeInsets.symmetric(horizontal: mediaW / 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -167,14 +171,14 @@ class Profile extends StatelessWidget {
               Text("0", style: theme.textTheme.headlineMedium),
             ],
           ),
-          SizedBox(height: mediaQueryData.size.height / 14, child: VerticalDivider(thickness: 1, indent: 17, endIndent: 18)),
+          SizedBox(height: mediaH / 14, child: VerticalDivider(thickness: 1, indent: 17, endIndent: 18)),
           Column(
             children: [
               Text("クレーム回数", style: CustomTextStyles.inputTitlePink),
               Text("0", style: theme.textTheme.headlineMedium),
             ],
           ),
-          SizedBox(height: mediaQueryData.size.height / 14, child: VerticalDivider(thickness: 1, indent: 17, endIndent: 18)),
+          SizedBox(height: mediaH / 14, child: VerticalDivider(thickness: 1, indent: 17, endIndent: 18)),
           Column(
             children: [
               Text("伝送回数", style: CustomTextStyles.inputTitlePink),

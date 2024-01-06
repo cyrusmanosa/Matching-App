@@ -18,12 +18,14 @@ class CustomBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return Container(
-      height: mediaQueryData.size.height / 10.5,
+      height: mediaH / 10.5,
       decoration: BoxDecoration(color: appTheme.gray500),
       padding: EdgeInsets.only(
-        left: mediaQueryData.size.width / 20,
-        right: mediaQueryData.size.width / 20,
+        left: mediaW / 20,
+        right: mediaW / 20,
       ),
       child: BottomNavigationBar(
         backgroundColor: Color.fromARGB(0, 255, 0, 0),
@@ -38,8 +40,8 @@ class CustomBottomBar extends StatelessWidget {
             // before
             icon: Column(
               children: [
-                Padding(padding: EdgeInsets.only(top: mediaQueryData.size.height / 100)),
-                CustomImageView(imagePath: bottomMenuList[index].icon, width: mediaQueryData.size.width / 20, color: appTheme.white),
+                Padding(padding: EdgeInsets.only(top: mediaH / 100)),
+                CustomImageView(imagePath: bottomMenuList[index].icon, width: mediaW / 20, color: appTheme.white),
                 Padding(padding: EdgeInsets.only(top: 2), child: Text(bottomMenuList[index].label!, style: CustomTextStyles.mainButtonW)),
               ],
             ),
@@ -47,10 +49,10 @@ class CustomBottomBar extends StatelessWidget {
             // after
             activeIcon: Column(
               children: [
-                Padding(padding: EdgeInsets.only(top: mediaQueryData.size.height / 100)),
+                Padding(padding: EdgeInsets.only(top: mediaH / 100)),
                 CustomImageView(
                   imagePath: bottomMenuList[index].activeIcon,
-                  width: mediaQueryData.size.width / 20,
+                  width: mediaW / 20,
                   color: appTheme.cyan600,
                 ),
                 Padding(padding: EdgeInsets.only(top: 2), child: Text(bottomMenuList[index].label!, style: CustomTextStyles.mainButtonC)),

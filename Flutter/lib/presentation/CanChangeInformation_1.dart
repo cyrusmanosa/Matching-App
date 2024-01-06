@@ -61,6 +61,8 @@ class CanChangeInformation_1 extends StatelessWidget {
 
   void showErrorDialog(BuildContext context, String errorMessage) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     showDialog(
       context: context,
       builder: (context) {
@@ -69,21 +71,21 @@ class CanChangeInformation_1 extends StatelessWidget {
           // Error Logo
           title: CustomImageView(
             imagePath: ImageConstant.imgWarning,
-            height: mediaQueryData.size.height / 20,
-            width: mediaQueryData.size.width / 10,
+            height: mediaH / 20,
+            width: mediaW / 10,
             alignment: Alignment.center,
           ),
 
           // Word
           content: Container(
-            width: mediaQueryData.size.width / 1.1,
+            width: mediaW / 1.1,
             child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
           ),
           actions: [
             CustomOutlinedButton(
               text: "OK",
               alignment: Alignment.center,
-              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
+              margin: EdgeInsets.only(bottom: mediaH / 100),
               onPressed: () {
                 onTapReturn(context);
               },
@@ -97,40 +99,42 @@ class CanChangeInformation_1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return Scaffold(
       appBar: _buildHeader(context),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+        padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
         child: Column(
           children: [
             // _buildHeader(context),
             // Nick Name
             CustomInputBar(titleName: "ニックネーム:", backendPart: _buildcanChangeNickNameInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // City
             CustomInputBar(titleName: "居住地:", backendPart: _buildcanChangeCityInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // Sexual
             CustomInputBar(titleName: "性的指向:", backendPart: _buildcanChangeSexualInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // Height
             CustomInputBar(titleName: "身長:", backendPart: _buildcanChangeHeightInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // Weight
             CustomInputBar(titleName: "体重:", backendPart: _buildcanChangeWeightInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // Speak Language
             CustomInputBar(titleName: "言語:", backendPart: _buildcanChangeSpeakLanguageInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // Job
             CustomInputBar(titleName: "学歴:", backendPart: _buildcanChangeEducationInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 25),
+            SizedBox(height: mediaH / 25),
 
             // Button
             _buildNextButton(context),

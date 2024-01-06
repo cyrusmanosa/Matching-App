@@ -7,6 +7,8 @@ class PayDone extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     bool isPageNavigated = false;
 
     Future.delayed(
@@ -22,14 +24,14 @@ class PayDone extends StatelessWidget {
     return Scaffold(
       body: Container(
         width: double.maxFinite,
-        padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+        padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
         child: Column(
           children: [
             // Logo and Slogan
-            SizedBox(height: mediaQueryData.size.height / 30),
-            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 3.5),
-            CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3),
-            SizedBox(height: mediaQueryData.size.height / 30),
+            SizedBox(height: mediaH / 30),
+            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 3.5),
+            CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3),
+            SizedBox(height: mediaH / 30),
 
             // Title
             Text("お支払いOK", style: TextStyle(fontSize: 40, color: appTheme.black)),

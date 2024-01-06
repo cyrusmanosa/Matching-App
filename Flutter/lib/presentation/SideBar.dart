@@ -8,6 +8,8 @@ class SideBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     mediaQueryData = MediaQuery.of(context);
 
     return Scaffold(
@@ -30,26 +32,26 @@ class SideBar extends StatelessWidget {
               _buildUserRow(context),
               SizedBox(height: 31),
               _buildCheckPointRow(context),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // 写真解放
               CustomSideBar(item: "写真解放"),
-              SizedBox(height: mediaQueryData.size.height / 25),
+              SizedBox(height: mediaH / 25),
               // 連絡解放
               CustomSideBar(item: "連絡解放"),
-              SizedBox(height: mediaQueryData.size.height / 25),
+              SizedBox(height: mediaH / 25),
 
               // 位置共有
               CustomSideBar(item: "位置共有"),
-              SizedBox(height: mediaQueryData.size.height / 25),
+              SizedBox(height: mediaH / 25),
 
               // デート解放
               CustomSideBar(item: "デート解放"),
-              SizedBox(height: mediaQueryData.size.height / 25),
+              SizedBox(height: mediaH / 25),
 
               // SNS共有
               CustomSideBar(item: "SNS共有"),
-              SizedBox(height: mediaQueryData.size.height / 25),
+              SizedBox(height: mediaH / 25),
             ],
           ),
         ),

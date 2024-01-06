@@ -5,7 +5,7 @@ import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_chatRecord.pb.dart';
 import 'package:dating_your_date/pb/rpc_images.pb.dart';
 import 'package:dating_your_date/presentation/Chat/widgets/conversationList.dart';
-import 'package:dating_your_date/widgets/Custom_WarningMsgBox.dart';
+import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
@@ -56,7 +56,7 @@ class _ChatState extends State<Chat> {
           userid: targetID[i],
           img: imgResponse.img.img1,
           info: infoResponse.canChangeInfo,
-          lastMsg: lmsgResponse.message,
+          lastMsg: lmsgResponse.media,
           isRead: lmsgResponse.isread,
         ));
       } on GrpcError {
@@ -72,6 +72,8 @@ class _ChatState extends State<Chat> {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return Scaffold(
       body: FutureBuilder<List<TargetInfos>>(
         future: getUserInfoGrpcRequest(context),
@@ -83,13 +85,13 @@ class _ChatState extends State<Chat> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: mediaQueryData.size.width / 20, top: mediaQueryData.size.height / 15),
+                    padding: EdgeInsets.only(left: mediaW / 20, top: mediaH / 15),
                     child: Text("Conversations", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                   ),
                   ListView.separated(
                     itemCount: data.length,
                     shrinkWrap: true,
-                    padding: EdgeInsets.only(top: mediaQueryData.size.height / 50),
+                    padding: EdgeInsets.only(top: mediaH / 50),
                     physics: NeverScrollableScrollPhysics(),
                     separatorBuilder: (context, index) => Divider(),
                     itemBuilder: (context, index) {

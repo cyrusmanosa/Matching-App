@@ -33,7 +33,6 @@ const CreateChatRecordRequest$json = {
     {'1': 'TargetID', '3': 2, '4': 1, '5': 5, '10': 'TargetID'},
     {'1': 'RoleType', '3': 3, '4': 1, '5': 9, '10': 'RoleType'},
     {'1': 'MediaType', '3': 4, '4': 1, '5': 9, '10': 'MediaType'},
-    {'1': 'Message', '3': 5, '4': 1, '5': 9, '10': 'Message'},
     {'1': 'Media', '3': 6, '4': 1, '5': 9, '10': 'Media'},
   ],
 };
@@ -42,8 +41,7 @@ const CreateChatRecordRequest$json = {
 final $typed_data.Uint8List createChatRecordRequestDescriptor = $convert.base64Decode(
     'ChdDcmVhdGVDaGF0UmVjb3JkUmVxdWVzdBIWCgZVc2VySUQYASABKAVSBlVzZXJJRBIaCghUYX'
     'JnZXRJRBgCIAEoBVIIVGFyZ2V0SUQSGgoIUm9sZVR5cGUYAyABKAlSCFJvbGVUeXBlEhwKCU1l'
-    'ZGlhVHlwZRgEIAEoCVIJTWVkaWFUeXBlEhgKB01lc3NhZ2UYBSABKAlSB01lc3NhZ2USFAoFTW'
-    'VkaWEYBiABKAlSBU1lZGlh');
+    'ZGlhVHlwZRgEIAEoCVIJTWVkaWFUeXBlEhQKBU1lZGlhGAYgASgJUgVNZWRpYQ==');
 
 @$core.Deprecated('Use createChatRecordResponseDescriptor instead')
 const CreateChatRecordResponse$json = {
@@ -128,15 +126,15 @@ const GetLastMsgResponse$json = {
   '1': 'GetLastMsgResponse',
   '2': [
     {'1': 'MediaType', '3': 1, '4': 1, '5': 9, '10': 'MediaType'},
-    {'1': 'Message', '3': 2, '4': 1, '5': 9, '10': 'Message'},
+    {'1': 'Media', '3': 2, '4': 1, '5': 9, '10': 'Media'},
     {'1': 'Isread', '3': 3, '4': 1, '5': 8, '10': 'Isread'},
   ],
 };
 
 /// Descriptor for `GetLastMsgResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getLastMsgResponseDescriptor = $convert.base64Decode(
-    'ChJHZXRMYXN0TXNnUmVzcG9uc2USHAoJTWVkaWFUeXBlGAEgASgJUglNZWRpYVR5cGUSGAoHTW'
-    'Vzc2FnZRgCIAEoCVIHTWVzc2FnZRIWCgZJc3JlYWQYAyABKAhSBklzcmVhZA==');
+    'ChJHZXRMYXN0TXNnUmVzcG9uc2USHAoJTWVkaWFUeXBlGAEgASgJUglNZWRpYVR5cGUSFAoFTW'
+    'VkaWEYAiABKAlSBU1lZGlhEhYKBklzcmVhZBgDIAEoCFIGSXNyZWFk');
 
 @$core.Deprecated('Use updateChatRecordRequestDescriptor instead')
 const UpdateChatRecordRequest$json = {
@@ -146,7 +144,7 @@ const UpdateChatRecordRequest$json = {
     {'1': 'TargetID', '3': 2, '4': 1, '5': 5, '10': 'TargetID'},
     {'1': 'RoleType', '3': 3, '4': 1, '5': 9, '10': 'RoleType'},
     {'1': 'MediaType', '3': 4, '4': 1, '5': 9, '10': 'MediaType'},
-    {'1': 'Message', '3': 5, '4': 1, '5': 9, '10': 'Message'},
+    {'1': 'Media', '3': 5, '4': 1, '5': 9, '10': 'Media'},
     {'1': 'CreateAt', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'CreateAt'},
   ],
 };
@@ -155,8 +153,8 @@ const UpdateChatRecordRequest$json = {
 final $typed_data.Uint8List updateChatRecordRequestDescriptor = $convert.base64Decode(
     'ChdVcGRhdGVDaGF0UmVjb3JkUmVxdWVzdBIWCgZVc2VySUQYASABKAVSBlVzZXJJRBIaCghUYX'
     'JnZXRJRBgCIAEoBVIIVGFyZ2V0SUQSGgoIUm9sZVR5cGUYAyABKAlSCFJvbGVUeXBlEhwKCU1l'
-    'ZGlhVHlwZRgEIAEoCVIJTWVkaWFUeXBlEhgKB01lc3NhZ2UYBSABKAlSB01lc3NhZ2USNgoIQ3'
-    'JlYXRlQXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUghDcmVhdGVBdA==');
+    'ZGlhVHlwZRgEIAEoCVIJTWVkaWFUeXBlEhQKBU1lZGlhGAUgASgJUgVNZWRpYRI2CghDcmVhdG'
+    'VBdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCENyZWF0ZUF0');
 
 @$core.Deprecated('Use updateChatRecordResponseDescriptor instead')
 const UpdateChatRecordResponse$json = {

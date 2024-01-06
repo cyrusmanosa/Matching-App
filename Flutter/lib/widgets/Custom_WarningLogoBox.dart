@@ -7,29 +7,26 @@ import 'package:flutter/material.dart';
 
 void showErrorDialog(BuildContext context, String errorMessage) {
   MediaQueryData mediaQueryData = MediaQuery.of(context);
+  double mediaH = mediaQueryData.size.height;
+  double mediaW = mediaQueryData.size.width;
   showDialog(
     context: context,
     builder: (context) {
       return AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
         // Error Logo
-        title: CustomImageView(
-          imagePath: ImageConstant.imgWarning,
-          height: mediaQueryData.size.height / 20,
-          width: mediaQueryData.size.width / 10,
-          alignment: Alignment.center,
-        ),
+        title: CustomImageView(imagePath: ImageConstant.imgWarning, height: mediaH / 20, width: mediaW / 10, alignment: Alignment.center),
 
         // Word
         content: Container(
-          width: mediaQueryData.size.width / 1.1,
+          width: mediaW / 1.1,
           child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
         ),
         actions: [
           CustomOutlinedButton(
             alignment: Alignment.center,
             text: "OK",
-            margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
+            margin: EdgeInsets.only(bottom: mediaH / 100),
             onPressed: () {
               onTapReturn(context);
             },

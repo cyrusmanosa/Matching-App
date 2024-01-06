@@ -1748,9 +1748,6 @@
         "MediaType": {
           "type": "string"
         },
-        "Message": {
-          "type": "string"
-        },
         "Media": {
           "type": "string"
         },
@@ -1770,9 +1767,6 @@
           "type": "string"
         },
         "MediaType": {
-          "type": "string"
-        },
-        "Message": {
           "type": "string"
         },
         "Media": {
@@ -1984,9 +1978,6 @@
           "type": "string"
         },
         "MediaType": {
-          "type": "string"
-        },
-        "Message": {
           "type": "string"
         },
         "Media": {
@@ -2390,7 +2381,7 @@
         "MediaType": {
           "type": "string"
         },
-        "Message": {
+        "Media": {
           "type": "string"
         },
         "Isread": {
@@ -2825,7 +2816,7 @@
         "MediaType": {
           "type": "string"
         },
-        "Message": {
+        "Media": {
           "type": "string"
         },
         "CreateAt": {

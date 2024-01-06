@@ -28,8 +28,8 @@ func (server *Server) CreateChatRecord(ctx context.Context, req *pb.CreateChatRe
 	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
 	chat := ch.CreateRecordParams{
 		TargetID:  req.GetTargetID(),
+		RoleType:  req.GetRoleType(),
 		MediaType: req.GetMediaType(),
-		Message:   req.GetMessage(),
 		Media:     req.GetMedia(),
 	}
 
@@ -101,7 +101,7 @@ func (server *Server) GetLastMsg(ctx context.Context, req *pb.GetLastMsgRequest)
 
 	rsp := &pb.GetLastMsgResponse{
 		MediaType: lmsg.MediaType,
-		Message:   lmsg.Message,
+		Media:     lmsg.Media,
 		Isread:    lmsg.Isread,
 	}
 
@@ -117,7 +117,7 @@ func (server *Server) UpdateChatRecord(ctx context.Context, req *pb.UpdateChatRe
 	chat := ch.UpdateRecordParams{
 		TargetID:  req.GetTargetID(),
 		MediaType: req.GetMediaType(),
-		Message:   req.GetMessage(),
+		Media:     req.GetMedia(),
 		CreatedAt: timeValue,
 	}
 

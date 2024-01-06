@@ -20,7 +20,6 @@ message CreateChatRecordRequest {
     int32 TargetID = 2;
     string RoleType = 3;
     string MediaType = 4;
-    string Message = 5;
     string Media = 6;
 }
 
@@ -55,7 +54,7 @@ message GetLastMsgRequest{
 
 message GetLastMsgResponse{
     string MediaType = 1;
-    string Message = 2;
+    string Media = 2;
     bool Isread = 3;
 }
 
@@ -65,7 +64,7 @@ message UpdateChatRecordRequest {
     int32 TargetID = 2;
     string RoleType = 3;
     string MediaType = 4;
-    string Message = 5;
+    string Media = 5;
     google.protobuf.Timestamp CreateAt = 6;
 }
 

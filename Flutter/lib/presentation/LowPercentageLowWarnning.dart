@@ -8,17 +8,18 @@ class LowPercentageLowWarnning extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
-
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return Scaffold(
       body: Container(
         width: double.maxFinite,
-        padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+        padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
         child: Column(
           children: [
             // logo
             CustomImageView(
               imagePath: ImageConstant.imgLogo,
-              width: mediaQueryData.size.width / 4,
+              width: mediaW / 4,
               alignment: Alignment.center,
             ),
             SizedBox(height: 1),
@@ -38,7 +39,7 @@ class LowPercentageLowWarnning extends StatelessWidget {
                 style: theme.textTheme.headlineSmall,
               ),
             ),
-            SizedBox(height: mediaQueryData.size.height / 25),
+            SizedBox(height: mediaH / 25),
 
             // Button
             Padding(

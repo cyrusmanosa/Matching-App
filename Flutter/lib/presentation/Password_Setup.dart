@@ -57,6 +57,8 @@ class _PasswordSetupState extends State<PasswordSetup> {
 
   void showErrorDialog(BuildContext context, String errorMessage) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     showDialog(
       context: context,
       builder: (context) {
@@ -65,21 +67,21 @@ class _PasswordSetupState extends State<PasswordSetup> {
           // Error Logo
           title: CustomImageView(
             imagePath: ImageConstant.imgWarning,
-            height: mediaQueryData.size.height / 20,
-            width: mediaQueryData.size.width / 10,
+            height: mediaH / 20,
+            width: mediaW / 10,
             alignment: Alignment.center,
           ),
 
           // Word
           content: Container(
-            width: mediaQueryData.size.width / 1.1,
+            width: mediaW / 1.1,
             child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
           ),
           actions: [
             CustomOutlinedButton(
               text: "OK",
               alignment: Alignment.center,
-              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
+              margin: EdgeInsets.only(bottom: mediaH / 100),
               onPressed: () {
                 onTapReturn(context);
               },
@@ -104,27 +106,29 @@ class _PasswordSetupState extends State<PasswordSetup> {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+        padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
         child: Column(
           children: [
             // Logo and Slogan
-            SizedBox(height: mediaQueryData.size.height / 15),
-            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 3.5),
-            CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3),
-            SizedBox(height: mediaQueryData.size.height / 30),
+            SizedBox(height: mediaH / 15),
+            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 3.5),
+            CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3),
+            SizedBox(height: mediaH / 30),
 
             // New Password
             CustomInputBar(titleName: "パスワード", backendPart: _buildPasswordInput(context)),
 
             // msg
             Align(alignment: Alignment.centerLeft, child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.pwRuleGray500)),
-            SizedBox(height: mediaQueryData.size.height / 25),
+            SizedBox(height: mediaH / 25),
 
             // New Password Confirm
             CustomInputBar(titleName: "パスワード（確認）", backendPart: _buildPasswordConfirm(context)),
-            SizedBox(height: mediaQueryData.size.height / 25),
+            SizedBox(height: mediaH / 25),
 
             // Button
             _buildNextButton(context)

@@ -12,6 +12,8 @@ class DeleteTarget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return Scaffold(
       appBar: _buildHeader(context),
       body: Container(
@@ -20,7 +22,7 @@ class DeleteTarget extends StatelessWidget {
         child: Column(
           children: [
             // Chooes
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // Button
             CustomOutlinedButton(
@@ -29,7 +31,7 @@ class DeleteTarget extends StatelessWidget {
                 onTapNextPage(context);
               },
             ),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
           ],
         ),
       ),

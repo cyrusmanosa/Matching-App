@@ -75,7 +75,6 @@ class CreateChatRecordRequest extends $pb.GeneratedMessage {
     $core.int? targetID,
     $core.String? roleType,
     $core.String? mediaType,
-    $core.String? message,
     $core.String? media,
   }) {
     final $result = create();
@@ -91,9 +90,6 @@ class CreateChatRecordRequest extends $pb.GeneratedMessage {
     if (mediaType != null) {
       $result.mediaType = mediaType;
     }
-    if (message != null) {
-      $result.message = message;
-    }
     if (media != null) {
       $result.media = media;
     }
@@ -108,7 +104,6 @@ class CreateChatRecordRequest extends $pb.GeneratedMessage {
     ..a<$core.int>(2, _omitFieldNames ? '' : 'TargetID', $pb.PbFieldType.O3, protoName: 'TargetID')
     ..aOS(3, _omitFieldNames ? '' : 'RoleType', protoName: 'RoleType')
     ..aOS(4, _omitFieldNames ? '' : 'MediaType', protoName: 'MediaType')
-    ..aOS(5, _omitFieldNames ? '' : 'Message', protoName: 'Message')
     ..aOS(6, _omitFieldNames ? '' : 'Media', protoName: 'Media')
     ..hasRequiredFields = false
   ;
@@ -170,21 +165,12 @@ class CreateChatRecordRequest extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   void clearMediaType() => clearField(4);
 
-  @$pb.TagNumber(5)
-  $core.String get message => $_getSZ(4);
-  @$pb.TagNumber(5)
-  set message($core.String v) { $_setString(4, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasMessage() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearMessage() => clearField(5);
-
   @$pb.TagNumber(6)
-  $core.String get media => $_getSZ(5);
+  $core.String get media => $_getSZ(4);
   @$pb.TagNumber(6)
-  set media($core.String v) { $_setString(5, v); }
+  set media($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(6)
-  $core.bool hasMedia() => $_has(5);
+  $core.bool hasMedia() => $_has(4);
   @$pb.TagNumber(6)
   void clearMedia() => clearField(6);
 }
@@ -513,15 +499,15 @@ class GetLastMsgRequest extends $pb.GeneratedMessage {
 class GetLastMsgResponse extends $pb.GeneratedMessage {
   factory GetLastMsgResponse({
     $core.String? mediaType,
-    $core.String? message,
+    $core.String? media,
     $core.bool? isread,
   }) {
     final $result = create();
     if (mediaType != null) {
       $result.mediaType = mediaType;
     }
-    if (message != null) {
-      $result.message = message;
+    if (media != null) {
+      $result.media = media;
     }
     if (isread != null) {
       $result.isread = isread;
@@ -534,7 +520,7 @@ class GetLastMsgResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetLastMsgResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'MediaType', protoName: 'MediaType')
-    ..aOS(2, _omitFieldNames ? '' : 'Message', protoName: 'Message')
+    ..aOS(2, _omitFieldNames ? '' : 'Media', protoName: 'Media')
     ..aOB(3, _omitFieldNames ? '' : 'Isread', protoName: 'Isread')
     ..hasRequiredFields = false
   ;
@@ -570,13 +556,13 @@ class GetLastMsgResponse extends $pb.GeneratedMessage {
   void clearMediaType() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get message => $_getSZ(1);
+  $core.String get media => $_getSZ(1);
   @$pb.TagNumber(2)
-  set message($core.String v) { $_setString(1, v); }
+  set media($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasMessage() => $_has(1);
+  $core.bool hasMedia() => $_has(1);
   @$pb.TagNumber(2)
-  void clearMessage() => clearField(2);
+  void clearMedia() => clearField(2);
 
   @$pb.TagNumber(3)
   $core.bool get isread => $_getBF(2);
@@ -595,7 +581,7 @@ class UpdateChatRecordRequest extends $pb.GeneratedMessage {
     $core.int? targetID,
     $core.String? roleType,
     $core.String? mediaType,
-    $core.String? message,
+    $core.String? media,
     $16.Timestamp? createAt,
   }) {
     final $result = create();
@@ -611,8 +597,8 @@ class UpdateChatRecordRequest extends $pb.GeneratedMessage {
     if (mediaType != null) {
       $result.mediaType = mediaType;
     }
-    if (message != null) {
-      $result.message = message;
+    if (media != null) {
+      $result.media = media;
     }
     if (createAt != null) {
       $result.createAt = createAt;
@@ -628,7 +614,7 @@ class UpdateChatRecordRequest extends $pb.GeneratedMessage {
     ..a<$core.int>(2, _omitFieldNames ? '' : 'TargetID', $pb.PbFieldType.O3, protoName: 'TargetID')
     ..aOS(3, _omitFieldNames ? '' : 'RoleType', protoName: 'RoleType')
     ..aOS(4, _omitFieldNames ? '' : 'MediaType', protoName: 'MediaType')
-    ..aOS(5, _omitFieldNames ? '' : 'Message', protoName: 'Message')
+    ..aOS(5, _omitFieldNames ? '' : 'Media', protoName: 'Media')
     ..aOM<$16.Timestamp>(6, _omitFieldNames ? '' : 'CreateAt', protoName: 'CreateAt', subBuilder: $16.Timestamp.create)
     ..hasRequiredFields = false
   ;
@@ -691,13 +677,13 @@ class UpdateChatRecordRequest extends $pb.GeneratedMessage {
   void clearMediaType() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get message => $_getSZ(4);
+  $core.String get media => $_getSZ(4);
   @$pb.TagNumber(5)
-  set message($core.String v) { $_setString(4, v); }
+  set media($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasMessage() => $_has(4);
+  $core.bool hasMedia() => $_has(4);
   @$pb.TagNumber(5)
-  void clearMessage() => clearField(5);
+  void clearMedia() => clearField(5);
 
   @$pb.TagNumber(6)
   $16.Timestamp get createAt => $_getN(5);

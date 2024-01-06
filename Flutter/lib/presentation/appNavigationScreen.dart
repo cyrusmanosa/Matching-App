@@ -191,13 +191,15 @@ class AppNavigationScreen extends StatelessWidget {
   /// Section Widget
   Widget _buildAppNavigation(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return Container(
       decoration: BoxDecoration(
         color: Color(0XFFFFFFFF),
       ),
       child: Column(
         children: [
-          SizedBox(height: mediaQueryData.size.height / 50),
+          SizedBox(height: mediaH / 50),
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
@@ -214,7 +216,7 @@ class AppNavigationScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: mediaQueryData.size.height / 50),
+          SizedBox(height: mediaH / 50),
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
@@ -241,6 +243,8 @@ class AppNavigationScreen extends StatelessWidget {
   /// Common widget
   Widget _buildScreenTitle(BuildContext context, {required String userName, Function? onTapScreenTitle}) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return GestureDetector(
       onTap: () {
         onTapScreenTitle!.call();
@@ -251,7 +255,7 @@ class AppNavigationScreen extends StatelessWidget {
         ),
         child: Column(
           children: [
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
@@ -268,7 +272,7 @@ class AppNavigationScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
             SizedBox(height: 5),
             Divider(
               height: 1,

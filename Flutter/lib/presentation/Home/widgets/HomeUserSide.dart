@@ -7,8 +7,10 @@ class MainframeItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return SizedBox(
-      width: mediaQueryData.size.width / 1.2,
+      width: mediaW / 1.2,
       child: Column(
         children: [
           Row(
@@ -19,8 +21,8 @@ class MainframeItemWidget extends StatelessWidget {
             ],
           ),
           Container(
-            height: mediaQueryData.size.height / 1.7,
-            width: mediaQueryData.size.width / 1.2,
+            height: mediaH / 1.7,
+            width: mediaW / 1.2,
             decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadiusStyle.r30),
           ),
         ],

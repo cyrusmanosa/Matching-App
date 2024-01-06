@@ -10,8 +10,7 @@ message ChatRecord{
     int32 TargetID = 1;
     string RoleType = 2;
     string MediaType = 3;
-    string Message = 4;
-    string Media = 5;
-    bool Isread = 6;
-    google.protobuf.Timestamp CreatedAt = 7;
+    string Media = 4;
+    bool Isread = 5;
+    google.protobuf.Timestamp CreatedAt = 6;
 }

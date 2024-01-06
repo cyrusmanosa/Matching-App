@@ -7,6 +7,8 @@ class NewPasswordDone extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return Scaffold(
       body: Container(
         width: double.maxFinite,
@@ -14,10 +16,10 @@ class NewPasswordDone extends StatelessWidget {
         child: Column(
           children: [
             // Logo and Slogan
-            SizedBox(height: mediaQueryData.size.height / 30),
-            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 3.5),
-            CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3),
-            SizedBox(height: mediaQueryData.size.height / 30),
+            SizedBox(height: mediaH / 30),
+            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 3.5),
+            CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3),
+            SizedBox(height: mediaH / 30),
 
             // Title 1
             Text("新しいパスワード設定しました", style: TextStyle(fontSize: 25, color: appTheme.black)),

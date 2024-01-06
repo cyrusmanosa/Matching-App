@@ -39,15 +39,17 @@ class CustomOutlinedButton extends BaseButton {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return alignment != null
-        ? Align(alignment: alignment ?? Alignment.center, child: buildOutlinedButtonWidget(mediaQueryData))
-        : buildOutlinedButtonWidget(mediaQueryData);
+        ? Align(alignment: alignment ?? Alignment.center, child: buildOutlinedButtonWidget(mediaH, mediaW))
+        : buildOutlinedButtonWidget(mediaH, mediaW);
   }
 
-  Widget buildOutlinedButtonWidget(MediaQueryData mediaQueryData) {
+  Widget buildOutlinedButtonWidget(double mediaH, double mediaW) {
     return Container(
-      height: height ?? mediaQueryData.size.height / 25,
-      width: width ?? mediaQueryData.size.width / 4,
+      height: height ?? mediaH / 25,
+      width: width ?? mediaW / 4,
       margin: margin,
       decoration: decoration,
       child: OutlinedButton(

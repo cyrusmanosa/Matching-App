@@ -7,23 +7,25 @@ class TargetReady extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     mediaQueryData = MediaQuery.of(context);
 
     return Scaffold(
       body: Container(
         width: double.maxFinite,
-        padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+        padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
         child: Column(
           children: [
             // logo
-            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 4, alignment: Alignment.center),
+            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4, alignment: Alignment.center),
             SizedBox(height: 1),
 
             CustomImageView(imagePath: ImageConstant.imgSlogan, width: 150, alignment: Alignment.center),
             SizedBox(height: 75),
 
             Text("ターゲットを準備します", style: theme.textTheme.headlineMedium),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
           ],
         ),
       ),

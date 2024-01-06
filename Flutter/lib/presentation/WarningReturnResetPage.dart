@@ -8,8 +8,8 @@
 //   @override
 //   Widget build(BuildContext context) {
 //     MediaQueryData mediaQueryData = MediaQuery.of(context);
-//     mediaQueryData = MediaQuery.of(context);
-
+// double mediaH = mediaQueryData.size.height;
+// double mediaW = mediaQueryData.size.width;
 //     return CustomWarningMsgBox(
 //       btnTitle: "了解",
 //       msg: "一旦、確認するボタンを押したら、条件はもう一度設定しますのでお確認してください",

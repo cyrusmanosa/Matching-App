@@ -38,6 +38,8 @@ class ConfirmationCore extends StatelessWidget {
 
   void showErrorDialog(BuildContext context, String errorMessage) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     showDialog(
       context: context,
       builder: (context) {
@@ -46,21 +48,21 @@ class ConfirmationCore extends StatelessWidget {
           // Error Logo
           title: CustomImageView(
             imagePath: ImageConstant.imgWarning,
-            height: mediaQueryData.size.height / 20,
-            width: mediaQueryData.size.width / 10,
+            height: mediaH / 20,
+            width: mediaW / 10,
             alignment: Alignment.center,
           ),
 
           // Word
           content: Container(
-            width: mediaQueryData.size.width / 1.1,
+            width: mediaW / 1.1,
             child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
           ),
           actions: [
             CustomOutlinedButton(
               text: "OK",
               alignment: Alignment.center,
-              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
+              margin: EdgeInsets.only(bottom: mediaH / 100),
               onPressed: () {
                 onTapReturn(context);
               },
@@ -74,27 +76,29 @@ class ConfirmationCore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+        padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
         child: Column(
           children: [
             // Logo and Slogan
-            SizedBox(height: mediaQueryData.size.height / 15),
-            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 4.5),
-            CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3.5),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 15),
+            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4.5),
+            CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3.5),
+            SizedBox(height: mediaH / 50),
 
             // Title
             Align(
               alignment: Alignment.centerLeft,
               child: Text("以下にコードを認証してください。", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
             ),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // Input
             CustomInputBar(titleName: "認証コード:", backendPart: _buildConfirmationCoreInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 350),
+            SizedBox(height: mediaH / 350),
 
             // reset password
             Align(
@@ -104,12 +108,12 @@ class ConfirmationCore extends StatelessWidget {
                   onTapReturn(context);
                 },
                 child: Padding(
-                  padding: EdgeInsets.only(left: mediaQueryData.size.width / 100),
+                  padding: EdgeInsets.only(left: mediaW / 100),
                   child: Text("コードは届かない場合", style: CustomTextStyles.wordOnlySmallButton),
                 ),
               ),
             ),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // button
             _buildNextButton(context),

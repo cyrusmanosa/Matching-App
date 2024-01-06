@@ -16,7 +16,6 @@ func (q *Queries) CreateChatTable(ctx context.Context, tablename string) error {
         "target_id" INT UNIQUE NOT NULL,
         "role_type" VARCHAR NOT NULL,
         "media_type" VARCHAR NOT NULL,
-        "message" VARCHAR,
         "media" VARCHAR,
         "isRead" BOOLEAN,
         "created_at" TIMESTAMPTZ NOT NULL DEFAULT (now())
@@ -31,7 +30,6 @@ type CreateRecordParams struct {
     TargetID  int32     `json:"target_id"`
     RoleType  string    `json:"role_type"`
     MediaType string    `json:"media_type"`
-    Message   string    `json:"message"`
     Media     string    `json:"media"`
     Isread    bool      `json:"isread"`
 }
@@ -43,19 +41,17 @@ func (q *Queries) CreateRecord(ctx context.Context, arg CreateRecordParams, tabl
         target_id,
         role_type,
         media_type,
-        message,
         media,
         isread
     ) VALUES (
-        $1,$2,$3,$4,$5,$6
-    ) RETURNING target_id, role_type, media_type, message, media, isread,created_at
+        $1,$2,$3,$4,$5
+    ) RETURNING target_id, role_type, media_type, media, isread,created_at
     `,tablename)
     
     row := q.db.QueryRow(ctx, createRecord,
         arg.TargetID,
         arg.RoleType,
         arg.MediaType,
-        arg.Message,
         arg.Media,
         arg.Isread,
     )
@@ -64,7 +60,6 @@ func (q *Queries) CreateRecord(ctx context.Context, arg CreateRecordParams, tabl
         &i.TargetID,
         &i.RoleType,
         &i.MediaType,
-        &i.Message,
         &i.Media,
         &i.Isread,
         &i.CreatedAt,
@@ -90,7 +85,7 @@ func (q *Queries) DeleteRecord(ctx context.Context, arg DeleteRecordParams, tabl
 
 func (q *Queries) GetRecord(ctx context.Context, targetID int32, tablename string) ([]Record, error) {  
     getRecord := fmt.Sprintf(`-- name: GetRecord :many
-    SELECT target_id, role_type, media_type, message, media, isread,created_at FROM %s
+    SELECT target_id, role_type, media_type, media, isread,created_at FROM %s
     WHERE target_id = $1
     ORDER BY created_at
     `,tablename)
@@ -107,7 +102,6 @@ func (q *Queries) GetRecord(ctx context.Context, targetID int32, tablename strin
             &i.TargetID,
             &i.RoleType,
             &i.MediaType,
-            &i.Message,
             &i.Media,
             &i.Isread,
             &i.CreatedAt,
@@ -149,7 +143,7 @@ func (q *Queries) GetTargetID(ctx context.Context,tablename string) ([]int32, er
 
 
 type GetLastMsgRow struct {
-    Message   string    `json:"message"`
+    Media   string    `json:"media"`
     MediaType string    `json:"media_type"`
     Isread    bool      `json:"isread"`
 }
@@ -157,7 +151,7 @@ type GetLastMsgRow struct {
 func (q *Queries) GetLastMsg(ctx context.Context, targetID int32, tablename string) (GetLastMsgRow, error) {
 
 	getLastMsg := fmt.Sprintf(`-- name: GetLastMsg :one
-	SELECT message,media_type,isread FROM %s
+	SELECT media,media_type,isread FROM %s
 	WHERE target_id = $1
 	ORDER BY created_at DESC
 	LIMIT 1
@@ -165,7 +159,7 @@ func (q *Queries) GetLastMsg(ctx context.Context, targetID int32, tablename stri
 
     row := q.db.QueryRow(ctx, getLastMsg, targetID)
     var i GetLastMsgRow
-    err := row.Scan(&i.Message, &i.MediaType, &i.Isread)
+    err := row.Scan(&i.Media, &i.MediaType, &i.Isread)
     return i, err
 }
 
@@ -174,7 +168,7 @@ func (q *Queries) GetLastMsg(ctx context.Context, targetID int32, tablename stri
 type UpdateRecordParams struct {
     TargetID  int32         `json:"target_id"`
     MediaType string        `json:"media_type"`
-    Message   string        `json:"message"`
+    Media   string        `json:"message"`
     CreatedAt time.Time     `json:"created_at"`
 }
 
@@ -182,25 +176,24 @@ func (q *Queries) UpdateRecord(ctx context.Context, arg UpdateRecordParams, tabl
     
     updateRecord := fmt.Sprintf(`-- name: UpdateRecord :one
     UPDATE %s
-    SET message = $4
+    SET media = $4
     WHERE target_id = $1
     AND media_type = $2
     AND created_at = $3
-    RETURNING target_id, role_type, media_type, message, media, isread, created_at
+    RETURNING target_id, role_type, media_type, media, isread, created_at
     `,tablename)
 
     row := q.db.QueryRow(ctx, updateRecord,
         arg.TargetID,
         arg.MediaType,
         arg.CreatedAt,
-        arg.Message,
+        arg.Media,
     )
     var i Record
     err := row.Scan(
         &i.TargetID,
         &i.RoleType,
         &i.MediaType,
-        &i.Message,
         &i.Media,
         &i.Isread,
         &i.CreatedAt,

@@ -73,7 +73,6 @@ class CanChangeInformation_2 extends StatelessWidget {
         religious: canChangeReligiousController.text,
         introduce: canChangeIntroduceController.text,
       );
-
       try {
         await GrpcInfoService.client.createCanChange(request);
         onTapNextPage(context);
@@ -85,29 +84,25 @@ class CanChangeInformation_2 extends StatelessWidget {
 
   void showErrorDialog(BuildContext context, String errorMessage) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
           // Error Logo
-          title: CustomImageView(
-            imagePath: ImageConstant.imgWarning,
-            height: mediaQueryData.size.height / 20,
-            width: mediaQueryData.size.width / 10,
-            alignment: Alignment.center,
-          ),
-
+          title: CustomImageView(imagePath: ImageConstant.imgWarning, height: mediaH / 20, width: mediaW / 10, alignment: Alignment.center),
           // Word
           content: Container(
-            width: mediaQueryData.size.width / 1.1,
+            width: mediaW / 1.1,
             child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
           ),
           actions: [
             CustomOutlinedButton(
               text: "OK",
               alignment: Alignment.center,
-              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
+              margin: EdgeInsets.only(bottom: mediaH / 100),
               onPressed: () {
                 onTapReturn(context);
               },
@@ -121,38 +116,40 @@ class CanChangeInformation_2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return Scaffold(
-      appBar: _buildHeader(context),
+      appBar: AppBar(automaticallyImplyLeading: true, title: AppbarTitle(text: "基本個人情報 - C")),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+        padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
         child: Column(
           children: [
             // Job
             CustomInputBar(titleName: "仕事:", backendPart: _buildcanChangeJobInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // Annual Salary
             CustomInputBar(titleName: "年収:", backendPart: _buildcanChangeAnnualSalaryInput(context)),
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: EdgeInsets.only(left: mediaQueryData.size.width / 100),
+                padding: EdgeInsets.only(left: mediaW / 100),
                 child: Text("＊入力しなくても大丈夫です。", style: CustomTextStyles.wordOnlySmallButton),
               ),
             ),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // Sociability
             CustomInputBar(titleName: "社交力:", backendPart: _buildcanChangeSociabilityInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // Religious
             CustomInputBar(titleName: "宗教:", backendPart: _buildcanChangeReligiousInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // Introduce
             CustomInputBar(titleName: "自己紹介:", backendPart: _buildcanChangeIntroduceInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 25),
+            SizedBox(height: mediaH / 25),
 
             _buildNextButton(context),
           ],
@@ -194,9 +191,11 @@ class CanChangeInformation_2 extends StatelessWidget {
   /// Introduce
   Widget _buildcanChangeIntroduceInput(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return CustomInputFormBar(
-      prefix: Padding(padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 75)),
-      height: mediaQueryData.size.height / 5,
+      prefix: Padding(padding: EdgeInsets.symmetric(horizontal: mediaW / 75)),
+      height: mediaH / 5,
       controller: canChangeIntroduceController,
       hintText: "亜dさdさだだ",
       textInputAction: TextInputAction.done,
@@ -205,7 +204,7 @@ class CanChangeInformation_2 extends StatelessWidget {
       onTap: () {
         FocusNode().requestFocus();
       },
-      contentPadding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.height / 200, vertical: mediaQueryData.size.width / 50),
+      contentPadding: EdgeInsets.symmetric(horizontal: mediaH / 200, vertical: mediaW / 50),
     );
   }
 

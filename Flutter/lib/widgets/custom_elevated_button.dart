@@ -36,15 +36,17 @@ class CustomElevatedButton extends BaseButton {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return alignment != null
-        ? Align(alignment: alignment ?? Alignment.center, child: buildElevatedButtonWidget(mediaQueryData))
-        : buildElevatedButtonWidget(mediaQueryData);
+        ? Align(alignment: alignment ?? Alignment.center, child: buildElevatedButtonWidget(mediaH, mediaW))
+        : buildElevatedButtonWidget(mediaH, mediaW);
   }
 
-  Widget buildElevatedButtonWidget(MediaQueryData mediaQueryData) {
+  Widget buildElevatedButtonWidget(double mediaH, double mediaW) {
     return Container(
-      height: height ?? mediaQueryData.size.height / 20,
-      width: width ?? mediaQueryData.size.width / 1.5,
+      height: height ?? mediaH / 20,
+      width: width ?? mediaW / 1.5,
       margin: margin,
       decoration: decoration,
       child: ElevatedButton(

@@ -6,7 +6,7 @@ import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
-import 'package:dating_your_date/widgets/Custom_WarningMsgBox.dart';
+import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -78,42 +78,44 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return Scaffold(
       appBar: _buildHeader(context),
       resizeToAvoidBottomInset: false,
       body: Container(
         width: double.maxFinite,
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+          padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
           child: Column(
             children: [
               // Era
               CustomInputBar(titleName: "年代:", backendPart: _buildAccompanyEraInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // City
               CustomInputBar(titleName: "居住地:", backendPart: _buildAccompanyCityInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // Gender
               CustomInputBar(titleName: "性別:", backendPart: _buildAccompanyGenderInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // Language
               CustomInputBar(titleName: "お喋れる言語:", backendPart: _buildAccompanySpeakLanguageInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // Accompany Type
               CustomInputBar(titleName: "お相伴のタイプ:", backendPart: _buildAccompanyFindTypeInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // Find Target
               CustomInputBar(titleName: "探す対象:", backendPart: _buildAccompanyFindTargetInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // Sociability
               CustomInputBar(titleName: "社交力:", backendPart: _buildAccompanySociabilityInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 40),
+              SizedBox(height: mediaH / 40),
 
               // 本人
               InkWell(
@@ -125,18 +127,18 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
                 child: Row(
                   children: [
                     Container(
-                      height: mediaQueryData.size.width / 25,
-                      width: mediaQueryData.size.width / 25,
+                      height: mediaW / 25,
+                      width: mediaW / 25,
                       decoration: BoxDecoration(color: confirmBtn ? appTheme.green : appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
+                      padding: EdgeInsets.only(left: mediaW / 50),
                       child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: mediaQueryData.size.height / 25),
+              SizedBox(height: mediaH / 25),
 
               _buildNextButton(context),
             ],
@@ -158,58 +160,37 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
 
   /// Era
   Widget _buildAccompanyEraInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: accompanyEraController,
-      hintText: "３０代",
-    );
+    return CustomInputFormBar(controller: accompanyEraController, hintText: "３０代");
   }
 
   /// City
   Widget _buildAccompanyCityInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: accompanyCityController,
-      hintText: "大阪",
-    );
+    return CustomInputFormBar(controller: accompanyCityController, hintText: "大阪");
   }
 
   /// Gender
   Widget _buildAccompanyGenderInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: accompanyGenderController,
-      hintText: "男",
-    );
+    return CustomInputFormBar(controller: accompanyGenderController, hintText: "男");
   }
 
   /// Speak Language
   Widget _buildAccompanySpeakLanguageInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: accompanySpeakLanguageController,
-      hintText: "日本語",
-    );
+    return CustomInputFormBar(controller: accompanySpeakLanguageController, hintText: "日本語");
   }
 
   /// Accompany Type
   Widget _buildAccompanyFindTypeInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: accompanyFindTypeController,
-      hintText: "おしゃべり",
-    );
+    return CustomInputFormBar(controller: accompanyFindTypeController, hintText: "おしゃべり");
   }
 
   /// FindTarget
   Widget _buildAccompanyFindTargetInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: accompanyFindTargetController,
-      hintText: "聞き役",
-    );
+    return CustomInputFormBar(controller: accompanyFindTargetController, hintText: "聞き役");
   }
 
   /// Sociability
   Widget _buildAccompanySociabilityInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: accompanySociabilityController,
-      hintText: "人たら神",
-    );
+    return CustomInputFormBar(controller: accompanySociabilityController, hintText: "人たら神");
   }
 
   /// Next Button

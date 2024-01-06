@@ -3,7 +3,6 @@ INSERT INTO "u1" (
     target_id,
     role_type,
     media_type,
-    message,
     media,
     isread
 ) VALUES (
@@ -19,7 +18,7 @@ ORDER BY created_at;
 SELECT DISTINCT target_id FROM u1;
 
 -- name: GetLastMsg :one
-SELECT message,media_type,isread FROM "u1"
+SELECT media,media_type,isread FROM "u1"
 WHERE target_id = $1
 ORDER BY created_at DESC
 LIMIT 1;
@@ -27,7 +26,7 @@ LIMIT 1;
 
 -- name: UpdateRecord :one
 UPDATE "u1"
-SET message = $4
+SET media = $4
 WHERE target_id = $1
   AND media_type = $2
   AND created_at = $3

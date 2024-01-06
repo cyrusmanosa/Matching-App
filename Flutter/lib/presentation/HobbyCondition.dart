@@ -6,7 +6,7 @@ import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
-import 'package:dating_your_date/widgets/Custom_WarningMsgBox.dart';
+import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:http/http.dart' as http;
@@ -125,56 +125,58 @@ class _HobbyConditionState extends State<HobbyCondition> {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: _buildHeader(context),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+        padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
         child: Column(
           children: [
             // Era
             CustomInputBar(titleName: "年代:", backendPart: _buildHobbyEraInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // Country
             CustomInputBar(titleName: "国籍:", backendPart: _buildHobbyCountryInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // City
             CustomInputBar(titleName: "居住地:", backendPart: _buildHobbyCityInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // Gender
             CustomInputBar(titleName: "性別:", backendPart: _buildHobbyGenderInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // Language
             CustomInputBar(titleName: "お喋れる言語:", backendPart: _buildHobbySpeakLanguageInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // Hobby Type
             CustomInputBar(titleName: "趣味のタイプ:", backendPart: _buildHobbyTypeInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // Find Target
             CustomInputBar(titleName: "探す対象:", backendPart: _buildHobbyFindTargetInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // Experience
             CustomInputBar(titleName: "経験:", backendPart: _buildHobbyExperienceInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // Height
             CustomInputBar(titleName: "身長:", backendPart: _buildHobbyHeightInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // Weight
             CustomInputBar(titleName: "体重:", backendPart: _buildHobbyWeightInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // Sociability
             CustomInputBar(titleName: "社交力:", backendPart: _buildHobbySociabilityInput(context)),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // 本人認証の丸
             InkWell(
@@ -186,19 +188,19 @@ class _HobbyConditionState extends State<HobbyCondition> {
               child: Row(
                 children: [
                   Container(
-                    height: mediaQueryData.size.width / 25,
-                    width: mediaQueryData.size.width / 25,
+                    height: mediaW / 25,
+                    width: mediaW / 25,
                     decoration: BoxDecoration(color: confirmBtn ? appTheme.green : appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
+                    padding: EdgeInsets.only(left: mediaW / 50),
                     child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
                   ),
                 ],
               ),
             ),
 
-            SizedBox(height: mediaQueryData.size.height / 25),
+            SizedBox(height: mediaH / 25),
             // button
             _buildNextButton(context),
           ],

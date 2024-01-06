@@ -1,12 +1,10 @@
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/models/ChatMessage.dart';
 import 'package:dating_your_date/models/model.dart';
-import 'package:dating_your_date/pb/chatRecord.pb.dart';
 import 'package:dating_your_date/pb/chatRecordNoID.pb.dart';
 import 'package:dating_your_date/pb/rpc_chatRecord.pb.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
-import 'package:dating_your_date/widgets/Custom_WarningMsgBox.dart';
+import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
@@ -24,26 +22,61 @@ class ChatBox extends StatefulWidget {
 
 class _ChatBoxState extends State<ChatBox> {
   TextEditingController newMsgTextController = TextEditingController();
-
-  List<ChatMessage> messages = [
-    ChatMessage(messageContent: "Hello, Will", messageType: "receiver"),
-    ChatMessage(messageContent: "How have you been?", messageType: "receiver"),
-    ChatMessage(messageContent: "Hey Kriss, I am doing fine dude. wbu?", messageType: "sender"),
-    ChatMessage(messageContent: "ehhhh, doing OK.", messageType: "receiver"),
-    ChatMessage(messageContent: "Is there anything wrong?", messageType: "sender"),
-  ];
-
   Future<List<ChatRecordNoID>> getChatRecords(BuildContext context) async {
     String? apiKeyU = await globalUserId.read(key: 'UserID');
     final userid = int.tryParse(apiKeyU!);
     try {
       final crRequest = GetChatRecordRequest(userID: userid!, targetID: widget.targetid);
       final crResponse = await GrpcChatService.client.getChatRecord(crRequest);
-      print(crResponse.chatRecordNoID);
       return crResponse.chatRecordNoID;
     } catch (e) {
       showErrorDialog(context, "Error: validatable input data of Info");
       throw Exception("Error occurred while fetching canChangeInfo: $e");
+    }
+  }
+
+  // Grpc
+  void senderMsgGrpcRequest(BuildContext context) async {
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
+    try {
+      final myRequest = CreateChatRecordRequest(
+        userID: userid,
+        targetID: widget.targetid,
+        roleType: "sender",
+        mediaType: "text",
+        media: newMsgTextController.text,
+      );
+      await GrpcChatService.client.createChatRecord(myRequest);
+    } on GrpcError catch (e) {
+      showErrorDialog(context, "Error: validatable input data of myself");
+      throw Exception("Error occurred while fetching chat record of ${e.message}");
+    }
+  }
+
+  void receiverMsgGrpcRequest(BuildContext context) async {
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
+    try {
+      final targetRequest = CreateChatRecordRequest(
+        userID: widget.targetid,
+        targetID: userid,
+        roleType: "receiver",
+        mediaType: "text",
+        media: newMsgTextController.text,
+      );
+      await GrpcChatService.client.createChatRecord(targetRequest);
+      print(targetRequest);
+    } on GrpcError catch (e) {
+      showErrorDialog(context, "Error: validatable input data of target");
+      throw Exception("Error occurred while fetching chat record of ${e.message}");
+    }
+    newMsgTextController = TextEditingController();
+  }
+
+  void checkStatus(String t) {
+    if (t != "Now") {
+      checktime = false;
     }
   }
 
@@ -55,45 +88,19 @@ class _ChatBoxState extends State<ChatBox> {
     checkStatus(widget.time!);
   }
 
-  void checkStatus(String t) {
-    if (t != "Now") {
-      checktime = false;
-    }
+  double getTextWidth(String text) {
+    final TextPainter textPainter = TextPainter(text: TextSpan(text: text), textDirection: TextDirection.ltr);
+    textPainter.layout();
+    return textPainter.width;
   }
 
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          automaticallyImplyLeading: true,
-          backgroundColor: Colors.yellow,
-          flexibleSpace: SafeArea(
-            child: Container(
-              padding: EdgeInsets.only(right: mediaQueryData.size.width / 30),
-              // info bar
-              child: Row(
-                children: [
-                  Container(margin: EdgeInsets.only(left: mediaQueryData.size.width / 8)),
-                  // image
-                  CircleAvatar(backgroundImage: NetworkImage("${widget.imageUrl}"), maxRadius: 20),
-                  SizedBox(width: mediaQueryData.size.width / 50),
-                  // name and status
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [Text(widget.name!, style: CustomTextStyles.msgWordOfMsgBox), checkShow(context)],
-                    ),
-                  ),
-                  // seting icon
-                  Icon(Icons.settings, color: Colors.black54),
-                ],
-              ),
-            ),
-          ),
-        ),
+        appBar: _buildHeader(context, mediaW),
         body: FutureBuilder<List<ChatRecordNoID>>(
           future: getChatRecords(context),
           builder: (context, snapshot) {
@@ -106,25 +113,27 @@ class _ChatBoxState extends State<ChatBox> {
                     ListView.builder(
                       itemCount: data.length,
                       shrinkWrap: true,
-                      padding: EdgeInsets.symmetric(vertical: mediaQueryData.size.height / 100),
+                      padding: EdgeInsets.symmetric(vertical: mediaH / 100),
                       physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         return Container(
-                          padding:
-                              EdgeInsets.symmetric(vertical: mediaQueryData.size.height / 150, horizontal: mediaQueryData.size.width / 30),
+                          padding: EdgeInsets.symmetric(
+                            vertical: mediaH / 150,
+                            horizontal: mediaW / 30,
+                          ),
                           child: Align(
                             alignment: (data[index].roleType == "receiver" ? Alignment.bottomLeft : Alignment.bottomRight),
                             child: Container(
-                              width: 200,
+                              constraints: BoxConstraints(maxWidth: mediaW / 1.5),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadiusStyle.r30,
                                 color: (data[index].roleType == "receiver" ? Colors.grey.shade200 : Colors.blue[200]),
                               ),
                               padding: EdgeInsets.symmetric(
-                                vertical: mediaQueryData.size.height / 100,
-                                horizontal: mediaQueryData.size.width / 30,
+                                vertical: mediaH / 100,
+                                horizontal: mediaW / 30,
                               ),
-                              child: Text(data[index].message, style: TextStyle(fontSize: 15)),
+                              child: Text(data[index].media, style: TextStyle(fontSize: mediaH / 60)),
                             ),
                           ),
                         );
@@ -139,13 +148,13 @@ class _ChatBoxState extends State<ChatBox> {
           },
         ),
         bottomNavigationBar: Container(
-          height: mediaQueryData.size.height / 10.5,
+          height: mediaH / 10.5,
           color: appTheme.white,
           child: Padding(
             padding: EdgeInsets.only(
-              left: mediaQueryData.size.width / 20,
-              right: mediaQueryData.size.width / 20,
-              bottom: mediaQueryData.size.height / 40,
+              left: mediaW / 20,
+              right: mediaW / 20,
+              bottom: mediaH / 40,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -155,18 +164,54 @@ class _ChatBoxState extends State<ChatBox> {
         ));
   }
 
+  PreferredSizeWidget _buildHeader(BuildContext context, double mediaW) {
+    return AppBar(
+      elevation: 0,
+      automaticallyImplyLeading: true,
+      backgroundColor: Colors.yellow,
+      flexibleSpace: SafeArea(
+        child: Container(
+          padding: EdgeInsets.only(right: mediaW / 30),
+          // info bar
+          child: Row(
+            children: [
+              Container(margin: EdgeInsets.only(left: mediaW / 8)),
+              // image
+              CircleAvatar(backgroundImage: NetworkImage("${widget.imageUrl}"), maxRadius: 20),
+              SizedBox(width: mediaW / 50),
+              // name and status
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Text(widget.name!, style: CustomTextStyles.msgWordOfMsgBox), checkShow(context)],
+                ),
+              ),
+              // seting icon
+              Icon(Icons.settings, color: Colors.black54),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget sendBarButton(BuildContext context, double s) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return GestureDetector(
       onTap: () {
         setState(() {
-          messages.add(ChatMessage(messageContent: newMsgTextController.text, messageType: "sender"));
-          newMsgTextController = TextEditingController();
+          if (newMsgTextController.text.isNotEmpty || newMsgTextController.text != " ") {
+            senderMsgGrpcRequest(context);
+            receiverMsgGrpcRequest(context);
+          }
         });
       },
       child: Container(
-        height: mediaQueryData.size.height / 30,
-        width: mediaQueryData.size.width / 14,
+        height: mediaH / 30,
+        width: mediaW / 14,
         decoration: BoxDecoration(color: appTheme.black, borderRadius: BorderRadiusStyle.r30),
         child: Icon(Icons.send, color: Colors.white, size: s),
       ),
@@ -175,11 +220,13 @@ class _ChatBoxState extends State<ChatBox> {
 
   Widget optionBarButton(BuildContext context, double s) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return GestureDetector(
       onTap: () {},
       child: Container(
-        height: mediaQueryData.size.height / 30,
-        width: mediaQueryData.size.width / 14,
+        height: mediaH / 30,
+        width: mediaW / 14,
         decoration: BoxDecoration(color: appTheme.black, borderRadius: BorderRadiusStyle.r30),
         child: Icon(Icons.add, color: Colors.white, size: s),
       ),
@@ -188,9 +235,11 @@ class _ChatBoxState extends State<ChatBox> {
 
   Widget _buildMsgInput(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return CustomInputFormBar(
-      height: mediaQueryData.size.height / 30,
-      width: mediaQueryData.size.width / 1.45,
+      height: mediaH / 30,
+      width: mediaW / 1.45,
       controller: newMsgTextController,
       hintText: "Write message...",
       focusNode: FocusNode(),

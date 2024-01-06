@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-const TId = 47
+const TId = 32
 const TN = "u1"
 
 func TestCreateRecord(t *testing.T) {
@@ -21,8 +21,7 @@ func CreateRandomRecord(t *testing.T) Record {
 		TargetID:  TId,
 		RoleType:  util.RandomRole(),
 		MediaType: util.Randomstring(3),
-		Message:   gofakeit.HackerPhrase(),
-		Media:     gofakeit.URL(),
+		Media:     gofakeit.HackerPhrase(),
 		Isread:    gofakeit.Bool(),
 	}
 
@@ -32,7 +31,6 @@ func CreateRandomRecord(t *testing.T) Record {
 	require.Equal(t, InsertR.TargetID, arg.TargetID)
 	require.Equal(t, InsertR.RoleType, arg.RoleType)
 	require.Equal(t, InsertR.MediaType, arg.MediaType)
-	require.Equal(t, InsertR.Message, arg.Message)
 	require.Equal(t, InsertR.Media, arg.Media)
 	require.Equal(t, InsertR.Isread, arg.Isread)
 	require.NotEmpty(t, InsertR.CreatedAt)
@@ -62,14 +60,14 @@ func TestUpdateRecord(t *testing.T) {
 	New := UpdateRecordParams{
 		TargetID:  arg.TargetID,
 		MediaType: arg.MediaType,
-		Message:   gofakeit.HackerPhrase(),
+		Media:     gofakeit.HackerPhrase(),
 		CreatedAt: arg.CreatedAt,
 	}
 
 	UpR, err := testChatQueries.UpdateRecord(context.Background(), New, TN)
 	require.NoError(t, err)
 	require.NotEmpty(t, UpR)
-	require.NotEqual(t, UpR.Message, arg.Message)
+	require.NotEqual(t, UpR.Media, arg.Media)
 }
 
 func TestDeleteRecord(t *testing.T) {

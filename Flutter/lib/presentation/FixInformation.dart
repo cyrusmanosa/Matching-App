@@ -89,6 +89,8 @@ class _FixInformationState extends State<FixInformation> {
 
   void showErrorDialog(BuildContext context, String errorMessage) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     showDialog(
       context: context,
       builder: (context) {
@@ -97,21 +99,21 @@ class _FixInformationState extends State<FixInformation> {
           // Error Logo
           title: CustomImageView(
             imagePath: ImageConstant.imgWarning,
-            height: mediaQueryData.size.height / 20,
-            width: mediaQueryData.size.width / 10,
+            height: mediaH / 20,
+            width: mediaW / 10,
             alignment: Alignment.center,
           ),
 
           // Word
           content: Container(
-            width: mediaQueryData.size.width / 1.1,
+            width: mediaW / 1.1,
             child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
           ),
           actions: [
             CustomOutlinedButton(
               text: "OK",
               alignment: Alignment.center,
-              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
+              margin: EdgeInsets.only(bottom: mediaH / 100),
               onPressed: () {
                 onTapReturn(context);
               },
@@ -128,53 +130,55 @@ class _FixInformationState extends State<FixInformation> {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return Scaffold(
       appBar: _buildHeader(context),
       body: Container(
         width: double.maxFinite,
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+          padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
           child: Column(
             children: [
               // image
               CustomImageView(
                 imagePath: ImageConstant.imgVector,
-                height: mediaQueryData.size.height / 7,
-                width: mediaQueryData.size.width / 3,
+                height: mediaH / 7,
+                width: mediaW / 3,
                 alignment: Alignment.center,
               ),
-              SizedBox(height: mediaQueryData.size.height / 70),
+              SizedBox(height: mediaH / 70),
 
               // msg
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text("以下の項目は全部入力するのは必要です。", style: CustomTextStyles.msgWordOfMsgBox),
               ),
-              SizedBox(height: mediaQueryData.size.height / 30),
+              SizedBox(height: mediaH / 30),
 
               // Last name
               CustomInputBar(titleName: "姓:", backendPart: _buildfixLastNameInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // First name
               CustomInputBar(titleName: "名:", backendPart: _buildfixFirstNameInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // Birth
               CustomInputBar(titleName: "生年月日:", backendPart: _buildfixBirthInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // Country
               CustomInputBar(titleName: "国籍:", backendPart: _buildfixCountryInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // Gender
               CustomInputBar(titleName: "性別:", backendPart: _buildfixGenderInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // 血液型
               CustomInputBar(titleName: "血液型:", backendPart: _buildfixBloodInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // 18
               InkWell(
@@ -186,20 +190,20 @@ class _FixInformationState extends State<FixInformation> {
                 child: Row(
                   children: [
                     Container(
-                      height: mediaQueryData.size.width / 25,
-                      width: mediaQueryData.size.width / 25,
+                      height: mediaW / 25,
+                      width: mediaW / 25,
                       decoration:
                           BoxDecoration(color: confirm18Btn ? appTheme.green : appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
+                      padding: EdgeInsets.only(left: mediaW / 50),
                       child:
                           Text("満18歳以上の独身であることを誓約します", style: confirm18Btn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: mediaQueryData.size.height / 150),
+              SizedBox(height: mediaH / 150),
 
               // Agree
               InkWell(
@@ -211,21 +215,21 @@ class _FixInformationState extends State<FixInformation> {
                 child: Row(
                   children: [
                     Container(
-                      height: mediaQueryData.size.width / 25,
-                      width: mediaQueryData.size.width / 25,
+                      height: mediaW / 25,
+                      width: mediaW / 25,
                       decoration: BoxDecoration(
                         color: confirmAgreeBtn ? appTheme.green : appTheme.gray500,
                         borderRadius: BorderRadiusStyle.r15,
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
+                      padding: EdgeInsets.only(left: mediaW / 50),
                       child: Text("全ての規約に同意します", style: confirmAgreeBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: mediaQueryData.size.height / 25),
+              SizedBox(height: mediaH / 25),
               // Button
               _buildNextButton(context),
             ],

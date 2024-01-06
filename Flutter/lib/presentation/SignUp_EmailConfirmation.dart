@@ -4,7 +4,7 @@ import 'package:dating_your_date/pb/rpc_checkEmail.pb.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
-import 'package:dating_your_date/widgets/Custom_WarningMsgBox.dart';
+import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:http/http.dart' as http;
@@ -48,25 +48,27 @@ class EmailConfirmation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+        padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
         child: Column(
           children: [
             // Logo and Slogan
-            SizedBox(height: mediaQueryData.size.height / 15),
-            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaQueryData.size.width / 4.5),
-            CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaQueryData.size.width / 3.5),
-            SizedBox(height: mediaQueryData.size.height / 30),
+            SizedBox(height: mediaH / 15),
+            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4.5),
+            CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3.5),
+            SizedBox(height: mediaH / 30),
 
             // input
             CustomInputBar(titleName: "メールアドレス", backendPart: _buildEmailInputSection(context)),
-            SizedBox(height: mediaQueryData.size.height / 50),
+            SizedBox(height: mediaH / 50),
 
             // send button
             _buildNextButton(context),
-            SizedBox(height: mediaQueryData.size.height / 30),
+            SizedBox(height: mediaH / 30),
 
             // 手続き
             Align(

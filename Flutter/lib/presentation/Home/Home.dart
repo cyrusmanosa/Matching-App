@@ -30,38 +30,32 @@ class _HomeState extends State<Home> {
     try {
       final request = GetCanChangeRequest(sessionID: apiKeyS, userID: userid);
       await GrpcInfoService.client.getCanChange(request);
-    } on GrpcError catch (e) {
-      if (e.code == 13) {
-        showErrorDialog(context, "個人情報はまだ開いてます");
-      }
+    } on GrpcError {
+      showErrorDialog(context, "個人情報はまだ開いてます");
     }
   }
 
   void showErrorDialog(BuildContext context, String errorMessage) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
           // Error Logo
-          title: CustomImageView(
-            imagePath: ImageConstant.imgWarning,
-            height: mediaQueryData.size.height / 20,
-            width: mediaQueryData.size.width / 10,
-            alignment: Alignment.center,
-          ),
-
+          title: CustomImageView(imagePath: ImageConstant.imgWarning, height: mediaH / 20, width: mediaW / 10, alignment: Alignment.center),
           // Word
           content: Container(
-            width: mediaQueryData.size.width / 1.1,
+            width: mediaW / 1.1,
             child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
           ),
           actions: [
             CustomOutlinedButton(
               alignment: Alignment.center,
               text: "入力へ",
-              margin: EdgeInsets.only(bottom: mediaQueryData.size.height / 100),
+              margin: EdgeInsets.only(bottom: mediaH / 100),
               onPressed: () {
                 onTapCanChange(context);
               },
@@ -76,10 +70,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildHeader(context),
-      body: Container(
-        width: double.maxFinite,
-        child: Column(children: [Expanded(child: _buildMainFrame(context))]),
-      ),
+      body: Container(width: double.maxFinite, child: Column(children: [Expanded(child: _buildMainFrame(context))])),
     );
   }
 
@@ -90,15 +81,17 @@ class _HomeState extends State<Home> {
 // User Side Show
   Widget _buildMainFrame(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return Column(
       children: [
-        SizedBox(height: mediaQueryData.size.height / 30),
+        SizedBox(height: mediaH / 30),
         SizedBox(
-          height: mediaQueryData.size.height / 1.5,
+          height: mediaH / 1.5,
           child: ListView.separated(
-            padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 11),
+            padding: EdgeInsets.symmetric(horizontal: mediaW / 11),
             scrollDirection: Axis.horizontal,
-            separatorBuilder: (context, index) => SizedBox(width: mediaQueryData.size.width / 22),
+            separatorBuilder: (context, index) => SizedBox(width: mediaW / 22),
             itemCount: 3,
             itemBuilder: (context, index) {
               return MainframeItemWidget();

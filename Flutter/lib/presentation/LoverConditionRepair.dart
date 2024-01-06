@@ -6,7 +6,7 @@ import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
-import 'package:dating_your_date/widgets/Custom_WarningMsgBox.dart';
+import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -96,6 +96,8 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     mediaQueryData = MediaQuery.of(context);
 
     return Scaffold(
@@ -104,70 +106,70 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
       body: SizedBox(
         width: double.maxFinite,
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 13, vertical: mediaQueryData.size.height / 20),
+          padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
           child: Column(
             children: [
               Row(
                 children: [
                   CustomInputBar(titleName: "年齢:", backendPart: _buildLoverMinAgeInput(context)),
-                  SizedBox(width: mediaQueryData.size.width / 30),
+                  SizedBox(width: mediaW / 30),
                   Text("から"),
-                  SizedBox(width: mediaQueryData.size.width / 30),
+                  SizedBox(width: mediaW / 30),
                   CustomInputBar(titleName: "", backendPart: _buildLoverMaxAgeInput(context)),
                 ],
               ),
-              SizedBox(height: mediaQueryData.size.height / 100),
+              SizedBox(height: mediaH / 100),
               // Country
               CustomInputBar(titleName: "国籍:", backendPart: _buildLoverResetCountryInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // City
               CustomInputBar(titleName: "居住地:", backendPart: _buildLoverResetCityInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // Gender
               CustomInputBar(titleName: "性別:", backendPart: _buildLoverResetGenderInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // Constellation
               CustomInputBar(titleName: "星座:", backendPart: _buildLoverResetConstellationInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // Blood
               CustomInputBar(titleName: "血液型:", backendPart: _buildLoverResetBloodInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // Sexual
               CustomInputBar(titleName: "性的指向:", backendPart: _buildLoverResetSexualInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // Height
               CustomInputBar(titleName: "身長:", backendPart: _buildLoverResetHeightInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // Wegiht
               CustomInputBar(titleName: "体重:", backendPart: _buildLoverResetWeightInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // Speak Language
               CustomInputBar(titleName: "言語:", backendPart: _buildLoverSpeakLanguageInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // Job
               CustomInputBar(titleName: "職種:", backendPart: _buildLoverResetJobInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // Annual Salary
               CustomInputBar(titleName: "年収:", backendPart: _buildLoverResetAnnualSalaryInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // Socialbility
               CustomInputBar(titleName: "社交力:", backendPart: _buildLoverResetSociabilityInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // Religious
               CustomInputBar(titleName: "宗教:", backendPart: _buildLoverResetReligiousInput(context)),
-              SizedBox(height: mediaQueryData.size.height / 50),
+              SizedBox(height: mediaH / 50),
 
               // 本人認証の丸
               InkWell(
@@ -179,19 +181,19 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
                 child: Row(
                   children: [
                     Container(
-                      height: mediaQueryData.size.width / 25,
-                      width: mediaQueryData.size.width / 25,
+                      height: mediaW / 25,
+                      width: mediaW / 25,
                       decoration: BoxDecoration(color: confirmBtn ? appTheme.green : appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: mediaQueryData.size.width / 50),
+                      padding: EdgeInsets.only(left: mediaW / 50),
                       child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
                     ),
                   ],
                 ),
               ),
 
-              SizedBox(height: mediaQueryData.size.height / 25),
+              SizedBox(height: mediaH / 25),
 
               // button
               _buildNextButton(context),
@@ -210,10 +212,12 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
   /// Min Age
   Widget _buildLoverMinAgeInput(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return CustomInputFormBar(
       alignment: Alignment.centerLeft,
-      height: mediaQueryData.size.height / 16,
-      width: mediaQueryData.size.width / 7.5,
+      height: mediaH / 16,
+      width: mediaW / 7.5,
       maxLength: 3,
       controller: resetLoverMaxAgeController,
       hintText: "20",
@@ -223,10 +227,12 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
   /// Min Age
   Widget _buildLoverMaxAgeInput(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return CustomInputFormBar(
       alignment: Alignment.centerLeft,
-      height: mediaQueryData.size.height / 16,
-      width: mediaQueryData.size.width / 7.5,
+      height: mediaH / 16,
+      width: mediaW / 7.5,
       maxLength: 3,
       controller: resetLoverMinAgeController,
       hintText: "20",

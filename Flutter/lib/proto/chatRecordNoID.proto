@@ -9,8 +9,7 @@ option go_package = "Backend/pb";
 message ChatRecordNoID{
     string RoleType = 1;
     string MediaType = 2;
-    string Message = 3;
-    string Media = 4;
-    bool Isread = 5;
-    google.protobuf.Timestamp CreatedAt = 6;
+    string Media = 3;
+    bool Isread = 4;
+    google.protobuf.Timestamp CreatedAt = 5;
 }

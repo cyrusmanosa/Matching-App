@@ -11,14 +11,16 @@ class ShownDataBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return SizedBox(
-      height: mediaQueryData.size.height / 35,
-      width: mediaQueryData.size.width / 1.3,
+      height: mediaH / 35,
+      width: mediaW / 1.3,
       child: Stack(
         alignment: Alignment.centerRight,
         children: [
           // Under bar
-          Align(alignment: Alignment.bottomCenter, child: SizedBox(width: mediaQueryData.size.width / 1.3, child: Divider())),
+          Align(alignment: Alignment.bottomCenter, child: SizedBox(width: mediaW / 1.3, child: Divider())),
           // Data
           Align(alignment: Alignment.centerRight, child: Text(data!, style: CustomTextStyles.smallTitle20)),
           // Theme

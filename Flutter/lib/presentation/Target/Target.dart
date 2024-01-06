@@ -8,18 +8,18 @@ class Target extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return Scaffold(
       appBar: _buildHeader(context),
       body: Container(
         width: double.maxFinite,
         child: Column(
           children: [
-            // _buildHeader(context),
-            SizedBox(height: mediaQueryData.size.height / 30),
-
+            SizedBox(height: mediaH / 30),
             // title
             Text("探すターゲットの種類", style: theme.textTheme.headlineSmall),
-            SizedBox(height: mediaQueryData.size.height / 30),
+            SizedBox(height: mediaH / 30),
             _buildTargetResetList(context)
           ],
         ),
@@ -34,14 +34,15 @@ class Target extends StatelessWidget {
   /// Section Widget
   Widget _buildTargetResetList(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
-
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return Expanded(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: mediaQueryData.size.width / 10),
+        padding: EdgeInsets.symmetric(horizontal: mediaW / 10),
         child: ListView.separated(
           physics: BouncingScrollPhysics(),
           itemCount: 3,
-          separatorBuilder: (context, index) => SizedBox(height: mediaQueryData.size.height / 30),
+          separatorBuilder: (context, index) => SizedBox(height: mediaH / 30),
           itemBuilder: (context, index) {
             if (index == 0) {
               return ResetTargetButton(title: "趣味", color: CustomButtonStyles.fillLightGray, sendPage: AppRoutes.hobbyConditionRepair);
