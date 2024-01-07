@@ -21,7 +21,7 @@ class MainframeItemWidget extends StatelessWidget {
             ],
           ),
           Container(
-            height: mediaH / 1.7,
+            height: mediaH / 1.5,
             width: mediaW / 1.2,
             decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadiusStyle.r30),
           ),

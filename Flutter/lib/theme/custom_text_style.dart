@@ -14,6 +14,9 @@ class CustomTextStyles {
   static get chatBoxUserName => theme.textTheme.headlineMedium!.copyWith(fontSize: 16);
 
   // body
+
+  static get sideBarButtonGray => TextStyle(color: appTheme.gray500, fontSize: 20, fontWeight: FontWeight.w400);
+  static get sideBarButtonGreen => TextStyle(color: appTheme.green, fontSize: 20, fontWeight: FontWeight.w400);
   static get pwRuleGray500 => theme.textTheme.bodySmall!.copyWith(fontSize: 12);
 
   static get outlineWhiteWordButton => TextStyle(color: theme.colorScheme.onPrimary, fontWeight: FontWeight.w400);

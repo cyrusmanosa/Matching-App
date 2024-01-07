@@ -5,6 +5,7 @@ import 'package:dating_your_date/pb/chatRecordNoID.pb.dart';
 import 'package:dating_your_date/pb/rpc_chatRecord.pb.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
+import 'package:dating_your_date/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
@@ -23,23 +24,23 @@ class ChatBox extends StatefulWidget {
 class _ChatBoxState extends State<ChatBox> {
   TextEditingController newMsgTextController = TextEditingController();
   Future<List<ChatRecordNoID>> getChatRecords(BuildContext context) async {
-    String? apiKeyU = await globalUserId.read(key: 'UserID');
-    final userid = int.tryParse(apiKeyU!);
     try {
+      String? apiKeyU = await globalUserId.read(key: 'UserID');
+      final userid = int.tryParse(apiKeyU!);
       final crRequest = GetChatRecordRequest(userID: userid!, targetID: widget.targetid);
       final crResponse = await GrpcChatService.client.getChatRecord(crRequest);
       return crResponse.chatRecordNoID;
-    } catch (e) {
+    } on GrpcError {
       showErrorDialog(context, "Error: validatable input data of Info");
-      throw Exception("Error occurred while fetching canChangeInfo: $e");
+      throw Exception("Error occurred while fetching take chat record");
     }
   }
 
   // Grpc
   void senderMsgGrpcRequest(BuildContext context) async {
-    String? apiKeyU = await globalUserId.read(key: 'UserID');
-    final userid = int.tryParse(apiKeyU!);
     try {
+      String? apiKeyU = await globalUserId.read(key: 'UserID');
+      final userid = int.tryParse(apiKeyU!);
       final myRequest = CreateChatRecordRequest(
         userID: userid,
         targetID: widget.targetid,
@@ -48,16 +49,16 @@ class _ChatBoxState extends State<ChatBox> {
         media: newMsgTextController.text,
       );
       await GrpcChatService.client.createChatRecord(myRequest);
-    } on GrpcError catch (e) {
+    } on GrpcError {
       showErrorDialog(context, "Error: validatable input data of myself");
-      throw Exception("Error occurred while fetching chat record of ${e.message}");
+      throw Exception("Error occurred while fetching myself chat record");
     }
   }
 
   void receiverMsgGrpcRequest(BuildContext context) async {
-    String? apiKeyU = await globalUserId.read(key: 'UserID');
-    final userid = int.tryParse(apiKeyU!);
     try {
+      String? apiKeyU = await globalUserId.read(key: 'UserID');
+      final userid = int.tryParse(apiKeyU!);
       final targetRequest = CreateChatRecordRequest(
         userID: widget.targetid,
         targetID: userid,
@@ -66,10 +67,9 @@ class _ChatBoxState extends State<ChatBox> {
         media: newMsgTextController.text,
       );
       await GrpcChatService.client.createChatRecord(targetRequest);
-      print(targetRequest);
-    } on GrpcError catch (e) {
+    } on GrpcError {
       showErrorDialog(context, "Error: validatable input data of target");
-      throw Exception("Error occurred while fetching chat record of ${e.message}");
+      throw Exception("Error occurred while fetching target chat record");
     }
     newMsgTextController = TextEditingController();
   }

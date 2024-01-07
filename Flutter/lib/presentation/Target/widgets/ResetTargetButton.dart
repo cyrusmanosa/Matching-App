@@ -1,4 +1,3 @@
-import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +16,7 @@ class ResetTargetButton extends StatelessWidget {
     double mediaW = mediaQueryData.size.width;
     return CustomElevatedButton(
       width: mediaW / 15,
-      height: mediaH / 6.5,
+      height: mediaH / 8,
       text: title!,
       buttonTextStyle: TextStyle(fontSize: mediaW / 15, fontWeight: FontWeight.w500),
       buttonStyle: color,

@@ -7,7 +7,9 @@ import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
+import 'package:dating_your_date/widgets/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:grpc/grpc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -19,6 +21,9 @@ class HobbyConditionRepair extends StatefulWidget {
 }
 
 class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
+  bool? haveTable;
+  bool confirmBtn = false;
+
   TextEditingController resetHobbyEraController = TextEditingController();
   TextEditingController resetHobbyCountryController = TextEditingController();
   TextEditingController resetHobbyCityController = TextEditingController();
@@ -31,7 +36,35 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
   TextEditingController resetHobbyHeightController = TextEditingController();
   TextEditingController resetHobbyWeightController = TextEditingController();
 
-  GlobalKey<NavigatorState> navigatorKey = GlobalKey();
+  @override
+  void initState() {
+    super.initState();
+    getHobbyGrpcRequest(context);
+  }
+
+  // check tabel
+  void getHobbyGrpcRequest(BuildContext context) async {
+    try {
+      String? apiKeyS = await globalSession.read(key: 'SessionId');
+      final request = GetHobbyRequest(sessionID: apiKeyS);
+      final response = await GrpcInfoService.client.getHobby(request);
+      setState(() {
+        haveTable = true;
+        resetHobbyEraController = TextEditingController(text: response.h.era.toString());
+        resetHobbyCityController = TextEditingController(text: response.h.city.toString());
+        resetHobbyGenderController = TextEditingController(text: response.h.gender.toString());
+        resetHobbySpeakLanguageController = TextEditingController(text: response.h.speaklanguage.toString());
+        resetHobbyFindTypeController = TextEditingController(text: response.h.findType.toString());
+        resetHobbyFindTargetController = TextEditingController(text: response.h.findTarget.toString());
+        resetHobbyExperienceController = TextEditingController(text: response.h.experience.toString());
+        resetHobbySociabilityController = TextEditingController(text: response.h.sociability.toString());
+        resetHobbyHeightController = TextEditingController(text: response.h.height.toString());
+        resetHobbyWeightController = TextEditingController(text: response.h.weight.toString());
+      });
+    } on GrpcError {
+      haveTable = false;
+    }
+  }
 
 // Http
   void updateHobbyHttpRequest(BuildContext context) async {
@@ -58,32 +91,58 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
     }
   }
 
-  void updateHobbyGrpcRequest(BuildContext context) async {
+  void hobbyGrpcRequest(BuildContext context) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
-    final request = UpdateHobbyRequest(
-      sessionID: apiKeyS,
-      era: int.parse(resetHobbyEraController.text),
-      city: resetHobbyCityController.text,
-      gender: resetHobbyGenderController.text,
-      height: int.parse(resetHobbyHeightController.text),
-      weight: int.parse(resetHobbyWeightController.text),
-      speaklanguage: resetHobbySpeakLanguageController.text,
-      findType: resetHobbyFindTypeController.text,
-      findTarget: resetHobbyFindTargetController.text,
-      experience: int.parse(resetHobbyExperienceController.text),
-      sociability: resetHobbySociabilityController.text,
-    );
-
-    final response = await GrpcInfoService.client.updateHobby(request);
-    // ignore: unnecessary_null_comparison
-    if (response != null) {
-      onTapNextPage(context);
+    setState(() {
+      showLoadDialog(context);
+    });
+    await Future.delayed(Duration(seconds: 1));
+    if (haveTable == true) {
+      try {
+        final request = UpdateHobbyRequest(
+          sessionID: apiKeyS,
+          era: int.parse(resetHobbyEraController.text),
+          city: resetHobbyCityController.text,
+          gender: resetHobbyGenderController.text,
+          height: int.parse(resetHobbyHeightController.text),
+          weight: int.parse(resetHobbyWeightController.text),
+          speaklanguage: resetHobbySpeakLanguageController.text,
+          findType: resetHobbyFindTypeController.text,
+          findTarget: resetHobbyFindTargetController.text,
+          experience: int.parse(resetHobbyExperienceController.text),
+          sociability: resetHobbySociabilityController.text,
+        );
+        await GrpcInfoService.client.updateHobby(request);
+        onTapNextPage(context);
+      } on GrpcError {
+        Navigator.pop(context);
+        showErrorDialog(context, "Error: validatable input data for update");
+        throw Exception("Error occurred while fetching update Hobby.");
+      }
     } else {
-      showErrorDialog(context, "Error: Empty response");
+      try {
+        final request = CreateHobbyRequest(
+          sessionID: apiKeyS,
+          era: int.parse(resetHobbyEraController.text),
+          city: resetHobbyCityController.text,
+          gender: resetHobbyGenderController.text,
+          height: int.parse(resetHobbyHeightController.text),
+          weight: int.parse(resetHobbyWeightController.text),
+          speaklanguage: resetHobbySpeakLanguageController.text,
+          findType: resetHobbyFindTypeController.text,
+          findTarget: resetHobbyFindTargetController.text,
+          experience: int.parse(resetHobbyExperienceController.text),
+          sociability: resetHobbySociabilityController.text,
+        );
+        await GrpcInfoService.client.createHobby(request);
+        onTapNextPage(context);
+      } on GrpcError {
+        Navigator.pop(context);
+        showErrorDialog(context, "Error: validatable input data for create Hobby");
+        throw Exception("Error occurred while fetching Create Hobby.");
+      }
     }
   }
-
-  bool confirmBtn = false;
 
   @override
   Widget build(BuildContext context) {
@@ -91,10 +150,9 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
-      appBar: _buildHeader(context),
+      appBar: AppBar(automaticallyImplyLeading: true, title: AppbarTitle(text: "趣味の条件")),
       resizeToAvoidBottomInset: false,
       body: Container(
-        width: double.maxFinite,
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
           child: Column(
@@ -103,16 +161,20 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
               CustomInputBar(titleName: "年代:", backendPart: _buildHobbyResetEraInput(context)),
               SizedBox(height: mediaH / 50),
 
-              // Country
-              CustomInputBar(titleName: "国籍:", backendPart: _buildHobbyResetCountryInput(context)),
-              SizedBox(height: mediaH / 50),
-
               // City
               CustomInputBar(titleName: "居住地:", backendPart: _buildHobbyResetCityInput(context)),
               SizedBox(height: mediaH / 50),
 
               // Gender
               CustomInputBar(titleName: "性別:", backendPart: _buildHobbyResetGenderInput(context)),
+              SizedBox(height: mediaH / 50),
+
+              // Height
+              CustomInputBar(titleName: "身長:", backendPart: _buildHobbyResetHeightInput(context)),
+              SizedBox(height: mediaH / 50),
+
+              // Weight
+              CustomInputBar(titleName: "体重:", backendPart: _buildHobbyResetWeightInput(context)),
               SizedBox(height: mediaH / 50),
 
               // Language
@@ -129,14 +191,6 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
 
               // Experience
               CustomInputBar(titleName: "経験:", backendPart: _buildHobbyResetExperienceInput(context)),
-              SizedBox(height: mediaH / 50),
-
-              // Height
-              CustomInputBar(titleName: "身長:", backendPart: _buildHobbyResetHeightInput(context)),
-              SizedBox(height: mediaH / 50),
-
-              // Weight
-              CustomInputBar(titleName: "体重:", backendPart: _buildHobbyResetWeightInput(context)),
               SizedBox(height: mediaH / 50),
 
               // Sociability
@@ -175,23 +229,9 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
     );
   }
 
-  /// Header
-  PreferredSizeWidget _buildHeader(BuildContext context) {
-    return AppBar(automaticallyImplyLeading: true, title: AppbarTitle(text: "趣味の条件更改"));
-  }
-
-  onTapReturn(BuildContext context) {
-    Navigator.pop(context);
-  }
-
   /// Reset Era
   Widget _buildHobbyResetEraInput(BuildContext context) {
     return CustomInputFormBar(controller: resetHobbyEraController, hintText: "３０代");
-  }
-
-  /// Reset Country
-  Widget _buildHobbyResetCountryInput(BuildContext context) {
-    return CustomInputFormBar(controller: resetHobbyCountryController, hintText: "日本");
   }
 
   /// Reset City
@@ -244,7 +284,7 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
     return CustomOutlinedButton(
       text: "条件確認",
       onPressed: () {
-        updateHobbyGrpcRequest(context);
+        hobbyGrpcRequest(context);
       },
     );
   }

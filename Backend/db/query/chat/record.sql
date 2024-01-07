@@ -6,7 +6,7 @@ INSERT INTO "u1" (
     media,
     isread
 ) VALUES (
-    $1,$2,$3,$4,$5,$6
+    $1,$2,$3,$4,$5
 ) RETURNING *;
 
 -- name: GetRecord :many
@@ -30,6 +30,13 @@ SET media = $4
 WHERE target_id = $1
   AND media_type = $2
   AND created_at = $3
+RETURNING *;
+
+-- name: UpdateRead :many
+UPDATE "u1"
+SET isread = true
+WHERE media_type = "text"
+  AND target_id = $1
 RETURNING *;
 
 -- name: DeleteRecord :exec

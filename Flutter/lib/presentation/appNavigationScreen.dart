@@ -109,33 +109,18 @@ class AppNavigationScreen extends StatelessWidget {
                       ),
                       _buildScreenTitle(
                         context,
-                        userName: "趣味の条件設定",
+                        userName: "H",
                         onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.hobbyCondition),
                       ),
                       _buildScreenTitle(
                         context,
-                        userName: "趣味の条件更改",
+                        userName: "HR",
                         onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.hobbyConditionRepair),
                       ),
                       _buildScreenTitle(
                         context,
-                        userName: "恋人の条件設定",
-                        onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.loverCondition),
-                      ),
-                      _buildScreenTitle(
-                        context,
-                        userName: "恋人の条件更改",
-                        onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.loverConditionRepair),
-                      ),
-                      _buildScreenTitle(
-                        context,
-                        userName: "相伴の条件設定",
-                        onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.accompanyCondition),
-                      ),
-                      _buildScreenTitle(
-                        context,
-                        userName: "相伴の条件更改",
-                        onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.accompanyConditionRepair),
+                        userName: "ターゲット",
+                        onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.target),
                       ),
                       _buildScreenTitle(
                         context,

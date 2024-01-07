@@ -12,7 +12,6 @@ dependencies:
   flutter_svg: 
   flutter_svg_provider:
   flutter_verification_code:
-  flutter_email_sender:
   intl: 
   google_fonts:
   postgres: 

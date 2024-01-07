@@ -7,7 +7,9 @@ import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
+import 'package:dating_your_date/widgets/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:grpc/grpc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -19,22 +21,55 @@ class LoverConditionRepair extends StatefulWidget {
 }
 
 class _LoverConditionRepairState extends State<LoverConditionRepair> {
+  bool? haveTable;
+  bool confirmBtn = false;
+
   TextEditingController resetLoverMinAgeController = TextEditingController();
   TextEditingController resetLoverMaxAgeController = TextEditingController();
-  TextEditingController resetLoverCountryController = TextEditingController();
   TextEditingController resetLoverCityController = TextEditingController();
   TextEditingController resetLoverGenderController = TextEditingController();
-  TextEditingController resetLoverBloodController = TextEditingController();
   TextEditingController resetLoverConstellationController = TextEditingController();
   TextEditingController resetLoverSexualController = TextEditingController();
   TextEditingController resetLoverHeightController = TextEditingController();
   TextEditingController resetLoverWeightController = TextEditingController();
   TextEditingController resetLoverSpeakLanguageController = TextEditingController();
-  TextEditingController resetLoverEducationController = TextEditingController();
   TextEditingController resetLoverJobController = TextEditingController();
   TextEditingController resetLoverAnnualSalaryController = TextEditingController();
   TextEditingController resetLoverSociabilityController = TextEditingController();
   TextEditingController resetLoverReligiousController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    getLoverGrpcRequest(context);
+  }
+
+  // check tabel
+  void getLoverGrpcRequest(BuildContext context) async {
+    try {
+      String? apiKeyS = await globalSession.read(key: 'SessionId');
+      final request = GetLoverRequest(sessionID: apiKeyS);
+      final response = await GrpcInfoService.client.getLover(request);
+      setState(() {
+        haveTable = true;
+        resetLoverMinAgeController = TextEditingController(text: response.l.minAge.toString());
+        resetLoverMaxAgeController = TextEditingController(text: response.l.maxAge.toString());
+        resetLoverCityController = TextEditingController(text: response.l.city.toString());
+        resetLoverGenderController = TextEditingController(text: response.l.gender.toString());
+        resetLoverConstellationController = TextEditingController(text: response.l.constellation.toString());
+        resetLoverSexualController = TextEditingController(text: response.l.sexual.toString());
+        resetLoverHeightController = TextEditingController(text: response.l.height.toString());
+        resetLoverWeightController = TextEditingController(text: response.l.weight.toString());
+        resetLoverSpeakLanguageController = TextEditingController(text: response.l.speaklanguage.toString());
+        resetLoverJobController = TextEditingController(text: response.l.job.toString());
+        resetLoverAnnualSalaryController = TextEditingController(text: response.l.annualSalary.toString());
+        resetLoverSociabilityController = TextEditingController(text: response.l.sociability.toString());
+        resetLoverReligiousController = TextEditingController(text: response.l.religious.toString());
+      });
+    } on GrpcError {
+      haveTable = false;
+    }
+  }
 
 // Http
   void updateLoverHttpRequest(BuildContext context) async {
@@ -66,45 +101,73 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
 // Grpc
   void updateLoverGrpcRequest(BuildContext context) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
-    final request = UpdateLoverRequest(
-      sessionID: apiKeyS,
-      minAge: int.parse(resetLoverMinAgeController.text),
-      maxAge: int.parse(resetLoverMaxAgeController.text),
-      city: resetLoverCityController.text,
-      gender: resetLoverGenderController.text,
-      constellation: resetLoverConstellationController.text,
-      height: int.parse(resetLoverHeightController.text),
-      weight: int.parse(resetLoverWeightController.text),
-      speaklanguage: resetLoverSpeakLanguageController.text,
-      job: resetLoverJobController.text,
-      annualSalary: int.parse(resetLoverAnnualSalaryController.text),
-      sociability: resetLoverSociabilityController.text,
-      religious: resetLoverReligiousController.text,
-    );
+    setState(() {
+      showLoadDialog(context);
+    });
+    await Future.delayed(Duration(seconds: 1));
+    if (haveTable == true) {
+      try {
+        final request = UpdateLoverRequest(
+          sessionID: apiKeyS,
+          minAge: int.parse(resetLoverMinAgeController.text),
+          maxAge: int.parse(resetLoverMaxAgeController.text),
+          city: resetLoverCityController.text,
+          gender: resetLoverGenderController.text,
+          constellation: resetLoverConstellationController.text,
+          height: int.parse(resetLoverHeightController.text),
+          weight: int.parse(resetLoverWeightController.text),
+          speaklanguage: resetLoverSpeakLanguageController.text,
+          job: resetLoverJobController.text,
+          annualSalary: int.parse(resetLoverAnnualSalaryController.text),
+          sociability: resetLoverSociabilityController.text,
+          religious: resetLoverReligiousController.text,
+        );
 
-    final response = await GrpcInfoService.client.updateLover(request);
-    // ignore: unnecessary_null_comparison
-    if (response != null) {
-      onTapNextPage(context);
+        await GrpcInfoService.client.updateLover(request);
+        onTapNextPage(context);
+      } on GrpcError {
+        Navigator.pop(context);
+        showErrorDialog(context, "Error: validatable input data for update");
+        throw Exception("Error occurred while fetching update Lover.");
+      }
     } else {
-      showErrorDialog(context, "Error: Empty response");
+      try {
+        final request = CreateLoverRequest(
+          sessionID: apiKeyS,
+          minAge: int.parse(resetLoverMinAgeController.text),
+          maxAge: int.parse(resetLoverMaxAgeController.text),
+          city: resetLoverCityController.text,
+          gender: resetLoverGenderController.text,
+          constellation: resetLoverConstellationController.text,
+          height: int.parse(resetLoverHeightController.text),
+          weight: int.parse(resetLoverWeightController.text),
+          speaklanguage: resetLoverSpeakLanguageController.text,
+          job: resetLoverJobController.text,
+          annualSalary: int.parse(resetLoverAnnualSalaryController.text),
+          sociability: resetLoverSociabilityController.text,
+          religious: resetLoverReligiousController.text,
+        );
+
+        await GrpcInfoService.client.createLover(request);
+        onTapNextPage(context);
+      } on GrpcError {
+        Navigator.pop(context);
+        showErrorDialog(context, "Error: validatable input data for create Lover");
+        throw Exception("Error occurred while fetching Create Lover.");
+      }
     }
   }
-
-  bool confirmBtn = false;
 
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
-    mediaQueryData = MediaQuery.of(context);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: _buildHeader(context),
+      appBar: AppBar(automaticallyImplyLeading: true, title: AppbarTitle(text: "恋人の条件")),
       body: SizedBox(
-        width: double.maxFinite,
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
           child: Column(
@@ -119,9 +182,6 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
                 ],
               ),
               SizedBox(height: mediaH / 100),
-              // Country
-              CustomInputBar(titleName: "国籍:", backendPart: _buildLoverResetCountryInput(context)),
-              SizedBox(height: mediaH / 50),
 
               // City
               CustomInputBar(titleName: "居住地:", backendPart: _buildLoverResetCityInput(context)),
@@ -133,10 +193,6 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
 
               // Constellation
               CustomInputBar(titleName: "星座:", backendPart: _buildLoverResetConstellationInput(context)),
-              SizedBox(height: mediaH / 50),
-
-              // Blood
-              CustomInputBar(titleName: "血液型:", backendPart: _buildLoverResetBloodInput(context)),
               SizedBox(height: mediaH / 50),
 
               // Sexual
@@ -204,11 +260,6 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
     );
   }
 
-  /// Header
-  PreferredSizeWidget _buildHeader(BuildContext context) {
-    return AppBar(automaticallyImplyLeading: true, title: AppbarTitle(text: "恋人の条件更改"));
-  }
-
   /// Min Age
   Widget _buildLoverMinAgeInput(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
@@ -239,11 +290,6 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
     );
   }
 
-  /// Country
-  Widget _buildLoverResetCountryInput(BuildContext context) {
-    return CustomInputFormBar(controller: resetLoverCountryController, hintText: "日本");
-  }
-
   /// City
   Widget _buildLoverResetCityInput(BuildContext context) {
     return CustomInputFormBar(controller: resetLoverCityController, hintText: "大阪");
@@ -257,11 +303,6 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
   /// Constellation
   Widget _buildLoverResetConstellationInput(BuildContext context) {
     return CustomInputFormBar(controller: resetLoverConstellationController, hintText: "いて座");
-  }
-
-  /// Constellation
-  Widget _buildLoverResetBloodInput(BuildContext context) {
-    return CustomInputFormBar(controller: resetLoverBloodController, hintText: "A");
   }
 
   /// Sexual

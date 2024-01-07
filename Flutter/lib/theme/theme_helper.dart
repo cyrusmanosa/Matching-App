@@ -70,7 +70,7 @@ class TextThemes {
 /// Class containing the supported color schemes.
 class ColorSchemes {
   static final primaryColorScheme = ColorScheme.light(
-    primary: Color(0XFF1877F2),
+    primary: Color(0XFFFF83A8),
     primaryContainer: Color(0XFF909090),
     onPrimary: Colors.white,
     onPrimaryContainer: Colors.red,

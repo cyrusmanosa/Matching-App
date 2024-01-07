@@ -3,6 +3,7 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/rpc_fix.pb.dart';
 import 'package:dating_your_date/pb/rpc_session.pb.dart';
+import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
@@ -64,15 +65,15 @@ class _FixInformationState extends State<FixInformation> {
     } else if (confirmAgreeBtn == false) {
       showErrorDialog(context, "同意のボタンを押してください");
     } else {
-      final request = CreateFixRequest(
-        firstName: fixFirstNameController.text,
-        lastName: fixLastNameController.text,
-        birth: fixBirthController.text,
-        country: fixCountryController.text,
-        gender: fixGenderController.text,
-        blood: fixBloodController.text,
-      );
       try {
+        final request = CreateFixRequest(
+          firstName: fixFirstNameController.text,
+          lastName: fixLastNameController.text,
+          birth: fixBirthController.text,
+          country: fixCountryController.text,
+          gender: fixGenderController.text,
+          blood: fixBloodController.text,
+        );
         final response = await GrpcInfoService.client.createFix(request);
         await globalSession.write(key: 'SessionId', value: response.sessionsID);
         // take user id
@@ -81,47 +82,12 @@ class _FixInformationState extends State<FixInformation> {
         final useridResponse = await GrpcInfoService.client.getUserID(useridRequest);
         await globalUserId.write(key: 'UserID', value: '${useridResponse.userID}');
         onTapNextPage(context);
-      } on GrpcError catch (e) {
-        showErrorDialog(context, "Error: ${e.codeName}");
+      } on GrpcError {
+        Navigator.pop(context);
+        showErrorDialog(context, "Error: validatable input data");
+        throw Exception("Error occurred while fetching Fix.");
       }
     }
-  }
-
-  void showErrorDialog(BuildContext context, String errorMessage) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    double mediaH = mediaQueryData.size.height;
-    double mediaW = mediaQueryData.size.width;
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
-          // Error Logo
-          title: CustomImageView(
-            imagePath: ImageConstant.imgWarning,
-            height: mediaH / 20,
-            width: mediaW / 10,
-            alignment: Alignment.center,
-          ),
-
-          // Word
-          content: Container(
-            width: mediaW / 1.1,
-            child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
-          ),
-          actions: [
-            CustomOutlinedButton(
-              text: "OK",
-              alignment: Alignment.center,
-              margin: EdgeInsets.only(bottom: mediaH / 100),
-              onPressed: () {
-                onTapReturn(context);
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 
   bool confirm18Btn = false;
@@ -135,18 +101,12 @@ class _FixInformationState extends State<FixInformation> {
     return Scaffold(
       appBar: _buildHeader(context),
       body: Container(
-        width: double.maxFinite,
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
           child: Column(
             children: [
               // image
-              CustomImageView(
-                imagePath: ImageConstant.imgVector,
-                height: mediaH / 7,
-                width: mediaW / 3,
-                alignment: Alignment.center,
-              ),
+              CustomImageView(imagePath: ImageConstant.imgVector, height: mediaH / 7, width: mediaW / 3, alignment: Alignment.center),
               SizedBox(height: mediaH / 70),
 
               // msg

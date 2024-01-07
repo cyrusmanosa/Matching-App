@@ -303,7 +303,7 @@ var file_service_Backend_proto_rawDesc = []byte{
 	0x55, 0x73, 0x65, 0x72, 0x49, 0x44, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x15, 0x2e,
 	0x70, 0x62, 0x2e, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72, 0x49, 0x44, 0x52, 0x65, 0x73, 0x70,
 	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x16, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x10, 0x12, 0x0e, 0x2f, 0x76,
-	0x31, 0x2f, 0x47, 0x65, 0x74, 0x5f, 0x55, 0x73, 0x65, 0x72, 0x49, 0x44, 0x32, 0xcb, 0x05, 0x0a,
+	0x31, 0x2f, 0x47, 0x65, 0x74, 0x5f, 0x55, 0x73, 0x65, 0x72, 0x49, 0x44, 0x32, 0xa4, 0x06, 0x0a,
 	0x04, 0x43, 0x68, 0x61, 0x74, 0x12, 0x66, 0x0a, 0x0f, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43,
 	0x68, 0x61, 0x74, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x12, 0x1a, 0x2e, 0x70, 0x62, 0x2e, 0x43, 0x72,
 	0x65, 0x61, 0x74, 0x65, 0x43, 0x68, 0x61, 0x74, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x52, 0x65, 0x71,
@@ -348,15 +348,20 @@ var file_service_Backend_proto_rawDesc = []byte{
 	0x73, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x70, 0x62, 0x2e, 0x47,
 	0x65, 0x74, 0x4c, 0x61, 0x73, 0x74, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
 	0x65, 0x22, 0x17, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x11, 0x12, 0x0f, 0x2f, 0x76, 0x31, 0x2f, 0x47,
-	0x65, 0x74, 0x5f, 0x4c, 0x61, 0x73, 0x74, 0x4d, 0x73, 0x67, 0x42, 0x6e, 0x92, 0x41, 0x5f, 0x12,
-	0x5d, 0x0a, 0x13, 0x41, 0x20, 0x42, 0x69, 0x74, 0x20, 0x6f, 0x66, 0x20, 0x45, 0x76, 0x65, 0x72,
-	0x79, 0x74, 0x68, 0x69, 0x6e, 0x67, 0x22, 0x41, 0x0a, 0x03, 0x41, 0x70, 0x70, 0x12, 0x23, 0x68,
-	0x74, 0x74, 0x70, 0x73, 0x3a, 0x2f, 0x2f, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f,
-	0x6d, 0x2f, 0x63, 0x79, 0x72, 0x75, 0x73, 0x6d, 0x61, 0x6e, 0x6f, 0x73, 0x61, 0x2f, 0x41, 0x70,
-	0x70, 0x73, 0x1a, 0x15, 0x63, 0x79, 0x72, 0x75, 0x73, 0x6d, 0x61, 0x6e, 0x6f, 0x73, 0x61, 0x40,
-	0x67, 0x6d, 0x61, 0x69, 0x6c, 0x2e, 0x63, 0x6f, 0x6d, 0x32, 0x03, 0x31, 0x2e, 0x30, 0x5a, 0x0a,
-	0x42, 0x61, 0x63, 0x6b, 0x65, 0x6e, 0x64, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x65, 0x74, 0x5f, 0x4c, 0x61, 0x73, 0x74, 0x4d, 0x73, 0x67, 0x12, 0x57, 0x0a, 0x0a, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x52, 0x65, 0x61, 0x64, 0x12, 0x15, 0x2e, 0x70, 0x62, 0x2e, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x52, 0x65, 0x61, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75,
+	0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x1a, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x14, 0x3a,
+	0x01, 0x2a, 0x1a, 0x0f, 0x2f, 0x76, 0x31, 0x2f, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x5f, 0x52,
+	0x65, 0x61, 0x64, 0x42, 0x6e, 0x92, 0x41, 0x5f, 0x12, 0x5d, 0x0a, 0x13, 0x41, 0x20, 0x42, 0x69,
+	0x74, 0x20, 0x6f, 0x66, 0x20, 0x45, 0x76, 0x65, 0x72, 0x79, 0x74, 0x68, 0x69, 0x6e, 0x67, 0x22,
+	0x41, 0x0a, 0x03, 0x41, 0x70, 0x70, 0x12, 0x23, 0x68, 0x74, 0x74, 0x70, 0x73, 0x3a, 0x2f, 0x2f,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x79, 0x72, 0x75, 0x73,
+	0x6d, 0x61, 0x6e, 0x6f, 0x73, 0x61, 0x2f, 0x41, 0x70, 0x70, 0x73, 0x1a, 0x15, 0x63, 0x79, 0x72,
+	0x75, 0x73, 0x6d, 0x61, 0x6e, 0x6f, 0x73, 0x61, 0x40, 0x67, 0x6d, 0x61, 0x69, 0x6c, 0x2e, 0x63,
+	0x6f, 0x6d, 0x32, 0x03, 0x31, 0x2e, 0x30, 0x5a, 0x0a, 0x42, 0x61, 0x63, 0x6b, 0x65, 0x6e, 0x64,
+	0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var file_service_Backend_proto_goTypes = []interface{}{
@@ -409,45 +414,46 @@ var file_service_Backend_proto_goTypes = []interface{}{
 	(*DeleteChatRecordRequest)(nil),    // 46: pb.DeleteChatRecordRequest
 	(*GetTargetIDRequest)(nil),         // 47: pb.GetTargetIDRequest
 	(*GetLastMsgRequest)(nil),          // 48: pb.GetLastMsgRequest
-	(*LoginUserResponse)(nil),          // 49: pb.LoginUserResponse
-	(*CheckEmailResponse)(nil),         // 50: pb.CheckEmailResponse
-	(*CheckedEmailResponse)(nil),       // 51: pb.CheckedEmailResponse
-	(*InputPasswordResponse)(nil),      // 52: pb.InputPasswordResponse
-	(*ResetPasswordResponse)(nil),      // 53: pb.ResetPasswordResponse
-	(*CreateFixResponse)(nil),          // 54: pb.CreateFixResponse
-	(*GetFixResponse)(nil),             // 55: pb.GetFixResponse
-	(*emptypb.Empty)(nil),              // 56: google.protobuf.Empty
-	(*CreateCanChangeResponse)(nil),    // 57: pb.CreateCanChangeResponse
-	(*GetCanChangeResponse)(nil),       // 58: pb.GetCanChangeResponse
-	(*UpdateCanChangeResponse)(nil),    // 59: pb.UpdateCanChangeResponse
-	(*CreateAccompanyResponse)(nil),    // 60: pb.CreateAccompanyResponse
-	(*GetAccompanyResponse)(nil),       // 61: pb.GetAccompanyResponse
-	(*UpdateAccompanyResponse)(nil),    // 62: pb.UpdateAccompanyResponse
-	(*CreateHobbyResponse)(nil),        // 63: pb.CreateHobbyResponse
-	(*GetHobbyResponse)(nil),           // 64: pb.GetHobbyResponse
-	(*UpdateHobbyResponse)(nil),        // 65: pb.UpdateHobbyResponse
-	(*CreateLoverResponse)(nil),        // 66: pb.CreateLoverResponse
-	(*GetLoverResponse)(nil),           // 67: pb.GetLoverResponse
-	(*UpdateLoverResponse)(nil),        // 68: pb.UpdateLoverResponse
-	(*CreateComplaintResponse)(nil),    // 69: pb.CreateComplaintResponse
-	(*GetComplaintResponse)(nil),       // 70: pb.GetComplaintResponse
-	(*UpdateComplaintResponse)(nil),    // 71: pb.UpdateComplaintResponse
-	(*CreateTargetListResponse)(nil),   // 72: pb.CreateTargetListResponse
-	(*GetTargetListResponse)(nil),      // 73: pb.GetTargetListResponse
-	(*UpdateTargetListResponse)(nil),   // 74: pb.UpdateTargetListResponse
-	(*CreateChangeTargetResponse)(nil), // 75: pb.CreateChangeTargetResponse
-	(*GetChangeTargetResponse)(nil),    // 76: pb.GetChangeTargetResponse
-	(*CreateImagesResponse)(nil),       // 77: pb.CreateImagesResponse
-	(*GetImagesResponse)(nil),          // 78: pb.GetImagesResponse
-	(*UpdateImagesResponse)(nil),       // 79: pb.UpdateImagesResponse
-	(*CreatePaymentResponse)(nil),      // 80: pb.CreatePaymentResponse
-	(*GetPaymentResponse)(nil),         // 81: pb.GetPaymentResponse
-	(*GetUserIDResponse)(nil),          // 82: pb.GetUserIDResponse
-	(*CreateChatRecordResponse)(nil),   // 83: pb.CreateChatRecordResponse
-	(*GetChatRecordResponse)(nil),      // 84: pb.GetChatRecordResponse
-	(*UpdateChatRecordResponse)(nil),   // 85: pb.UpdateChatRecordResponse
-	(*GetTargetIDResponse)(nil),        // 86: pb.GetTargetIDResponse
-	(*GetLastMsgResponse)(nil),         // 87: pb.GetLastMsgResponse
+	(*UpdateReadRequest)(nil),          // 49: pb.UpdateReadRequest
+	(*LoginUserResponse)(nil),          // 50: pb.LoginUserResponse
+	(*CheckEmailResponse)(nil),         // 51: pb.CheckEmailResponse
+	(*CheckedEmailResponse)(nil),       // 52: pb.CheckedEmailResponse
+	(*InputPasswordResponse)(nil),      // 53: pb.InputPasswordResponse
+	(*ResetPasswordResponse)(nil),      // 54: pb.ResetPasswordResponse
+	(*CreateFixResponse)(nil),          // 55: pb.CreateFixResponse
+	(*GetFixResponse)(nil),             // 56: pb.GetFixResponse
+	(*emptypb.Empty)(nil),              // 57: google.protobuf.Empty
+	(*CreateCanChangeResponse)(nil),    // 58: pb.CreateCanChangeResponse
+	(*GetCanChangeResponse)(nil),       // 59: pb.GetCanChangeResponse
+	(*UpdateCanChangeResponse)(nil),    // 60: pb.UpdateCanChangeResponse
+	(*CreateAccompanyResponse)(nil),    // 61: pb.CreateAccompanyResponse
+	(*GetAccompanyResponse)(nil),       // 62: pb.GetAccompanyResponse
+	(*UpdateAccompanyResponse)(nil),    // 63: pb.UpdateAccompanyResponse
+	(*CreateHobbyResponse)(nil),        // 64: pb.CreateHobbyResponse
+	(*GetHobbyResponse)(nil),           // 65: pb.GetHobbyResponse
+	(*UpdateHobbyResponse)(nil),        // 66: pb.UpdateHobbyResponse
+	(*CreateLoverResponse)(nil),        // 67: pb.CreateLoverResponse
+	(*GetLoverResponse)(nil),           // 68: pb.GetLoverResponse
+	(*UpdateLoverResponse)(nil),        // 69: pb.UpdateLoverResponse
+	(*CreateComplaintResponse)(nil),    // 70: pb.CreateComplaintResponse
+	(*GetComplaintResponse)(nil),       // 71: pb.GetComplaintResponse
+	(*UpdateComplaintResponse)(nil),    // 72: pb.UpdateComplaintResponse
+	(*CreateTargetListResponse)(nil),   // 73: pb.CreateTargetListResponse
+	(*GetTargetListResponse)(nil),      // 74: pb.GetTargetListResponse
+	(*UpdateTargetListResponse)(nil),   // 75: pb.UpdateTargetListResponse
+	(*CreateChangeTargetResponse)(nil), // 76: pb.CreateChangeTargetResponse
+	(*GetChangeTargetResponse)(nil),    // 77: pb.GetChangeTargetResponse
+	(*CreateImagesResponse)(nil),       // 78: pb.CreateImagesResponse
+	(*GetImagesResponse)(nil),          // 79: pb.GetImagesResponse
+	(*UpdateImagesResponse)(nil),       // 80: pb.UpdateImagesResponse
+	(*CreatePaymentResponse)(nil),      // 81: pb.CreatePaymentResponse
+	(*GetPaymentResponse)(nil),         // 82: pb.GetPaymentResponse
+	(*GetUserIDResponse)(nil),          // 83: pb.GetUserIDResponse
+	(*CreateChatRecordResponse)(nil),   // 84: pb.CreateChatRecordResponse
+	(*GetChatRecordResponse)(nil),      // 85: pb.GetChatRecordResponse
+	(*UpdateChatRecordResponse)(nil),   // 86: pb.UpdateChatRecordResponse
+	(*GetTargetIDResponse)(nil),        // 87: pb.GetTargetIDResponse
+	(*GetLastMsgResponse)(nil),         // 88: pb.GetLastMsgResponse
 }
 var file_service_Backend_proto_depIdxs = []int32{
 	0,  // 0: pb.Information.LoginUser:input_type -> pb.LoginUserRequest
@@ -499,57 +505,59 @@ var file_service_Backend_proto_depIdxs = []int32{
 	46, // 46: pb.Chat.DeleteChatRecord:input_type -> pb.DeleteChatRecordRequest
 	47, // 47: pb.Chat.GetTargetID:input_type -> pb.GetTargetIDRequest
 	48, // 48: pb.Chat.GetLastMsg:input_type -> pb.GetLastMsgRequest
-	49, // 49: pb.Information.LoginUser:output_type -> pb.LoginUserResponse
-	50, // 50: pb.Information.CheckEmail:output_type -> pb.CheckEmailResponse
-	51, // 51: pb.Information.CheckEmailCode:output_type -> pb.CheckedEmailResponse
-	52, // 52: pb.Information.InputPassword:output_type -> pb.InputPasswordResponse
-	53, // 53: pb.Information.ResetPassword:output_type -> pb.ResetPasswordResponse
-	54, // 54: pb.Information.CreateFix:output_type -> pb.CreateFixResponse
-	55, // 55: pb.Information.GetFix:output_type -> pb.GetFixResponse
-	56, // 56: pb.Information.DeleteFix:output_type -> google.protobuf.Empty
-	57, // 57: pb.Information.CreateCanChange:output_type -> pb.CreateCanChangeResponse
-	58, // 58: pb.Information.GetCanChange:output_type -> pb.GetCanChangeResponse
-	59, // 59: pb.Information.UpdateCanChange:output_type -> pb.UpdateCanChangeResponse
-	56, // 60: pb.Information.DeleteCanChange:output_type -> google.protobuf.Empty
-	60, // 61: pb.Information.CreateAccompany:output_type -> pb.CreateAccompanyResponse
-	61, // 62: pb.Information.GetAccompany:output_type -> pb.GetAccompanyResponse
-	62, // 63: pb.Information.UpdateAccompany:output_type -> pb.UpdateAccompanyResponse
-	56, // 64: pb.Information.DeleteAccompany:output_type -> google.protobuf.Empty
-	63, // 65: pb.Information.CreateHobby:output_type -> pb.CreateHobbyResponse
-	64, // 66: pb.Information.GetHobby:output_type -> pb.GetHobbyResponse
-	65, // 67: pb.Information.UpdateHobby:output_type -> pb.UpdateHobbyResponse
-	56, // 68: pb.Information.DeleteHobby:output_type -> google.protobuf.Empty
-	66, // 69: pb.Information.CreateLover:output_type -> pb.CreateLoverResponse
-	67, // 70: pb.Information.GetLover:output_type -> pb.GetLoverResponse
-	68, // 71: pb.Information.UpdateLover:output_type -> pb.UpdateLoverResponse
-	56, // 72: pb.Information.DeleteLover:output_type -> google.protobuf.Empty
-	69, // 73: pb.Information.CreateComplaint:output_type -> pb.CreateComplaintResponse
-	70, // 74: pb.Information.GetComplaint:output_type -> pb.GetComplaintResponse
-	71, // 75: pb.Information.UpdateComplaint:output_type -> pb.UpdateComplaintResponse
-	56, // 76: pb.Information.DeleteComplaint:output_type -> google.protobuf.Empty
-	72, // 77: pb.Information.CreateTargetList:output_type -> pb.CreateTargetListResponse
-	73, // 78: pb.Information.GetTargetList:output_type -> pb.GetTargetListResponse
-	74, // 79: pb.Information.UpdateTargetList:output_type -> pb.UpdateTargetListResponse
-	56, // 80: pb.Information.DeleteTargetList:output_type -> google.protobuf.Empty
-	75, // 81: pb.Information.CreateChangeTarget:output_type -> pb.CreateChangeTargetResponse
-	76, // 82: pb.Information.GetChangeTarget:output_type -> pb.GetChangeTargetResponse
-	56, // 83: pb.Information.DeleteChangeTarget:output_type -> google.protobuf.Empty
-	77, // 84: pb.Information.CreateImages:output_type -> pb.CreateImagesResponse
-	78, // 85: pb.Information.GetImages:output_type -> pb.GetImagesResponse
-	79, // 86: pb.Information.UpdateImages:output_type -> pb.UpdateImagesResponse
-	56, // 87: pb.Information.DeleteImages:output_type -> google.protobuf.Empty
-	80, // 88: pb.Information.CreatePayment:output_type -> pb.CreatePaymentResponse
-	81, // 89: pb.Information.GetPayment:output_type -> pb.GetPaymentResponse
-	82, // 90: pb.Information.GetUserID:output_type -> pb.GetUserIDResponse
-	56, // 91: pb.Chat.CreateChatTable:output_type -> google.protobuf.Empty
-	83, // 92: pb.Chat.CreateChatRecord:output_type -> pb.CreateChatRecordResponse
-	84, // 93: pb.Chat.GetChatRecord:output_type -> pb.GetChatRecordResponse
-	85, // 94: pb.Chat.UpdateChatRecord:output_type -> pb.UpdateChatRecordResponse
-	56, // 95: pb.Chat.DeleteChatRecord:output_type -> google.protobuf.Empty
-	86, // 96: pb.Chat.GetTargetID:output_type -> pb.GetTargetIDResponse
-	87, // 97: pb.Chat.GetLastMsg:output_type -> pb.GetLastMsgResponse
-	49, // [49:98] is the sub-list for method output_type
-	0,  // [0:49] is the sub-list for method input_type
+	49, // 49: pb.Chat.UpdateRead:input_type -> pb.UpdateReadRequest
+	50, // 50: pb.Information.LoginUser:output_type -> pb.LoginUserResponse
+	51, // 51: pb.Information.CheckEmail:output_type -> pb.CheckEmailResponse
+	52, // 52: pb.Information.CheckEmailCode:output_type -> pb.CheckedEmailResponse
+	53, // 53: pb.Information.InputPassword:output_type -> pb.InputPasswordResponse
+	54, // 54: pb.Information.ResetPassword:output_type -> pb.ResetPasswordResponse
+	55, // 55: pb.Information.CreateFix:output_type -> pb.CreateFixResponse
+	56, // 56: pb.Information.GetFix:output_type -> pb.GetFixResponse
+	57, // 57: pb.Information.DeleteFix:output_type -> google.protobuf.Empty
+	58, // 58: pb.Information.CreateCanChange:output_type -> pb.CreateCanChangeResponse
+	59, // 59: pb.Information.GetCanChange:output_type -> pb.GetCanChangeResponse
+	60, // 60: pb.Information.UpdateCanChange:output_type -> pb.UpdateCanChangeResponse
+	57, // 61: pb.Information.DeleteCanChange:output_type -> google.protobuf.Empty
+	61, // 62: pb.Information.CreateAccompany:output_type -> pb.CreateAccompanyResponse
+	62, // 63: pb.Information.GetAccompany:output_type -> pb.GetAccompanyResponse
+	63, // 64: pb.Information.UpdateAccompany:output_type -> pb.UpdateAccompanyResponse
+	57, // 65: pb.Information.DeleteAccompany:output_type -> google.protobuf.Empty
+	64, // 66: pb.Information.CreateHobby:output_type -> pb.CreateHobbyResponse
+	65, // 67: pb.Information.GetHobby:output_type -> pb.GetHobbyResponse
+	66, // 68: pb.Information.UpdateHobby:output_type -> pb.UpdateHobbyResponse
+	57, // 69: pb.Information.DeleteHobby:output_type -> google.protobuf.Empty
+	67, // 70: pb.Information.CreateLover:output_type -> pb.CreateLoverResponse
+	68, // 71: pb.Information.GetLover:output_type -> pb.GetLoverResponse
+	69, // 72: pb.Information.UpdateLover:output_type -> pb.UpdateLoverResponse
+	57, // 73: pb.Information.DeleteLover:output_type -> google.protobuf.Empty
+	70, // 74: pb.Information.CreateComplaint:output_type -> pb.CreateComplaintResponse
+	71, // 75: pb.Information.GetComplaint:output_type -> pb.GetComplaintResponse
+	72, // 76: pb.Information.UpdateComplaint:output_type -> pb.UpdateComplaintResponse
+	57, // 77: pb.Information.DeleteComplaint:output_type -> google.protobuf.Empty
+	73, // 78: pb.Information.CreateTargetList:output_type -> pb.CreateTargetListResponse
+	74, // 79: pb.Information.GetTargetList:output_type -> pb.GetTargetListResponse
+	75, // 80: pb.Information.UpdateTargetList:output_type -> pb.UpdateTargetListResponse
+	57, // 81: pb.Information.DeleteTargetList:output_type -> google.protobuf.Empty
+	76, // 82: pb.Information.CreateChangeTarget:output_type -> pb.CreateChangeTargetResponse
+	77, // 83: pb.Information.GetChangeTarget:output_type -> pb.GetChangeTargetResponse
+	57, // 84: pb.Information.DeleteChangeTarget:output_type -> google.protobuf.Empty
+	78, // 85: pb.Information.CreateImages:output_type -> pb.CreateImagesResponse
+	79, // 86: pb.Information.GetImages:output_type -> pb.GetImagesResponse
+	80, // 87: pb.Information.UpdateImages:output_type -> pb.UpdateImagesResponse
+	57, // 88: pb.Information.DeleteImages:output_type -> google.protobuf.Empty
+	81, // 89: pb.Information.CreatePayment:output_type -> pb.CreatePaymentResponse
+	82, // 90: pb.Information.GetPayment:output_type -> pb.GetPaymentResponse
+	83, // 91: pb.Information.GetUserID:output_type -> pb.GetUserIDResponse
+	57, // 92: pb.Chat.CreateChatTable:output_type -> google.protobuf.Empty
+	84, // 93: pb.Chat.CreateChatRecord:output_type -> pb.CreateChatRecordResponse
+	85, // 94: pb.Chat.GetChatRecord:output_type -> pb.GetChatRecordResponse
+	86, // 95: pb.Chat.UpdateChatRecord:output_type -> pb.UpdateChatRecordResponse
+	57, // 96: pb.Chat.DeleteChatRecord:output_type -> google.protobuf.Empty
+	87, // 97: pb.Chat.GetTargetID:output_type -> pb.GetTargetIDResponse
+	88, // 98: pb.Chat.GetLastMsg:output_type -> pb.GetLastMsgResponse
+	57, // 99: pb.Chat.UpdateRead:output_type -> google.protobuf.Empty
+	50, // [50:100] is the sub-list for method output_type
+	0,  // [0:50] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name

@@ -72,6 +72,12 @@ message UpdateChatRecordResponse {
     ChatRecord ChatRecord = 1;
 }
 
+message UpdateReadRequest {
+    int32 UserID = 1;
+    int32 TargetID = 2;
+}
+
+
 // Delete
 message DeleteChatRecordRequest {
     int32 UserID = 1;

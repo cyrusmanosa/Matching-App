@@ -9,6 +9,7 @@ import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:flutter/material.dart';
+import 'package:grpc/grpc.dart';
 
 class NewPasswordSetup extends StatefulWidget {
   NewPasswordSetup({Key? key}) : super(key: key);
@@ -27,10 +28,7 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
   void resetPasswordHttpRequest(BuildContext context) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
     var url = "http://127.0.0.1:8080/ChangePassword";
-    var requestBody = {
-      "session_id": apiKeyS,
-      "password": newPasswordSetupController.text,
-    };
+    var requestBody = {"session_id": apiKeyS, "password": newPasswordSetupController.text};
     var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
     if (response.statusCode == 200) {
       onTapNextPage(context);
@@ -39,17 +37,24 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
 
   // Grpc
   void resetPasswordGrpcRequest(BuildContext context) async {
-    String? apiKeyS = await globalSession.read(key: 'SessionId');
-    final request = ResetPasswordRequest(
-      sessionID: apiKeyS,
-      password: newPasswordSetupController.text,
-    );
-    final response = await GrpcInfoService.client.resetPassword(request);
-    // ignore: unnecessary_null_comparison
-    if (response != null) {
-      onTapNextPage(context);
+    if (newPasswordSetupController.text != newPasswordSetupConfirmController.text) {
+      showErrorDialog(context, "パスワード（確認）とパスワードは一致しません");
+    } else if (isPureText(newPasswordSetupController.text) || isPureNumber(newPasswordSetupController.text)) {
+      showErrorDialog(context, "パスワードの組み合わせは英数字は必要です");
     } else {
-      showErrorDialog(context, "Error: validatable input data");
+      try {
+        String? apiKeyS = await globalSession.read(key: 'SessionId');
+        final request = ResetPasswordRequest(
+          sessionID: apiKeyS,
+          password: newPasswordSetupController.text,
+        );
+        await GrpcInfoService.client.resetPassword(request);
+        onTapNextPage(context);
+      } on GrpcError {
+        Navigator.pop(context);
+        showErrorDialog(context, "Error: validatable input data");
+        throw Exception("Error occurred while fetching New Password setup.");
+      }
     }
   }
 
@@ -69,8 +74,6 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
-    mediaQueryData = MediaQuery.of(context);
-
     return Scaffold(
       body: Form(
         child: Container(
@@ -112,7 +115,6 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
       textInputType: TextInputType.visiblePassword,
       hintText: "Ankdl2332",
       obscureText: passwordVisible ? false : true,
-      maxLines: 1,
       focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
@@ -136,7 +138,6 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
       textInputType: TextInputType.visiblePassword,
       hintText: "Ankdl2332",
       obscureText: passwordVisible ? false : true,
-      maxLines: 1,
       focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
@@ -154,22 +155,11 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
 
   /// Next Button
   Widget _buildNextButton(BuildContext context) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    double mediaH = mediaQueryData.size.height;
-    double mediaW = mediaQueryData.size.width;
     return CustomOutlinedButton(
-      width: mediaW / 4,
-      height: mediaH / 25,
       text: "設定",
       buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
-        if (newPasswordSetupController.text != newPasswordSetupConfirmController.text) {
-          showErrorDialog(context, "パスワード（確認）とパスワードは一致しません");
-        } else if (isPureText(newPasswordSetupController.text) || isPureNumber(newPasswordSetupController.text)) {
-          showErrorDialog(context, "パスワードの組み合わせは英数字は必要です");
-        } else {
-          resetPasswordGrpcRequest(context);
-        }
+        resetPasswordGrpcRequest(context);
       },
     );
   }
@@ -178,7 +168,6 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
     Navigator.pop(context);
   }
 
-  /// Navigates to the okScreen when the action is triggered.
   onTapNextPage(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.newPasswordDone);
   }

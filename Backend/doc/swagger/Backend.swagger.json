@@ -1587,6 +1587,39 @@
         ]
       }
     },
+    "/v1/Update_Read": {
+      "put": {
+        "operationId": "Chat_UpdateRead",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbUpdateReadRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Chat"
+        ]
+      }
+    },
     "/v1/Update_TargetList": {
       "put": {
         "operationId": "Information_UpdateTargetList",
@@ -3008,6 +3041,19 @@
       "properties": {
         "l": {
           "$ref": "#/definitions/pbLover"
+        }
+      }
+    },
+    "pbUpdateReadRequest": {
+      "type": "object",
+      "properties": {
+        "UserID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "TargetID": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

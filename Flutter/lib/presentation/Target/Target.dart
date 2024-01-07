@@ -1,9 +1,18 @@
-import 'package:dating_your_date/presentation/Target/widgets/ResetTargetButton.dart';
-import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
+import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/presentation/Target/widgets/ResetTargetButton.dart';
 
+// ignore: must_be_immutable
 class Target extends StatelessWidget {
-  const Target({Key? key}) : super(key: key);
+  static List<TargetInfo> targetList = [
+    TargetInfo(title: "趣味", style: CustomButtonStyles.fillLightGray, sendPage: AppRoutes.hobbyConditionRepair),
+    TargetInfo(title: "恋人", style: CustomButtonStyles.fillDarkRed, sendPage: AppRoutes.loverConditionRepair),
+    TargetInfo(title: "お相伴", style: CustomButtonStyles.fillRed, sendPage: AppRoutes.accompanyConditionRepair),
+  ];
+
+  Target({Key? key, this.head}) : super(key: key);
+
+  String? head;
 
   @override
   Widget build(BuildContext context) {
@@ -11,50 +20,66 @@ class Target extends StatelessWidget {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
-      appBar: _buildHeader(context),
       body: Container(
-        width: double.maxFinite,
         child: Column(
           children: [
-            SizedBox(height: mediaH / 30),
-            // title
-            Text("探すターゲットの種類", style: theme.textTheme.headlineSmall),
-            SizedBox(height: mediaH / 30),
-            _buildTargetResetList(context)
+            if (head! == "head") _buildHeader(context, mediaW, mediaH),
+            if (head! == "logo") _buildLogo(context, mediaW, mediaH),
+            Text("探すターゲットの種類", style: CustomTextStyles.smallTitle20),
+            _buildTargetResetList(context, mediaW, mediaH),
           ],
         ),
       ),
     );
   }
 
-  PreferredSizeWidget _buildHeader(BuildContext context) {
-    return AppBar(automaticallyImplyLeading: false, title: Text("ターゲットの設定", style: theme.textTheme.headlineMedium));
-  }
-
-  /// Section Widget
-  Widget _buildTargetResetList(BuildContext context) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    double mediaH = mediaQueryData.size.height;
-    double mediaW = mediaQueryData.size.width;
+  Widget _buildTargetResetList(BuildContext context, double mediaW, double mediaH) {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: mediaW / 10),
-        child: ListView.separated(
+        child: ListView.builder(
           physics: BouncingScrollPhysics(),
-          itemCount: 3,
-          separatorBuilder: (context, index) => SizedBox(height: mediaH / 30),
+          itemCount: targetList.length,
           itemBuilder: (context, index) {
-            if (index == 0) {
-              return ResetTargetButton(title: "趣味", color: CustomButtonStyles.fillLightGray, sendPage: AppRoutes.hobbyConditionRepair);
-            } else if (index == 1) {
-              return ResetTargetButton(title: "恋人", color: CustomButtonStyles.fillDarkRed, sendPage: AppRoutes.loverConditionRepair);
-            } else if (index == 2) {
-              return ResetTargetButton(title: "お相伴", color: CustomButtonStyles.fillRed, sendPage: AppRoutes.accompanyConditionRepair);
-            }
-            return SizedBox();
+            final targetInfo = targetList[index];
+            return Padding(
+              padding: EdgeInsets.symmetric(vertical: mediaH / 50),
+              child: ResetTargetButton(title: targetInfo.title, color: targetInfo.style, sendPage: targetInfo.sendPage),
+            );
           },
         ),
       ),
     );
   }
+
+  Widget _buildLogo(BuildContext context, double mediaW, double mediaH) {
+    return Column(
+      children: [
+        SizedBox(height: mediaH / 12),
+        CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 3.5),
+        CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3),
+        SizedBox(height: mediaH / 40),
+      ],
+    );
+  }
+
+  Widget _buildHeader(BuildContext context, double mediaW, double mediaH) {
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.only(top: mediaH / 80),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [Text("ターゲット更新", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900))],
+        ),
+      ),
+    );
+  }
+}
+
+class TargetInfo {
+  final String title;
+  final ButtonStyle style;
+  final String sendPage;
+
+  TargetInfo({required this.title, required this.style, required this.sendPage});
 }

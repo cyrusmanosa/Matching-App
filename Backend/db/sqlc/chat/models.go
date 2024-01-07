@@ -9,10 +9,10 @@ import (
 )
 
 type Record struct {
-	TargetID  int32         `json:"target_id"`
-	RoleType  string        `json:"role_type"`
-	MediaType string        `json:"media_type"`
-	Media     string        `json:"media"`
-	Isread    bool          `json:"isread"`
-	CreatedAt time.Time 	`json:"created_at"`
+	TargetID  int32              `json:"target_id"`
+	RoleType  string             `json:"role_type"`
+	MediaType string             `json:"media_type"`
+	Media     string       		 `json:"media"`
+	Isread    bool               `json:"isread"`
+	CreatedAt time.Time `json:"created_at"`
 }

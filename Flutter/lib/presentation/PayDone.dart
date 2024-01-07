@@ -28,10 +28,10 @@ class PayDone extends StatelessWidget {
         child: Column(
           children: [
             // Logo and Slogan
-            SizedBox(height: mediaH / 30),
+            SizedBox(height: mediaH / 15),
             CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 3.5),
             CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3),
-            SizedBox(height: mediaH / 30),
+            SizedBox(height: mediaH / 15),
 
             // Title
             Text("お支払いOK", style: TextStyle(fontSize: 40, color: appTheme.black)),

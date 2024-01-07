@@ -23,10 +23,7 @@ class CustomBottomBar extends StatelessWidget {
     return Container(
       height: mediaH / 10.5,
       decoration: BoxDecoration(color: appTheme.gray500),
-      padding: EdgeInsets.only(
-        left: mediaW / 20,
-        right: mediaW / 20,
-      ),
+      padding: EdgeInsets.only(left: mediaW / 20, right: mediaW / 20),
       child: BottomNavigationBar(
         backgroundColor: Color.fromARGB(0, 255, 0, 0),
         selectedFontSize: 0,
@@ -36,7 +33,6 @@ class CustomBottomBar extends StatelessWidget {
         items: List.generate(bottomMenuList.length, (index) {
           return BottomNavigationBarItem(
             label: "",
-
             // before
             icon: Column(
               children: [
@@ -50,11 +46,7 @@ class CustomBottomBar extends StatelessWidget {
             activeIcon: Column(
               children: [
                 Padding(padding: EdgeInsets.only(top: mediaH / 100)),
-                CustomImageView(
-                  imagePath: bottomMenuList[index].activeIcon,
-                  width: mediaW / 20,
-                  color: appTheme.cyan600,
-                ),
+                CustomImageView(imagePath: bottomMenuList[index].activeIcon, width: mediaW / 20, color: appTheme.cyan600),
                 Padding(padding: EdgeInsets.only(top: 2), child: Text(bottomMenuList[index].label!, style: CustomTextStyles.mainButtonC)),
               ],
             ),

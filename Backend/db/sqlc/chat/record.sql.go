@@ -150,20 +150,18 @@ type GetLastMsgRow struct {
 
 func (q *Queries) GetLastMsg(ctx context.Context, targetID int32, tablename string) (GetLastMsgRow, error) {
 
-	getLastMsg := fmt.Sprintf(`-- name: GetLastMsg :one
-	SELECT media,media_type,isread FROM %s
-	WHERE target_id = $1
-	ORDER BY created_at DESC
-	LIMIT 1
-	`,tablename)
+    getLastMsg := fmt.Sprintf(`-- name: GetLastMsg :one
+    SELECT media,media_type,isread FROM %s
+    WHERE target_id = $1
+    ORDER BY created_at DESC
+    LIMIT 1
+    `,tablename)
 
     row := q.db.QueryRow(ctx, getLastMsg, targetID)
     var i GetLastMsgRow
     err := row.Scan(&i.Media, &i.MediaType, &i.Isread)
     return i, err
 }
-
-
 
 type UpdateRecordParams struct {
     TargetID  int32         `json:"target_id"`
@@ -200,3 +198,24 @@ func (q *Queries) UpdateRecord(ctx context.Context, arg UpdateRecordParams, tabl
     )
     return i, err
 }
+
+
+
+
+func (q *Queries) UpdateRead(ctx context.Context, targetID int32,tablename string)  error {
+    updateRead := fmt.Sprintf(`-- name: UpdateRead :many
+    UPDATE %s
+    SET isread = true
+    WHERE target_id = $1
+    `,tablename)
+    rows, err := q.db.Query(ctx, updateRead, targetID)
+    if err != nil {
+        return err
+    }
+    defer rows.Close()
+    if err := rows.Err(); err != nil {
+        return err
+    }
+    return nil
+}
+

@@ -7,18 +7,24 @@ import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
+import 'package:dating_your_date/widgets/loading.dart';
 
 import 'package:flutter/material.dart';
+import 'package:grpc/grpc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class AccompanyConditionRepair extends StatefulWidget {
   AccompanyConditionRepair({Key? key}) : super(key: key);
+
   @override
   _AccompanyConditionRepairState createState() => _AccompanyConditionRepairState();
 }
 
 class _AccompanyConditionRepairState extends State<AccompanyConditionRepair> {
+  bool? haveTable;
+  bool confirmBtn = false;
+
   TextEditingController resetAccompanyEraController = TextEditingController();
   TextEditingController resetAccompanyCityController = TextEditingController();
   TextEditingController resetAccompanyGenderController = TextEditingController();
@@ -27,7 +33,34 @@ class _AccompanyConditionRepairState extends State<AccompanyConditionRepair> {
   TextEditingController resetAccompanyFindTargetController = TextEditingController();
   TextEditingController resetAccompanySociabilityController = TextEditingController();
 
-// Http
+  @override
+  void initState() {
+    super.initState();
+    getAccompanyGrpcRequest(context);
+  }
+
+  // check tabel
+  void getAccompanyGrpcRequest(BuildContext context) async {
+    try {
+      String? apiKeyS = await globalSession.read(key: 'SessionId');
+      final request = GetAccompanyRequest(sessionID: apiKeyS);
+      final response = await GrpcInfoService.client.getAccompany(request);
+      setState(() {
+        haveTable = true;
+        resetAccompanyEraController.text = response.ac.era.toString();
+        resetAccompanyCityController.text = response.ac.city.toString();
+        resetAccompanyGenderController.text = response.ac.gender.toString();
+        resetAccompanySpeakLanguageController.text = response.ac.speaklanguage.toString();
+        resetAccompanyFindTypeController.text = response.ac.findType.toString();
+        resetAccompanyFindTargetController.text = response.ac.findTarget.toString();
+        resetAccompanySociabilityController.text = response.ac.sociability.toString();
+      });
+    } on GrpcError {
+      haveTable = false;
+    }
+  }
+
+  // Http
   void updateAccompanyHttpRequest(BuildContext context) async {
     var url = "http://127.0.0.1:8080/UpdateAccompany";
     String? apiKeyS = await globalSession.read(key: 'SessionId');
@@ -43,7 +76,6 @@ class _AccompanyConditionRepairState extends State<AccompanyConditionRepair> {
       "Certification": false
     };
     var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
-
     if (response.statusCode == 200) {
       onTapNextPage(context);
     }
@@ -52,28 +84,52 @@ class _AccompanyConditionRepairState extends State<AccompanyConditionRepair> {
   // Grpc
   void createAccompanyGrpcRequest(BuildContext context) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
-    final request = UpdateAccompanyRequest(
-      sessionID: apiKeyS,
-      era: int.parse(resetAccompanyEraController.text),
-      city: resetAccompanyCityController.text,
-      gender: resetAccompanyGenderController.text,
-      speaklanguage: resetAccompanySpeakLanguageController.text,
-      findType: resetAccompanyFindTypeController.text,
-      findTarget: resetAccompanyFindTargetController.text,
-      sociability: resetAccompanySociabilityController.text,
-      certification: false,
-    );
-
-    final response = await GrpcInfoService.client.updateAccompany(request);
-    // ignore: unnecessary_null_comparison
-    if (response != null) {
-      onTapNextPage(context);
+    setState(() {
+      showLoadDialog(context);
+    });
+    await Future.delayed(Duration(seconds: 1));
+    if (haveTable == true) {
+      try {
+        final request = UpdateAccompanyRequest(
+          sessionID: apiKeyS,
+          era: int.parse(resetAccompanyEraController.text),
+          city: resetAccompanyCityController.text,
+          gender: resetAccompanyGenderController.text,
+          speaklanguage: resetAccompanySpeakLanguageController.text,
+          findType: resetAccompanyFindTypeController.text,
+          findTarget: resetAccompanyFindTargetController.text,
+          sociability: resetAccompanySociabilityController.text,
+          certification: false,
+        );
+        await GrpcInfoService.client.updateAccompany(request);
+        onTapNextPage(context);
+      } on GrpcError {
+        Navigator.pop(context);
+        showErrorDialog(context, "Error: validatable input data for update");
+        throw Exception("Error occurred while fetching update Accompany.");
+      }
     } else {
-      showErrorDialog(context, "Error: Empty response");
+      try {
+        final request = CreateAccompanyRequest(
+          sessionID: apiKeyS,
+          era: int.parse(resetAccompanyEraController.text),
+          city: resetAccompanyCityController.text,
+          gender: resetAccompanyGenderController.text,
+          speaklanguage: resetAccompanySpeakLanguageController.text,
+          findType: resetAccompanyFindTypeController.text,
+          findTarget: resetAccompanyFindTargetController.text,
+          sociability: resetAccompanySociabilityController.text,
+          certification: false,
+        );
+        await GrpcInfoService.client.createAccompany(request);
+        onTapNextPage(context);
+      } on GrpcError {
+        Navigator.pop(context);
+        showErrorDialog(context, "Error: validatable input data for create accompany");
+        throw Exception("Error occurred while fetching Create Accompany.");
+      }
     }
   }
-
-  bool confirmBtn = false;
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +140,6 @@ class _AccompanyConditionRepairState extends State<AccompanyConditionRepair> {
       appBar: _buildHeader(context),
       resizeToAvoidBottomInset: false,
       body: Container(
-        width: double.maxFinite,
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
           child: Column(
@@ -203,6 +258,6 @@ class _AccompanyConditionRepairState extends State<AccompanyConditionRepair> {
   }
 
   onTapNextPage(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.deleteTarget);
+    Navigator.pushNamed(context, AppRoutes.payDone);
   }
 }

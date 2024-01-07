@@ -3,9 +3,11 @@ import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/rpc_password.pb.dart';
+import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
+import 'package:dating_your_date/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:http/http.dart' as http;
@@ -44,52 +46,22 @@ class _PasswordSetupState extends State<PasswordSetup> {
     } else if (passwordSetupController.text.length < 8) {
       showErrorDialog(context, "パスワードの長さは 8 以上です。");
     } else {
-      String? apiKeyS = await globalSession.read(key: 'SessionId');
+      setState(() {
+        showLoadDialog(context);
+      });
+      await Future.delayed(Duration(seconds: 1));
       try {
+        String? apiKeyS = await globalSession.read(key: 'SessionId');
         final request = InputPasswordRequest(sessionID: apiKeyS, password: passwordSetupController.text);
         await GrpcInfoService.client.inputPassword(request);
+        ;
         onTapNextPage(context);
-      } on GrpcError catch (e) {
-        showErrorDialog(context, "Error: ${e.codeName}");
+      } on GrpcError {
+        Navigator.pop(context);
+        showErrorDialog(context, "Error: validatable input data");
+        throw Exception("Error occurred while fetching Password setup.");
       }
     }
-  }
-
-  void showErrorDialog(BuildContext context, String errorMessage) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    double mediaH = mediaQueryData.size.height;
-    double mediaW = mediaQueryData.size.width;
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
-          // Error Logo
-          title: CustomImageView(
-            imagePath: ImageConstant.imgWarning,
-            height: mediaH / 20,
-            width: mediaW / 10,
-            alignment: Alignment.center,
-          ),
-
-          // Word
-          content: Container(
-            width: mediaW / 1.1,
-            child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
-          ),
-          actions: [
-            CustomOutlinedButton(
-              text: "OK",
-              alignment: Alignment.center,
-              margin: EdgeInsets.only(bottom: mediaH / 100),
-              onPressed: () {
-                onTapReturn(context);
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 
   bool passwordVisible = false;

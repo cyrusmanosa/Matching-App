@@ -3,12 +3,13 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
+import 'package:dating_your_date/presentation/ContainerScreen.dart';
 import 'package:dating_your_date/widgets/Custom_IconLogoBox.dart';
-import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
+import 'package:dating_your_date/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
@@ -85,29 +86,37 @@ class _ProfileEditState extends State<ProfileEdit> {
     } else if (updateIntroduceController.text.isEmpty) {
       showErrorDialog(context, "自己紹介はまだ入力されていません");
     } else {
-      String? apiKeyS = await globalSession.read(key: 'SessionId');
-      final request = UpdateCanChangeRequest(
-        sessionID: apiKeyS,
-        nickName: updateNickNameController.text,
-        city: updateCityController.text,
-        sexual: updateSexualController.text,
-        height: int.parse(updateHeightController.text),
-        weight: int.parse(updateWeightController.text),
-        speaklanguage: updateSpeakLanguageController.text,
-        education: updateEducationController.text,
-        job: updateJobController.text,
-        annualSalary: int.parse(updateAnnualSalaryController.text),
-        sociability: updateSociabilityController.text,
-        religious: updateReligiousController.text,
-        introduce: updateIntroduceController.text,
-      );
-
+      setState(() {
+        showLoadDialog(context);
+      });
+      await Future.delayed(Duration(seconds: 1));
       try {
+        String? apiKeyS = await globalSession.read(key: 'SessionId');
+        final request = UpdateCanChangeRequest(
+          sessionID: apiKeyS,
+          nickName: updateNickNameController.text,
+          city: updateCityController.text,
+          sexual: updateSexualController.text,
+          height: int.parse(updateHeightController.text),
+          weight: int.parse(updateWeightController.text),
+          speaklanguage: updateSpeakLanguageController.text,
+          education: updateEducationController.text,
+          job: updateJobController.text,
+          annualSalary: int.parse(updateAnnualSalaryController.text),
+          sociability: updateSociabilityController.text,
+          religious: updateReligiousController.text,
+          introduce: updateIntroduceController.text,
+        );
+
         await GrpcInfoService.client.updateCanChange(request);
+        ;
+
         onTapNextPage(context);
         showLogoDialog(context, "個人情報もアップしました");
-      } on GrpcError catch (e) {
-        showErrorDialog(context, "Error: ${e.codeName}");
+      } on GrpcError {
+        Navigator.pop(context);
+        showErrorDialog(context, "Error: validatable input data");
+        throw Exception("Error occurred while fetching profile edit.");
       }
     }
   }
@@ -121,7 +130,6 @@ class _ProfileEditState extends State<ProfileEdit> {
       appBar: _buildHeader(context),
       resizeToAvoidBottomInset: false,
       body: Container(
-        width: double.maxFinite,
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
           child: Column(
@@ -204,7 +212,7 @@ class _ProfileEditState extends State<ProfileEdit> {
 
   /// Header
   PreferredSizeWidget _buildHeader(BuildContext context) {
-    return AppBar(automaticallyImplyLeading: true, title: AppbarTitle(text: "プロフィール編集"));
+    return AppBar(automaticallyImplyLeading: true, title: Text("プロフィール編集", style: theme.textTheme.headlineMedium));
   }
 
   /// Nickname
@@ -286,12 +294,13 @@ class _ProfileEditState extends State<ProfileEdit> {
     return CustomOutlinedButton(
       text: "送信",
       onPressed: () {
+        ;
         updateDataGrpcRequest(context);
       },
     );
   }
 
   onTapNextPage(BuildContext context) {
-    Navigator.pop(context);
+    Navigator.push(context, MaterialPageRoute(builder: (context) => ContainerScreen(number: 3)));
   }
 }

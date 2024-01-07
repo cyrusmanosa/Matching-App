@@ -9,8 +9,8 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-const TId = 32
-const TN = "u1"
+const TId = 1
+const TN = "u47"
 
 func TestCreateRecord(t *testing.T) {
 	CreateRandomRecord(t)
@@ -53,6 +53,11 @@ func TestGetLastMsg(t *testing.T) {
 	lmsg, err := testChatQueries.GetLastMsg(context.Background(), TId, TN)
 	require.NoError(t, err)
 	require.NotEmpty(t, lmsg)
+}
+
+func TestUpdateRead(t *testing.T) {
+	err := testChatQueries.UpdateRead(context.Background(), TId, TN)
+	require.NoError(t, err)
 }
 
 func TestUpdateRecord(t *testing.T) {

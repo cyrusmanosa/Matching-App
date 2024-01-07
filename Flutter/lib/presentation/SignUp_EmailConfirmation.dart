@@ -5,14 +5,18 @@ import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
+import 'package:dating_your_date/widgets/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:grpc/grpc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-// ignore_for_file: must_be_immutable
-class EmailConfirmation extends StatelessWidget {
+class EmailConfirmation extends StatefulWidget {
   EmailConfirmation({Key? key}) : super(key: key);
+  @override
+  _EmailConfirmationtate createState() => _EmailConfirmationtate();
+}
+
+class _EmailConfirmationtate extends State<EmailConfirmation> {
   TextEditingController emailController = TextEditingController();
 
   // Http
@@ -30,17 +34,21 @@ class EmailConfirmation extends StatelessWidget {
     return emailRegex.hasMatch(email);
   }
 
-// Grpc
   void emailConfirmationGrpcRequest(BuildContext context) async {
     if (!isEmailValid(emailController.text)) {
       showErrorDialog(context, "無効なメールアドレス");
     } else {
       try {
+        setState(() {
+          showLoadDialog(context);
+        });
         final request = CheckEmailRequest(email: emailController.text);
         await GrpcInfoService.client.checkEmail(request);
         onTapNextPage(context);
-      } on GrpcError {
-        showErrorDialog(context, "このメールアドレスは登録できません。");
+      } catch (error) {
+        Navigator.pop(context);
+        showErrorDialog(context, "Error: validatable input data");
+        throw Exception("Error occurred while fetching email Confirmation.");
       }
     }
   }
@@ -72,7 +80,7 @@ class EmailConfirmation extends StatelessWidget {
 
             // 手続き
             Align(
-              alignment: Alignment.centerLeft,
+              alignment: Alignment.topLeft,
               child: Container(child: Text("・ご手続きは1回のみです", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo)),
             ),
 
@@ -99,7 +107,7 @@ class EmailConfirmation extends StatelessWidget {
   Widget _buildEmailInputSection(BuildContext context) {
     return CustomInputFormBar(
       controller: emailController,
-      hintText: " example@email.com",
+      hintText: "example@email.com",
       textInputType: TextInputType.emailAddress,
       focusNode: FocusNode(),
       onTap: () {
@@ -116,10 +124,6 @@ class EmailConfirmation extends StatelessWidget {
         emailConfirmationGrpcRequest(context);
       },
     );
-  }
-
-  onTapReturn(BuildContext context) {
-    Navigator.pop(context);
   }
 
   onTapNextPage(BuildContext context) {

@@ -169,6 +169,20 @@ final $typed_data.Uint8List updateChatRecordResponseDescriptor = $convert.base64
     'ChhVcGRhdGVDaGF0UmVjb3JkUmVzcG9uc2USLgoKQ2hhdFJlY29yZBgBIAEoCzIOLnBiLkNoYX'
     'RSZWNvcmRSCkNoYXRSZWNvcmQ=');
 
+@$core.Deprecated('Use updateReadRequestDescriptor instead')
+const UpdateReadRequest$json = {
+  '1': 'UpdateReadRequest',
+  '2': [
+    {'1': 'UserID', '3': 1, '4': 1, '5': 5, '10': 'UserID'},
+    {'1': 'TargetID', '3': 2, '4': 1, '5': 5, '10': 'TargetID'},
+  ],
+};
+
+/// Descriptor for `UpdateReadRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List updateReadRequestDescriptor = $convert.base64Decode(
+    'ChFVcGRhdGVSZWFkUmVxdWVzdBIWCgZVc2VySUQYASABKAVSBlVzZXJJRBIaCghUYXJnZXRJRB'
+    'gCIAEoBVIIVGFyZ2V0SUQ=');
+
 @$core.Deprecated('Use deleteChatRecordRequestDescriptor instead')
 const DeleteChatRecordRequest$json = {
   '1': 'DeleteChatRecordRequest',

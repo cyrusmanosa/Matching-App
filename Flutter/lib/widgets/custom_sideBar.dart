@@ -3,29 +3,33 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class CustomSideBar extends StatelessWidget {
-  CustomSideBar({Key? key, this.item, this.backendPart}) : super(key: key);
+  CustomSideBar({Key? key, this.item, this.btn}) : super(key: key);
 
   final String? item;
-  final Widget? backendPart;
+  final bool? btn;
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
     return Container(
-      width: 180,
+      width: mediaW / 2.5,
+      height: mediaH / 20,
       decoration: AppDecoration.fillOnPrimary.copyWith(borderRadius: BorderRadiusStyle.r15),
       child: Row(
         children: [
           Padding(
-            padding: EdgeInsets.only(left: 25),
+            padding: EdgeInsets.only(left: mediaW / 20),
             child: Container(
-              height: 25,
-              width: 25,
-              decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
+              height: mediaH / 45,
+              width: mediaW / 20,
+              decoration: BoxDecoration(color: btn! ? appTheme.green : appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 10),
-            child: Text(item!, style: theme.textTheme.bodySmall),
+            padding: EdgeInsets.only(left: mediaW / 50),
+            child: Text(item!, style: btn! ? CustomTextStyles.sideBarButtonGreen : CustomTextStyles.sideBarButtonGray),
           ),
         ],
       ),

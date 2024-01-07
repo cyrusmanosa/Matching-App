@@ -340,4 +340,10 @@ service Chat {
             get: "/v1/Get_LastMsg"
         };
     }
+    rpc UpdateRead(UpdateReadRequest) returns (google.protobuf.Empty){
+        option (google.api.http) = {
+            put: "/v1/Update_Read"
+            body: "*"
+        };
+    }
 }

@@ -1,18 +1,23 @@
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/pb/rpc_checkEmail.pb.dart';
+import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
+import 'package:dating_your_date/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-// ignore: must_be_immutable
-class ConfirmationCore extends StatelessWidget {
+class ConfirmationCore extends StatefulWidget {
   ConfirmationCore({Key? key}) : super(key: key);
+  @override
+  _ConfirmationCoreState createState() => _ConfirmationCoreState();
+}
 
+class _ConfirmationCoreState extends State<ConfirmationCore> {
   TextEditingController confirmationCoreController = TextEditingController();
 
   // Http
@@ -28,49 +33,18 @@ class ConfirmationCore extends StatelessWidget {
   // Grpc
   void checkCodeGrpcRequest(BuildContext context) async {
     try {
+      setState(() {
+        showLoadDialog(context);
+      });
+      await Future.delayed(Duration(seconds: 1));
       final request = SendEmailRequest(checkCode: confirmationCoreController.text);
       await GrpcInfoService.client.checkEmailCode(request);
       onTapNextPage(context);
-    } on GrpcError catch (e) {
-      if (e.code != 1) showErrorDialog(context, "無効的なコードです。");
+    } on GrpcError {
+      Navigator.pop(context);
+      showErrorDialog(context, "Code have a error.");
+      throw Exception("Error occurred while fetching Check Code.");
     }
-  }
-
-  void showErrorDialog(BuildContext context, String errorMessage) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    double mediaH = mediaQueryData.size.height;
-    double mediaW = mediaQueryData.size.width;
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
-          // Error Logo
-          title: CustomImageView(
-            imagePath: ImageConstant.imgWarning,
-            height: mediaH / 20,
-            width: mediaW / 10,
-            alignment: Alignment.center,
-          ),
-
-          // Word
-          content: Container(
-            width: mediaW / 1.1,
-            child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
-          ),
-          actions: [
-            CustomOutlinedButton(
-              text: "OK",
-              alignment: Alignment.center,
-              margin: EdgeInsets.only(bottom: mediaH / 100),
-              onPressed: () {
-                onTapReturn(context);
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 
   @override
@@ -87,7 +61,7 @@ class ConfirmationCore extends StatelessWidget {
             SizedBox(height: mediaH / 15),
             CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4.5),
             CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3.5),
-            SizedBox(height: mediaH / 50),
+            SizedBox(height: mediaH / 30),
 
             // Title
             Align(
@@ -147,7 +121,7 @@ class ConfirmationCore extends StatelessWidget {
   }
 
   onTapReturn(BuildContext context) {
-    Navigator.pop(context);
+    Navigator.popUntil(context, ModalRoute.withName(AppRoutes.emailConfirmation));
   }
 
   onTapNextPage(BuildContext context) {

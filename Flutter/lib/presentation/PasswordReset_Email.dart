@@ -9,44 +9,39 @@ class PasswordResetEmail extends StatelessWidget {
   PasswordResetEmail({Key? key}) : super(key: key);
 
   TextEditingController emailController = TextEditingController();
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
-    mediaQueryData = MediaQuery.of(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Form(
-        key: _formKey,
-        child: Container(
-          width: double.maxFinite,
-          padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
-          child: Column(
-            children: [
-              // Logo and Slogan
-              SizedBox(height: mediaH / 15),
-              CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4),
-              CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3.5),
-              SizedBox(height: mediaH / 50),
+      body: Container(
+        width: double.maxFinite,
+        padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
+        child: Column(
+          children: [
+            // Logo and Slogan
+            SizedBox(height: mediaH / 15),
+            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4),
+            CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3.5),
+            SizedBox(height: mediaH / 30),
 
-              // msg
-              Container(
-                alignment: Alignment.centerLeft,
-                child: Text("ご登録されているメールアドレスに認証キーを送します", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
-              ),
-              SizedBox(height: mediaH / 50),
+            // msg
+            Container(
+              alignment: Alignment.centerLeft,
+              child: Text("ご登録されているメールアドレスに認証キーを送します", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
+            ),
+            SizedBox(height: mediaH / 50),
 
-              // Input
-              CustomInputBar(titleName: "メールアドレス:", backendPart: _buildResetPasswordEmailInput(context)),
-              SizedBox(height: mediaH / 50),
+            // Input
+            CustomInputBar(titleName: "メールアドレス:", backendPart: _buildResetPasswordEmailInput(context)),
+            SizedBox(height: mediaH / 50),
 
-              // button
-              _buildNextButton(context)
-            ],
-          ),
+            // button
+            _buildNextButton(context)
+          ],
         ),
       ),
     );
@@ -54,11 +49,7 @@ class PasswordResetEmail extends StatelessWidget {
 
   /// _ResetPassword Email
   Widget _buildResetPasswordEmailInput(BuildContext context) {
-    return CustomInputFormBar(
-      controller: emailController,
-      hintText: "example@email.com",
-      textInputType: TextInputType.emailAddress,
-    );
+    return CustomInputFormBar(controller: emailController, hintText: "example@email.com", textInputType: TextInputType.emailAddress);
   }
 }
 

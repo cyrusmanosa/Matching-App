@@ -749,6 +749,70 @@ class UpdateChatRecordResponse extends $pb.GeneratedMessage {
   $20.ChatRecord ensureChatRecord() => $_ensure(0);
 }
 
+class UpdateReadRequest extends $pb.GeneratedMessage {
+  factory UpdateReadRequest({
+    $core.int? userID,
+    $core.int? targetID,
+  }) {
+    final $result = create();
+    if (userID != null) {
+      $result.userID = userID;
+    }
+    if (targetID != null) {
+      $result.targetID = targetID;
+    }
+    return $result;
+  }
+  UpdateReadRequest._() : super();
+  factory UpdateReadRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateReadRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateReadRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'UserID', $pb.PbFieldType.O3, protoName: 'UserID')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'TargetID', $pb.PbFieldType.O3, protoName: 'TargetID')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  UpdateReadRequest clone() => UpdateReadRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  UpdateReadRequest copyWith(void Function(UpdateReadRequest) updates) => super.copyWith((message) => updates(message as UpdateReadRequest)) as UpdateReadRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static UpdateReadRequest create() => UpdateReadRequest._();
+  UpdateReadRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateReadRequest> createRepeated() => $pb.PbList<UpdateReadRequest>();
+  @$core.pragma('dart2js:noInline')
+  static UpdateReadRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateReadRequest>(create);
+  static UpdateReadRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get userID => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set userID($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUserID() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUserID() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get targetID => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set targetID($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasTargetID() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTargetID() => clearField(2);
+}
+
 /// Delete
 class DeleteChatRecordRequest extends $pb.GeneratedMessage {
   factory DeleteChatRecordRequest({

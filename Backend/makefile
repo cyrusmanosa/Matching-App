@@ -101,4 +101,4 @@ resetdb:
 
 .PHONY: dockernetwork postgres createdb_info dropdb_info createdb_chat dropdb_chat test sqlc server 
 		createmigrate_info info_migrateup info_migrateup1 info_migrateup2 info_migratedown info_migratedown1 info_migratedown2
-		createmigrate_chat chat_migrateup chat_migratedown chat_migrateup1 chat_migratedown1 mock db_docs db_schema protob resetdb
+		createmigrate_chat chat_migrateup chat_migratedown mock db_docs db_schema protob resetdb

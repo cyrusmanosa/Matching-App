@@ -7,6 +7,7 @@ import 'package:dating_your_date/widgets/custom_elevated_button.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
+import 'package:dating_your_date/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:dating_your_date/models/model.dart';
 import 'package:grpc/grpc.dart';
@@ -36,6 +37,10 @@ class _LoginState extends State<Login> {
 // Grpc
   void loginGrpcUser(BuildContext context) async {
     try {
+      setState(() {
+        showLoadDialog(context);
+      });
+      await Future.delayed(Duration(seconds: 1));
       final loginRequest = LoginUserRequest(email: emailController.text, password: passwordController.text);
       final loginResponse = await GrpcInfoService.client.loginUser(loginRequest);
       await globalSession.write(key: 'SessionId', value: loginResponse.sessionsID);
@@ -46,7 +51,9 @@ class _LoginState extends State<Login> {
       await globalUserId.write(key: 'UserID', value: '${useridResponse.userID}');
       onTapLoginButton(context);
     } on GrpcError {
+      Navigator.pop(context);
       showErrorDialog(context, "Email or Password have a error.");
+      throw Exception("Error occurred while fetching Login.");
     }
   }
 

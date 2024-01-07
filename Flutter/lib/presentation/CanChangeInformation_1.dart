@@ -1,17 +1,22 @@
-import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/presentation/CanChangeInformation_2.dart';
+import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
+import 'package:dating_your_date/widgets/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:grpc/grpc.dart';
 
-// ignore_for_file: must_be_immutable,camel_case_types
-class CanChangeInformation_1 extends StatelessWidget {
+class CanChangeInformation_1 extends StatefulWidget {
   CanChangeInformation_1({Key? key}) : super(key: key);
+  @override
+  _CanChangeInformation_1State createState() => _CanChangeInformation_1State();
+}
 
+class _CanChangeInformation_1State extends State<CanChangeInformation_1> {
   bool isPureNumber(String value) {
     final pattern = RegExp(r'^\d+$');
     return pattern.hasMatch(value);
@@ -44,56 +49,30 @@ class CanChangeInformation_1 extends StatelessWidget {
     } else if (canChangeSpeakLanguageController.text.isEmpty) {
       showErrorDialog(context, "学歴はまだ入力されていません");
     } else {
-      String? apiKeyS = await globalSession.read(key: 'SessionId');
-      final request = CreateCanChangeRequest(
-        sessionID: apiKeyS,
-        nickName: canChangeNickNameController.text,
-        city: canChangeCityController.text,
-        sexual: canChangeSexualController.text,
-        height: int.parse(canChangeHeightController.text),
-        weight: int.parse(canChangeWeightController.text),
-        speaklanguage: canChangeSpeakLanguageController.text,
-        education: canChangeEducationController.text,
-      );
-      onTapNextPage(context, request);
-    }
-  }
-
-  void showErrorDialog(BuildContext context, String errorMessage) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    double mediaH = mediaQueryData.size.height;
-    double mediaW = mediaQueryData.size.width;
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
-          // Error Logo
-          title: CustomImageView(
-            imagePath: ImageConstant.imgWarning,
-            height: mediaH / 20,
-            width: mediaW / 10,
-            alignment: Alignment.center,
-          ),
-
-          // Word
-          content: Container(
-            width: mediaW / 1.1,
-            child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
-          ),
-          actions: [
-            CustomOutlinedButton(
-              text: "OK",
-              alignment: Alignment.center,
-              margin: EdgeInsets.only(bottom: mediaH / 100),
-              onPressed: () {
-                onTapReturn(context);
-              },
-            ),
-          ],
+      setState(() {
+        showLoadDialog(context);
+      });
+      await Future.delayed(Duration(seconds: 1));
+      try {
+        String? apiKeyS = await globalSession.read(key: 'SessionId');
+        final request = CreateCanChangeRequest(
+          sessionID: apiKeyS,
+          nickName: canChangeNickNameController.text,
+          city: canChangeCityController.text,
+          sexual: canChangeSexualController.text,
+          height: int.parse(canChangeHeightController.text),
+          weight: int.parse(canChangeWeightController.text),
+          speaklanguage: canChangeSpeakLanguageController.text,
+          education: canChangeEducationController.text,
         );
-      },
-    );
+        ;
+        onTapNextPage(context, request);
+      } on GrpcError {
+        Navigator.pop(context);
+        showErrorDialog(context, "Error: validatable input data");
+        throw Exception("Error occurred while fetching CanChange1.");
+      }
+    }
   }
 
   @override
@@ -124,7 +103,7 @@ class CanChangeInformation_1 extends StatelessWidget {
             CustomInputBar(titleName: "身長:", backendPart: _buildcanChangeHeightInput(context)),
             SizedBox(height: mediaH / 50),
 
-            // Weight
+            // Width
             CustomInputBar(titleName: "体重:", backendPart: _buildcanChangeWeightInput(context)),
             SizedBox(height: mediaH / 50),
 
@@ -181,7 +160,7 @@ class CanChangeInformation_1 extends StatelessWidget {
     return CustomInputFormBar(controller: canChangeHeightController, hintText: "170cm");
   }
 
-  /// Weight
+  /// Width
   Widget _buildcanChangeWeightInput(BuildContext context) {
     return CustomInputFormBar(controller: canChangeWeightController, hintText: "60kg");
   }
@@ -201,6 +180,7 @@ class CanChangeInformation_1 extends StatelessWidget {
     return CustomOutlinedButton(
       text: "次へ",
       onPressed: () {
+        ;
         canChangeGrpcRequest(context);
       },
     );

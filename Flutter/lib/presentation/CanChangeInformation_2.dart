@@ -2,21 +2,29 @@ import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/model.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
+import 'package:dating_your_date/pb/rpc_chatRecord.pb.dart';
+import 'package:dating_your_date/presentation/Target/Target.dart';
+import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
+import 'package:dating_your_date/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-// ignore_for_file: must_be_immutable,camel_case_types
-class CanChangeInformation_2 extends StatelessWidget {
+class CanChangeInformation_2 extends StatefulWidget {
   CanChangeInformation_2({Key? key, this.can1}) : super(key: key);
 
   final CreateCanChangeRequest? can1;
 
+  @override
+  _CanChangeInformation_2State createState() => _CanChangeInformation_2State();
+}
+
+class _CanChangeInformation_2State extends State<CanChangeInformation_2> {
   TextEditingController canChangeJobController = TextEditingController();
   TextEditingController canChangeAnnualSalaryController = TextEditingController();
   TextEditingController canChangeSociabilityController = TextEditingController();
@@ -57,60 +65,50 @@ class CanChangeInformation_2 extends StatelessWidget {
     } else if (canChangeIntroduceController.text.isEmpty) {
       showErrorDialog(context, "自己紹介はまだ入力されていません");
     } else {
-      String? apiKeyS = await globalSession.read(key: 'SessionId');
-      final request = CreateCanChangeRequest(
-        sessionID: apiKeyS,
-        nickName: can1?.nickName,
-        city: can1?.city,
-        sexual: can1?.sexual,
-        height: can1?.height,
-        weight: can1?.weight,
-        speaklanguage: can1?.speaklanguage,
-        education: can1?.education,
-        job: canChangeJobController.text,
-        annualSalary: int.parse(canChangeAnnualSalaryController.text),
-        sociability: canChangeSociabilityController.text,
-        religious: canChangeReligiousController.text,
-        introduce: canChangeIntroduceController.text,
-      );
       try {
+        String? apiKeyS = await globalSession.read(key: 'SessionId');
+        final request = CreateCanChangeRequest(
+          sessionID: apiKeyS,
+          nickName: widget.can1?.nickName,
+          city: widget.can1?.city,
+          sexual: widget.can1?.sexual,
+          height: widget.can1?.height,
+          weight: widget.can1?.weight,
+          speaklanguage: widget.can1?.speaklanguage,
+          education: widget.can1?.education,
+          job: canChangeJobController.text,
+          annualSalary: int.parse(canChangeAnnualSalaryController.text),
+          sociability: canChangeSociabilityController.text,
+          religious: canChangeReligiousController.text,
+          introduce: canChangeIntroduceController.text,
+        );
         await GrpcInfoService.client.createCanChange(request);
+        createChatRecord(context);
         onTapNextPage(context);
-      } on GrpcError catch (e) {
-        showErrorDialog(context, "Error: ${e.codeName}");
+      } on GrpcError {
+        Navigator.pop(context);
+        showErrorDialog(context, "Error: validatable input data");
+        throw Exception("Error occurred while fetching CanChange1.");
       }
     }
   }
 
-  void showErrorDialog(BuildContext context, String errorMessage) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    double mediaH = mediaQueryData.size.height;
-    double mediaW = mediaQueryData.size.width;
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
-          // Error Logo
-          title: CustomImageView(imagePath: ImageConstant.imgWarning, height: mediaH / 20, width: mediaW / 10, alignment: Alignment.center),
-          // Word
-          content: Container(
-            width: mediaW / 1.1,
-            child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
-          ),
-          actions: [
-            CustomOutlinedButton(
-              text: "OK",
-              alignment: Alignment.center,
-              margin: EdgeInsets.only(bottom: mediaH / 100),
-              onPressed: () {
-                onTapReturn(context);
-              },
-            ),
-          ],
-        );
-      },
-    );
+  // Grpc
+  void createChatRecord(BuildContext context) async {
+    try {
+      setState(() {
+        showLoadDialog(context);
+      });
+      await Future.delayed(Duration(seconds: 1));
+      String? apiKeyU = await globalUserId.read(key: 'UserID');
+      final userid = int.tryParse(apiKeyU!);
+      final request = CreateChatTableRequest(userID: userid!);
+      await GrpcChatService.client.createChatTable(request);
+    } on GrpcError {
+      Navigator.pop(context);
+      showErrorDialog(context, "Error: validatable create Chat Record");
+      throw Exception("Error occurred while fetching Chat Record");
+    }
   }
 
   @override
@@ -156,11 +154,6 @@ class CanChangeInformation_2 extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  /// Header
-  PreferredSizeWidget _buildHeader(BuildContext context) {
-    return AppBar(automaticallyImplyLeading: true, title: AppbarTitle(text: "基本個人情報 - C"));
   }
 
   // turn back
@@ -218,6 +211,6 @@ class CanChangeInformation_2 extends StatelessWidget {
   }
 
   onTapNextPage(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.targetFirstTime);
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Target(head: "logo")));
   }
 }

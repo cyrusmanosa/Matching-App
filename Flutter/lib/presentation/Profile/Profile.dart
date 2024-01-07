@@ -15,13 +15,11 @@ class Profile extends StatelessWidget {
 
   // Grpc
   Future<CanChange> getCanChangeGrpcRequest(BuildContext context) async {
-    String? apiKeyS = await globalSession.read(key: 'SessionId');
-    String? apiKeyU = await globalUserId.read(key: 'UserID');
-    final userid = int.tryParse(apiKeyU!);
-
     try {
+      String? apiKeyS = await globalSession.read(key: 'SessionId');
+      String? apiKeyU = await globalUserId.read(key: 'UserID');
+      final userid = int.tryParse(apiKeyU!);
       final request = GetCanChangeRequest(sessionID: apiKeyS, userID: userid);
-      await GrpcInfoService.client.getCanChange(request);
       final response = await GrpcInfoService.client.getCanChange(request);
       return response.canChangeInfo;
     } on GrpcError {
@@ -36,7 +34,6 @@ class Profile extends StatelessWidget {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
-      appBar: _buildHeader(context),
       body: FutureBuilder<CanChange>(
         future: getCanChangeGrpcRequest(context),
         builder: (context, snapshot) {
@@ -45,36 +42,18 @@ class Profile extends StatelessWidget {
             return SingleChildScrollView(
               child: Column(
                 children: [
+                  _headerBuilder(context),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
+                    padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
                     child: Column(
                       children: [
-                        // img
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            // Profile img
-                            CustomImageView(
-                              imagePath: ImageConstant.imgVectorgray500,
-                              height: 150,
-                              width: 150,
-                              margin: EdgeInsets.symmetric(vertical: 10),
-                            ),
-
-                            // 4
-                            CustomImageView(
-                              imagePath: ImageConstant.imgPhotoSet,
-                              height: 170,
-                              width: 50,
-                              margin: EdgeInsets.only(left: 20),
-                            ),
-                          ],
-                        ),
+                        SizedBox(height: mediaH / 50),
+                        _buildImags(context),
                         SizedBox(height: mediaH / 50),
 
                         // Part 2 - data
                         _buildInformationBar(context),
-                        SizedBox(height: mediaH / 50),
+                        SizedBox(height: mediaH / 40),
 
                         // intro
                         Padding(
@@ -132,17 +111,16 @@ class Profile extends StatelessWidget {
                         SizedBox(height: mediaH / 40),
                         // religious
                         ShownDataBarWidget(item: "宗教", data: data.religious),
-                        SizedBox(height: mediaH / 40),
+                        SizedBox(height: mediaH / 30),
                         // edit button
-                        _buildEditButton(context, data)
+                        _buildEditButton(context, data),
+                        SizedBox(height: mediaH / 30)
                       ],
                     ),
                   ),
                 ],
               ),
             );
-          } else if (snapshot.hasError) {
-            return Text("Error: ${snapshot.error}");
           } else {
             return CircularProgressIndicator();
           }
@@ -151,8 +129,28 @@ class Profile extends StatelessWidget {
     );
   }
 
-  PreferredSizeWidget _buildHeader(BuildContext context) {
-    return AppBar(automaticallyImplyLeading: false, title: Text("プロフィール", style: theme.textTheme.headlineMedium));
+  Widget _headerBuilder(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.only(top: mediaH / 80),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [Text("プロフィール", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildImags(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // Profile img
+        CustomImageView(imagePath: ImageConstant.imgVectorgray500),
+      ],
+    );
   }
 
   // Part2
@@ -161,7 +159,7 @@ class Profile extends StatelessWidget {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: mediaW / 15),
+      padding: EdgeInsets.symmetric(horizontal: mediaW / 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

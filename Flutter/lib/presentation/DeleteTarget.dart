@@ -7,13 +7,10 @@ import 'package:flutter/material.dart';
 class DeleteTarget extends StatelessWidget {
   DeleteTarget({Key? key}) : super(key: key);
 
-  GlobalKey<NavigatorState> navigatorKey = GlobalKey();
-
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
-    double mediaW = mediaQueryData.size.width;
     return Scaffold(
       appBar: _buildHeader(context),
       body: Container(
