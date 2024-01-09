@@ -20,7 +20,7 @@ class ThemeHelper {
       visualDensity: VisualDensity.standard,
       colorScheme: colorScheme,
       textTheme: TextThemes.textTheme(colorScheme),
-      scaffoldBackgroundColor: colorScheme.onPrimary,
+      scaffoldBackgroundColor: colorScheme.primary,
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           backgroundColor: Colors.transparent,
@@ -70,10 +70,8 @@ class TextThemes {
 /// Class containing the supported color schemes.
 class ColorSchemes {
   static final primaryColorScheme = ColorScheme.light(
-    primary: Color(0XFFFF83A8),
+    primary: Colors.white,
     primaryContainer: Color(0XFF909090),
-    onPrimary: Colors.white,
-    onPrimaryContainer: Colors.red,
     errorContainer: Color(0XFF9C3D3D),
   );
 }

@@ -59,6 +59,7 @@ class _EmailConfirmationtate extends State<EmailConfirmation> {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
+      backgroundColor: appTheme.white,
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),

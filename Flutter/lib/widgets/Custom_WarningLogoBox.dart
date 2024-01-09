@@ -1,8 +1,5 @@
-import 'package:dating_your_date/core/image_constant.dart';
-import 'package:dating_your_date/theme/app_decoration.dart';
-import 'package:dating_your_date/theme/custom_text_style.dart';
+import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
-import 'package:dating_your_date/widgets/custom_image_view.dart';
 import 'package:flutter/material.dart';
 
 void showErrorDialog(BuildContext context, String errorMessage) {

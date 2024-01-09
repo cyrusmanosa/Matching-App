@@ -34,7 +34,7 @@ class CustomButtonStyles {
 
   // Google Button
   static ButtonStyle get outlineGoogleButton => OutlinedButton.styleFrom(
-        backgroundColor: theme.colorScheme.onPrimary,
+        backgroundColor: appTheme.white,
         side: BorderSide(color: appTheme.gray500),
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
       );

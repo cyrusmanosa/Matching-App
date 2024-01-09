@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/canChange.pb.dart';
@@ -5,7 +6,8 @@ import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/presentation/ProfileEdit.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:grpc/grpc.dart';
-import 'package:image_field/image_field.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'widgets/showDataBar.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
@@ -58,10 +60,9 @@ class _ProfileState extends State<Profile> {
               padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
               child: Column(
                 children: [
-                  // _buildImages(context, mediaH),
-
+                  _buildImages(context, mediaH),
                   SizedBox(height: mediaH / 40),
-                  ImageField(),
+
                   // Part 2 - data!
                   _buildInformationBar(context),
                   SizedBox(height: mediaH / 40),
@@ -149,21 +150,51 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-// images
   Widget _buildImages(BuildContext context, double mediaH) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: mediaH / 50),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CustomImageView(
-            imagePath: ImageConstant.imgVectorgray500,
-            onTap: () {
-              setState(() {});
-            },
+    File? selectedImage;
+
+    void selectImage() async {
+      PermissionStatus status = await Permission.photos.request();
+      if (status.isDenied || status.isPermanentlyDenied) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("請在應用設置中授予相機權限才能使用該功能"),
+            action: SnackBarAction(
+              label: "去授權",
+              onPressed: () {
+                openAppSettings();
+              },
+            ),
           ),
-        ],
-      ),
+        );
+      } else {
+        final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+        if (pickedImage != null) {
+          setState(() {
+            selectedImage = File(pickedImage.path);
+          });
+        }
+      }
+    }
+
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: selectImage,
+          child: Container(
+            height: mediaH / 5,
+            width: mediaH / 5,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                image: selectedImage != null ? Image.file(selectedImage!).image : AssetImage('assets/images/image_not_found.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 10),
+      ],
     );
   }
 

@@ -76,6 +76,7 @@ class CustomInputFormBar extends StatelessWidget {
       height: height ?? mediaH / 25,
       width: width ?? mediaW / 1.2,
       child: TextFormField(
+        cursorColor: appTheme.pinkA100,
         autofocus: autofocus,
         controller: controller,
         textAlign: TextAlign.start,

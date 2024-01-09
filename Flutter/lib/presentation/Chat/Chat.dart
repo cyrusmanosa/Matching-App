@@ -26,10 +26,6 @@ class _ChatState extends State<Chat> {
   void initState() {
     super.initState();
     _getTargetID(context);
-
-    if (targetID.isNotEmpty) {
-      _getUserInfoGrpcRequest(context);
-    }
   }
 
 // Grpc
@@ -43,6 +39,7 @@ class _ChatState extends State<Chat> {
         targetID = tid.targetID;
       });
       isEmpty = false;
+      _getUserInfoGrpcRequest(context);
     } on GrpcError {
       isEmpty = true;
     }
@@ -57,11 +54,9 @@ class _ChatState extends State<Chat> {
         // take info
         final infoRequest = GetCanChangeRequest(sessionID: apiKeyS, userID: targetID[i]);
         final infoResponse = await GrpcInfoService.client.getCanChange(infoRequest);
-
         // take icon
         final imgRequest = GetImagesRequest(sessionID: apiKeyS, userID: targetID[i]);
         final imgResponse = await GrpcInfoService.client.getImages(imgRequest);
-
         // take last msg
         final lmsgRequest = GetLastMsgRequest(userID: userid!, targetID: targetID[i]);
         final lmsgResponse = await GrpcChatService.client.getLastMsg(lmsgRequest);
@@ -94,7 +89,7 @@ class _ChatState extends State<Chat> {
         child: Column(
           children: [
             _buildHeader(context),
-            if (isEmpty == true || users.length == 0)
+            if (isEmpty == true)
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,

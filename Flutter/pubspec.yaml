@@ -9,6 +9,7 @@ dependencies:
     sdk: flutter
   cached_network_image:
   dropdown_button2:
+  flutter_bloc:
   flutter_launcher_icons:
   flutter_svg: 
   flutter_svg_provider:
@@ -17,7 +18,9 @@ dependencies:
   google_fonts:
   grpc:
   image_field:
+  image_picker:
   intl: 
+  permission_handler:
   postgres: 
   protobuf:
   protoc_plugin:

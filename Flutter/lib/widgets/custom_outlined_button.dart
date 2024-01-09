@@ -48,6 +48,7 @@ class CustomOutlinedButton extends BaseButton {
 
   Widget buildOutlinedButtonWidget(double mediaH, double mediaW) {
     return Container(
+      color: appTheme.white,
       height: height ?? mediaH / 25,
       width: width ?? mediaW / 4,
       margin: margin,

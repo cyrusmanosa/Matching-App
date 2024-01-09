@@ -1,3 +1,4 @@
+import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 Future<void> showLoadDialog(BuildContext context) async {
@@ -6,7 +7,11 @@ Future<void> showLoadDialog(BuildContext context) async {
     builder: (context) {
       return Scaffold(
         backgroundColor: Colors.transparent,
-        body: Container(alignment: Alignment.center, child: CircularProgressIndicator()),
+        body: Container(
+            alignment: Alignment.center,
+            child: CircularProgressIndicator(
+              color: appTheme.pinkA100,
+            )),
       );
     },
   );

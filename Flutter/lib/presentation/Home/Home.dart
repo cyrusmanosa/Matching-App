@@ -20,18 +20,6 @@ class _HomeState extends State<Home> {
     checkDataGrpcRequest(context);
   }
 
-  @override
-  Widget build(BuildContext context) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    double mediaH = mediaQueryData.size.height;
-    double mediaW = mediaQueryData.size.width;
-    return Scaffold(
-      body: Container(
-        child: Column(children: [_buildHeader(context, mediaW, mediaH), SizedBox(height: mediaH / 50), _buildMainFrame(context)]),
-      ),
-    );
-  }
-
   void checkDataGrpcRequest(BuildContext context) async {
     try {
       String? apiKeyS = await globalSession.read(key: 'SessionId');
@@ -44,6 +32,25 @@ class _HomeState extends State<Home> {
     }
   }
 
+  @override
+  Widget build(BuildContext context) {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
+    return Scaffold(
+      body: Container(
+        child: Column(
+          children: [
+            _buildHeader(context, mediaW, mediaH),
+            SizedBox(height: mediaH / 50),
+            _buildMainFrame(context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Header
   Widget _buildHeader(BuildContext context, double mediaW, double mediaH) {
     return SafeArea(
       child: Padding(
@@ -56,6 +63,7 @@ class _HomeState extends State<Home> {
     );
   }
 
+  // Main
   Widget _buildMainFrame(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;

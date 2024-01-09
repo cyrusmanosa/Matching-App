@@ -2,6 +2,8 @@ import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_hobby.pb.dart';
+import 'package:dating_your_date/pb/rpc_targetList.pb.dart';
+import 'package:dating_your_date/presentation/DeleteTarget.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
@@ -87,7 +89,18 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
     var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
 
     if (response.statusCode == 200) {
-      onTapNextPage(context);
+      onTapPaymentPage(context);
+    }
+  }
+
+  void checkTargetUserTable(BuildContext context) async {
+    try {
+      String? apiKeyS = await globalSession.read(key: 'SessionId');
+      final request = GetTargetListRequest(sessionID: apiKeyS);
+      await GrpcInfoService.client.getTargetList(request);
+      Navigator.pushNamed(context, AppRoutes.deleteTarget);
+    } on GrpcError {
+      onTapPaymentPage(context);
     }
   }
 
@@ -113,7 +126,7 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
           sociability: resetHobbySociabilityController.text,
         );
         await GrpcInfoService.client.updateHobby(request);
-        onTapNextPage(context);
+        checkTargetUserTable(context);
       } on GrpcError {
         Navigator.pop(context);
         showErrorDialog(context, "Error: validatable input data for update");
@@ -135,7 +148,7 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
           sociability: resetHobbySociabilityController.text,
         );
         await GrpcInfoService.client.createHobby(request);
-        onTapNextPage(context);
+        onTapPaymentPage(context);
       } on GrpcError {
         Navigator.pop(context);
         showErrorDialog(context, "Error: validatable input data for create Hobby");
@@ -289,7 +302,7 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
     );
   }
 
-  onTapNextPage(BuildContext context) {
+  onTapPaymentPage(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.payDone);
   }
 }

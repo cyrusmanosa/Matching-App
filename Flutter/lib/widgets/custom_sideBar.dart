@@ -16,7 +16,7 @@ class CustomSideBar extends StatelessWidget {
     return Container(
       width: mediaW / 2.5,
       height: mediaH / 20,
-      decoration: AppDecoration.fillOnPrimary.copyWith(borderRadius: BorderRadiusStyle.r15),
+      decoration: AppDecoration.fillPrimary.copyWith(borderRadius: BorderRadiusStyle.r15),
       child: Row(
         children: [
           Padding(

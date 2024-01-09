@@ -5,8 +5,7 @@ class AppDecoration {
   // Fill decorations
   static BoxDecoration get fillGray => BoxDecoration(color: appTheme.gray500);
   static BoxDecoration get fillPink => BoxDecoration(color: appTheme.pinkA100);
-  static BoxDecoration get fillPrimary => BoxDecoration(color: theme.colorScheme.primary);
-  static BoxDecoration get fillOnPrimary => BoxDecoration(color: theme.colorScheme.onPrimary);
+  static BoxDecoration get fillPrimary => BoxDecoration(color: appTheme.white);
 }
 
 class BorderRadiusStyle {

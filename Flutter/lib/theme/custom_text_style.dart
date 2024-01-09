@@ -19,7 +19,7 @@ class CustomTextStyles {
   static get sideBarButtonGreen => TextStyle(color: appTheme.green, fontSize: 20, fontWeight: FontWeight.w400);
   static get pwRuleGray500 => theme.textTheme.bodySmall!.copyWith(fontSize: 12);
 
-  static get outlineWhiteWordButton => TextStyle(color: theme.colorScheme.onPrimary, fontWeight: FontWeight.w400);
+  static get outlineWhiteWordButton => TextStyle(color: appTheme.white, fontWeight: FontWeight.w400);
   static get confirmGray => TextStyle(color: appTheme.gray500, fontSize: 12, fontWeight: FontWeight.w800);
   static get confirmGreen => TextStyle(color: appTheme.green, fontSize: 12, fontWeight: FontWeight.w800);
   static get mainButtonC => TextStyle(color: appTheme.cyan600, fontSize: 12, fontWeight: FontWeight.w800);
