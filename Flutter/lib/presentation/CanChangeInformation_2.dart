@@ -1,6 +1,6 @@
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/models/model.dart';
+import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_chatRecord.pb.dart';
 import 'package:dating_your_date/presentation/Target/Target.dart';

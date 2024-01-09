@@ -9,7 +9,7 @@ import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:dating_your_date/models/model.dart';
+import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:grpc/grpc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';

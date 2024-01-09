@@ -1,6 +1,6 @@
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/models/model.dart';
+import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/presentation/ContainerScreen.dart';
@@ -107,11 +107,9 @@ class _ProfileEditState extends State<ProfileEdit> {
           religious: updateReligiousController.text,
           introduce: updateIntroduceController.text,
         );
-
         await GrpcInfoService.client.updateCanChange(request);
-        ;
-
         onTapNextPage(context);
+        await Future.delayed(Duration(milliseconds: 500));
         showLogoDialog(context, "個人情報もアップしました");
       } on GrpcError {
         Navigator.pop(context);
@@ -137,20 +135,7 @@ class _ProfileEditState extends State<ProfileEdit> {
               // photos
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CustomImageView(
-                    imagePath: ImageConstant.imgVectorgray500,
-                    height: 150,
-                    width: 150,
-                    margin: EdgeInsets.symmetric(vertical: 10),
-                  ),
-                  CustomImageView(
-                    imagePath: ImageConstant.imgPhotoSet,
-                    height: 170,
-                    width: 50,
-                    margin: EdgeInsets.only(left: 22),
-                  ),
-                ],
+                children: [CustomImageView(imagePath: ImageConstant.imgVectorgray500)],
               ),
 
               // Introduce
@@ -294,7 +279,6 @@ class _ProfileEditState extends State<ProfileEdit> {
     return CustomOutlinedButton(
       text: "送信",
       onPressed: () {
-        ;
         updateDataGrpcRequest(context);
       },
     );

@@ -1,4 +1,4 @@
-import 'package:dating_your_date/models/model.dart';
+import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/presentation/CanChangeInformation_2.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
@@ -65,7 +65,7 @@ class _CanChangeInformation_1State extends State<CanChangeInformation_1> {
           speaklanguage: canChangeSpeakLanguageController.text,
           education: canChangeEducationController.text,
         );
-        ;
+
         onTapNextPage(context, request);
       } on GrpcError {
         Navigator.pop(context);
@@ -180,7 +180,6 @@ class _CanChangeInformation_1State extends State<CanChangeInformation_1> {
     return CustomOutlinedButton(
       text: "次へ",
       onPressed: () {
-        ;
         canChangeGrpcRequest(context);
       },
     );

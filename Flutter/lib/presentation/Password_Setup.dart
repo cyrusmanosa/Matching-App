@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/models/model.dart';
+import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_password.pb.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
@@ -54,7 +54,7 @@ class _PasswordSetupState extends State<PasswordSetup> {
         String? apiKeyS = await globalSession.read(key: 'SessionId');
         final request = InputPasswordRequest(sessionID: apiKeyS, password: passwordSetupController.text);
         await GrpcInfoService.client.inputPassword(request);
-        ;
+
         onTapNextPage(context);
       } on GrpcError {
         Navigator.pop(context);

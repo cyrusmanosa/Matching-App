@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class ShownDataBarWidget extends StatelessWidget {
-  const ShownDataBarWidget({Key? key, this.item, this.data}) : super(key: key);
+  ShownDataBarWidget({Key? key, this.item, this.data}) : super(key: key);
 
   final String? item;
   final String? data;

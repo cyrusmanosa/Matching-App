@@ -7,21 +7,22 @@ environment:
 dependencies: 
   flutter: 
     sdk: flutter
-  flutter_launcher_icons:
   cached_network_image:
+  dropdown_button2:
+  flutter_launcher_icons:
   flutter_svg: 
   flutter_svg_provider:
   flutter_verification_code:
-  intl: 
-  google_fonts:
-  postgres: 
-  shared_preferences:
-  protobuf:
-  grpc:
-  protoc_plugin:
-  uuid:
-  dropdown_button2:
   flutter_secure_storage:
+  google_fonts:
+  grpc:
+  image_field:
+  intl: 
+  postgres: 
+  protobuf:
+  protoc_plugin:
+  shared_preferences:
+  uuid:
 
 
 flutter_launcher_icons:
@@ -47,14 +48,4 @@ flutter:
     - family: Rounded Mplus 1c
       fonts: 
         - asset: assets/fonts/RoundedMplus1cRegular.ttf
-          weight: 400
-    - family: Montserrat
-      fonts: 
-        - asset: assets/fonts/MontserratSemiBold.ttf
-          weight: 600
-    - family: SF Pro Text
-      fonts: 
-        - asset: assets/fonts/SFProTextLight.ttf
-          weight: 300
-        - asset: assets/fonts/SFProTextRegular.ttf
           weight: 400

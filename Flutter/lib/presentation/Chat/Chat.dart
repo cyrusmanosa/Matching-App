@@ -1,15 +1,14 @@
-import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/widgets/loading.dart';
-import 'package:flutter/material.dart';
-import 'package:grpc/grpc.dart';
 import 'package:dating_your_date/client/grpc_services.dart';
-import 'package:dating_your_date/models/chatUsers.dart';
-import 'package:dating_your_date/models/model.dart';
+import 'package:dating_your_date/models/ChatModel.dart';
+import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_chatRecord.pb.dart';
 import 'package:dating_your_date/pb/rpc_images.pb.dart';
 import 'package:dating_your_date/presentation/Chat/widgets/conversationList.dart';
+import 'package:dating_your_date/theme/custom_text_style.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
+import 'package:flutter/material.dart';
+import 'package:grpc/grpc.dart';
 
 class Chat extends StatefulWidget {
   Chat({Key? key}) : super(key: key);
@@ -19,6 +18,7 @@ class Chat extends StatefulWidget {
 }
 
 class _ChatState extends State<Chat> {
+  bool? isEmpty;
   List<int> targetID = [];
   List<TargetInfos> users = [];
 
@@ -26,15 +26,15 @@ class _ChatState extends State<Chat> {
   void initState() {
     super.initState();
     _getTargetID(context);
+
+    if (targetID.isNotEmpty) {
+      _getUserInfoGrpcRequest(context);
+    }
   }
 
-  // Grpc
+// Grpc
   void _getTargetID(BuildContext context) async {
     try {
-      setState(() {
-        showLoadDialog(context);
-      });
-      await Future.delayed(Duration(seconds: 1));
       String? apiKeyU = await globalUserId.read(key: 'UserID');
       final userid = int.tryParse(apiKeyU!);
       final targetIDRequest = GetTargetIDRequest(userID: userid);
@@ -42,29 +42,30 @@ class _ChatState extends State<Chat> {
       setState(() {
         targetID = tid.targetID;
       });
-      _getUserInfoGrpcRequest(context);
+      isEmpty = false;
     } on GrpcError {
-      Navigator.pop(context);
-      showErrorDialog(context, "Error: validatable input data of Target");
-      throw Exception("Error occurred while fetching target list.");
+      isEmpty = true;
     }
   }
 
   void _getUserInfoGrpcRequest(BuildContext context) async {
-    for (int i = 0; i < targetID.length; i++) {
-      try {
-        String? apiKeyS = await globalSession.read(key: 'SessionId');
-        String? apiKeyU = await globalUserId.read(key: 'UserID');
-        final userid = int.tryParse(apiKeyU!);
+    try {
+      String? apiKeyS = await globalSession.read(key: 'SessionId');
+      String? apiKeyU = await globalUserId.read(key: 'UserID');
+      final userid = int.tryParse(apiKeyU!);
+      for (int i = 0; i < targetID.length; i++) {
         // take info
         final infoRequest = GetCanChangeRequest(sessionID: apiKeyS, userID: targetID[i]);
         final infoResponse = await GrpcInfoService.client.getCanChange(infoRequest);
+
         // take icon
         final imgRequest = GetImagesRequest(sessionID: apiKeyS, userID: targetID[i]);
         final imgResponse = await GrpcInfoService.client.getImages(imgRequest);
+
         // take last msg
         final lmsgRequest = GetLastMsgRequest(userID: userid!, targetID: targetID[i]);
         final lmsgResponse = await GrpcChatService.client.getLastMsg(lmsgRequest);
+
         setState(() {
           users.add(TargetInfos(
             userid: targetID[i],
@@ -74,25 +75,32 @@ class _ChatState extends State<Chat> {
             isRead: lmsgResponse.isread,
           ));
         });
-      } on GrpcError {
-        Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data of Info");
-        throw Exception("Error occurred while fetching canChangeInfo.");
       }
+    } catch (e) {
+      showErrorDialog(context, "Error: validatable input data of Msg Info");
+      throw Exception("Error occurred while fetching user info.");
     }
   }
 
   List<ChatUsers> chatUsers = [ChatUsers(time: "Now"), ChatUsers(time: "23 Mar"), ChatUsers(time: "17 Mar")];
+
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             _buildHeader(context),
-            if (users.length > 0)
+            if (isEmpty == true || users.length == 0)
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [SizedBox(height: mediaH / 4), Text("相手とまだおしゃべりしておりません", style: CustomTextStyles.smallTitle20)],
+              )
+            else
               ListView.separated(
                 itemCount: users.length,
                 shrinkWrap: true,
@@ -109,15 +117,6 @@ class _ChatState extends State<Chat> {
                     isMessageRead: users[index].isRead,
                   );
                 },
-              )
-            else
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: mediaH / 4),
-                  Text("相手とまだおしゃべりしておりません", style: CustomTextStyles.smallTitle20),
-                ],
               ),
           ],
         ),
@@ -128,6 +127,7 @@ class _ChatState extends State<Chat> {
   Widget _buildHeader(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
+
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.only(top: mediaH / 80),

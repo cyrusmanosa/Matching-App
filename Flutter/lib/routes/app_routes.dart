@@ -69,7 +69,7 @@ class AppRoutes {
     appNavigationScreen: (context) => AppNavigationScreen(),
     chat: (context) => Chat(),
     chatBox: (context) => ChatBox(),
-    containerScreen: (context) => ContainerScreen(),
+    containerScreen: (context) => ContainerScreen(number: 0),
     accompanyConditionRepair: (context) => AccompanyConditionRepair(),
     confirmationCore: (context) => ConfirmationCore(),
     deleteTarget: (context) => DeleteTarget(),

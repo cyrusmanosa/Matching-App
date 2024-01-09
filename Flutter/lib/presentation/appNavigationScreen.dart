@@ -2,24 +2,19 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 class AppNavigationScreen extends StatelessWidget {
-  const AppNavigationScreen({Key? key}) : super(key: key);
+  AppNavigationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0XFFFFFFFF),
       body: Container(
         padding: EdgeInsets.only(top: 30),
-        width: 375,
         child: Column(
           children: [
             _buildAppNavigation(context),
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
-                  decoration: BoxDecoration(
-                    color: Color(0XFFFFFFFF),
-                  ),
                   child: Column(
                     children: [
                       _buildScreenTitle(
@@ -177,48 +172,19 @@ class AppNavigationScreen extends StatelessWidget {
   Widget _buildAppNavigation(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
-    double mediaW = mediaQueryData.size.width;
     return Container(
-      decoration: BoxDecoration(
-        color: Color(0XFFFFFFFF),
-      ),
+      decoration: BoxDecoration(color: Color(0XFFFFFFFF)),
       child: Column(
         children: [
-          SizedBox(height: mediaH / 50),
+          SizedBox(height: mediaH / 25),
           Align(
             alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                "App Navigation",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Color(0XFF000000),
-                  fontSize: 20,
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
+            child: Text(
+              "Check your app's UI from the below demo screens of your app.",
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Color(0XFF888888), fontSize: 16, fontFamily: 'Roboto', fontWeight: FontWeight.w400),
             ),
           ),
-          SizedBox(height: mediaH / 50),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: EdgeInsets.only(left: 20),
-              child: Text(
-                "Check your app's UI from the below demo screens of your app.",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Color(0XFF888888),
-                  fontSize: 16,
-                  fontFamily: 'Roboto',
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: 5),
           Divider(height: 1, thickness: 1, color: Color(0XFF000000)),
         ],
       ),
@@ -229,15 +195,12 @@ class AppNavigationScreen extends StatelessWidget {
   Widget _buildScreenTitle(BuildContext context, {required String userName, Function? onTapScreenTitle}) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
-    double mediaW = mediaQueryData.size.width;
     return GestureDetector(
       onTap: () {
         onTapScreenTitle!.call();
       },
       child: Container(
-        decoration: BoxDecoration(
-          color: Color(0XFFFFFFFF),
-        ),
+        decoration: BoxDecoration(color: Color(0XFFFFFFFF)),
         child: Column(
           children: [
             SizedBox(height: mediaH / 50),
@@ -245,25 +208,11 @@ class AppNavigationScreen extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  userName,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color(0XFF000000),
-                    fontSize: 20,
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
+                child: Text(userName, textAlign: TextAlign.center, style: TextStyle(color: Color(0XFF000000), fontSize: 20)),
               ),
             ),
             SizedBox(height: mediaH / 50),
-            SizedBox(height: 5),
-            Divider(
-              height: 1,
-              thickness: 1,
-              color: Color(0XFF888888),
-            ),
+            Divider(height: 1, thickness: 1, color: Color(0XFF888888)),
           ],
         ),
       ),
@@ -271,10 +220,7 @@ class AppNavigationScreen extends StatelessWidget {
   }
 
   /// Common click event
-  void onTapScreenTitle(
-    BuildContext context,
-    String routeName,
-  ) {
+  void onTapScreenTitle(BuildContext context, String routeName) {
     Navigator.pushNamed(context, routeName);
   }
 }

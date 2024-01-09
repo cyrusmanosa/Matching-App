@@ -1,6 +1,6 @@
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/models/model.dart';
+import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_fix.pb.dart';
 import 'package:dating_your_date/pb/rpc_session.pb.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';

@@ -1,10 +1,9 @@
 import 'package:dating_your_date/presentation/Home/widgets/HomeUserSide.dart';
-import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/client/grpc_services.dart';
-import 'package:dating_your_date/models/model.dart';
+import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 
 class Home extends StatefulWidget {
@@ -28,13 +27,7 @@ class _HomeState extends State<Home> {
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
       body: Container(
-        child: Column(
-          children: [
-            _buildHeader(context, mediaW, mediaH),
-            SizedBox(height: mediaH / 50),
-            _buildMainFrame(context),
-          ],
-        ),
+        child: Column(children: [_buildHeader(context, mediaW, mediaH), SizedBox(height: mediaH / 50), _buildMainFrame(context)]),
       ),
     );
   }
@@ -57,9 +50,7 @@ class _HomeState extends State<Home> {
         padding: EdgeInsets.only(top: mediaH / 80),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("ホーム", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-          ],
+          children: [Text("ホーム", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))],
         ),
       ),
     );
