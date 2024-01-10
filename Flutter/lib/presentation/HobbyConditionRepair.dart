@@ -3,7 +3,6 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_hobby.pb.dart';
 import 'package:dating_your_date/pb/rpc_targetList.pb.dart';
-import 'package:dating_your_date/presentation/DeleteTarget.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
@@ -242,8 +241,8 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
     );
   }
 
-  /// Reset Era
   Widget _buildHobbyResetEraInput(BuildContext context) {
+    // return CustomDropDownBar(controller: resetHobbyEraController, hintText: "３０代", itemArray: eraList);
     return CustomInputFormBar(controller: resetHobbyEraController, hintText: "３０代");
   }
 
@@ -254,7 +253,8 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
 
   /// Reset Gender
   Widget _buildHobbyResetGenderInput(BuildContext context) {
-    return CustomInputFormBar(controller: resetHobbyGenderController, hintText: "男");
+    // return CustomDropDownBar(controller: resetHobbyGenderController, hintText: "男性", itemArray: genderList);
+    return CustomInputFormBar(controller: resetHobbyGenderController, hintText: "男性");
   }
 
   /// Speak Language
@@ -284,7 +284,7 @@ class _HobbyConditionRepairState extends State<HobbyConditionRepair> {
 
   /// Reset Height
   Widget _buildHobbyResetHeightInput(BuildContext context) {
-    return CustomInputFormBar(controller: resetHobbyHeightController, hintText: "172");
+    return CustomInputFormBar(controller: resetHobbyHeightController, hintText: "172cm");
   }
 
   /// Reset Weight

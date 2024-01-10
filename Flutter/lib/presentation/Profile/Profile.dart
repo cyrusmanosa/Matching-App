@@ -7,11 +7,12 @@ import 'package:dating_your_date/presentation/ProfileEdit.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:grpc/grpc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:path_provider/path_provider.dart';
 import 'widgets/showDataBar.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart' as path;
 
 class Profile extends StatefulWidget {
   Profile({Key? key}) : super(key: key);
@@ -22,11 +23,46 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   CanChange? data = CanChange();
+  File? _imageFile;
 
   @override
   void initState() {
     super.initState();
     getCanChangeGrpcRequest(context);
+  }
+
+  void _uploadPhotoToNewFile() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      final file = File(pickedFile.path);
+      final directory = await getApplicationDocumentsDirectory();
+      final newDirectoryPath = path.join(directory.path, 'u1');
+
+      try {
+        if (!Directory(newDirectoryPath).existsSync()) {
+          Directory(newDirectoryPath).createSync();
+        }
+        // 先刪除舊檔案
+        await for (var oldFile in Directory(newDirectoryPath).list()) {
+          await oldFile.delete();
+        }
+        // 上傳檔案
+        final newFilePath = path.join(newDirectoryPath, '${DateTime.now().millisecondsSinceEpoch}.jpg');
+        await file.copy(newFilePath);
+        // 直接複製檔案到指定的path
+        final pathA = '/Users/cyrusman/Desktop/ProgrammingLearning/Apps/Flutter/';
+        // 調整為相對於應用程式資料目錄的路徑
+        final destinationPath = path.join(pathA, '123', '${DateTime.now().millisecondsSinceEpoch}.jpg');
+        await file.copy(destinationPath);
+        setState(() {
+          _imageFile = File(newFilePath);
+        });
+      } catch (e) {
+        print("Error: $e");
+      }
+    }
   }
 
   // Grpc
@@ -55,21 +91,21 @@ class _ProfileState extends State<Profile> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _headerBuilder(context),
+            _headerBuilder(context, mediaH),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
               child: Column(
                 children: [
-                  _buildImages(context, mediaH),
+                  _buildImages(context, mediaH, mediaW),
                   SizedBox(height: mediaH / 40),
 
                   // Part 2 - data!
-                  _buildInformationBar(context),
+                  _buildInformationBar(context, mediaH, mediaW),
                   SizedBox(height: mediaH / 40),
 
                   // intro
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: EdgeInsets.symmetric(horizontal: mediaW / 30),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -126,7 +162,7 @@ class _ProfileState extends State<Profile> {
                   SizedBox(height: mediaH / 30),
                   // edit button
                   _buildEditButton(context, data!),
-                  SizedBox(height: mediaH / 30)
+                  SizedBox(height: mediaH / 25)
                 ],
               ),
             ),
@@ -136,9 +172,7 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget _headerBuilder(BuildContext context) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    double mediaH = mediaQueryData.size.height;
+  Widget _headerBuilder(BuildContext context, double mediaH) {
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.only(top: mediaH / 80),
@@ -150,59 +184,33 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget _buildImages(BuildContext context, double mediaH) {
-    File? selectedImage;
-
-    void selectImage() async {
-      PermissionStatus status = await Permission.photos.request();
-      if (status.isDenied || status.isPermanentlyDenied) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("請在應用設置中授予相機權限才能使用該功能"),
-            action: SnackBarAction(
-              label: "去授權",
-              onPressed: () {
-                openAppSettings();
-              },
-            ),
+  Widget _buildImages(BuildContext context, double mediaH, double mediaW) {
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          IconButton(
+            onPressed: () {
+              _uploadPhotoToNewFile();
+            },
+            icon: Icon(Icons.upload),
           ),
-        );
-      } else {
-        final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
-        if (pickedImage != null) {
-          setState(() {
-            selectedImage = File(pickedImage.path);
-          });
-        }
-      }
-    }
-
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: selectImage,
-          child: Container(
-            height: mediaH / 5,
-            width: mediaH / 5,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                image: selectedImage != null ? Image.file(selectedImage!).image : AssetImage('assets/images/image_not_found.png'),
-                fit: BoxFit.cover,
+          if (_imageFile != null)
+            Align(
+              alignment: Alignment.topCenter,
+              child: Container(
+                width: mediaW / 2.25,
+                height: mediaH / 5,
+                child: ClipOval(child: Image.file(_imageFile!, fit: BoxFit.cover)),
               ),
             ),
-          ),
-        ),
-        SizedBox(height: 10),
-      ],
+        ],
+      ),
     );
   }
 
   // Part2
-  Widget _buildInformationBar(BuildContext context) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    double mediaH = mediaQueryData.size.height;
-    double mediaW = mediaQueryData.size.width;
+  Widget _buildInformationBar(BuildContext context, double mediaH, double mediaW) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: mediaW / 20),
       child: Row(

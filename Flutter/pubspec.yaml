@@ -20,6 +20,7 @@ dependencies:
   image_field:
   image_picker:
   intl: 
+  path_provider:
   permission_handler:
   postgres: 
   protobuf:

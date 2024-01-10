@@ -174,11 +174,11 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
             children: [
               Row(
                 children: [
-                  CustomInputBar(titleName: "年齢:", backendPart: _buildLoverMinAgeInput(context)),
+                  CustomInputBar(titleName: "年齢:", backendPart: _buildLoverMinAgeInput(context, mediaH, mediaW)),
                   SizedBox(width: mediaW / 30),
                   Text("から"),
                   SizedBox(width: mediaW / 30),
-                  CustomInputBar(titleName: "", backendPart: _buildLoverMaxAgeInput(context)),
+                  CustomInputBar(titleName: "", backendPart: _buildLoverMaxAgeInput(context, mediaH, mediaW)),
                 ],
               ),
               SizedBox(height: mediaH / 100),
@@ -261,10 +261,7 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
   }
 
   /// Min Age
-  Widget _buildLoverMinAgeInput(BuildContext context) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    double mediaH = mediaQueryData.size.height;
-    double mediaW = mediaQueryData.size.width;
+  Widget _buildLoverMinAgeInput(BuildContext context, double mediaH, double mediaW) {
     return CustomInputFormBar(
       alignment: Alignment.centerLeft,
       height: mediaH / 16,
@@ -276,10 +273,7 @@ class _LoverConditionRepairState extends State<LoverConditionRepair> {
   }
 
   /// Min Age
-  Widget _buildLoverMaxAgeInput(BuildContext context) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    double mediaH = mediaQueryData.size.height;
-    double mediaW = mediaQueryData.size.width;
+  Widget _buildLoverMaxAgeInput(BuildContext context, double mediaH, double mediaW) {
     return CustomInputFormBar(
       alignment: Alignment.centerLeft,
       height: mediaH / 16,

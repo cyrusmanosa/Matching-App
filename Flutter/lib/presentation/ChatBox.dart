@@ -154,7 +154,11 @@ class _ChatBoxState extends State<ChatBox> {
           padding: EdgeInsets.only(left: mediaW / 20, right: mediaW / 20, bottom: mediaH / 40),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [optionBarButton(context, 30), _buildMsgInput(context), sendBarButton(context, 20)],
+            children: [
+              optionBarButton(context, 30, mediaH, mediaW),
+              _buildMsgInput(context, mediaH, mediaW),
+              sendBarButton(context, 20, mediaH, mediaW),
+            ],
           ),
         ),
       ),
@@ -204,10 +208,7 @@ class _ChatBoxState extends State<ChatBox> {
     );
   }
 
-  Widget sendBarButton(BuildContext context, double s) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    double mediaH = mediaQueryData.size.height;
-    double mediaW = mediaQueryData.size.width;
+  Widget sendBarButton(BuildContext context, double s, double mediaH, double mediaW) {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -226,10 +227,7 @@ class _ChatBoxState extends State<ChatBox> {
     );
   }
 
-  Widget optionBarButton(BuildContext context, double s) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    double mediaH = mediaQueryData.size.height;
-    double mediaW = mediaQueryData.size.width;
+  Widget optionBarButton(BuildContext context, double s, double mediaH, double mediaW) {
     return GestureDetector(
       onTap: () {},
       child: Container(
@@ -241,10 +239,7 @@ class _ChatBoxState extends State<ChatBox> {
     );
   }
 
-  Widget _buildMsgInput(BuildContext context) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    double mediaH = mediaQueryData.size.height;
-    double mediaW = mediaQueryData.size.width;
+  Widget _buildMsgInput(BuildContext context, double mediaH, double mediaW) {
     return CustomInputFormBar(
       height: mediaH / 30,
       width: mediaW / 1.45,

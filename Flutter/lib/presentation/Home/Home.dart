@@ -41,9 +41,9 @@ class _HomeState extends State<Home> {
       body: Container(
         child: Column(
           children: [
-            _buildHeader(context, mediaW, mediaH),
+            _buildHeader(context, mediaH, mediaW),
             SizedBox(height: mediaH / 50),
-            _buildMainFrame(context),
+            _buildMainFrame(context, mediaW, mediaW),
           ],
         ),
       ),
@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
   }
 
   // Header
-  Widget _buildHeader(BuildContext context, double mediaW, double mediaH) {
+  Widget _buildHeader(BuildContext context, double mediaH, double mediaW) {
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.only(top: mediaH / 80),
@@ -64,10 +64,7 @@ class _HomeState extends State<Home> {
   }
 
   // Main
-  Widget _buildMainFrame(BuildContext context) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    double mediaH = mediaQueryData.size.height;
-    double mediaW = mediaQueryData.size.width;
+  Widget _buildMainFrame(BuildContext context, double mediaH, double mediaW) {
     return Column(
       children: [
         SizedBox(

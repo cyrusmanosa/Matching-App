@@ -146,7 +146,7 @@ class _CanChangeInformation_2State extends State<CanChangeInformation_2> {
             SizedBox(height: mediaH / 50),
 
             // Introduce
-            CustomInputBar(titleName: "自己紹介:", backendPart: _buildcanChangeIntroduceInput(context)),
+            CustomInputBar(titleName: "自己紹介:", backendPart: _buildcanChangeIntroduceInput(context, mediaH, mediaW)),
             SizedBox(height: mediaH / 25),
 
             _buildNextButton(context),
@@ -182,10 +182,7 @@ class _CanChangeInformation_2State extends State<CanChangeInformation_2> {
   }
 
   /// Introduce
-  Widget _buildcanChangeIntroduceInput(BuildContext context) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    double mediaH = mediaQueryData.size.height;
-    double mediaW = mediaQueryData.size.width;
+  Widget _buildcanChangeIntroduceInput(BuildContext context, double mediaH, double mediaW) {
     return CustomInputFormBar(
       prefix: Padding(padding: EdgeInsets.symmetric(horizontal: mediaW / 75)),
       height: mediaH / 5,

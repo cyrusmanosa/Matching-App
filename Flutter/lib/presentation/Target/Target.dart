@@ -23,17 +23,17 @@ class Target extends StatelessWidget {
       body: Container(
         child: Column(
           children: [
-            if (head! == "head") _buildHeader(context, mediaW, mediaH),
-            if (head! == "logo") _buildLogo(context, mediaW, mediaH),
+            if (head! == "head") _buildHeader(context, mediaH, mediaW),
+            if (head! == "logo") _buildLogo(context, mediaH, mediaW),
             Text("探すターゲットの種類", style: CustomTextStyles.smallTitle20),
-            _buildTargetResetList(context, mediaW, mediaH),
+            _buildTargetResetList(context, mediaH, mediaW),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTargetResetList(BuildContext context, double mediaW, double mediaH) {
+  Widget _buildTargetResetList(BuildContext context, double mediaH, double mediaW) {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: mediaW / 10),
@@ -52,7 +52,7 @@ class Target extends StatelessWidget {
     );
   }
 
-  Widget _buildLogo(BuildContext context, double mediaW, double mediaH) {
+  Widget _buildLogo(BuildContext context, double mediaH, double mediaW) {
     return Column(
       children: [
         SizedBox(height: mediaH / 12),
@@ -63,7 +63,7 @@ class Target extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader(BuildContext context, double mediaW, double mediaH) {
+  Widget _buildHeader(BuildContext context, double mediaH, double mediaW) {
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.only(top: mediaH / 80),

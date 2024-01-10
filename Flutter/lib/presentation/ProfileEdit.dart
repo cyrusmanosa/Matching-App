@@ -139,7 +139,7 @@ class _ProfileEditState extends State<ProfileEdit> {
               ),
 
               // Introduce
-              CustomInputBar(titleName: "自己紹介:", backendPart: _buildUpdateIntroduceInput(context)),
+              CustomInputBar(titleName: "自己紹介:", backendPart: _buildUpdateIntroduceInput(context, mediaH, mediaW)),
               SizedBox(height: mediaH / 50),
 
               // Nickname
@@ -256,10 +256,7 @@ class _ProfileEditState extends State<ProfileEdit> {
   }
 
   /// Introduce
-  Widget _buildUpdateIntroduceInput(BuildContext context) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    double mediaH = mediaQueryData.size.height;
-    double mediaW = mediaQueryData.size.width;
+  Widget _buildUpdateIntroduceInput(BuildContext context, double mediaH, double mediaW) {
     return CustomInputFormBar(
       prefix: Padding(padding: EdgeInsets.symmetric(horizontal: mediaW / 75)),
       height: mediaH / 5,
