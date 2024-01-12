@@ -1,18 +1,25 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_fix.pb.dart';
+import 'package:dating_your_date/pb/rpc_images.pb.dart';
 import 'package:dating_your_date/pb/rpc_session.pb.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
+import 'package:dating_your_date/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
-import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as path;
 import 'package:intl/intl.dart';
-import 'dart:convert';
+
+import 'package:path_provider/path_provider.dart';
 
 class FixInformation extends StatefulWidget {
   FixInformation({Key? key}) : super(key: key);
@@ -29,20 +36,31 @@ class _FixInformationState extends State<FixInformation> {
   TextEditingController fixGenderController = TextEditingController();
   TextEditingController fixBloodController = TextEditingController();
 
-  // Http
-  void fixInformationHttpRequest(BuildContext context) async {
-    var url = "http://127.0.0.1:8080/CreateFixInfo";
-    var requestBody = {
-      "FirstName": fixFirstNameController.text,
-      "LastName": fixLastNameController.text,
-      "Birth": fixBirthController.text,
-      "Country": fixCountryController.text,
-      "Gender": fixGenderController.text,
-      "Blood": fixBloodController.text,
-    };
-    var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
-    if (response.statusCode == 200) {
-      onTapNextPage(context);
+  String? oldPath;
+  File? _imageFile;
+  bool confirm18Btn = false;
+  bool confirmAgreeBtn = false;
+
+  // upload and show image
+  void _uploadPhotoToNewFile() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      final file = File(pickedFile.path);
+      final directory = await getApplicationDocumentsDirectory();
+      try {
+        await for (var oldFile in Directory(directory.path).list()) {
+          await oldFile.delete();
+        }
+        oldPath = directory.path;
+        final newFilePath = path.join(directory.path, '${DateTime.now().millisecondsSinceEpoch}.jpg');
+        await file.copy(newFilePath);
+        setState(() {
+          _imageFile = File(newFilePath);
+        });
+      } catch (e) {
+        print("Error: $e");
+      }
     }
   }
 
@@ -66,6 +84,9 @@ class _FixInformationState extends State<FixInformation> {
       showErrorDialog(context, "同意のボタンを押してください");
     } else {
       try {
+        setState(() {
+          showLoadDialog(context);
+        });
         final request = CreateFixRequest(
           firstName: fixFirstNameController.text,
           lastName: fixLastNameController.text,
@@ -75,13 +96,16 @@ class _FixInformationState extends State<FixInformation> {
           blood: fixBloodController.text,
         );
         final response = await GrpcInfoService.client.createFix(request);
+        // set session ID
         await globalSession.write(key: 'SessionId', value: response.sessionsID);
         // take user id
-        String? apiKeyS = await globalSession.read(key: 'SessionId');
-        final useridRequest = GetUserIDRequest(sessionID: apiKeyS);
+        final useridRequest = GetUserIDRequest(sessionID: response.sessionsID);
         final useridResponse = await GrpcInfoService.client.getUserID(useridRequest);
+        print(useridResponse.userID);
+        // set user ID
         await globalUserId.write(key: 'UserID', value: '${useridResponse.userID}');
-        onTapNextPage(context);
+
+        saveImage(context);
       } on GrpcError {
         Navigator.pop(context);
         showErrorDialog(context, "Error: validatable input data");
@@ -90,8 +114,26 @@ class _FixInformationState extends State<FixInformation> {
     }
   }
 
-  bool confirm18Btn = false;
-  bool confirmAgreeBtn = false;
+  void saveImage(BuildContext context) async {
+    try {
+      String? apiKeyS = await globalSession.read(key: 'SessionId');
+      String? apiKeyU = await globalUserId.read(key: 'UserID');
+      final createFolderPath = '/Users/cyrusman/Desktop/ProgrammingLearning/Apps/Flutter/userImage/u$apiKeyU';
+      Directory(createFolderPath).createSync(recursive: true);
+      String targetFilePath = path.join(createFolderPath, path.basename(_imageFile!.path));
+      _imageFile!.copySync(targetFilePath);
+
+      Uint8List bytes = await _imageFile!.readAsBytes();
+      List<int> img = bytes.toList();
+
+      final request = CreateImagesRequest(sessionID: apiKeyS, img1: img, img2: null, img3: null, img4: null, img5: null);
+      await GrpcInfoService.client.createImages(request);
+      onTapNextPage(context);
+    } on GrpcError catch (e) {
+      Navigator.pop(context);
+      print("Error: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,22 +141,22 @@ class _FixInformationState extends State<FixInformation> {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
-      appBar: _buildHeader(context),
+      appBar: AppBar(automaticallyImplyLeading: true, title: AppbarTitle(text: "基本個人情報 - A")),
       body: Container(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
+          padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
           child: Column(
             children: [
               // image
-              CustomImageView(imagePath: ImageConstant.imgVector, height: mediaH / 7, width: mediaW / 3, alignment: Alignment.center),
-              SizedBox(height: mediaH / 70),
+              _buildImages(context, mediaH),
+              SizedBox(height: mediaH / 50),
 
               // msg
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text("以下の項目は全部入力するのは必要です。", style: CustomTextStyles.msgWordOfMsgBox),
               ),
-              SizedBox(height: mediaH / 30),
+              SizedBox(height: mediaH / 75),
 
               // Last name
               CustomInputBar(titleName: "姓:", backendPart: _buildfixLastNameInput(context)),
@@ -152,8 +194,10 @@ class _FixInformationState extends State<FixInformation> {
                     Container(
                       height: mediaW / 25,
                       width: mediaW / 25,
-                      decoration:
-                          BoxDecoration(color: confirm18Btn ? appTheme.green : appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
+                      decoration: BoxDecoration(
+                        color: confirm18Btn ? appTheme.green : appTheme.gray500,
+                        borderRadius: BorderRadiusStyle.r15,
+                      ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: mediaW / 50),
@@ -192,6 +236,7 @@ class _FixInformationState extends State<FixInformation> {
               SizedBox(height: mediaH / 25),
               // Button
               _buildNextButton(context),
+              SizedBox(height: mediaH / 20),
             ],
           ),
         ),
@@ -199,9 +244,27 @@ class _FixInformationState extends State<FixInformation> {
     );
   }
 
-  /// Header
-  PreferredSizeWidget _buildHeader(BuildContext context) {
-    return AppBar(automaticallyImplyLeading: true, title: AppbarTitle(text: "基本個人情報 - A"));
+  /// image
+  Widget _buildImages(BuildContext context, double mediaH) {
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          IconButton(
+            onPressed: () {
+              _uploadPhotoToNewFile();
+            },
+            icon: _imageFile != null
+                ? Container(
+                    width: mediaH / 6.5,
+                    height: mediaH / 6.5,
+                    child: ClipOval(child: Image.file(_imageFile!, fit: BoxFit.cover)),
+                  )
+                : Icon(Icons.account_circle, size: mediaH / 6.5, color: appTheme.gray800),
+          ),
+        ],
+      ),
+    );
   }
 
   /// Last Name
@@ -271,10 +334,6 @@ class _FixInformationState extends State<FixInformation> {
         fixInformationGrpcRequest(context);
       },
     );
-  }
-
-  onTapReturn(BuildContext context) {
-    Navigator.pop(context);
   }
 
   onTapNextPage(BuildContext context) {

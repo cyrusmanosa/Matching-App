@@ -12,14 +12,10 @@ message CreateHobbyRequest {
     int32 Era = 2;
     string City = 3;
     string Gender = 4;
-    int32 Height = 5;
-    int32 Weight = 6;
-    string Speaklanguage = 7;
-    string FindType = 8;
-    string FindTarget = 9;
-    int32 Experience = 10;
-    string Sociability = 11;
-    bool Certification = 12;
+    string Speaklanguage = 5;
+    string FindType = 6;
+    string FindTarget = 7;
+    int32 Experience = 8;
 }
 message CreateHobbyResponse {
     Hobby h = 1;
@@ -39,14 +35,10 @@ message UpdateHobbyRequest {
     int32 Era = 2;
     string City = 3;
     string Gender = 4;
-    int32 Height = 5;
-    int32 Weight = 6;
-    string Speaklanguage = 7;
-    string FindType = 8;
-    string FindTarget = 9;
-    int32 Experience = 10;
-    string Sociability = 11;
-    bool Certification = 12;
+    string Speaklanguage = 5;
+    string FindType = 6;
+    string FindTarget = 7;
+    int32 Experience = 8;
 }
 message UpdateHobbyResponse {
     Hobby h = 1;
@@ -56,4 +48,3 @@ message UpdateHobbyResponse {
 message DeleteHobbyRequest {
     string SessionID = 1; 
 }
- 

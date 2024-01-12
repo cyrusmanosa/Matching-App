@@ -334,3 +334,10 @@ func SwitchAge(Y, M, D int) int32 {
 
 	return int32(age)
 }
+
+func RandomTT() string {
+	t := []string{"Hobby", "Lover", "Accompany"}
+	r := rand.Intn(3)
+
+	return t[r]
+}

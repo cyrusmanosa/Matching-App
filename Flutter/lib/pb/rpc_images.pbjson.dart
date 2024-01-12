@@ -18,21 +18,19 @@ const CreateImagesRequest$json = {
   '1': 'CreateImagesRequest',
   '2': [
     {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
-    {'1': 'Qr', '3': 2, '4': 1, '5': 9, '10': 'Qr'},
-    {'1': 'Img1', '3': 3, '4': 1, '5': 9, '10': 'Img1'},
-    {'1': 'Img2', '3': 4, '4': 1, '5': 9, '10': 'Img2'},
-    {'1': 'Img3', '3': 5, '4': 1, '5': 9, '10': 'Img3'},
-    {'1': 'Img4', '3': 6, '4': 1, '5': 9, '10': 'Img4'},
-    {'1': 'Img5', '3': 7, '4': 1, '5': 9, '10': 'Img5'},
+    {'1': 'Img1', '3': 2, '4': 1, '5': 12, '10': 'Img1'},
+    {'1': 'Img2', '3': 3, '4': 1, '5': 12, '10': 'Img2'},
+    {'1': 'Img3', '3': 4, '4': 1, '5': 12, '10': 'Img3'},
+    {'1': 'Img4', '3': 5, '4': 1, '5': 12, '10': 'Img4'},
+    {'1': 'img5', '3': 6, '4': 1, '5': 12, '10': 'img5'},
   ],
 };
 
 /// Descriptor for `CreateImagesRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createImagesRequestDescriptor = $convert.base64Decode(
-    'ChNDcmVhdGVJbWFnZXNSZXF1ZXN0EhwKCVNlc3Npb25JRBgBIAEoCVIJU2Vzc2lvbklEEg4KAl'
-    'FyGAIgASgJUgJRchISCgRJbWcxGAMgASgJUgRJbWcxEhIKBEltZzIYBCABKAlSBEltZzISEgoE'
-    'SW1nMxgFIAEoCVIESW1nMxISCgRJbWc0GAYgASgJUgRJbWc0EhIKBEltZzUYByABKAlSBEltZz'
-    'U=');
+    'ChNDcmVhdGVJbWFnZXNSZXF1ZXN0EhwKCVNlc3Npb25JRBgBIAEoCVIJU2Vzc2lvbklEEhIKBE'
+    'ltZzEYAiABKAxSBEltZzESEgoESW1nMhgDIAEoDFIESW1nMhISCgRJbWczGAQgASgMUgRJbWcz'
+    'EhIKBEltZzQYBSABKAxSBEltZzQSEgoEaW1nNRgGIAEoDFIEaW1nNQ==');
 
 @$core.Deprecated('Use createImagesResponseDescriptor instead')
 const CreateImagesResponse$json = {
@@ -77,21 +75,19 @@ const UpdateImagesRequest$json = {
   '1': 'UpdateImagesRequest',
   '2': [
     {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
-    {'1': 'Qr', '3': 2, '4': 1, '5': 9, '10': 'Qr'},
-    {'1': 'Img1', '3': 3, '4': 1, '5': 9, '10': 'Img1'},
-    {'1': 'Img2', '3': 4, '4': 1, '5': 9, '10': 'Img2'},
-    {'1': 'Img3', '3': 5, '4': 1, '5': 9, '10': 'Img3'},
-    {'1': 'Img4', '3': 6, '4': 1, '5': 9, '10': 'Img4'},
-    {'1': 'Img5', '3': 7, '4': 1, '5': 9, '10': 'Img5'},
+    {'1': 'Img1', '3': 2, '4': 1, '5': 12, '10': 'Img1'},
+    {'1': 'Img2', '3': 3, '4': 1, '5': 12, '10': 'Img2'},
+    {'1': 'Img3', '3': 4, '4': 1, '5': 12, '10': 'Img3'},
+    {'1': 'Img4', '3': 5, '4': 1, '5': 12, '10': 'Img4'},
+    {'1': 'img5', '3': 6, '4': 1, '5': 12, '10': 'img5'},
   ],
 };
 
 /// Descriptor for `UpdateImagesRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateImagesRequestDescriptor = $convert.base64Decode(
-    'ChNVcGRhdGVJbWFnZXNSZXF1ZXN0EhwKCVNlc3Npb25JRBgBIAEoCVIJU2Vzc2lvbklEEg4KAl'
-    'FyGAIgASgJUgJRchISCgRJbWcxGAMgASgJUgRJbWcxEhIKBEltZzIYBCABKAlSBEltZzISEgoE'
-    'SW1nMxgFIAEoCVIESW1nMxISCgRJbWc0GAYgASgJUgRJbWc0EhIKBEltZzUYByABKAlSBEltZz'
-    'U=');
+    'ChNVcGRhdGVJbWFnZXNSZXF1ZXN0EhwKCVNlc3Npb25JRBgBIAEoCVIJU2Vzc2lvbklEEhIKBE'
+    'ltZzEYAiABKAxSBEltZzESEgoESW1nMhgDIAEoDFIESW1nMhISCgRJbWczGAQgASgMUgRJbWcz'
+    'EhIKBEltZzQYBSABKAxSBEltZzQSEgoEaW1nNRgGIAEoDFIEaW1nNQ==');
 
 @$core.Deprecated('Use updateImagesResponseDescriptor instead')
 const UpdateImagesResponse$json = {

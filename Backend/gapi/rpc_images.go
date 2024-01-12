@@ -14,7 +14,6 @@ import (
 )
 
 func (server *Server) CreateImages(ctx context.Context, req *pb.CreateImagesRequest) (*pb.CreateImagesResponse, error) {
-
 	Gid, err := uuid.Parse(req.GetSessionID())
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
@@ -32,7 +31,6 @@ func (server *Server) CreateImages(ctx context.Context, req *pb.CreateImagesRequ
 
 	img := info.CreateImageParams{
 		UserID: token.UserID,
-		Qr:     req.GetQr(),
 		Img1:   req.GetImg1(),
 		Img2:   req.GetImg2(),
 		Img3:   req.GetImg3(),
@@ -77,7 +75,7 @@ func (server *Server) GetImages(ctx context.Context, req *pb.GetImagesRequest) (
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
 			return nil, status.Errorf(codes.NotFound, "user not found")
 		}
-		return nil, status.Errorf(codes.Internal, "failed to input UserID: %s", err)
+		return nil, status.Errorf(codes.Internal, "failed to input image: %s", err)
 	}
 
 	rsp := &pb.GetImagesResponse{

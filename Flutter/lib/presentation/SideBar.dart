@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dating_your_date/theme/custom_text_style.dart';
 import 'package:dating_your_date/theme/theme_helper.dart';
 import 'package:dating_your_date/widgets/custom_sideBar.dart';
@@ -7,7 +9,7 @@ class SideBar extends StatefulWidget {
   SideBar({Key? key, this.name, this.imageUrl}) : super(key: key);
 
   final String? name;
-  final String? imageUrl;
+  final File? imageUrl;
 
   @override
   State<StatefulWidget> createState() => _SideBarState();
@@ -110,14 +112,14 @@ class _SideBarState extends State<SideBar> {
       ),
       child: Row(
         children: [
-          CircleAvatar(backgroundImage: NetworkImage("${widget.imageUrl}"), maxRadius: 25),
+          CircleAvatar(backgroundImage: FileImage(widget.imageUrl!), maxRadius: 25),
           Padding(
             padding: EdgeInsets.only(left: mediaW / 75),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(widget.name!, style: CustomTextStyles.msgWordOfMsgBox),
-                Text("目的：", style: CustomTextStyles.msgWordOfMsgBox),
+                Text("", style: CustomTextStyles.msgWordOfMsgBox),
               ],
             ),
           ),

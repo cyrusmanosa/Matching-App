@@ -22,14 +22,10 @@ class CreateHobbyRequest extends $pb.GeneratedMessage {
     $core.int? era,
     $core.String? city,
     $core.String? gender,
-    $core.int? height,
-    $core.int? weight,
     $core.String? speaklanguage,
     $core.String? findType,
     $core.String? findTarget,
     $core.int? experience,
-    $core.String? sociability,
-    $core.bool? certification,
   }) {
     final $result = create();
     if (sessionID != null) {
@@ -44,12 +40,6 @@ class CreateHobbyRequest extends $pb.GeneratedMessage {
     if (gender != null) {
       $result.gender = gender;
     }
-    if (height != null) {
-      $result.height = height;
-    }
-    if (weight != null) {
-      $result.weight = weight;
-    }
     if (speaklanguage != null) {
       $result.speaklanguage = speaklanguage;
     }
@@ -62,12 +52,6 @@ class CreateHobbyRequest extends $pb.GeneratedMessage {
     if (experience != null) {
       $result.experience = experience;
     }
-    if (sociability != null) {
-      $result.sociability = sociability;
-    }
-    if (certification != null) {
-      $result.certification = certification;
-    }
     return $result;
   }
   CreateHobbyRequest._() : super();
@@ -79,14 +63,10 @@ class CreateHobbyRequest extends $pb.GeneratedMessage {
     ..a<$core.int>(2, _omitFieldNames ? '' : 'Era', $pb.PbFieldType.O3, protoName: 'Era')
     ..aOS(3, _omitFieldNames ? '' : 'City', protoName: 'City')
     ..aOS(4, _omitFieldNames ? '' : 'Gender', protoName: 'Gender')
-    ..a<$core.int>(5, _omitFieldNames ? '' : 'Height', $pb.PbFieldType.O3, protoName: 'Height')
-    ..a<$core.int>(6, _omitFieldNames ? '' : 'Weight', $pb.PbFieldType.O3, protoName: 'Weight')
-    ..aOS(7, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
-    ..aOS(8, _omitFieldNames ? '' : 'FindType', protoName: 'FindType')
-    ..aOS(9, _omitFieldNames ? '' : 'FindTarget', protoName: 'FindTarget')
-    ..a<$core.int>(10, _omitFieldNames ? '' : 'Experience', $pb.PbFieldType.O3, protoName: 'Experience')
-    ..aOS(11, _omitFieldNames ? '' : 'Sociability', protoName: 'Sociability')
-    ..aOB(12, _omitFieldNames ? '' : 'Certification', protoName: 'Certification')
+    ..aOS(5, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
+    ..aOS(6, _omitFieldNames ? '' : 'FindType', protoName: 'FindType')
+    ..aOS(7, _omitFieldNames ? '' : 'FindTarget', protoName: 'FindTarget')
+    ..a<$core.int>(8, _omitFieldNames ? '' : 'Experience', $pb.PbFieldType.O3, protoName: 'Experience')
     ..hasRequiredFields = false
   ;
 
@@ -148,76 +128,40 @@ class CreateHobbyRequest extends $pb.GeneratedMessage {
   void clearGender() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.int get height => $_getIZ(4);
+  $core.String get speaklanguage => $_getSZ(4);
   @$pb.TagNumber(5)
-  set height($core.int v) { $_setSignedInt32(4, v); }
+  set speaklanguage($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasHeight() => $_has(4);
+  $core.bool hasSpeaklanguage() => $_has(4);
   @$pb.TagNumber(5)
-  void clearHeight() => clearField(5);
+  void clearSpeaklanguage() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.int get weight => $_getIZ(5);
+  $core.String get findType => $_getSZ(5);
   @$pb.TagNumber(6)
-  set weight($core.int v) { $_setSignedInt32(5, v); }
+  set findType($core.String v) { $_setString(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasWeight() => $_has(5);
+  $core.bool hasFindType() => $_has(5);
   @$pb.TagNumber(6)
-  void clearWeight() => clearField(6);
+  void clearFindType() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.String get speaklanguage => $_getSZ(6);
+  $core.String get findTarget => $_getSZ(6);
   @$pb.TagNumber(7)
-  set speaklanguage($core.String v) { $_setString(6, v); }
+  set findTarget($core.String v) { $_setString(6, v); }
   @$pb.TagNumber(7)
-  $core.bool hasSpeaklanguage() => $_has(6);
+  $core.bool hasFindTarget() => $_has(6);
   @$pb.TagNumber(7)
-  void clearSpeaklanguage() => clearField(7);
+  void clearFindTarget() => clearField(7);
 
   @$pb.TagNumber(8)
-  $core.String get findType => $_getSZ(7);
+  $core.int get experience => $_getIZ(7);
   @$pb.TagNumber(8)
-  set findType($core.String v) { $_setString(7, v); }
+  set experience($core.int v) { $_setSignedInt32(7, v); }
   @$pb.TagNumber(8)
-  $core.bool hasFindType() => $_has(7);
+  $core.bool hasExperience() => $_has(7);
   @$pb.TagNumber(8)
-  void clearFindType() => clearField(8);
-
-  @$pb.TagNumber(9)
-  $core.String get findTarget => $_getSZ(8);
-  @$pb.TagNumber(9)
-  set findTarget($core.String v) { $_setString(8, v); }
-  @$pb.TagNumber(9)
-  $core.bool hasFindTarget() => $_has(8);
-  @$pb.TagNumber(9)
-  void clearFindTarget() => clearField(9);
-
-  @$pb.TagNumber(10)
-  $core.int get experience => $_getIZ(9);
-  @$pb.TagNumber(10)
-  set experience($core.int v) { $_setSignedInt32(9, v); }
-  @$pb.TagNumber(10)
-  $core.bool hasExperience() => $_has(9);
-  @$pb.TagNumber(10)
-  void clearExperience() => clearField(10);
-
-  @$pb.TagNumber(11)
-  $core.String get sociability => $_getSZ(10);
-  @$pb.TagNumber(11)
-  set sociability($core.String v) { $_setString(10, v); }
-  @$pb.TagNumber(11)
-  $core.bool hasSociability() => $_has(10);
-  @$pb.TagNumber(11)
-  void clearSociability() => clearField(11);
-
-  @$pb.TagNumber(12)
-  $core.bool get certification => $_getBF(11);
-  @$pb.TagNumber(12)
-  set certification($core.bool v) { $_setBool(11, v); }
-  @$pb.TagNumber(12)
-  $core.bool hasCertification() => $_has(11);
-  @$pb.TagNumber(12)
-  void clearCertification() => clearField(12);
+  void clearExperience() => clearField(8);
 }
 
 class CreateHobbyResponse extends $pb.GeneratedMessage {
@@ -382,14 +326,10 @@ class UpdateHobbyRequest extends $pb.GeneratedMessage {
     $core.int? era,
     $core.String? city,
     $core.String? gender,
-    $core.int? height,
-    $core.int? weight,
     $core.String? speaklanguage,
     $core.String? findType,
     $core.String? findTarget,
     $core.int? experience,
-    $core.String? sociability,
-    $core.bool? certification,
   }) {
     final $result = create();
     if (sessionID != null) {
@@ -404,12 +344,6 @@ class UpdateHobbyRequest extends $pb.GeneratedMessage {
     if (gender != null) {
       $result.gender = gender;
     }
-    if (height != null) {
-      $result.height = height;
-    }
-    if (weight != null) {
-      $result.weight = weight;
-    }
     if (speaklanguage != null) {
       $result.speaklanguage = speaklanguage;
     }
@@ -422,12 +356,6 @@ class UpdateHobbyRequest extends $pb.GeneratedMessage {
     if (experience != null) {
       $result.experience = experience;
     }
-    if (sociability != null) {
-      $result.sociability = sociability;
-    }
-    if (certification != null) {
-      $result.certification = certification;
-    }
     return $result;
   }
   UpdateHobbyRequest._() : super();
@@ -439,14 +367,10 @@ class UpdateHobbyRequest extends $pb.GeneratedMessage {
     ..a<$core.int>(2, _omitFieldNames ? '' : 'Era', $pb.PbFieldType.O3, protoName: 'Era')
     ..aOS(3, _omitFieldNames ? '' : 'City', protoName: 'City')
     ..aOS(4, _omitFieldNames ? '' : 'Gender', protoName: 'Gender')
-    ..a<$core.int>(5, _omitFieldNames ? '' : 'Height', $pb.PbFieldType.O3, protoName: 'Height')
-    ..a<$core.int>(6, _omitFieldNames ? '' : 'Weight', $pb.PbFieldType.O3, protoName: 'Weight')
-    ..aOS(7, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
-    ..aOS(8, _omitFieldNames ? '' : 'FindType', protoName: 'FindType')
-    ..aOS(9, _omitFieldNames ? '' : 'FindTarget', protoName: 'FindTarget')
-    ..a<$core.int>(10, _omitFieldNames ? '' : 'Experience', $pb.PbFieldType.O3, protoName: 'Experience')
-    ..aOS(11, _omitFieldNames ? '' : 'Sociability', protoName: 'Sociability')
-    ..aOB(12, _omitFieldNames ? '' : 'Certification', protoName: 'Certification')
+    ..aOS(5, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
+    ..aOS(6, _omitFieldNames ? '' : 'FindType', protoName: 'FindType')
+    ..aOS(7, _omitFieldNames ? '' : 'FindTarget', protoName: 'FindTarget')
+    ..a<$core.int>(8, _omitFieldNames ? '' : 'Experience', $pb.PbFieldType.O3, protoName: 'Experience')
     ..hasRequiredFields = false
   ;
 
@@ -508,76 +432,40 @@ class UpdateHobbyRequest extends $pb.GeneratedMessage {
   void clearGender() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.int get height => $_getIZ(4);
+  $core.String get speaklanguage => $_getSZ(4);
   @$pb.TagNumber(5)
-  set height($core.int v) { $_setSignedInt32(4, v); }
+  set speaklanguage($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasHeight() => $_has(4);
+  $core.bool hasSpeaklanguage() => $_has(4);
   @$pb.TagNumber(5)
-  void clearHeight() => clearField(5);
+  void clearSpeaklanguage() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.int get weight => $_getIZ(5);
+  $core.String get findType => $_getSZ(5);
   @$pb.TagNumber(6)
-  set weight($core.int v) { $_setSignedInt32(5, v); }
+  set findType($core.String v) { $_setString(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasWeight() => $_has(5);
+  $core.bool hasFindType() => $_has(5);
   @$pb.TagNumber(6)
-  void clearWeight() => clearField(6);
+  void clearFindType() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.String get speaklanguage => $_getSZ(6);
+  $core.String get findTarget => $_getSZ(6);
   @$pb.TagNumber(7)
-  set speaklanguage($core.String v) { $_setString(6, v); }
+  set findTarget($core.String v) { $_setString(6, v); }
   @$pb.TagNumber(7)
-  $core.bool hasSpeaklanguage() => $_has(6);
+  $core.bool hasFindTarget() => $_has(6);
   @$pb.TagNumber(7)
-  void clearSpeaklanguage() => clearField(7);
+  void clearFindTarget() => clearField(7);
 
   @$pb.TagNumber(8)
-  $core.String get findType => $_getSZ(7);
+  $core.int get experience => $_getIZ(7);
   @$pb.TagNumber(8)
-  set findType($core.String v) { $_setString(7, v); }
+  set experience($core.int v) { $_setSignedInt32(7, v); }
   @$pb.TagNumber(8)
-  $core.bool hasFindType() => $_has(7);
+  $core.bool hasExperience() => $_has(7);
   @$pb.TagNumber(8)
-  void clearFindType() => clearField(8);
-
-  @$pb.TagNumber(9)
-  $core.String get findTarget => $_getSZ(8);
-  @$pb.TagNumber(9)
-  set findTarget($core.String v) { $_setString(8, v); }
-  @$pb.TagNumber(9)
-  $core.bool hasFindTarget() => $_has(8);
-  @$pb.TagNumber(9)
-  void clearFindTarget() => clearField(9);
-
-  @$pb.TagNumber(10)
-  $core.int get experience => $_getIZ(9);
-  @$pb.TagNumber(10)
-  set experience($core.int v) { $_setSignedInt32(9, v); }
-  @$pb.TagNumber(10)
-  $core.bool hasExperience() => $_has(9);
-  @$pb.TagNumber(10)
-  void clearExperience() => clearField(10);
-
-  @$pb.TagNumber(11)
-  $core.String get sociability => $_getSZ(10);
-  @$pb.TagNumber(11)
-  set sociability($core.String v) { $_setString(10, v); }
-  @$pb.TagNumber(11)
-  $core.bool hasSociability() => $_has(10);
-  @$pb.TagNumber(11)
-  void clearSociability() => clearField(11);
-
-  @$pb.TagNumber(12)
-  $core.bool get certification => $_getBF(11);
-  @$pb.TagNumber(12)
-  set certification($core.bool v) { $_setBool(11, v); }
-  @$pb.TagNumber(12)
-  $core.bool hasCertification() => $_has(11);
-  @$pb.TagNumber(12)
-  void clearCertification() => clearField(12);
+  void clearExperience() => clearField(8);
 }
 
 class UpdateHobbyResponse extends $pb.GeneratedMessage {

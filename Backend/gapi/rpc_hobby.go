@@ -29,21 +29,17 @@ func (server *Server) CreateHobby(ctx context.Context, req *pb.CreateHobbyReques
 		return nil, fmt.Errorf("invalid access token: %v", err)
 	}
 
-	H := info.CreateHobbyRequestParams{
+	H := info.CreateHobbyParams{
 		UserID:        token.UserID,
 		Era:           req.GetEra(),
 		City:          req.GetCity(),
 		Gender:        req.GetGender(),
-		Height:        req.GetHeight(),
-		Weight:        req.GetWeight(),
 		Speaklanguage: req.GetSpeaklanguage(),
 		FindType:      req.GetFindType(),
 		FindTarget:    req.GetFindTarget(),
 		Experience:    req.GetExperience(),
-		Sociability:   req.GetSociability(),
-		Certification: req.GetCertification(),
 	}
-	hobby, err := server.infoStore.CreateHobbyRequest(ctx, H)
+	hobby, err := server.infoStore.CreateHobby(ctx, H)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -74,7 +70,7 @@ func (server *Server) GetHobby(ctx context.Context, req *pb.GetHobbyRequest) (*p
 		return nil, fmt.Errorf("invalid access token: %v", err)
 	}
 
-	hobby, err := server.infoStore.GetUserHobby(ctx, token.UserID)
+	hobby, err := server.infoStore.GetHobby(ctx, token.UserID)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -105,21 +101,17 @@ func (server *Server) UpdateHobby(ctx context.Context, req *pb.UpdateHobbyReques
 		return nil, fmt.Errorf("invalid access token: %v", err)
 	}
 
-	H := info.UpdateUserHobbyParams{
+	H := info.UpdateHobbyParams{
 		UserID:        token.UserID,
 		Era:           req.GetEra(),
 		City:          req.GetCity(),
 		Gender:        req.GetGender(),
-		Height:        req.GetHeight(),
-		Weight:        req.GetWeight(),
 		Speaklanguage: req.GetSpeaklanguage(),
 		FindType:      req.GetFindType(),
 		FindTarget:    req.GetFindTarget(),
 		Experience:    req.GetExperience(),
-		Sociability:   req.GetSociability(),
-		Certification: req.GetCertification(),
 	}
-	hobby, err := server.infoStore.UpdateUserHobby(ctx, H)
+	hobby, err := server.infoStore.UpdateHobby(ctx, H)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -150,7 +142,7 @@ func (server *Server) DeleteHobby(ctx context.Context, req *pb.DeleteHobbyReques
 		return nil, fmt.Errorf("invalid access token: %v", err)
 	}
 
-	err = server.infoStore.DeleteUserHobby(ctx, token.UserID)
+	err = server.infoStore.DeleteHobby(ctx, token.UserID)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {

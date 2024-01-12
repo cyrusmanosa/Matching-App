@@ -13,15 +13,7 @@ message Lover {
     int32 MaxAge = 3;
     string City = 4;
     string Gender = 5;
-    string Constellation = 6;
-    string Sexual = 7;
-    int32 Height = 8;
-    int32 Weight = 9;
-    string Speaklanguage = 10;
-    string Job = 11;
-    int32 AnnualSalary = 12;
-    string Sociability = 13;
-    string Religious = 14;
-    bool Certification = 15;
-    google.protobuf.Timestamp InfoChangedAt = 16;
+    string Sexual = 6;
+    string Speaklanguage = 7;
+    google.protobuf.Timestamp InfoChangedAt = 8;
 }

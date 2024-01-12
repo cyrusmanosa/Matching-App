@@ -54,7 +54,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER update_accompanyrequest_info_changed_at_trigger
-BEFORE INSERT OR UPDATE ON "accompanyrequest"
+BEFORE INSERT OR UPDATE ON "accompany"
 FOR EACH ROW
 EXECUTE FUNCTION update_ac_info_changed_at();
 
@@ -69,7 +69,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER update_hobbyrequest_info_changed_at_trigger
-BEFORE INSERT OR UPDATE ON "hobbyrequest"
+BEFORE INSERT OR UPDATE ON "hobby"
 FOR EACH ROW
 EXECUTE FUNCTION update_h_info_changed_at();
 
@@ -84,7 +84,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER update_loverrequest_info_changed_at_trigger
-BEFORE INSERT OR UPDATE ON "loverrequest"
+BEFORE INSERT OR UPDATE ON "lover"
 FOR EACH ROW
 EXECUTE FUNCTION update_l_info_changed_at();
 

@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:dating_your_date/client/grpc_services.dart';
+import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/ChatModel.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
@@ -7,8 +10,11 @@ import 'package:dating_your_date/pb/rpc_images.pb.dart';
 import 'package:dating_your_date/presentation/Chat/widgets/conversationList.dart';
 import 'package:dating_your_date/theme/custom_text_style.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
+import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
+import 'package:path_provider/path_provider.dart';
 
 class Chat extends StatefulWidget {
   Chat({Key? key}) : super(key: key);
@@ -38,10 +44,11 @@ class _ChatState extends State<Chat> {
       setState(() {
         targetID = tid.targetID;
       });
-      isEmpty = false;
       _getUserInfoGrpcRequest(context);
     } on GrpcError {
       isEmpty = true;
+      showErrorDialog(context, "Error: validatable input data of Msg Info");
+      throw Exception("Error occurred while fetching user info.");
     }
   }
 
@@ -54,47 +61,56 @@ class _ChatState extends State<Chat> {
         // take info
         final infoRequest = GetCanChangeRequest(sessionID: apiKeyS, userID: targetID[i]);
         final infoResponse = await GrpcInfoService.client.getCanChange(infoRequest);
+
         // take icon
         final imgRequest = GetImagesRequest(sessionID: apiKeyS, userID: targetID[i]);
         final imgResponse = await GrpcInfoService.client.getImages(imgRequest);
+
         // take last msg
         final lmsgRequest = GetLastMsgRequest(userID: userid!, targetID: targetID[i]);
         final lmsgResponse = await GrpcChatService.client.getLastMsg(lmsgRequest);
 
+        Uint8List bytes = Uint8List.fromList(imgResponse.img.img1);
+        Directory tempDir = await getTemporaryDirectory();
+        File file = File('${tempDir.path}/data_$i.bin');
+        await file.writeAsBytes(bytes);
+
         setState(() {
           users.add(TargetInfos(
             userid: targetID[i],
-            img: imgResponse.img.img1,
+            img: file,
             info: infoResponse.canChangeInfo,
             lastMsg: lmsgResponse.media,
             isRead: lmsgResponse.isread,
           ));
         });
       }
-    } catch (e) {
-      showErrorDialog(context, "Error: validatable input data of Msg Info");
-      throw Exception("Error occurred while fetching user info.");
+      isEmpty = false;
+    } on GrpcError {
+      isEmpty = true;
     }
   }
 
   List<ChatUsers> chatUsers = [ChatUsers(time: "Now"), ChatUsers(time: "23 Mar"), ChatUsers(time: "17 Mar")];
-
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
-
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: AppbarTitle(text: "チャット"),
+        backgroundColor: Colors.transparent,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+      ),
+      backgroundColor: Color.fromARGB(255, 226, 226, 226),
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            _buildHeader(context),
             if (isEmpty == true)
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [SizedBox(height: mediaH / 4), Text("相手とまだおしゃべりしておりません", style: CustomTextStyles.smallTitle20)],
-              )
+              Center(child: Text("相手とまだおしゃべりしておりません", style: CustomTextStyles.smallTitle20))
             else
               ListView.separated(
                 itemCount: users.length,
@@ -114,21 +130,6 @@ class _ChatState extends State<Chat> {
                 },
               ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildHeader(BuildContext context) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    double mediaH = mediaQueryData.size.height;
-
-    return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.only(top: mediaH / 80),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text("チャット", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))],
         ),
       ),
     );

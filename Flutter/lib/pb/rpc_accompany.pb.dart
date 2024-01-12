@@ -20,13 +20,9 @@ class CreateAccompanyRequest extends $pb.GeneratedMessage {
   factory CreateAccompanyRequest({
     $core.String? sessionID,
     $core.int? era,
-    $core.String? city,
-    $core.String? gender,
     $core.String? speaklanguage,
     $core.String? findType,
-    $core.String? findTarget,
     $core.String? sociability,
-    $core.bool? certification,
   }) {
     final $result = create();
     if (sessionID != null) {
@@ -35,26 +31,14 @@ class CreateAccompanyRequest extends $pb.GeneratedMessage {
     if (era != null) {
       $result.era = era;
     }
-    if (city != null) {
-      $result.city = city;
-    }
-    if (gender != null) {
-      $result.gender = gender;
-    }
     if (speaklanguage != null) {
       $result.speaklanguage = speaklanguage;
     }
     if (findType != null) {
       $result.findType = findType;
     }
-    if (findTarget != null) {
-      $result.findTarget = findTarget;
-    }
     if (sociability != null) {
       $result.sociability = sociability;
-    }
-    if (certification != null) {
-      $result.certification = certification;
     }
     return $result;
   }
@@ -65,13 +49,9 @@ class CreateAccompanyRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateAccompanyRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'Era', $pb.PbFieldType.O3, protoName: 'Era')
-    ..aOS(3, _omitFieldNames ? '' : 'City', protoName: 'City')
-    ..aOS(4, _omitFieldNames ? '' : 'Gender', protoName: 'Gender')
-    ..aOS(5, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
-    ..aOS(6, _omitFieldNames ? '' : 'FindType', protoName: 'FindType')
-    ..aOS(7, _omitFieldNames ? '' : 'FindTarget', protoName: 'FindTarget')
-    ..aOS(8, _omitFieldNames ? '' : 'Sociability', protoName: 'Sociability')
-    ..aOB(9, _omitFieldNames ? '' : 'Certification', protoName: 'Certification')
+    ..aOS(3, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
+    ..aOS(4, _omitFieldNames ? '' : 'FindType', protoName: 'FindType')
+    ..aOS(5, _omitFieldNames ? '' : 'Sociability', protoName: 'Sociability')
     ..hasRequiredFields = false
   ;
 
@@ -115,67 +95,31 @@ class CreateAccompanyRequest extends $pb.GeneratedMessage {
   void clearEra() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get city => $_getSZ(2);
+  $core.String get speaklanguage => $_getSZ(2);
   @$pb.TagNumber(3)
-  set city($core.String v) { $_setString(2, v); }
+  set speaklanguage($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasCity() => $_has(2);
+  $core.bool hasSpeaklanguage() => $_has(2);
   @$pb.TagNumber(3)
-  void clearCity() => clearField(3);
+  void clearSpeaklanguage() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get gender => $_getSZ(3);
+  $core.String get findType => $_getSZ(3);
   @$pb.TagNumber(4)
-  set gender($core.String v) { $_setString(3, v); }
+  set findType($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasGender() => $_has(3);
+  $core.bool hasFindType() => $_has(3);
   @$pb.TagNumber(4)
-  void clearGender() => clearField(4);
+  void clearFindType() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get speaklanguage => $_getSZ(4);
+  $core.String get sociability => $_getSZ(4);
   @$pb.TagNumber(5)
-  set speaklanguage($core.String v) { $_setString(4, v); }
+  set sociability($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasSpeaklanguage() => $_has(4);
+  $core.bool hasSociability() => $_has(4);
   @$pb.TagNumber(5)
-  void clearSpeaklanguage() => clearField(5);
-
-  @$pb.TagNumber(6)
-  $core.String get findType => $_getSZ(5);
-  @$pb.TagNumber(6)
-  set findType($core.String v) { $_setString(5, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasFindType() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearFindType() => clearField(6);
-
-  @$pb.TagNumber(7)
-  $core.String get findTarget => $_getSZ(6);
-  @$pb.TagNumber(7)
-  set findTarget($core.String v) { $_setString(6, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasFindTarget() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearFindTarget() => clearField(7);
-
-  @$pb.TagNumber(8)
-  $core.String get sociability => $_getSZ(7);
-  @$pb.TagNumber(8)
-  set sociability($core.String v) { $_setString(7, v); }
-  @$pb.TagNumber(8)
-  $core.bool hasSociability() => $_has(7);
-  @$pb.TagNumber(8)
-  void clearSociability() => clearField(8);
-
-  @$pb.TagNumber(9)
-  $core.bool get certification => $_getBF(8);
-  @$pb.TagNumber(9)
-  set certification($core.bool v) { $_setBool(8, v); }
-  @$pb.TagNumber(9)
-  $core.bool hasCertification() => $_has(8);
-  @$pb.TagNumber(9)
-  void clearCertification() => clearField(9);
+  void clearSociability() => clearField(5);
 }
 
 class CreateAccompanyResponse extends $pb.GeneratedMessage {
@@ -338,13 +282,9 @@ class UpdateAccompanyRequest extends $pb.GeneratedMessage {
   factory UpdateAccompanyRequest({
     $core.String? sessionID,
     $core.int? era,
-    $core.String? city,
-    $core.String? gender,
     $core.String? speaklanguage,
     $core.String? findType,
-    $core.String? findTarget,
     $core.String? sociability,
-    $core.bool? certification,
   }) {
     final $result = create();
     if (sessionID != null) {
@@ -353,26 +293,14 @@ class UpdateAccompanyRequest extends $pb.GeneratedMessage {
     if (era != null) {
       $result.era = era;
     }
-    if (city != null) {
-      $result.city = city;
-    }
-    if (gender != null) {
-      $result.gender = gender;
-    }
     if (speaklanguage != null) {
       $result.speaklanguage = speaklanguage;
     }
     if (findType != null) {
       $result.findType = findType;
     }
-    if (findTarget != null) {
-      $result.findTarget = findTarget;
-    }
     if (sociability != null) {
       $result.sociability = sociability;
-    }
-    if (certification != null) {
-      $result.certification = certification;
     }
     return $result;
   }
@@ -383,13 +311,9 @@ class UpdateAccompanyRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateAccompanyRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'Era', $pb.PbFieldType.O3, protoName: 'Era')
-    ..aOS(3, _omitFieldNames ? '' : 'City', protoName: 'City')
-    ..aOS(4, _omitFieldNames ? '' : 'Gender', protoName: 'Gender')
-    ..aOS(5, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
-    ..aOS(6, _omitFieldNames ? '' : 'FindType', protoName: 'FindType')
-    ..aOS(7, _omitFieldNames ? '' : 'FindTarget', protoName: 'FindTarget')
-    ..aOS(8, _omitFieldNames ? '' : 'Sociability', protoName: 'Sociability')
-    ..aOB(9, _omitFieldNames ? '' : 'Certification', protoName: 'Certification')
+    ..aOS(3, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
+    ..aOS(4, _omitFieldNames ? '' : 'FindType', protoName: 'FindType')
+    ..aOS(5, _omitFieldNames ? '' : 'Sociability', protoName: 'Sociability')
     ..hasRequiredFields = false
   ;
 
@@ -433,67 +357,31 @@ class UpdateAccompanyRequest extends $pb.GeneratedMessage {
   void clearEra() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get city => $_getSZ(2);
+  $core.String get speaklanguage => $_getSZ(2);
   @$pb.TagNumber(3)
-  set city($core.String v) { $_setString(2, v); }
+  set speaklanguage($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasCity() => $_has(2);
+  $core.bool hasSpeaklanguage() => $_has(2);
   @$pb.TagNumber(3)
-  void clearCity() => clearField(3);
+  void clearSpeaklanguage() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get gender => $_getSZ(3);
+  $core.String get findType => $_getSZ(3);
   @$pb.TagNumber(4)
-  set gender($core.String v) { $_setString(3, v); }
+  set findType($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasGender() => $_has(3);
+  $core.bool hasFindType() => $_has(3);
   @$pb.TagNumber(4)
-  void clearGender() => clearField(4);
+  void clearFindType() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get speaklanguage => $_getSZ(4);
+  $core.String get sociability => $_getSZ(4);
   @$pb.TagNumber(5)
-  set speaklanguage($core.String v) { $_setString(4, v); }
+  set sociability($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasSpeaklanguage() => $_has(4);
+  $core.bool hasSociability() => $_has(4);
   @$pb.TagNumber(5)
-  void clearSpeaklanguage() => clearField(5);
-
-  @$pb.TagNumber(6)
-  $core.String get findType => $_getSZ(5);
-  @$pb.TagNumber(6)
-  set findType($core.String v) { $_setString(5, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasFindType() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearFindType() => clearField(6);
-
-  @$pb.TagNumber(7)
-  $core.String get findTarget => $_getSZ(6);
-  @$pb.TagNumber(7)
-  set findTarget($core.String v) { $_setString(6, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasFindTarget() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearFindTarget() => clearField(7);
-
-  @$pb.TagNumber(8)
-  $core.String get sociability => $_getSZ(7);
-  @$pb.TagNumber(8)
-  set sociability($core.String v) { $_setString(7, v); }
-  @$pb.TagNumber(8)
-  $core.bool hasSociability() => $_has(7);
-  @$pb.TagNumber(8)
-  void clearSociability() => clearField(8);
-
-  @$pb.TagNumber(9)
-  $core.bool get certification => $_getBF(8);
-  @$pb.TagNumber(9)
-  set certification($core.bool v) { $_setBool(8, v); }
-  @$pb.TagNumber(9)
-  $core.bool hasCertification() => $_has(8);
-  @$pb.TagNumber(9)
-  void clearCertification() => clearField(9);
+  void clearSociability() => clearField(5);
 }
 
 class UpdateAccompanyResponse extends $pb.GeneratedMessage {

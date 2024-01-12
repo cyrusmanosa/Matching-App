@@ -22,16 +22,8 @@ const CreateLoverRequest$json = {
     {'1': 'MaxAge', '3': 3, '4': 1, '5': 5, '10': 'MaxAge'},
     {'1': 'City', '3': 4, '4': 1, '5': 9, '10': 'City'},
     {'1': 'Gender', '3': 5, '4': 1, '5': 9, '10': 'Gender'},
-    {'1': 'Constellation', '3': 6, '4': 1, '5': 9, '10': 'Constellation'},
-    {'1': 'Sexual', '3': 7, '4': 1, '5': 9, '10': 'Sexual'},
-    {'1': 'Height', '3': 8, '4': 1, '5': 5, '10': 'Height'},
-    {'1': 'Weight', '3': 9, '4': 1, '5': 5, '10': 'Weight'},
-    {'1': 'Speaklanguage', '3': 10, '4': 1, '5': 9, '10': 'Speaklanguage'},
-    {'1': 'Job', '3': 11, '4': 1, '5': 9, '10': 'Job'},
-    {'1': 'AnnualSalary', '3': 12, '4': 1, '5': 5, '10': 'AnnualSalary'},
-    {'1': 'Sociability', '3': 13, '4': 1, '5': 9, '10': 'Sociability'},
-    {'1': 'Religious', '3': 14, '4': 1, '5': 9, '10': 'Religious'},
-    {'1': 'Certification', '3': 15, '4': 1, '5': 8, '10': 'Certification'},
+    {'1': 'Sexual', '3': 6, '4': 1, '5': 9, '10': 'Sexual'},
+    {'1': 'Speaklanguage', '3': 7, '4': 1, '5': 9, '10': 'Speaklanguage'},
   ],
 };
 
@@ -39,13 +31,8 @@ const CreateLoverRequest$json = {
 final $typed_data.Uint8List createLoverRequestDescriptor = $convert.base64Decode(
     'ChJDcmVhdGVMb3ZlclJlcXVlc3QSHAoJU2Vzc2lvbklEGAEgASgJUglTZXNzaW9uSUQSFgoGTW'
     'luQWdlGAIgASgFUgZNaW5BZ2USFgoGTWF4QWdlGAMgASgFUgZNYXhBZ2USEgoEQ2l0eRgEIAEo'
-    'CVIEQ2l0eRIWCgZHZW5kZXIYBSABKAlSBkdlbmRlchIkCg1Db25zdGVsbGF0aW9uGAYgASgJUg'
-    '1Db25zdGVsbGF0aW9uEhYKBlNleHVhbBgHIAEoCVIGU2V4dWFsEhYKBkhlaWdodBgIIAEoBVIG'
-    'SGVpZ2h0EhYKBldlaWdodBgJIAEoBVIGV2VpZ2h0EiQKDVNwZWFrbGFuZ3VhZ2UYCiABKAlSDV'
-    'NwZWFrbGFuZ3VhZ2USEAoDSm9iGAsgASgJUgNKb2ISIgoMQW5udWFsU2FsYXJ5GAwgASgFUgxB'
-    'bm51YWxTYWxhcnkSIAoLU29jaWFiaWxpdHkYDSABKAlSC1NvY2lhYmlsaXR5EhwKCVJlbGlnaW'
-    '91cxgOIAEoCVIJUmVsaWdpb3VzEiQKDUNlcnRpZmljYXRpb24YDyABKAhSDUNlcnRpZmljYXRp'
-    'b24=');
+    'CVIEQ2l0eRIWCgZHZW5kZXIYBSABKAlSBkdlbmRlchIWCgZTZXh1YWwYBiABKAlSBlNleHVhbB'
+    'IkCg1TcGVha2xhbmd1YWdlGAcgASgJUg1TcGVha2xhbmd1YWdl');
 
 @$core.Deprecated('Use createLoverResponseDescriptor instead')
 const CreateLoverResponse$json = {
@@ -92,16 +79,8 @@ const UpdateLoverRequest$json = {
     {'1': 'MaxAge', '3': 3, '4': 1, '5': 5, '10': 'MaxAge'},
     {'1': 'City', '3': 4, '4': 1, '5': 9, '10': 'City'},
     {'1': 'Gender', '3': 5, '4': 1, '5': 9, '10': 'Gender'},
-    {'1': 'Constellation', '3': 6, '4': 1, '5': 9, '10': 'Constellation'},
-    {'1': 'Sexual', '3': 7, '4': 1, '5': 9, '10': 'Sexual'},
-    {'1': 'Height', '3': 8, '4': 1, '5': 5, '10': 'Height'},
-    {'1': 'Weight', '3': 9, '4': 1, '5': 5, '10': 'Weight'},
-    {'1': 'Speaklanguage', '3': 10, '4': 1, '5': 9, '10': 'Speaklanguage'},
-    {'1': 'Job', '3': 11, '4': 1, '5': 9, '10': 'Job'},
-    {'1': 'AnnualSalary', '3': 12, '4': 1, '5': 5, '10': 'AnnualSalary'},
-    {'1': 'Sociability', '3': 13, '4': 1, '5': 9, '10': 'Sociability'},
-    {'1': 'Religious', '3': 14, '4': 1, '5': 9, '10': 'Religious'},
-    {'1': 'Certification', '3': 15, '4': 1, '5': 8, '10': 'Certification'},
+    {'1': 'Sexual', '3': 6, '4': 1, '5': 9, '10': 'Sexual'},
+    {'1': 'Speaklanguage', '3': 7, '4': 1, '5': 9, '10': 'Speaklanguage'},
   ],
 };
 
@@ -109,13 +88,8 @@ const UpdateLoverRequest$json = {
 final $typed_data.Uint8List updateLoverRequestDescriptor = $convert.base64Decode(
     'ChJVcGRhdGVMb3ZlclJlcXVlc3QSHAoJU2Vzc2lvbklEGAEgASgJUglTZXNzaW9uSUQSFgoGTW'
     'luQWdlGAIgASgFUgZNaW5BZ2USFgoGTWF4QWdlGAMgASgFUgZNYXhBZ2USEgoEQ2l0eRgEIAEo'
-    'CVIEQ2l0eRIWCgZHZW5kZXIYBSABKAlSBkdlbmRlchIkCg1Db25zdGVsbGF0aW9uGAYgASgJUg'
-    '1Db25zdGVsbGF0aW9uEhYKBlNleHVhbBgHIAEoCVIGU2V4dWFsEhYKBkhlaWdodBgIIAEoBVIG'
-    'SGVpZ2h0EhYKBldlaWdodBgJIAEoBVIGV2VpZ2h0EiQKDVNwZWFrbGFuZ3VhZ2UYCiABKAlSDV'
-    'NwZWFrbGFuZ3VhZ2USEAoDSm9iGAsgASgJUgNKb2ISIgoMQW5udWFsU2FsYXJ5GAwgASgFUgxB'
-    'bm51YWxTYWxhcnkSIAoLU29jaWFiaWxpdHkYDSABKAlSC1NvY2lhYmlsaXR5EhwKCVJlbGlnaW'
-    '91cxgOIAEoCVIJUmVsaWdpb3VzEiQKDUNlcnRpZmljYXRpb24YDyABKAhSDUNlcnRpZmljYXRp'
-    'b24=');
+    'CVIEQ2l0eRIWCgZHZW5kZXIYBSABKAlSBkdlbmRlchIWCgZTZXh1YWwYBiABKAlSBlNleHVhbB'
+    'IkCg1TcGVha2xhbmd1YWdlGAcgASgJUg1TcGVha2xhbmd1YWdl');
 
 @$core.Deprecated('Use updateLoverResponseDescriptor instead')
 const UpdateLoverResponse$json = {

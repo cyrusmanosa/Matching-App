@@ -29,24 +29,16 @@ func (server *Server) CreateLover(ctx context.Context, req *pb.CreateLoverReques
 		return nil, fmt.Errorf("invalid access token: %v", err)
 	}
 
-	L := info.CreateLoverRequestParams{
+	L := info.CreateLoverParams{
 		UserID:        token.UserID,
 		MinAge:        req.GetMinAge(),
 		MaxAge:        req.GetMaxAge(),
 		City:          req.GetCity(),
 		Gender:        req.GetGender(),
-		Constellation: req.GetConstellation(),
 		Sexual:        req.GetSexual(),
-		Height:        req.GetHeight(),
-		Weight:        req.GetWeight(),
 		Speaklanguage: req.GetSpeaklanguage(),
-		Job:           req.GetJob(),
-		AnnualSalary:  req.GetAnnualSalary(),
-		Sociability:   req.GetSociability(),
-		Religious:     req.GetReligious(),
-		Certification: req.GetCertification(),
 	}
-	Lover, err := server.infoStore.CreateLoverRequest(ctx, L)
+	Lover, err := server.infoStore.CreateLover(ctx, L)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -77,7 +69,7 @@ func (server *Server) GetLover(ctx context.Context, req *pb.GetLoverRequest) (*p
 		return nil, fmt.Errorf("invalid access token: %v", err)
 	}
 
-	Lover, err := server.infoStore.GetUserLover(ctx, token.UserID)
+	Lover, err := server.infoStore.GetLover(ctx, token.UserID)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -108,24 +100,16 @@ func (server *Server) UpdateLover(ctx context.Context, req *pb.UpdateLoverReques
 		return nil, fmt.Errorf("invalid access token: %v", err)
 	}
 
-	L := info.UpdateUserLoverParams{
+	L := info.UpdateLoverParams{
 		UserID:        token.UserID,
 		MinAge:        req.GetMinAge(),
 		MaxAge:        req.GetMaxAge(),
 		City:          req.GetCity(),
 		Gender:        req.GetGender(),
-		Constellation: req.GetConstellation(),
 		Sexual:        req.GetSexual(),
-		Height:        req.GetHeight(),
-		Weight:        req.GetWeight(),
 		Speaklanguage: req.GetSpeaklanguage(),
-		Job:           req.GetJob(),
-		AnnualSalary:  req.GetAnnualSalary(),
-		Sociability:   req.GetSociability(),
-		Religious:     req.GetReligious(),
-		Certification: req.GetCertification(),
 	}
-	Lover, err := server.infoStore.UpdateUserLover(ctx, L)
+	Lover, err := server.infoStore.UpdateLover(ctx, L)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -155,7 +139,7 @@ func (server *Server) DeleteLover(ctx context.Context, req *pb.DeleteLoverReques
 		return nil, fmt.Errorf("invalid access token: %v", err)
 	}
 
-	err = server.infoStore.DeleteUserLoverRequest(ctx, token.UserID)
+	err = server.infoStore.DeleteLover(ctx, token.UserID)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {

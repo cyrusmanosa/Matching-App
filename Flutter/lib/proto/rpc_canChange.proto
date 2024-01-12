@@ -62,4 +62,3 @@ message UpdateCanChangeResponse {
 message DeleteCanChangeRequest {
   string SessionID = 1; 
 }
- 

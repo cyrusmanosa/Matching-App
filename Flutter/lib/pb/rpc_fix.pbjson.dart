@@ -38,17 +38,17 @@ const CreateFixResponse$json = {
   '1': 'CreateFixResponse',
   '2': [
     {'1': 'SessionsID', '3': 1, '4': 1, '5': 9, '10': 'SessionsID'},
-    {'1': 'Email', '3': 3, '4': 1, '5': 9, '10': 'Email'},
-    {'1': 'CreateAt', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'CreateAt'},
-    {'1': 'AccessTokenExpiresAt', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'AccessTokenExpiresAt'},
+    {'1': 'Email', '3': 2, '4': 1, '5': 9, '10': 'Email'},
+    {'1': 'CreateAt', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'CreateAt'},
+    {'1': 'AccessTokenExpiresAt', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'AccessTokenExpiresAt'},
   ],
 };
 
 /// Descriptor for `CreateFixResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createFixResponseDescriptor = $convert.base64Decode(
     'ChFDcmVhdGVGaXhSZXNwb25zZRIeCgpTZXNzaW9uc0lEGAEgASgJUgpTZXNzaW9uc0lEEhQKBU'
-    'VtYWlsGAMgASgJUgVFbWFpbBI2CghDcmVhdGVBdBgEIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5U'
-    'aW1lc3RhbXBSCENyZWF0ZUF0Ek4KFEFjY2Vzc1Rva2VuRXhwaXJlc0F0GAYgASgLMhouZ29vZ2'
+    'VtYWlsGAIgASgJUgVFbWFpbBI2CghDcmVhdGVBdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5U'
+    'aW1lc3RhbXBSCENyZWF0ZUF0Ek4KFEFjY2Vzc1Rva2VuRXhwaXJlc0F0GAQgASgLMhouZ29vZ2'
     'xlLnByb3RvYnVmLlRpbWVzdGFtcFIUQWNjZXNzVG9rZW5FeHBpcmVzQXQ=');
 
 @$core.Deprecated('Use getFixRequestDescriptor instead')

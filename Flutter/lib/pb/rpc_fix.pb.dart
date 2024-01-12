@@ -164,9 +164,9 @@ class CreateFixResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateFixResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'SessionsID', protoName: 'SessionsID')
-    ..aOS(3, _omitFieldNames ? '' : 'Email', protoName: 'Email')
-    ..aOM<$16.Timestamp>(4, _omitFieldNames ? '' : 'CreateAt', protoName: 'CreateAt', subBuilder: $16.Timestamp.create)
-    ..aOM<$16.Timestamp>(6, _omitFieldNames ? '' : 'AccessTokenExpiresAt', protoName: 'AccessTokenExpiresAt', subBuilder: $16.Timestamp.create)
+    ..aOS(2, _omitFieldNames ? '' : 'Email', protoName: 'Email')
+    ..aOM<$16.Timestamp>(3, _omitFieldNames ? '' : 'CreateAt', protoName: 'CreateAt', subBuilder: $16.Timestamp.create)
+    ..aOM<$16.Timestamp>(4, _omitFieldNames ? '' : 'AccessTokenExpiresAt', protoName: 'AccessTokenExpiresAt', subBuilder: $16.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -200,35 +200,35 @@ class CreateFixResponse extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearSessionsID() => clearField(1);
 
-  @$pb.TagNumber(3)
+  @$pb.TagNumber(2)
   $core.String get email => $_getSZ(1);
-  @$pb.TagNumber(3)
+  @$pb.TagNumber(2)
   set email($core.String v) { $_setString(1, v); }
-  @$pb.TagNumber(3)
+  @$pb.TagNumber(2)
   $core.bool hasEmail() => $_has(1);
-  @$pb.TagNumber(3)
-  void clearEmail() => clearField(3);
+  @$pb.TagNumber(2)
+  void clearEmail() => clearField(2);
 
-  @$pb.TagNumber(4)
+  @$pb.TagNumber(3)
   $16.Timestamp get createAt => $_getN(2);
-  @$pb.TagNumber(4)
-  set createAt($16.Timestamp v) { setField(4, v); }
-  @$pb.TagNumber(4)
+  @$pb.TagNumber(3)
+  set createAt($16.Timestamp v) { setField(3, v); }
+  @$pb.TagNumber(3)
   $core.bool hasCreateAt() => $_has(2);
-  @$pb.TagNumber(4)
-  void clearCreateAt() => clearField(4);
-  @$pb.TagNumber(4)
+  @$pb.TagNumber(3)
+  void clearCreateAt() => clearField(3);
+  @$pb.TagNumber(3)
   $16.Timestamp ensureCreateAt() => $_ensure(2);
 
-  @$pb.TagNumber(6)
+  @$pb.TagNumber(4)
   $16.Timestamp get accessTokenExpiresAt => $_getN(3);
-  @$pb.TagNumber(6)
-  set accessTokenExpiresAt($16.Timestamp v) { setField(6, v); }
-  @$pb.TagNumber(6)
+  @$pb.TagNumber(4)
+  set accessTokenExpiresAt($16.Timestamp v) { setField(4, v); }
+  @$pb.TagNumber(4)
   $core.bool hasAccessTokenExpiresAt() => $_has(3);
-  @$pb.TagNumber(6)
-  void clearAccessTokenExpiresAt() => clearField(6);
-  @$pb.TagNumber(6)
+  @$pb.TagNumber(4)
+  void clearAccessTokenExpiresAt() => clearField(4);
+  @$pb.TagNumber(4)
   $16.Timestamp ensureAccessTokenExpiresAt() => $_ensure(3);
 }
 

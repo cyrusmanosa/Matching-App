@@ -86,7 +86,6 @@ CREATE TABLE "accompanyrequest" (
 
 CREATE TABLE "image" (
   "user_id" INT PRIMARY KEY,
-  "qr" VARCHAR UNIQUE NOT NULL,
   "img1" VARCHAR NOT NULL,
   "img2" VARCHAR NOT NULL,
   "img3" VARCHAR NOT NULL,

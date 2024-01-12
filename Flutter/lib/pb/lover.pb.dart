@@ -22,16 +22,8 @@ class Lover extends $pb.GeneratedMessage {
     $core.int? maxAge,
     $core.String? city,
     $core.String? gender,
-    $core.String? constellation,
     $core.String? sexual,
-    $core.int? height,
-    $core.int? weight,
     $core.String? speaklanguage,
-    $core.String? job,
-    $core.int? annualSalary,
-    $core.String? sociability,
-    $core.String? religious,
-    $core.bool? certification,
     $16.Timestamp? infoChangedAt,
   }) {
     final $result = create();
@@ -50,35 +42,11 @@ class Lover extends $pb.GeneratedMessage {
     if (gender != null) {
       $result.gender = gender;
     }
-    if (constellation != null) {
-      $result.constellation = constellation;
-    }
     if (sexual != null) {
       $result.sexual = sexual;
     }
-    if (height != null) {
-      $result.height = height;
-    }
-    if (weight != null) {
-      $result.weight = weight;
-    }
     if (speaklanguage != null) {
       $result.speaklanguage = speaklanguage;
-    }
-    if (job != null) {
-      $result.job = job;
-    }
-    if (annualSalary != null) {
-      $result.annualSalary = annualSalary;
-    }
-    if (sociability != null) {
-      $result.sociability = sociability;
-    }
-    if (religious != null) {
-      $result.religious = religious;
-    }
-    if (certification != null) {
-      $result.certification = certification;
     }
     if (infoChangedAt != null) {
       $result.infoChangedAt = infoChangedAt;
@@ -95,17 +63,9 @@ class Lover extends $pb.GeneratedMessage {
     ..a<$core.int>(3, _omitFieldNames ? '' : 'MaxAge', $pb.PbFieldType.O3, protoName: 'MaxAge')
     ..aOS(4, _omitFieldNames ? '' : 'City', protoName: 'City')
     ..aOS(5, _omitFieldNames ? '' : 'Gender', protoName: 'Gender')
-    ..aOS(6, _omitFieldNames ? '' : 'Constellation', protoName: 'Constellation')
-    ..aOS(7, _omitFieldNames ? '' : 'Sexual', protoName: 'Sexual')
-    ..a<$core.int>(8, _omitFieldNames ? '' : 'Height', $pb.PbFieldType.O3, protoName: 'Height')
-    ..a<$core.int>(9, _omitFieldNames ? '' : 'Weight', $pb.PbFieldType.O3, protoName: 'Weight')
-    ..aOS(10, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
-    ..aOS(11, _omitFieldNames ? '' : 'Job', protoName: 'Job')
-    ..a<$core.int>(12, _omitFieldNames ? '' : 'AnnualSalary', $pb.PbFieldType.O3, protoName: 'AnnualSalary')
-    ..aOS(13, _omitFieldNames ? '' : 'Sociability', protoName: 'Sociability')
-    ..aOS(14, _omitFieldNames ? '' : 'Religious', protoName: 'Religious')
-    ..aOB(15, _omitFieldNames ? '' : 'Certification', protoName: 'Certification')
-    ..aOM<$16.Timestamp>(16, _omitFieldNames ? '' : 'InfoChangedAt', protoName: 'InfoChangedAt', subBuilder: $16.Timestamp.create)
+    ..aOS(6, _omitFieldNames ? '' : 'Sexual', protoName: 'Sexual')
+    ..aOS(7, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
+    ..aOM<$16.Timestamp>(8, _omitFieldNames ? '' : 'InfoChangedAt', protoName: 'InfoChangedAt', subBuilder: $16.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -176,105 +136,33 @@ class Lover extends $pb.GeneratedMessage {
   void clearGender() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.String get constellation => $_getSZ(5);
+  $core.String get sexual => $_getSZ(5);
   @$pb.TagNumber(6)
-  set constellation($core.String v) { $_setString(5, v); }
+  set sexual($core.String v) { $_setString(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasConstellation() => $_has(5);
+  $core.bool hasSexual() => $_has(5);
   @$pb.TagNumber(6)
-  void clearConstellation() => clearField(6);
+  void clearSexual() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.String get sexual => $_getSZ(6);
+  $core.String get speaklanguage => $_getSZ(6);
   @$pb.TagNumber(7)
-  set sexual($core.String v) { $_setString(6, v); }
+  set speaklanguage($core.String v) { $_setString(6, v); }
   @$pb.TagNumber(7)
-  $core.bool hasSexual() => $_has(6);
+  $core.bool hasSpeaklanguage() => $_has(6);
   @$pb.TagNumber(7)
-  void clearSexual() => clearField(7);
+  void clearSpeaklanguage() => clearField(7);
 
   @$pb.TagNumber(8)
-  $core.int get height => $_getIZ(7);
+  $16.Timestamp get infoChangedAt => $_getN(7);
   @$pb.TagNumber(8)
-  set height($core.int v) { $_setSignedInt32(7, v); }
+  set infoChangedAt($16.Timestamp v) { setField(8, v); }
   @$pb.TagNumber(8)
-  $core.bool hasHeight() => $_has(7);
+  $core.bool hasInfoChangedAt() => $_has(7);
   @$pb.TagNumber(8)
-  void clearHeight() => clearField(8);
-
-  @$pb.TagNumber(9)
-  $core.int get weight => $_getIZ(8);
-  @$pb.TagNumber(9)
-  set weight($core.int v) { $_setSignedInt32(8, v); }
-  @$pb.TagNumber(9)
-  $core.bool hasWeight() => $_has(8);
-  @$pb.TagNumber(9)
-  void clearWeight() => clearField(9);
-
-  @$pb.TagNumber(10)
-  $core.String get speaklanguage => $_getSZ(9);
-  @$pb.TagNumber(10)
-  set speaklanguage($core.String v) { $_setString(9, v); }
-  @$pb.TagNumber(10)
-  $core.bool hasSpeaklanguage() => $_has(9);
-  @$pb.TagNumber(10)
-  void clearSpeaklanguage() => clearField(10);
-
-  @$pb.TagNumber(11)
-  $core.String get job => $_getSZ(10);
-  @$pb.TagNumber(11)
-  set job($core.String v) { $_setString(10, v); }
-  @$pb.TagNumber(11)
-  $core.bool hasJob() => $_has(10);
-  @$pb.TagNumber(11)
-  void clearJob() => clearField(11);
-
-  @$pb.TagNumber(12)
-  $core.int get annualSalary => $_getIZ(11);
-  @$pb.TagNumber(12)
-  set annualSalary($core.int v) { $_setSignedInt32(11, v); }
-  @$pb.TagNumber(12)
-  $core.bool hasAnnualSalary() => $_has(11);
-  @$pb.TagNumber(12)
-  void clearAnnualSalary() => clearField(12);
-
-  @$pb.TagNumber(13)
-  $core.String get sociability => $_getSZ(12);
-  @$pb.TagNumber(13)
-  set sociability($core.String v) { $_setString(12, v); }
-  @$pb.TagNumber(13)
-  $core.bool hasSociability() => $_has(12);
-  @$pb.TagNumber(13)
-  void clearSociability() => clearField(13);
-
-  @$pb.TagNumber(14)
-  $core.String get religious => $_getSZ(13);
-  @$pb.TagNumber(14)
-  set religious($core.String v) { $_setString(13, v); }
-  @$pb.TagNumber(14)
-  $core.bool hasReligious() => $_has(13);
-  @$pb.TagNumber(14)
-  void clearReligious() => clearField(14);
-
-  @$pb.TagNumber(15)
-  $core.bool get certification => $_getBF(14);
-  @$pb.TagNumber(15)
-  set certification($core.bool v) { $_setBool(14, v); }
-  @$pb.TagNumber(15)
-  $core.bool hasCertification() => $_has(14);
-  @$pb.TagNumber(15)
-  void clearCertification() => clearField(15);
-
-  @$pb.TagNumber(16)
-  $16.Timestamp get infoChangedAt => $_getN(15);
-  @$pb.TagNumber(16)
-  set infoChangedAt($16.Timestamp v) { setField(16, v); }
-  @$pb.TagNumber(16)
-  $core.bool hasInfoChangedAt() => $_has(15);
-  @$pb.TagNumber(16)
-  void clearInfoChangedAt() => clearField(16);
-  @$pb.TagNumber(16)
-  $16.Timestamp ensureInfoChangedAt() => $_ensure(15);
+  void clearInfoChangedAt() => clearField(8);
+  @$pb.TagNumber(8)
+  $16.Timestamp ensureInfoChangedAt() => $_ensure(7);
 }
 
 

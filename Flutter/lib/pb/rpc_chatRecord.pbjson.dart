@@ -136,6 +136,30 @@ final $typed_data.Uint8List getLastMsgResponseDescriptor = $convert.base64Decode
     'ChJHZXRMYXN0TXNnUmVzcG9uc2USHAoJTWVkaWFUeXBlGAEgASgJUglNZWRpYVR5cGUSFAoFTW'
     'VkaWEYAiABKAlSBU1lZGlhEhYKBklzcmVhZBgDIAEoCFIGSXNyZWFk');
 
+@$core.Deprecated('Use getChatRowRequestDescriptor instead')
+const GetChatRowRequest$json = {
+  '1': 'GetChatRowRequest',
+  '2': [
+    {'1': 'UserID', '3': 1, '4': 1, '5': 5, '10': 'UserID'},
+  ],
+};
+
+/// Descriptor for `GetChatRowRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getChatRowRequestDescriptor = $convert.base64Decode(
+    'ChFHZXRDaGF0Um93UmVxdWVzdBIWCgZVc2VySUQYASABKAVSBlVzZXJJRA==');
+
+@$core.Deprecated('Use getChatRowResponseDescriptor instead')
+const GetChatRowResponse$json = {
+  '1': 'GetChatRowResponse',
+  '2': [
+    {'1': 'Row', '3': 1, '4': 1, '5': 5, '10': 'Row'},
+  ],
+};
+
+/// Descriptor for `GetChatRowResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getChatRowResponseDescriptor = $convert.base64Decode(
+    'ChJHZXRDaGF0Um93UmVzcG9uc2USEAoDUm93GAEgASgFUgNSb3c=');
+
 @$core.Deprecated('Use updateChatRecordRequestDescriptor instead')
 const UpdateChatRecordRequest$json = {
   '1': 'UpdateChatRecordRequest',

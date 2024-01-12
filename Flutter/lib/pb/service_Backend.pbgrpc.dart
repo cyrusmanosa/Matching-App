@@ -922,6 +922,10 @@ class ChatClient extends $grpc.Client {
       '/pb.Chat/GetLastMsg',
       ($15.GetLastMsgRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $15.GetLastMsgResponse.fromBuffer(value));
+  static final _$getChatRow = $grpc.ClientMethod<$15.GetChatRowRequest, $15.GetChatRowResponse>(
+      '/pb.Chat/GetChatRow',
+      ($15.GetChatRowRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $15.GetChatRowResponse.fromBuffer(value));
   static final _$updateRead = $grpc.ClientMethod<$15.UpdateReadRequest, $4.Empty>(
       '/pb.Chat/UpdateRead',
       ($15.UpdateReadRequest value) => value.writeToBuffer(),
@@ -959,6 +963,10 @@ class ChatClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$15.GetLastMsgResponse> getLastMsg($15.GetLastMsgRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getLastMsg, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$15.GetChatRowResponse> getChatRow($15.GetChatRowRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getChatRow, request, options: options);
   }
 
   $grpc.ResponseFuture<$4.Empty> updateRead($15.UpdateReadRequest request, {$grpc.CallOptions? options}) {
@@ -1020,6 +1028,13 @@ abstract class ChatServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $15.GetLastMsgRequest.fromBuffer(value),
         ($15.GetLastMsgResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$15.GetChatRowRequest, $15.GetChatRowResponse>(
+        'GetChatRow',
+        getChatRow_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $15.GetChatRowRequest.fromBuffer(value),
+        ($15.GetChatRowResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$15.UpdateReadRequest, $4.Empty>(
         'UpdateRead',
         updateRead_Pre,
@@ -1057,6 +1072,10 @@ abstract class ChatServiceBase extends $grpc.Service {
     return getLastMsg(call, await request);
   }
 
+  $async.Future<$15.GetChatRowResponse> getChatRow_Pre($grpc.ServiceCall call, $async.Future<$15.GetChatRowRequest> request) async {
+    return getChatRow(call, await request);
+  }
+
   $async.Future<$4.Empty> updateRead_Pre($grpc.ServiceCall call, $async.Future<$15.UpdateReadRequest> request) async {
     return updateRead(call, await request);
   }
@@ -1068,5 +1087,6 @@ abstract class ChatServiceBase extends $grpc.Service {
   $async.Future<$4.Empty> deleteChatRecord($grpc.ServiceCall call, $15.DeleteChatRecordRequest request);
   $async.Future<$15.GetTargetIDResponse> getTargetID($grpc.ServiceCall call, $15.GetTargetIDRequest request);
   $async.Future<$15.GetLastMsgResponse> getLastMsg($grpc.ServiceCall call, $15.GetLastMsgRequest request);
+  $async.Future<$15.GetChatRowResponse> getChatRow($grpc.ServiceCall call, $15.GetChatRowRequest request);
   $async.Future<$4.Empty> updateRead($grpc.ServiceCall call, $15.UpdateReadRequest request);
 }

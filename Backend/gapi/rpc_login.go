@@ -39,6 +39,7 @@ func (server *Server) LoginUser(ctx context.Context, req *pb.LoginUserRequest) (
 		ID:          payload.ID,
 		UserID:      user.UserID,
 		AccessToken: accessToken,
+		Status:      "Login",
 		IsBlocked:   false,
 		ExpiresAt:   payload.ExpiredAt,
 	})

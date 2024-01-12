@@ -11,8 +11,6 @@ import 'package:dating_your_date/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:grpc/grpc.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class Login extends StatefulWidget {
   Login({Key? key}) : super(key: key);
@@ -24,17 +22,7 @@ class _LoginState extends State<Login> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-// HTTP
-  void loginHttpRequest(BuildContext context) async {
-    var url = "http://127.0.0.1:8080/UserLogin";
-    var requestBody = {"Email": emailController.text, "Password": passwordController.text};
-    var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
-    if (response.statusCode == 200) {
-      onTapLoginButton(context);
-    }
-  }
-
-// Grpc
+  // Grpc
   void loginGrpcUser(BuildContext context) async {
     try {
       setState(() {

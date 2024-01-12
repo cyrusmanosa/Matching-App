@@ -10,8 +10,11 @@ option go_package = "Backend/pb";
 message CreateTargetListRequest {
     string SessionID = 1; 
     int32 Target1ID = 2;
-    int32 Target2ID = 3;
-    int32 Target3ID = 4;
+    string T1Type = 3;
+    int32 Target2ID = 4;
+    string T2Type = 5;
+    int32 Target3ID = 6;
+    string T3Type = 7;
 }
 
 message CreateTargetListResponse {
@@ -30,8 +33,11 @@ message GetTargetListResponse {
 message UpdateTargetListRequest {
     string SessionID = 1;
     int32 Target1ID = 2;
-    int32 Target2ID = 3;
-    int32 Target3ID = 4;
+    string T1Type = 3;
+    int32 Target2ID = 4;
+    string T2Type = 5;
+    int32 Target3ID = 6;
+    string T3Type = 7;
 }
 message UpdateTargetListResponse {
     Targetlist tl = 1;

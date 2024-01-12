@@ -9,56 +9,40 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
-func convertHobby(Hobby info.Hobbyrequest) *pb.Hobby {
+func convertHobby(Hobby info.Hobby) *pb.Hobby {
 	return &pb.Hobby{
 		UserID:        Hobby.UserID,
 		Era:           Hobby.Era,
 		City:          Hobby.City,
 		Gender:        Hobby.Gender,
-		Height:        Hobby.Height,
-		Weight:        Hobby.Weight,
 		Speaklanguage: Hobby.Speaklanguage,
 		FindType:      Hobby.FindType,
 		FindTarget:    Hobby.FindTarget,
 		Experience:    Hobby.Experience,
-		Sociability:   Hobby.Sociability,
-		Certification: Hobby.Certification,
 		InfoChangedAt: timestamppb.New(Hobby.InfoChangedAt.Time),
 	}
 }
 
-func convertLover(Lover info.Loverrequest) *pb.Lover {
+func convertLover(Lover info.Lover) *pb.Lover {
 	return &pb.Lover{
 		UserID:        Lover.UserID,
 		MinAge:        Lover.MinAge,
 		MaxAge:        Lover.MaxAge,
 		City:          Lover.City,
 		Gender:        Lover.Gender,
-		Constellation: Lover.Constellation,
 		Sexual:        Lover.Sexual,
-		Height:        Lover.Height,
-		Weight:        Lover.Weight,
 		Speaklanguage: Lover.Speaklanguage,
-		Job:           Lover.Job,
-		AnnualSalary:  Lover.AnnualSalary,
-		Sociability:   Lover.Sociability,
-		Religious:     Lover.Religious,
-		Certification: Lover.Certification,
 		InfoChangedAt: timestamppb.New(Lover.InfoChangedAt.Time),
 	}
 }
 
-func convertAccompany(Accompany info.Accompanyrequest) *pb.Accompany {
+func convertAccompany(Accompany info.Accompany) *pb.Accompany {
 	return &pb.Accompany{
 		UserID:        Accompany.UserID,
 		Era:           Accompany.Era,
-		City:          Accompany.City,
-		Gender:        Accompany.Gender,
 		Speaklanguage: Accompany.Speaklanguage,
 		FindType:      Accompany.FindType,
-		FindTarget:    Accompany.FindTarget,
 		Sociability:   Accompany.Sociability,
-		Certification: Accompany.Certification,
 		InfoChangedAt: timestamppb.New(Accompany.InfoChangedAt.Time),
 	}
 }
@@ -107,7 +91,6 @@ func convertComplaint(cp info.Complaint) *pb.Complaint {
 func convertImages(img info.Image) *pb.Images {
 	return &pb.Images{
 		UserID: img.UserID,
-		Qr:     img.Qr,
 		Img1:   img.Img1,
 		Img2:   img.Img2,
 		Img3:   img.Img3,

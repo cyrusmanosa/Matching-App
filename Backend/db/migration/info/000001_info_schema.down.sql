@@ -1,9 +1,9 @@
 DROP TABLE IF EXISTS fixinformation;
 DROP TABLE IF EXISTS passwordlist;
 DROP TABLE IF EXISTS canchangeinformation;
-DROP TABLE IF EXISTS loverrequest;
-DROP TABLE IF EXISTS hobbyrequest;
-DROP TABLE IF EXISTS accompanyrequest;
+DROP TABLE IF EXISTS lover;
+DROP TABLE IF EXISTS hobby;
+DROP TABLE IF EXISTS accompany;
 DROP TABLE IF EXISTS imagelist;
 DROP TABLE IF EXISTS targetlist;
 DROP TABLE IF EXISTS changetargetuser;

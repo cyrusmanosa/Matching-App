@@ -7,8 +7,6 @@ import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class EmailConfirmation extends StatefulWidget {
   EmailConfirmation({Key? key}) : super(key: key);
@@ -18,16 +16,6 @@ class EmailConfirmation extends StatefulWidget {
 
 class _EmailConfirmationtate extends State<EmailConfirmation> {
   TextEditingController emailController = TextEditingController();
-
-  // Http
-  void emailConfirmationHttpRequest(BuildContext context) async {
-    var url = "http://127.0.0.1:8080/SignUpEmail";
-    var requestBody = {"email": emailController.text};
-    var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
-    if (response.statusCode == 200) {
-      onTapNextPage(context);
-    }
-  }
 
   bool isEmailValid(String email) {
     final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
@@ -59,14 +47,12 @@ class _EmailConfirmationtate extends State<EmailConfirmation> {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
-      backgroundColor: appTheme.white,
-      resizeToAvoidBottomInset: false,
+      appBar: AppBar(automaticallyImplyLeading: true),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
+        padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
         child: Column(
           children: [
             // Logo and Slogan
-            SizedBox(height: mediaH / 15),
             CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4.5),
             CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3.5),
             SizedBox(height: mediaH / 30),

@@ -7,19 +7,23 @@ import (
 
 func SendValidateCodeOnEmail(RequestCode string, to []string) bool {
 	auth := smtp.PlainAuth("", "studiocmkc0110@gmail.com", "iodvpvmlyvadnhfb", "smtp.gmail.com")
-	subject := "Verification Code Email for Dating Date"
+	subject := "「Dating Date」アカウント認証コードのメール"
 	body := `<html>
 	<body>
-		<h2>Dear User,</竹>
-		<h3>Thank you for registering with Dating Date, our dating and social platform! To ensure the security of your account, we are sending you a verification code. Please use the following code to complete the verification process:</h3>
+		<h2>親愛なるユーザー様: </h2>
+		<h3>出会い系ソーシャルプラットフォーム「Dating Date」にご登録いただき、ありがとうございます。<br>アカウントのセキュリティを確保するため、確認コードをお送りします。</h3>
+		<h3> 確認コード:  ` + RequestCode + `  </h3>
+		<h3>このコードは、ウェブサイトまたはアプリの指定された欄に、5分以内に入力してアカウント認証を完了してください。</h3>
+		<h3>【重要】</h3>
+		<ul>
+			<li>このメールは、お客様がメールアドレスを登録されたために送信されています。心当たりのない場合は、すぐにサポートチームまでお問い合わせください。</li>
+			<li>このコードを他人に教えないでください。Dating Dateの担当者がお客様にコードを尋ねることは絶対にありません。</li>
+		</ul>
+		<h3>ご不明な点がございましたら、お気軽にサポートチームまでお問い合わせください。</h3>
 		<br>
-		<h3>Verification Code:  ` + RequestCode + `  </h3>
-		<br>
-		<h3>Please enter this code in the designated field on our website or application within the next 5 minutes to complete your account verification. If you did not initiate this request or have any concerns, please contact our support team immediately.</h3>
-		<h3>Thank you for your cooperation.</h3>
-		<br>
-		<h2>Best regards,</h2>
-		<h2>The Dating Date Team</h2>
+		<h2>敬具</h2>
+		<h2>Dating Date チーム</h2>
+		<p>※このメールは送信専用です。返信はしないでください。</p>
 	</body>
 	</html>`
 

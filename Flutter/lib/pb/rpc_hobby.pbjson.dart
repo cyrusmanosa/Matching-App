@@ -21,14 +21,10 @@ const CreateHobbyRequest$json = {
     {'1': 'Era', '3': 2, '4': 1, '5': 5, '10': 'Era'},
     {'1': 'City', '3': 3, '4': 1, '5': 9, '10': 'City'},
     {'1': 'Gender', '3': 4, '4': 1, '5': 9, '10': 'Gender'},
-    {'1': 'Height', '3': 5, '4': 1, '5': 5, '10': 'Height'},
-    {'1': 'Weight', '3': 6, '4': 1, '5': 5, '10': 'Weight'},
-    {'1': 'Speaklanguage', '3': 7, '4': 1, '5': 9, '10': 'Speaklanguage'},
-    {'1': 'FindType', '3': 8, '4': 1, '5': 9, '10': 'FindType'},
-    {'1': 'FindTarget', '3': 9, '4': 1, '5': 9, '10': 'FindTarget'},
-    {'1': 'Experience', '3': 10, '4': 1, '5': 5, '10': 'Experience'},
-    {'1': 'Sociability', '3': 11, '4': 1, '5': 9, '10': 'Sociability'},
-    {'1': 'Certification', '3': 12, '4': 1, '5': 8, '10': 'Certification'},
+    {'1': 'Speaklanguage', '3': 5, '4': 1, '5': 9, '10': 'Speaklanguage'},
+    {'1': 'FindType', '3': 6, '4': 1, '5': 9, '10': 'FindType'},
+    {'1': 'FindTarget', '3': 7, '4': 1, '5': 9, '10': 'FindTarget'},
+    {'1': 'Experience', '3': 8, '4': 1, '5': 5, '10': 'Experience'},
   ],
 };
 
@@ -36,11 +32,9 @@ const CreateHobbyRequest$json = {
 final $typed_data.Uint8List createHobbyRequestDescriptor = $convert.base64Decode(
     'ChJDcmVhdGVIb2JieVJlcXVlc3QSHAoJU2Vzc2lvbklEGAEgASgJUglTZXNzaW9uSUQSEAoDRX'
     'JhGAIgASgFUgNFcmESEgoEQ2l0eRgDIAEoCVIEQ2l0eRIWCgZHZW5kZXIYBCABKAlSBkdlbmRl'
-    'chIWCgZIZWlnaHQYBSABKAVSBkhlaWdodBIWCgZXZWlnaHQYBiABKAVSBldlaWdodBIkCg1TcG'
-    'Vha2xhbmd1YWdlGAcgASgJUg1TcGVha2xhbmd1YWdlEhoKCEZpbmRUeXBlGAggASgJUghGaW5k'
-    'VHlwZRIeCgpGaW5kVGFyZ2V0GAkgASgJUgpGaW5kVGFyZ2V0Eh4KCkV4cGVyaWVuY2UYCiABKA'
-    'VSCkV4cGVyaWVuY2USIAoLU29jaWFiaWxpdHkYCyABKAlSC1NvY2lhYmlsaXR5EiQKDUNlcnRp'
-    'ZmljYXRpb24YDCABKAhSDUNlcnRpZmljYXRpb24=');
+    'chIkCg1TcGVha2xhbmd1YWdlGAUgASgJUg1TcGVha2xhbmd1YWdlEhoKCEZpbmRUeXBlGAYgAS'
+    'gJUghGaW5kVHlwZRIeCgpGaW5kVGFyZ2V0GAcgASgJUgpGaW5kVGFyZ2V0Eh4KCkV4cGVyaWVu'
+    'Y2UYCCABKAVSCkV4cGVyaWVuY2U=');
 
 @$core.Deprecated('Use createHobbyResponseDescriptor instead')
 const CreateHobbyResponse$json = {
@@ -86,14 +80,10 @@ const UpdateHobbyRequest$json = {
     {'1': 'Era', '3': 2, '4': 1, '5': 5, '10': 'Era'},
     {'1': 'City', '3': 3, '4': 1, '5': 9, '10': 'City'},
     {'1': 'Gender', '3': 4, '4': 1, '5': 9, '10': 'Gender'},
-    {'1': 'Height', '3': 5, '4': 1, '5': 5, '10': 'Height'},
-    {'1': 'Weight', '3': 6, '4': 1, '5': 5, '10': 'Weight'},
-    {'1': 'Speaklanguage', '3': 7, '4': 1, '5': 9, '10': 'Speaklanguage'},
-    {'1': 'FindType', '3': 8, '4': 1, '5': 9, '10': 'FindType'},
-    {'1': 'FindTarget', '3': 9, '4': 1, '5': 9, '10': 'FindTarget'},
-    {'1': 'Experience', '3': 10, '4': 1, '5': 5, '10': 'Experience'},
-    {'1': 'Sociability', '3': 11, '4': 1, '5': 9, '10': 'Sociability'},
-    {'1': 'Certification', '3': 12, '4': 1, '5': 8, '10': 'Certification'},
+    {'1': 'Speaklanguage', '3': 5, '4': 1, '5': 9, '10': 'Speaklanguage'},
+    {'1': 'FindType', '3': 6, '4': 1, '5': 9, '10': 'FindType'},
+    {'1': 'FindTarget', '3': 7, '4': 1, '5': 9, '10': 'FindTarget'},
+    {'1': 'Experience', '3': 8, '4': 1, '5': 5, '10': 'Experience'},
   ],
 };
 
@@ -101,11 +91,9 @@ const UpdateHobbyRequest$json = {
 final $typed_data.Uint8List updateHobbyRequestDescriptor = $convert.base64Decode(
     'ChJVcGRhdGVIb2JieVJlcXVlc3QSHAoJU2Vzc2lvbklEGAEgASgJUglTZXNzaW9uSUQSEAoDRX'
     'JhGAIgASgFUgNFcmESEgoEQ2l0eRgDIAEoCVIEQ2l0eRIWCgZHZW5kZXIYBCABKAlSBkdlbmRl'
-    'chIWCgZIZWlnaHQYBSABKAVSBkhlaWdodBIWCgZXZWlnaHQYBiABKAVSBldlaWdodBIkCg1TcG'
-    'Vha2xhbmd1YWdlGAcgASgJUg1TcGVha2xhbmd1YWdlEhoKCEZpbmRUeXBlGAggASgJUghGaW5k'
-    'VHlwZRIeCgpGaW5kVGFyZ2V0GAkgASgJUgpGaW5kVGFyZ2V0Eh4KCkV4cGVyaWVuY2UYCiABKA'
-    'VSCkV4cGVyaWVuY2USIAoLU29jaWFiaWxpdHkYCyABKAlSC1NvY2lhYmlsaXR5EiQKDUNlcnRp'
-    'ZmljYXRpb24YDCABKAhSDUNlcnRpZmljYXRpb24=');
+    'chIkCg1TcGVha2xhbmd1YWdlGAUgASgJUg1TcGVha2xhbmd1YWdlEhoKCEZpbmRUeXBlGAYgAS'
+    'gJUghGaW5kVHlwZRIeCgpGaW5kVGFyZ2V0GAcgASgJUgpGaW5kVGFyZ2V0Eh4KCkV4cGVyaWVu'
+    'Y2UYCCABKAVSCkV4cGVyaWVuY2U=');
 
 @$core.Deprecated('Use updateHobbyResponseDescriptor instead')
 const UpdateHobbyResponse$json = {

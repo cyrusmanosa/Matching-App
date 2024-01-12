@@ -5,9 +5,9 @@ import 'package:dating_your_date/presentation/Target/widgets/ResetTargetButton.d
 // ignore: must_be_immutable
 class Target extends StatelessWidget {
   static List<TargetInfo> targetList = [
-    TargetInfo(title: "趣味", style: CustomButtonStyles.fillLightGray, sendPage: AppRoutes.hobbyConditionRepair),
-    TargetInfo(title: "恋人", style: CustomButtonStyles.fillDarkRed, sendPage: AppRoutes.loverConditionRepair),
-    TargetInfo(title: "お相伴", style: CustomButtonStyles.fillRed, sendPage: AppRoutes.accompanyConditionRepair),
+    TargetInfo(title: "趣味", style: CustomButtonStyles.fillLightGray, sendPage: AppRoutes.hobbyCondition),
+    TargetInfo(title: "恋人", style: CustomButtonStyles.fillDarkRed, sendPage: AppRoutes.loverCondition),
+    TargetInfo(title: "お相伴", style: CustomButtonStyles.fillRed, sendPage: AppRoutes.accompanyCondition),
   ];
 
   Target({Key? key, this.head}) : super(key: key);
@@ -20,12 +20,14 @@ class Target extends StatelessWidget {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 226, 226, 226),
       body: Container(
         child: Column(
           children: [
             if (head! == "head") _buildHeader(context, mediaH, mediaW),
             if (head! == "logo") _buildLogo(context, mediaH, mediaW),
-            Text("探すターゲットの種類", style: CustomTextStyles.smallTitle20),
+            SizedBox(height: mediaH / 30),
+            Text("探すターゲットの種類", style: CustomTextStyles.profileData),
             _buildTargetResetList(context, mediaH, mediaW),
           ],
         ),
@@ -43,7 +45,7 @@ class Target extends StatelessWidget {
           itemBuilder: (context, index) {
             final targetInfo = targetList[index];
             return Padding(
-              padding: EdgeInsets.symmetric(vertical: mediaH / 50),
+              padding: EdgeInsets.symmetric(vertical: mediaH / 60),
               child: ResetTargetButton(title: targetInfo.title, color: targetInfo.style, sendPage: targetInfo.sendPage),
             );
           },
@@ -55,10 +57,9 @@ class Target extends StatelessWidget {
   Widget _buildLogo(BuildContext context, double mediaH, double mediaW) {
     return Column(
       children: [
-        SizedBox(height: mediaH / 12),
+        SizedBox(height: mediaH / 10),
         CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 3.5),
         CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3),
-        SizedBox(height: mediaH / 40),
       ],
     );
   }

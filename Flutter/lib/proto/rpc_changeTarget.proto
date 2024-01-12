@@ -30,4 +30,3 @@ message GetChangeTargetResponse {
 message DeleteChangeTargetRequest {
     string SessionID = 1; 
 }
- 

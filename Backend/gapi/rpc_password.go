@@ -62,8 +62,12 @@ func (server *Server) InputPassword(ctx context.Context, req *pb.InputPasswordRe
 }
 
 func (server *Server) ResetPassword(ctx context.Context, req *pb.ResetPasswordRequest) (*pb.ResetPasswordResponse, error) {
+	Gid, err := uuid.Parse(req.GetSessionID())
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
+	}
 
-	token, err := server.infoStore.GetSession(ctx, GlobalSessionID)
+	token, err := server.infoStore.GetSession(ctx, Gid)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}

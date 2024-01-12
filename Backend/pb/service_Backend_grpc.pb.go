@@ -1656,6 +1656,7 @@ const (
 	Chat_DeleteChatRecord_FullMethodName = "/pb.Chat/DeleteChatRecord"
 	Chat_GetTargetID_FullMethodName      = "/pb.Chat/GetTargetID"
 	Chat_GetLastMsg_FullMethodName       = "/pb.Chat/GetLastMsg"
+	Chat_GetChatRow_FullMethodName       = "/pb.Chat/GetChatRow"
 	Chat_UpdateRead_FullMethodName       = "/pb.Chat/UpdateRead"
 )
 
@@ -1670,6 +1671,7 @@ type ChatClient interface {
 	DeleteChatRecord(ctx context.Context, in *DeleteChatRecordRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetTargetID(ctx context.Context, in *GetTargetIDRequest, opts ...grpc.CallOption) (*GetTargetIDResponse, error)
 	GetLastMsg(ctx context.Context, in *GetLastMsgRequest, opts ...grpc.CallOption) (*GetLastMsgResponse, error)
+	GetChatRow(ctx context.Context, in *GetChatRowRequest, opts ...grpc.CallOption) (*GetChatRowResponse, error)
 	UpdateRead(ctx context.Context, in *UpdateReadRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
@@ -1744,6 +1746,15 @@ func (c *chatClient) GetLastMsg(ctx context.Context, in *GetLastMsgRequest, opts
 	return out, nil
 }
 
+func (c *chatClient) GetChatRow(ctx context.Context, in *GetChatRowRequest, opts ...grpc.CallOption) (*GetChatRowResponse, error) {
+	out := new(GetChatRowResponse)
+	err := c.cc.Invoke(ctx, Chat_GetChatRow_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *chatClient) UpdateRead(ctx context.Context, in *UpdateReadRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, Chat_UpdateRead_FullMethodName, in, out, opts...)
@@ -1764,6 +1775,7 @@ type ChatServer interface {
 	DeleteChatRecord(context.Context, *DeleteChatRecordRequest) (*emptypb.Empty, error)
 	GetTargetID(context.Context, *GetTargetIDRequest) (*GetTargetIDResponse, error)
 	GetLastMsg(context.Context, *GetLastMsgRequest) (*GetLastMsgResponse, error)
+	GetChatRow(context.Context, *GetChatRowRequest) (*GetChatRowResponse, error)
 	UpdateRead(context.Context, *UpdateReadRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedChatServer()
 }
@@ -1792,6 +1804,9 @@ func (UnimplementedChatServer) GetTargetID(context.Context, *GetTargetIDRequest)
 }
 func (UnimplementedChatServer) GetLastMsg(context.Context, *GetLastMsgRequest) (*GetLastMsgResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLastMsg not implemented")
+}
+func (UnimplementedChatServer) GetChatRow(context.Context, *GetChatRowRequest) (*GetChatRowResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetChatRow not implemented")
 }
 func (UnimplementedChatServer) UpdateRead(context.Context, *UpdateReadRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateRead not implemented")
@@ -1935,6 +1950,24 @@ func _Chat_GetLastMsg_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Chat_GetChatRow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetChatRowRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).GetChatRow(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_GetChatRow_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).GetChatRow(ctx, req.(*GetChatRowRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Chat_UpdateRead_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateReadRequest)
 	if err := dec(in); err != nil {
@@ -1987,6 +2020,10 @@ var Chat_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetLastMsg",
 			Handler:    _Chat_GetLastMsg_Handler,
+		},
+		{
+			MethodName: "GetChatRow",
+			Handler:    _Chat_GetChatRow_Handler,
 		},
 		{
 			MethodName: "UpdateRead",

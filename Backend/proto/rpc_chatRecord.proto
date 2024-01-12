@@ -58,6 +58,13 @@ message GetLastMsgResponse{
     bool Isread = 3;
 }
 
+message GetChatRowRequest{
+    int32 UserID = 1;
+}
+message GetChatRowResponse{
+    int32 Row = 1;
+}
+
 // Update
 message UpdateChatRecordRequest {
     int32 UserID = 1;

@@ -65,6 +65,7 @@ func (server *Server) CreateFix(ctx context.Context, req *pb.CreateFixRequest) (
 		ID:          payload.ID,
 		UserID:      fix.UserID,
 		AccessToken: aToken,
+		Status:      "SignUp",
 		IsBlocked:   false,
 		ExpiresAt:   payload.ExpiredAt,
 	})

@@ -5,7 +5,7 @@ import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/custom_image_view.dart';
 import 'package:flutter/material.dart';
 
-void showLogoDialog(BuildContext context, String errorMessage) {
+void showLogoDialog(BuildContext context, String errorMessage, bool havebtn) {
   MediaQueryData mediaQueryData = MediaQuery.of(context);
   double mediaH = mediaQueryData.size.height;
   double mediaW = mediaQueryData.size.width;
@@ -22,14 +22,15 @@ void showLogoDialog(BuildContext context, String errorMessage) {
           child: Text(errorMessage, style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
         ),
         actions: [
-          CustomOutlinedButton(
-            alignment: Alignment.center,
-            text: "OK",
-            margin: EdgeInsets.only(bottom: mediaH / 100),
-            onPressed: () {
-              onTapReturn(context);
-            },
-          ),
+          if (havebtn)
+            CustomOutlinedButton(
+              alignment: Alignment.center,
+              text: "OK",
+              margin: EdgeInsets.only(bottom: mediaH / 100),
+              onPressed: () {
+                onTapReturn(context);
+              },
+            ),
         ],
       );
     },

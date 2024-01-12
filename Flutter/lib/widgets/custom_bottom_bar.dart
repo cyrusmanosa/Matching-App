@@ -22,7 +22,7 @@ class CustomBottomBar extends StatelessWidget {
     double mediaW = mediaQueryData.size.width;
     return Container(
       height: mediaH / 10.5,
-      decoration: BoxDecoration(color: appTheme.gray500),
+      decoration: BoxDecoration(color: appTheme.pinkA100),
       padding: EdgeInsets.only(left: mediaW / 20, right: mediaW / 20),
       child: BottomNavigationBar(
         backgroundColor: Color.fromARGB(0, 255, 0, 0),

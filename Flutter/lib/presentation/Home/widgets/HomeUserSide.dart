@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class MainframeItemWidget extends StatelessWidget {
-  const MainframeItemWidget({Key? key}) : super(key: key);
+  MainframeItemWidget({Key? key, this.mediaH, this.mediaW}) : super(key: key);
+
+  final double? mediaH;
+  final double? mediaW;
   @override
   Widget build(BuildContext context) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
-    double mediaH = mediaQueryData.size.height;
-    double mediaW = mediaQueryData.size.width;
     return SizedBox(
-      width: mediaW / 1.2,
+      width: mediaW! / 1.2,
       child: Column(
         children: [
           Row(
@@ -21,8 +21,8 @@ class MainframeItemWidget extends StatelessWidget {
             ],
           ),
           Container(
-            height: mediaH / 1.5,
-            width: mediaW / 1.2,
+            height: 600,
+            width: mediaW! / 1.2,
             decoration: BoxDecoration(color: appTheme.gray500, borderRadius: BorderRadiusStyle.r30),
           ),
         ],

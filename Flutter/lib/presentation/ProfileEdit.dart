@@ -1,8 +1,12 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
+import 'package:dating_your_date/pb/rpc_images.pb.dart';
 import 'package:dating_your_date/presentation/ContainerScreen.dart';
 import 'package:dating_your_date/widgets/Custom_IconLogoBox.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
@@ -10,12 +14,17 @@ import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/loading.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as path;
 
 class ProfileEdit extends StatefulWidget {
-  ProfileEdit({Key? key, this.canData}) : super(key: key);
+  ProfileEdit({Key? key, this.canData, this.imgIconPath}) : super(key: key);
   final CanChange? canData;
+  final File? imgIconPath;
 
   @override
   _ProfileEditState createState() => _ProfileEditState();
@@ -35,6 +44,10 @@ class _ProfileEditState extends State<ProfileEdit> {
   TextEditingController updateReligiousController = TextEditingController();
   TextEditingController updateIntroduceController = TextEditingController();
 
+  String? oldPath;
+  File? _oldimageFile;
+  File? _newimageFile;
+
   @override
   void initState() {
     super.initState();
@@ -50,11 +63,66 @@ class _ProfileEditState extends State<ProfileEdit> {
     updateSociabilityController = TextEditingController(text: widget.canData?.sociability);
     updateReligiousController = TextEditingController(text: widget.canData?.religious);
     updateIntroduceController = TextEditingController(text: widget.canData?.introduce);
+    _oldimageFile = widget.imgIconPath!;
+    _newimageFile = widget.imgIconPath!;
   }
 
   bool isPureNumber(String value) {
     final pattern = RegExp(r'^\d+$');
     return pattern.hasMatch(value);
+  }
+
+  void _uploadPhotoToNewFile() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      final file = File(pickedFile.path);
+      final directory = await getApplicationDocumentsDirectory();
+      try {
+        await for (var oldFile in Directory(directory.path).list()) {
+          await oldFile.delete();
+        }
+        oldPath = directory.path;
+        final newFilePath = path.join(directory.path, '${DateTime.now().millisecondsSinceEpoch}.jpg');
+        await file.copy(newFilePath);
+        setState(() {
+          _oldimageFile = File(newFilePath);
+        });
+      } catch (e) {
+        print("Error: $e");
+      }
+    }
+  }
+
+  void updateImage(BuildContext context) async {
+    if (_newimageFile != _oldimageFile)
+      try {
+        String? apiKeyS = await globalSession.read(key: 'SessionId');
+        String? apiKeyU = await globalUserId.read(key: 'UserID');
+
+        final createFolderPath = '/Users/cyrusman/Desktop/ProgrammingLearning/Apps/Flutter/userImage/u$apiKeyU';
+        String targetFilePath = path.join(createFolderPath, path.basename(_oldimageFile!.path));
+        _oldimageFile!.copySync(targetFilePath);
+
+        // 轉 bytes
+        Uint8List bytes = await _oldimageFile!.readAsBytes();
+        List<int> img = bytes.toList();
+
+        final request = UpdateImagesRequest(
+          sessionID: apiKeyS,
+          img1: img,
+          img2: null,
+          img3: null,
+          img4: null,
+          img5: null,
+        );
+        await GrpcInfoService.client.updateImages(request);
+        onTapNextPage(context);
+      } on GrpcError catch (e) {
+        Navigator.pop(context);
+        showErrorDialog(context, "Error: validatable update image in Image at $e");
+        throw Exception("Error occurred while fetching profile edit.");
+      }
   }
 
   // Grpc
@@ -108,9 +176,10 @@ class _ProfileEditState extends State<ProfileEdit> {
           introduce: updateIntroduceController.text,
         );
         await GrpcInfoService.client.updateCanChange(request);
+        updateImage(context);
         onTapNextPage(context);
         await Future.delayed(Duration(milliseconds: 500));
-        showLogoDialog(context, "個人情報もアップしました");
+        showLogoDialog(context, "個人情報もアップしました", true);
       } on GrpcError {
         Navigator.pop(context);
         showErrorDialog(context, "Error: validatable input data");
@@ -125,18 +194,15 @@ class _ProfileEditState extends State<ProfileEdit> {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
-      appBar: _buildHeader(context),
+      appBar: AppBar(automaticallyImplyLeading: true, title: Text("プロフィール編集", style: theme.textTheme.headlineMedium)),
       resizeToAvoidBottomInset: false,
       body: Container(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
+          padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
           child: Column(
             children: [
               // photos
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [CustomImageView(imagePath: ImageConstant.imgVectorgray500)],
-              ),
+              _buildImages(context, mediaH),
 
               // Introduce
               CustomInputBar(titleName: "自己紹介:", backendPart: _buildUpdateIntroduceInput(context, mediaH, mediaW)),
@@ -188,6 +254,7 @@ class _ProfileEditState extends State<ProfileEdit> {
 
               // button
               _buildSubmitButton(context),
+              SizedBox(height: mediaH / 20),
             ],
           ),
         ),
@@ -195,9 +262,25 @@ class _ProfileEditState extends State<ProfileEdit> {
     );
   }
 
-  /// Header
-  PreferredSizeWidget _buildHeader(BuildContext context) {
-    return AppBar(automaticallyImplyLeading: true, title: Text("プロフィール編集", style: theme.textTheme.headlineMedium));
+  /// image
+  Widget _buildImages(BuildContext context, double mediaH) {
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          IconButton(
+            onPressed: () {
+              _uploadPhotoToNewFile();
+            },
+            icon: Container(
+              width: mediaH / 6.5,
+              height: mediaH / 6.5,
+              child: ClipOval(child: Image.file(_oldimageFile!, fit: BoxFit.cover)),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   /// Nickname
@@ -282,6 +365,20 @@ class _ProfileEditState extends State<ProfileEdit> {
   }
 
   onTapNextPage(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => ContainerScreen(number: 3)));
+    Navigator.pop(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => ContainerScreen(number: 3),
+        fullscreenDialog: true,
+        transitionDuration: Duration(milliseconds: 500),
+        reverseTransitionDuration: Duration(milliseconds: 500),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return SlideTransition(
+            position: Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(animation),
+            child: child,
+          );
+        },
+      ),
+    );
   }
 }

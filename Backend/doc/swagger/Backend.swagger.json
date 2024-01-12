@@ -1112,6 +1112,37 @@
         ]
       }
     },
+    "/v1/Get_RowMsg": {
+      "get": {
+        "operationId": "Chat_GetChatRow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetChatRowResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "UserID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Chat"
+        ]
+      }
+    },
     "/v1/Get_TargetList": {
       "get": {
         "operationId": "Information_GetTargetList",
@@ -1665,26 +1696,14 @@
           "type": "integer",
           "format": "int32"
         },
-        "City": {
-          "type": "string"
-        },
-        "Gender": {
-          "type": "string"
-        },
         "Speaklanguage": {
           "type": "string"
         },
         "FindType": {
           "type": "string"
         },
-        "FindTarget": {
-          "type": "string"
-        },
         "Sociability": {
           "type": "string"
-        },
-        "Certification": {
-          "type": "boolean"
         },
         "InfoChangedAt": {
           "type": "string",
@@ -1884,26 +1903,14 @@
           "type": "integer",
           "format": "int32"
         },
-        "City": {
-          "type": "string"
-        },
-        "Gender": {
-          "type": "string"
-        },
         "Speaklanguage": {
           "type": "string"
         },
         "FindType": {
           "type": "string"
         },
-        "FindTarget": {
-          "type": "string"
-        },
         "Sociability": {
           "type": "string"
-        },
-        "Certification": {
-          "type": "boolean"
         }
       },
       "title": "Create"
@@ -2123,14 +2130,6 @@
         "Gender": {
           "type": "string"
         },
-        "Height": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "Weight": {
-          "type": "integer",
-          "format": "int32"
-        },
         "Speaklanguage": {
           "type": "string"
         },
@@ -2143,12 +2142,6 @@
         "Experience": {
           "type": "integer",
           "format": "int32"
-        },
-        "Sociability": {
-          "type": "string"
-        },
-        "Certification": {
-          "type": "boolean"
         }
       },
       "title": "Create"
@@ -2167,23 +2160,25 @@
         "SessionID": {
           "type": "string"
         },
-        "Qr": {
-          "type": "string"
-        },
         "Img1": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
         },
         "Img2": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
         },
         "Img3": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
         },
         "Img4": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
         },
-        "Img5": {
-          "type": "string"
+        "img5": {
+          "type": "string",
+          "format": "byte"
         }
       },
       "title": "Create"
@@ -2216,38 +2211,11 @@
         "Gender": {
           "type": "string"
         },
-        "Constellation": {
-          "type": "string"
-        },
         "Sexual": {
           "type": "string"
         },
-        "Height": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "Weight": {
-          "type": "integer",
-          "format": "int32"
-        },
         "Speaklanguage": {
           "type": "string"
-        },
-        "Job": {
-          "type": "string"
-        },
-        "AnnualSalary": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "Sociability": {
-          "type": "string"
-        },
-        "Religious": {
-          "type": "string"
-        },
-        "Certification": {
-          "type": "boolean"
         }
       },
       "title": "Create"
@@ -2296,13 +2264,22 @@
           "type": "integer",
           "format": "int32"
         },
+        "T1Type": {
+          "type": "string"
+        },
         "Target2ID": {
           "type": "integer",
           "format": "int32"
         },
+        "T2Type": {
+          "type": "string"
+        },
         "Target3ID": {
           "type": "integer",
           "format": "int32"
+        },
+        "T3Type": {
+          "type": "string"
         }
       },
       "title": "Create"
@@ -2348,6 +2325,15 @@
             "type": "object",
             "$ref": "#/definitions/pbChatRecordNoID"
           }
+        }
+      }
+    },
+    "pbGetChatRowResponse": {
+      "type": "object",
+      "properties": {
+        "Row": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -2484,14 +2470,6 @@
         "Gender": {
           "type": "string"
         },
-        "Height": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "Weight": {
-          "type": "integer",
-          "format": "int32"
-        },
         "Speaklanguage": {
           "type": "string"
         },
@@ -2504,12 +2482,6 @@
         "Experience": {
           "type": "integer",
           "format": "int32"
-        },
-        "Sociability": {
-          "type": "string"
-        },
-        "Certification": {
-          "type": "boolean"
         },
         "InfoChangedAt": {
           "type": "string",
@@ -2524,23 +2496,25 @@
           "type": "integer",
           "format": "int32"
         },
-        "Qr": {
-          "type": "string"
-        },
         "Img1": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
         },
         "Img2": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
         },
         "Img3": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
         },
         "Img4": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
         },
         "img5": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
         }
       }
     },
@@ -2614,38 +2588,11 @@
         "Gender": {
           "type": "string"
         },
-        "Constellation": {
-          "type": "string"
-        },
         "Sexual": {
           "type": "string"
         },
-        "Height": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "Weight": {
-          "type": "integer",
-          "format": "int32"
-        },
         "Speaklanguage": {
           "type": "string"
-        },
-        "Job": {
-          "type": "string"
-        },
-        "AnnualSalary": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "Sociability": {
-          "type": "string"
-        },
-        "Religious": {
-          "type": "string"
-        },
-        "Certification": {
-          "type": "boolean"
         },
         "InfoChangedAt": {
           "type": "string",
@@ -2720,13 +2667,22 @@
           "type": "integer",
           "format": "int32"
         },
+        "T1Type": {
+          "type": "string"
+        },
         "Target2ID": {
           "type": "integer",
           "format": "int32"
         },
+        "T2Type": {
+          "type": "string"
+        },
         "Target3ID": {
           "type": "integer",
           "format": "int32"
+        },
+        "T3Type": {
+          "type": "string"
         },
         "UpdatedAt": {
           "type": "string",
@@ -2744,26 +2700,14 @@
           "type": "integer",
           "format": "int32"
         },
-        "City": {
-          "type": "string"
-        },
-        "Gender": {
-          "type": "string"
-        },
         "Speaklanguage": {
           "type": "string"
         },
         "FindType": {
           "type": "string"
         },
-        "FindTarget": {
-          "type": "string"
-        },
         "Sociability": {
           "type": "string"
-        },
-        "Certification": {
-          "type": "boolean"
         }
       },
       "title": "Update"
@@ -2907,14 +2851,6 @@
         "Gender": {
           "type": "string"
         },
-        "Height": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "Weight": {
-          "type": "integer",
-          "format": "int32"
-        },
         "Speaklanguage": {
           "type": "string"
         },
@@ -2927,12 +2863,6 @@
         "Experience": {
           "type": "integer",
           "format": "int32"
-        },
-        "Sociability": {
-          "type": "string"
-        },
-        "Certification": {
-          "type": "boolean"
         }
       },
       "title": "Update"
@@ -2951,23 +2881,25 @@
         "SessionID": {
           "type": "string"
         },
-        "Qr": {
-          "type": "string"
-        },
         "Img1": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
         },
         "Img2": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
         },
         "Img3": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
         },
         "Img4": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
         },
-        "Img5": {
-          "type": "string"
+        "img5": {
+          "type": "string",
+          "format": "byte"
         }
       },
       "title": "Updat"
@@ -3000,38 +2932,11 @@
         "Gender": {
           "type": "string"
         },
-        "Constellation": {
-          "type": "string"
-        },
         "Sexual": {
           "type": "string"
         },
-        "Height": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "Weight": {
-          "type": "integer",
-          "format": "int32"
-        },
         "Speaklanguage": {
           "type": "string"
-        },
-        "Job": {
-          "type": "string"
-        },
-        "AnnualSalary": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "Sociability": {
-          "type": "string"
-        },
-        "Religious": {
-          "type": "string"
-        },
-        "Certification": {
-          "type": "boolean"
         }
       },
       "title": "Update"
@@ -3067,13 +2972,22 @@
           "type": "integer",
           "format": "int32"
         },
+        "T1Type": {
+          "type": "string"
+        },
         "Target2ID": {
           "type": "integer",
           "format": "int32"
         },
+        "T2Type": {
+          "type": "string"
+        },
         "Target3ID": {
           "type": "integer",
           "format": "int32"
+        },
+        "T3Type": {
+          "type": "string"
         }
       },
       "title": "Update"

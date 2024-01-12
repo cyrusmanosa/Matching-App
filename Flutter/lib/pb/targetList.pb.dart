@@ -19,8 +19,11 @@ class Targetlist extends $pb.GeneratedMessage {
   factory Targetlist({
     $core.int? userID,
     $core.int? target1ID,
+    $core.String? t1Type,
     $core.int? target2ID,
+    $core.String? t2Type,
     $core.int? target3ID,
+    $core.String? t3Type,
     $16.Timestamp? updatedAt,
   }) {
     final $result = create();
@@ -30,11 +33,20 @@ class Targetlist extends $pb.GeneratedMessage {
     if (target1ID != null) {
       $result.target1ID = target1ID;
     }
+    if (t1Type != null) {
+      $result.t1Type = t1Type;
+    }
     if (target2ID != null) {
       $result.target2ID = target2ID;
     }
+    if (t2Type != null) {
+      $result.t2Type = t2Type;
+    }
     if (target3ID != null) {
       $result.target3ID = target3ID;
+    }
+    if (t3Type != null) {
+      $result.t3Type = t3Type;
     }
     if (updatedAt != null) {
       $result.updatedAt = updatedAt;
@@ -48,9 +60,12 @@ class Targetlist extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Targetlist', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'UserID', $pb.PbFieldType.O3, protoName: 'UserID')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'Target1ID', $pb.PbFieldType.O3, protoName: 'Target1ID')
-    ..a<$core.int>(3, _omitFieldNames ? '' : 'Target2ID', $pb.PbFieldType.O3, protoName: 'Target2ID')
-    ..a<$core.int>(4, _omitFieldNames ? '' : 'Target3ID', $pb.PbFieldType.O3, protoName: 'Target3ID')
-    ..aOM<$16.Timestamp>(5, _omitFieldNames ? '' : 'UpdatedAt', protoName: 'UpdatedAt', subBuilder: $16.Timestamp.create)
+    ..aOS(3, _omitFieldNames ? '' : 'T1Type', protoName: 'T1Type')
+    ..a<$core.int>(4, _omitFieldNames ? '' : 'Target2ID', $pb.PbFieldType.O3, protoName: 'Target2ID')
+    ..aOS(5, _omitFieldNames ? '' : 'T2Type', protoName: 'T2Type')
+    ..a<$core.int>(6, _omitFieldNames ? '' : 'Target3ID', $pb.PbFieldType.O3, protoName: 'Target3ID')
+    ..aOS(7, _omitFieldNames ? '' : 'T3Type', protoName: 'T3Type')
+    ..aOM<$16.Timestamp>(8, _omitFieldNames ? '' : 'UpdatedAt', protoName: 'UpdatedAt', subBuilder: $16.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -94,33 +109,60 @@ class Targetlist extends $pb.GeneratedMessage {
   void clearTarget1ID() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.int get target2ID => $_getIZ(2);
+  $core.String get t1Type => $_getSZ(2);
   @$pb.TagNumber(3)
-  set target2ID($core.int v) { $_setSignedInt32(2, v); }
+  set t1Type($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasTarget2ID() => $_has(2);
+  $core.bool hasT1Type() => $_has(2);
   @$pb.TagNumber(3)
-  void clearTarget2ID() => clearField(3);
+  void clearT1Type() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.int get target3ID => $_getIZ(3);
+  $core.int get target2ID => $_getIZ(3);
   @$pb.TagNumber(4)
-  set target3ID($core.int v) { $_setSignedInt32(3, v); }
+  set target2ID($core.int v) { $_setSignedInt32(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasTarget3ID() => $_has(3);
+  $core.bool hasTarget2ID() => $_has(3);
   @$pb.TagNumber(4)
-  void clearTarget3ID() => clearField(4);
+  void clearTarget2ID() => clearField(4);
 
   @$pb.TagNumber(5)
-  $16.Timestamp get updatedAt => $_getN(4);
+  $core.String get t2Type => $_getSZ(4);
   @$pb.TagNumber(5)
-  set updatedAt($16.Timestamp v) { setField(5, v); }
+  set t2Type($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasUpdatedAt() => $_has(4);
+  $core.bool hasT2Type() => $_has(4);
   @$pb.TagNumber(5)
-  void clearUpdatedAt() => clearField(5);
-  @$pb.TagNumber(5)
-  $16.Timestamp ensureUpdatedAt() => $_ensure(4);
+  void clearT2Type() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.int get target3ID => $_getIZ(5);
+  @$pb.TagNumber(6)
+  set target3ID($core.int v) { $_setSignedInt32(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasTarget3ID() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearTarget3ID() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get t3Type => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set t3Type($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasT3Type() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearT3Type() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $16.Timestamp get updatedAt => $_getN(7);
+  @$pb.TagNumber(8)
+  set updatedAt($16.Timestamp v) { setField(8, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasUpdatedAt() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearUpdatedAt() => clearField(8);
+  @$pb.TagNumber(8)
+  $16.Timestamp ensureUpdatedAt() => $_ensure(7);
 }
 
 

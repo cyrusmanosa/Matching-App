@@ -1,4 +1,5 @@
 import 'package:dating_your_date/presentation/Home/widgets/HomeUserSide.dart';
+import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 import 'package:dating_your_date/core/app_export.dart';
@@ -38,26 +39,13 @@ class _HomeState extends State<Home> {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
+      appBar: AppBar(automaticallyImplyLeading: false, title: AppbarTitle(text: "ホーム")),
       body: Container(
         child: Column(
           children: [
-            _buildHeader(context, mediaH, mediaW),
             SizedBox(height: mediaH / 50),
             _buildMainFrame(context, mediaW, mediaW),
           ],
-        ),
-      ),
-    );
-  }
-
-  // Header
-  Widget _buildHeader(BuildContext context, double mediaH, double mediaW) {
-    return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.only(top: mediaH / 80),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text("ホーム", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))],
         ),
       ),
     );
@@ -68,14 +56,14 @@ class _HomeState extends State<Home> {
     return Column(
       children: [
         SizedBox(
-          height: mediaH / 1.4,
+          height: mediaH <= 700 ? 700 : mediaH,
           child: ListView.separated(
             padding: EdgeInsets.symmetric(horizontal: mediaW / 12),
             scrollDirection: Axis.horizontal,
             separatorBuilder: (context, index) => SizedBox(width: mediaW / 22),
             itemCount: 3,
             itemBuilder: (context, index) {
-              return MainframeItemWidget();
+              return MainframeItemWidget(mediaH: mediaH, mediaW: mediaW);
             },
           ),
         ),

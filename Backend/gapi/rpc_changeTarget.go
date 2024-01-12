@@ -34,6 +34,13 @@ func (server *Server) CreateChangeTarget(ctx context.Context, req *pb.CreateChan
 		ChangeUserID: req.GetChangeUserID(),
 		Reason:       req.GetReason(),
 	}
+	Row, Rerr := server.infoStore.GetRowCount(ctx, token.UserID)
+	if Rerr != nil {
+		Ct.Frequency = 1
+	} else {
+		Ct.Frequency = Row + 1
+	}
+
 	changeTarget, err := server.infoStore.CreateChangeTargetUser(ctx, Ct)
 	if err != nil {
 		errCode := db.ErrorCode(err)

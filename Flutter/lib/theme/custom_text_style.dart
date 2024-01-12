@@ -11,6 +11,7 @@ class CustomTextStyles {
   static get msgWordOfMsgBox => theme.textTheme.headlineSmall!.copyWith(fontSize: 16);
   static get titleOfUnderLogo => theme.textTheme.headlineSmall!.copyWith(fontSize: 13);
   static get wordOnlySmallButton => theme.textTheme.headlineSmall!.copyWith(fontSize: 11);
+  static get profileData => theme.textTheme.headlineMedium!.copyWith(fontSize: 18);
   static get chatBoxUserName => theme.textTheme.headlineMedium!.copyWith(fontSize: 16);
 
   // body

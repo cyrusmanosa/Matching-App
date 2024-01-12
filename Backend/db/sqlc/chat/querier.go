@@ -16,6 +16,7 @@ type ChatQuerier interface {
     GetLastMsg(ctx context.Context, targetID int32, tablename string) (GetLastMsgRow, error) 
     GetRecord(ctx context.Context, targetID int32, tablename string) ([]Record, error)
     GetTargetID(ctx context.Context,tablename string) ([]int32, error)
+    GetChatRow(ctx context.Context, tablename string) (int32, error)
 	UpdateRead(ctx context.Context, targetID int32,tablename string) error
     UpdateRecord(ctx context.Context, arg UpdateRecordParams, tablename string) (Record, error)
 }

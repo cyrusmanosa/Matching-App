@@ -6,10 +6,9 @@ option go_package = "Backend/pb";
 
 message Images {
     int32 UserID = 1;
-    string Qr = 2;
-    string Img1 = 3;
-    string Img2 = 4;
-    string Img3 = 5;
-    string Img4 = 6;
-    string img5 = 7;
+    bytes Img1 = 2;
+    bytes Img2 = 3;
+    bytes Img3 = 4;
+    bytes Img4 = 5;
+    bytes img5 = 6;
 }

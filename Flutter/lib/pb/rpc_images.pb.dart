@@ -19,19 +19,15 @@ import 'images.pb.dart' as $24;
 class CreateImagesRequest extends $pb.GeneratedMessage {
   factory CreateImagesRequest({
     $core.String? sessionID,
-    $core.String? qr,
-    $core.String? img1,
-    $core.String? img2,
-    $core.String? img3,
-    $core.String? img4,
-    $core.String? img5,
+    $core.List<$core.int>? img1,
+    $core.List<$core.int>? img2,
+    $core.List<$core.int>? img3,
+    $core.List<$core.int>? img4,
+    $core.List<$core.int>? img5,
   }) {
     final $result = create();
     if (sessionID != null) {
       $result.sessionID = sessionID;
-    }
-    if (qr != null) {
-      $result.qr = qr;
     }
     if (img1 != null) {
       $result.img1 = img1;
@@ -56,12 +52,11 @@ class CreateImagesRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateImagesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
-    ..aOS(2, _omitFieldNames ? '' : 'Qr', protoName: 'Qr')
-    ..aOS(3, _omitFieldNames ? '' : 'Img1', protoName: 'Img1')
-    ..aOS(4, _omitFieldNames ? '' : 'Img2', protoName: 'Img2')
-    ..aOS(5, _omitFieldNames ? '' : 'Img3', protoName: 'Img3')
-    ..aOS(6, _omitFieldNames ? '' : 'Img4', protoName: 'Img4')
-    ..aOS(7, _omitFieldNames ? '' : 'Img5', protoName: 'Img5')
+    ..a<$core.List<$core.int>>(2, _omitFieldNames ? '' : 'Img1', $pb.PbFieldType.OY, protoName: 'Img1')
+    ..a<$core.List<$core.int>>(3, _omitFieldNames ? '' : 'Img2', $pb.PbFieldType.OY, protoName: 'Img2')
+    ..a<$core.List<$core.int>>(4, _omitFieldNames ? '' : 'Img3', $pb.PbFieldType.OY, protoName: 'Img3')
+    ..a<$core.List<$core.int>>(5, _omitFieldNames ? '' : 'Img4', $pb.PbFieldType.OY, protoName: 'Img4')
+    ..a<$core.List<$core.int>>(6, _omitFieldNames ? '' : 'img5', $pb.PbFieldType.OY)
     ..hasRequiredFields = false
   ;
 
@@ -96,58 +91,49 @@ class CreateImagesRequest extends $pb.GeneratedMessage {
   void clearSessionID() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get qr => $_getSZ(1);
+  $core.List<$core.int> get img1 => $_getN(1);
   @$pb.TagNumber(2)
-  set qr($core.String v) { $_setString(1, v); }
+  set img1($core.List<$core.int> v) { $_setBytes(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasQr() => $_has(1);
+  $core.bool hasImg1() => $_has(1);
   @$pb.TagNumber(2)
-  void clearQr() => clearField(2);
+  void clearImg1() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get img1 => $_getSZ(2);
+  $core.List<$core.int> get img2 => $_getN(2);
   @$pb.TagNumber(3)
-  set img1($core.String v) { $_setString(2, v); }
+  set img2($core.List<$core.int> v) { $_setBytes(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasImg1() => $_has(2);
+  $core.bool hasImg2() => $_has(2);
   @$pb.TagNumber(3)
-  void clearImg1() => clearField(3);
+  void clearImg2() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get img2 => $_getSZ(3);
+  $core.List<$core.int> get img3 => $_getN(3);
   @$pb.TagNumber(4)
-  set img2($core.String v) { $_setString(3, v); }
+  set img3($core.List<$core.int> v) { $_setBytes(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasImg2() => $_has(3);
+  $core.bool hasImg3() => $_has(3);
   @$pb.TagNumber(4)
-  void clearImg2() => clearField(4);
+  void clearImg3() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get img3 => $_getSZ(4);
+  $core.List<$core.int> get img4 => $_getN(4);
   @$pb.TagNumber(5)
-  set img3($core.String v) { $_setString(4, v); }
+  set img4($core.List<$core.int> v) { $_setBytes(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasImg3() => $_has(4);
+  $core.bool hasImg4() => $_has(4);
   @$pb.TagNumber(5)
-  void clearImg3() => clearField(5);
+  void clearImg4() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.String get img4 => $_getSZ(5);
+  $core.List<$core.int> get img5 => $_getN(5);
   @$pb.TagNumber(6)
-  set img4($core.String v) { $_setString(5, v); }
+  set img5($core.List<$core.int> v) { $_setBytes(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasImg4() => $_has(5);
+  $core.bool hasImg5() => $_has(5);
   @$pb.TagNumber(6)
-  void clearImg4() => clearField(6);
-
-  @$pb.TagNumber(7)
-  $core.String get img5 => $_getSZ(6);
-  @$pb.TagNumber(7)
-  set img5($core.String v) { $_setString(6, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasImg5() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearImg5() => clearField(7);
+  void clearImg5() => clearField(6);
 }
 
 class CreateImagesResponse extends $pb.GeneratedMessage {
@@ -323,19 +309,15 @@ class GetImagesResponse extends $pb.GeneratedMessage {
 class UpdateImagesRequest extends $pb.GeneratedMessage {
   factory UpdateImagesRequest({
     $core.String? sessionID,
-    $core.String? qr,
-    $core.String? img1,
-    $core.String? img2,
-    $core.String? img3,
-    $core.String? img4,
-    $core.String? img5,
+    $core.List<$core.int>? img1,
+    $core.List<$core.int>? img2,
+    $core.List<$core.int>? img3,
+    $core.List<$core.int>? img4,
+    $core.List<$core.int>? img5,
   }) {
     final $result = create();
     if (sessionID != null) {
       $result.sessionID = sessionID;
-    }
-    if (qr != null) {
-      $result.qr = qr;
     }
     if (img1 != null) {
       $result.img1 = img1;
@@ -360,12 +342,11 @@ class UpdateImagesRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateImagesRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
-    ..aOS(2, _omitFieldNames ? '' : 'Qr', protoName: 'Qr')
-    ..aOS(3, _omitFieldNames ? '' : 'Img1', protoName: 'Img1')
-    ..aOS(4, _omitFieldNames ? '' : 'Img2', protoName: 'Img2')
-    ..aOS(5, _omitFieldNames ? '' : 'Img3', protoName: 'Img3')
-    ..aOS(6, _omitFieldNames ? '' : 'Img4', protoName: 'Img4')
-    ..aOS(7, _omitFieldNames ? '' : 'Img5', protoName: 'Img5')
+    ..a<$core.List<$core.int>>(2, _omitFieldNames ? '' : 'Img1', $pb.PbFieldType.OY, protoName: 'Img1')
+    ..a<$core.List<$core.int>>(3, _omitFieldNames ? '' : 'Img2', $pb.PbFieldType.OY, protoName: 'Img2')
+    ..a<$core.List<$core.int>>(4, _omitFieldNames ? '' : 'Img3', $pb.PbFieldType.OY, protoName: 'Img3')
+    ..a<$core.List<$core.int>>(5, _omitFieldNames ? '' : 'Img4', $pb.PbFieldType.OY, protoName: 'Img4')
+    ..a<$core.List<$core.int>>(6, _omitFieldNames ? '' : 'img5', $pb.PbFieldType.OY)
     ..hasRequiredFields = false
   ;
 
@@ -400,58 +381,49 @@ class UpdateImagesRequest extends $pb.GeneratedMessage {
   void clearSessionID() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get qr => $_getSZ(1);
+  $core.List<$core.int> get img1 => $_getN(1);
   @$pb.TagNumber(2)
-  set qr($core.String v) { $_setString(1, v); }
+  set img1($core.List<$core.int> v) { $_setBytes(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasQr() => $_has(1);
+  $core.bool hasImg1() => $_has(1);
   @$pb.TagNumber(2)
-  void clearQr() => clearField(2);
+  void clearImg1() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get img1 => $_getSZ(2);
+  $core.List<$core.int> get img2 => $_getN(2);
   @$pb.TagNumber(3)
-  set img1($core.String v) { $_setString(2, v); }
+  set img2($core.List<$core.int> v) { $_setBytes(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasImg1() => $_has(2);
+  $core.bool hasImg2() => $_has(2);
   @$pb.TagNumber(3)
-  void clearImg1() => clearField(3);
+  void clearImg2() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get img2 => $_getSZ(3);
+  $core.List<$core.int> get img3 => $_getN(3);
   @$pb.TagNumber(4)
-  set img2($core.String v) { $_setString(3, v); }
+  set img3($core.List<$core.int> v) { $_setBytes(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasImg2() => $_has(3);
+  $core.bool hasImg3() => $_has(3);
   @$pb.TagNumber(4)
-  void clearImg2() => clearField(4);
+  void clearImg3() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get img3 => $_getSZ(4);
+  $core.List<$core.int> get img4 => $_getN(4);
   @$pb.TagNumber(5)
-  set img3($core.String v) { $_setString(4, v); }
+  set img4($core.List<$core.int> v) { $_setBytes(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasImg3() => $_has(4);
+  $core.bool hasImg4() => $_has(4);
   @$pb.TagNumber(5)
-  void clearImg3() => clearField(5);
+  void clearImg4() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.String get img4 => $_getSZ(5);
+  $core.List<$core.int> get img5 => $_getN(5);
   @$pb.TagNumber(6)
-  set img4($core.String v) { $_setString(5, v); }
+  set img5($core.List<$core.int> v) { $_setBytes(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasImg4() => $_has(5);
+  $core.bool hasImg5() => $_has(5);
   @$pb.TagNumber(6)
-  void clearImg4() => clearField(6);
-
-  @$pb.TagNumber(7)
-  $core.String get img5 => $_getSZ(6);
-  @$pb.TagNumber(7)
-  set img5($core.String v) { $_setString(6, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasImg5() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearImg5() => clearField(7);
+  void clearImg5() => clearField(6);
 }
 
 class UpdateImagesResponse extends $pb.GeneratedMessage {

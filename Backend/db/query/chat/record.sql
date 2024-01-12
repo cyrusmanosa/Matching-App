@@ -17,6 +17,10 @@ ORDER BY created_at;
 -- name: GetTargetID :many
 SELECT DISTINCT target_id FROM u1;
 
+-- name: GetChatRow :one
+SELECT COUNT(*) FROM u1
+WHERE role_type = $1;
+
 -- name: GetLastMsg :one
 SELECT media,media_type,isread FROM "u1"
 WHERE target_id = $1

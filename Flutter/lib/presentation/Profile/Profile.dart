@@ -1,84 +1,89 @@
 import 'dart:io';
+
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
-import 'package:dating_your_date/pb/canChange.pb.dart';
-import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
-import 'package:dating_your_date/presentation/ProfileEdit.dart';
+import 'package:dating_your_date/pb/rpc_changeTarget.pb.dart';
+import 'package:dating_your_date/pb/rpc_chatRecord.pb.dart';
+import 'package:dating_your_date/pb/rpc_images.pb.dart';
+import 'package:dating_your_date/widgets/Custom_Profile_button.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
+import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:grpc/grpc.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
-import 'widgets/showDataBar.dart';
 import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
 
 class Profile extends StatefulWidget {
   Profile({Key? key}) : super(key: key);
-
   @override
   _ProfileState createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
-  CanChange? data = CanChange();
-  File? _imageFile;
+  final storage = FlutterSecureStorage();
+  File? imgIconPath;
+  String? send;
+  String? changeTime;
 
   @override
   void initState() {
     super.initState();
-    getCanChangeGrpcRequest(context);
-  }
-
-  void _uploadPhotoToNewFile() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile != null) {
-      final file = File(pickedFile.path);
-      final directory = await getApplicationDocumentsDirectory();
-      final newDirectoryPath = path.join(directory.path, 'u1');
-
-      try {
-        if (!Directory(newDirectoryPath).existsSync()) {
-          Directory(newDirectoryPath).createSync();
-        }
-        // 先刪除舊檔案
-        await for (var oldFile in Directory(newDirectoryPath).list()) {
-          await oldFile.delete();
-        }
-        // 上傳檔案
-        final newFilePath = path.join(newDirectoryPath, '${DateTime.now().millisecondsSinceEpoch}.jpg');
-        await file.copy(newFilePath);
-        // 直接複製檔案到指定的path
-        final pathA = '/Users/cyrusman/Desktop/ProgrammingLearning/Apps/Flutter/';
-        // 調整為相對於應用程式資料目錄的路徑
-        final destinationPath = path.join(pathA, '123', '${DateTime.now().millisecondsSinceEpoch}.jpg');
-        await file.copy(destinationPath);
-        setState(() {
-          _imageFile = File(newFilePath);
-        });
-      } catch (e) {
-        print("Error: $e");
-      }
-    }
+    getDataGrpcRequest(context);
   }
 
   // Grpc
-  void getCanChangeGrpcRequest(BuildContext context) async {
+  void getDataGrpcRequest(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
+
+    // image
     try {
-      String? apiKeyS = await globalSession.read(key: 'SessionId');
-      String? apiKeyU = await globalUserId.read(key: 'UserID');
-      final userid = int.tryParse(apiKeyU!);
-      final request = GetCanChangeRequest(sessionID: apiKeyS, userID: userid);
-      final response = await GrpcInfoService.client.getCanChange(request);
+      final imgRequest = GetImagesRequest(sessionID: apiKeyS, userID: userid);
+      final imgResponse = await GrpcInfoService.client.getImages(imgRequest);
+      Uint8List bytes = Uint8List.fromList(imgResponse.img.img1);
+
+      Directory documentsDirectory = await getApplicationDocumentsDirectory();
+      String filePath = '${documentsDirectory.path}/data.bin';
+      File file = File(filePath);
+      final i = await file.writeAsBytes(bytes);
+
       setState(() {
-        data = response.canChangeInfo;
+        imgIconPath = i;
       });
     } on GrpcError {
-      showErrorDialog(context, "Error: validatable input data!");
+      showErrorDialog(context, "Error: validatable input UserId in Image!");
       throw Exception("Error occurred while fetching canChangeInfo.");
+    }
+
+    // Sended Data
+    try {
+      final sendRequest = GetChatRowRequest(userID: userid);
+      final sendResponse = await GrpcChatService.client.getChatRow(sendRequest);
+      setState(() {
+        send = sendResponse.row.toString();
+      });
+    } on GrpcError {
+      showErrorDialog(context, "Error: validatable input UserId in Chat Record!");
+      throw Exception("Error occurred while fetching canChangeInfo.");
+    }
+
+    // changed data
+    try {
+      final changeRequest = GetChangeTargetRequest(sessionID: apiKeyS);
+      final changeResponse = await GrpcInfoService.client.getChangeTarget(changeRequest);
+      setState(() {
+        changeTime = changeResponse.ct.frequency.toString();
+      });
+    } on GrpcError catch (e) {
+      if (e.code == 13) {
+        changeTime = "0";
+      } else {
+        showErrorDialog(context, "Error: validatable input UserId in ChangeTarget! $e");
+        throw Exception("Error occurred while fetching canChangeInfo.");
+      }
     }
   }
 
@@ -88,81 +93,119 @@ class _ProfileState extends State<Profile> {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: AppbarTitle(text: "プロフィール"),
+        backgroundColor: Colors.transparent,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+      ),
+      backgroundColor: Color.fromARGB(255, 226, 226, 226),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _headerBuilder(context, mediaH),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
               child: Column(
                 children: [
-                  _buildImages(context, mediaH, mediaW),
-                  SizedBox(height: mediaH / 40),
+                  // image
+                  _buildImages(context, mediaH),
+                  SizedBox(height: mediaH / 75),
 
                   // Part 2 - data!
                   _buildInformationBar(context, mediaH, mediaW),
-                  SizedBox(height: mediaH / 40),
+                  SizedBox(height: mediaH / 30),
 
-                  // intro
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: mediaW / 30),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  // Button 1rd
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: mediaW / 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("自己紹介", style: CustomTextStyles.showDataTitle),
-                        Divider(),
-                        Text(data!.introduce, style: CustomTextStyles.smallTitle20),
+                        // 1
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: ProfileButton(
+                              mediaW: mediaW,
+                              mediaH: mediaH,
+                              iconData: Icons.manage_accounts_sharp,
+                              page: AppRoutes.information,
+                              title: "基本情報",
+                            ),
+                          ),
+                        ),
+                        // 2
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: ProfileButton(
+                              mediaW: mediaW,
+                              mediaH: mediaH,
+                              iconData: Icons.sensor_occupied_sharp,
+                              page: AppRoutes.information,
+                              title: "SNS",
+                            ),
+                          ),
+                        ),
+                        // 3
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: ProfileButton(
+                              mediaW: mediaW,
+                              mediaH: mediaH,
+                              iconData: Icons.lock_clock_outlined,
+                              page: AppRoutes.newPasswordSetup,
+                              title: "パスワード更新",
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
-                  SizedBox(height: 100),
 
-                  // title
-                  Text("個人基本情報", style: CustomTextStyles.smallTitle20),
-                  SizedBox(height: mediaH / 40),
-
-                  // Nick Name
-                  ShownDataBarWidget(item: "ニックネーム", data: data!.nickName),
-                  SizedBox(height: mediaH / 40),
-                  // height
-                  ShownDataBarWidget(item: "身長", data: data!.height.toString() + " CM"),
-                  SizedBox(height: mediaH / 40),
-                  // weight
-                  ShownDataBarWidget(item: "体重", data: data!.weight.toString() + " KG"),
-                  SizedBox(height: mediaH / 40),
-                  // address
-                  ShownDataBarWidget(item: "居住地", data: data!.city),
-                  SizedBox(height: mediaH / 40),
-                  // education
-                  ShownDataBarWidget(item: "学歴", data: data!.education),
-                  SizedBox(height: mediaH / 40),
-                  // hobby
-                  // TODO: 1
-                  ShownDataBarWidget(item: "趣味", data: "#################"),
-                  SizedBox(height: mediaH / 40),
-                  // job
-                  ShownDataBarWidget(item: "職種", data: data!.job),
-                  SizedBox(height: mediaH / 40),
-                  // sexual
-                  ShownDataBarWidget(item: "性的指向", data: data!.sexual),
-                  SizedBox(height: mediaH / 40),
-                  // sociability
-                  ShownDataBarWidget(item: "社交力", data: data!.sociability),
-                  SizedBox(height: mediaH / 40),
-                  // find target
-                  // TODO: 2
-                  ShownDataBarWidget(item: "探す対象", data: "#########"),
-                  SizedBox(height: mediaH / 40),
-                  // find reason
-                  // TODO: 3
-                  ShownDataBarWidget(item: "目的", data: "############"),
-                  SizedBox(height: mediaH / 40),
-                  // religious
-                  ShownDataBarWidget(item: "宗教", data: data!.religious),
                   SizedBox(height: mediaH / 30),
-                  // edit button
-                  _buildEditButton(context, data!),
-                  SizedBox(height: mediaH / 25)
+
+                  // Button 2rd
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: mediaW / 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: ProfileButton(
+                              mediaW: mediaW,
+                              mediaH: mediaH,
+                              iconData: Icons.admin_panel_settings_outlined,
+                              page: AppRoutes.information,
+                              title: "連絡",
+                            ),
+                          ),
+                        ),
+                        // 3
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: GestureDetector(
+                              onTap: () async {
+                                await globalSession.delete(key: 'SessionId');
+                                await globalUserId.delete(key: 'UserId');
+                              },
+                              child: ProfileButton(
+                                mediaW: mediaW,
+                                mediaH: mediaH,
+                                iconData: Icons.logout_sharp,
+                                page: AppRoutes.login,
+                                title: "ログアウト",
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -172,86 +215,58 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget _headerBuilder(BuildContext context, double mediaH) {
-    return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.only(top: mediaH / 80),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text("プロフィール", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildImages(BuildContext context, double mediaH, double mediaW) {
+  Widget _buildImages(BuildContext context, double mediaH) {
     return Container(
+      padding: EdgeInsets.symmetric(vertical: mediaH / 50),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          IconButton(
-            onPressed: () {
-              _uploadPhotoToNewFile();
-            },
-            icon: Icon(Icons.upload),
-          ),
-          if (_imageFile != null)
-            Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                width: mediaW / 2.25,
-                height: mediaH / 5,
-                child: ClipOval(child: Image.file(_imageFile!, fit: BoxFit.cover)),
-              ),
+          if (imgIconPath != null)
+            Container(
+              width: mediaH / 6.5,
+              height: mediaH / 6.5,
+              child: ClipOval(child: Image.file(imgIconPath!, fit: BoxFit.cover)),
+            )
+          else
+            Container(
+              width: mediaH / 6.5,
+              height: mediaH / 6.5,
+              child: Icon(Icons.account_circle, size: mediaH / 6.5, color: appTheme.gray800),
             ),
         ],
       ),
     );
   }
 
-  // Part2
   Widget _buildInformationBar(BuildContext context, double mediaH, double mediaW) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: mediaW / 20),
+    return Container(
+      width: mediaW / 1.3,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadiusStyle.r10,
+        boxShadow: [
+          BoxShadow(color: Colors.grey.withOpacity(0.5), spreadRadius: 2, blurRadius: 5, offset: Offset(0, 3)),
+        ],
+      ),
+      padding: EdgeInsets.symmetric(horizontal: mediaW / 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
             children: [
               Text("交換回数", style: CustomTextStyles.inputTitlePink),
-              Text("0", style: theme.textTheme.headlineMedium),
+              Text(changeTime ?? "0", style: CustomTextStyles.profileData),
             ],
           ),
-          SizedBox(height: mediaH / 14, child: VerticalDivider(thickness: 1, indent: 17, endIndent: 18)),
-          Column(
-            children: [
-              Text("クレーム回数", style: CustomTextStyles.inputTitlePink),
-              Text("0", style: theme.textTheme.headlineMedium),
-            ],
-          ),
-          SizedBox(height: mediaH / 14, child: VerticalDivider(thickness: 1, indent: 17, endIndent: 18)),
+          SizedBox(height: mediaH / 14, child: VerticalDivider(thickness: 1, indent: 10, endIndent: 10)),
           Column(
             children: [
               Text("伝送回数", style: CustomTextStyles.inputTitlePink),
-              Text("0", style: theme.textTheme.headlineMedium),
+              Text(send ?? "0", style: CustomTextStyles.profileData),
             ],
           ),
         ],
       ),
     );
-  }
-
-  /// button
-  Widget _buildEditButton(BuildContext context, CanChange data) {
-    return CustomOutlinedButton(
-      text: "編集",
-      onPressed: () {
-        onTapNextPage(context, data);
-      },
-    );
-  }
-
-  onTapNextPage(BuildContext context, CanChange request) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileEdit(canData: request)));
   }
 }

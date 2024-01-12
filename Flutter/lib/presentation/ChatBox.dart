@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
@@ -13,7 +15,7 @@ class ChatBox extends StatefulWidget {
   ChatBox({Key? key, this.name, this.imageUrl, this.time, this.targetid}) : super(key: key);
 
   final String? name;
-  final String? imageUrl;
+  final File? imageUrl;
   final String? time;
   final int? targetid;
 
@@ -99,11 +101,10 @@ class _ChatBoxState extends State<ChatBox> {
       key: _scaffoldKey,
       appBar: _buildHeader(context, mediaW),
       drawer: Drawer(
-        child: SideBar(
-          name: widget.name,
-          imageUrl: widget.imageUrl,
-        ),
-      ),
+          child: SideBar(
+        name: widget.name,
+        imageUrl: widget.imageUrl,
+      )),
       body: FutureBuilder<List<ChatRecordNoID>>(
         future: getChatRecords(context),
         builder: (context, snapshot) {
@@ -120,10 +121,7 @@ class _ChatBoxState extends State<ChatBox> {
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       return Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: mediaH / 150,
-                          horizontal: mediaW / 30,
-                        ),
+                        padding: EdgeInsets.symmetric(vertical: mediaH / 150, horizontal: mediaW / 30),
                         child: Align(
                           alignment: (data[index].roleType == "receiver" ? Alignment.bottomLeft : Alignment.bottomRight),
                           child: Container(
@@ -184,7 +182,7 @@ class _ChatBoxState extends State<ChatBox> {
             children: [
               Container(margin: EdgeInsets.only(left: mediaW / 8)),
               // image
-              CircleAvatar(backgroundImage: NetworkImage("${widget.imageUrl}"), maxRadius: 20),
+              CircleAvatar(backgroundImage: FileImage(widget.imageUrl!), maxRadius: 20),
               SizedBox(width: mediaW / 50),
               // name and status
               Expanded(

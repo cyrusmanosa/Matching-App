@@ -32,69 +32,56 @@ CREATE TABLE "canchangeinformation" (
   "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
 
-CREATE TABLE "loverrequest" (
+CREATE TABLE "lover" (
   "user_id" INT PRIMARY KEY,
   "min_age" INT NOT NULL,
   "max_age" INT NOT NULL,
   "city" VARCHAR NOT NULL,
   "gender" VARCHAR NOT NULL,
-  "constellation" VARCHAR NOT NULL,
   "sexual" VARCHAR NOT NULL,
-  "height" INT NOT NULL,
-  "weight" INT NOT NULL,
   "speaklanguage" VARCHAR NOT NULL,
-  "job" VARCHAR NOT NULL,
-  "annual_salary" INT NOT NULL,
-  "sociability" VARCHAR NOT NULL,
-  "religious" VARCHAR NOT NULL,
-  "certification" BOOLEAN DEFAULT FALSE,
   "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
 
-CREATE TABLE "hobbyrequest" (
+CREATE TABLE "hobby" (
   "user_id" INT PRIMARY KEY,
   "era" INT,
   "city" VARCHAR NOT NULL,
   "gender" VARCHAR NOT NULL,
-  "height" INT,
-  "weight" INT,
   "speaklanguage" VARCHAR NOT NULL,
   "find_type" VARCHAR NOT NULL,
   "find_target" VARCHAR NOT NULL,
   "experience" INT,
-  "sociability" VARCHAR,
-  "certification" BOOLEAN DEFAULT FALSE,
   "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
 
-CREATE TABLE "accompanyrequest" (
+CREATE TABLE "accompany" (
   "user_id" INT PRIMARY KEY,
   "era" INT,
-  "city" VARCHAR NOT NULL,
-  "gender" VARCHAR,
   "speaklanguage" VARCHAR NOT NULL,
   "find_type" VARCHAR NOT NULL,
-  "find_target" VARCHAR NOT NULL,
   "sociability" VARCHAR NOT NULL,
-  "certification" BOOLEAN DEFAULT FALSE,
   "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
 
-CREATE TABLE "image" (
+CREATE TABLE image (
   "user_id" INT PRIMARY KEY,
-  "qr" VARCHAR UNIQUE NOT NULL,
-  "img1" VARCHAR NOT NULL,
-  "img2" VARCHAR,
-  "img3" VARCHAR,
-  "img4" VARCHAR,
-  "img5" VARCHAR
+  "img1" BYTEA NOT NULL,
+  "img2" BYTEA,
+  "img3" BYTEA,
+  "img4" BYTEA,
+  "img5" BYTEA
 );
+
 
 CREATE TABLE "targetlist" (
   "user_id" INT PRIMARY KEY,
   "target_1_id" INT NOT NULL,
+  "t1_Type" VARCHAR NOT NULL,
   "target_2_id" INT,
+  "t2_Type" VARCHAR,
   "target_3_id" INT,
+  "t3_Type" VARCHAR,
   "updated_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
 
@@ -116,13 +103,22 @@ CREATE TABLE "complaint" (
   "complaint_time" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
 
+CREATE TABLE "socialmedia" (
+  "user_id" INT NOT NULL,
+  "Facebook" VARCHAR,
+  "Instagram" VARCHAR,
+  "Twtter" VARCHAR
+);
+
+
+
 ALTER TABLE "canchangeinformation" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
 
-ALTER TABLE "loverrequest" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
+ALTER TABLE "lover" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
 
-ALTER TABLE "hobbyrequest" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
+ALTER TABLE "hobby" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
 
-ALTER TABLE "accompanyrequest" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
+ALTER TABLE "accompany" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
 
 ALTER TABLE "image" ADD FOREIGN KEY ("user_id") REFERENCES "fixinformation" ("user_id");
 

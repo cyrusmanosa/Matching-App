@@ -574,6 +574,106 @@ class GetLastMsgResponse extends $pb.GeneratedMessage {
   void clearIsread() => clearField(3);
 }
 
+class GetChatRowRequest extends $pb.GeneratedMessage {
+  factory GetChatRowRequest({
+    $core.int? userID,
+  }) {
+    final $result = create();
+    if (userID != null) {
+      $result.userID = userID;
+    }
+    return $result;
+  }
+  GetChatRowRequest._() : super();
+  factory GetChatRowRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetChatRowRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetChatRowRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'UserID', $pb.PbFieldType.O3, protoName: 'UserID')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetChatRowRequest clone() => GetChatRowRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetChatRowRequest copyWith(void Function(GetChatRowRequest) updates) => super.copyWith((message) => updates(message as GetChatRowRequest)) as GetChatRowRequest;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetChatRowRequest create() => GetChatRowRequest._();
+  GetChatRowRequest createEmptyInstance() => create();
+  static $pb.PbList<GetChatRowRequest> createRepeated() => $pb.PbList<GetChatRowRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetChatRowRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetChatRowRequest>(create);
+  static GetChatRowRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get userID => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set userID($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUserID() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUserID() => clearField(1);
+}
+
+class GetChatRowResponse extends $pb.GeneratedMessage {
+  factory GetChatRowResponse({
+    $core.int? row,
+  }) {
+    final $result = create();
+    if (row != null) {
+      $result.row = row;
+    }
+    return $result;
+  }
+  GetChatRowResponse._() : super();
+  factory GetChatRowResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetChatRowResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetChatRowResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
+    ..a<$core.int>(1, _omitFieldNames ? '' : 'Row', $pb.PbFieldType.O3, protoName: 'Row')
+    ..hasRequiredFields = false
+  ;
+
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetChatRowResponse clone() => GetChatRowResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetChatRowResponse copyWith(void Function(GetChatRowResponse) updates) => super.copyWith((message) => updates(message as GetChatRowResponse)) as GetChatRowResponse;
+
+  $pb.BuilderInfo get info_ => _i;
+
+  @$core.pragma('dart2js:noInline')
+  static GetChatRowResponse create() => GetChatRowResponse._();
+  GetChatRowResponse createEmptyInstance() => create();
+  static $pb.PbList<GetChatRowResponse> createRepeated() => $pb.PbList<GetChatRowResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetChatRowResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetChatRowResponse>(create);
+  static GetChatRowResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get row => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set row($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasRow() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearRow() => clearField(1);
+}
+
 /// Update
 class UpdateChatRecordRequest extends $pb.GeneratedMessage {
   factory UpdateChatRecordRequest({

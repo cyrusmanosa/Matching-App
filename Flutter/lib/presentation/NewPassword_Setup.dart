@@ -4,6 +4,7 @@ import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_password.pb.dart';
+import 'package:dating_your_date/widgets/Custom_IconLogoBox.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
@@ -24,17 +25,6 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
 
   get http => null;
 
-  // Http
-  void resetPasswordHttpRequest(BuildContext context) async {
-    String? apiKeyS = await globalSession.read(key: 'SessionId');
-    var url = "http://127.0.0.1:8080/ChangePassword";
-    var requestBody = {"session_id": apiKeyS, "password": newPasswordSetupController.text};
-    var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
-    if (response.statusCode == 200) {
-      onTapNextPage(context);
-    }
-  }
-
   // Grpc
   void resetPasswordGrpcRequest(BuildContext context) async {
     if (newPasswordSetupController.text != newPasswordSetupConfirmController.text) {
@@ -49,7 +39,10 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
           password: newPasswordSetupController.text,
         );
         await GrpcInfoService.client.resetPassword(request);
-        onTapNextPage(context);
+        showLogoDialog(context, "新しいパスワード設定しました", false);
+        await Future.delayed(Duration(seconds: 1));
+        Navigator.pop(context);
+        Navigator.pop(context);
       } on GrpcError {
         Navigator.pop(context);
         showErrorDialog(context, "Error: validatable input data");
@@ -75,33 +68,30 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
-      body: Form(
-        child: Container(
-          width: double.maxFinite,
-          padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
-          child: Column(
-            children: [
-              // Logo and Slogan
-              SizedBox(height: mediaH / 15),
-              CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4),
-              CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3.5),
-              SizedBox(height: mediaH / 30),
+      appBar: AppBar(automaticallyImplyLeading: true),
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
+        child: Column(
+          children: [
+            // Logo and Slogan
+            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4),
+            CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3.5),
+            SizedBox(height: mediaH / 30),
 
-              // New Password
-              CustomInputBar(titleName: "新しいパスワード", backendPart: _buildNewPasswordInput(context)),
+            // New Password
+            CustomInputBar(titleName: "新しいパスワード", backendPart: _buildNewPasswordInput(context)),
 
-              // msg
-              Align(alignment: Alignment.centerLeft, child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.pwRuleGray500)),
-              SizedBox(height: mediaH / 25),
+            // msg
+            Align(alignment: Alignment.centerLeft, child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.pwRuleGray500)),
+            SizedBox(height: mediaH / 25),
 
-              // New Password Confirm
-              CustomInputBar(titleName: "新しいパスワード（確認）", backendPart: _buildNewPasswordConfirm(context)),
-              SizedBox(height: mediaH / 25),
+            // New Password Confirm
+            CustomInputBar(titleName: "新しいパスワード（確認）", backendPart: _buildNewPasswordConfirm(context)),
+            SizedBox(height: mediaH / 25),
 
-              // Button
-              _buildNextButton(context)
-            ],
-          ),
+            // Button
+            _buildNextButton(context)
+          ],
         ),
       ),
     );
@@ -157,18 +147,9 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
   Widget _buildNextButton(BuildContext context) {
     return CustomOutlinedButton(
       text: "設定",
-      buttonTextStyle: theme.textTheme.titleMedium,
       onPressed: () {
         resetPasswordGrpcRequest(context);
       },
     );
-  }
-
-  onTapReturn(BuildContext context) {
-    Navigator.pop(context);
-  }
-
-  onTapNextPage(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.newPasswordDone);
   }
 }

@@ -340,6 +340,13 @@ service Chat {
             get: "/v1/Get_LastMsg"
         };
     }
+
+    rpc GetChatRow(GetChatRowRequest) returns (GetChatRowResponse){
+        option (google.api.http) = {
+            get: "/v1/Get_RowMsg"
+        };
+    }
+
     rpc UpdateRead(UpdateReadRequest) returns (google.protobuf.Empty){
         option (google.api.http) = {
             put: "/v1/Update_Read"

@@ -19,13 +19,9 @@ class Accompany extends $pb.GeneratedMessage {
   factory Accompany({
     $core.int? userID,
     $core.int? era,
-    $core.String? city,
-    $core.String? gender,
     $core.String? speaklanguage,
     $core.String? findType,
-    $core.String? findTarget,
     $core.String? sociability,
-    $core.bool? certification,
     $16.Timestamp? infoChangedAt,
   }) {
     final $result = create();
@@ -35,26 +31,14 @@ class Accompany extends $pb.GeneratedMessage {
     if (era != null) {
       $result.era = era;
     }
-    if (city != null) {
-      $result.city = city;
-    }
-    if (gender != null) {
-      $result.gender = gender;
-    }
     if (speaklanguage != null) {
       $result.speaklanguage = speaklanguage;
     }
     if (findType != null) {
       $result.findType = findType;
     }
-    if (findTarget != null) {
-      $result.findTarget = findTarget;
-    }
     if (sociability != null) {
       $result.sociability = sociability;
-    }
-    if (certification != null) {
-      $result.certification = certification;
     }
     if (infoChangedAt != null) {
       $result.infoChangedAt = infoChangedAt;
@@ -68,14 +52,10 @@ class Accompany extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Accompany', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'UserID', $pb.PbFieldType.O3, protoName: 'UserID')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'Era', $pb.PbFieldType.O3, protoName: 'Era')
-    ..aOS(3, _omitFieldNames ? '' : 'City', protoName: 'City')
-    ..aOS(4, _omitFieldNames ? '' : 'Gender', protoName: 'Gender')
-    ..aOS(5, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
-    ..aOS(6, _omitFieldNames ? '' : 'FindType', protoName: 'FindType')
-    ..aOS(7, _omitFieldNames ? '' : 'FindTarget', protoName: 'FindTarget')
-    ..aOS(8, _omitFieldNames ? '' : 'Sociability', protoName: 'Sociability')
-    ..aOB(9, _omitFieldNames ? '' : 'Certification', protoName: 'Certification')
-    ..aOM<$16.Timestamp>(10, _omitFieldNames ? '' : 'InfoChangedAt', protoName: 'InfoChangedAt', subBuilder: $16.Timestamp.create)
+    ..aOS(3, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
+    ..aOS(4, _omitFieldNames ? '' : 'FindType', protoName: 'FindType')
+    ..aOS(5, _omitFieldNames ? '' : 'Sociability', protoName: 'Sociability')
+    ..aOM<$16.Timestamp>(6, _omitFieldNames ? '' : 'InfoChangedAt', protoName: 'InfoChangedAt', subBuilder: $16.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -119,78 +99,42 @@ class Accompany extends $pb.GeneratedMessage {
   void clearEra() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get city => $_getSZ(2);
+  $core.String get speaklanguage => $_getSZ(2);
   @$pb.TagNumber(3)
-  set city($core.String v) { $_setString(2, v); }
+  set speaklanguage($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasCity() => $_has(2);
+  $core.bool hasSpeaklanguage() => $_has(2);
   @$pb.TagNumber(3)
-  void clearCity() => clearField(3);
+  void clearSpeaklanguage() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get gender => $_getSZ(3);
+  $core.String get findType => $_getSZ(3);
   @$pb.TagNumber(4)
-  set gender($core.String v) { $_setString(3, v); }
+  set findType($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasGender() => $_has(3);
+  $core.bool hasFindType() => $_has(3);
   @$pb.TagNumber(4)
-  void clearGender() => clearField(4);
+  void clearFindType() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get speaklanguage => $_getSZ(4);
+  $core.String get sociability => $_getSZ(4);
   @$pb.TagNumber(5)
-  set speaklanguage($core.String v) { $_setString(4, v); }
+  set sociability($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasSpeaklanguage() => $_has(4);
+  $core.bool hasSociability() => $_has(4);
   @$pb.TagNumber(5)
-  void clearSpeaklanguage() => clearField(5);
+  void clearSociability() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.String get findType => $_getSZ(5);
+  $16.Timestamp get infoChangedAt => $_getN(5);
   @$pb.TagNumber(6)
-  set findType($core.String v) { $_setString(5, v); }
+  set infoChangedAt($16.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
-  $core.bool hasFindType() => $_has(5);
+  $core.bool hasInfoChangedAt() => $_has(5);
   @$pb.TagNumber(6)
-  void clearFindType() => clearField(6);
-
-  @$pb.TagNumber(7)
-  $core.String get findTarget => $_getSZ(6);
-  @$pb.TagNumber(7)
-  set findTarget($core.String v) { $_setString(6, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasFindTarget() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearFindTarget() => clearField(7);
-
-  @$pb.TagNumber(8)
-  $core.String get sociability => $_getSZ(7);
-  @$pb.TagNumber(8)
-  set sociability($core.String v) { $_setString(7, v); }
-  @$pb.TagNumber(8)
-  $core.bool hasSociability() => $_has(7);
-  @$pb.TagNumber(8)
-  void clearSociability() => clearField(8);
-
-  @$pb.TagNumber(9)
-  $core.bool get certification => $_getBF(8);
-  @$pb.TagNumber(9)
-  set certification($core.bool v) { $_setBool(8, v); }
-  @$pb.TagNumber(9)
-  $core.bool hasCertification() => $_has(8);
-  @$pb.TagNumber(9)
-  void clearCertification() => clearField(9);
-
-  @$pb.TagNumber(10)
-  $16.Timestamp get infoChangedAt => $_getN(9);
-  @$pb.TagNumber(10)
-  set infoChangedAt($16.Timestamp v) { setField(10, v); }
-  @$pb.TagNumber(10)
-  $core.bool hasInfoChangedAt() => $_has(9);
-  @$pb.TagNumber(10)
-  void clearInfoChangedAt() => clearField(10);
-  @$pb.TagNumber(10)
-  $16.Timestamp ensureInfoChangedAt() => $_ensure(9);
+  void clearInfoChangedAt() => clearField(6);
+  @$pb.TagNumber(6)
+  $16.Timestamp ensureInfoChangedAt() => $_ensure(5);
 }
 
 

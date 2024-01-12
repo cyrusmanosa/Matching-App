@@ -108,6 +108,24 @@ func (server *Server) GetLastMsg(ctx context.Context, req *pb.GetLastMsgRequest)
 	return rsp, nil
 }
 
+func (server *Server) GetChatRow(ctx context.Context, req *pb.GetChatRowRequest) (*pb.GetChatRowResponse, error) {
+	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
+
+	row, err := server.chatStore.GetChatRow(ctx, tablename)
+	if err != nil {
+		errCode := db.ErrorCode(err)
+		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+			return nil, status.Errorf(codes.NotFound, "table not found")
+		}
+		return nil, status.Errorf(codes.Internal, "failed to get data: %s", err)
+	}
+	rsp := &pb.GetChatRowResponse{
+		Row: row,
+	}
+
+	return rsp, nil
+}
+
 func (server *Server) UpdateRead(ctx context.Context, req *pb.UpdateReadRequest) (*emptypb.Empty, error) {
 	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
 	err := server.chatStore.UpdateRead(ctx, req.GetTargetID(), tablename)

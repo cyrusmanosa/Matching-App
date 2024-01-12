@@ -9,7 +9,10 @@ option go_package = "Backend/pb";
 message Targetlist {
     int32 UserID = 1;
     int32 Target1ID = 2;
-    int32 Target2ID = 3;
-    int32 Target3ID = 4;
-    google.protobuf.Timestamp UpdatedAt = 5;
+    string T1Type = 3;
+    int32 Target2ID = 4;
+    string T2Type = 5;
+    int32 Target3ID = 6;
+    string T3Type = 7;
+    google.protobuf.Timestamp UpdatedAt = 8;
 }

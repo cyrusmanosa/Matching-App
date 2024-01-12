@@ -29,18 +29,14 @@ func (server *Server) CreateAccompany(ctx context.Context, req *pb.CreateAccompa
 		return nil, fmt.Errorf("invalid access token: %v", err)
 	}
 
-	Ac := info.CreateAccompanyRequestParams{
+	Ac := info.CreateAccompanyParams{
 		UserID:        token.UserID,
 		Era:           req.GetEra(),
-		City:          req.GetCity(),
-		Gender:        req.GetGender(),
 		Speaklanguage: req.GetSpeaklanguage(),
 		FindType:      req.GetFindType(),
-		FindTarget:    req.GetFindTarget(),
 		Sociability:   req.GetSociability(),
-		Certification: req.GetCertification(),
 	}
-	accompany, err := server.infoStore.CreateAccompanyRequest(ctx, Ac)
+	accompany, err := server.infoStore.CreateAccompany(ctx, Ac)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -71,7 +67,7 @@ func (server *Server) GetAccompany(ctx context.Context, req *pb.GetAccompanyRequ
 		return nil, fmt.Errorf("invalid access token: %v", err)
 	}
 
-	accompany, err := server.infoStore.GetUserAccompany(ctx, token.UserID)
+	accompany, err := server.infoStore.GetAccompany(ctx, token.UserID)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -102,18 +98,14 @@ func (server *Server) UpdateAccompany(ctx context.Context, req *pb.UpdateAccompa
 		return nil, fmt.Errorf("invalid access token: %v", err)
 	}
 
-	Ac := info.UpdateUserAccompanyParams{
+	Ac := info.UpdateAccompanyParams{
 		UserID:        token.UserID,
 		Era:           req.GetEra(),
-		City:          req.GetCity(),
-		Gender:        req.GetGender(),
 		Speaklanguage: req.GetSpeaklanguage(),
 		FindType:      req.GetFindType(),
-		FindTarget:    req.GetFindTarget(),
 		Sociability:   req.GetSociability(),
-		Certification: req.GetCertification(),
 	}
-	accompany, err := server.infoStore.UpdateUserAccompany(ctx, Ac)
+	accompany, err := server.infoStore.UpdateAccompany(ctx, Ac)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -144,7 +136,7 @@ func (server *Server) DeleteAccompany(ctx context.Context, req *pb.DeleteAccompa
 		return nil, fmt.Errorf("invalid access token: %v", err)
 	}
 
-	err = server.infoStore.DeleteUserAccompany(ctx, token.UserID)
+	err = server.infoStore.DeleteAccompany(ctx, token.UserID)
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {

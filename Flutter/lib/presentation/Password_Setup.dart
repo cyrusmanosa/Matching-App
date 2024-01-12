@@ -81,12 +81,12 @@ class _PasswordSetupState extends State<PasswordSetup> {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
+      appBar: AppBar(automaticallyImplyLeading: true),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
+        padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
         child: Column(
           children: [
             // Logo and Slogan
-            SizedBox(height: mediaH / 15),
             CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 3.5),
             CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3),
             SizedBox(height: mediaH / 30),

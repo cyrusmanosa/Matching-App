@@ -1,7 +1,6 @@
 package main
 
 import (
-	"Backend/api"
 	chdb "Backend/db/sqlc/chat"
 	indb "Backend/db/sqlc/info"
 	"Backend/gapi"
@@ -48,7 +47,6 @@ func main() {
 	chstore := chdb.NewChatStore(chat_conn)
 
 	runGrpcServer(config, instore, chstore)
-	// runGinServer(config, store)
 }
 
 // Grpc
@@ -79,17 +77,5 @@ func runGrpcServer(config util.Config, inStore indb.InfoStore, chStore chdb.Chat
 	err = grpcServer.Serve(listener)
 	if err != nil {
 		log.Fatal().Msg("error connecting to GRPC")
-	}
-}
-
-func runGinServer(config util.Config, store indb.InfoStore) {
-	server, err := api.NewServer(config, store)
-	if err != nil {
-		log.Fatal().Err(err).Msg("cannot create server")
-	}
-
-	err = server.Start(config.HTTPServerAddress)
-	if err != nil {
-		log.Fatal().Err(err).Msg("cannot start server")
 	}
 }

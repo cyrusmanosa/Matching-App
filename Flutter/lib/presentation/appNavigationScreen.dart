@@ -44,11 +44,6 @@ class AppNavigationScreen extends StatelessWidget {
                       ),
                       _buildScreenTitle(
                         context,
-                        userName: "新しいパスワードーOK",
-                        onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.newPasswordDone),
-                      ),
-                      _buildScreenTitle(
-                        context,
                         userName: "ターゲットを削除",
                         onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.deleteTarget),
                       ),
@@ -106,11 +101,6 @@ class AppNavigationScreen extends StatelessWidget {
                         context,
                         userName: "H",
                         onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.hobbyCondition),
-                      ),
-                      _buildScreenTitle(
-                        context,
-                        userName: "HR",
-                        onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.hobbyConditionRepair),
                       ),
                       _buildScreenTitle(
                         context,

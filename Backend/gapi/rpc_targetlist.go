@@ -32,8 +32,11 @@ func (server *Server) CreateTargetList(ctx context.Context, req *pb.CreateTarget
 	tl := info.TargetUserListParams{
 		UserID:    token.UserID,
 		Target1ID: req.GetTarget1ID(),
+		T1Type:    req.GetT1Type(),
 		Target2ID: req.GetTarget2ID(),
+		T2Type:    req.GetT2Type(),
 		Target3ID: req.GetTarget3ID(),
+		T3Type:    req.GetT3Type(),
 	}
 	targetlist, err := server.infoStore.TargetUserList(ctx, tl)
 	if err != nil {
@@ -99,9 +102,11 @@ func (server *Server) UpdateTargetList(ctx context.Context, req *pb.UpdateTarget
 
 	tl := info.UpdateTargetListParams{
 		UserID:    token.UserID,
-		Target1ID: req.GetTarget1ID(),
+		T1Type:    req.GetT1Type(),
 		Target2ID: req.GetTarget2ID(),
+		T2Type:    req.GetT2Type(),
 		Target3ID: req.GetTarget3ID(),
+		T3Type:    req.GetT3Type(),
 	}
 	targetlist, err := server.infoStore.UpdateTargetList(ctx, tl)
 	if err != nil {

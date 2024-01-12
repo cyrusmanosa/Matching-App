@@ -93,7 +93,6 @@ Table accompanyrequest {
 
 Table image {
   user_id INT [ref: > fixinformation.user_id, pk]
-  qr VARCHAR [not null, unique]
   img1 VARCHAR [not null]
   img2 VARCHAR [not null]
   img3 VARCHAR [not null]

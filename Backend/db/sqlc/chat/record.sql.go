@@ -163,6 +163,17 @@ func (q *Queries) GetLastMsg(ctx context.Context, targetID int32, tablename stri
     return i, err
 }
 
+func (q *Queries) GetChatRow(ctx context.Context, tablename string) (int32, error) {
+    getRow := fmt.Sprintf(`-- name: GetChatRow :one
+    SELECT COUNT(*) FROM %s WHERE role_type = 'sender';
+    `, tablename)
+
+	row := q.db.QueryRow(ctx, getRow)
+	var count int32
+	err := row.Scan(&count)
+	return count, err
+}
+
 type UpdateRecordParams struct {
     TargetID  int32         `json:"target_id"`
     MediaType string        `json:"media_type"`
