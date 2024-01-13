@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
@@ -45,7 +44,6 @@ class _InformationEditState extends State<InformationEdit> {
   TextEditingController updateIntroduceController = TextEditingController();
 
   String? oldPath;
-  List<File>? _oldimageFile;
   List<File>? _newimageFile;
 
   @override
@@ -63,7 +61,6 @@ class _InformationEditState extends State<InformationEdit> {
     updateSociabilityController = TextEditingController(text: widget.canData?.sociability);
     updateReligiousController = TextEditingController(text: widget.canData?.religious);
     updateIntroduceController = TextEditingController(text: widget.canData?.introduce);
-    _oldimageFile = widget.imgIcon!;
     _newimageFile = widget.imgIcon!;
   }
 
