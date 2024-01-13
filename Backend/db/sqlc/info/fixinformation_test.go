@@ -37,7 +37,7 @@ func CreateRandomUserFixInformaion(t *testing.T) Fixinformation {
 		Gender:         gofakeit.Gender(),
 		Blood:          util.RandomBlood(),
 		Age:            age,
-		Constellation:  util.Constellation(M, D),
+		Constellation:  util.SwitchConstellation(M, D),
 		Certification:  gofakeit.Bool(),
 	}
 	fix, err := testinfoQueries.CreateUserFixInformation(context.Background(), arg)
@@ -58,7 +58,6 @@ func CreateRandomUserFixInformaion(t *testing.T) Fixinformation {
 
 	require.NotZero(t, fix.UserID)
 	require.NotZero(t, fix.CreatedAt)
-	require.NotZero(t, fix.PasswordChangedAt)
 
 	return fix
 }
@@ -66,10 +65,9 @@ func CreateRandomUserFixInformaion(t *testing.T) Fixinformation {
 func TestGetUserFixInformation(t *testing.T) {
 	user1 := CreateRandomUserFixInformaion(t)
 
-	user2, err := testinfoQueries.GetUserFixInformation(context.Background(), user1.Email)
+	user2, err := testinfoQueries.GetUserFixInformation(context.Background(), user1.UserID)
 	require.NoError(t, err)
 	require.NotEmpty(t, user2)
-
 	require.Equal(t, user1.FirstName, user2.FirstName)
 	require.Equal(t, user1.LastName, user2.LastName)
 	require.Equal(t, user1.Email, user2.Email)
@@ -120,4 +118,12 @@ func TestDeleteUser(t *testing.T) {
 
 	user1 := testinfoQueries.DeleteUser(context.Background(), user.UserID)
 	require.Empty(t, user1)
+}
+
+func TestLoginAtEmail(t *testing.T) {
+	user := CreateRandomUserFixInformaion(t)
+
+	Login, err := testinfoQueries.LoginAtEmail(context.Background(), user.Email)
+	require.NoError(t, err)
+	require.NotEmpty(t, Login)
 }

@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package pb;
+
+import "payment.proto";
+
+option go_package = "Backend/pb";
+
+
+message CreatePaymentRequest {
+    string SessionID = 1;
+    string PaymentType = 2;
+    int32 Amount = 3;
+    string Product = 4;
+}
+
+message CreatePaymentResponse {
+    Payment payment = 1;
+}
+
+message GetPaymentRequest {
+    string PayID = 1;
+}
+
+message GetPaymentResponse {
+    Payment payment = 1;
+}

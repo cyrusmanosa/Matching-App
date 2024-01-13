@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package pb;
+
+import "lover.proto";
+
+option go_package = "Backend/pb";
+
+// Create
+message CreateLoverRequest {
+    string SessionID = 1; 
+    int32 MinAge = 2;
+    int32 MaxAge = 3;
+    string City = 4;
+    string Gender = 5;
+    string Sexual = 6;
+    string Speaklanguage = 7;
+}
+message CreateLoverResponse {
+    Lover l = 1;
+}
+
+// Get
+message GetLoverRequest {
+    string SessionID = 1; 
+}
+message GetLoverResponse {
+    Lover l = 1;
+}
+
+// Update
+message UpdateLoverRequest {
+    string SessionID = 1; 
+    int32 MinAge = 2;
+    int32 MaxAge = 3;
+    string City = 4;
+    string Gender = 5;
+    string Sexual = 6;
+    string Speaklanguage = 7;
+}
+message UpdateLoverResponse {
+    Lover l = 1;
+}
+
+// Delete
+message DeleteLoverRequest {
+    string SessionID = 1; 
+}
+ 

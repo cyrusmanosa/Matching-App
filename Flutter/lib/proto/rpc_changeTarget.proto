@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package pb;
+
+import "changeTarget.proto";
+
+option go_package = "Backend/pb";
+
+// Create 
+message CreateChangeTargetRequest {
+    string SessionID = 1; 
+    int32 ChangeUserID = 2;
+    string Reason = 3;
+}
+
+message CreateChangeTargetResponse {
+    ChangeTarget ct = 1;
+}
+
+// Get
+message GetChangeTargetRequest {
+    string SessionID = 1; 
+}
+
+message GetChangeTargetResponse {
+    ChangeTarget ct = 1;
+}
+
+// Delete
+message DeleteChangeTargetRequest {
+    string SessionID = 1; 
+}

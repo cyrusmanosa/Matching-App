@@ -42,6 +42,6 @@ SET nickname = $2,
 WHERE user_id = $1
 RETURNING *;
 
--- name: DeleteInformation :exec
+-- name: DeleteCanChangeInformation :exec
 DELETE FROM canchangeinformation 
 WHERE user_id = $1;

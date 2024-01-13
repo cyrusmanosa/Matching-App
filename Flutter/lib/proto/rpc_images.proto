@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package pb;
+
+import "images.proto";
+
+option go_package = "Backend/pb";
+
+// Create 
+message CreateImagesRequest {
+    string SessionID = 1; 
+    bytes Img1 = 2;
+    bytes Img2 = 3;
+    bytes Img3 = 4;
+    bytes Img4 = 5;
+    bytes img5 = 6;
+}
+message CreateImagesResponse {
+    Images Img = 1;
+}
+
+// Get
+message GetImagesRequest {
+    string SessionID = 1;
+    int32 UserID = 2; 
+}
+
+message GetImagesResponse {
+    Images Img = 1;
+}
+
+// Updat
+message UpdateImagesRequest {
+    string SessionID = 1; 
+    bytes Img1 = 2;
+    bytes Img2 = 3;
+    bytes Img3 = 4;
+    bytes Img4 = 5;
+    bytes img5 = 6;
+}
+message UpdateImagesResponse {
+    Images Img = 1;
+}
+
+// Delete
+message DeleteImagesRequest {
+    string SessionID = 1; 
+}
+message DeleteResponse {
+    string msg = 1;
+}

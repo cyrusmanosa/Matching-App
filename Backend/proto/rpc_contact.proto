@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package pb;
+
+import "contact.proto";
+
+option go_package = "Backend/pb";
+
+
+// Create 
+message CreateContactRequest {
+    string SessionID = 1; 
+    string ContactType = 2;
+    string Message = 3;
+    string status = 4;
+}
+message CreateContactResponse {
+    Contact c = 1;
+}
+
+// Get
+message GetContactRequest {
+    string SessionID = 1; 
+    int32 ContactID = 2;
+}
+message GetContactResponse {
+    Contact c = 1;
+}
+
+// Update
+message UpdateContactRequest {
+    string SessionID = 1; 
+    int32 ContactID = 2;
+    string ContactType = 3;
+    string Message = 4;
+    string status = 5;
+}
+message UpdateContactResponse {
+    Contact c = 1;
+}
+
+// Delete
+message DeleteContactRequest {
+    string SessionID = 1; 
+    int32 ContactID = 2;
+}

@@ -7,13 +7,14 @@ import (
 )
 
 type Config struct {
-	DBDriver             string        `mapstructure:"DB_Driver"`
-	DBSourceInfo         string        `mapstructure:"DB_Source_Info"`
-	DBSourceChat         string        `mapstructure:"DB_Source_Chat"`
-	ServerAddress        string        `mapstructure:"SERVER_ADDRESS"`
-	TokenSymmetricKey    string        `mapstructure:"TOKEN_SYMMETRIC_KEY"`
-	AccessTokenDuration  time.Duration `mapstructure:"ACCESS_TOKEN_DURATION"`
-	RefreshTokenDuration time.Duration `mapstructure:"REFRESH_TOKEN_DURATION"`
+	Environment         string        `mapstructure:"ENVIRONMENT"`
+	DBDriver            string        `mapstructure:"DB_Driver"`
+	DBSourceInfo        string        `mapstructure:"DB_Source_Info"`
+	DBSourceChat        string        `mapstructure:"DB_Source_Chat"`
+	HTTPServerAddress   string        `mapstructure:"HTTP_SERVER_ADDRESS"`
+	GRPCServerAddress   string        `mapstructure:"GRPC_SERVER_ADDRESS"`
+	TokenSymmetricKey   string        `mapstructure:"TOKEN_SYMMETRIC_KEY"`
+	AccessTokenDuration time.Duration `mapstructure:"ACCESS_TOKEN_DURATION"`
 }
 
 // LoadConfig reads the configuration from file or environment variable

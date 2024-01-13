@@ -1,0 +1,3040 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "A Bit of Everything",
+    "version": "1.0",
+    "contact": {
+      "name": "App",
+      "url": "https://github.com/cyrusmanosa/Apps",
+      "email": "cyrusmanosa@gmail.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "Information"
+    },
+    {
+      "name": "Chat"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/Check_Code": {
+      "post": {
+        "operationId": "Information_CheckEmailCode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbCheckedEmailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbSendEmailRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Create_Accompany": {
+      "post": {
+        "summary": "/ Accompany",
+        "operationId": "Information_CreateAccompany",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbCreateAccompanyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbCreateAccompanyRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Create_CanChange": {
+      "post": {
+        "summary": "/ Can Change Information",
+        "operationId": "Information_CreateCanChange",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbCreateCanChangeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbCreateCanChangeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Create_ChangeTarget": {
+      "post": {
+        "summary": "Change Target",
+        "operationId": "Information_CreateChangeTarget",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbCreateChangeTargetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbCreateChangeTargetRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Create_ChatRecord": {
+      "post": {
+        "operationId": "Chat_CreateChatRecord",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbCreateChatRecordResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbCreateChatRecordRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Chat"
+        ]
+      }
+    },
+    "/v1/Create_ChatTable": {
+      "post": {
+        "operationId": "Chat_CreateChatTable",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbCreateChatTableRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Chat"
+        ]
+      }
+    },
+    "/v1/Create_Contact": {
+      "post": {
+        "summary": "Complaint",
+        "operationId": "Information_CreateContact",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbCreateContactResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbCreateContactRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Create_Fix": {
+      "post": {
+        "summary": "/ Fix Information",
+        "operationId": "Information_CreateFix",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbCreateFixResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbCreateFixRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Create_Hobby": {
+      "post": {
+        "summary": "Hobby",
+        "operationId": "Information_CreateHobby",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbCreateHobbyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbCreateHobbyRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Create_Images": {
+      "post": {
+        "summary": "images",
+        "operationId": "Information_CreateImages",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbCreateImagesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbCreateImagesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Create_Lover": {
+      "post": {
+        "summary": "Lover",
+        "operationId": "Information_CreateLover",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbCreateLoverResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbCreateLoverRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Create_Payment": {
+      "post": {
+        "summary": "Payment",
+        "operationId": "Information_CreatePayment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbCreatePaymentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbCreatePaymentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Create_TargetList": {
+      "post": {
+        "summary": "Target List",
+        "operationId": "Information_CreateTargetList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbCreateTargetListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbCreateTargetListRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Del_Accompany": {
+      "delete": {
+        "operationId": "Information_DeleteAccompany",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Del_CanChange": {
+      "delete": {
+        "operationId": "Information_DeleteCanChange",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Del_ChangeTarget": {
+      "delete": {
+        "operationId": "Information_DeleteChangeTarget",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Del_ChatRecord": {
+      "delete": {
+        "operationId": "Chat_DeleteChatRecord",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "UserID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "TargetID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "CreateAt",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "Chat"
+        ]
+      }
+    },
+    "/v1/Del_Contact": {
+      "delete": {
+        "operationId": "Information_DeleteContact",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "ContactID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Del_Fix": {
+      "delete": {
+        "operationId": "Information_DeleteFix",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Del_Images": {
+      "delete": {
+        "operationId": "Information_DeleteImages",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Del_Lover": {
+      "delete": {
+        "operationId": "Information_DeleteLover",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Get_Accompany": {
+      "get": {
+        "operationId": "Information_GetAccompany",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetAccompanyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Get_CanChange": {
+      "get": {
+        "operationId": "Information_GetCanChange",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetCanChangeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "UserID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Get_ChangeTarget": {
+      "get": {
+        "operationId": "Information_GetChangeTarget",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetChangeTargetResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Get_ChatRecord": {
+      "get": {
+        "operationId": "Chat_GetChatRecord",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetChatRecordResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "UserID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "TargetID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Chat"
+        ]
+      }
+    },
+    "/v1/Get_ChatTargetID": {
+      "get": {
+        "operationId": "Chat_GetTargetID",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetTargetIDResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "UserID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Chat"
+        ]
+      }
+    },
+    "/v1/Get_Contact": {
+      "get": {
+        "operationId": "Information_GetContact",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetContactResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "ContactID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Get_Fix": {
+      "get": {
+        "operationId": "Information_GetFix",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetFixResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Get_Hobby": {
+      "get": {
+        "operationId": "Information_GetHobby",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetHobbyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Get_Images": {
+      "get": {
+        "operationId": "Information_GetImages",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetImagesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "UserID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Get_LastMsg": {
+      "get": {
+        "operationId": "Chat_GetLastMsg",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetLastMsgResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "UserID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "TargetID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Chat"
+        ]
+      }
+    },
+    "/v1/Get_Lover": {
+      "get": {
+        "operationId": "Information_GetLover",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetLoverResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Get_Payment": {
+      "get": {
+        "operationId": "Information_GetPayment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetPaymentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "PayID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Get_RowMsg": {
+      "get": {
+        "operationId": "Chat_GetChatRow",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetChatRowResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "UserID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Chat"
+        ]
+      }
+    },
+    "/v1/Get_TargetList": {
+      "get": {
+        "operationId": "Information_GetTargetList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetTargetListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Get_UserID": {
+      "get": {
+        "summary": "Session",
+        "operationId": "Information_GetUserID",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbGetUserIDResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Hobby": {
+      "delete": {
+        "operationId": "Information_DeleteHobby",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Login_User": {
+      "post": {
+        "operationId": "Information_LoginUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbLoginUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbLoginUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Password_Setup": {
+      "put": {
+        "operationId": "Information_InputPassword",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbInputPasswordResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbInputPasswordRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Reset_Password": {
+      "put": {
+        "operationId": "Information_ResetPassword",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbResetPasswordResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbResetPasswordRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Sign_Up": {
+      "post": {
+        "operationId": "Information_CheckEmail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbCheckEmailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbCheckEmailRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/TargetList": {
+      "delete": {
+        "operationId": "Information_DeleteTargetList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Update_Accompany": {
+      "put": {
+        "operationId": "Information_UpdateAccompany",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbUpdateAccompanyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbUpdateAccompanyRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Update_CanChange": {
+      "put": {
+        "operationId": "Information_UpdateCanChange",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbUpdateCanChangeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbUpdateCanChangeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Update_ChatRecord": {
+      "put": {
+        "operationId": "Chat_UpdateChatRecord",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbUpdateChatRecordResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbUpdateChatRecordRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Chat"
+        ]
+      }
+    },
+    "/v1/Update_Contact": {
+      "put": {
+        "operationId": "Information_UpdateContact",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbUpdateContactResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbUpdateContactRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Update_Hobby": {
+      "put": {
+        "operationId": "Information_UpdateHobby",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbUpdateHobbyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbUpdateHobbyRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Update_Images": {
+      "put": {
+        "operationId": "Information_UpdateImages",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbUpdateImagesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbUpdateImagesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Update_Lover": {
+      "put": {
+        "operationId": "Information_UpdateLover",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbUpdateLoverResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbUpdateLoverRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Update_Read": {
+      "put": {
+        "operationId": "Chat_UpdateRead",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbUpdateReadRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Chat"
+        ]
+      }
+    },
+    "/v1/Update_TargetList": {
+      "put": {
+        "operationId": "Information_UpdateTargetList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbUpdateTargetListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbUpdateTargetListRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "pbAccompany": {
+      "type": "object",
+      "properties": {
+        "UserID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Era": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Speaklanguage": {
+          "type": "string"
+        },
+        "FindType": {
+          "type": "string"
+        },
+        "Sociability": {
+          "type": "string"
+        },
+        "InfoChangedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pbCanChange": {
+      "type": "object",
+      "properties": {
+        "UserID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "NickName": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "Sexual": {
+          "type": "string"
+        },
+        "Height": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Weight": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Speaklanguage": {
+          "type": "string"
+        },
+        "Education": {
+          "type": "string"
+        },
+        "Job": {
+          "type": "string"
+        },
+        "AnnualSalary": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Sociability": {
+          "type": "string"
+        },
+        "Religious": {
+          "type": "string"
+        },
+        "Introduce": {
+          "type": "string"
+        },
+        "InfoChangedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pbChangeTarget": {
+      "type": "object",
+      "properties": {
+        "UserID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ChangeUserID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Reason": {
+          "type": "string"
+        },
+        "Frequency": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ChangeTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pbChatRecord": {
+      "type": "object",
+      "properties": {
+        "TargetID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "RoleType": {
+          "type": "string"
+        },
+        "MediaType": {
+          "type": "string"
+        },
+        "Media": {
+          "type": "string"
+        },
+        "Isread": {
+          "type": "boolean"
+        },
+        "CreatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pbChatRecordNoID": {
+      "type": "object",
+      "properties": {
+        "RoleType": {
+          "type": "string"
+        },
+        "MediaType": {
+          "type": "string"
+        },
+        "Media": {
+          "type": "string"
+        },
+        "Isread": {
+          "type": "boolean"
+        },
+        "CreatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pbCheckEmailRequest": {
+      "type": "object",
+      "properties": {
+        "Email": {
+          "type": "string"
+        }
+      }
+    },
+    "pbCheckEmailResponse": {
+      "type": "object",
+      "properties": {
+        "Email": {
+          "type": "string"
+        },
+        "CheckCode": {
+          "type": "string"
+        }
+      }
+    },
+    "pbCheckedEmailResponse": {
+      "type": "object",
+      "properties": {
+        "Email": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        }
+      }
+    },
+    "pbContact": {
+      "type": "object",
+      "properties": {
+        "ContactID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "UserID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ContactType": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        },
+        "ContactAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pbCreateAccompanyRequest": {
+      "type": "object",
+      "properties": {
+        "SessionID": {
+          "type": "string"
+        },
+        "Era": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Speaklanguage": {
+          "type": "string"
+        },
+        "FindType": {
+          "type": "string"
+        },
+        "Sociability": {
+          "type": "string"
+        }
+      },
+      "title": "Create"
+    },
+    "pbCreateAccompanyResponse": {
+      "type": "object",
+      "properties": {
+        "ac": {
+          "$ref": "#/definitions/pbAccompany"
+        }
+      }
+    },
+    "pbCreateCanChangeRequest": {
+      "type": "object",
+      "properties": {
+        "SessionID": {
+          "type": "string"
+        },
+        "NickName": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "Sexual": {
+          "type": "string"
+        },
+        "Height": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Weight": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Speaklanguage": {
+          "type": "string"
+        },
+        "Education": {
+          "type": "string"
+        },
+        "Job": {
+          "type": "string"
+        },
+        "AnnualSalary": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Sociability": {
+          "type": "string"
+        },
+        "Religious": {
+          "type": "string"
+        },
+        "Introduce": {
+          "type": "string"
+        }
+      },
+      "title": "Create"
+    },
+    "pbCreateCanChangeResponse": {
+      "type": "object",
+      "properties": {
+        "CanChangeInfo": {
+          "$ref": "#/definitions/pbCanChange"
+        }
+      }
+    },
+    "pbCreateChangeTargetRequest": {
+      "type": "object",
+      "properties": {
+        "SessionID": {
+          "type": "string"
+        },
+        "ChangeUserID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Reason": {
+          "type": "string"
+        }
+      },
+      "title": "Create"
+    },
+    "pbCreateChangeTargetResponse": {
+      "type": "object",
+      "properties": {
+        "ct": {
+          "$ref": "#/definitions/pbChangeTarget"
+        }
+      }
+    },
+    "pbCreateChatRecordRequest": {
+      "type": "object",
+      "properties": {
+        "UserID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "TargetID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "RoleType": {
+          "type": "string"
+        },
+        "MediaType": {
+          "type": "string"
+        },
+        "Media": {
+          "type": "string"
+        }
+      },
+      "title": "Create"
+    },
+    "pbCreateChatRecordResponse": {
+      "type": "object",
+      "properties": {
+        "ChatRecord": {
+          "$ref": "#/definitions/pbChatRecord"
+        }
+      }
+    },
+    "pbCreateChatTableRequest": {
+      "type": "object",
+      "properties": {
+        "UserID": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Create Chat Table"
+    },
+    "pbCreateContactRequest": {
+      "type": "object",
+      "properties": {
+        "SessionID": {
+          "type": "string"
+        },
+        "ContactType": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "title": "Create"
+    },
+    "pbCreateContactResponse": {
+      "type": "object",
+      "properties": {
+        "c": {
+          "$ref": "#/definitions/pbContact"
+        }
+      }
+    },
+    "pbCreateFixRequest": {
+      "type": "object",
+      "properties": {
+        "FirstName": {
+          "type": "string"
+        },
+        "LastName": {
+          "type": "string"
+        },
+        "Birth": {
+          "type": "string"
+        },
+        "Country": {
+          "type": "string"
+        },
+        "Gender": {
+          "type": "string"
+        },
+        "Blood": {
+          "type": "string"
+        }
+      },
+      "title": "Create"
+    },
+    "pbCreateFixResponse": {
+      "type": "object",
+      "properties": {
+        "SessionsID": {
+          "type": "string"
+        },
+        "Email": {
+          "type": "string"
+        },
+        "CreateAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "AccessTokenExpiresAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pbCreateHobbyRequest": {
+      "type": "object",
+      "properties": {
+        "SessionID": {
+          "type": "string"
+        },
+        "Era": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "City": {
+          "type": "string"
+        },
+        "Gender": {
+          "type": "string"
+        },
+        "Speaklanguage": {
+          "type": "string"
+        },
+        "FindType": {
+          "type": "string"
+        },
+        "FindTarget": {
+          "type": "string"
+        },
+        "Experience": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Create"
+    },
+    "pbCreateHobbyResponse": {
+      "type": "object",
+      "properties": {
+        "h": {
+          "$ref": "#/definitions/pbHobby"
+        }
+      }
+    },
+    "pbCreateImagesRequest": {
+      "type": "object",
+      "properties": {
+        "SessionID": {
+          "type": "string"
+        },
+        "Img1": {
+          "type": "string",
+          "format": "byte"
+        },
+        "Img2": {
+          "type": "string",
+          "format": "byte"
+        },
+        "Img3": {
+          "type": "string",
+          "format": "byte"
+        },
+        "Img4": {
+          "type": "string",
+          "format": "byte"
+        },
+        "img5": {
+          "type": "string",
+          "format": "byte"
+        }
+      },
+      "title": "Create"
+    },
+    "pbCreateImagesResponse": {
+      "type": "object",
+      "properties": {
+        "Img": {
+          "$ref": "#/definitions/pbImages"
+        }
+      }
+    },
+    "pbCreateLoverRequest": {
+      "type": "object",
+      "properties": {
+        "SessionID": {
+          "type": "string"
+        },
+        "MinAge": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MaxAge": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "City": {
+          "type": "string"
+        },
+        "Gender": {
+          "type": "string"
+        },
+        "Sexual": {
+          "type": "string"
+        },
+        "Speaklanguage": {
+          "type": "string"
+        }
+      },
+      "title": "Create"
+    },
+    "pbCreateLoverResponse": {
+      "type": "object",
+      "properties": {
+        "l": {
+          "$ref": "#/definitions/pbLover"
+        }
+      }
+    },
+    "pbCreatePaymentRequest": {
+      "type": "object",
+      "properties": {
+        "SessionID": {
+          "type": "string"
+        },
+        "PaymentType": {
+          "type": "string"
+        },
+        "Amount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Product": {
+          "type": "string"
+        }
+      }
+    },
+    "pbCreatePaymentResponse": {
+      "type": "object",
+      "properties": {
+        "payment": {
+          "$ref": "#/definitions/pbPayment"
+        }
+      }
+    },
+    "pbCreateTargetListRequest": {
+      "type": "object",
+      "properties": {
+        "SessionID": {
+          "type": "string"
+        },
+        "Target1ID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "T1Type": {
+          "type": "string"
+        },
+        "Target2ID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "T2Type": {
+          "type": "string"
+        },
+        "Target3ID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "T3Type": {
+          "type": "string"
+        }
+      },
+      "title": "Create"
+    },
+    "pbCreateTargetListResponse": {
+      "type": "object",
+      "properties": {
+        "tl": {
+          "$ref": "#/definitions/pbTargetlist"
+        }
+      }
+    },
+    "pbGetAccompanyResponse": {
+      "type": "object",
+      "properties": {
+        "ac": {
+          "$ref": "#/definitions/pbAccompany"
+        }
+      }
+    },
+    "pbGetCanChangeResponse": {
+      "type": "object",
+      "properties": {
+        "CanChangeInfo": {
+          "$ref": "#/definitions/pbCanChange"
+        }
+      }
+    },
+    "pbGetChangeTargetResponse": {
+      "type": "object",
+      "properties": {
+        "ct": {
+          "$ref": "#/definitions/pbChangeTarget"
+        }
+      }
+    },
+    "pbGetChatRecordResponse": {
+      "type": "object",
+      "properties": {
+        "ChatRecordNoID": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/pbChatRecordNoID"
+          }
+        }
+      }
+    },
+    "pbGetChatRowResponse": {
+      "type": "object",
+      "properties": {
+        "Row": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "pbGetContactResponse": {
+      "type": "object",
+      "properties": {
+        "c": {
+          "$ref": "#/definitions/pbContact"
+        }
+      }
+    },
+    "pbGetFixResponse": {
+      "type": "object",
+      "properties": {
+        "FirstName": {
+          "type": "string"
+        },
+        "LastName": {
+          "type": "string"
+        },
+        "Birth": {
+          "type": "string"
+        },
+        "Country": {
+          "type": "string"
+        },
+        "Gender": {
+          "type": "string"
+        },
+        "Blood": {
+          "type": "string"
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "constellation": {
+          "type": "string"
+        },
+        "certification": {
+          "type": "boolean"
+        }
+      }
+    },
+    "pbGetHobbyResponse": {
+      "type": "object",
+      "properties": {
+        "h": {
+          "$ref": "#/definitions/pbHobby"
+        }
+      }
+    },
+    "pbGetImagesResponse": {
+      "type": "object",
+      "properties": {
+        "Img": {
+          "$ref": "#/definitions/pbImages"
+        }
+      }
+    },
+    "pbGetLastMsgResponse": {
+      "type": "object",
+      "properties": {
+        "MediaType": {
+          "type": "string"
+        },
+        "Media": {
+          "type": "string"
+        },
+        "Isread": {
+          "type": "boolean"
+        }
+      }
+    },
+    "pbGetLoverResponse": {
+      "type": "object",
+      "properties": {
+        "l": {
+          "$ref": "#/definitions/pbLover"
+        }
+      }
+    },
+    "pbGetPaymentResponse": {
+      "type": "object",
+      "properties": {
+        "payment": {
+          "$ref": "#/definitions/pbPayment"
+        }
+      }
+    },
+    "pbGetTargetIDResponse": {
+      "type": "object",
+      "properties": {
+        "TargetID": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    },
+    "pbGetTargetListResponse": {
+      "type": "object",
+      "properties": {
+        "tl": {
+          "$ref": "#/definitions/pbTargetlist"
+        }
+      }
+    },
+    "pbGetUserIDResponse": {
+      "type": "object",
+      "properties": {
+        "UserID": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "pbHobby": {
+      "type": "object",
+      "properties": {
+        "UserID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Era": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "City": {
+          "type": "string"
+        },
+        "Gender": {
+          "type": "string"
+        },
+        "Speaklanguage": {
+          "type": "string"
+        },
+        "FindType": {
+          "type": "string"
+        },
+        "FindTarget": {
+          "type": "string"
+        },
+        "Experience": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "InfoChangedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pbImages": {
+      "type": "object",
+      "properties": {
+        "UserID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Img1": {
+          "type": "string",
+          "format": "byte"
+        },
+        "Img2": {
+          "type": "string",
+          "format": "byte"
+        },
+        "Img3": {
+          "type": "string",
+          "format": "byte"
+        },
+        "Img4": {
+          "type": "string",
+          "format": "byte"
+        },
+        "img5": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "pbInputPasswordRequest": {
+      "type": "object",
+      "properties": {
+        "SessionID": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        }
+      }
+    },
+    "pbInputPasswordResponse": {
+      "type": "object",
+      "properties": {
+        "Message": {
+          "type": "string"
+        },
+        "PasswordChangedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pbLoginUserRequest": {
+      "type": "object",
+      "properties": {
+        "Email": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        }
+      }
+    },
+    "pbLoginUserResponse": {
+      "type": "object",
+      "properties": {
+        "SessionsID": {
+          "type": "string"
+        },
+        "Email": {
+          "type": "string"
+        },
+        "AccessTokenExpiresAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pbLover": {
+      "type": "object",
+      "properties": {
+        "UserID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MinAge": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MaxAge": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "City": {
+          "type": "string"
+        },
+        "Gender": {
+          "type": "string"
+        },
+        "Sexual": {
+          "type": "string"
+        },
+        "Speaklanguage": {
+          "type": "string"
+        },
+        "InfoChangedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pbPayment": {
+      "type": "object",
+      "properties": {
+        "PayID": {
+          "type": "string"
+        },
+        "FullName": {
+          "type": "string"
+        },
+        "PaymentType": {
+          "type": "string"
+        },
+        "Amount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Product": {
+          "type": "string"
+        },
+        "PayAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pbResetPasswordRequest": {
+      "type": "object",
+      "properties": {
+        "SessionID": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        }
+      }
+    },
+    "pbResetPasswordResponse": {
+      "type": "object",
+      "properties": {
+        "Message": {
+          "type": "string"
+        },
+        "PasswordChangedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pbSendEmailRequest": {
+      "type": "object",
+      "properties": {
+        "CheckCode": {
+          "type": "string"
+        }
+      }
+    },
+    "pbTargetlist": {
+      "type": "object",
+      "properties": {
+        "UserID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Target1ID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "T1Type": {
+          "type": "string"
+        },
+        "Target2ID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "T2Type": {
+          "type": "string"
+        },
+        "Target3ID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "T3Type": {
+          "type": "string"
+        },
+        "UpdatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pbUpdateAccompanyRequest": {
+      "type": "object",
+      "properties": {
+        "SessionID": {
+          "type": "string"
+        },
+        "Era": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Speaklanguage": {
+          "type": "string"
+        },
+        "FindType": {
+          "type": "string"
+        },
+        "Sociability": {
+          "type": "string"
+        }
+      },
+      "title": "Update"
+    },
+    "pbUpdateAccompanyResponse": {
+      "type": "object",
+      "properties": {
+        "ac": {
+          "$ref": "#/definitions/pbAccompany"
+        }
+      }
+    },
+    "pbUpdateCanChangeRequest": {
+      "type": "object",
+      "properties": {
+        "SessionID": {
+          "type": "string"
+        },
+        "NickName": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "Sexual": {
+          "type": "string"
+        },
+        "Height": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Weight": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Speaklanguage": {
+          "type": "string"
+        },
+        "Education": {
+          "type": "string"
+        },
+        "Job": {
+          "type": "string"
+        },
+        "AnnualSalary": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Sociability": {
+          "type": "string"
+        },
+        "Religious": {
+          "type": "string"
+        },
+        "Introduce": {
+          "type": "string"
+        }
+      },
+      "title": "Update"
+    },
+    "pbUpdateCanChangeResponse": {
+      "type": "object",
+      "properties": {
+        "CanChangeInfo": {
+          "$ref": "#/definitions/pbCanChange"
+        }
+      }
+    },
+    "pbUpdateChatRecordRequest": {
+      "type": "object",
+      "properties": {
+        "UserID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "TargetID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "RoleType": {
+          "type": "string"
+        },
+        "MediaType": {
+          "type": "string"
+        },
+        "Media": {
+          "type": "string"
+        },
+        "CreateAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "title": "Update"
+    },
+    "pbUpdateChatRecordResponse": {
+      "type": "object",
+      "properties": {
+        "ChatRecord": {
+          "$ref": "#/definitions/pbChatRecord"
+        }
+      }
+    },
+    "pbUpdateContactRequest": {
+      "type": "object",
+      "properties": {
+        "SessionID": {
+          "type": "string"
+        },
+        "ContactID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ContactType": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "title": "Update"
+    },
+    "pbUpdateContactResponse": {
+      "type": "object",
+      "properties": {
+        "c": {
+          "$ref": "#/definitions/pbContact"
+        }
+      }
+    },
+    "pbUpdateHobbyRequest": {
+      "type": "object",
+      "properties": {
+        "SessionID": {
+          "type": "string"
+        },
+        "Era": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "City": {
+          "type": "string"
+        },
+        "Gender": {
+          "type": "string"
+        },
+        "Speaklanguage": {
+          "type": "string"
+        },
+        "FindType": {
+          "type": "string"
+        },
+        "FindTarget": {
+          "type": "string"
+        },
+        "Experience": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "Update"
+    },
+    "pbUpdateHobbyResponse": {
+      "type": "object",
+      "properties": {
+        "h": {
+          "$ref": "#/definitions/pbHobby"
+        }
+      }
+    },
+    "pbUpdateImagesRequest": {
+      "type": "object",
+      "properties": {
+        "SessionID": {
+          "type": "string"
+        },
+        "Img1": {
+          "type": "string",
+          "format": "byte"
+        },
+        "Img2": {
+          "type": "string",
+          "format": "byte"
+        },
+        "Img3": {
+          "type": "string",
+          "format": "byte"
+        },
+        "Img4": {
+          "type": "string",
+          "format": "byte"
+        },
+        "img5": {
+          "type": "string",
+          "format": "byte"
+        }
+      },
+      "title": "Updat"
+    },
+    "pbUpdateImagesResponse": {
+      "type": "object",
+      "properties": {
+        "Img": {
+          "$ref": "#/definitions/pbImages"
+        }
+      }
+    },
+    "pbUpdateLoverRequest": {
+      "type": "object",
+      "properties": {
+        "SessionID": {
+          "type": "string"
+        },
+        "MinAge": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "MaxAge": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "City": {
+          "type": "string"
+        },
+        "Gender": {
+          "type": "string"
+        },
+        "Sexual": {
+          "type": "string"
+        },
+        "Speaklanguage": {
+          "type": "string"
+        }
+      },
+      "title": "Update"
+    },
+    "pbUpdateLoverResponse": {
+      "type": "object",
+      "properties": {
+        "l": {
+          "$ref": "#/definitions/pbLover"
+        }
+      }
+    },
+    "pbUpdateReadRequest": {
+      "type": "object",
+      "properties": {
+        "UserID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "TargetID": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "pbUpdateTargetListRequest": {
+      "type": "object",
+      "properties": {
+        "SessionID": {
+          "type": "string"
+        },
+        "Target1ID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "T1Type": {
+          "type": "string"
+        },
+        "Target2ID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "T2Type": {
+          "type": "string"
+        },
+        "Target3ID": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "T3Type": {
+          "type": "string"
+        }
+      },
+      "title": "Update"
+    },
+    "pbUpdateTargetListResponse": {
+      "type": "object",
+      "properties": {
+        "tl": {
+          "$ref": "#/definitions/pbTargetlist"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "Backend/pb";
+
+message Payment {
+    string PayID = 1;
+    string FullName = 2;
+    string PaymentType = 3;
+    int32 Amount = 4;
+    string Product = 5;
+    google.protobuf.Timestamp PayAt = 6;
+}

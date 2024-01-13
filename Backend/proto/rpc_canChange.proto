@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package pb;
+import "canChange.proto";
+
+option go_package = "Backend/pb";
+
+
+// Create 
+message CreateCanChangeRequest {
+  string SessionID = 1;
+  string NickName = 2;
+  string City = 3;
+  string Sexual = 4;
+  int32 Height = 5;
+  int32 Weight = 6;
+  string Speaklanguage = 7;
+  string Education = 8;
+  string Job = 9;
+  int32 AnnualSalary = 10;
+  string Sociability = 11;
+  string Religious = 12;
+  string Introduce = 13;
+}
+message CreateCanChangeResponse {
+  CanChange CanChangeInfo = 1;
+}
+
+
+// Get
+message GetCanChangeRequest {
+  string SessionID = 1;
+  int32 UserID = 2;
+}
+message GetCanChangeResponse {
+  CanChange CanChangeInfo = 1;
+}
+
+// Update
+message UpdateCanChangeRequest {
+  string SessionID = 1;
+  string NickName = 2;
+  string City = 3;
+  string Sexual = 4;
+  int32 Height = 5;
+  int32 Weight = 6;
+  string Speaklanguage = 7;
+  string Education = 8;
+  string Job = 9;
+  int32 AnnualSalary = 10;
+  string Sociability = 11;
+  string Religious = 12;
+  string Introduce = 13;
+}
+
+message UpdateCanChangeResponse {
+  CanChange CanChangeInfo = 1;
+}
+
+
+// Delete
+message DeleteCanChangeRequest {
+  string SessionID = 1; 
+}

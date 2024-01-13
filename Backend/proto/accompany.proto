@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "Backend/pb";
+
+
+message Accompany {
+    int32 UserID = 1;
+    int32 Era = 2;
+    string Speaklanguage = 3;
+    string FindType = 4;
+    string Sociability = 5;
+    google.protobuf.Timestamp InfoChangedAt = 6;
+}

@@ -1,0 +1,160 @@
+Project Dating_Your_Date {
+  database_type: 'postgres'
+  Note:''''''
+}
+
+// PW : secret
+
+Table fixinformation {
+  user_id INT [pk, increment, unique]
+  first_name VARCHAR [not null]
+  last_name VARCHAR [not null]
+  email VARCHAR [not null, unique]
+  hashed_password VARCHAR [not null]
+  birth VARCHAR [not null]
+  country VARCHAR [not null]
+  gender VARCHAR [not null]
+  blood VARCHAR [not null]
+  age INT [not null]
+  constellation VARCHAR [not null]
+  certification BOOLEAN [default: false]
+  created_at TIMESTAMPTZ [not null, default: `now()`]
+  password_changed_at TIMESTAMPTZ [not null, default: `now()`]
+}
+
+Table canchangeinformation {
+  user_id INT [ref: > fixinformation.user_id, pk]
+  nickname VARCHAR [not null]
+  city VARCHAR [not null]
+  sexual VARCHAR [not null]
+  height FLOAT [not null]
+  weight FLOAT [not null]
+  language VARCHAR [not null]
+  education VARCHAR [not null]
+  job VARCHAR [not null]
+  annual_salary INT [not null]
+  sociability VARCHAR [not null]
+  religious VARCHAR [not null]
+  introduce VARCHAR [not null]
+  info_changed_at TIMESTAMPTZ [not null, default: `now()`]
+
+}
+
+Table loverrequest {
+  user_id INT [ref: > fixinformation.user_id, pk]
+  min_age INT [not null]
+  max_age INT [not null]
+  city VARCHAR [not null]
+  gender VARCHAR [not null]
+  constellation VARCHAR [not null]
+  sexual VARCHAR [not null]
+  height FLOAT [not null]
+  weight FLOAT [not null]
+  language VARCHAR [not null]
+  job VARCHAR [not null]
+  annual_salary INT [not null]
+  sociability VARCHAR [not null]
+  religious VARCHAR [not null]
+  certification BOOLEAN [default: false]
+  info_changed_at TIMESTAMPTZ [not null, default: `now()`]
+
+}
+
+Table hobbyrequest {
+  user_id INT [ref: > fixinformation.user_id, pk]
+  era INT [not null]
+  city VARCHAR [not null]
+  gender VARCHAR [not null]
+  height INT [not null]
+  weight INT [not null]
+  language VARCHAR [not null]
+  find_type VARCHAR [not null]
+  find_target VARCHAR [not null]
+  experience INT [not null]
+  sociability VARCHAR [not null]
+  certification BOOLEAN [default: false]
+  info_changed_at TIMESTAMPTZ [not null, default: `now()`]
+
+}
+
+Table accompanyrequest {
+  user_id INT [ref: > fixinformation.user_id, pk]
+  era INT [not null]
+  city VARCHAR [not null]
+  language VARCHAR [not null]
+  gender VARCHAR [not null]
+  find_type VARCHAR [not null]
+  find_target VARCHAR [not null]
+  sociability VARCHAR [not null]
+  certification BOOLEAN [default: false]
+  info_changed_at TIMESTAMPTZ [not null, default: `now()`]
+
+}
+
+Table image {
+  user_id INT [ref: > fixinformation.user_id, pk]
+  img1 VARCHAR [not null]
+  img2 VARCHAR [not null]
+  img3 VARCHAR [not null]
+  img4 VARCHAR [not null]
+  img5 VARCHAR [not null]
+}
+
+Table targetlist {
+  user_id INT [ref: > fixinformation.user_id, pk]
+  target_1_id INT
+  target_2_id INT
+  target_3_id INT
+  updated_at TIMESTAMPTZ [not null, default: `now()`]
+
+}
+
+Table changetargetuser {
+  user_id INT [ref: > fixinformation.user_id]
+  change_user_id INT [not null]
+  reason VARCHAR [not null]
+  frequency INT [not null, default:1 , increment]
+  change_time TIMESTAMPTZ [not null, default: `now()`]
+}
+
+Table complaint as cp{
+  cp_id INT [pk,increment,unique]
+  user_id INT [ref: > fixinformation.user_id]
+  cp_target_id INT [not null]
+  cp_tpye VARCHAR [not null]
+  cp_message VARCHAR [not null]
+  status VARCHAR [not null]
+  complaint_time TIMESTAMPTZ [not null, default: `now()`]
+}
+
+
+// -------04 ver----------
+// Type => Hobby or Accompany
+// role => Detail
+// e.g : photography , camera man 
+Table sideInformation {
+  user_id INT [pk,ref: > fixinformation.user_id]
+  type VARCHAR
+  role VARCHAR
+  created_at TIMESTAMPTZ [not null, default: `now()`]
+}
+
+Table complaintProcess as CPP{
+  cp_id INT [pk,ref:> cp.cp_id]
+  staff_id INT [not null]
+  user_reply VARCHAR
+  resulf_message VARCHAR [not null]
+  status VARCHAR [not null]
+  result_at TIMESTAMPTZ [not null, default: `now()`]
+}
+
+Table staff{
+  staff_id INT [pk,increment,unique]
+  fullname VARCHAR [not null]
+  birth VARCHAR [not null]
+  phone_no INT [not null]
+  address VARCHAR [not null]
+  hiredate VARCHAR [not null]
+  depart_no INT [not null]
+  salary INT [not null]
+}

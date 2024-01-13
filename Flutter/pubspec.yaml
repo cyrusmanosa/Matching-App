@@ -1,0 +1,57 @@
+name: dating_your_date
+description: A new Flutter project.
+version: 1.0.0+1
+environment:
+  sdk: ^3.1.0
+  
+dependencies: 
+  flutter: 
+    sdk: flutter
+  cached_network_image:
+  dropdown_button2:
+  flutter_bloc:
+  flutter_launcher_icons:
+  flutter_svg: 
+  flutter_svg_provider:
+  flutter_verification_code:
+  flutter_secure_storage:
+  google_fonts:
+  grpc:
+  image_field:
+  image_picker:
+  intl: 
+  path_provider:
+  permission_handler:
+  postgres: 
+  protobuf:
+  protoc_builder: 
+  protoc_plugin: 
+  shared_preferences:
+  uuid:
+  image:
+
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path_android: "assets/images/app_logo.png"
+  image_path_ios: "assets/images/app_logo.png"
+  android_icon_background: "#FFFFFF"
+  ios_icon_background: "#FFFFFF"
+
+# run command to using ： flutter pub run flutter_launcher_icons:main
+
+dev_dependencies: 
+  flutter_test: 
+    sdk: flutter
+
+flutter: 
+  uses-material-design: true
+  assets: 
+    - assets/
+    - assets/images/
+  fonts: 
+    - family: Rounded Mplus 1c
+      fonts: 
+        - asset: assets/fonts/RoundedMplus1cRegular.ttf
+          weight: 400

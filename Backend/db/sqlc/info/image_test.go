@@ -16,19 +16,17 @@ func TestCreateImage(t *testing.T) {
 func CreateRandomImage(t *testing.T, arg Fixinformation) Image {
 	Img := CreateImageParams{
 		UserID: arg.UserID,
-		Qr:     gofakeit.URL(),
-		Img1:   gofakeit.URL(),
-		Img2:   gofakeit.URL(),
-		Img3:   gofakeit.URL(),
-		Img4:   gofakeit.URL(),
-		Img5:   gofakeit.URL(),
+		Img1:   gofakeit.ImagePng(300, 200),
+		Img2:   gofakeit.ImagePng(300, 200),
+		Img3:   gofakeit.ImagePng(300, 200),
+		Img4:   gofakeit.ImagePng(300, 200),
+		Img5:   gofakeit.ImagePng(300, 200),
 	}
 
 	image, err := testinfoQueries.CreateImage(context.Background(), Img)
 	require.NoError(t, err)
 	require.NotEmpty(t, image)
 	require.Equal(t, image.UserID, arg.UserID)
-	require.Equal(t, image.Qr, Img.Qr)
 	require.Equal(t, image.Img1, Img.Img1)
 	require.Equal(t, image.Img2, Img.Img2)
 	require.Equal(t, image.Img3, Img.Img3)
@@ -44,11 +42,11 @@ func TestUpdateImage(t *testing.T) {
 
 	NewImg := UpdateImageParams{
 		UserID: Img.UserID,
-		Img1:   gofakeit.ImageURL(200, 300),
-		Img2:   gofakeit.ImageURL(200, 300),
-		Img3:   gofakeit.ImageURL(200, 300),
-		Img4:   gofakeit.ImageURL(200, 300),
-		Img5:   gofakeit.ImageURL(200, 300),
+		Img1:   gofakeit.ImagePng(300, 200),
+		Img2:   gofakeit.ImagePng(300, 200),
+		Img3:   gofakeit.ImagePng(300, 200),
+		Img4:   gofakeit.ImagePng(300, 200),
+		Img5:   gofakeit.ImagePng(300, 200),
 	}
 	UpdateImg, err := testinfoQueries.UpdateImage(context.Background(), NewImg)
 	require.NoError(t, err)
@@ -63,7 +61,6 @@ func TestGetUserimageData(t *testing.T) {
 	require.NoError(t, err)
 	require.NotEmpty(t, GetImg)
 	require.Equal(t, GetImg.UserID, Img.UserID)
-	require.Equal(t, GetImg.Qr, Img.Qr)
 	require.Equal(t, GetImg.Img1, Img.Img1)
 	require.Equal(t, GetImg.Img2, Img.Img2)
 	require.Equal(t, GetImg.Img3, Img.Img3)

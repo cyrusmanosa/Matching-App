@@ -3,6 +3,7 @@ package db
 //TODO: Update Target List function
 
 import (
+	"Backend/util"
 	"context"
 	"testing"
 
@@ -22,8 +23,11 @@ func RandomTargetUserList(t *testing.T, user Fixinformation) Targetlist {
 	Targetlist := TargetUserListParams{
 		UserID:    user.UserID,
 		Target1ID: arg1.UserID,
+		T1Type:    util.RandomTT(),
 		Target2ID: arg2.UserID,
+		T2Type:    util.RandomTT(),
 		Target3ID: arg3.UserID,
+		T3Type:    util.RandomTT(),
 	}
 
 	Target, err := testinfoQueries.TargetUserList(context.Background(), Targetlist)
@@ -31,8 +35,11 @@ func RandomTargetUserList(t *testing.T, user Fixinformation) Targetlist {
 	require.NotEmpty(t, Target)
 	require.Equal(t, Target.UserID, Targetlist.UserID)
 	require.Equal(t, Target.Target1ID, Targetlist.Target1ID)
+	require.Equal(t, Target.T1Type, Targetlist.T1Type)
 	require.Equal(t, Target.Target2ID, Targetlist.Target2ID)
+	require.Equal(t, Target.T2Type, Targetlist.T2Type)
 	require.Equal(t, Target.Target3ID, Targetlist.Target3ID)
+	require.Equal(t, Target.T3Type, Targetlist.T3Type)
 	require.NotZero(t, Target.UpdatedAt)
 
 	return Target
@@ -48,9 +55,11 @@ func TestGetTargetUserList(t *testing.T) {
 
 	require.Equal(t, GetTL.UserID, tl.UserID)
 	require.Equal(t, GetTL.Target1ID, tl.Target1ID)
-	require.Equal(t, GetTL.Target1ID, tl.Target1ID)
+	require.Equal(t, GetTL.T1Type, tl.T1Type)
 	require.Equal(t, GetTL.Target2ID, tl.Target2ID)
+	require.Equal(t, GetTL.T2Type, tl.T2Type)
 	require.Equal(t, GetTL.Target3ID, tl.Target3ID)
+	require.Equal(t, GetTL.T3Type, tl.T3Type)
 	require.Equal(t, GetTL.UpdatedAt, tl.UpdatedAt)
 }
 
@@ -84,8 +93,11 @@ func TestUpdateTargetList(t *testing.T) {
 	ntl := UpdateTargetListParams{
 		UserID:    tl.UserID,
 		Target1ID: Narg1.UserID,
+		T1Type:    util.RandomTT(),
 		Target2ID: Narg2.UserID,
+		T2Type:    util.RandomTT(),
 		Target3ID: Narg3.UserID,
+		T3Type:    util.RandomTT(),
 	}
 
 	UpTL, err := testinfoQueries.UpdateTargetList(context.Background(), ntl)

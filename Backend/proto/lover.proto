@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "Backend/pb";
+
+
+message Lover {
+    int32 UserID = 1;
+    int32 MinAge = 2;
+    int32 MaxAge = 3;
+    string City = 4;
+    string Gender = 5;
+    string Sexual = 6;
+    string Speaklanguage = 7;
+    google.protobuf.Timestamp InfoChangedAt = 8;
+}

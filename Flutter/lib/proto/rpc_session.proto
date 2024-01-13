@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "Backend/pb";
+
+message GetUserIDRequest {
+  string SessionID = 1;
+}
+
+message GetUserIDResponse {
+    int32 UserID = 1;
+}

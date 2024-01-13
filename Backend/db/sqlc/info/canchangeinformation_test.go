@@ -128,6 +128,6 @@ func TestDeleteInformation(t *testing.T) {
 	user := CreateRandomUserFixInformaion(t)
 	Can := CreateRandomUserCanChangeInformation(t, user)
 
-	err := testinfoQueries.DeleteInformation(context.Background(), Can.UserID)
+	err := testinfoQueries.DeleteCanChangeInformation(context.Background(), Can.UserID)
 	require.NoError(t, err)
 }
