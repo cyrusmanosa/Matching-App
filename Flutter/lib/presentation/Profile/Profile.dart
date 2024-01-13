@@ -292,7 +292,7 @@ class _ProfileState extends State<Profile> {
                 SizedBox(height: mediaH / 75),
 
                 // Part 2 - data!
-                _buildInformationBar(context, mediaH, mediaW),
+                _buildDataBar(context, mediaH, mediaW),
                 SizedBox(height: mediaH / 30),
 
                 // Button 1rd
@@ -301,72 +301,12 @@ class _ProfileState extends State<Profile> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // 1
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Column(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadiusStyle.r15,
-                                  boxShadow: [
-                                    BoxShadow(color: Colors.grey.withOpacity(0.5), spreadRadius: 2, blurRadius: 5, offset: Offset(0, 3))
-                                  ],
-                                ),
-                                child: IconButton(
-                                  padding: EdgeInsets.all(5),
-                                  onPressed: () {
-                                    showModalBottomSheet(
-                                      context: context,
-                                      isScrollControlled: true,
-                                      builder: (BuildContext context) {
-                                        List<File> allimg = [imgIcon1];
-                                        if (imgIcon2.existsSync()) allimg.add(imgIcon2);
-                                        if (imgIcon3.existsSync()) allimg.add(imgIcon3);
-                                        if (imgIcon4.existsSync()) allimg.add(imgIcon4);
-                                        if (imgIcon5.existsSync()) allimg.add(imgIcon5);
-                                        return Information(canData: data, imgIcon: allimg);
-                                      },
-                                    );
-                                  },
-                                  icon: Icon(Icons.manage_accounts_sharp, color: appTheme.pinkA100),
-                                  iconSize: mediaW / 8,
-                                ),
-                              ),
-                              SizedBox(height: mediaH / 130),
-                              Text("基本情報", style: theme.textTheme.headlineSmall),
-                            ],
-                          ),
-                        ),
-                      ),
-                      // 2
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: ProfileButton(
-                            mediaW: mediaW,
-                            mediaH: mediaH,
-                            iconData: Icons.sensor_occupied_sharp,
-                            page: AppRoutes.information,
-                            title: "SNS",
-                          ),
-                        ),
-                      ),
-                      // 3
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: ProfileButton(
-                            mediaW: mediaW,
-                            mediaH: mediaH,
-                            iconData: Icons.lock_clock_outlined,
-                            page: AppRoutes.newPasswordSetup,
-                            title: "パスワード更新",
-                          ),
-                        ),
-                      ),
+                      // User Information
+                      _buildUserInfomationBtn(context, mediaH, mediaW),
+                      // SNS
+                      _buildSNSBtn(context, mediaH, mediaW),
+                      // Reset PW
+                      _buildResetPWtBtn(context, mediaH, mediaW),
                     ],
                   ),
                 ),
@@ -377,37 +317,10 @@ class _ProfileState extends State<Profile> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: ProfileButton(
-                            mediaW: mediaW,
-                            mediaH: mediaH,
-                            iconData: Icons.admin_panel_settings_outlined,
-                            page: AppRoutes.information,
-                            title: "連絡",
-                          ),
-                        ),
-                      ),
-                      // 3
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: GestureDetector(
-                            onTap: () async {
-                              await globalSession.delete(key: 'SessionId');
-                              await globalUserId.delete(key: 'UserId');
-                            },
-                            child: ProfileButton(
-                              mediaW: mediaW,
-                              mediaH: mediaH,
-                              iconData: Icons.logout_sharp,
-                              page: AppRoutes.login,
-                              title: "ログアウト",
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Context
+                      _buildContextBtn(context, mediaH, mediaW),
+                      // Logout
+                      _buildLogoutBtn(context, mediaH, mediaW)
                     ],
                   ),
                 ),
@@ -419,6 +332,7 @@ class _ProfileState extends State<Profile> {
     );
   }
 
+// images
   Widget _buildImages(BuildContext context, double mediaH, double mediaW) {
     return Container(
       height: mediaH / 6.5,
@@ -471,7 +385,119 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget _buildInformationBar(BuildContext context, double mediaH, double mediaW) {
+// UserInformation
+  Widget _buildUserInfomationBtn(BuildContext context, double mediaH, double mediaW) {
+    return Expanded(
+      child: Align(
+        alignment: Alignment.center,
+        child: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadiusStyle.r15,
+                boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.5), spreadRadius: 2, blurRadius: 5, offset: Offset(0, 3))],
+              ),
+              child: IconButton(
+                padding: EdgeInsets.all(5),
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (BuildContext context) {
+                      List<File> allimg = [imgIcon1];
+                      if (imgIcon2.existsSync()) allimg.add(imgIcon2);
+                      if (imgIcon3.existsSync()) allimg.add(imgIcon3);
+                      if (imgIcon4.existsSync()) allimg.add(imgIcon4);
+                      if (imgIcon5.existsSync()) allimg.add(imgIcon5);
+                      return Information(canData: data, imgIcon: allimg);
+                    },
+                  );
+                },
+                icon: Icon(Icons.manage_accounts_sharp, color: appTheme.pinkA100),
+                iconSize: mediaW / 8,
+              ),
+            ),
+            SizedBox(height: mediaH / 130),
+            Text("基本情報", style: theme.textTheme.headlineSmall),
+          ],
+        ),
+      ),
+    );
+  }
+
+// SNS
+  Widget _buildSNSBtn(BuildContext context, double mediaH, double mediaW) {
+    return Expanded(
+      child: Align(
+        alignment: Alignment.center,
+        child: ProfileButton(
+          mediaW: mediaW,
+          mediaH: mediaH,
+          iconData: Icons.sensor_occupied_sharp,
+          page: AppRoutes.information,
+          title: "SNS",
+        ),
+      ),
+    );
+  }
+
+// Reset PW
+  Widget _buildResetPWtBtn(BuildContext context, double mediaH, double mediaW) {
+    return Expanded(
+      child: Align(
+        alignment: Alignment.center,
+        child: ProfileButton(
+          mediaW: mediaW,
+          mediaH: mediaH,
+          iconData: Icons.lock_clock_outlined,
+          page: AppRoutes.newPasswordSetup,
+          title: "パスワード更新",
+        ),
+      ),
+    );
+  }
+
+// Context
+  Widget _buildContextBtn(BuildContext context, double mediaH, double mediaW) {
+    return Expanded(
+      child: Align(
+        alignment: Alignment.center,
+        child: ProfileButton(
+          mediaW: mediaW,
+          mediaH: mediaH,
+          iconData: Icons.admin_panel_settings_outlined,
+          page: AppRoutes.contactPage,
+          title: "連絡",
+        ),
+      ),
+    );
+  }
+
+// Logout
+  Widget _buildLogoutBtn(BuildContext context, double mediaH, double mediaW) {
+    return Expanded(
+      child: Align(
+        alignment: Alignment.center,
+        child: GestureDetector(
+          onTap: () async {
+            await globalSession.delete(key: 'SessionId');
+            await globalUserId.delete(key: 'UserId');
+          },
+          child: ProfileButton(
+            mediaW: mediaW,
+            mediaH: mediaH,
+            iconData: Icons.logout_sharp,
+            page: AppRoutes.login,
+            title: "ログアウト",
+          ),
+        ),
+      ),
+    );
+  }
+
+// Data Bar
+  Widget _buildDataBar(BuildContext context, double mediaH, double mediaW) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,

@@ -1,6 +1,6 @@
 //
 //  Generated code. Do not modify.
-//  source: complaint.proto
+//  source: contact.proto
 //
 // @dart = 2.12
 

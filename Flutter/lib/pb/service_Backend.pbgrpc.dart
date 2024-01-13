@@ -21,7 +21,7 @@ import 'rpc_canChange.pb.dart' as $5;
 import 'rpc_changeTarget.pb.dart' as $11;
 import 'rpc_chatRecord.pb.dart' as $15;
 import 'rpc_checkEmail.pb.dart' as $1;
-import 'rpc_complaint.pb.dart' as $9;
+import 'rpc_contact.pb.dart' as $9;
 import 'rpc_fix.pb.dart' as $3;
 import 'rpc_hobby.pb.dart' as $7;
 import 'rpc_images.pb.dart' as $12;
@@ -132,21 +132,21 @@ class InformationClient extends $grpc.Client {
       '/pb.Information/DeleteLover',
       ($8.DeleteLoverRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $4.Empty.fromBuffer(value));
-  static final _$createComplaint = $grpc.ClientMethod<$9.CreateComplaintRequest, $9.CreateComplaintResponse>(
-      '/pb.Information/CreateComplaint',
-      ($9.CreateComplaintRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $9.CreateComplaintResponse.fromBuffer(value));
-  static final _$getComplaint = $grpc.ClientMethod<$9.GetComplaintRequest, $9.GetComplaintResponse>(
-      '/pb.Information/GetComplaint',
-      ($9.GetComplaintRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $9.GetComplaintResponse.fromBuffer(value));
-  static final _$updateComplaint = $grpc.ClientMethod<$9.UpdateComplaintRequest, $9.UpdateComplaintResponse>(
-      '/pb.Information/UpdateComplaint',
-      ($9.UpdateComplaintRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $9.UpdateComplaintResponse.fromBuffer(value));
-  static final _$deleteComplaint = $grpc.ClientMethod<$9.DeleteComplaintRequest, $4.Empty>(
-      '/pb.Information/DeleteComplaint',
-      ($9.DeleteComplaintRequest value) => value.writeToBuffer(),
+  static final _$createContact = $grpc.ClientMethod<$9.CreateContactRequest, $9.CreateContactResponse>(
+      '/pb.Information/CreateContact',
+      ($9.CreateContactRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $9.CreateContactResponse.fromBuffer(value));
+  static final _$getContact = $grpc.ClientMethod<$9.GetContactRequest, $9.GetContactResponse>(
+      '/pb.Information/GetContact',
+      ($9.GetContactRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $9.GetContactResponse.fromBuffer(value));
+  static final _$updateContact = $grpc.ClientMethod<$9.UpdateContactRequest, $9.UpdateContactResponse>(
+      '/pb.Information/UpdateContact',
+      ($9.UpdateContactRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $9.UpdateContactResponse.fromBuffer(value));
+  static final _$deleteContact = $grpc.ClientMethod<$9.DeleteContactRequest, $4.Empty>(
+      '/pb.Information/DeleteContact',
+      ($9.DeleteContactRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $4.Empty.fromBuffer(value));
   static final _$createTargetList = $grpc.ClientMethod<$10.CreateTargetListRequest, $10.CreateTargetListResponse>(
       '/pb.Information/CreateTargetList',
@@ -307,20 +307,20 @@ class InformationClient extends $grpc.Client {
     return $createUnaryCall(_$deleteLover, request, options: options);
   }
 
-  $grpc.ResponseFuture<$9.CreateComplaintResponse> createComplaint($9.CreateComplaintRequest request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$createComplaint, request, options: options);
+  $grpc.ResponseFuture<$9.CreateContactResponse> createContact($9.CreateContactRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$createContact, request, options: options);
   }
 
-  $grpc.ResponseFuture<$9.GetComplaintResponse> getComplaint($9.GetComplaintRequest request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$getComplaint, request, options: options);
+  $grpc.ResponseFuture<$9.GetContactResponse> getContact($9.GetContactRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getContact, request, options: options);
   }
 
-  $grpc.ResponseFuture<$9.UpdateComplaintResponse> updateComplaint($9.UpdateComplaintRequest request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$updateComplaint, request, options: options);
+  $grpc.ResponseFuture<$9.UpdateContactResponse> updateContact($9.UpdateContactRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateContact, request, options: options);
   }
 
-  $grpc.ResponseFuture<$4.Empty> deleteComplaint($9.DeleteComplaintRequest request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$deleteComplaint, request, options: options);
+  $grpc.ResponseFuture<$4.Empty> deleteContact($9.DeleteContactRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$deleteContact, request, options: options);
   }
 
   $grpc.ResponseFuture<$10.CreateTargetListResponse> createTargetList($10.CreateTargetListRequest request, {$grpc.CallOptions? options}) {
@@ -553,33 +553,33 @@ abstract class InformationServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $8.DeleteLoverRequest.fromBuffer(value),
         ($4.Empty value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$9.CreateComplaintRequest, $9.CreateComplaintResponse>(
-        'CreateComplaint',
-        createComplaint_Pre,
+    $addMethod($grpc.ServiceMethod<$9.CreateContactRequest, $9.CreateContactResponse>(
+        'CreateContact',
+        createContact_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $9.CreateComplaintRequest.fromBuffer(value),
-        ($9.CreateComplaintResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$9.GetComplaintRequest, $9.GetComplaintResponse>(
-        'GetComplaint',
-        getComplaint_Pre,
+        ($core.List<$core.int> value) => $9.CreateContactRequest.fromBuffer(value),
+        ($9.CreateContactResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$9.GetContactRequest, $9.GetContactResponse>(
+        'GetContact',
+        getContact_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $9.GetComplaintRequest.fromBuffer(value),
-        ($9.GetComplaintResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$9.UpdateComplaintRequest, $9.UpdateComplaintResponse>(
-        'UpdateComplaint',
-        updateComplaint_Pre,
+        ($core.List<$core.int> value) => $9.GetContactRequest.fromBuffer(value),
+        ($9.GetContactResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$9.UpdateContactRequest, $9.UpdateContactResponse>(
+        'UpdateContact',
+        updateContact_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $9.UpdateComplaintRequest.fromBuffer(value),
-        ($9.UpdateComplaintResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$9.DeleteComplaintRequest, $4.Empty>(
-        'DeleteComplaint',
-        deleteComplaint_Pre,
+        ($core.List<$core.int> value) => $9.UpdateContactRequest.fromBuffer(value),
+        ($9.UpdateContactResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$9.DeleteContactRequest, $4.Empty>(
+        'DeleteContact',
+        deleteContact_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $9.DeleteComplaintRequest.fromBuffer(value),
+        ($core.List<$core.int> value) => $9.DeleteContactRequest.fromBuffer(value),
         ($4.Empty value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$10.CreateTargetListRequest, $10.CreateTargetListResponse>(
         'CreateTargetList',
@@ -777,20 +777,20 @@ abstract class InformationServiceBase extends $grpc.Service {
     return deleteLover(call, await request);
   }
 
-  $async.Future<$9.CreateComplaintResponse> createComplaint_Pre($grpc.ServiceCall call, $async.Future<$9.CreateComplaintRequest> request) async {
-    return createComplaint(call, await request);
+  $async.Future<$9.CreateContactResponse> createContact_Pre($grpc.ServiceCall call, $async.Future<$9.CreateContactRequest> request) async {
+    return createContact(call, await request);
   }
 
-  $async.Future<$9.GetComplaintResponse> getComplaint_Pre($grpc.ServiceCall call, $async.Future<$9.GetComplaintRequest> request) async {
-    return getComplaint(call, await request);
+  $async.Future<$9.GetContactResponse> getContact_Pre($grpc.ServiceCall call, $async.Future<$9.GetContactRequest> request) async {
+    return getContact(call, await request);
   }
 
-  $async.Future<$9.UpdateComplaintResponse> updateComplaint_Pre($grpc.ServiceCall call, $async.Future<$9.UpdateComplaintRequest> request) async {
-    return updateComplaint(call, await request);
+  $async.Future<$9.UpdateContactResponse> updateContact_Pre($grpc.ServiceCall call, $async.Future<$9.UpdateContactRequest> request) async {
+    return updateContact(call, await request);
   }
 
-  $async.Future<$4.Empty> deleteComplaint_Pre($grpc.ServiceCall call, $async.Future<$9.DeleteComplaintRequest> request) async {
-    return deleteComplaint(call, await request);
+  $async.Future<$4.Empty> deleteContact_Pre($grpc.ServiceCall call, $async.Future<$9.DeleteContactRequest> request) async {
+    return deleteContact(call, await request);
   }
 
   $async.Future<$10.CreateTargetListResponse> createTargetList_Pre($grpc.ServiceCall call, $async.Future<$10.CreateTargetListRequest> request) async {
@@ -873,10 +873,10 @@ abstract class InformationServiceBase extends $grpc.Service {
   $async.Future<$8.GetLoverResponse> getLover($grpc.ServiceCall call, $8.GetLoverRequest request);
   $async.Future<$8.UpdateLoverResponse> updateLover($grpc.ServiceCall call, $8.UpdateLoverRequest request);
   $async.Future<$4.Empty> deleteLover($grpc.ServiceCall call, $8.DeleteLoverRequest request);
-  $async.Future<$9.CreateComplaintResponse> createComplaint($grpc.ServiceCall call, $9.CreateComplaintRequest request);
-  $async.Future<$9.GetComplaintResponse> getComplaint($grpc.ServiceCall call, $9.GetComplaintRequest request);
-  $async.Future<$9.UpdateComplaintResponse> updateComplaint($grpc.ServiceCall call, $9.UpdateComplaintRequest request);
-  $async.Future<$4.Empty> deleteComplaint($grpc.ServiceCall call, $9.DeleteComplaintRequest request);
+  $async.Future<$9.CreateContactResponse> createContact($grpc.ServiceCall call, $9.CreateContactRequest request);
+  $async.Future<$9.GetContactResponse> getContact($grpc.ServiceCall call, $9.GetContactRequest request);
+  $async.Future<$9.UpdateContactResponse> updateContact($grpc.ServiceCall call, $9.UpdateContactRequest request);
+  $async.Future<$4.Empty> deleteContact($grpc.ServiceCall call, $9.DeleteContactRequest request);
   $async.Future<$10.CreateTargetListResponse> createTargetList($grpc.ServiceCall call, $10.CreateTargetListRequest request);
   $async.Future<$10.GetTargetListResponse> getTargetList($grpc.ServiceCall call, $10.GetTargetListRequest request);
   $async.Future<$10.UpdateTargetListResponse> updateTargetList($grpc.ServiceCall call, $10.UpdateTargetListRequest request);

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "Backend/pb";
+
+message Contact {
+    int32 ContactID = 1;
+    int32 UserID = 2;
+    string ContactType = 3;
+    string Message = 4;
+    string Status = 5;
+    google.protobuf.Timestamp ContactAt = 6;
+}

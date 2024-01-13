@@ -234,6 +234,7 @@ class _FixInformationState extends State<FixInformation> {
                 ),
               ),
               SizedBox(height: mediaH / 25),
+
               // Button
               _buildNextButton(context),
               SizedBox(height: mediaH / 20),
@@ -255,11 +256,7 @@ class _FixInformationState extends State<FixInformation> {
               _uploadPhotoToNewFile();
             },
             icon: _imageFile != null
-                ? Container(
-                    width: mediaH / 6.5,
-                    height: mediaH / 6.5,
-                    child: ClipOval(child: Image.file(_imageFile!, fit: BoxFit.cover)),
-                  )
+                ? Container(width: mediaH / 6.5, height: mediaH / 6.5, child: ClipOval(child: Image.file(_imageFile!, fit: BoxFit.cover)))
                 : Icon(Icons.account_circle, size: mediaH / 6.5, color: appTheme.gray800),
           ),
         ],

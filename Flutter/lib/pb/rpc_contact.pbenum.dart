@@ -1,6 +1,6 @@
 //
 //  Generated code. Do not modify.
-//  source: rpc_complaint.proto
+//  source: rpc_contact.proto
 //
 // @dart = 2.12
 

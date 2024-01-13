@@ -1,4 +1,5 @@
 import 'package:dating_your_date/presentation/AccompanyCondition.dart';
+import 'package:dating_your_date/presentation/ContactPage.dart';
 import 'package:dating_your_date/presentation/HobbyCondition.dart';
 import 'package:dating_your_date/presentation/LoverCondition.dart';
 import 'package:dating_your_date/presentation/Password_Setup.dart';
@@ -34,6 +35,7 @@ class AppRoutes {
   static String chatBox = '/ChatBox';
   static String containerScreen = '/containerScreen';
   static String confirmationCore = '/confirmationCore';
+  static String contactPage = '/ContactPage';
   static String accompanyCondition = '/AccompanyCondition';
   static String deleteTarget = '/deleteTarget';
   static String emailConfirmation = '/emailConfirmation';
@@ -68,6 +70,7 @@ class AppRoutes {
     chatBox: (context) => ChatBox(),
     containerScreen: (context) => ContainerScreen(number: 0),
     confirmationCore: (context) => ConfirmationCore(),
+    contactPage: (context) => ContactPage(),
     deleteTarget: (context) => DeleteTarget(),
     emailConfirmation: (context) => EmailConfirmation(),
     home: (context) => Home(),
