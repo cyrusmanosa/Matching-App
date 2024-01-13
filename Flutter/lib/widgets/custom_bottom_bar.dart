@@ -46,7 +46,7 @@ class CustomBottomBar extends StatelessWidget {
             activeIcon: Column(
               children: [
                 Padding(padding: EdgeInsets.only(top: mediaH / 100)),
-                CustomImageView(imagePath: bottomMenuList[index].activeIcon, width: mediaW / 20, color: appTheme.cyan600),
+                CustomImageView(imagePath: bottomMenuList[index].activeIcon, width: mediaW / 20, color: appTheme.black),
                 Padding(padding: EdgeInsets.only(top: 2), child: Text(bottomMenuList[index].label!, style: CustomTextStyles.mainButtonC)),
               ],
             ),

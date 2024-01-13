@@ -2,7 +2,7 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:flutter/material.dart';
 
-void showErrorDialog(BuildContext context, String errorMessage) {
+void showErrorDialog(BuildContext context, String errorMessage, bool twe) {
   MediaQueryData mediaQueryData = MediaQuery.of(context);
   double mediaH = mediaQueryData.size.height;
   double mediaW = mediaQueryData.size.width;
@@ -25,7 +25,11 @@ void showErrorDialog(BuildContext context, String errorMessage) {
             text: "OK",
             margin: EdgeInsets.only(bottom: mediaH / 100),
             onPressed: () {
-              onTapReturn(context);
+              if (!twe) Navigator.pop(context);
+              if (twe) {
+                Navigator.pop(context);
+                Navigator.pop(context);
+              }
             },
           ),
         ],

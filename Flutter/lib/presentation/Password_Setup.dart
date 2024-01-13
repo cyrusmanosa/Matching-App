@@ -40,11 +40,11 @@ class _PasswordSetupState extends State<PasswordSetup> {
   // Grpc
   void inputPasswordGrpcRequest(BuildContext context) async {
     if (passwordSetupController.text != passwordSetupConfirmController.text) {
-      showErrorDialog(context, "パスワード（確認）とパスワードは一致しません");
+      showErrorDialog(context, "パスワード（確認）とパスワードは一致しません", false);
     } else if (isPureText(passwordSetupController.text) || isPureNumber(passwordSetupController.text)) {
-      showErrorDialog(context, "パスワードの組み合わせは英数字は必要です");
+      showErrorDialog(context, "パスワードの組み合わせは英数字は必要です", false);
     } else if (passwordSetupController.text.length < 8) {
-      showErrorDialog(context, "パスワードの長さは 8 以上です。");
+      showErrorDialog(context, "パスワードの長さは 8 以上です。", false);
     } else {
       setState(() {
         showLoadDialog(context);
@@ -58,7 +58,7 @@ class _PasswordSetupState extends State<PasswordSetup> {
         onTapNextPage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data");
+        showErrorDialog(context, "Error: validatable input data", false);
         throw Exception("Error occurred while fetching Password setup.");
       }
     }

@@ -52,9 +52,9 @@ class _FixInformationState extends State<FixInformation> {
         await for (var oldFile in Directory(directory.path).list()) {
           await oldFile.delete();
         }
-        oldPath = directory.path;
         final newFilePath = path.join(directory.path, '${DateTime.now().millisecondsSinceEpoch}.jpg');
         await file.copy(newFilePath);
+
         setState(() {
           _imageFile = File(newFilePath);
         });
@@ -67,21 +67,21 @@ class _FixInformationState extends State<FixInformation> {
   // Grpc
   void fixInformationGrpcRequest(BuildContext context) async {
     if (fixFirstNameController.text.isEmpty) {
-      showErrorDialog(context, "姓はまだ入力されていません");
+      showErrorDialog(context, "姓はまだ入力されていません", false);
     } else if (fixLastNameController.text.isEmpty) {
-      showErrorDialog(context, "名はまだ入力されていません");
+      showErrorDialog(context, "名はまだ入力されていません", false);
     } else if (fixBirthController.text.isEmpty) {
-      showErrorDialog(context, "生年月日はまだ入力されていません");
+      showErrorDialog(context, "生年月日はまだ入力されていません", false);
     } else if (fixCountryController.text.isEmpty) {
-      showErrorDialog(context, "国籍はまだ入力されていません");
+      showErrorDialog(context, "国籍はまだ入力されていません", false);
     } else if (fixGenderController.text.isEmpty) {
-      showErrorDialog(context, "性別はまだ入力されていません");
+      showErrorDialog(context, "性別はまだ入力されていません", false);
     } else if (fixBloodController.text.isEmpty) {
-      showErrorDialog(context, "血液型はまだ入力されていません");
+      showErrorDialog(context, "血液型はまだ入力されていません", false);
     } else if (confirm18Btn == false) {
-      showErrorDialog(context, "１８歳以上のボタンを押してください");
+      showErrorDialog(context, "１８歳以上のボタンを押してください", false);
     } else if (confirmAgreeBtn == false) {
-      showErrorDialog(context, "同意のボタンを押してください");
+      showErrorDialog(context, "同意のボタンを押してください", false);
     } else {
       try {
         setState(() {
@@ -108,7 +108,7 @@ class _FixInformationState extends State<FixInformation> {
         saveImage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data");
+        showErrorDialog(context, "Error: validatable input data", false);
         throw Exception("Error occurred while fetching Fix.");
       }
     }

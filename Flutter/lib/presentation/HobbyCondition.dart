@@ -91,7 +91,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
         checkTargetUserTable(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data for update");
+        showErrorDialog(context, "Error: validatable input data for update", false);
         throw Exception("Error occurred while fetching update Hobby.");
       }
     } else {
@@ -110,7 +110,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
         onTapPaymentPage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data for create Hobby");
+        showErrorDialog(context, "Error: validatable input data for create Hobby", false);
         throw Exception("Error occurred while fetching Create Hobby.");
       }
     }

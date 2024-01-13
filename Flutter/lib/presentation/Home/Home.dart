@@ -42,10 +42,7 @@ class _HomeState extends State<Home> {
       appBar: AppBar(automaticallyImplyLeading: false, title: AppbarTitle(text: "ホーム")),
       body: Container(
         child: Column(
-          children: [
-            SizedBox(height: mediaH / 50),
-            _buildMainFrame(context, mediaW, mediaW),
-          ],
+          children: [SizedBox(height: mediaH / 50), _buildMainFrame(context, mediaW, mediaW)],
         ),
       ),
     );

@@ -28,9 +28,9 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
   // Grpc
   void resetPasswordGrpcRequest(BuildContext context) async {
     if (newPasswordSetupController.text != newPasswordSetupConfirmController.text) {
-      showErrorDialog(context, "パスワード（確認）とパスワードは一致しません");
+      showErrorDialog(context, "パスワード（確認）とパスワードは一致しません", false);
     } else if (isPureText(newPasswordSetupController.text) || isPureNumber(newPasswordSetupController.text)) {
-      showErrorDialog(context, "パスワードの組み合わせは英数字は必要です");
+      showErrorDialog(context, "パスワードの組み合わせは英数字は必要です", false);
     } else {
       try {
         String? apiKeyS = await globalSession.read(key: 'SessionId');
@@ -45,7 +45,7 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
         Navigator.pop(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data");
+        showErrorDialog(context, "Error: validatable input data", false);
         throw Exception("Error occurred while fetching New Password setup.");
       }
     }

@@ -33,21 +33,21 @@ class _CanChangeInformation_1State extends State<CanChangeInformation_1> {
   // Grpc
   void canChangeGrpcRequest(BuildContext context) async {
     if (canChangeNickNameController.text.isEmpty) {
-      showErrorDialog(context, "ニックネームはまだ入力されていません");
+      showErrorDialog(context, "ニックネームはまだ入力されていません", false);
     } else if (canChangeCityController.text.isEmpty) {
-      showErrorDialog(context, "居住地はまだ入力されていません");
+      showErrorDialog(context, "居住地はまだ入力されていません", false);
     } else if (canChangeSexualController.text.isEmpty) {
-      showErrorDialog(context, "性的指向はまだ入力されていません");
+      showErrorDialog(context, "性的指向はまだ入力されていません", false);
     } else if (canChangeHeightController.text.isEmpty) {
-      showErrorDialog(context, "身長はまだ入力されていません");
+      showErrorDialog(context, "身長はまだ入力されていません", false);
     } else if (!isPureNumber(canChangeHeightController.text)) {
-      showErrorDialog(context, "入力した身長は数字じゃありません");
+      showErrorDialog(context, "入力した身長は数字じゃありません", false);
     } else if (canChangeWeightController.text.isEmpty) {
-      showErrorDialog(context, "体重はまだ入力されていません");
+      showErrorDialog(context, "体重はまだ入力されていません", false);
     } else if (!isPureNumber(canChangeWeightController.text)) {
-      showErrorDialog(context, "入力した体重は数字じゃありません");
+      showErrorDialog(context, "入力した体重は数字じゃありません", false);
     } else if (canChangeSpeakLanguageController.text.isEmpty) {
-      showErrorDialog(context, "学歴はまだ入力されていません");
+      showErrorDialog(context, "学歴はまだ入力されていません", false);
     } else {
       setState(() {
         showLoadDialog(context);
@@ -69,7 +69,7 @@ class _CanChangeInformation_1State extends State<CanChangeInformation_1> {
         onTapNextPage(context, request);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data");
+        showErrorDialog(context, "Error: validatable input data", false);
         throw Exception("Error occurred while fetching CanChange1.");
       }
     }

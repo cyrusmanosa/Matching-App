@@ -35,7 +35,7 @@ class _ChatBoxState extends State<ChatBox> {
       final crResponse = await GrpcChatService.client.getChatRecord(crRequest);
       return crResponse.chatRecordNoID;
     } on GrpcError {
-      showErrorDialog(context, "Error: validatable input data of Info");
+      showErrorDialog(context, "Error: validatable input data of Info", false);
       throw Exception("Error occurred while fetching take chat record");
     }
   }
@@ -54,7 +54,7 @@ class _ChatBoxState extends State<ChatBox> {
       );
       await GrpcChatService.client.createChatRecord(myRequest);
     } on GrpcError {
-      showErrorDialog(context, "Error: validatable input data of myself");
+      showErrorDialog(context, "Error: validatable input data of myself", false);
       throw Exception("Error occurred while fetching myself chat record");
     }
   }
@@ -72,7 +72,7 @@ class _ChatBoxState extends State<ChatBox> {
       );
       await GrpcChatService.client.createChatRecord(targetRequest);
     } on GrpcError {
-      showErrorDialog(context, "Error: validatable input data of target");
+      showErrorDialog(context, "Error: validatable input data of target", false);
       throw Exception("Error occurred while fetching target chat record");
     }
     newMsgTextController = TextEditingController();

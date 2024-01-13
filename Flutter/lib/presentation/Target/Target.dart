@@ -5,9 +5,9 @@ import 'package:dating_your_date/presentation/Target/widgets/ResetTargetButton.d
 // ignore: must_be_immutable
 class Target extends StatelessWidget {
   static List<TargetInfo> targetList = [
-    TargetInfo(title: "趣味", style: CustomButtonStyles.fillLightGray, sendPage: AppRoutes.hobbyCondition),
-    TargetInfo(title: "恋人", style: CustomButtonStyles.fillDarkRed, sendPage: AppRoutes.loverCondition),
-    TargetInfo(title: "お相伴", style: CustomButtonStyles.fillRed, sendPage: AppRoutes.accompanyCondition),
+    TargetInfo(title: "趣味", style: CustomButtonStyles.fillDarkGray, sendPage: AppRoutes.hobbyCondition),
+    TargetInfo(title: "お相伴", style: CustomButtonStyles.fillScallopSeashell, sendPage: AppRoutes.accompanyCondition),
+    TargetInfo(title: "恋人", style: CustomButtonStyles.fillPink, sendPage: AppRoutes.loverCondition),
   ];
 
   Target({Key? key, this.head}) : super(key: key);

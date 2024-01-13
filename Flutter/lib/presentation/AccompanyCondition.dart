@@ -71,7 +71,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
         onTapNextPage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data for update");
+        showErrorDialog(context, "Error: validatable input data for update", false);
         throw Exception("Error occurred while fetching update Accompany.");
       }
     } else {
@@ -87,7 +87,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
         onTapNextPage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data for create accompany");
+        showErrorDialog(context, "Error: validatable input data for create accompany", false);
         throw Exception("Error occurred while fetching Create Accompany.");
       }
     }

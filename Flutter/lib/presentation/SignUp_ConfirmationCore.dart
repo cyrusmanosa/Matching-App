@@ -42,7 +42,7 @@ class _ConfirmationCoreState extends State<ConfirmationCore> {
       onTapNextPage(context);
     } on GrpcError {
       Navigator.pop(context);
-      showErrorDialog(context, "Code have a error.");
+      showErrorDialog(context, "Code have a error.", false);
       throw Exception("Error occurred while fetching Check Code.");
     }
   }

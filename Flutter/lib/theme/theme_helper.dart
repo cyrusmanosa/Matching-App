@@ -80,21 +80,25 @@ class ColorSchemes {
 class PrimaryColors {
   Color get black => Colors.black;
   Color get white => Colors.white;
+
   Color get blue => Color(0XFF1877F2);
+
   Color get green => Color.fromARGB(255, 21, 179, 0);
+
   Color get red => Colors.red;
 
-  // Cyan
-  Color get cyan600 => Color(0XFF1AB4BE);
+  Color get test => Color.fromARGB(255, 223, 198, 87);
 
   // Gray
-  Color get gray500 => Color(0XFF909090);
+  Color get gray500 => Color(0XFFA49393);
   Color get gray800 => Color(0XFF454545);
 
   // Pink
   Color get maroon => Color(0XFF9C3D3D);
   Color get pinkA100 => Color(0XFFFF83A8);
   Color get pinkA400 => Color(0XFFFF00B7);
+
+  Color get scallopSeashell => Color(0XFFDB8E6C);
 }
 
 PrimaryColors get appTheme => ThemeHelper().themeColor();

@@ -40,7 +40,7 @@ class _DeleteTargetState extends State<DeleteTarget> {
       changeUserRecord(context, tid);
     } on GrpcError catch (e) {
       Navigator.pop(context);
-      showErrorDialog(context, "Error: $e");
+      showErrorDialog(context, "Error: $e", false);
       throw Exception("Error occurred while fetching Target List.");
     }
   }
@@ -71,7 +71,7 @@ class _DeleteTargetState extends State<DeleteTarget> {
       onTapNextPage(context);
     } on GrpcError catch (e) {
       Navigator.pop(context);
-      showErrorDialog(context, "Error: $e");
+      showErrorDialog(context, "Error: $e", false);
       throw Exception("Error occurred while fetching Login.");
     }
   }

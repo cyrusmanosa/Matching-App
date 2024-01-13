@@ -140,7 +140,7 @@ class AppNavigationScreen extends StatelessWidget {
                       _buildScreenTitle(
                         context,
                         userName: "プロフィール編集",
-                        onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.profileEdit),
+                        onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.informationEdit),
                       ),
                       _buildScreenTitle(
                         context,

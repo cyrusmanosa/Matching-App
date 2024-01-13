@@ -28,6 +28,7 @@ dependencies:
   protoc_plugin: 
   shared_preferences:
   uuid:
+  image:
 
 
 flutter_launcher_icons:

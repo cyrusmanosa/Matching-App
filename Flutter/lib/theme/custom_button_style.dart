@@ -30,6 +30,11 @@ class CustomButtonStyles {
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
       );
 
+  static ButtonStyle get fillScallopSeashell => ElevatedButton.styleFrom(
+        backgroundColor: appTheme.scallopSeashell,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
+      );
+
 // --------------------- outline ---------------------
 
   // Google Button

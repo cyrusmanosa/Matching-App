@@ -2,14 +2,18 @@ import 'dart:io';
 
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
+import 'package:dating_your_date/pb/canChange.pb.dart';
+import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_changeTarget.pb.dart';
 import 'package:dating_your_date/pb/rpc_chatRecord.pb.dart';
 import 'package:dating_your_date/pb/rpc_images.pb.dart';
+import 'package:dating_your_date/presentation/Information.dart';
+import 'package:dating_your_date/presentation/InformationEdit.dart';
+import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Profile_button.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:grpc/grpc.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
@@ -22,42 +26,120 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  final storage = FlutterSecureStorage();
-  File? imgIconPath;
+  File imgIcon1 = File('');
+  File imgIcon2 = File('');
+  File imgIcon3 = File('');
+  File imgIcon4 = File('');
+  File imgIcon5 = File('');
+  List<File> allimg = [];
   String? send;
   String? changeTime;
+  CanChange? data = CanChange();
 
   @override
   void initState() {
     super.initState();
+    getImagesGrpcRequest(context);
+    getSendDataGrpcRequest(context);
+    getChangeGrpcRequest(context);
     getDataGrpcRequest(context);
   }
 
+  void _showOriginalImage(BuildContext context, File imageFile, double mediaH, double mediaW, int item) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Image.file(imageFile),
+        actions: [
+          if (item != 0)
+            CustomOutlinedButton(
+              width: mediaW / 2,
+              alignment: Alignment.center,
+              text: "プロフィール画像に設定する",
+              onPressed: () {
+                updateIconGrpcRequest(context, item);
+              },
+            ),
+        ],
+      ),
+    );
+  }
+
   // Grpc
-  void getDataGrpcRequest(BuildContext context) async {
+  void getImagesGrpcRequest(BuildContext context) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
     String? apiKeyU = await globalUserId.read(key: 'UserID');
     final userid = int.tryParse(apiKeyU!);
-
-    // image
     try {
+      // image
       final imgRequest = GetImagesRequest(sessionID: apiKeyS, userID: userid);
       final imgResponse = await GrpcInfoService.client.getImages(imgRequest);
-      Uint8List bytes = Uint8List.fromList(imgResponse.img.img1);
 
       Directory documentsDirectory = await getApplicationDocumentsDirectory();
-      String filePath = '${documentsDirectory.path}/data.bin';
-      File file = File(filePath);
-      final i = await file.writeAsBytes(bytes);
 
-      setState(() {
-        imgIconPath = i;
-      });
+      // img1
+      if (imgResponse.img.img1.isNotEmpty) {
+        String filePath1 = '${documentsDirectory.path}/img1.bin';
+        File file1 = File(filePath1);
+        Uint8List bytes1 = Uint8List.fromList(imgResponse.img.img1);
+        await file1.writeAsBytes(bytes1);
+        setState(() {
+          imgIcon1 = file1;
+        });
+      }
+
+      // img2
+      if (imgResponse.img.img2.isNotEmpty) {
+        String filePath2 = '${documentsDirectory.path}/img2.bin';
+        File file2 = File(filePath2);
+        Uint8List bytes2 = Uint8List.fromList(imgResponse.img.img2);
+        await file2.writeAsBytes(bytes2);
+        setState(() {
+          imgIcon2 = file2;
+        });
+      }
+
+      // img3
+      if (imgResponse.img.img3.isNotEmpty) {
+        String filePath3 = '${documentsDirectory.path}/img3.bin';
+        File file3 = File(filePath3);
+        Uint8List bytes3 = Uint8List.fromList(imgResponse.img.img3);
+        await file3.writeAsBytes(bytes3);
+        setState(() {
+          imgIcon3 = file3;
+        });
+      }
+
+      // img4
+      if (imgResponse.img.img4.isNotEmpty) {
+        String filePath4 = '${documentsDirectory.path}/img4.bin';
+        File file4 = File(filePath4);
+        Uint8List bytes4 = Uint8List.fromList(imgResponse.img.img4);
+        await file4.writeAsBytes(bytes4);
+        setState(() {
+          imgIcon4 = file4;
+        });
+      }
+
+      // img5
+      if (imgResponse.img.img5.isNotEmpty) {
+        String filePath5 = '${documentsDirectory.path}/img5.bin';
+        File file5 = File(filePath5);
+        Uint8List bytes5 = Uint8List.fromList(imgResponse.img.img5);
+        await file5.writeAsBytes(bytes5);
+        setState(() {
+          imgIcon5 = file5;
+        });
+      }
     } on GrpcError {
-      showErrorDialog(context, "Error: validatable input UserId in Image!");
+      showErrorDialog(context, "Error: validatable input UserId in Image!", false);
       throw Exception("Error occurred while fetching canChangeInfo.");
     }
+  }
 
+  void getSendDataGrpcRequest(BuildContext context) async {
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
     // Sended Data
     try {
       final sendRequest = GetChatRowRequest(userID: userid);
@@ -66,10 +148,13 @@ class _ProfileState extends State<Profile> {
         send = sendResponse.row.toString();
       });
     } on GrpcError {
-      showErrorDialog(context, "Error: validatable input UserId in Chat Record!");
+      showErrorDialog(context, "Error: validatable input UserId in Chat Record!", false);
       throw Exception("Error occurred while fetching canChangeInfo.");
     }
+  }
 
+  void getChangeGrpcRequest(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
     // changed data
     try {
       final changeRequest = GetChangeTargetRequest(sessionID: apiKeyS);
@@ -81,10 +166,107 @@ class _ProfileState extends State<Profile> {
       if (e.code == 13) {
         changeTime = "0";
       } else {
-        showErrorDialog(context, "Error: validatable input UserId in ChangeTarget! $e");
+        showErrorDialog(context, "Error: validatable input UserId in ChangeTarget! $e", false);
         throw Exception("Error occurred while fetching canChangeInfo.");
       }
     }
+  }
+
+  void updateIconGrpcRequest(BuildContext context, int item) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
+    // Get image
+    final imgRequest = GetImagesRequest(sessionID: apiKeyS, userID: userid);
+    final imgResponse = await GrpcInfoService.client.getImages(imgRequest);
+    try {
+      switch (item) {
+        case 1:
+          Uint8List bytes = imgIcon2.readAsBytesSync();
+          List<int> img2B = bytes.toList();
+          final updateImagesRequest = UpdateImagesRequest(
+            sessionID: apiKeyS,
+            img1: img2B,
+            img2: imgResponse.img.img1,
+            img3: imgResponse.img.img3,
+            img4: imgResponse.img.img4,
+            img5: imgResponse.img.img5,
+          );
+          await GrpcInfoService.client.updateImages(updateImagesRequest);
+          break;
+        case 2:
+          Uint8List bytes = imgIcon3.readAsBytesSync();
+          List<int> img3B = bytes.toList();
+          final updateImagesRequest = UpdateImagesRequest(
+            sessionID: apiKeyS,
+            img1: img3B,
+            img2: imgResponse.img.img2,
+            img3: imgResponse.img.img1,
+            img4: imgResponse.img.img4,
+            img5: imgResponse.img.img5,
+          );
+          await GrpcInfoService.client.updateImages(updateImagesRequest);
+          break;
+        case 3:
+          Uint8List bytes = imgIcon4.readAsBytesSync();
+          List<int> img4B = bytes.toList();
+          final updateImagesRequest = UpdateImagesRequest(
+            sessionID: apiKeyS,
+            img1: img4B,
+            img2: imgResponse.img.img2,
+            img3: imgResponse.img.img3,
+            img4: imgResponse.img.img1,
+            img5: imgResponse.img.img5,
+          );
+          await GrpcInfoService.client.updateImages(updateImagesRequest);
+          break;
+        case 4:
+          Uint8List bytes = imgIcon5.readAsBytesSync();
+          List<int> img5B = bytes.toList();
+          final updateImagesRequest = UpdateImagesRequest(
+            sessionID: apiKeyS,
+            img1: img5B,
+            img2: imgResponse.img.img2,
+            img3: imgResponse.img.img3,
+            img4: imgResponse.img.img4,
+            img5: imgResponse.img.img1,
+          );
+          await GrpcInfoService.client.updateImages(updateImagesRequest);
+          break;
+      }
+    } on GrpcError {
+      showErrorDialog(context, "Error: validatable input UserId in Chat Record!", false);
+      throw Exception("Error occurred while fetching canChangeInfo.");
+    }
+  }
+
+  void getDataGrpcRequest(BuildContext context) async {
+    try {
+      String? apiKeyS = await globalSession.read(key: 'SessionId');
+      String? apiKeyU = await globalUserId.read(key: 'UserID');
+      final userid = int.tryParse(apiKeyU!);
+      // Can Change
+      final infoRequest = GetCanChangeRequest(sessionID: apiKeyS, userID: userid);
+      final infoResponse = await GrpcInfoService.client.getCanChange(infoRequest);
+      setState(() {
+        data = infoResponse.canChangeInfo;
+      });
+    } on GrpcError {
+      showErrorDialog(context, "Error: validatable input UserId in Can Change Table!", false);
+      throw Exception("Error occurred while fetching canChangeInfo.");
+    }
+  }
+
+  void onTapNextPage(BuildContext context) {
+    List<File> allimg = [imgIcon1];
+    if (imgIcon2.existsSync()) allimg.add(imgIcon2);
+    if (imgIcon3.existsSync()) allimg.add(imgIcon3);
+    if (imgIcon4.existsSync()) allimg.add(imgIcon4);
+    if (imgIcon5.existsSync()) allimg.add(imgIcon5);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => InformationEdit(canData: data, imgIcon: allimg), fullscreenDialog: true),
+    );
   }
 
   @override
@@ -103,111 +285,133 @@ class _ProfileState extends State<Profile> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
-              child: Column(
-                children: [
-                  // image
-                  _buildImages(context, mediaH),
-                  SizedBox(height: mediaH / 75),
+            Column(
+              children: [
+                // image
+                _buildImages(context, mediaH, mediaW),
+                SizedBox(height: mediaH / 75),
 
-                  // Part 2 - data!
-                  _buildInformationBar(context, mediaH, mediaW),
-                  SizedBox(height: mediaH / 30),
+                // Part 2 - data!
+                _buildInformationBar(context, mediaH, mediaW),
+                SizedBox(height: mediaH / 30),
 
-                  // Button 1rd
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: mediaW / 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // 1
-                        Expanded(
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: ProfileButton(
-                              mediaW: mediaW,
-                              mediaH: mediaH,
-                              iconData: Icons.manage_accounts_sharp,
-                              page: AppRoutes.information,
-                              title: "基本情報",
-                            ),
-                          ),
-                        ),
-                        // 2
-                        Expanded(
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: ProfileButton(
-                              mediaW: mediaW,
-                              mediaH: mediaH,
-                              iconData: Icons.sensor_occupied_sharp,
-                              page: AppRoutes.information,
-                              title: "SNS",
-                            ),
-                          ),
-                        ),
-                        // 3
-                        Expanded(
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: ProfileButton(
-                              mediaW: mediaW,
-                              mediaH: mediaH,
-                              iconData: Icons.lock_clock_outlined,
-                              page: AppRoutes.newPasswordSetup,
-                              title: "パスワード更新",
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  SizedBox(height: mediaH / 30),
-
-                  // Button 2rd
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: mediaW / 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: ProfileButton(
-                              mediaW: mediaW,
-                              mediaH: mediaH,
-                              iconData: Icons.admin_panel_settings_outlined,
-                              page: AppRoutes.information,
-                              title: "連絡",
-                            ),
-                          ),
-                        ),
-                        // 3
-                        Expanded(
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: GestureDetector(
-                              onTap: () async {
-                                await globalSession.delete(key: 'SessionId');
-                                await globalUserId.delete(key: 'UserId');
-                              },
-                              child: ProfileButton(
-                                mediaW: mediaW,
-                                mediaH: mediaH,
-                                iconData: Icons.logout_sharp,
-                                page: AppRoutes.login,
-                                title: "ログアウト",
+                // Button 1rd
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: mediaW / 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // 1
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Column(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadiusStyle.r15,
+                                  boxShadow: [
+                                    BoxShadow(color: Colors.grey.withOpacity(0.5), spreadRadius: 2, blurRadius: 5, offset: Offset(0, 3))
+                                  ],
+                                ),
+                                child: IconButton(
+                                  padding: EdgeInsets.all(5),
+                                  onPressed: () {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      isScrollControlled: true,
+                                      builder: (BuildContext context) {
+                                        List<File> allimg = [imgIcon1];
+                                        if (imgIcon2.existsSync()) allimg.add(imgIcon2);
+                                        if (imgIcon3.existsSync()) allimg.add(imgIcon3);
+                                        if (imgIcon4.existsSync()) allimg.add(imgIcon4);
+                                        if (imgIcon5.existsSync()) allimg.add(imgIcon5);
+                                        return Information(canData: data, imgIcon: allimg);
+                                      },
+                                    );
+                                  },
+                                  icon: Icon(Icons.manage_accounts_sharp, color: appTheme.pinkA100),
+                                  iconSize: mediaW / 8,
+                                ),
                               ),
+                              SizedBox(height: mediaH / 130),
+                              Text("基本情報", style: theme.textTheme.headlineSmall),
+                            ],
+                          ),
+                        ),
+                      ),
+                      // 2
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: ProfileButton(
+                            mediaW: mediaW,
+                            mediaH: mediaH,
+                            iconData: Icons.sensor_occupied_sharp,
+                            page: AppRoutes.information,
+                            title: "SNS",
+                          ),
+                        ),
+                      ),
+                      // 3
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: ProfileButton(
+                            mediaW: mediaW,
+                            mediaH: mediaH,
+                            iconData: Icons.lock_clock_outlined,
+                            page: AppRoutes.newPasswordSetup,
+                            title: "パスワード更新",
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: mediaH / 30),
+                // Button 2rd
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: mediaW / 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: ProfileButton(
+                            mediaW: mediaW,
+                            mediaH: mediaH,
+                            iconData: Icons.admin_panel_settings_outlined,
+                            page: AppRoutes.information,
+                            title: "連絡",
+                          ),
+                        ),
+                      ),
+                      // 3
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: GestureDetector(
+                            onTap: () async {
+                              await globalSession.delete(key: 'SessionId');
+                              await globalUserId.delete(key: 'UserId');
+                            },
+                            child: ProfileButton(
+                              mediaW: mediaW,
+                              mediaH: mediaH,
+                              iconData: Icons.logout_sharp,
+                              page: AppRoutes.login,
+                              title: "ログアウト",
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),
@@ -215,42 +419,69 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget _buildImages(BuildContext context, double mediaH) {
+  Widget _buildImages(BuildContext context, double mediaH, double mediaW) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: mediaH / 50),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      height: mediaH / 6.5,
+      padding: EdgeInsets.only(left: mediaW / 15),
+      child: ListView(
+        scrollDirection: Axis.horizontal,
         children: [
-          if (imgIconPath != null)
-            Container(
-              width: mediaH / 6.5,
-              height: mediaH / 6.5,
-              child: ClipOval(child: Image.file(imgIconPath!, fit: BoxFit.cover)),
-            )
-          else
-            Container(
-              width: mediaH / 6.5,
-              height: mediaH / 6.5,
-              child: Icon(Icons.account_circle, size: mediaH / 6.5, color: appTheme.gray800),
+          _buildImageContainer(context, mediaH, mediaW, imgIcon1, 0),
+          if (imgIcon2.existsSync()) _buildImageContainer(context, mediaH, mediaW, imgIcon2, 1),
+          if (imgIcon3.existsSync()) _buildImageContainer(context, mediaH, mediaW, imgIcon3, 2),
+          if (imgIcon4.existsSync()) _buildImageContainer(context, mediaH, mediaW, imgIcon4, 3),
+          if (imgIcon5.existsSync()) _buildImageContainer(context, mediaH, mediaW, imgIcon5, 4),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: mediaW / 50),
+            decoration: BoxDecoration(color: Colors.grey, shape: BoxShape.circle),
+            child: IconButton(
+              onPressed: () {
+                onTapNextPage(context);
+              },
+              icon: Icon(Icons.add, size: mediaH / 15, color: appTheme.gray800),
             ),
+          ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildImageContainer(BuildContext context, double mediaH, double mediaW, File imageFile, int item) {
+    return InkWell(
+      onTap: () {
+        _showOriginalImage(context, imageFile, mediaH, mediaW, item);
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: mediaW / 50),
+        width: mediaH / 6.5,
+        height: mediaH / 6.5,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(color: Colors.pinkAccent, width: 3.5),
+        ),
+        child: ClipOval(
+          child: Container(
+            width: mediaH / 6.5,
+            height: mediaH / 6.5,
+            decoration: BoxDecoration(color: Colors.transparent),
+            child: Image.file(imageFile, fit: BoxFit.cover),
+          ),
+        ),
       ),
     );
   }
 
   Widget _buildInformationBar(BuildContext context, double mediaH, double mediaW) {
     return Container(
-      width: mediaW / 1.3,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadiusStyle.r10,
         boxShadow: [
           BoxShadow(color: Colors.grey.withOpacity(0.5), spreadRadius: 2, blurRadius: 5, offset: Offset(0, 3)),
         ],
       ),
       padding: EdgeInsets.symmetric(horizontal: mediaW / 10),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Column(
             children: [

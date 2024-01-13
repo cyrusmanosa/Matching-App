@@ -40,7 +40,7 @@ class _LoginState extends State<Login> {
       onTapLoginButton(context);
     } on GrpcError {
       Navigator.pop(context);
-      showErrorDialog(context, "Email or Password have a error.");
+      showErrorDialog(context, "Email or Password have a error.", false);
       throw Exception("Error occurred while fetching Login.");
     }
   }

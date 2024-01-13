@@ -47,7 +47,7 @@ class _ChatState extends State<Chat> {
       _getUserInfoGrpcRequest(context);
     } on GrpcError {
       isEmpty = true;
-      showErrorDialog(context, "Error: validatable input data of Msg Info");
+      showErrorDialog(context, "Error: validatable input data of Msg Info", false);
       throw Exception("Error occurred while fetching user info.");
     }
   }

@@ -77,7 +77,7 @@ class _LoverConditionState extends State<LoverCondition> {
         onTapNextPage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data for update");
+        showErrorDialog(context, "Error: validatable input data for update", false);
         throw Exception("Error occurred while fetching update Lover.");
       }
     } else {
@@ -95,7 +95,7 @@ class _LoverConditionState extends State<LoverCondition> {
         onTapNextPage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data for create Lover");
+        showErrorDialog(context, "Error: validatable input data for create Lover", false);
         throw Exception("Error occurred while fetching Create Lover.");
       }
     }

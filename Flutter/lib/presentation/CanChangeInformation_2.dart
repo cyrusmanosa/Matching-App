@@ -55,15 +55,15 @@ class _CanChangeInformation_2State extends State<CanChangeInformation_2> {
   // Grpc
   void createCanChangeGrpcRequest(BuildContext context) async {
     if (canChangeJobController.text.isEmpty) {
-      showErrorDialog(context, "仕事はまだ入力されていません");
+      showErrorDialog(context, "仕事はまだ入力されていません", false);
     } else if (!isPureNumber(canChangeAnnualSalaryController.text)) {
-      showErrorDialog(context, "入力した年収は数字じゃありません");
+      showErrorDialog(context, "入力した年収は数字じゃありません", false);
     } else if (canChangeSociabilityController.text.isEmpty) {
-      showErrorDialog(context, "社交力はまだ入力されていません");
+      showErrorDialog(context, "社交力はまだ入力されていません", false);
     } else if (canChangeReligiousController.text.isEmpty) {
-      showErrorDialog(context, "宗教はまだ入力されていません");
+      showErrorDialog(context, "宗教はまだ入力されていません", false);
     } else if (canChangeIntroduceController.text.isEmpty) {
-      showErrorDialog(context, "自己紹介はまだ入力されていません");
+      showErrorDialog(context, "自己紹介はまだ入力されていません", false);
     } else {
       try {
         String? apiKeyS = await globalSession.read(key: 'SessionId');
@@ -87,7 +87,7 @@ class _CanChangeInformation_2State extends State<CanChangeInformation_2> {
         onTapNextPage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data");
+        showErrorDialog(context, "Error: validatable input data", false);
         throw Exception("Error occurred while fetching CanChange1.");
       }
     }
@@ -106,7 +106,7 @@ class _CanChangeInformation_2State extends State<CanChangeInformation_2> {
       await GrpcChatService.client.createChatTable(request);
     } on GrpcError {
       Navigator.pop(context);
-      showErrorDialog(context, "Error: validatable create Chat Record");
+      showErrorDialog(context, "Error: validatable create Chat Record", false);
       throw Exception("Error occurred while fetching Chat Record");
     }
   }
