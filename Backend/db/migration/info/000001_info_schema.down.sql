@@ -8,5 +8,5 @@ DROP TABLE IF EXISTS imagelist;
 DROP TABLE IF EXISTS targetlist;
 DROP TABLE IF EXISTS changetargetuser;
 DROP TABLE IF EXISTS mediaunlock;
-DROP TABLE IF EXISTS complaintlist;
+DROP TABLE IF EXISTS "contact";
 DROP TABLE IF EXISTS payrecord;

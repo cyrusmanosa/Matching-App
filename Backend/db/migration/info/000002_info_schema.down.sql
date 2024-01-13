@@ -1,4 +1,4 @@
-DROP TRIGGER IF EXISTS update_complaint_time_trigger ON "complaint";
+DROP TRIGGER IF EXISTS update_contact_time_trigger ON "contact";
 DROP TRIGGER IF EXISTS update_change_time_trigger ON "changetargetuser";
 DROP TRIGGER IF EXISTS update_updated_at_trigger ON "targetlist";
 DROP TRIGGER IF EXISTS update_accompanyrequest_info_changed_at_trigger ON "accompany";

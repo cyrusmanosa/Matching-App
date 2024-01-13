@@ -15,7 +15,7 @@ type InfoQuerier interface {
 	AllTargetUserList(ctx context.Context) ([]Targetlist, error)
 	CreateAccompany(ctx context.Context, arg CreateAccompanyParams) (Accompany, error)
 	CreateChangeTargetUser(ctx context.Context, arg CreateChangeTargetUserParams) (Changetargetuser, error)
-	CreateComplaint(ctx context.Context, arg CreateComplaintParams) (Complaint, error)
+	CreateContact(ctx context.Context, arg CreateContactParams) (Contact, error)
 	CreateHobby(ctx context.Context, arg CreateHobbyParams) (Hobby, error)
 	CreateImage(ctx context.Context, arg CreateImageParams) (Image, error)
 	CreateLover(ctx context.Context, arg CreateLoverParams) (Lover, error)
@@ -26,7 +26,7 @@ type InfoQuerier interface {
 	DeleteAccompany(ctx context.Context, userID int32) error
 	DeleteCanChangeInformation(ctx context.Context, userID int32) error
 	DeleteChangeTargetUser(ctx context.Context, userID int32) error
-	DeleteComplaint(ctx context.Context, cpID int32) error
+	DeleteContact(ctx context.Context, contactID int32) error
 	DeleteHobby(ctx context.Context, userID int32) error
 	DeleteImage(ctx context.Context, userID int32) error
 	DeleteLover(ctx context.Context, userID int32) error
@@ -41,12 +41,12 @@ type InfoQuerier interface {
 	GetSession(ctx context.Context, id uuid.UUID) (Session, error)
 	GetTargetUserList(ctx context.Context, userID int32) (Targetlist, error)
 	GetUserCanChangeInformation(ctx context.Context, userID int32) (Canchangeinformation, error)
-	GetUserComplaintList(ctx context.Context, cpID int32) (Complaint, error)
+	GetUserContactList(ctx context.Context, contactID int32) (Contact, error)
 	GetUserFixInformation(ctx context.Context, userID int32) (Fixinformation, error)
 	GetUserimageData(ctx context.Context, userID int32) (Image, error)
 	ListAccompany(ctx context.Context) ([]Accompany, error)
 	ListCanChangeInformation(ctx context.Context) ([]Canchangeinformation, error)
-	ListComplaint(ctx context.Context) ([]Complaint, error)
+	ListContact(ctx context.Context) ([]Contact, error)
 	ListFixInformation(ctx context.Context) ([]Fixinformation, error)
 	ListHobby(ctx context.Context) ([]Hobby, error)
 	ListLover(ctx context.Context) ([]Lover, error)
@@ -60,7 +60,7 @@ type InfoQuerier interface {
 	UpdateLover(ctx context.Context, arg UpdateLoverParams) (Lover, error)
 	UpdatePassword(ctx context.Context, arg UpdatePasswordParams) (Fixinformation, error)
 	UpdateTargetList(ctx context.Context, arg UpdateTargetListParams) (Targetlist, error)
-	UpdateUserComplaint(ctx context.Context, arg UpdateUserComplaintParams) (Complaint, error)
+	UpdateUserContact(ctx context.Context, arg UpdateUserContactParams) (Contact, error)
 }
 
 var _ InfoQuerier = (*Queries)(nil)

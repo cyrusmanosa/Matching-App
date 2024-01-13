@@ -44,10 +44,10 @@ const (
 	Information_GetLover_FullMethodName           = "/pb.Information/GetLover"
 	Information_UpdateLover_FullMethodName        = "/pb.Information/UpdateLover"
 	Information_DeleteLover_FullMethodName        = "/pb.Information/DeleteLover"
-	Information_CreateComplaint_FullMethodName    = "/pb.Information/CreateComplaint"
-	Information_GetComplaint_FullMethodName       = "/pb.Information/GetComplaint"
-	Information_UpdateComplaint_FullMethodName    = "/pb.Information/UpdateComplaint"
-	Information_DeleteComplaint_FullMethodName    = "/pb.Information/DeleteComplaint"
+	Information_CreateContact_FullMethodName      = "/pb.Information/CreateContact"
+	Information_GetContact_FullMethodName         = "/pb.Information/GetContact"
+	Information_UpdateContact_FullMethodName      = "/pb.Information/UpdateContact"
+	Information_DeleteContact_FullMethodName      = "/pb.Information/DeleteContact"
 	Information_CreateTargetList_FullMethodName   = "/pb.Information/CreateTargetList"
 	Information_GetTargetList_FullMethodName      = "/pb.Information/GetTargetList"
 	Information_UpdateTargetList_FullMethodName   = "/pb.Information/UpdateTargetList"
@@ -98,10 +98,10 @@ type InformationClient interface {
 	UpdateLover(ctx context.Context, in *UpdateLoverRequest, opts ...grpc.CallOption) (*UpdateLoverResponse, error)
 	DeleteLover(ctx context.Context, in *DeleteLoverRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Complaint
-	CreateComplaint(ctx context.Context, in *CreateComplaintRequest, opts ...grpc.CallOption) (*CreateComplaintResponse, error)
-	GetComplaint(ctx context.Context, in *GetComplaintRequest, opts ...grpc.CallOption) (*GetComplaintResponse, error)
-	UpdateComplaint(ctx context.Context, in *UpdateComplaintRequest, opts ...grpc.CallOption) (*UpdateComplaintResponse, error)
-	DeleteComplaint(ctx context.Context, in *DeleteComplaintRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	CreateContact(ctx context.Context, in *CreateContactRequest, opts ...grpc.CallOption) (*CreateContactResponse, error)
+	GetContact(ctx context.Context, in *GetContactRequest, opts ...grpc.CallOption) (*GetContactResponse, error)
+	UpdateContact(ctx context.Context, in *UpdateContactRequest, opts ...grpc.CallOption) (*UpdateContactResponse, error)
+	DeleteContact(ctx context.Context, in *DeleteContactRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Target List
 	CreateTargetList(ctx context.Context, in *CreateTargetListRequest, opts ...grpc.CallOption) (*CreateTargetListResponse, error)
 	GetTargetList(ctx context.Context, in *GetTargetListRequest, opts ...grpc.CallOption) (*GetTargetListResponse, error)
@@ -347,36 +347,36 @@ func (c *informationClient) DeleteLover(ctx context.Context, in *DeleteLoverRequ
 	return out, nil
 }
 
-func (c *informationClient) CreateComplaint(ctx context.Context, in *CreateComplaintRequest, opts ...grpc.CallOption) (*CreateComplaintResponse, error) {
-	out := new(CreateComplaintResponse)
-	err := c.cc.Invoke(ctx, Information_CreateComplaint_FullMethodName, in, out, opts...)
+func (c *informationClient) CreateContact(ctx context.Context, in *CreateContactRequest, opts ...grpc.CallOption) (*CreateContactResponse, error) {
+	out := new(CreateContactResponse)
+	err := c.cc.Invoke(ctx, Information_CreateContact_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *informationClient) GetComplaint(ctx context.Context, in *GetComplaintRequest, opts ...grpc.CallOption) (*GetComplaintResponse, error) {
-	out := new(GetComplaintResponse)
-	err := c.cc.Invoke(ctx, Information_GetComplaint_FullMethodName, in, out, opts...)
+func (c *informationClient) GetContact(ctx context.Context, in *GetContactRequest, opts ...grpc.CallOption) (*GetContactResponse, error) {
+	out := new(GetContactResponse)
+	err := c.cc.Invoke(ctx, Information_GetContact_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *informationClient) UpdateComplaint(ctx context.Context, in *UpdateComplaintRequest, opts ...grpc.CallOption) (*UpdateComplaintResponse, error) {
-	out := new(UpdateComplaintResponse)
-	err := c.cc.Invoke(ctx, Information_UpdateComplaint_FullMethodName, in, out, opts...)
+func (c *informationClient) UpdateContact(ctx context.Context, in *UpdateContactRequest, opts ...grpc.CallOption) (*UpdateContactResponse, error) {
+	out := new(UpdateContactResponse)
+	err := c.cc.Invoke(ctx, Information_UpdateContact_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *informationClient) DeleteComplaint(ctx context.Context, in *DeleteComplaintRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *informationClient) DeleteContact(ctx context.Context, in *DeleteContactRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Information_DeleteComplaint_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Information_DeleteContact_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -543,10 +543,10 @@ type InformationServer interface {
 	UpdateLover(context.Context, *UpdateLoverRequest) (*UpdateLoverResponse, error)
 	DeleteLover(context.Context, *DeleteLoverRequest) (*emptypb.Empty, error)
 	// Complaint
-	CreateComplaint(context.Context, *CreateComplaintRequest) (*CreateComplaintResponse, error)
-	GetComplaint(context.Context, *GetComplaintRequest) (*GetComplaintResponse, error)
-	UpdateComplaint(context.Context, *UpdateComplaintRequest) (*UpdateComplaintResponse, error)
-	DeleteComplaint(context.Context, *DeleteComplaintRequest) (*emptypb.Empty, error)
+	CreateContact(context.Context, *CreateContactRequest) (*CreateContactResponse, error)
+	GetContact(context.Context, *GetContactRequest) (*GetContactResponse, error)
+	UpdateContact(context.Context, *UpdateContactRequest) (*UpdateContactResponse, error)
+	DeleteContact(context.Context, *DeleteContactRequest) (*emptypb.Empty, error)
 	// Target List
 	CreateTargetList(context.Context, *CreateTargetListRequest) (*CreateTargetListResponse, error)
 	GetTargetList(context.Context, *GetTargetListRequest) (*GetTargetListResponse, error)
@@ -645,17 +645,17 @@ func (UnimplementedInformationServer) UpdateLover(context.Context, *UpdateLoverR
 func (UnimplementedInformationServer) DeleteLover(context.Context, *DeleteLoverRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteLover not implemented")
 }
-func (UnimplementedInformationServer) CreateComplaint(context.Context, *CreateComplaintRequest) (*CreateComplaintResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateComplaint not implemented")
+func (UnimplementedInformationServer) CreateContact(context.Context, *CreateContactRequest) (*CreateContactResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateContact not implemented")
 }
-func (UnimplementedInformationServer) GetComplaint(context.Context, *GetComplaintRequest) (*GetComplaintResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetComplaint not implemented")
+func (UnimplementedInformationServer) GetContact(context.Context, *GetContactRequest) (*GetContactResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetContact not implemented")
 }
-func (UnimplementedInformationServer) UpdateComplaint(context.Context, *UpdateComplaintRequest) (*UpdateComplaintResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateComplaint not implemented")
+func (UnimplementedInformationServer) UpdateContact(context.Context, *UpdateContactRequest) (*UpdateContactResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateContact not implemented")
 }
-func (UnimplementedInformationServer) DeleteComplaint(context.Context, *DeleteComplaintRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteComplaint not implemented")
+func (UnimplementedInformationServer) DeleteContact(context.Context, *DeleteContactRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteContact not implemented")
 }
 func (UnimplementedInformationServer) CreateTargetList(context.Context, *CreateTargetListRequest) (*CreateTargetListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateTargetList not implemented")
@@ -1144,74 +1144,74 @@ func _Information_DeleteLover_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Information_CreateComplaint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateComplaintRequest)
+func _Information_CreateContact_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateContactRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(InformationServer).CreateComplaint(ctx, in)
+		return srv.(InformationServer).CreateContact(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Information_CreateComplaint_FullMethodName,
+		FullMethod: Information_CreateContact_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(InformationServer).CreateComplaint(ctx, req.(*CreateComplaintRequest))
+		return srv.(InformationServer).CreateContact(ctx, req.(*CreateContactRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Information_GetComplaint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetComplaintRequest)
+func _Information_GetContact_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetContactRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(InformationServer).GetComplaint(ctx, in)
+		return srv.(InformationServer).GetContact(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Information_GetComplaint_FullMethodName,
+		FullMethod: Information_GetContact_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(InformationServer).GetComplaint(ctx, req.(*GetComplaintRequest))
+		return srv.(InformationServer).GetContact(ctx, req.(*GetContactRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Information_UpdateComplaint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateComplaintRequest)
+func _Information_UpdateContact_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateContactRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(InformationServer).UpdateComplaint(ctx, in)
+		return srv.(InformationServer).UpdateContact(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Information_UpdateComplaint_FullMethodName,
+		FullMethod: Information_UpdateContact_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(InformationServer).UpdateComplaint(ctx, req.(*UpdateComplaintRequest))
+		return srv.(InformationServer).UpdateContact(ctx, req.(*UpdateContactRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Information_DeleteComplaint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteComplaintRequest)
+func _Information_DeleteContact_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteContactRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(InformationServer).DeleteComplaint(ctx, in)
+		return srv.(InformationServer).DeleteContact(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Information_DeleteComplaint_FullMethodName,
+		FullMethod: Information_DeleteContact_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(InformationServer).DeleteComplaint(ctx, req.(*DeleteComplaintRequest))
+		return srv.(InformationServer).DeleteContact(ctx, req.(*DeleteContactRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1572,20 +1572,20 @@ var Information_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Information_DeleteLover_Handler,
 		},
 		{
-			MethodName: "CreateComplaint",
-			Handler:    _Information_CreateComplaint_Handler,
+			MethodName: "CreateContact",
+			Handler:    _Information_CreateContact_Handler,
 		},
 		{
-			MethodName: "GetComplaint",
-			Handler:    _Information_GetComplaint_Handler,
+			MethodName: "GetContact",
+			Handler:    _Information_GetContact_Handler,
 		},
 		{
-			MethodName: "UpdateComplaint",
-			Handler:    _Information_UpdateComplaint_Handler,
+			MethodName: "UpdateContact",
+			Handler:    _Information_UpdateContact_Handler,
 		},
 		{
-			MethodName: "DeleteComplaint",
-			Handler:    _Information_DeleteComplaint_Handler,
+			MethodName: "DeleteContact",
+			Handler:    _Information_DeleteContact_Handler,
 		},
 		{
 			MethodName: "CreateTargetList",

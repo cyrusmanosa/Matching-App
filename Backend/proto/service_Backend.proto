@@ -6,7 +6,7 @@ import "rpc_fix.proto";
 import "rpc_canChange.proto";
 import "rpc_changeTarget.proto";
 import "rpc_accompany.proto";
-import "rpc_complaint.proto";
+import "rpc_contact.proto";
 import "rpc_targetList.proto";
 import "rpc_hobby.proto";
 import "rpc_images.proto";
@@ -185,26 +185,26 @@ service Information {
     }
 
     // Complaint
-    rpc CreateComplaint(CreateComplaintRequest) returns (CreateComplaintResponse){
+    rpc CreateContact(CreateContactRequest) returns (CreateContactResponse){
         option (google.api.http) = {
-            post: "/v1/Create_Complaint"
+            post: "/v1/Create_Contact"
             body: "*"
         };
     }
-    rpc GetComplaint(GetComplaintRequest) returns (GetComplaintResponse){
+    rpc GetContact(GetContactRequest) returns (GetContactResponse){
         option (google.api.http) = {
-            get: "/v1/Get_Complaint"
+            get: "/v1/Get_Contact"
         };
     }
-    rpc UpdateComplaint(UpdateComplaintRequest) returns (UpdateComplaintResponse){
+    rpc UpdateContact(UpdateContactRequest) returns (UpdateContactResponse){
         option (google.api.http) = {
-            put: "/v1/Update_Complaint"
+            put: "/v1/Update_Contact"
             body: "*"
         };
     }
-    rpc DeleteComplaint(DeleteComplaintRequest) returns (google.protobuf.Empty){
+    rpc DeleteContact(DeleteContactRequest) returns (google.protobuf.Empty){
         option (google.api.http) = {
-            delete: "/v1/Del_Complaint"
+            delete: "/v1/Del_Contact"
         };
     }
 

@@ -220,15 +220,15 @@
         ]
       }
     },
-    "/v1/Create_Complaint": {
+    "/v1/Create_Contact": {
       "post": {
         "summary": "Complaint",
-        "operationId": "Information_CreateComplaint",
+        "operationId": "Information_CreateContact",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbCreateComplaintResponse"
+              "$ref": "#/definitions/pbCreateContactResponse"
             }
           },
           "default": {
@@ -244,7 +244,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbCreateComplaintRequest"
+              "$ref": "#/definitions/pbCreateContactRequest"
             }
           }
         ],
@@ -590,9 +590,9 @@
         ]
       }
     },
-    "/v1/Del_Complaint": {
+    "/v1/Del_Contact": {
       "delete": {
-        "operationId": "Information_DeleteComplaint",
+        "operationId": "Information_DeleteContact",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -614,6 +614,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "ContactID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "tags": [
@@ -880,14 +887,14 @@
         ]
       }
     },
-    "/v1/Get_Complaint": {
+    "/v1/Get_Contact": {
       "get": {
-        "operationId": "Information_GetComplaint",
+        "operationId": "Information_GetContact",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbGetComplaintResponse"
+              "$ref": "#/definitions/pbGetContactResponse"
             }
           },
           "default": {
@@ -905,7 +912,7 @@
             "type": "string"
           },
           {
-            "name": "CpID",
+            "name": "ContactID",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -1490,14 +1497,14 @@
         ]
       }
     },
-    "/v1/Update_Complaint": {
+    "/v1/Update_Contact": {
       "put": {
-        "operationId": "Information_UpdateComplaint",
+        "operationId": "Information_UpdateContact",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbUpdateComplaintResponse"
+              "$ref": "#/definitions/pbUpdateContactResponse"
             }
           },
           "default": {
@@ -1513,7 +1520,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/pbUpdateComplaintRequest"
+              "$ref": "#/definitions/pbUpdateContactRequest"
             }
           }
         ],
@@ -1863,10 +1870,10 @@
         }
       }
     },
-    "pbComplaint": {
+    "pbContact": {
       "type": "object",
       "properties": {
-        "CpID": {
+        "ContactID": {
           "type": "integer",
           "format": "int32"
         },
@@ -1874,20 +1881,16 @@
           "type": "integer",
           "format": "int32"
         },
-        "CpTargetID": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "CpType": {
+        "ContactType": {
           "type": "string"
         },
-        "CpMessage": {
+        "Message": {
           "type": "string"
         },
         "Status": {
           "type": "string"
         },
-        "ComplaintTime": {
+        "ContactAt": {
           "type": "string",
           "format": "date-time"
         }
@@ -2044,30 +2047,29 @@
       },
       "title": "Create Chat Table"
     },
-    "pbCreateComplaintRequest": {
+    "pbCreateContactRequest": {
       "type": "object",
       "properties": {
         "SessionID": {
           "type": "string"
         },
-        "CpTargetID": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "CpType": {
+        "ContactType": {
           "type": "string"
         },
-        "CpMessage": {
+        "Message": {
+          "type": "string"
+        },
+        "status": {
           "type": "string"
         }
       },
       "title": "Create"
     },
-    "pbCreateComplaintResponse": {
+    "pbCreateContactResponse": {
       "type": "object",
       "properties": {
-        "cp": {
-          "$ref": "#/definitions/pbComplaint"
+        "c": {
+          "$ref": "#/definitions/pbContact"
         }
       }
     },
@@ -2337,11 +2339,11 @@
         }
       }
     },
-    "pbGetComplaintResponse": {
+    "pbGetContactResponse": {
       "type": "object",
       "properties": {
-        "cp": {
-          "$ref": "#/definitions/pbComplaint"
+        "c": {
+          "$ref": "#/definitions/pbContact"
         }
       }
     },
@@ -2811,27 +2813,33 @@
         }
       }
     },
-    "pbUpdateComplaintRequest": {
+    "pbUpdateContactRequest": {
       "type": "object",
       "properties": {
         "SessionID": {
           "type": "string"
         },
-        "CpID": {
+        "ContactID": {
           "type": "integer",
           "format": "int32"
         },
-        "Status": {
+        "ContactType": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "status": {
           "type": "string"
         }
       },
       "title": "Update"
     },
-    "pbUpdateComplaintResponse": {
+    "pbUpdateContactResponse": {
       "type": "object",
       "properties": {
-        "cp": {
-          "$ref": "#/definitions/pbComplaint"
+        "c": {
+          "$ref": "#/definitions/pbContact"
         }
       }
     },

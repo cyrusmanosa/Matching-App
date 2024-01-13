@@ -28,7 +28,6 @@ func RandomRole() string {
 	role := []string{"sender", "receiver"}
 	r := rand.Intn(2)
 	return role[r]
-
 }
 
 func RandomBlood() string {

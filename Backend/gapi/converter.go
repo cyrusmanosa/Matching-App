@@ -76,15 +76,14 @@ func convertChangeTarget(ct info.Changetargetuser) *pb.ChangeTarget {
 	}
 }
 
-func convertComplaint(cp info.Complaint) *pb.Complaint {
-	return &pb.Complaint{
-		CpID:          cp.CpID,
-		UserID:        cp.UserID,
-		CpTargetID:    cp.CpTargetID,
-		CpType:        cp.CpType,
-		CpMessage:     cp.CpMessage,
-		Status:        cp.Status,
-		ComplaintTime: timestamppb.New(cp.ComplaintTime.Time),
+func convertContact(c info.Contact) *pb.Contact {
+	return &pb.Contact{
+		ContactID:   c.ContactID,
+		UserID:      c.UserID,
+		ContactType: c.ContactType,
+		Message:     c.Message,
+		Status:      c.Status,
+		ContactAt:   timestamppb.New(c.ContactAt.Time),
 	}
 }
 

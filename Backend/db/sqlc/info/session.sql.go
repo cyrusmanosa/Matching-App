@@ -28,7 +28,7 @@ type CreateSessionParams struct {
 	ID          uuid.UUID          `json:"id"`
 	UserID      int32              `json:"user_id"`
 	AccessToken string             `json:"access_token"`
-	Status      string        `json:"status"`
+	Status      string       `json:"status"`
 	IsBlocked   bool               `json:"is_blocked"`
 	ExpiresAt   time.Time `json:"expires_at"`
 }

@@ -7,7 +7,6 @@ package db
 
 import (
 	"context"
-
 )
 
 const allTargetUserList = `-- name: AllTargetUserList :many
@@ -94,9 +93,9 @@ type TargetUserListParams struct {
 	Target1ID int32       `json:"target_1_id"`
 	T1Type    string      `json:"t1_Type"`
 	Target2ID int32 `json:"target_2_id"`
-	T2Type    string `json:"t2_Type"`
+	T2Type    string`json:"t2_Type"`
 	Target3ID int32 `json:"target_3_id"`
-	T3Type    string `json:"t3_Type"`
+	T3Type    string`json:"t3_Type"`
 }
 
 func (q *Queries) TargetUserList(ctx context.Context, arg TargetUserListParams) (Targetlist, error) {
@@ -140,9 +139,9 @@ type UpdateTargetListParams struct {
 	Target1ID int32       `json:"target_1_id"`
 	T1Type    string      `json:"t1_Type"`
 	Target2ID int32 `json:"target_2_id"`
-	T2Type    string `json:"t2_Type"`
+	T2Type    string`json:"t2_Type"`
 	Target3ID int32 `json:"target_3_id"`
-	T3Type    string `json:"t3_Type"`
+	T3Type    string`json:"t3_Type"`
 }
 
 func (q *Queries) UpdateTargetList(ctx context.Context, arg UpdateTargetListParams) (Targetlist, error) {

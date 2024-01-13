@@ -1,17 +1,17 @@
 -- complaint
 
-CREATE OR REPLACE FUNCTION update_complaint_time()
+CREATE OR REPLACE FUNCTION update_contact_time()
 RETURNS TRIGGER AS $$
 BEGIN
-    NEW.complaint_time := NOW();
+    NEW.contact_at := NOW();
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER update_complaint_time_trigger
-BEFORE INSERT OR UPDATE ON "complaint"
+CREATE TRIGGER update_contact_time_trigger
+BEFORE INSERT OR UPDATE ON "contact"
 FOR EACH ROW
-EXECUTE FUNCTION update_complaint_time();
+EXECUTE FUNCTION update_contact_time();
 
 -- changetargetuser
 

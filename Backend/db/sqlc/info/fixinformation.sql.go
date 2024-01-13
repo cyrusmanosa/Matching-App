@@ -31,7 +31,7 @@ type CreateUserFixInformationParams struct {
 	FirstName      string      `json:"first_name"`
 	LastName       string      `json:"last_name"`
 	Email          string      `json:"email"`
-	HashedPassword string `json:"hashed_password"`
+	HashedPassword string`json:"hashed_password"`
 	Birth          string      `json:"birth"`
 	Country        string      `json:"country"`
 	Gender         string      `json:"gender"`
@@ -192,7 +192,7 @@ RETURNING user_id, first_name, last_name, email, hashed_password, birth, country
 
 type UpdatePasswordParams struct {
 	UserID         int32       `json:"user_id"`
-	HashedPassword string `json:"hashed_password"`
+	HashedPassword string`json:"hashed_password"`
 }
 
 func (q *Queries) UpdatePassword(ctx context.Context, arg UpdatePasswordParams) (Fixinformation, error) {

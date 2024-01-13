@@ -31,18 +31,18 @@ INSERT INTO canchangeinformation (
 
 type CreateUserCanChangeInformationParams struct {
 	UserID        int32       `json:"user_id"`
-	Nickname      string `json:"nickname"`
-	City          string `json:"city"`
-	Sexual        string `json:"sexual"`
+	Nickname      string`json:"nickname"`
+	City          string`json:"city"`
+	Sexual        string`json:"sexual"`
 	Height        int32 `json:"height"`
 	Weight        int32 `json:"weight"`
-	Speaklanguage string `json:"speaklanguage"`
-	Education     string `json:"education"`
-	Job           string `json:"job"`
+	Speaklanguage string`json:"speaklanguage"`
+	Education     string`json:"education"`
+	Job           string`json:"job"`
 	AnnualSalary  int32 `json:"annual_salary"`
-	Sociability   string `json:"sociability"`
-	Religious     string `json:"religious"`
-	Introduce     string `json:"introduce"`
+	Sociability   string`json:"sociability"`
+	Religious     string`json:"religious"`
+	Introduce     string`json:"introduce"`
 }
 
 func (q *Queries) CreateUserCanChangeInformation(ctx context.Context, arg CreateUserCanChangeInformationParams) (Canchangeinformation, error) {
@@ -178,18 +178,18 @@ RETURNING user_id, nickname, city, sexual, height, weight, speaklanguage, educat
 
 type UpdateInformationParams struct {
 	UserID        int32       `json:"user_id"`
-	Nickname      string `json:"nickname"`
-	City          string `json:"city"`
-	Sexual        string `json:"sexual"`
+	Nickname      string`json:"nickname"`
+	City          string`json:"city"`
+	Sexual        string`json:"sexual"`
 	Height        int32 `json:"height"`
 	Weight        int32 `json:"weight"`
-	Speaklanguage string `json:"speaklanguage"`
-	Education     string `json:"education"`
-	Job           string `json:"job"`
+	Speaklanguage string`json:"speaklanguage"`
+	Education     string`json:"education"`
+	Job           string`json:"job"`
 	AnnualSalary  int32 `json:"annual_salary"`
-	Sociability   string `json:"sociability"`
-	Religious     string `json:"religious"`
-	Introduce     string `json:"introduce"`
+	Sociability   string`json:"sociability"`
+	Religious     string`json:"religious"`
+	Introduce     string`json:"introduce"`
 }
 
 func (q *Queries) UpdateInformation(ctx context.Context, arg UpdateInformationParams) (Canchangeinformation, error) {

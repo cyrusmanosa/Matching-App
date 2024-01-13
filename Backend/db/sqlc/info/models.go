@@ -20,18 +20,18 @@ type Accompany struct {
 
 type Canchangeinformation struct {
 	UserID        int32              `json:"user_id"`
-	Nickname      string        `json:"nickname"`
-	City          string        `json:"city"`
-	Sexual        string        `json:"sexual"`
+	Nickname      string       `json:"nickname"`
+	City          string       `json:"city"`
+	Sexual        string       `json:"sexual"`
 	Height        int32        `json:"height"`
 	Weight        int32        `json:"weight"`
-	Speaklanguage string        `json:"speaklanguage"`
-	Education     string        `json:"education"`
-	Job           string        `json:"job"`
+	Speaklanguage string       `json:"speaklanguage"`
+	Education     string       `json:"education"`
+	Job           string       `json:"job"`
 	AnnualSalary  int32        `json:"annual_salary"`
-	Sociability   string        `json:"sociability"`
-	Religious     string        `json:"religious"`
-	Introduce     string        `json:"introduce"`
+	Sociability   string       `json:"sociability"`
+	Religious     string       `json:"religious"`
+	Introduce     string       `json:"introduce"`
 	InfoChangedAt pgtype.Timestamptz `json:"info_changed_at"`
 }
 
@@ -43,14 +43,13 @@ type Changetargetuser struct {
 	ChangeTime   pgtype.Timestamptz `json:"change_time"`
 }
 
-type Complaint struct {
-	CpID          int32              `json:"cp_id"`
-	UserID        int32              `json:"user_id"`
-	CpTargetID    int32              `json:"cp_target_id"`
-	CpType        string             `json:"cp_type"`
-	CpMessage     string             `json:"cp_message"`
-	Status        string        `json:"status"`
-	ComplaintTime pgtype.Timestamptz `json:"complaint_time"`
+type Contact struct {
+	ContactID   int32              `json:"contact_id"`
+	UserID      int32              `json:"user_id"`
+	ContactType string             `json:"contact_type"`
+	Message     string             `json:"message"`
+	Status      string       `json:"status"`
+	ContactAt   pgtype.Timestamptz `json:"contact_at"`
 }
 
 type Fixinformation struct {
@@ -58,7 +57,7 @@ type Fixinformation struct {
 	FirstName         string             `json:"first_name"`
 	LastName          string             `json:"last_name"`
 	Email             string             `json:"email"`
-	HashedPassword    string        `json:"hashed_password"`
+	HashedPassword    string       `json:"hashed_password"`
 	Birth             string             `json:"birth"`
 	Country           string             `json:"country"`
 	Gender            string             `json:"gender"`
@@ -116,7 +115,7 @@ type Session struct {
 	ID          uuid.UUID          `json:"id"`
 	UserID      int32              `json:"user_id"`
 	AccessToken string             `json:"access_token"`
-	Status      string        `json:"status"`
+	Status      string       `json:"status"`
 	IsBlocked   bool               `json:"is_blocked"`
 	ExpiresAt   pgtype.Timestamptz `json:"expires_at"`
 	CreatedAt   pgtype.Timestamptz `json:"created_at"`
@@ -124,9 +123,9 @@ type Session struct {
 
 type Socialmedium struct {
 	UserID    int32       `json:"user_id"`
-	Facebook  string `json:"Facebook"`
-	Instagram string `json:"Instagram"`
-	Twtter    string `json:"Twtter"`
+	Facebook  string`json:"Facebook"`
+	Instagram string`json:"Instagram"`
+	Twtter    string`json:"Twtter"`
 }
 
 type Targetlist struct {
@@ -134,8 +133,8 @@ type Targetlist struct {
 	Target1ID int32              `json:"target_1_id"`
 	T1Type    string             `json:"t1_Type"`
 	Target2ID int32        `json:"target_2_id"`
-	T2Type    string        `json:"t2_Type"`
+	T2Type    string       `json:"t2_Type"`
 	Target3ID int32        `json:"target_3_id"`
-	T3Type    string        `json:"t3_Type"`
+	T3Type    string       `json:"t3_Type"`
 	UpdatedAt pgtype.Timestamptz `json:"updated_at"`
 }
