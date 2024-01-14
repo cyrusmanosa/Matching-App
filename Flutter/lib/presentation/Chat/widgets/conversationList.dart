@@ -40,7 +40,7 @@ class _ConversationListState extends State<ConversationList> {
       final request = UpdateReadRequest(userID: userid, targetID: widget.targetid);
       await GrpcChatService.client.updateRead(request);
     } on GrpcError catch (e) {
-      showErrorDialog(context, "Error: ${e.codeName}", false);
+      showErrorDialog(context, "Error: ${e.codeName}");
     }
   }
 

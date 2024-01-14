@@ -90,6 +90,7 @@ class PrimaryColors {
   Color get test => Color.fromARGB(255, 223, 198, 87);
 
   // Gray
+  Color get gray100 => Color.fromARGB(255, 233, 233, 233);
   Color get gray500 => Color(0XFFA49393);
   Color get gray800 => Color(0XFF454545);
 
@@ -99,6 +100,8 @@ class PrimaryColors {
   Color get pinkA400 => Color(0XFFFF00B7);
 
   Color get scallopSeashell => Color(0XFFDB8E6C);
+
+  Color get bgColor => Colors.white;
 }
 
 PrimaryColors get appTheme => ThemeHelper().themeColor();

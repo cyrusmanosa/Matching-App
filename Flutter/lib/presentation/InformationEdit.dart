@@ -6,12 +6,14 @@ import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_images.pb.dart';
+import 'package:dating_your_date/presentation/ContainerScreen.dart';
 import 'package:dating_your_date/widgets/Custom_IconLogoBox.dart';
+import 'package:dating_your_date/widgets/Custom_Show_Image.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
-import 'package:dating_your_date/widgets/loading.dart';
+import 'package:dating_your_date/widgets/Custom_Loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
@@ -135,7 +137,7 @@ class _InformationEditState extends State<InformationEdit> {
       await GrpcInfoService.client.updateImages(request);
     } on GrpcError catch (e) {
       Navigator.pop(context);
-      showErrorDialog(context, "Error: validatable update image in Image at $e", false);
+      showErrorDialog(context, "Error: validatable update image in Image at $e");
       throw Exception("Error occurred while fetching profile edit.");
     }
   }
@@ -143,36 +145,35 @@ class _InformationEditState extends State<InformationEdit> {
   // Grpc
   void updateDataGrpcRequest(BuildContext context) async {
     if (updateNickNameController.text.isEmpty) {
-      showErrorDialog(context, "ニックネームはまだ入力されていません", false);
+      showErrorDialog(context, "ニックネームはまだ入力されていません");
     } else if (updateCityController.text.isEmpty) {
-      showErrorDialog(context, "居住地はまだ入力されていません", false);
+      showErrorDialog(context, "居住地はまだ入力されていません");
     } else if (updateSexualController.text.isEmpty) {
-      showErrorDialog(context, "性的指向はまだ入力されていません", false);
+      showErrorDialog(context, "性的指向はまだ入力されていません");
     } else if (updateHeightController.text.isEmpty) {
-      showErrorDialog(context, "身長はまだ入力されていません", false);
+      showErrorDialog(context, "身長はまだ入力されていません");
     } else if (!isPureNumber(updateHeightController.text)) {
-      showErrorDialog(context, "入力した身長は数字じゃありません", false);
+      showErrorDialog(context, "入力した身長は数字じゃありません");
     } else if (updateWeightController.text.isEmpty) {
-      showErrorDialog(context, "体重はまだ入力されていません", false);
+      showErrorDialog(context, "体重はまだ入力されていません");
     } else if (!isPureNumber(updateWeightController.text)) {
-      showErrorDialog(context, "入力した体重は数字じゃありません", false);
+      showErrorDialog(context, "入力した体重は数字じゃありません");
     } else if (updateSpeakLanguageController.text.isEmpty) {
-      showErrorDialog(context, "学歴はまだ入力されていません", false);
+      showErrorDialog(context, "学歴はまだ入力されていません");
     } else if (updateJobController.text.isEmpty) {
-      showErrorDialog(context, "仕事はまだ入力されていません", false);
+      showErrorDialog(context, "仕事はまだ入力されていません");
     } else if (!isPureNumber(updateAnnualSalaryController.text)) {
-      showErrorDialog(context, "入力した年収は数字じゃありません", false);
+      showErrorDialog(context, "入力した年収は数字じゃありません");
     } else if (updateSociabilityController.text.isEmpty) {
-      showErrorDialog(context, "社交力はまだ入力されていません", false);
+      showErrorDialog(context, "社交力はまだ入力されていません");
     } else if (updateReligiousController.text.isEmpty) {
-      showErrorDialog(context, "宗教はまだ入力されていません", false);
+      showErrorDialog(context, "宗教はまだ入力されていません");
     } else if (updateIntroduceController.text.isEmpty) {
-      showErrorDialog(context, "自己紹介はまだ入力されていません", false);
+      showErrorDialog(context, "自己紹介はまだ入力されていません");
     } else {
       setState(() {
         showLoadDialog(context);
       });
-      await Future.delayed(Duration(seconds: 1));
       try {
         String? apiKeyS = await globalSession.read(key: 'SessionId');
         final request = UpdateCanChangeRequest(
@@ -192,11 +193,14 @@ class _InformationEditState extends State<InformationEdit> {
         );
         await GrpcInfoService.client.updateCanChange(request);
         updateImage(context);
-        Navigator.pop(context);
         showLogoDialog(context, "個人情報もアップしました", false);
+        Future.delayed(Duration(seconds: 1), () {
+          Navigator.pop(context);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ContainerScreen(number: 3)));
+        });
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data", false);
+        showErrorDialog(context, "Error: validatable input data");
         throw Exception("Error occurred while fetching profile edit.");
       }
     }
@@ -209,7 +213,9 @@ class _InformationEditState extends State<InformationEdit> {
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
       appBar: _buildheader(context, mediaH, mediaW),
-      backgroundColor: Color.fromARGB(255, 226, 226, 226),
+      backgroundColor: appTheme.bgColor,
+      // 鍵盤彈出後自動調節Size - 要test先知
+      resizeToAvoidBottomInset: false,
       body: Container(
         child: SingleChildScrollView(
           child: Column(
@@ -339,23 +345,7 @@ class _InformationEditState extends State<InformationEdit> {
         print(item.toString());
         _uploadPhotoToNewFile(item);
       },
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: mediaW / 50),
-        width: mediaH / 6.5,
-        height: mediaH / 6.5,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(color: Colors.pinkAccent, width: 3.5),
-        ),
-        child: ClipOval(
-          child: Container(
-            width: mediaH / 6.5,
-            height: mediaH / 6.5,
-            decoration: BoxDecoration(color: Colors.transparent),
-            child: Image.file(imageFile, fit: BoxFit.cover),
-          ),
-        ),
-      ),
+      child: customImageDesign(context, imageFile, mediaH, mediaW),
     );
   }
 

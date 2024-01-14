@@ -3,13 +3,15 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_hobby.pb.dart';
 import 'package:dating_your_date/pb/rpc_targetList.pb.dart';
+import 'package:dating_your_date/widgets/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
-import 'package:dating_your_date/widgets/loading.dart';
+import 'package:dating_your_date/widgets/Custom_Loading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
 
 class HobbyCondition extends StatefulWidget {
@@ -91,7 +93,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
         checkTargetUserTable(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data for update", false);
+        showErrorDialog(context, "Error: validatable input data for update");
         throw Exception("Error occurred while fetching update Hobby.");
       }
     } else {
@@ -110,7 +112,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
         onTapPaymentPage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data for create Hobby", false);
+        showErrorDialog(context, "Error: validatable input data for create Hobby");
         throw Exception("Error occurred while fetching Create Hobby.");
       }
     }
@@ -122,11 +124,13 @@ class _HobbyConditionState extends State<HobbyCondition> {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: true, title: AppbarTitle(text: "趣味の条件")),
+      appBar: buildAppBar(context, "趣味の条件", true),
+      // 鍵盤彈出後自動調節Size - 要test先知
       resizeToAvoidBottomInset: false,
+      backgroundColor: appTheme.bgColor,
       body: Container(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
+          padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 50),
           child: Column(
             children: [
               // Era

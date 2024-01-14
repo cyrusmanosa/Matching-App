@@ -2,13 +2,16 @@ import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_lover.pb.dart';
+import 'package:dating_your_date/widgets/Custom_App_bar.dart';
+import 'package:dating_your_date/widgets/Custom_Word_button.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
-import 'package:dating_your_date/widgets/loading.dart';
+import 'package:dating_your_date/widgets/Custom_Loading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
 
 class LoverCondition extends StatefulWidget {
@@ -77,7 +80,7 @@ class _LoverConditionState extends State<LoverCondition> {
         onTapNextPage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data for update", false);
+        showErrorDialog(context, "Error: validatable input data for update");
         throw Exception("Error occurred while fetching update Lover.");
       }
     } else {
@@ -95,7 +98,7 @@ class _LoverConditionState extends State<LoverCondition> {
         onTapNextPage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data for create Lover", false);
+        showErrorDialog(context, "Error: validatable input data for create Lover");
         throw Exception("Error occurred while fetching Create Lover.");
       }
     }
@@ -108,8 +111,10 @@ class _LoverConditionState extends State<LoverCondition> {
     double mediaW = mediaQueryData.size.width;
 
     return Scaffold(
+      appBar: buildAppBar(context, "恋人の条件", true),
+      // 鍵盤彈出後自動調節Size - 要test先知
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(automaticallyImplyLeading: true, title: AppbarTitle(text: "恋人の条件")),
+      backgroundColor: appTheme.bgColor,
       body: SizedBox(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
@@ -149,21 +154,8 @@ class _LoverConditionState extends State<LoverCondition> {
                     confirmBtn = !confirmBtn;
                   });
                 },
-                child: Row(
-                  children: [
-                    Container(
-                      height: mediaW / 25,
-                      width: mediaW / 25,
-                      decoration: BoxDecoration(color: confirmBtn ? appTheme.green : appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: mediaW / 50),
-                      child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
-                    ),
-                  ],
-                ),
+                child: WordButton(msg: "本人認証を確認しました", mediaH: mediaH, mediaW: mediaW, boolbtn: confirmBtn),
               ),
-
               SizedBox(height: mediaH / 25),
 
               // button

@@ -8,6 +8,7 @@ dependencies:
   flutter: 
     sdk: flutter
   cached_network_image:
+  carousel_slider:
   dropdown_button2:
   flutter_bloc:
   flutter_launcher_icons:

@@ -19,7 +19,12 @@ class ResetTargetButton extends StatelessWidget {
       width: mediaW / 15,
       height: mediaH / 8,
       text: title!,
-      buttonTextStyle: TextStyle(fontSize: mediaW / 15, fontWeight: FontWeight.w500, color: appTheme.white),
+      buttonTextStyle: TextStyle(
+        fontSize: mediaW / 15,
+        fontWeight: FontWeight.w500,
+        color: appTheme.white,
+        shadows: [Shadow(offset: Offset(0, 4), blurRadius: 5.0, color: Colors.black26)],
+      ),
       buttonStyle: color,
       onPressed: () {
         onTapNextPage(context);

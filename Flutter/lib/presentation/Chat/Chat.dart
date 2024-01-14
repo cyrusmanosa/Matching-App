@@ -9,6 +9,7 @@ import 'package:dating_your_date/pb/rpc_chatRecord.pb.dart';
 import 'package:dating_your_date/pb/rpc_images.pb.dart';
 import 'package:dating_your_date/presentation/Chat/widgets/conversationList.dart';
 import 'package:dating_your_date/theme/custom_text_style.dart';
+import 'package:dating_your_date/widgets/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,7 @@ class _ChatState extends State<Chat> {
       _getUserInfoGrpcRequest(context);
     } on GrpcError {
       isEmpty = true;
-      showErrorDialog(context, "Error: validatable input data of Msg Info", false);
+      showErrorDialog(context, "Error: validatable input data of Msg Info");
       throw Exception("Error occurred while fetching user info.");
     }
   }
@@ -97,13 +98,8 @@ class _ChatState extends State<Chat> {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: AppbarTitle(text: "チャット"),
-        backgroundColor: Colors.transparent,
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
-      ),
-      backgroundColor: Color.fromARGB(255, 226, 226, 226),
+      appBar: buildAppBar(context, "チャット", false),
+      backgroundColor: appTheme.bgColor,
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

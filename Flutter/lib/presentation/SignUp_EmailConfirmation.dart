@@ -1,12 +1,14 @@
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/pb/rpc_checkEmail.pb.dart';
+import 'package:dating_your_date/widgets/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
-import 'package:dating_your_date/widgets/loading.dart';
+import 'package:dating_your_date/widgets/Custom_Loading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class EmailConfirmation extends StatefulWidget {
   EmailConfirmation({Key? key}) : super(key: key);
@@ -24,7 +26,7 @@ class _EmailConfirmationtate extends State<EmailConfirmation> {
 
   void emailConfirmationGrpcRequest(BuildContext context) async {
     if (!isEmailValid(emailController.text)) {
-      showErrorDialog(context, "無効なメールアドレス", false);
+      showErrorDialog(context, "無効なメールアドレス");
     } else {
       try {
         setState(() {
@@ -35,7 +37,7 @@ class _EmailConfirmationtate extends State<EmailConfirmation> {
         onTapNextPage(context);
       } catch (error) {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data", false);
+        showErrorDialog(context, "Error: validatable input data");
         throw Exception("Error occurred while fetching email Confirmation.");
       }
     }
@@ -47,7 +49,8 @@ class _EmailConfirmationtate extends State<EmailConfirmation> {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: true),
+      appBar: buildAppBar(context, "", true),
+      backgroundColor: appTheme.bgColor,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
         child: Column(

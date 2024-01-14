@@ -4,27 +4,29 @@ import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_chatRecord.pb.dart';
 import 'package:dating_your_date/presentation/Target/Target.dart';
+import 'package:dating_your_date/widgets/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
-import 'package:dating_your_date/widgets/loading.dart';
+import 'package:dating_your_date/widgets/Custom_Loading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class CanChangeInformation_2 extends StatefulWidget {
-  CanChangeInformation_2({Key? key, this.can1}) : super(key: key);
+class CanChangeInformation2 extends StatefulWidget {
+  CanChangeInformation2({Key? key, this.can1}) : super(key: key);
 
   final CreateCanChangeRequest? can1;
 
   @override
-  _CanChangeInformation_2State createState() => _CanChangeInformation_2State();
+  _CanChangeInformation2State createState() => _CanChangeInformation2State();
 }
 
-class _CanChangeInformation_2State extends State<CanChangeInformation_2> {
+class _CanChangeInformation2State extends State<CanChangeInformation2> {
   TextEditingController canChangeJobController = TextEditingController();
   TextEditingController canChangeAnnualSalaryController = TextEditingController();
   TextEditingController canChangeSociabilityController = TextEditingController();
@@ -55,15 +57,15 @@ class _CanChangeInformation_2State extends State<CanChangeInformation_2> {
   // Grpc
   void createCanChangeGrpcRequest(BuildContext context) async {
     if (canChangeJobController.text.isEmpty) {
-      showErrorDialog(context, "仕事はまだ入力されていません", false);
+      showErrorDialog(context, "仕事はまだ入力されていません");
     } else if (!isPureNumber(canChangeAnnualSalaryController.text)) {
-      showErrorDialog(context, "入力した年収は数字じゃありません", false);
+      showErrorDialog(context, "入力した年収は数字じゃありません");
     } else if (canChangeSociabilityController.text.isEmpty) {
-      showErrorDialog(context, "社交力はまだ入力されていません", false);
+      showErrorDialog(context, "社交力はまだ入力されていません");
     } else if (canChangeReligiousController.text.isEmpty) {
-      showErrorDialog(context, "宗教はまだ入力されていません", false);
+      showErrorDialog(context, "宗教はまだ入力されていません");
     } else if (canChangeIntroduceController.text.isEmpty) {
-      showErrorDialog(context, "自己紹介はまだ入力されていません", false);
+      showErrorDialog(context, "自己紹介はまだ入力されていません");
     } else {
       try {
         String? apiKeyS = await globalSession.read(key: 'SessionId');
@@ -87,7 +89,7 @@ class _CanChangeInformation_2State extends State<CanChangeInformation_2> {
         onTapNextPage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data", false);
+        showErrorDialog(context, "Error: validatable input data");
         throw Exception("Error occurred while fetching CanChange1.");
       }
     }
@@ -106,7 +108,7 @@ class _CanChangeInformation_2State extends State<CanChangeInformation_2> {
       await GrpcChatService.client.createChatTable(request);
     } on GrpcError {
       Navigator.pop(context);
-      showErrorDialog(context, "Error: validatable create Chat Record", false);
+      showErrorDialog(context, "Error: validatable create Chat Record");
       throw Exception("Error occurred while fetching Chat Record");
     }
   }
@@ -117,7 +119,10 @@ class _CanChangeInformation_2State extends State<CanChangeInformation_2> {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: true, title: AppbarTitle(text: "基本個人情報 - C")),
+      appBar: buildAppBar(context, "基本個人情報 - C", true),
+      backgroundColor: appTheme.bgColor,
+      // 鍵盤彈出後自動調節Size - 要test先知
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
         child: Column(

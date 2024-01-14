@@ -4,6 +4,7 @@ import 'package:dating_your_date/presentation/HobbyCondition.dart';
 import 'package:dating_your_date/presentation/LoverCondition.dart';
 import 'package:dating_your_date/presentation/Password_Setup.dart';
 import 'package:dating_your_date/presentation/Information.dart';
+import 'package:dating_your_date/presentation/UserPage.dart';
 import 'package:dating_your_date/presentation/appNavigationScreen.dart';
 import 'package:dating_your_date/presentation/Chat/Chat.dart';
 import 'package:dating_your_date/presentation/ChatBox.dart';
@@ -63,6 +64,7 @@ class AppRoutes {
   static String targetReady = '/targetReady';
   static String warningMsgDeleteUser = '/WarningMsgDeleteUser';
   static String warningMsgReturnResetPage = '/WarningMsgReturnResetPage';
+  static String userPage = '/userPage';
 
   static Map<String, WidgetBuilder> routes = {
     appNavigationScreen: (context) => AppNavigationScreen(),
@@ -90,9 +92,10 @@ class AppRoutes {
     informationEdit: (context) => InformationEdit(),
     sideBar: (context) => SideBar(),
     fixInformation: (context) => FixInformation(),
-    canChangeInformation_1: (context) => CanChangeInformation_1(),
-    canChangeInformation_2: (context) => CanChangeInformation_2(),
+    canChangeInformation_1: (context) => CanChangeInformation1(),
+    canChangeInformation_2: (context) => CanChangeInformation2(),
     target: (context) => Target(),
     targetReady: (context) => TargetReady(),
+    userPage: (context) => UserPage(),
   };
 }

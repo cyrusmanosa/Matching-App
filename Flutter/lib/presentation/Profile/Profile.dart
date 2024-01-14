@@ -9,10 +9,11 @@ import 'package:dating_your_date/pb/rpc_chatRecord.pb.dart';
 import 'package:dating_your_date/pb/rpc_images.pb.dart';
 import 'package:dating_your_date/presentation/Information.dart';
 import 'package:dating_your_date/presentation/InformationEdit.dart';
+import 'package:dating_your_date/widgets/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Profile_button.dart';
+import 'package:dating_your_date/widgets/Custom_Show_Image.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
-import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
 import 'package:dating_your_date/core/app_export.dart';
@@ -66,6 +67,7 @@ class _ProfileState extends State<Profile> {
   }
 
   // Grpc
+// get Data1
   void getImagesGrpcRequest(BuildContext context) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
     String? apiKeyU = await globalUserId.read(key: 'UserID');
@@ -74,7 +76,6 @@ class _ProfileState extends State<Profile> {
       // image
       final imgRequest = GetImagesRequest(sessionID: apiKeyS, userID: userid);
       final imgResponse = await GrpcInfoService.client.getImages(imgRequest);
-
       Directory documentsDirectory = await getApplicationDocumentsDirectory();
 
       // img1
@@ -132,11 +133,12 @@ class _ProfileState extends State<Profile> {
         });
       }
     } on GrpcError {
-      showErrorDialog(context, "Error: validatable input UserId in Image!", false);
+      showErrorDialog(context, "Error: validatable input UserId in Image!");
       throw Exception("Error occurred while fetching canChangeInfo.");
     }
   }
 
+// get Data2
   void getSendDataGrpcRequest(BuildContext context) async {
     String? apiKeyU = await globalUserId.read(key: 'UserID');
     final userid = int.tryParse(apiKeyU!);
@@ -148,11 +150,12 @@ class _ProfileState extends State<Profile> {
         send = sendResponse.row.toString();
       });
     } on GrpcError {
-      showErrorDialog(context, "Error: validatable input UserId in Chat Record!", false);
+      showErrorDialog(context, "Error: validatable input UserId in Chat Record!");
       throw Exception("Error occurred while fetching canChangeInfo.");
     }
   }
 
+// get Data3
   void getChangeGrpcRequest(BuildContext context) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
     // changed data
@@ -166,12 +169,31 @@ class _ProfileState extends State<Profile> {
       if (e.code == 13) {
         changeTime = "0";
       } else {
-        showErrorDialog(context, "Error: validatable input UserId in ChangeTarget! $e", false);
+        showErrorDialog(context, "Error: validatable input UserId in ChangeTarget! $e");
         throw Exception("Error occurred while fetching canChangeInfo.");
       }
     }
   }
 
+// get Data4
+  void getDataGrpcRequest(BuildContext context) async {
+    try {
+      String? apiKeyS = await globalSession.read(key: 'SessionId');
+      String? apiKeyU = await globalUserId.read(key: 'UserID');
+      final userid = int.tryParse(apiKeyU!);
+      // Can Change
+      final infoRequest = GetCanChangeRequest(sessionID: apiKeyS, userID: userid);
+      final infoResponse = await GrpcInfoService.client.getCanChange(infoRequest);
+      setState(() {
+        data = infoResponse.canChangeInfo;
+      });
+    } on GrpcError {
+      showErrorDialog(context, "Error: validatable input UserId in Can Change Table!");
+      throw Exception("Error occurred while fetching canChangeInfo.");
+    }
+  }
+
+// upload img
   void updateIconGrpcRequest(BuildContext context, int item) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
     String? apiKeyU = await globalUserId.read(key: 'UserID');
@@ -235,24 +257,7 @@ class _ProfileState extends State<Profile> {
           break;
       }
     } on GrpcError {
-      showErrorDialog(context, "Error: validatable input UserId in Chat Record!", false);
-      throw Exception("Error occurred while fetching canChangeInfo.");
-    }
-  }
-
-  void getDataGrpcRequest(BuildContext context) async {
-    try {
-      String? apiKeyS = await globalSession.read(key: 'SessionId');
-      String? apiKeyU = await globalUserId.read(key: 'UserID');
-      final userid = int.tryParse(apiKeyU!);
-      // Can Change
-      final infoRequest = GetCanChangeRequest(sessionID: apiKeyS, userID: userid);
-      final infoResponse = await GrpcInfoService.client.getCanChange(infoRequest);
-      setState(() {
-        data = infoResponse.canChangeInfo;
-      });
-    } on GrpcError {
-      showErrorDialog(context, "Error: validatable input UserId in Can Change Table!", false);
+      showErrorDialog(context, "Error: validatable input UserId in Chat Record!");
       throw Exception("Error occurred while fetching canChangeInfo.");
     }
   }
@@ -275,13 +280,8 @@ class _ProfileState extends State<Profile> {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: AppbarTitle(text: "プロフィール"),
-        backgroundColor: Colors.transparent,
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
-      ),
-      backgroundColor: Color.fromARGB(255, 226, 226, 226),
+      appBar: buildAppBar(context, "プロフィール", false),
+      backgroundColor: appTheme.bgColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -336,10 +336,10 @@ class _ProfileState extends State<Profile> {
   Widget _buildImages(BuildContext context, double mediaH, double mediaW) {
     return Container(
       height: mediaH / 6.5,
-      padding: EdgeInsets.only(left: mediaW / 15),
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
+          SizedBox(width: mediaW / 25),
           _buildImageContainer(context, mediaH, mediaW, imgIcon1, 0),
           if (imgIcon2.existsSync()) _buildImageContainer(context, mediaH, mediaW, imgIcon2, 1),
           if (imgIcon3.existsSync()) _buildImageContainer(context, mediaH, mediaW, imgIcon3, 2),
@@ -355,6 +355,7 @@ class _ProfileState extends State<Profile> {
               icon: Icon(Icons.add, size: mediaH / 15, color: appTheme.gray800),
             ),
           ),
+          SizedBox(width: mediaW / 25),
         ],
       ),
     );
@@ -365,21 +366,40 @@ class _ProfileState extends State<Profile> {
       onTap: () {
         _showOriginalImage(context, imageFile, mediaH, mediaW, item);
       },
+      child: customImageDesign(context, imageFile, mediaH, mediaW),
+    );
+  }
+
+// Data Bar
+  Widget _buildDataBar(BuildContext context, double mediaH, double mediaW) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: mediaW / 10),
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: mediaW / 50),
-        width: mediaH / 6.5,
-        height: mediaH / 6.5,
         decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(color: Colors.pinkAccent, width: 3.5),
+          color: appTheme.gray100,
+          borderRadius: BorderRadiusStyle.r15,
+          boxShadow: [
+            BoxShadow(color: Colors.grey.withOpacity(0.7), spreadRadius: 2, blurRadius: 5, offset: Offset(0, 4)),
+          ],
         ),
-        child: ClipOval(
-          child: Container(
-            width: mediaH / 6.5,
-            height: mediaH / 6.5,
-            decoration: BoxDecoration(color: Colors.transparent),
-            child: Image.file(imageFile, fit: BoxFit.cover),
-          ),
+        padding: EdgeInsets.symmetric(horizontal: mediaW / 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: [
+                Text("交換回数", style: CustomTextStyles.inputTitlePink),
+                Text(changeTime ?? "0", style: CustomTextStyles.dataWord),
+              ],
+            ),
+            SizedBox(height: mediaH / 14, child: VerticalDivider(thickness: 1, indent: 10, endIndent: 10)),
+            Column(
+              children: [
+                Text("伝送回数", style: CustomTextStyles.inputTitlePink),
+                Text(send ?? "0", style: CustomTextStyles.dataWord),
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -492,37 +512,6 @@ class _ProfileState extends State<Profile> {
             title: "ログアウト",
           ),
         ),
-      ),
-    );
-  }
-
-// Data Bar
-  Widget _buildDataBar(BuildContext context, double mediaH, double mediaW) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(color: Colors.grey.withOpacity(0.5), spreadRadius: 2, blurRadius: 5, offset: Offset(0, 3)),
-        ],
-      ),
-      padding: EdgeInsets.symmetric(horizontal: mediaW / 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Column(
-            children: [
-              Text("交換回数", style: CustomTextStyles.inputTitlePink),
-              Text(changeTime ?? "0", style: CustomTextStyles.profileData),
-            ],
-          ),
-          SizedBox(height: mediaH / 14, child: VerticalDivider(thickness: 1, indent: 10, endIndent: 10)),
-          Column(
-            children: [
-              Text("伝送回数", style: CustomTextStyles.inputTitlePink),
-              Text(send ?? "0", style: CustomTextStyles.profileData),
-            ],
-          ),
-        ],
       ),
     );
   }

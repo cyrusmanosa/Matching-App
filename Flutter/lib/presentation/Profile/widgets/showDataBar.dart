@@ -1,9 +1,12 @@
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class ShownDataBarWidget extends StatelessWidget {
-  ShownDataBarWidget({Key? key, this.item, this.data}) : super(key: key);
+  const ShownDataBarWidget({
+    Key? key,
+    this.item,
+    this.data,
+  }) : super(key: key);
 
   final String? item;
   final String? data;
@@ -13,19 +16,19 @@ class ShownDataBarWidget extends StatelessWidget {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
-    return SizedBox(
-      height: mediaH / 35,
+
+    return Container(
+      height: mediaH / 25,
       width: mediaW / 1.3,
-      child: Stack(
-        alignment: Alignment.centerRight,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Under bar
-          Align(alignment: Alignment.bottomCenter, child: SizedBox(width: mediaW / 1.3, child: Divider())),
-          // Data
-          Align(alignment: Alignment.centerRight, child: Text(data!, style: CustomTextStyles.smallTitle20)),
-          // Theme
-          Align(alignment: Alignment.centerLeft, child: Text(item!, style: CustomTextStyles.showDataTitle)),
+          Text(item!, style: CustomTextStyles.showDataTitle),
+          Text(data!, style: CustomTextStyles.smallTitle20),
         ],
+      ),
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(width: 1, color: Colors.grey)),
       ),
     );
   }

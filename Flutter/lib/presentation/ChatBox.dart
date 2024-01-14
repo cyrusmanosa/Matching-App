@@ -5,6 +5,7 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/chatRecordNoID.pb.dart';
 import 'package:dating_your_date/pb/rpc_chatRecord.pb.dart';
+import 'package:dating_your_date/pb/rpc_targetList.pb.dart';
 import 'package:dating_your_date/presentation/SideBar.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
@@ -24,8 +25,18 @@ class ChatBox extends StatefulWidget {
 }
 
 class _ChatBoxState extends State<ChatBox> {
+  String? purpose;
+  bool checktime = true;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController newMsgTextController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    getChatRecords(context);
+    checkStatus(widget.time!);
+    getPurpose(context);
+  }
 
   Future<List<ChatRecordNoID>> getChatRecords(BuildContext context) async {
     try {
@@ -35,8 +46,35 @@ class _ChatBoxState extends State<ChatBox> {
       final crResponse = await GrpcChatService.client.getChatRecord(crRequest);
       return crResponse.chatRecordNoID;
     } on GrpcError {
-      showErrorDialog(context, "Error: validatable input data of Info", false);
+      showErrorDialog(context, "Error: validatable input data of Info");
       throw Exception("Error occurred while fetching take chat record");
+    }
+  }
+
+  void getPurpose(BuildContext context) async {
+    try {
+      String? apiKeyS = await globalSession.read(key: 'SessionId');
+      final request = GetTargetListRequest(sessionID: apiKeyS);
+      final response = await GrpcInfoService.client.getTargetList(request);
+      if (response.tl.target1ID == widget.targetid) {
+        setState(() {
+          purpose = response.tl.t1Type;
+          print(purpose);
+        });
+      } else if (response.tl.target2ID == widget.targetid) {
+        setState(() {
+          purpose = response.tl.t2Type;
+          print(purpose);
+        });
+      } else {
+        setState(() {
+          purpose = response.tl.t3Type;
+          print(purpose);
+        });
+      }
+    } on GrpcError {
+      showErrorDialog(context, "Error: validatable input data of Target List");
+      throw Exception("Error occurred while fetching take Target List");
     }
   }
 
@@ -54,7 +92,7 @@ class _ChatBoxState extends State<ChatBox> {
       );
       await GrpcChatService.client.createChatRecord(myRequest);
     } on GrpcError {
-      showErrorDialog(context, "Error: validatable input data of myself", false);
+      showErrorDialog(context, "Error: validatable input data of myself");
       throw Exception("Error occurred while fetching myself chat record");
     }
   }
@@ -72,7 +110,7 @@ class _ChatBoxState extends State<ChatBox> {
       );
       await GrpcChatService.client.createChatRecord(targetRequest);
     } on GrpcError {
-      showErrorDialog(context, "Error: validatable input data of target", false);
+      showErrorDialog(context, "Error: validatable input data of target");
       throw Exception("Error occurred while fetching target chat record");
     }
     newMsgTextController = TextEditingController();
@@ -84,14 +122,6 @@ class _ChatBoxState extends State<ChatBox> {
     }
   }
 
-  bool checktime = true;
-  @override
-  void initState() {
-    super.initState();
-    getChatRecords(context);
-    checkStatus(widget.time!);
-  }
-
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
@@ -100,11 +130,11 @@ class _ChatBoxState extends State<ChatBox> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: _buildHeader(context, mediaW),
-      drawer: Drawer(
-          child: SideBar(
-        name: widget.name,
-        imageUrl: widget.imageUrl,
-      )),
+      drawer: Drawer(child: SideBar(name: widget.name, imageUrl: widget.imageUrl, purpose: purpose)),
+      // 鍵盤彈出後自動調節Size - 要test先知
+      resizeToAvoidBottomInset: true,
+      backgroundColor: appTheme.bgColor,
+
       body: FutureBuilder<List<ChatRecordNoID>>(
         future: getChatRecords(context),
         builder: (context, snapshot) {
@@ -147,7 +177,7 @@ class _ChatBoxState extends State<ChatBox> {
       ),
       bottomNavigationBar: Container(
         height: mediaH / 10.5,
-        color: appTheme.white,
+        color: Color.fromARGB(255, 226, 226, 226),
         child: Padding(
           padding: EdgeInsets.only(left: mediaW / 20, right: mediaW / 20, bottom: mediaH / 40),
           child: Row(
@@ -163,6 +193,7 @@ class _ChatBoxState extends State<ChatBox> {
     );
   }
 
+// Header
   PreferredSizeWidget _buildHeader(BuildContext context, double mediaW) {
     return AppBar(
       elevation: 0,

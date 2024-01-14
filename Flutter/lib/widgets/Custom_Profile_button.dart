@@ -35,10 +35,7 @@ class _ProfileButtonState extends State<ProfileButton> {
           ),
         ),
         SizedBox(height: widget.mediaH! / 130),
-        Text(
-          widget.title!,
-          style: theme.textTheme.headlineSmall,
-        ),
+        Text(widget.title!, style: theme.textTheme.headlineSmall),
       ],
     );
   }

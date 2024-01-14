@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package pb;
 
+import "fix.proto";
 import "google/protobuf/timestamp.proto";
 
 
@@ -27,17 +28,11 @@ message CreateFixResponse {
 // Get
 message GetFixRequest {
   string SessionID = 1;
+  int32 UserID = 2;
 }
+
 message GetFixResponse {
-  string FirstName = 1;
-  string LastName = 2;
-  string Birth = 3;
-  string Country = 4;
-  string Gender = 5;
-  string Blood = 6;
-  int32 age = 7;
-  string constellation = 8;
-  bool certification = 9;
+  Fix fix = 1;
 }
 
 // Delete

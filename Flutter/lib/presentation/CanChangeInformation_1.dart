@@ -1,22 +1,25 @@
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/presentation/CanChangeInformation_2.dart';
+import 'package:dating_your_date/theme/theme_helper.dart';
+import 'package:dating_your_date/widgets/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
-import 'package:dating_your_date/widgets/loading.dart';
+import 'package:dating_your_date/widgets/Custom_Loading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
 
-class CanChangeInformation_1 extends StatefulWidget {
-  CanChangeInformation_1({Key? key}) : super(key: key);
+class CanChangeInformation1 extends StatefulWidget {
+  CanChangeInformation1({Key? key}) : super(key: key);
   @override
-  _CanChangeInformation_1State createState() => _CanChangeInformation_1State();
+  _CanChangeInformation1State createState() => _CanChangeInformation1State();
 }
 
-class _CanChangeInformation_1State extends State<CanChangeInformation_1> {
+class _CanChangeInformation1State extends State<CanChangeInformation1> {
   bool isPureNumber(String value) {
     final pattern = RegExp(r'^\d+$');
     return pattern.hasMatch(value);
@@ -33,21 +36,21 @@ class _CanChangeInformation_1State extends State<CanChangeInformation_1> {
   // Grpc
   void canChangeGrpcRequest(BuildContext context) async {
     if (canChangeNickNameController.text.isEmpty) {
-      showErrorDialog(context, "ニックネームはまだ入力されていません", false);
+      showErrorDialog(context, "ニックネームはまだ入力されていません");
     } else if (canChangeCityController.text.isEmpty) {
-      showErrorDialog(context, "居住地はまだ入力されていません", false);
+      showErrorDialog(context, "居住地はまだ入力されていません");
     } else if (canChangeSexualController.text.isEmpty) {
-      showErrorDialog(context, "性的指向はまだ入力されていません", false);
+      showErrorDialog(context, "性的指向はまだ入力されていません");
     } else if (canChangeHeightController.text.isEmpty) {
-      showErrorDialog(context, "身長はまだ入力されていません", false);
+      showErrorDialog(context, "身長はまだ入力されていません");
     } else if (!isPureNumber(canChangeHeightController.text)) {
-      showErrorDialog(context, "入力した身長は数字じゃありません", false);
+      showErrorDialog(context, "入力した身長は数字じゃありません");
     } else if (canChangeWeightController.text.isEmpty) {
-      showErrorDialog(context, "体重はまだ入力されていません", false);
+      showErrorDialog(context, "体重はまだ入力されていません");
     } else if (!isPureNumber(canChangeWeightController.text)) {
-      showErrorDialog(context, "入力した体重は数字じゃありません", false);
+      showErrorDialog(context, "入力した体重は数字じゃありません");
     } else if (canChangeSpeakLanguageController.text.isEmpty) {
-      showErrorDialog(context, "学歴はまだ入力されていません", false);
+      showErrorDialog(context, "学歴はまだ入力されていません");
     } else {
       setState(() {
         showLoadDialog(context);
@@ -69,7 +72,7 @@ class _CanChangeInformation_1State extends State<CanChangeInformation_1> {
         onTapNextPage(context, request);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data", false);
+        showErrorDialog(context, "Error: validatable input data");
         throw Exception("Error occurred while fetching CanChange1.");
       }
     }
@@ -81,12 +84,14 @@ class _CanChangeInformation_1State extends State<CanChangeInformation_1> {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
-      appBar: _buildHeader(context),
+      appBar: buildAppBar(context, "基本個人情報 - B", true),
+      backgroundColor: appTheme.bgColor,
+      // 鍵盤彈出後自動調節Size - 要test先知
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
         child: Column(
           children: [
-            // _buildHeader(context),
             // Nick Name
             CustomInputBar(titleName: "ニックネーム:", backendPart: _buildcanChangeNickNameInput(context)),
             SizedBox(height: mediaH / 50),
@@ -121,16 +126,6 @@ class _CanChangeInformation_1State extends State<CanChangeInformation_1> {
         ),
       ),
     );
-  }
-
-  /// Header
-  PreferredSizeWidget _buildHeader(BuildContext context) {
-    return AppBar(automaticallyImplyLeading: true, title: AppbarTitle(text: "基本個人情報 - B"));
-  }
-
-  // turn back
-  onTapReturn(BuildContext context) {
-    Navigator.pop(context);
   }
 
   /// Nickname
@@ -186,6 +181,6 @@ class _CanChangeInformation_1State extends State<CanChangeInformation_1> {
   }
 
   onTapNextPage(BuildContext context, CreateCanChangeRequest request) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => CanChangeInformation_2(can1: request)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => CanChangeInformation2(can1: request)));
   }
 }

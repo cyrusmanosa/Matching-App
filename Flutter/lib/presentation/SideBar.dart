@@ -6,8 +6,9 @@ import 'package:dating_your_date/widgets/custom_sideBar.dart';
 import 'package:flutter/material.dart';
 
 class SideBar extends StatefulWidget {
-  SideBar({Key? key, this.name, this.imageUrl}) : super(key: key);
+  SideBar({Key? key, this.name, this.imageUrl, this.purpose}) : super(key: key);
 
+  final String? purpose;
   final String? name;
   final File? imageUrl;
 
@@ -16,12 +17,6 @@ class SideBar extends StatefulWidget {
 }
 
 class _SideBarState extends State<SideBar> {
-  bool imgBtn = false;
-  bool contextBtn = false;
-  bool locationBtn = false;
-  bool dataBtn = false;
-  bool snsBtn = false;
-
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
@@ -42,58 +37,23 @@ class _SideBarState extends State<SideBar> {
             _buildCheckPointRow(context, mediaH, mediaW),
 
             // 写真解放
-            InkWell(
-              onTap: () {
-                setState(() {
-                  imgBtn = !imgBtn;
-                });
-              },
-              child: CustomSideBar(item: "写真解放", btn: imgBtn),
-            ),
+            CustomSideBar(item: "写真解放"),
             SizedBox(height: mediaH / 25),
 
             // 連絡解放
-            InkWell(
-              onTap: () {
-                setState(() {
-                  contextBtn = !contextBtn;
-                });
-              },
-              child: CustomSideBar(item: "連絡解放", btn: contextBtn),
-            ),
+            CustomSideBar(item: "連絡解放"),
             SizedBox(height: mediaH / 25),
 
             // 位置共有
-            InkWell(
-              onTap: () {
-                setState(() {
-                  locationBtn = !locationBtn;
-                });
-              },
-              child: CustomSideBar(item: "位置共有", btn: locationBtn),
-            ),
+            CustomSideBar(item: "位置共有"),
             SizedBox(height: mediaH / 25),
 
             // デート解放
-            InkWell(
-              onTap: () {
-                setState(() {
-                  dataBtn = !dataBtn;
-                });
-              },
-              child: CustomSideBar(item: "デート解放", btn: dataBtn),
-            ),
+            CustomSideBar(item: "デート解放"),
             SizedBox(height: mediaH / 25),
 
             // SNS共有
-            InkWell(
-              onTap: () {
-                setState(() {
-                  snsBtn = !snsBtn;
-                });
-              },
-              child: CustomSideBar(item: "SNS共有", btn: snsBtn),
-            ),
+            CustomSideBar(item: "SNS共有"),
             SizedBox(height: mediaH / 25),
           ],
         ),
@@ -118,8 +78,8 @@ class _SideBarState extends State<SideBar> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(widget.name!, style: CustomTextStyles.msgWordOfMsgBox),
-                Text("", style: CustomTextStyles.msgWordOfMsgBox),
+                Text(widget.name!, style: CustomTextStyles.sideBarTitle),
+                Text(widget.purpose!, style: CustomTextStyles.sideBarTitle),
               ],
             ),
           ),

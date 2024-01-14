@@ -24,9 +24,9 @@ class _ContainerScreenState extends State<ContainerScreen> {
   }
 
   void number() {
-    if (widget.number != null) {
+    setState(() {
       selectedIndex = widget.number!;
-    }
+    });
   }
 
   List<Widget> pages = [Home(), Target(head: "head"), Chat(), Profile()];

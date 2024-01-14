@@ -7,13 +7,16 @@ import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_fix.pb.dart';
 import 'package:dating_your_date/pb/rpc_images.pb.dart';
 import 'package:dating_your_date/pb/rpc_session.pb.dart';
+import 'package:dating_your_date/widgets/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
+import 'package:dating_your_date/widgets/Custom_Word_button.dart';
 import 'package:dating_your_date/widgets/app_bar/appbar_title.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
-import 'package:dating_your_date/widgets/loading.dart';
+import 'package:dating_your_date/widgets/Custom_Loading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
@@ -67,21 +70,21 @@ class _FixInformationState extends State<FixInformation> {
   // Grpc
   void fixInformationGrpcRequest(BuildContext context) async {
     if (fixFirstNameController.text.isEmpty) {
-      showErrorDialog(context, "姓はまだ入力されていません", false);
+      showErrorDialog(context, "姓はまだ入力されていません");
     } else if (fixLastNameController.text.isEmpty) {
-      showErrorDialog(context, "名はまだ入力されていません", false);
+      showErrorDialog(context, "名はまだ入力されていません");
     } else if (fixBirthController.text.isEmpty) {
-      showErrorDialog(context, "生年月日はまだ入力されていません", false);
+      showErrorDialog(context, "生年月日はまだ入力されていません");
     } else if (fixCountryController.text.isEmpty) {
-      showErrorDialog(context, "国籍はまだ入力されていません", false);
+      showErrorDialog(context, "国籍はまだ入力されていません");
     } else if (fixGenderController.text.isEmpty) {
-      showErrorDialog(context, "性別はまだ入力されていません", false);
+      showErrorDialog(context, "性別はまだ入力されていません");
     } else if (fixBloodController.text.isEmpty) {
-      showErrorDialog(context, "血液型はまだ入力されていません", false);
+      showErrorDialog(context, "血液型はまだ入力されていません");
     } else if (confirm18Btn == false) {
-      showErrorDialog(context, "１８歳以上のボタンを押してください", false);
+      showErrorDialog(context, "１８歳以上のボタンを押してください");
     } else if (confirmAgreeBtn == false) {
-      showErrorDialog(context, "同意のボタンを押してください", false);
+      showErrorDialog(context, "同意のボタンを押してください");
     } else {
       try {
         setState(() {
@@ -108,7 +111,7 @@ class _FixInformationState extends State<FixInformation> {
         saveImage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data", false);
+        showErrorDialog(context, "Error: validatable input data");
         throw Exception("Error occurred while fetching Fix.");
       }
     }
@@ -141,7 +144,10 @@ class _FixInformationState extends State<FixInformation> {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: true, title: AppbarTitle(text: "基本個人情報 - A")),
+      appBar: buildAppBar(context, "基本個人情報 - A", true),
+      backgroundColor: appTheme.bgColor,
+      // 鍵盤彈出後自動調節Size - 要test先知
+      resizeToAvoidBottomInset: false,
       body: Container(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
@@ -189,23 +195,7 @@ class _FixInformationState extends State<FixInformation> {
                     confirm18Btn = !confirm18Btn;
                   });
                 },
-                child: Row(
-                  children: [
-                    Container(
-                      height: mediaW / 25,
-                      width: mediaW / 25,
-                      decoration: BoxDecoration(
-                        color: confirm18Btn ? appTheme.green : appTheme.gray500,
-                        borderRadius: BorderRadiusStyle.r15,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: mediaW / 50),
-                      child:
-                          Text("満18歳以上の独身であることを誓約します", style: confirm18Btn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
-                    ),
-                  ],
-                ),
+                child: WordButton(msg: "満18歳以上の独身であることを誓約します", mediaH: mediaH, mediaW: mediaW, boolbtn: confirm18Btn),
               ),
               SizedBox(height: mediaH / 150),
 
@@ -216,22 +206,7 @@ class _FixInformationState extends State<FixInformation> {
                     confirmAgreeBtn = !confirmAgreeBtn;
                   });
                 },
-                child: Row(
-                  children: [
-                    Container(
-                      height: mediaW / 25,
-                      width: mediaW / 25,
-                      decoration: BoxDecoration(
-                        color: confirmAgreeBtn ? appTheme.green : appTheme.gray500,
-                        borderRadius: BorderRadiusStyle.r15,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: mediaW / 50),
-                      child: Text("全ての規約に同意します", style: confirmAgreeBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
-                    ),
-                  ],
-                ),
+                child: WordButton(msg: "全ての規約に同意します", mediaH: mediaH, mediaW: mediaW, boolbtn: confirmAgreeBtn),
               ),
               SizedBox(height: mediaH / 25),
 

@@ -1,5 +1,6 @@
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class TargetReady extends StatelessWidget {
   TargetReady({Key? key}) : super(key: key);
@@ -22,15 +23,20 @@ class TargetReady extends StatelessWidget {
     double mediaW = mediaQueryData.size.width;
 
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        toolbarHeight: 0,
+      ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
         child: Align(
           child: Column(
             children: [
               // Logo and Slogan
-              SizedBox(height: mediaH / 15),
-              CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 3.5),
-              CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3),
+              CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4.5),
+              CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3.5),
               SizedBox(height: mediaH / 15),
 
               // Title

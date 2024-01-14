@@ -7,9 +7,10 @@ import 'package:dating_your_date/widgets/custom_elevated_button.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
-import 'package:dating_your_date/widgets/loading.dart';
+import 'package:dating_your_date/widgets/Custom_Loading.dart';
 import 'package:flutter/material.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
+import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
 
 class Login extends StatefulWidget {
@@ -40,7 +41,7 @@ class _LoginState extends State<Login> {
       onTapLoginButton(context);
     } on GrpcError {
       Navigator.pop(context);
-      showErrorDialog(context, "Email or Password have a error.", false);
+      showErrorDialog(context, "Email or Password have a error.");
       throw Exception("Error occurred while fetching Login.");
     }
   }
@@ -55,15 +56,20 @@ class _LoginState extends State<Login> {
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
-          backgroundColor: appTheme.white,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            systemOverlayStyle: SystemUiOverlayStyle.dark,
+            toolbarHeight: 0,
+          ),
+          backgroundColor: appTheme.bgColor,
+          // 鍵盤彈出後自動調節Size - 要test先知
           resizeToAvoidBottomInset: false,
           body: Container(
-            width: double.maxFinite,
             padding: EdgeInsets.symmetric(horizontal: mediaW / 10),
             child: Column(
               children: [
                 // Logo and Slogan
-                SizedBox(height: mediaH / 10),
+                SizedBox(height: mediaH / 25),
                 CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 3.5),
                 CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3),
                 SizedBox(height: mediaH / 35),

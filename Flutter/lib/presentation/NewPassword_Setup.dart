@@ -2,12 +2,15 @@ import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_password.pb.dart';
+import 'package:dating_your_date/presentation/ContainerScreen.dart';
+import 'package:dating_your_date/widgets/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/Custom_IconLogoBox.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
 
 class NewPasswordSetup extends StatefulWidget {
@@ -21,14 +24,12 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
   TextEditingController newPasswordSetupController = TextEditingController();
   TextEditingController newPasswordSetupConfirmController = TextEditingController();
 
-  get http => null;
-
   // Grpc
   void resetPasswordGrpcRequest(BuildContext context) async {
     if (newPasswordSetupController.text != newPasswordSetupConfirmController.text) {
-      showErrorDialog(context, "パスワード（確認）とパスワードは一致しません", false);
+      showErrorDialog(context, "パスワード（確認）とパスワードは一致しません");
     } else if (isPureText(newPasswordSetupController.text) || isPureNumber(newPasswordSetupController.text)) {
-      showErrorDialog(context, "パスワードの組み合わせは英数字は必要です", false);
+      showErrorDialog(context, "パスワードの組み合わせは英数字は必要です");
     } else {
       try {
         String? apiKeyS = await globalSession.read(key: 'SessionId');
@@ -40,10 +41,10 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
         showLogoDialog(context, "新しいパスワード設定しました", false);
         await Future.delayed(Duration(seconds: 1));
         Navigator.pop(context);
-        Navigator.pop(context);
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ContainerScreen(number: 3)));
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data", false);
+        showErrorDialog(context, "Error: validatable input data");
         throw Exception("Error occurred while fetching New Password setup.");
       }
     }
@@ -66,7 +67,10 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: true),
+      appBar: buildAppBar(context, "", true),
+      backgroundColor: appTheme.bgColor,
+      // 鍵盤彈出後自動調節Size - 要test先知
+      resizeToAvoidBottomInset: false,
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
         child: Column(
@@ -95,7 +99,7 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
     );
   }
 
-  /// Section Widget
+  /// NPW Input
   Widget _buildNewPasswordInput(BuildContext context) {
     return CustomInputFormBar(
       controller: newPasswordSetupController,
@@ -118,7 +122,7 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
     );
   }
 
-  /// Section Widget
+  /// NPW Confirm Input
   Widget _buildNewPasswordConfirm(BuildContext context) {
     return CustomInputFormBar(
       controller: newPasswordSetupConfirmController,

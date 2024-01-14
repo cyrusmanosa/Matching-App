@@ -1,15 +1,56 @@
+import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/models/GlobalModel.dart';
+import 'package:dating_your_date/pb/rpc_contact.pb.dart';
+import 'package:dating_your_date/widgets/Custom_App_bar.dart';
+import 'package:dating_your_date/widgets/Custom_IconLogoBox.dart';
+import 'package:dating_your_date/widgets/Custom_Loading.dart';
+import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:grpc/grpc.dart';
 
-// ignore: must_be_immutable
-class ContactPage extends StatelessWidget {
+class ContactPage extends StatefulWidget {
   ContactPage({Key? key}) : super(key: key);
+  @override
+  _ContactPageState createState() => _ContactPageState();
+}
 
+class _ContactPageState extends State<ContactPage> {
   TextEditingController msgTypeController = TextEditingController();
   TextEditingController messageBoxController = TextEditingController();
+
+  void createContact(BuildContext context) async {
+    if (msgTypeController.text.isEmpty || messageBoxController.text.isEmpty) {
+      showErrorDialog(context, "正しく入力してください");
+    } else {
+      try {
+        setState(() {
+          showLoadDialog(context);
+        });
+        String? apiKeyS = await globalSession.read(key: 'SessionId');
+        final request = CreateContactRequest(
+          sessionID: apiKeyS,
+          contactType: msgTypeController.text,
+          message: messageBoxController.text,
+          status: "Sended",
+        );
+        await GrpcInfoService.client.createContact(request);
+        showLogoDialog(context, "送信が完了しました。担当者よりご連絡いたします。", false);
+        Future.delayed(Duration(seconds: 1), () {
+          Navigator.pop(context);
+          Navigator.pop(context);
+          Navigator.pop(context);
+        });
+      } on GrpcError {
+        showErrorDialog(context, "Error: validatable create Chat Record");
+        throw Exception("Error occurred while fetching Chat Record");
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +58,10 @@ class ContactPage extends StatelessWidget {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: true),
+      appBar: buildAppBar(context, "", true),
+      backgroundColor: appTheme.bgColor,
+      // 鍵盤彈出後自動調節Size - 要test先知
+      resizeToAvoidBottomInset: false,
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
         child: Column(
@@ -71,18 +115,14 @@ class ContactPage extends StatelessWidget {
       contentPadding: EdgeInsets.symmetric(horizontal: mediaH / 200, vertical: mediaW / 50),
     );
   }
-}
 
-/// Next Button
-Widget _buildNextButton(BuildContext context) {
-  return CustomOutlinedButton(
-    text: "送信",
-    onPressed: () {
-      onTapReturn(context);
-    },
-  );
-}
-
-onTapReturn(BuildContext context) {
-  Navigator.pop(context);
+  /// Next Button
+  Widget _buildNextButton(BuildContext context) {
+    return CustomOutlinedButton(
+      text: "送信",
+      onPressed: () {
+        createContact(context);
+      },
+    );
+  }
 }

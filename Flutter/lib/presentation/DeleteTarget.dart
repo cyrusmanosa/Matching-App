@@ -3,9 +3,10 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_changeTarget.pb.dart';
 import 'package:dating_your_date/pb/rpc_targetList.pb.dart';
+import 'package:dating_your_date/widgets/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
-import 'package:dating_your_date/widgets/loading.dart';
+import 'package:dating_your_date/widgets/Custom_Loading.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
@@ -40,7 +41,7 @@ class _DeleteTargetState extends State<DeleteTarget> {
       changeUserRecord(context, tid);
     } on GrpcError catch (e) {
       Navigator.pop(context);
-      showErrorDialog(context, "Error: $e", false);
+      showErrorDialog(context, "Error: $e");
       throw Exception("Error occurred while fetching Target List.");
     }
   }
@@ -71,7 +72,7 @@ class _DeleteTargetState extends State<DeleteTarget> {
       onTapNextPage(context);
     } on GrpcError catch (e) {
       Navigator.pop(context);
-      showErrorDialog(context, "Error: $e", false);
+      showErrorDialog(context, "Error: $e");
       throw Exception("Error occurred while fetching Login.");
     }
   }
@@ -83,7 +84,8 @@ class _DeleteTargetState extends State<DeleteTarget> {
     double mediaW = mediaQueryData.size.width;
 
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: true, title: Text("ターゲットを削除")),
+      appBar: buildAppBar(context, "ターゲットを削除", true),
+      backgroundColor: appTheme.bgColor,
       body: Container(
         decoration: BoxDecoration(
           color: Colors.white,

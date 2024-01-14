@@ -60,7 +60,6 @@ class CustomBottomBar extends StatelessWidget {
 
 class BottomMenuModel {
   BottomMenuModel({this.label, this.activeIcon, this.icon});
-
   String? activeIcon;
   String? icon;
   String? label;

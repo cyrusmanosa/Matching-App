@@ -13,6 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
+import 'fix.pb.dart' as $23;
 import 'google/protobuf/timestamp.pb.dart' as $16;
 
 /// Create
@@ -236,10 +237,14 @@ class CreateFixResponse extends $pb.GeneratedMessage {
 class GetFixRequest extends $pb.GeneratedMessage {
   factory GetFixRequest({
     $core.String? sessionID,
+    $core.int? userID,
   }) {
     final $result = create();
     if (sessionID != null) {
       $result.sessionID = sessionID;
+    }
+    if (userID != null) {
+      $result.userID = userID;
     }
     return $result;
   }
@@ -249,6 +254,7 @@ class GetFixRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetFixRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'UserID', $pb.PbFieldType.O3, protoName: 'UserID')
     ..hasRequiredFields = false
   ;
 
@@ -281,47 +287,24 @@ class GetFixRequest extends $pb.GeneratedMessage {
   $core.bool hasSessionID() => $_has(0);
   @$pb.TagNumber(1)
   void clearSessionID() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get userID => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set userID($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasUserID() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUserID() => clearField(2);
 }
 
 class GetFixResponse extends $pb.GeneratedMessage {
   factory GetFixResponse({
-    $core.String? firstName,
-    $core.String? lastName,
-    $core.String? birth,
-    $core.String? country,
-    $core.String? gender,
-    $core.String? blood,
-    $core.int? age,
-    $core.String? constellation,
-    $core.bool? certification,
+    $23.Fix? fix,
   }) {
     final $result = create();
-    if (firstName != null) {
-      $result.firstName = firstName;
-    }
-    if (lastName != null) {
-      $result.lastName = lastName;
-    }
-    if (birth != null) {
-      $result.birth = birth;
-    }
-    if (country != null) {
-      $result.country = country;
-    }
-    if (gender != null) {
-      $result.gender = gender;
-    }
-    if (blood != null) {
-      $result.blood = blood;
-    }
-    if (age != null) {
-      $result.age = age;
-    }
-    if (constellation != null) {
-      $result.constellation = constellation;
-    }
-    if (certification != null) {
-      $result.certification = certification;
+    if (fix != null) {
+      $result.fix = fix;
     }
     return $result;
   }
@@ -330,15 +313,7 @@ class GetFixResponse extends $pb.GeneratedMessage {
   factory GetFixResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetFixResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOS(1, _omitFieldNames ? '' : 'FirstName', protoName: 'FirstName')
-    ..aOS(2, _omitFieldNames ? '' : 'LastName', protoName: 'LastName')
-    ..aOS(3, _omitFieldNames ? '' : 'Birth', protoName: 'Birth')
-    ..aOS(4, _omitFieldNames ? '' : 'Country', protoName: 'Country')
-    ..aOS(5, _omitFieldNames ? '' : 'Gender', protoName: 'Gender')
-    ..aOS(6, _omitFieldNames ? '' : 'Blood', protoName: 'Blood')
-    ..a<$core.int>(7, _omitFieldNames ? '' : 'age', $pb.PbFieldType.O3)
-    ..aOS(8, _omitFieldNames ? '' : 'constellation')
-    ..aOB(9, _omitFieldNames ? '' : 'certification')
+    ..aOM<$23.Fix>(1, _omitFieldNames ? '' : 'fix', subBuilder: $23.Fix.create)
     ..hasRequiredFields = false
   ;
 
@@ -364,85 +339,15 @@ class GetFixResponse extends $pb.GeneratedMessage {
   static GetFixResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get firstName => $_getSZ(0);
+  $23.Fix get fix => $_getN(0);
   @$pb.TagNumber(1)
-  set firstName($core.String v) { $_setString(0, v); }
+  set fix($23.Fix v) { setField(1, v); }
   @$pb.TagNumber(1)
-  $core.bool hasFirstName() => $_has(0);
+  $core.bool hasFix() => $_has(0);
   @$pb.TagNumber(1)
-  void clearFirstName() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get lastName => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set lastName($core.String v) { $_setString(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasLastName() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearLastName() => clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.String get birth => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set birth($core.String v) { $_setString(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasBirth() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearBirth() => clearField(3);
-
-  @$pb.TagNumber(4)
-  $core.String get country => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set country($core.String v) { $_setString(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasCountry() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearCountry() => clearField(4);
-
-  @$pb.TagNumber(5)
-  $core.String get gender => $_getSZ(4);
-  @$pb.TagNumber(5)
-  set gender($core.String v) { $_setString(4, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasGender() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearGender() => clearField(5);
-
-  @$pb.TagNumber(6)
-  $core.String get blood => $_getSZ(5);
-  @$pb.TagNumber(6)
-  set blood($core.String v) { $_setString(5, v); }
-  @$pb.TagNumber(6)
-  $core.bool hasBlood() => $_has(5);
-  @$pb.TagNumber(6)
-  void clearBlood() => clearField(6);
-
-  @$pb.TagNumber(7)
-  $core.int get age => $_getIZ(6);
-  @$pb.TagNumber(7)
-  set age($core.int v) { $_setSignedInt32(6, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasAge() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearAge() => clearField(7);
-
-  @$pb.TagNumber(8)
-  $core.String get constellation => $_getSZ(7);
-  @$pb.TagNumber(8)
-  set constellation($core.String v) { $_setString(7, v); }
-  @$pb.TagNumber(8)
-  $core.bool hasConstellation() => $_has(7);
-  @$pb.TagNumber(8)
-  void clearConstellation() => clearField(8);
-
-  @$pb.TagNumber(9)
-  $core.bool get certification => $_getBF(8);
-  @$pb.TagNumber(9)
-  set certification($core.bool v) { $_setBool(8, v); }
-  @$pb.TagNumber(9)
-  $core.bool hasCertification() => $_has(8);
-  @$pb.TagNumber(9)
-  void clearCertification() => clearField(9);
+  void clearFix() => clearField(1);
+  @$pb.TagNumber(1)
+  $23.Fix ensureFix() => $_ensure(0);
 }
 
 /// Delete

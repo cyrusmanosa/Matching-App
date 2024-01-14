@@ -20,7 +20,7 @@ class Target extends StatelessWidget {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 226, 226, 226),
+      backgroundColor: appTheme.bgColor,
       body: Container(
         child: Column(
           children: [

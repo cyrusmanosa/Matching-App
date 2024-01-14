@@ -1,16 +1,16 @@
-import 'dart:convert';
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_password.pb.dart';
+import 'package:dating_your_date/widgets/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Outlined_Button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
-import 'package:dating_your_date/widgets/loading.dart';
+import 'package:dating_your_date/widgets/Custom_Loading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
-import 'package:http/http.dart' as http;
 
 class PasswordSetup extends StatefulWidget {
   PasswordSetup({Key? key}) : super(key: key);
@@ -23,28 +23,14 @@ class _PasswordSetupState extends State<PasswordSetup> {
   TextEditingController passwordSetupController = TextEditingController();
   TextEditingController passwordSetupConfirmController = TextEditingController();
 
-  // Http
-  void inputPasswordHttpRequest(BuildContext context) async {
-    String? apiKeyS = await globalSession.read(key: 'SessionId');
-    var url = "http://127.0.0.1:8080/InputPassword";
-    var requestBody = {
-      "session_id": apiKeyS,
-      "password": passwordSetupController.text,
-    };
-    var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
-    if (response.statusCode == 200) {
-      onTapNextPage(context);
-    }
-  }
-
   // Grpc
   void inputPasswordGrpcRequest(BuildContext context) async {
     if (passwordSetupController.text != passwordSetupConfirmController.text) {
-      showErrorDialog(context, "パスワード（確認）とパスワードは一致しません", false);
+      showErrorDialog(context, "パスワード（確認）とパスワードは一致しません");
     } else if (isPureText(passwordSetupController.text) || isPureNumber(passwordSetupController.text)) {
-      showErrorDialog(context, "パスワードの組み合わせは英数字は必要です", false);
+      showErrorDialog(context, "パスワードの組み合わせは英数字は必要です");
     } else if (passwordSetupController.text.length < 8) {
-      showErrorDialog(context, "パスワードの長さは 8 以上です。", false);
+      showErrorDialog(context, "パスワードの長さは 8 以上です。");
     } else {
       setState(() {
         showLoadDialog(context);
@@ -58,7 +44,7 @@ class _PasswordSetupState extends State<PasswordSetup> {
         onTapNextPage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data", false);
+        showErrorDialog(context, "Error: validatable input data");
         throw Exception("Error occurred while fetching Password setup.");
       }
     }
@@ -81,14 +67,17 @@ class _PasswordSetupState extends State<PasswordSetup> {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: true),
+      appBar: buildAppBar(context, "", true),
+      backgroundColor: appTheme.bgColor,
+      // 鍵盤彈出後自動調節Size - 要test先知
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
         child: Column(
           children: [
             // Logo and Slogan
-            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 3.5),
-            CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3),
+            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4.5),
+            CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3.5),
             SizedBox(height: mediaH / 30),
 
             // New Password
