@@ -50,7 +50,6 @@ CREATE TABLE "hobby" (
   "gender" VARCHAR NOT NULL,
   "speaklanguage" VARCHAR NOT NULL,
   "find_type" VARCHAR NOT NULL,
-  "find_target" VARCHAR NOT NULL,
   "experience" INT,
   "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );

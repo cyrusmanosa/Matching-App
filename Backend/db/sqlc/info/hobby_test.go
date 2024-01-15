@@ -22,7 +22,6 @@ func CreateRandomHobbyRequest(t *testing.T, user Fixinformation) Hobby {
 		Gender:        gofakeit.Gender(),
 		Speaklanguage: gofakeit.Language(),
 		FindType:      util.RandomHobbyType(),
-		FindTarget:    util.RandomHobbyType(),
 		Experience:    int32(gofakeit.Number(0, 30)),
 	}
 
@@ -34,7 +33,6 @@ func CreateRandomHobbyRequest(t *testing.T, user Fixinformation) Hobby {
 	require.Equal(t, HobbyList.City, hobby.City)
 	require.Equal(t, HobbyList.Gender, hobby.Gender)
 	require.Equal(t, HobbyList.FindType, hobby.FindType)
-	require.Equal(t, HobbyList.FindTarget, hobby.FindTarget)
 	require.Equal(t, HobbyList.Experience, hobby.Experience)
 	require.NotZero(t, HobbyList.InfoChangedAt)
 
@@ -52,7 +50,6 @@ func TestUpdateUserHobby(t *testing.T) {
 		Gender:        gofakeit.Gender(),
 		Speaklanguage: gofakeit.Language(),
 		FindType:      util.RandomHobbyType(),
-		FindTarget:    util.RandomHobbyType(),
 		Experience:    int32(gofakeit.Number(0, 30)),
 	}
 	HobbyList, err := testinfoQueries.UpdateHobby(context.Background(), NH)
@@ -63,7 +60,6 @@ func TestUpdateUserHobby(t *testing.T) {
 	require.Equal(t, HobbyList.City, NH.City)
 	require.Equal(t, HobbyList.Gender, NH.Gender)
 	require.Equal(t, HobbyList.FindType, NH.FindType)
-	require.Equal(t, HobbyList.FindTarget, NH.FindTarget)
 	require.Equal(t, HobbyList.Experience, NH.Experience)
 	require.NotEmpty(t, HobbyList.InfoChangedAt, H.InfoChangedAt)
 }
@@ -80,7 +76,6 @@ func TestGetUserHobby(t *testing.T) {
 	require.Equal(t, HobbyList.City, Hobby.City)
 	require.Equal(t, HobbyList.Gender, Hobby.Gender)
 	require.Equal(t, HobbyList.FindType, Hobby.FindType)
-	require.Equal(t, HobbyList.FindTarget, Hobby.FindTarget)
 	require.Equal(t, HobbyList.Experience, Hobby.Experience)
 	require.Equal(t, HobbyList.InfoChangedAt, Hobby.InfoChangedAt)
 }

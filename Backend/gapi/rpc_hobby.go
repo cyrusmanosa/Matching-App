@@ -36,7 +36,6 @@ func (server *Server) CreateHobby(ctx context.Context, req *pb.CreateHobbyReques
 		Gender:        req.GetGender(),
 		Speaklanguage: req.GetSpeaklanguage(),
 		FindType:      req.GetFindType(),
-		FindTarget:    req.GetFindTarget(),
 		Experience:    req.GetExperience(),
 	}
 	hobby, err := server.infoStore.CreateHobby(ctx, H)
@@ -108,7 +107,6 @@ func (server *Server) UpdateHobby(ctx context.Context, req *pb.UpdateHobbyReques
 		Gender:        req.GetGender(),
 		Speaklanguage: req.GetSpeaklanguage(),
 		FindType:      req.GetFindType(),
-		FindTarget:    req.GetFindTarget(),
 		Experience:    req.GetExperience(),
 	}
 	hobby, err := server.infoStore.UpdateHobby(ctx, H)

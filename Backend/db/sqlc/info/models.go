@@ -77,7 +77,6 @@ type Hobby struct {
 	Gender        string             `json:"gender"`
 	Speaklanguage string             `json:"speaklanguage"`
 	FindType      string             `json:"find_type"`
-	FindTarget    string             `json:"find_target"`
 	Experience    int32        `json:"experience"`
 	InfoChangedAt pgtype.Timestamptz `json:"info_changed_at"`
 }

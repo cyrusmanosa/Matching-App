@@ -7,6 +7,7 @@ package db
 
 import (
 	"context"
+
 )
 
 const createUserCanChangeInformation = `-- name: CreateUserCanChangeInformation :one

@@ -35,6 +35,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 };
 
 service Information {
+    /// Login
     rpc LoginUser(LoginUserRequest) returns (LoginUserResponse){
         option (google.api.http) = {
             post: "/v1/Login_User"
@@ -42,6 +43,7 @@ service Information {
         };
     }
 
+    /// SignUp
     rpc CheckEmail(CheckEmailRequest) returns (CheckEmailResponse){
         option (google.api.http) = {
             post: "/v1/Sign_Up"
@@ -62,7 +64,7 @@ service Information {
             body: "*"
         };
     }
-    
+    /// Reset Password
     rpc ResetPassword(ResetPasswordRequest) returns (ResetPasswordResponse){
         option (google.api.http) = {
             put: "/v1/Reset_Password"
@@ -184,7 +186,7 @@ service Information {
         };
     }
 
-    // Complaint
+    // Contact
     rpc CreateContact(CreateContactRequest) returns (CreateContactResponse){
         option (google.api.http) = {
             post: "/v1/Create_Contact"

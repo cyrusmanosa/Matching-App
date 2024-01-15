@@ -6,10 +6,9 @@ INSERT INTO hobby (
     gender,
     speaklanguage,
     find_type,
-    find_target,
     experience
 ) VALUES (
-    $1,$2,$3,$4,$5,$6,$7,$8
+    $1,$2,$3,$4,$5,$6,$7
 ) RETURNING *;
 
 -- name: GetHobby :one
@@ -27,8 +26,7 @@ SET era = $2,
     gender = $4,
     speaklanguage = $5,
     find_type = $6,
-    find_target = $7,
-    experience = $8
+    experience = $7
 WHERE user_id = $1
 RETURNING *;
 

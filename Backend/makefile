@@ -85,7 +85,7 @@ protob:
 # rm -f lib/pb/*.dart
 # protoc --proto_path=lib/proto --dart_out=grpc:lib/pb lib/proto/*.proto google/protobuf/timestamp.proto google/protobuf/empty.proto
 
-evans:
+evans: 
 	evans --host localhost --port 9090 -r repl
 
 # inside:

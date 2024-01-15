@@ -222,7 +222,7 @@
     },
     "/v1/Create_Contact": {
       "post": {
-        "summary": "Complaint",
+        "summary": "Contact",
         "operationId": "Information_CreateContact",
         "responses": {
           "200": {
@@ -947,6 +947,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "UserID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "tags": [
@@ -1244,6 +1251,7 @@
     },
     "/v1/Login_User": {
       "post": {
+        "summary": "/ Login",
         "operationId": "Information_LoginUser",
         "responses": {
           "200": {
@@ -1308,6 +1316,7 @@
     },
     "/v1/Reset_Password": {
       "put": {
+        "summary": "/ Reset Password",
         "operationId": "Information_ResetPassword",
         "responses": {
           "200": {
@@ -1340,6 +1349,7 @@
     },
     "/v1/Sign_Up": {
       "post": {
+        "summary": "/ SignUp",
         "operationId": "Information_CheckEmail",
         "responses": {
           "200": {
@@ -2138,9 +2148,6 @@
         "FindType": {
           "type": "string"
         },
-        "FindTarget": {
-          "type": "string"
-        },
         "Experience": {
           "type": "integer",
           "format": "int32"
@@ -2294,6 +2301,43 @@
         }
       }
     },
+    "pbFix": {
+      "type": "object",
+      "properties": {
+        "FirstName": {
+          "type": "string"
+        },
+        "LastName": {
+          "type": "string"
+        },
+        "Birth": {
+          "type": "string"
+        },
+        "Country": {
+          "type": "string"
+        },
+        "Gender": {
+          "type": "string"
+        },
+        "Blood": {
+          "type": "string"
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "constellation": {
+          "type": "string"
+        },
+        "certification": {
+          "type": "boolean"
+        },
+        "CreateAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "pbGetAccompanyResponse": {
       "type": "object",
       "properties": {
@@ -2350,33 +2394,8 @@
     "pbGetFixResponse": {
       "type": "object",
       "properties": {
-        "FirstName": {
-          "type": "string"
-        },
-        "LastName": {
-          "type": "string"
-        },
-        "Birth": {
-          "type": "string"
-        },
-        "Country": {
-          "type": "string"
-        },
-        "Gender": {
-          "type": "string"
-        },
-        "Blood": {
-          "type": "string"
-        },
-        "age": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "constellation": {
-          "type": "string"
-        },
-        "certification": {
-          "type": "boolean"
+        "fix": {
+          "$ref": "#/definitions/pbFix"
         }
       }
     },
@@ -2476,9 +2495,6 @@
           "type": "string"
         },
         "FindType": {
-          "type": "string"
-        },
-        "FindTarget": {
           "type": "string"
         },
         "Experience": {
@@ -2863,9 +2879,6 @@
           "type": "string"
         },
         "FindType": {
-          "type": "string"
-        },
-        "FindTarget": {
           "type": "string"
         },
         "Experience": {

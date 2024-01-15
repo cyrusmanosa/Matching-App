@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "Backend/pb";
+
+message Fix {
+  string FirstName = 1;
+  string LastName = 2;
+  string Birth = 3;
+  string Country = 4;
+  string Gender = 5;
+  string Blood = 6;
+  int32 age = 7;
+  string constellation = 8;
+  bool certification = 9;
+  google.protobuf.Timestamp CreateAt = 10;
+}

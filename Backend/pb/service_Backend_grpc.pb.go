@@ -68,10 +68,13 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type InformationClient interface {
+	// / Login
 	LoginUser(ctx context.Context, in *LoginUserRequest, opts ...grpc.CallOption) (*LoginUserResponse, error)
+	// / SignUp
 	CheckEmail(ctx context.Context, in *CheckEmailRequest, opts ...grpc.CallOption) (*CheckEmailResponse, error)
 	CheckEmailCode(ctx context.Context, in *SendEmailRequest, opts ...grpc.CallOption) (*CheckedEmailResponse, error)
 	InputPassword(ctx context.Context, in *InputPasswordRequest, opts ...grpc.CallOption) (*InputPasswordResponse, error)
+	// / Reset Password
 	ResetPassword(ctx context.Context, in *ResetPasswordRequest, opts ...grpc.CallOption) (*ResetPasswordResponse, error)
 	// / Fix Information
 	CreateFix(ctx context.Context, in *CreateFixRequest, opts ...grpc.CallOption) (*CreateFixResponse, error)
@@ -97,7 +100,7 @@ type InformationClient interface {
 	GetLover(ctx context.Context, in *GetLoverRequest, opts ...grpc.CallOption) (*GetLoverResponse, error)
 	UpdateLover(ctx context.Context, in *UpdateLoverRequest, opts ...grpc.CallOption) (*UpdateLoverResponse, error)
 	DeleteLover(ctx context.Context, in *DeleteLoverRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Complaint
+	// Contact
 	CreateContact(ctx context.Context, in *CreateContactRequest, opts ...grpc.CallOption) (*CreateContactResponse, error)
 	GetContact(ctx context.Context, in *GetContactRequest, opts ...grpc.CallOption) (*GetContactResponse, error)
 	UpdateContact(ctx context.Context, in *UpdateContactRequest, opts ...grpc.CallOption) (*UpdateContactResponse, error)
@@ -513,10 +516,13 @@ func (c *informationClient) GetUserID(ctx context.Context, in *GetUserIDRequest,
 // All implementations must embed UnimplementedInformationServer
 // for forward compatibility
 type InformationServer interface {
+	// / Login
 	LoginUser(context.Context, *LoginUserRequest) (*LoginUserResponse, error)
+	// / SignUp
 	CheckEmail(context.Context, *CheckEmailRequest) (*CheckEmailResponse, error)
 	CheckEmailCode(context.Context, *SendEmailRequest) (*CheckedEmailResponse, error)
 	InputPassword(context.Context, *InputPasswordRequest) (*InputPasswordResponse, error)
+	// / Reset Password
 	ResetPassword(context.Context, *ResetPasswordRequest) (*ResetPasswordResponse, error)
 	// / Fix Information
 	CreateFix(context.Context, *CreateFixRequest) (*CreateFixResponse, error)
@@ -542,7 +548,7 @@ type InformationServer interface {
 	GetLover(context.Context, *GetLoverRequest) (*GetLoverResponse, error)
 	UpdateLover(context.Context, *UpdateLoverRequest) (*UpdateLoverResponse, error)
 	DeleteLover(context.Context, *DeleteLoverRequest) (*emptypb.Empty, error)
-	// Complaint
+	// Contact
 	CreateContact(context.Context, *CreateContactRequest) (*CreateContactResponse, error)
 	GetContact(context.Context, *GetContactRequest) (*GetContactResponse, error)
 	UpdateContact(context.Context, *UpdateContactRequest) (*UpdateContactResponse, error)

@@ -7,6 +7,7 @@ package db
 
 import (
 	"context"
+
 )
 
 const createHobby = `-- name: CreateHobby :one
@@ -17,11 +18,10 @@ INSERT INTO hobby (
     gender,
     speaklanguage,
     find_type,
-    find_target,
     experience
 ) VALUES (
-    $1,$2,$3,$4,$5,$6,$7,$8
-) RETURNING user_id, era, city, gender, speaklanguage, find_type, find_target, experience, info_changed_at
+    $1,$2,$3,$4,$5,$6,$7
+) RETURNING user_id, era, city, gender, speaklanguage, find_type, experience, info_changed_at
 `
 
 type CreateHobbyParams struct {
@@ -31,7 +31,6 @@ type CreateHobbyParams struct {
 	Gender        string      `json:"gender"`
 	Speaklanguage string      `json:"speaklanguage"`
 	FindType      string      `json:"find_type"`
-	FindTarget    string      `json:"find_target"`
 	Experience    int32 `json:"experience"`
 }
 
@@ -43,7 +42,6 @@ func (q *Queries) CreateHobby(ctx context.Context, arg CreateHobbyParams) (Hobby
 		arg.Gender,
 		arg.Speaklanguage,
 		arg.FindType,
-		arg.FindTarget,
 		arg.Experience,
 	)
 	var i Hobby
@@ -54,7 +52,6 @@ func (q *Queries) CreateHobby(ctx context.Context, arg CreateHobbyParams) (Hobby
 		&i.Gender,
 		&i.Speaklanguage,
 		&i.FindType,
-		&i.FindTarget,
 		&i.Experience,
 		&i.InfoChangedAt,
 	)
@@ -72,7 +69,7 @@ func (q *Queries) DeleteHobby(ctx context.Context, userID int32) error {
 }
 
 const getHobby = `-- name: GetHobby :one
-SELECT user_id, era, city, gender, speaklanguage, find_type, find_target, experience, info_changed_at FROM hobby
+SELECT user_id, era, city, gender, speaklanguage, find_type, experience, info_changed_at FROM hobby
 WHERE user_id = $1
 `
 
@@ -86,7 +83,6 @@ func (q *Queries) GetHobby(ctx context.Context, userID int32) (Hobby, error) {
 		&i.Gender,
 		&i.Speaklanguage,
 		&i.FindType,
-		&i.FindTarget,
 		&i.Experience,
 		&i.InfoChangedAt,
 	)
@@ -94,7 +90,7 @@ func (q *Queries) GetHobby(ctx context.Context, userID int32) (Hobby, error) {
 }
 
 const listHobby = `-- name: ListHobby :many
-SELECT user_id, era, city, gender, speaklanguage, find_type, find_target, experience, info_changed_at FROM hobby
+SELECT user_id, era, city, gender, speaklanguage, find_type, experience, info_changed_at FROM hobby
 ORDER BY user_id
 `
 
@@ -114,7 +110,6 @@ func (q *Queries) ListHobby(ctx context.Context) ([]Hobby, error) {
 			&i.Gender,
 			&i.Speaklanguage,
 			&i.FindType,
-			&i.FindTarget,
 			&i.Experience,
 			&i.InfoChangedAt,
 		); err != nil {
@@ -135,10 +130,9 @@ SET era = $2,
     gender = $4,
     speaklanguage = $5,
     find_type = $6,
-    find_target = $7,
-    experience = $8
+    experience = $7
 WHERE user_id = $1
-RETURNING user_id, era, city, gender, speaklanguage, find_type, find_target, experience, info_changed_at
+RETURNING user_id, era, city, gender, speaklanguage, find_type, experience, info_changed_at
 `
 
 type UpdateHobbyParams struct {
@@ -148,7 +142,6 @@ type UpdateHobbyParams struct {
 	Gender        string      `json:"gender"`
 	Speaklanguage string      `json:"speaklanguage"`
 	FindType      string      `json:"find_type"`
-	FindTarget    string      `json:"find_target"`
 	Experience    int32 `json:"experience"`
 }
 
@@ -160,7 +153,6 @@ func (q *Queries) UpdateHobby(ctx context.Context, arg UpdateHobbyParams) (Hobby
 		arg.Gender,
 		arg.Speaklanguage,
 		arg.FindType,
-		arg.FindTarget,
 		arg.Experience,
 	)
 	var i Hobby
@@ -171,7 +163,6 @@ func (q *Queries) UpdateHobby(ctx context.Context, arg UpdateHobbyParams) (Hobby
 		&i.Gender,
 		&i.Speaklanguage,
 		&i.FindType,
-		&i.FindTarget,
 		&i.Experience,
 		&i.InfoChangedAt,
 	)

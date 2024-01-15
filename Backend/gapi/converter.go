@@ -9,6 +9,21 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
+func convertFix(fix info.Fixinformation) *pb.Fix {
+	return &pb.Fix{
+		FirstName:     fix.FirstName,
+		LastName:      fix.LastName,
+		Birth:         fix.Birth,
+		Country:       fix.Country,
+		Gender:        fix.Gender,
+		Blood:         fix.Blood,
+		Age:           fix.Age,
+		Constellation: fix.Constellation,
+		Certification: fix.Certification,
+		CreateAt:      timestamppb.New(fix.CreatedAt.Time),
+	}
+}
+
 func convertHobby(Hobby info.Hobby) *pb.Hobby {
 	return &pb.Hobby{
 		UserID:        Hobby.UserID,
@@ -17,7 +32,6 @@ func convertHobby(Hobby info.Hobby) *pb.Hobby {
 		Gender:        Hobby.Gender,
 		Speaklanguage: Hobby.Speaklanguage,
 		FindType:      Hobby.FindType,
-		FindTarget:    Hobby.FindTarget,
 		Experience:    Hobby.Experience,
 		InfoChangedAt: timestamppb.New(Hobby.InfoChangedAt.Time),
 	}
@@ -102,8 +116,11 @@ func convertTargetList(tl info.Targetlist) *pb.Targetlist {
 	return &pb.Targetlist{
 		UserID:    tl.UserID,
 		Target1ID: tl.Target1ID,
+		T1Type:    tl.T1Type,
 		Target2ID: tl.Target2ID,
+		T2Type:    tl.T2Type,
 		Target3ID: tl.Target3ID,
+		T3Type:    tl.T3Type,
 		UpdatedAt: timestamppb.New(tl.UpdatedAt.Time),
 	}
 }
