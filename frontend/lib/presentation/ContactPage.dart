@@ -46,8 +46,8 @@ class _ContactPageState extends State<ContactPage> {
           Navigator.pop(context);
         });
       } on GrpcError {
-        showErrorDialog(context, "Error: validatable create Chat Record");
-        throw Exception("Error occurred while fetching Chat Record");
+        showErrorDialog(context, "エラー：検証可能なメッセージの送信");
+        throw Exception("データの取得中にエラーが発生しました。");
       }
     }
   }
@@ -61,34 +61,39 @@ class _ContactPageState extends State<ContactPage> {
       appBar: buildAppBar(context, "", true),
       backgroundColor: appTheme.bgColor,
       // 鍵盤彈出後自動調節Size - 要test先知
-      resizeToAvoidBottomInset: false,
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
-        child: Column(
-          children: [
-            // Logo and Slogan
-            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4),
-            CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3.5),
-            SizedBox(height: mediaH / 30),
+      resizeToAvoidBottomInset: true,
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
+          child: Column(
+            children: [
+              // Logo and Slogan
+              CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4),
+              CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3.5),
+              SizedBox(height: mediaH / 30),
 
-            // msg
-            Container(
-              alignment: Alignment.centerLeft,
-              child: Text("送信後、弊社担当者よりメールにてご返信いたします", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
-            ),
-            SizedBox(height: mediaH / 50),
+              // msg
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Text("送信後、弊社担当者よりメールにてご返信いたします", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
+              ),
+              SizedBox(height: mediaH / 50),
 
-            // Input
-            CustomInputBar(titleName: "メッセージの種類:", backendPart: _buildMessageTypeInput(context)),
-            SizedBox(height: mediaH / 50),
+              // Input
+              CustomInputBar(titleName: "メッセージの種類:", backendPart: _buildMessageTypeInput(context)),
+              SizedBox(height: mediaH / 50),
 
-            // Input
-            CustomInputBar(titleName: "メッセージボックス:", backendPart: _buildMessageBoxInput(context, mediaH, mediaW)),
-            SizedBox(height: mediaH / 50),
+              // Input
+              CustomInputBar(titleName: "メッセージボックス:", backendPart: _buildMessageBoxInput(context, mediaH, mediaW)),
+              SizedBox(height: mediaH / 50),
 
-            // button
-            _buildNextButton(context)
-          ],
+              // button
+              _buildNextButton(context)
+            ],
+          ),
         ),
       ),
     );

@@ -130,11 +130,11 @@ class _UserPageState extends State<UserPage> {
             SizedBox(height: mediaH / 40),
 
             // height
-            ShownDataBarWidget(item: "身長", data: widget.canData!.height.toString() + " CM"),
+            ShownDataBarWidget(item: " 身長 - cm", data: widget.canData!.height.toString() + " CM"),
             SizedBox(height: mediaH / 40),
 
             // weight
-            ShownDataBarWidget(item: "体重", data: widget.canData!.weight.toString() + " KG"),
+            ShownDataBarWidget(item: " 体重 - kg", data: widget.canData!.weight.toString() + " KG"),
             SizedBox(height: mediaH / 40),
 
             // address

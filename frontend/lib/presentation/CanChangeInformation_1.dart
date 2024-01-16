@@ -1,7 +1,11 @@
+import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
+import 'package:dating_your_date/models/listData.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
+import 'package:dating_your_date/pb/rpc_fix.pb.dart';
 import 'package:dating_your_date/presentation/CanChangeInformation_2.dart';
 import 'package:dating_your_date/theme/theme_helper.dart';
+import 'package:dating_your_date/widgets/Custom_dropdown_Bar.dart';
 import 'package:dating_your_date/widgets/app_bar/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
@@ -12,15 +16,43 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
 class CanChangeInformation1 extends StatefulWidget {
-  CanChangeInformation1({Key? key}) : super(key: key);
+  CanChangeInformation1({Key? key, this.country}) : super(key: key);
+
+  final String? country;
   @override
   _CanChangeInformation1State createState() => _CanChangeInformation1State();
 }
 
 class _CanChangeInformation1State extends State<CanChangeInformation1> {
+  String country = "";
   bool isPureNumber(String value) {
     final pattern = RegExp(r'^\d+$');
     return pattern.hasMatch(value);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.country!.isEmpty) {
+      getCountry(context);
+    }
+  }
+
+  Future<void> getCountry(BuildContext context) async {
+    try {
+      String? apiKeyS = await globalSession.read(key: 'SessionId');
+      String? apiKeyU = await globalUserId.read(key: 'UserID');
+      final userid = int.tryParse(apiKeyU!);
+      final request = GetFixRequest(sessionID: apiKeyS, userID: userid);
+      final response = await GrpcInfoService.client.getFix(request);
+      setState(() {
+        country = response.fix.country;
+      });
+    } on GrpcError {
+      Navigator.pop(context);
+      showErrorDialog(context, "エラー：検証可能な入力データがありません。");
+      throw Exception("基本個人情報 - A の取得中にエラーが発生しました。");
+    }
   }
 
   TextEditingController canChangeNickNameController = TextEditingController();
@@ -40,13 +72,13 @@ class _CanChangeInformation1State extends State<CanChangeInformation1> {
     } else if (canChangeSexualController.text.isEmpty) {
       showErrorDialog(context, "性的指向はまだ入力されていません");
     } else if (canChangeHeightController.text.isEmpty) {
-      showErrorDialog(context, "身長はまだ入力されていません");
+      showErrorDialog(context, " 身長 - cmはまだ入力されていません");
     } else if (!isPureNumber(canChangeHeightController.text)) {
-      showErrorDialog(context, "入力した身長は数字じゃありません");
+      showErrorDialog(context, "入力した 身長 - cmは数字じゃありません");
     } else if (canChangeWeightController.text.isEmpty) {
-      showErrorDialog(context, "体重はまだ入力されていません");
+      showErrorDialog(context, " 体重 - kgはまだ入力されていません");
     } else if (!isPureNumber(canChangeWeightController.text)) {
-      showErrorDialog(context, "入力した体重は数字じゃありません");
+      showErrorDialog(context, "入力した 体重 - kgは数字じゃありません");
     } else if (canChangeSpeakLanguageController.text.isEmpty) {
       showErrorDialog(context, "学歴はまだ入力されていません");
     } else {
@@ -70,8 +102,8 @@ class _CanChangeInformation1State extends State<CanChangeInformation1> {
         onTapNextPage(context, request);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data");
-        throw Exception("Error occurred while fetching CanChange1.");
+        showErrorDialog(context, "エラー：検証可能な入力データがありません。");
+        throw Exception("基本個人情報 - A の取得中にエラーが発生しました。");
       }
     }
   }
@@ -82,45 +114,50 @@ class _CanChangeInformation1State extends State<CanChangeInformation1> {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
-      appBar: buildAppBar(context, "基本個人情報 - B", true),
+      appBar: buildAppBar(context, "基本個人情報 - A", true),
       backgroundColor: appTheme.bgColor,
       // 鍵盤彈出後自動調節Size - 要test先知
-      resizeToAvoidBottomInset: false,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
-        child: Column(
-          children: [
-            // Nick Name
-            CustomInputBar(titleName: "ニックネーム:", backendPart: _buildcanChangeNickNameInput(context)),
-            SizedBox(height: mediaH / 50),
+      resizeToAvoidBottomInset: true,
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
+          child: Column(
+            children: [
+              // Nick Name
+              CustomInputBar(titleName: "ニックネーム:", backendPart: _buildcanChangeNickNameInput(context)),
+              SizedBox(height: mediaH / 50),
 
-            // City
-            CustomInputBar(titleName: "居住地:", backendPart: _buildcanChangeCityInput(context)),
-            SizedBox(height: mediaH / 50),
+              // City
+              CustomInputBar(titleName: "居住地:", backendPart: _buildcanChangeCityInput(context)),
+              SizedBox(height: mediaH / 50),
 
-            // Sexual
-            CustomInputBar(titleName: "性的指向:", backendPart: _buildcanChangeSexualInput(context)),
-            SizedBox(height: mediaH / 50),
+              // Sexual
+              CustomInputBar(titleName: "性的指向:", backendPart: _buildcanChangeSexualInput(context)),
+              SizedBox(height: mediaH / 50),
 
-            // Height
-            CustomInputBar(titleName: "身長:", backendPart: _buildcanChangeHeightInput(context)),
-            SizedBox(height: mediaH / 50),
+              // Height
+              CustomInputBar(titleName: " 身長 - cm:", backendPart: _buildcanChangeHeightInput(context)),
+              SizedBox(height: mediaH / 50),
 
-            // Width
-            CustomInputBar(titleName: "体重:", backendPart: _buildcanChangeWeightInput(context)),
-            SizedBox(height: mediaH / 50),
+              // Width
+              CustomInputBar(titleName: " 体重 - kg:", backendPart: _buildcanChangeWeightInput(context)),
+              SizedBox(height: mediaH / 50),
 
-            // Speak Language
-            CustomInputBar(titleName: "言語:", backendPart: _buildcanChangeSpeakLanguageInput(context)),
-            SizedBox(height: mediaH / 50),
+              // Speak Language
+              CustomInputBar(titleName: "言語:", backendPart: _buildcanChangeSpeakLanguageInput(context)),
+              SizedBox(height: mediaH / 50),
 
-            // Job
-            CustomInputBar(titleName: "学歴:", backendPart: _buildcanChangeEducationInput(context)),
-            SizedBox(height: mediaH / 25),
+              // Job
+              CustomInputBar(titleName: "学歴:", backendPart: _buildcanChangeEducationInput(context)),
+              SizedBox(height: mediaH / 25),
 
-            // Button
-            _buildNextButton(context),
-          ],
+              // Button
+              _buildNextButton(context),
+            ],
+          ),
         ),
       ),
     );
@@ -140,27 +177,30 @@ class _CanChangeInformation1State extends State<CanChangeInformation1> {
 
   /// City
   Widget _buildcanChangeCityInput(BuildContext context) {
-    return CustomInputFormBar(controller: canChangeCityController, hintText: "大阪");
+    return CustomDropDownBar(
+        controller: canChangeCityController,
+        // hintText: widget.country!.isNotEmpty ? asiaCities['${widget.country!}']. : asiaCities['$country'][0],
+        itemArray: widget.country!.isNotEmpty ? asiaCities[widget.country!] : asiaCities[country]);
   }
 
   /// Sexual
   Widget _buildcanChangeSexualInput(BuildContext context) {
-    return CustomInputFormBar(controller: canChangeSexualController, hintText: "異性愛");
+    return CustomDropDownBar(controller: canChangeSexualController, hintText: sexualList[0], itemArray: sexualList);
   }
 
   /// Height
   Widget _buildcanChangeHeightInput(BuildContext context) {
-    return CustomInputFormBar(controller: canChangeHeightController, hintText: "170cm");
+    return CustomInputFormBar(controller: canChangeHeightController, hintText: "170");
   }
 
   /// Width
   Widget _buildcanChangeWeightInput(BuildContext context) {
-    return CustomInputFormBar(controller: canChangeWeightController, hintText: "60kg");
+    return CustomInputFormBar(controller: canChangeWeightController, hintText: "60");
   }
 
   /// Education
   Widget _buildcanChangeEducationInput(BuildContext context) {
-    return CustomInputFormBar(controller: canChangeEducationController, hintText: "高校生");
+    return CustomDropDownBar(controller: canChangeEducationController, hintText: educationLevels[0], itemArray: educationLevels);
   }
 
   /// Speak Language

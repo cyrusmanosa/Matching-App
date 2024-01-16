@@ -17,6 +17,7 @@ dependencies:
   flutter_verification_code:
   flutter_secure_storage:
   google_fonts:
+  google_maps_flutter:
   grpc:
   image_field:
   image_picker:
@@ -30,6 +31,7 @@ dependencies:
   shared_preferences:
   uuid:
   image:
+  xml:
 
 
 flutter_launcher_icons:

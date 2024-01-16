@@ -1,8 +1,10 @@
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
+import 'package:dating_your_date/models/listData.dart';
 import 'package:dating_your_date/pb/rpc_hobby.pb.dart';
 import 'package:dating_your_date/pb/rpc_targetList.pb.dart';
+import 'package:dating_your_date/widgets/Custom_dropdown_Bar.dart';
 import 'package:dating_your_date/widgets/app_bar/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
@@ -88,8 +90,8 @@ class _HobbyConditionState extends State<HobbyCondition> {
         checkTargetUserTable(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data for update");
-        throw Exception("Error occurred while fetching update Hobby.");
+        showErrorDialog(context, "エラー：更新用の検証可能な入力データがありません。");
+        throw Exception("ホビーの更新中にエラーが発生しました。");
       }
     } else {
       try {
@@ -106,8 +108,8 @@ class _HobbyConditionState extends State<HobbyCondition> {
         onTapPaymentPage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data for create Hobby");
-        throw Exception("Error occurred while fetching Create Hobby.");
+        showErrorDialog(context, "エラー：作成用の検証可能な入力データがありません。");
+        throw Exception("ホビーの条件を入力中にエラーが発生しました。");
       }
     }
   }
@@ -119,64 +121,69 @@ class _HobbyConditionState extends State<HobbyCondition> {
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
       appBar: buildAppBar(context, "趣味の条件", true),
-      // 鍵盤彈出後自動調節Size - 要test先知
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: appTheme.bgColor,
-      body: Container(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 50),
-          child: Column(
-            children: [
-              // Era
-              CustomInputBar(titleName: "年代:", backendPart: _buildHobbyResetEraInput(context)),
-              SizedBox(height: mediaH / 50),
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Container(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 50),
+            child: Column(
+              children: [
+                // Era
+                CustomInputBar(titleName: "年代:", backendPart: _buildHobbyResetEraInput(context)),
+                SizedBox(height: mediaH / 50),
 
-              // City
-              CustomInputBar(titleName: "居住地:", backendPart: _buildHobbyResetCityInput(context)),
-              SizedBox(height: mediaH / 50),
+                // City
+                CustomInputBar(titleName: "居住地:", backendPart: _buildHobbyResetCityInput(context)),
+                SizedBox(height: mediaH / 50),
 
-              // Gender
-              CustomInputBar(titleName: "性別:", backendPart: _buildHobbyResetGenderInput(context)),
-              SizedBox(height: mediaH / 50),
+                // Gender
+                CustomInputBar(titleName: "性別:", backendPart: _buildHobbyResetGenderInput(context)),
+                SizedBox(height: mediaH / 50),
 
-              // Language
-              CustomInputBar(titleName: "お喋れる言語:", backendPart: _buildHobbySpeakLanguageInput(context)),
-              SizedBox(height: mediaH / 50),
+                // Language
+                CustomInputBar(titleName: "言語:", backendPart: _buildHobbySpeakLanguageInput(context)),
+                SizedBox(height: mediaH / 50),
 
-              // Hobby Type
-              CustomInputBar(titleName: "趣味のタイプ:", backendPart: _buildHobbyResetHobbyTypeInput(context)),
-              SizedBox(height: mediaH / 50),
+                // Hobby Type
+                CustomInputBar(titleName: "趣味のタイプ:", backendPart: _buildHobbyResetHobbyTypeInput(context)),
+                SizedBox(height: mediaH / 50),
 
-              // Experience
-              CustomInputBar(titleName: "経験:", backendPart: _buildHobbyResetExperienceInput(context)),
-              SizedBox(height: mediaH / 50),
+                // Experience
+                CustomInputBar(titleName: "経験 - 年:", backendPart: _buildHobbyResetExperienceInput(context)),
+                SizedBox(height: mediaH / 50),
 
-              // 本人認証の丸
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    confirmBtn = !confirmBtn;
-                  });
-                },
-                child: Row(
-                  children: [
-                    Container(
-                      height: mediaW / 25,
-                      width: mediaW / 25,
-                      decoration: BoxDecoration(color: confirmBtn ? appTheme.green : appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: mediaW / 50),
-                      child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
-                    ),
-                  ],
+                // 本人認証の丸
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      confirmBtn = !confirmBtn;
+                    });
+                  },
+                  child: Row(
+                    children: [
+                      Container(
+                        height: mediaW / 25,
+                        width: mediaW / 25,
+                        decoration:
+                            BoxDecoration(color: confirmBtn ? appTheme.green : appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: mediaW / 50),
+                        child: Text("本人認証を確認しました", style: confirmBtn ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(height: mediaH / 25),
+                SizedBox(height: mediaH / 25),
 
-              // button
-              _buildNextButton(context),
-            ],
+                // button
+                _buildNextButton(context),
+              ],
+            ),
           ),
         ),
       ),
@@ -184,8 +191,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
   }
 
   Widget _buildHobbyResetEraInput(BuildContext context) {
-    // return CustomDropDownBar(controller: resetHobbyEraController, hintText: "３０代", itemArray: eraList);
-    return CustomInputFormBar(controller: resetHobbyEraController, hintText: "３０代");
+    return CustomInputFormBar(controller: resetHobbyEraController, hintText: "30");
   }
 
   /// Reset City
@@ -195,8 +201,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
 
   /// Reset Gender
   Widget _buildHobbyResetGenderInput(BuildContext context) {
-    // return CustomDropDownBar(controller: resetHobbyGenderController, hintText: "男性", itemArray: genderList);
-    return CustomInputFormBar(controller: resetHobbyGenderController, hintText: "男性");
+    return CustomDropDownBar(controller: resetHobbyGenderController, hintText: genderList[0], itemArray: genderList);
   }
 
   /// Speak Language
@@ -211,7 +216,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
 
   /// Reset Experience
   Widget _buildHobbyResetExperienceInput(BuildContext context) {
-    return CustomInputFormBar(controller: resetHobbyExperienceController, hintText: "3年");
+    return CustomInputFormBar(controller: resetHobbyExperienceController, hintText: "3");
   }
 
   /// Next Button

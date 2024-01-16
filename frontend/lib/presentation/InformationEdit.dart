@@ -63,7 +63,8 @@ class _InformationEditState extends State<InformationEdit> {
     updateSociabilityController = TextEditingController(text: widget.canData?.sociability);
     updateReligiousController = TextEditingController(text: widget.canData?.religious);
     updateIntroduceController = TextEditingController(text: widget.canData?.introduce);
-    _newimageFile = widget.imgIcon!;
+
+    _newimageFile = widget.imgIcon;
   }
 
   bool isPureNumber(String value) {
@@ -151,13 +152,13 @@ class _InformationEditState extends State<InformationEdit> {
     } else if (updateSexualController.text.isEmpty) {
       showErrorDialog(context, "性的指向はまだ入力されていません");
     } else if (updateHeightController.text.isEmpty) {
-      showErrorDialog(context, "身長はまだ入力されていません");
+      showErrorDialog(context, " 身長 - cmはまだ入力されていません");
     } else if (!isPureNumber(updateHeightController.text)) {
-      showErrorDialog(context, "入力した身長は数字じゃありません");
+      showErrorDialog(context, "入力した 身長 - cmは数字じゃありません");
     } else if (updateWeightController.text.isEmpty) {
-      showErrorDialog(context, "体重はまだ入力されていません");
+      showErrorDialog(context, " 体重 - kgはまだ入力されていません");
     } else if (!isPureNumber(updateWeightController.text)) {
-      showErrorDialog(context, "入力した体重は数字じゃありません");
+      showErrorDialog(context, "入力した 体重 - kgは数字じゃありません");
     } else if (updateSpeakLanguageController.text.isEmpty) {
       showErrorDialog(context, "学歴はまだ入力されていません");
     } else if (updateJobController.text.isEmpty) {
@@ -200,8 +201,8 @@ class _InformationEditState extends State<InformationEdit> {
         });
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data");
-        throw Exception("Error occurred while fetching profile edit.");
+        showErrorDialog(context, "エラー：検証可能な入力データがありません。");
+        throw Exception("プロフィールの編集中にエラーが発生しました。");
       }
     }
   }
@@ -215,65 +216,70 @@ class _InformationEditState extends State<InformationEdit> {
       appBar: _buildheader(context, mediaH, mediaW),
       backgroundColor: appTheme.bgColor,
       // 鍵盤彈出後自動調節Size - 要test先知
-      resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // photos
-            _buildImages(context, mediaH, mediaW),
+      resizeToAvoidBottomInset: true,
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              // photos
+              _buildImages(context, mediaH, mediaW),
 
-            // Introduce
-            CustomInputBar(titleName: "自己紹介:", backendPart: _buildUpdateIntroduceInput(context, mediaH, mediaW)),
-            SizedBox(height: mediaH / 50),
+              // Introduce
+              CustomInputBar(titleName: "自己紹介:", backendPart: _buildUpdateIntroduceInput(context, mediaH, mediaW)),
+              SizedBox(height: mediaH / 50),
 
-            // Nickname
-            CustomInputBar(titleName: "ニックネーム:", backendPart: _buildUpdateNickNameInput(context)),
-            SizedBox(height: mediaH / 50),
+              // Nickname
+              CustomInputBar(titleName: "ニックネーム:", backendPart: _buildUpdateNickNameInput(context)),
+              SizedBox(height: mediaH / 50),
 
-            // Height
-            CustomInputBar(titleName: "身長:", backendPart: _buildUpdateHeightInput(context)),
-            SizedBox(height: mediaH / 50),
+              // Height
+              CustomInputBar(titleName: " 身長 - cm:", backendPart: _buildUpdateHeightInput(context)),
+              SizedBox(height: mediaH / 50),
 
-            // Weight
-            CustomInputBar(titleName: "体重:", backendPart: _buildUpdateWeightInput(context)),
-            SizedBox(height: mediaH / 50),
+              // Weight
+              CustomInputBar(titleName: " 体重 - kg:", backendPart: _buildUpdateWeightInput(context)),
+              SizedBox(height: mediaH / 50),
 
-            // City
-            CustomInputBar(titleName: "居住地:", backendPart: _buildUpdateCityInput(context)),
-            SizedBox(height: mediaH / 50),
+              // City
+              CustomInputBar(titleName: "居住地:", backendPart: _buildUpdateCityInput(context)),
+              SizedBox(height: mediaH / 50),
 
-            // Education
-            CustomInputBar(titleName: "学歴:", backendPart: _buildUpdateEducationInput(context)),
-            SizedBox(height: mediaH / 50),
+              // Education
+              CustomInputBar(titleName: "学歴:", backendPart: _buildUpdateEducationInput(context)),
+              SizedBox(height: mediaH / 50),
 
-            // Speak Language
-            CustomInputBar(titleName: "言語:", backendPart: _buildUpdateSpeakLanguageInput(context)),
-            SizedBox(height: mediaH / 50),
+              // Speak Language
+              CustomInputBar(titleName: "言語:", backendPart: _buildUpdateSpeakLanguageInput(context)),
+              SizedBox(height: mediaH / 50),
 
-            // Job
-            CustomInputBar(titleName: "職種:", backendPart: _buildUpdateJobInput(context)),
-            SizedBox(height: mediaH / 50),
+              // Job
+              CustomInputBar(titleName: "職種:", backendPart: _buildUpdateJobInput(context)),
+              SizedBox(height: mediaH / 50),
 
-            // Annual Salary
-            CustomInputBar(titleName: "年収:", backendPart: _buildUpdateAnnualSalaryInput(context)),
-            SizedBox(height: mediaH / 50),
+              // Annual Salary
+              CustomInputBar(titleName: "年収:", backendPart: _buildUpdateAnnualSalaryInput(context)),
+              SizedBox(height: mediaH / 50),
 
-            // Sexual
-            CustomInputBar(titleName: "性的指向:", backendPart: _buildUpdateSexualInput(context)),
-            SizedBox(height: mediaH / 50),
+              // Sexual
+              CustomInputBar(titleName: "性的指向:", backendPart: _buildUpdateSexualInput(context)),
+              SizedBox(height: mediaH / 50),
 
-            // Sociability
-            CustomInputBar(titleName: "社交力:", backendPart: _buildUpdateSociabilityInput(context)),
-            SizedBox(height: mediaH / 50),
+              // Sociability
+              CustomInputBar(titleName: "社交力:", backendPart: _buildUpdateSociabilityInput(context)),
+              SizedBox(height: mediaH / 50),
 
-            // Relighious
-            CustomInputBar(titleName: "宗教:", backendPart: _buildUpdateReligiousInput(context)),
-            SizedBox(height: mediaH / 25),
+              // Relighious
+              CustomInputBar(titleName: "宗教:", backendPart: _buildUpdateReligiousInput(context)),
+              SizedBox(height: mediaH / 25),
 
-            // button
-            _buildSubmitButton(context),
-            SizedBox(height: mediaH / 20),
-          ],
+              // button
+              _buildSubmitButton(context),
+              SizedBox(height: mediaH / 20),
+            ],
+          ),
         ),
       ),
     );
@@ -367,12 +373,12 @@ class _InformationEditState extends State<InformationEdit> {
 
   /// Height
   Widget _buildUpdateHeightInput(BuildContext context) {
-    return CustomInputFormBar(controller: updateHeightController, hintText: "170cm");
+    return CustomInputFormBar(controller: updateHeightController, hintText: "170");
   }
 
   /// Weight
   Widget _buildUpdateWeightInput(BuildContext context) {
-    return CustomInputFormBar(controller: updateWeightController, hintText: "60kg");
+    return CustomInputFormBar(controller: updateWeightController, hintText: "60");
   }
 
   /// Education

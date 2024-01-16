@@ -21,30 +21,35 @@ class PasswordResetEmail extends StatelessWidget {
       appBar: buildAppBar(context, "", true),
       backgroundColor: appTheme.bgColor,
       // 鍵盤彈出後自動調節Size - 要test先知
-      resizeToAvoidBottomInset: false,
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
-        child: Column(
-          children: [
-            // Logo and Slogan
-            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4),
-            CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3.5),
-            SizedBox(height: mediaH / 30),
+      resizeToAvoidBottomInset: true,
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
+          child: Column(
+            children: [
+              // Logo and Slogan
+              CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4),
+              CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3.5),
+              SizedBox(height: mediaH / 30),
 
-            // msg
-            Container(
-              alignment: Alignment.centerLeft,
-              child: Text("ご登録されているメールアドレスに認証キーを送します", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
-            ),
-            SizedBox(height: mediaH / 50),
+              // msg
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Text("ご登録されているメールアドレスに認証キーを送します", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
+              ),
+              SizedBox(height: mediaH / 50),
 
-            // Input
-            CustomInputBar(titleName: "メールアドレス:", backendPart: _buildResetPasswordEmailInput(context)),
-            SizedBox(height: mediaH / 50),
+              // Input
+              CustomInputBar(titleName: "メールアドレス:", backendPart: _buildResetPasswordEmailInput(context)),
+              SizedBox(height: mediaH / 50),
 
-            // button
-            _buildNextButton(context)
-          ],
+              // button
+              _buildNextButton(context)
+            ],
+          ),
         ),
       ),
     );

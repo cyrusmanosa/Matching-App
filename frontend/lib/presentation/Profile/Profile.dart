@@ -11,6 +11,7 @@ import 'package:dating_your_date/pb/rpc_fix.pb.dart';
 import 'package:dating_your_date/pb/rpc_images.pb.dart';
 import 'package:dating_your_date/presentation/Information.dart';
 import 'package:dating_your_date/presentation/InformationEdit.dart';
+import 'package:dating_your_date/widgets/Custom_IconLogoBox.dart';
 import 'package:dating_your_date/widgets/button/Custom_Profile_button.dart';
 import 'package:dating_your_date/widgets/Custom_Show_Image.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
@@ -22,11 +23,8 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 class Profile extends StatefulWidget {
-  Profile({Key? key, this.send, this.changeTime, this.allMyImg}) : super(key: key);
-  final List<File>? allMyImg;
+  Profile({Key? key}) : super(key: key);
 
-  final String? send;
-  final String? changeTime;
   @override
   _ProfileState createState() => _ProfileState();
 }
@@ -37,45 +35,51 @@ class _ProfileState extends State<Profile> {
   File myImg3 = File('');
   File myImg4 = File('');
   File myImg5 = File('');
+  List<File> allMyImg = [];
+
   String send = "";
   String changeTime = "";
-  CanChange? cCData = CanChange();
-  Fix? myFixData = Fix();
-
+  CanChange cCData = CanChange();
+  Fix myFixData = Fix();
   @override
   void initState() {
     super.initState();
     fetchData(context);
-    getChangeGrpcRequest(context);
-    getImagesGrpcRequest(context);
   }
 
+  /// all Manager
   Future<void> fetchData(BuildContext context) async {
-    await getMyselfGrpc(context);
+    await getChangeGrpcRequest(context);
+    await getImagesGrpcRequest(context);
+    await getMyselfInfoGrpcRequest(context);
+
+    allMyImg = [myImg1, myImg2, myImg3, myImg4, myImg5];
   }
 
-  /// get myself Fix
-  Future<void> getMyselfGrpc(BuildContext context) async {
+  /// get myself info
+  Future<void> getMyselfInfoGrpcRequest(BuildContext context) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
     String? apiKeyU = await globalUserId.read(key: 'UserID');
     final userid = int.tryParse(apiKeyU!);
     try {
-      final request = GetFixRequest(sessionID: apiKeyS, userID: userid);
-      final response = await GrpcInfoService.client.getFix(request);
-      myFixData = response.fix;
-    } on GrpcError {
-      showErrorDialog(context, "Error: validatable get Can Change!");
-      throw Exception("Error occurred while fetching Can Change.");
+      final fRequest = GetFixRequest(sessionID: apiKeyS, userID: userid);
+      final fResponse = await GrpcInfoService.client.getFix(fRequest);
+      setState(() {
+        myFixData = fResponse.fix;
+      });
+    } on GrpcError catch (e) {
+      showErrorDialog(context, "Error: validatable input UserId in Fixinfo! at $e");
+      throw Exception("Error occurred while fetching Fixinfo.");
     }
     try {
-      final cCRequest = GetCanChangeRequest(sessionID: apiKeyS, userID: userid);
-      final cCResponse = await GrpcInfoService.client.getCanChange(cCRequest);
+      final cRequest = GetCanChangeRequest(sessionID: apiKeyS, userID: userid);
+      final cResponse = await GrpcInfoService.client.getCanChange(cRequest);
       setState(() {
-        cCData = cCResponse.canChangeInfo;
+        cCData = cResponse.canChangeInfo;
       });
-    } on GrpcError {
-      showErrorDialog(context, "Error: validatable input UserId in Can Change Table!");
-      throw Exception("Error occurred while fetching canChangeInfo.");
+    } on GrpcError catch (e) {
+      showErrorDialog(context, "Error: validatable input UserId in Fixinfo! at $e");
+      throw Exception("Error occurred while fetching Fixinfo.");
     }
   }
 
@@ -140,13 +144,13 @@ class _ProfileState extends State<Profile> {
         });
       }
     } on GrpcError {
-      showErrorDialog(context, "Error: validatable input UserId in Image!");
-      throw Exception("Error occurred while fetching canChangeInfo.");
+      showErrorDialog(context, "エラー：検証可能な入力データ");
+      throw Exception("データの送信中にエラーが発生しました。");
     }
   }
 
-  /// get Data
-  void getChangeGrpcRequest(BuildContext context) async {
+  /// get Myself Data
+  Future<void> getChangeGrpcRequest(BuildContext context) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
     String? apiKeyU = await globalUserId.read(key: 'UserID');
     final userid = int.tryParse(apiKeyU!);
@@ -187,7 +191,7 @@ class _ProfileState extends State<Profile> {
     try {
       switch (item) {
         case 1:
-          Uint8List bytes = myImg2.readAsBytesSync();
+          Uint8List bytes = allMyImg[1].readAsBytesSync();
           List<int> img2B = bytes.toList();
           final updateImagesRequest = UpdateImagesRequest(
             sessionID: apiKeyS,
@@ -200,7 +204,7 @@ class _ProfileState extends State<Profile> {
           await GrpcInfoService.client.updateImages(updateImagesRequest);
           break;
         case 2:
-          Uint8List bytes = myImg3.readAsBytesSync();
+          Uint8List bytes = allMyImg[2].readAsBytesSync();
           List<int> img3B = bytes.toList();
           final updateImagesRequest = UpdateImagesRequest(
             sessionID: apiKeyS,
@@ -213,7 +217,7 @@ class _ProfileState extends State<Profile> {
           await GrpcInfoService.client.updateImages(updateImagesRequest);
           break;
         case 3:
-          Uint8List bytes = myImg4.readAsBytesSync();
+          Uint8List bytes = allMyImg[3].readAsBytesSync();
           List<int> img4B = bytes.toList();
           final updateImagesRequest = UpdateImagesRequest(
             sessionID: apiKeyS,
@@ -226,7 +230,7 @@ class _ProfileState extends State<Profile> {
           await GrpcInfoService.client.updateImages(updateImagesRequest);
           break;
         case 4:
-          Uint8List bytes = myImg5.readAsBytesSync();
+          Uint8List bytes = allMyImg[4].readAsBytesSync();
           List<int> img5B = bytes.toList();
           final updateImagesRequest = UpdateImagesRequest(
             sessionID: apiKeyS,
@@ -239,21 +243,23 @@ class _ProfileState extends State<Profile> {
           await GrpcInfoService.client.updateImages(updateImagesRequest);
           break;
       }
+      showLogoDialog(context, "アバターも更新しました", true);
     } on GrpcError {
-      showErrorDialog(context, "Error: validatable input UserId in Chat Record!");
-      throw Exception("Error occurred while fetching canChangeInfo.");
+      showErrorDialog(context, "エラー：検証可能な入力データ");
+      throw Exception("データの送信中にエラーが発生しました。");
     }
   }
 
   void onTapNextPage(BuildContext context) {
-    List<File> allMyImg = [myImg1];
-    if (myImg2.existsSync()) allMyImg.add(myImg2);
-    if (myImg3.existsSync()) allMyImg.add(myImg3);
-    if (myImg4.existsSync()) allMyImg.add(myImg4);
-    if (myImg5.existsSync()) allMyImg.add(myImg5);
+    List<File> newAllMyImg = [allMyImg[0]];
+    if (allMyImg[1].existsSync()) newAllMyImg.add(allMyImg[1]);
+    if (allMyImg[2].existsSync()) newAllMyImg.add(allMyImg[2]);
+    if (allMyImg[3].existsSync()) newAllMyImg.add(allMyImg[3]);
+    if (allMyImg[4].existsSync()) newAllMyImg.add(allMyImg[4]);
+
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => InformationEdit(canData: cCData, imgIcon: allMyImg), fullscreenDialog: true),
+      MaterialPageRoute(builder: (context) => InformationEdit(canData: cCData, imgIcon: newAllMyImg), fullscreenDialog: true),
     );
   }
 
@@ -270,7 +276,7 @@ class _ProfileState extends State<Profile> {
         systemOverlayStyle: SystemUiOverlayStyle.dark,
         toolbarHeight: 50,
         actions: [
-          if (!myImg5.existsSync())
+          if (allMyImg.length < 5)
             IconButton(
               icon: Icon(Icons.add_photo_alternate_outlined),
               onPressed: () {
@@ -284,10 +290,10 @@ class _ProfileState extends State<Profile> {
         child: Column(
           children: [
             // image
-            _buildImages(context, mediaH, mediaW),
+            if (allMyImg.isNotEmpty) _buildImages(context, mediaH, mediaW),
             SizedBox(height: mediaH / 75),
             // Part 2 - cCData!
-            _buildDataBar(context, mediaH, mediaW),
+            if (send.isNotEmpty && changeTime.isNotEmpty) _buildDataBar(context, mediaH, mediaW),
             SizedBox(height: mediaH / 30),
 
             // Button 1rd
@@ -343,13 +349,12 @@ class _ProfileState extends State<Profile> {
           children: [
             // far left
             SizedBox(width: mediaW / 25),
-
             // image
-            _buildImageContainer(context, mediaH, mediaW, myImg1, 0),
-            if (myImg2.existsSync()) _buildImageContainer(context, mediaH, mediaW, myImg2, 1),
-            if (myImg3.existsSync()) _buildImageContainer(context, mediaH, mediaW, myImg3, 2),
-            if (myImg4.existsSync()) _buildImageContainer(context, mediaH, mediaW, myImg4, 3),
-            if (myImg5.existsSync()) _buildImageContainer(context, mediaH, mediaW, myImg5, 4),
+            _buildImageContainer(context, mediaH, mediaW, allMyImg[0], 0),
+            if (allMyImg[1].existsSync()) _buildImageContainer(context, mediaH, mediaW, allMyImg[1], 1),
+            if (allMyImg[2].existsSync()) _buildImageContainer(context, mediaH, mediaW, allMyImg[2], 2),
+            if (allMyImg[3].existsSync()) _buildImageContainer(context, mediaH, mediaW, allMyImg[3], 3),
+            if (allMyImg[4].existsSync()) _buildImageContainer(context, mediaH, mediaW, allMyImg[4], 4),
 
             // far right
             SizedBox(width: mediaW / 25),
@@ -374,6 +379,7 @@ class _ProfileState extends State<Profile> {
                   text: "プロフィール画像に設定する",
                   onPressed: () {
                     updateIconGrpcRequest(context, item);
+                    Navigator.pop(context);
                   },
                 ),
             ],
@@ -401,14 +407,14 @@ class _ProfileState extends State<Profile> {
             Column(
               children: [
                 Text("交換回数", style: CustomTextStyles.inputTitlePink),
-                Text(changeTime ?? "0", style: CustomTextStyles.dataWord),
+                Text(changeTime, style: CustomTextStyles.dataWord),
               ],
             ),
             SizedBox(height: mediaH / 14, child: VerticalDivider(thickness: 1, indent: 10, endIndent: 10)),
             Column(
               children: [
                 Text("伝送回数", style: CustomTextStyles.inputTitlePink),
-                Text(send ?? "0", style: CustomTextStyles.dataWord),
+                Text(send, style: CustomTextStyles.dataWord),
               ],
             ),
           ],
@@ -427,11 +433,11 @@ class _ProfileState extends State<Profile> {
               context: context,
               isScrollControlled: true,
               builder: (BuildContext context) {
-                List<File> allMyImg = [myImg1];
-                if (myImg2.existsSync()) allMyImg.add(myImg2);
-                if (myImg3.existsSync()) allMyImg.add(myImg3);
-                if (myImg4.existsSync()) allMyImg.add(myImg4);
-                if (myImg5.existsSync()) allMyImg.add(myImg5);
+                List<File> newAllMyImg = [allMyImg[0]];
+                if (allMyImg[1].existsSync()) newAllMyImg.add(allMyImg[1]);
+                if (allMyImg[2].existsSync()) newAllMyImg.add(allMyImg[2]);
+                if (allMyImg[3].existsSync()) newAllMyImg.add(allMyImg[3]);
+                if (allMyImg[4].existsSync()) newAllMyImg.add(allMyImg[4]);
                 return Information(canData: cCData, fixData: myFixData, imgIcon: allMyImg);
               },
             );

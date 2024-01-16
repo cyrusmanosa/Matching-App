@@ -30,12 +30,16 @@ class _ChatState extends State<Chat> {
   @override
   void initState() {
     super.initState();
-    _getTargetID(context);
+    fetchData(context);
+  }
+
+  Future<void> fetchData(BuildContext context) async {
+    await _getTargetID(context);
     _getUserInfoGrpcRequest(context);
   }
 
 // Grpc
-  void _getTargetID(BuildContext context) async {
+  Future<void> _getTargetID(BuildContext context) async {
     try {
       String? apiKeyU = await globalUserId.read(key: 'UserID');
       final userid = int.tryParse(apiKeyU!);
@@ -46,8 +50,8 @@ class _ChatState extends State<Chat> {
       });
     } on GrpcError {
       isEmpty = true;
-      showErrorDialog(context, "Error: validatable input data of Msg Info");
-      throw Exception("Error occurred while fetching user info.");
+      showErrorDialog(context, "エラー：検証可能な入力データ");
+      throw Exception("データの送信中にエラーが発生しました。");
     }
   }
 

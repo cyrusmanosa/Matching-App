@@ -44,8 +44,8 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
         Navigator.push(context, MaterialPageRoute(builder: (context) => ContainerScreen(number: 3)));
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data");
-        throw Exception("Error occurred while fetching New Password setup.");
+        showErrorDialog(context, "エラー：検証可能な入力データがありません。");
+        throw Exception("新しいパスワードの設定中にエラーが発生しました。");
       }
     }
   }
@@ -70,30 +70,35 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
       appBar: buildAppBar(context, "", true),
       backgroundColor: appTheme.bgColor,
       // 鍵盤彈出後自動調節Size - 要test先知
-      resizeToAvoidBottomInset: false,
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
-        child: Column(
-          children: [
-            // Logo and Slogan
-            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4),
-            CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3.5),
-            SizedBox(height: mediaH / 30),
+      resizeToAvoidBottomInset: true,
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
+          child: Column(
+            children: [
+              // Logo and Slogan
+              CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4),
+              CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3.5),
+              SizedBox(height: mediaH / 30),
 
-            // New Password
-            CustomInputBar(titleName: "新しいパスワード", backendPart: _buildNewPasswordInput(context)),
+              // New Password
+              CustomInputBar(titleName: "新しいパスワード", backendPart: _buildNewPasswordInput(context)),
 
-            // msg
-            Align(alignment: Alignment.centerLeft, child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.pwRuleGray500)),
-            SizedBox(height: mediaH / 25),
+              // msg
+              Align(alignment: Alignment.centerLeft, child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.pwRuleGray500)),
+              SizedBox(height: mediaH / 25),
 
-            // New Password Confirm
-            CustomInputBar(titleName: "新しいパスワード（確認）", backendPart: _buildNewPasswordConfirm(context)),
-            SizedBox(height: mediaH / 25),
+              // New Password Confirm
+              CustomInputBar(titleName: "新しいパスワード（確認）", backendPart: _buildNewPasswordConfirm(context)),
+              SizedBox(height: mediaH / 25),
 
-            // Button
-            _buildNextButton(context)
-          ],
+              // Button
+              _buildNextButton(context)
+            ],
+          ),
         ),
       ),
     );

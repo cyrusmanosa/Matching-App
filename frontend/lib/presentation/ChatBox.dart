@@ -46,8 +46,8 @@ class _ChatBoxState extends State<ChatBox> {
       final crResponse = await GrpcChatService.client.getChatRecord(crRequest);
       return crResponse.chatRecordNoID;
     } on GrpcError {
-      showErrorDialog(context, "Error: validatable input data of Info");
-      throw Exception("Error occurred while fetching take chat record");
+      showErrorDialog(context, "エラー：検証可能な情報の入力データ");
+      throw Exception("データの取得中にエラーが発生しました。");
     }
   }
 
@@ -73,8 +73,8 @@ class _ChatBoxState extends State<ChatBox> {
         });
       }
     } on GrpcError {
-      showErrorDialog(context, "Error: validatable input data of Target List");
-      throw Exception("Error occurred while fetching take Target List");
+      showErrorDialog(context, "エラー：検証可能なデータの入力データ");
+      throw Exception("データの取得中にエラーが発生しました。");
     }
   }
 
@@ -92,8 +92,8 @@ class _ChatBoxState extends State<ChatBox> {
       );
       await GrpcChatService.client.createChatRecord(myRequest);
     } on GrpcError {
-      showErrorDialog(context, "Error: validatable input data of myself");
-      throw Exception("Error occurred while fetching myself chat record");
+      showErrorDialog(context, "エラー：検証可能なメッセージの送信");
+      throw Exception("データの取得中にエラーが発生しました。");
     }
   }
 
@@ -110,8 +110,8 @@ class _ChatBoxState extends State<ChatBox> {
       );
       await GrpcChatService.client.createChatRecord(targetRequest);
     } on GrpcError {
-      showErrorDialog(context, "Error: validatable input data of target");
-      throw Exception("Error occurred while fetching target chat record");
+      showErrorDialog(context, "エラー：検証可能なメッセージの送信");
+      throw Exception("データの取得中にエラーが発生しました。");
     }
     newMsgTextController = TextEditingController();
   }
@@ -134,46 +134,50 @@ class _ChatBoxState extends State<ChatBox> {
       // 鍵盤彈出後自動調節Size - 要test先知
       resizeToAvoidBottomInset: true,
       backgroundColor: appTheme.bgColor,
-
-      body: FutureBuilder<List<ChatRecordNoID>>(
-        future: getChatRecords(context),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final data = snapshot.data!;
-            return SingleChildScrollView(
-              reverse: true,
-              child: Column(
-                children: [
-                  ListView.builder(
-                    itemCount: data.length,
-                    shrinkWrap: true,
-                    padding: EdgeInsets.symmetric(vertical: mediaH / 100),
-                    physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Container(
-                        padding: EdgeInsets.symmetric(vertical: mediaH / 150, horizontal: mediaW / 30),
-                        child: Align(
-                          alignment: (data[index].roleType == "receiver" ? Alignment.bottomLeft : Alignment.bottomRight),
-                          child: Container(
-                            constraints: BoxConstraints(maxWidth: mediaW / 1.5),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadiusStyle.r30,
-                              color: (data[index].roleType == "receiver" ? Colors.grey.shade200 : Colors.blue[200]),
-                            ),
-                            padding: EdgeInsets.symmetric(vertical: mediaH / 100, horizontal: mediaW / 30),
-                            child: Text(data[index].media, style: TextStyle(fontSize: mediaH / 60)),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            );
-          } else {
-            return Container();
-          }
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
         },
+        child: FutureBuilder<List<ChatRecordNoID>>(
+          future: getChatRecords(context),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final data = snapshot.data!;
+              return SingleChildScrollView(
+                reverse: true,
+                child: Column(
+                  children: [
+                    ListView.builder(
+                      itemCount: data.length,
+                      shrinkWrap: true,
+                      padding: EdgeInsets.symmetric(vertical: mediaH / 100),
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return Container(
+                          padding: EdgeInsets.symmetric(vertical: mediaH / 150, horizontal: mediaW / 30),
+                          child: Align(
+                            alignment: (data[index].roleType == "receiver" ? Alignment.bottomLeft : Alignment.bottomRight),
+                            child: Container(
+                              constraints: BoxConstraints(maxWidth: mediaW / 1.5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadiusStyle.r30,
+                                color: (data[index].roleType == "receiver" ? Colors.grey.shade200 : Colors.blue[200]),
+                              ),
+                              padding: EdgeInsets.symmetric(vertical: mediaH / 100, horizontal: mediaW / 30),
+                              child: Text(data[index].media, style: TextStyle(fontSize: mediaH / 60)),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return Container();
+            }
+          },
+        ),
       ),
       bottomNavigationBar: Container(
         height: mediaH / 10.5,

@@ -21,37 +21,43 @@ class CustomBottomBar extends StatelessWidget {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Container(
-      height: mediaH / 10.5,
+      height: mediaH / 10.3,
+      width: mediaW,
       decoration: BoxDecoration(color: appTheme.pinkA100),
-      padding: EdgeInsets.only(left: mediaW / 20, right: mediaW / 20),
       child: BottomNavigationBar(
         backgroundColor: Color.fromARGB(0, 255, 0, 0),
         selectedFontSize: 0,
         elevation: 0,
         currentIndex: selectedIndex!,
         type: BottomNavigationBarType.fixed,
-        items: List.generate(bottomMenuList.length, (index) {
-          return BottomNavigationBarItem(
-            label: "",
-            // before
-            icon: Column(
-              children: [
-                Padding(padding: EdgeInsets.only(top: mediaH / 100)),
-                CustomImageView(imagePath: bottomMenuList[index].icon, width: mediaW / 20, color: appTheme.white),
-                Padding(padding: EdgeInsets.only(top: 2), child: Text(bottomMenuList[index].label!, style: CustomTextStyles.mainButtonW)),
-              ],
-            ),
+        items: List.generate(
+          bottomMenuList.length,
+          (index) {
+            return BottomNavigationBarItem(
+              label: "",
+              // before
+              icon: Column(
+                children: [
+                  Padding(padding: EdgeInsets.only(top: mediaH / 100)),
+                  CustomImageView(imagePath: bottomMenuList[index].icon, width: mediaW / 20, color: appTheme.white),
+                  Padding(padding: EdgeInsets.only(top: 2), child: Text(bottomMenuList[index].label!, style: CustomTextStyles.mainButtonW)),
+                ],
+              ),
 
-            // after
-            activeIcon: Column(
-              children: [
-                Padding(padding: EdgeInsets.only(top: mediaH / 100)),
-                CustomImageView(imagePath: bottomMenuList[index].activeIcon, width: mediaW / 20, color: appTheme.black),
-                Padding(padding: EdgeInsets.only(top: 2), child: Text(bottomMenuList[index].label!, style: CustomTextStyles.mainButtonC)),
-              ],
-            ),
-          );
-        }),
+              // after
+              activeIcon: Column(
+                children: [
+                  Padding(padding: EdgeInsets.only(top: mediaH / 100)),
+                  CustomImageView(imagePath: bottomMenuList[index].activeIcon, width: mediaW / 20, color: appTheme.black),
+                  Padding(
+                    padding: EdgeInsets.only(top: 2),
+                    child: Text(bottomMenuList[index].label!, style: CustomTextStyles.mainButtonC),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
         onTap: onChanged,
       ),
     );

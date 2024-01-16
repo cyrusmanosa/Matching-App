@@ -1,3 +1,4 @@
+import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 class CustomDropDownBar extends StatelessWidget {
@@ -79,37 +80,34 @@ class CustomDropDownBar extends StatelessWidget {
   }
 
   Widget dropdownFormFieldWidget(double mediaH, double mediaW) {
-    return Container(
+    return SizedBox(
       height: height ?? mediaH / 25,
       width: width ?? mediaW / 1.2,
-      child: DropdownButtonFormField<String>(
-        value: controller!.text.isNotEmpty ? controller!.text : null,
+      child: DropdownButtonFormField(
+        decoration: decoration,
+        value: value,
         items: itemArray!.map((option) {
           return DropdownMenuItem(value: option, child: Text(option));
         }).toList(),
         onChanged: (value) {
           controller!.text = value!;
         },
-        decoration: decoration,
       ),
     );
   }
 
   InputDecoration get decoration => InputDecoration(
-        contentPadding: contentPadding ?? EdgeInsets.only(top: -10),
-        fillColor: fillColor,
+        contentPadding: contentPadding ?? EdgeInsets.only(top: -30),
         filled: filled,
         hintText: hintText,
-        hintStyle: hintStyle,
+        hintStyle: theme.textTheme.bodySmall,
         isDense: false,
         prefix: prefix ?? Padding(padding: EdgeInsets.only(left: 15.0)),
         prefixIconConstraints: prefixConstraints,
         suffixIcon: suffix,
         suffixIconConstraints: suffixConstraints,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0), borderSide: BorderSide(width: 2)),
-        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0), borderSide: BorderSide(color: Colors.pink, width: 2)),
-        errorBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0), borderSide: BorderSide(color: Colors.red, width: 2)),
-        focusedErrorBorder:
-            OutlineInputBorder(borderRadius: BorderRadius.circular(15.0), borderSide: BorderSide(color: Colors.red, width: 2)),
+        focusedBorder:
+            OutlineInputBorder(borderRadius: BorderRadius.circular(15.0), borderSide: BorderSide(color: appTheme.pinkA100, width: 2)),
       );
 }

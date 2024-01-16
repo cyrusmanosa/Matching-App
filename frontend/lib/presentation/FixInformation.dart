@@ -1,12 +1,15 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
+import 'package:dating_your_date/models/listData.dart';
 import 'package:dating_your_date/pb/rpc_fix.pb.dart';
 import 'package:dating_your_date/pb/rpc_images.pb.dart';
 import 'package:dating_your_date/pb/rpc_session.pb.dart';
+import 'package:dating_your_date/widgets/Custom_dropdown_Bar.dart';
 import 'package:dating_your_date/widgets/app_bar/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/Custom_Word_button.dart';
@@ -43,7 +46,6 @@ class _FixInformationState extends State<FixInformation> {
   bool confirm18Btn = false;
   bool confirmAgreeBtn = false;
 
-  // upload and show image
   void _uploadPhotoToNewFile() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -110,8 +112,8 @@ class _FixInformationState extends State<FixInformation> {
         saveImage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data");
-        throw Exception("Error occurred while fetching Fix.");
+        showErrorDialog(context, "エラー：検証可能な入力データ");
+        throw Exception("データの送信中にエラーが発生しました。");
       }
     }
   }
@@ -127,7 +129,6 @@ class _FixInformationState extends State<FixInformation> {
 
       Uint8List bytes = await _imageFile!.readAsBytes();
       List<int> img = bytes.toList();
-
       final request = CreateImagesRequest(sessionID: apiKeyS, img1: img, img2: null, img3: null, img4: null, img5: null);
       await GrpcInfoService.client.createImages(request);
       onTapNextPage(context);
@@ -145,78 +146,82 @@ class _FixInformationState extends State<FixInformation> {
     return Scaffold(
       appBar: buildAppBar(context, "マイプロフィール", true),
       backgroundColor: appTheme.bgColor,
-      // 鍵盤彈出後自動調節Size - 要test先知
-      resizeToAvoidBottomInset: false,
-      body: Container(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
-          child: Column(
-            children: [
-              // image
-              _buildImages(context, mediaH),
-              SizedBox(height: mediaH / 50),
+      resizeToAvoidBottomInset: true,
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Container(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
+            child: Column(
+              children: [
+                // image
+                _buildImages(context, mediaH),
+                SizedBox(height: mediaH / 50),
 
-              // msg
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text("＊マイプロフィールの資料は一度入力されますと", style: CustomTextStyles.titleOfUnderLogo),
-              ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text("　変更することができません。", style: CustomTextStyles.titleOfUnderLogo),
-              ),
-              SizedBox(height: mediaH / 75),
+                // msg
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text("＊マイプロフィールの資料は一度入力されますと", style: CustomTextStyles.titleOfUnderLogo),
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text("　変更することができません。", style: CustomTextStyles.titleOfUnderLogo),
+                ),
+                SizedBox(height: mediaH / 75),
 
-              // Last name
-              CustomInputBar(titleName: "姓:", backendPart: _buildfixLastNameInput(context)),
-              SizedBox(height: mediaH / 50),
+                // Last name
+                CustomInputBar(titleName: "姓:", backendPart: _buildfixLastNameInput(context)),
+                SizedBox(height: mediaH / 50),
 
-              // First name
-              CustomInputBar(titleName: "名:", backendPart: _buildfixFirstNameInput(context)),
-              SizedBox(height: mediaH / 50),
+                // First name
+                CustomInputBar(titleName: "名:", backendPart: _buildfixFirstNameInput(context)),
+                SizedBox(height: mediaH / 50),
 
-              // Birth
-              CustomInputBar(titleName: "生年月日:", backendPart: _buildfixBirthInput(context)),
-              SizedBox(height: mediaH / 50),
+                // Birth
+                CustomInputBar(titleName: "生年月日:", backendPart: _buildfixBirthInput(context)),
+                SizedBox(height: mediaH / 50),
 
-              // Country
-              CustomInputBar(titleName: "国籍:", backendPart: _buildfixCountryInput(context)),
-              SizedBox(height: mediaH / 50),
+                // Country
+                CustomInputBar(titleName: "国籍:", backendPart: _buildfixCountryInput(context)),
+                SizedBox(height: mediaH / 50),
 
-              // Gender
-              CustomInputBar(titleName: "性別:", backendPart: _buildfixGenderInput(context)),
-              SizedBox(height: mediaH / 50),
+                // Gender
+                CustomInputBar(titleName: "性別:", backendPart: _buildfixGenderInput(context)),
+                SizedBox(height: mediaH / 50),
 
-              // 血液型
-              CustomInputBar(titleName: "血液型:", backendPart: _buildfixBloodInput(context)),
-              SizedBox(height: mediaH / 50),
+                // 血液型
+                CustomInputBar(titleName: "血液型:", backendPart: _buildfixBloodInput(context)),
+                SizedBox(height: mediaH / 50),
 
-              // 18
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    confirm18Btn = !confirm18Btn;
-                  });
-                },
-                child: WordButton(msg: "満18歳以上の独身であることを誓約します", mediaH: mediaH, mediaW: mediaW, boolbtn: confirm18Btn),
-              ),
-              SizedBox(height: mediaH / 150),
+                // 18
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      confirm18Btn = !confirm18Btn;
+                    });
+                  },
+                  child: WordButton(msg: "満18歳以上の独身であることを誓約します", mediaH: mediaH, mediaW: mediaW, boolbtn: confirm18Btn),
+                ),
+                SizedBox(height: mediaH / 150),
 
-              // Agree
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    confirmAgreeBtn = !confirmAgreeBtn;
-                  });
-                },
-                child: WordButton(msg: "全ての規約に同意します", mediaH: mediaH, mediaW: mediaW, boolbtn: confirmAgreeBtn),
-              ),
-              SizedBox(height: mediaH / 25),
+                // Agree
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      confirmAgreeBtn = !confirmAgreeBtn;
+                    });
+                  },
+                  child: WordButton(msg: "全ての規約に同意します", mediaH: mediaH, mediaW: mediaW, boolbtn: confirmAgreeBtn),
+                ),
+                SizedBox(height: mediaH / 25),
 
-              // Button
-              _buildNextButton(context),
-              SizedBox(height: mediaH / 20),
-            ],
+                // Button
+                _buildNextButton(context),
+                SizedBox(height: mediaH / 20),
+              ],
+            ),
           ),
         ),
       ),
@@ -277,7 +282,18 @@ class _FixInformationState extends State<FixInformation> {
           initialDate: DateTime.now(),
           firstDate: DateTime(1923),
           lastDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+          builder: (BuildContext context, Widget? child) {
+            return Theme(
+              data: ThemeData.light().copyWith(
+                colorScheme: ColorScheme.light().copyWith(
+                  primary: appTheme.black,
+                ),
+              ),
+              child: child!,
+            );
+          },
         );
+
         if (pickedDate != null) {
           String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
           fixBirthController.text = formattedDate;
@@ -288,17 +304,18 @@ class _FixInformationState extends State<FixInformation> {
 
   /// Country
   Widget _buildfixCountryInput(BuildContext context) {
-    return CustomInputFormBar(controller: fixCountryController, hintText: "日本");
+    final keys = asiaCities.keys;
+    return CustomDropDownBar(controller: fixCountryController, hintText: asiaCities.keys.first, itemArray: keys.toList());
   }
 
   /// Gender
   Widget _buildfixGenderInput(BuildContext context) {
-    return CustomInputFormBar(controller: fixGenderController, hintText: "男");
+    return CustomDropDownBar(controller: fixGenderController, hintText: genderList[0], itemArray: genderList);
   }
 
   /// Blood
   Widget _buildfixBloodInput(BuildContext context) {
-    return CustomInputFormBar(controller: fixBloodController, hintText: "O");
+    return CustomDropDownBar(controller: fixBloodController, hintText: blood[0], itemArray: blood);
   }
 
   /// Next Button

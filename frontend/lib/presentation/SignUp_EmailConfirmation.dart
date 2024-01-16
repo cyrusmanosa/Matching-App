@@ -51,43 +51,48 @@ class _EmailConfirmationtate extends State<EmailConfirmation> {
     return Scaffold(
       appBar: buildAppBar(context, "", true),
       backgroundColor: appTheme.bgColor,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
-        child: Column(
-          children: [
-            // Logo and Slogan
-            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4.5),
-            CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3.5),
-            SizedBox(height: mediaH / 30),
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
+          child: Column(
+            children: [
+              // Logo and Slogan
+              CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4.5),
+              CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3.5),
+              SizedBox(height: mediaH / 30),
 
-            // input
-            CustomInputBar(titleName: "メールアドレス", backendPart: _buildEmailInputSection(context)),
-            SizedBox(height: mediaH / 50),
+              // input
+              CustomInputBar(titleName: "メールアドレス", backendPart: _buildEmailInputSection(context)),
+              SizedBox(height: mediaH / 50),
 
-            // send button
-            _buildNextButton(context),
-            SizedBox(height: mediaH / 30),
+              // send button
+              _buildNextButton(context),
+              SizedBox(height: mediaH / 30),
 
-            // 手続き
-            Align(
-              alignment: Alignment.topLeft,
-              child: Container(child: Text("・ご手続きは1回のみです", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo)),
-            ),
-
-            // information note
-            Align(
-              alignment: Alignment.topLeft,
-              child: Container(
-                child: Text("・メールアドレスの受信確認は必須です。", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
+              // 手続き
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(child: Text("・ご手続きは1回のみです", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo)),
               ),
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Container(
-                child: Text("・ご登録済みのお客様は受信確認をお願いします。", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
+
+              // information note
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  child: Text("・メールアドレスの受信確認は必須です。", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
+                ),
               ),
-            ),
-          ],
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  child: Text("・ご登録済みのお客様は受信確認をお願いします。", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

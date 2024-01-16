@@ -1,5 +1,6 @@
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/models/listData.dart';
 import 'package:dating_your_date/pb/rpc_checkEmail.pb.dart';
 import 'package:dating_your_date/widgets/app_bar/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
@@ -9,8 +10,6 @@ import 'package:dating_your_date/widgets/Custom_Loading.dart';
 import 'package:dating_your_date/widgets/button/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class ConfirmationCore extends StatefulWidget {
   ConfirmationCore({Key? key}) : super(key: key);
@@ -20,16 +19,6 @@ class ConfirmationCore extends StatefulWidget {
 
 class _ConfirmationCoreState extends State<ConfirmationCore> {
   TextEditingController confirmationCoreController = TextEditingController();
-
-  // Http
-  void checkCodeHttpRequest(BuildContext context) async {
-    var url = "http://127.0.0.1:8080/SignUpCheckCode";
-    var requestBody = {"checkcode": confirmationCoreController.text};
-    var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
-    if (response.statusCode == 200) {
-      onTapNextPage(context);
-    }
-  }
 
   // Grpc
   void checkCodeGrpcRequest(BuildContext context) async {
@@ -43,8 +32,8 @@ class _ConfirmationCoreState extends State<ConfirmationCore> {
       onTapNextPage(context);
     } on GrpcError {
       Navigator.pop(context);
-      showErrorDialog(context, "Code have a error.");
-      throw Exception("Error occurred while fetching Check Code.");
+      showErrorDialog(context, "コードにエラーがあります。");
+      throw Exception("チェックコードの確認中にエラーが発生しました。");
     }
   }
 
@@ -56,44 +45,49 @@ class _ConfirmationCoreState extends State<ConfirmationCore> {
     return Scaffold(
       appBar: buildAppBar(context, "", true),
       backgroundColor: appTheme.bgColor,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
-        child: Column(
-          children: [
-            // Logo and Slogan
-            CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4.5),
-            CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3.5),
-            SizedBox(height: mediaH / 30),
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
+          child: Column(
+            children: [
+              // Logo and Slogan
+              CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4.5),
+              CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3.5),
+              SizedBox(height: mediaH / 30),
 
-            // Title
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text("以下にコードを認証してください。", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
-            ),
-            SizedBox(height: mediaH / 50),
+              // Title
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text("以下にコードを認証してください。", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
+              ),
+              SizedBox(height: mediaH / 50),
 
-            // Input
-            CustomInputBar(titleName: "認証コード:", backendPart: _buildConfirmationCoreInput(context)),
-            SizedBox(height: mediaH / 350),
+              // Input
+              CustomInputBar(titleName: "認証コード:", backendPart: _buildConfirmationCoreInput(context)),
+              SizedBox(height: mediaH / 350),
 
-            // reset password
-            Align(
-              alignment: Alignment.centerLeft,
-              child: GestureDetector(
-                onTap: () {
-                  onTapReturn(context);
-                },
-                child: Padding(
-                  padding: EdgeInsets.only(left: mediaW / 100),
-                  child: Text("コードは届かない場合", style: CustomTextStyles.wordOnlySmallButton),
+              // reset password
+              Align(
+                alignment: Alignment.centerLeft,
+                child: GestureDetector(
+                  onTap: () {
+                    onTapReturn(context);
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.only(left: mediaW / 100),
+                    child: Text("コードは届かない場合", style: CustomTextStyles.wordOnlySmallButton),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: mediaH / 50),
+              SizedBox(height: mediaH / 50),
 
-            // button
-            _buildNextButton(context),
-          ],
+              // button
+              _buildNextButton(context),
+            ],
+          ),
         ),
       ),
     );

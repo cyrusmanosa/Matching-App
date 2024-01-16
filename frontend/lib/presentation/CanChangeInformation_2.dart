@@ -1,9 +1,11 @@
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
+import 'package:dating_your_date/models/listData.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_chatRecord.pb.dart';
 import 'package:dating_your_date/presentation/Target/Target.dart';
+import 'package:dating_your_date/widgets/Custom_dropdown_Bar.dart';
 import 'package:dating_your_date/widgets/app_bar/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
@@ -11,10 +13,7 @@ import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_Loading.dart';
 import 'package:dating_your_date/widgets/button/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class CanChangeInformation2 extends StatefulWidget {
   CanChangeInformation2({Key? key, this.can1}) : super(key: key);
@@ -35,22 +34,6 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
   bool isPureNumber(String value) {
     final pattern = RegExp(r'^\d+$');
     return pattern.hasMatch(value);
-  }
-
-  // Http
-  void updateCanChangeHttpRequest(BuildContext context) async {
-    var url = "http://127.0.0.1:8080/CreateCanChangeInfo";
-    var requestBody = {
-      "Job": canChangeJobController.text,
-      "AnnualSalary": int.parse(canChangeAnnualSalaryController.text),
-      "Sociability": canChangeSociabilityController.text,
-      "Religious": canChangeReligiousController.text,
-      "Introduce": canChangeIntroduceController.text,
-    };
-    var response = await http.post(Uri.parse(url), body: jsonEncode(requestBody), headers: {"Content-Type": "application/json"});
-    if (response.statusCode == 200) {
-      onTapNextPage(context);
-    }
   }
 
   // Grpc
@@ -88,8 +71,8 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
         onTapNextPage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data");
-        throw Exception("Error occurred while fetching CanChange1.");
+        showErrorDialog(context, "エラー：検証可能な入力データがありません。");
+        throw Exception("基本個人情報 - B の取得中にエラーが発生しました。");
       }
     }
   }
@@ -107,8 +90,8 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
       await GrpcChatService.client.createChatTable(request);
     } on GrpcError {
       Navigator.pop(context);
-      showErrorDialog(context, "Error: validatable create Chat Record");
-      throw Exception("Error occurred while fetching Chat Record");
+      showErrorDialog(context, "エラー：検証可能なチャットレコードの作成");
+      throw Exception("チャットレコードの取得中にエラーが発生しました。");
     }
   }
 
@@ -118,43 +101,48 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
-      appBar: buildAppBar(context, "基本個人情報 - C", true),
+      appBar: buildAppBar(context, "基本個人情報 - B", true),
       backgroundColor: appTheme.bgColor,
       // 鍵盤彈出後自動調節Size - 要test先知
-      resizeToAvoidBottomInset: false,
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
-        child: Column(
-          children: [
-            // Job
-            CustomInputBar(titleName: "仕事:", backendPart: _buildcanChangeJobInput(context)),
-            SizedBox(height: mediaH / 50),
+      resizeToAvoidBottomInset: true,
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
+          child: Column(
+            children: [
+              // Job
+              CustomInputBar(titleName: "仕事:", backendPart: _buildcanChangeJobInput(context)),
+              SizedBox(height: mediaH / 50),
 
-            // Annual Salary
-            CustomInputBar(titleName: "年収:", backendPart: _buildcanChangeAnnualSalaryInput(context)),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.only(left: mediaW / 100),
-                child: Text("＊入力しなくても大丈夫です。", style: CustomTextStyles.wordOnlySmallButton),
+              // Annual Salary
+              CustomInputBar(titleName: "年収:", backendPart: _buildcanChangeAnnualSalaryInput(context)),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: EdgeInsets.only(left: mediaW / 100),
+                  child: Text("＊入力しなくても大丈夫です。", style: CustomTextStyles.wordOnlySmallButton),
+                ),
               ),
-            ),
-            SizedBox(height: mediaH / 50),
+              SizedBox(height: mediaH / 50),
 
-            // Sociability
-            CustomInputBar(titleName: "社交力:", backendPart: _buildcanChangeSociabilityInput(context)),
-            SizedBox(height: mediaH / 50),
+              // Sociability
+              CustomInputBar(titleName: "社交力:", backendPart: _buildcanChangeSociabilityInput(context)),
+              SizedBox(height: mediaH / 50),
 
-            // Religious
-            CustomInputBar(titleName: "宗教:", backendPart: _buildcanChangeReligiousInput(context)),
-            SizedBox(height: mediaH / 50),
+              // Religious
+              CustomInputBar(titleName: "宗教:", backendPart: _buildcanChangeReligiousInput(context)),
+              SizedBox(height: mediaH / 50),
 
-            // Introduce
-            CustomInputBar(titleName: "自己紹介:", backendPart: _buildcanChangeIntroduceInput(context, mediaH, mediaW)),
-            SizedBox(height: mediaH / 25),
+              // Introduce
+              CustomInputBar(titleName: "自己紹介:", backendPart: _buildcanChangeIntroduceInput(context, mediaH, mediaW)),
+              SizedBox(height: mediaH / 25),
 
-            _buildNextButton(context),
-          ],
+              _buildNextButton(context),
+            ],
+          ),
         ),
       ),
     );
@@ -167,7 +155,7 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
 
   /// Job
   Widget _buildcanChangeJobInput(BuildContext context) {
-    return CustomInputFormBar(controller: canChangeJobController, hintText: "ホスト");
+    return CustomDropDownBar(controller: canChangeJobController, hintText: occupations[0], itemArray: occupations);
   }
 
   /// Annual Salary
@@ -177,12 +165,12 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
 
   /// Sociability
   Widget _buildcanChangeSociabilityInput(BuildContext context) {
-    return CustomInputFormBar(controller: canChangeSociabilityController, hintText: "人たら神");
+    return CustomDropDownBar(controller: canChangeSociabilityController, hintText: socialPersonalities[0], itemArray: socialPersonalities);
   }
 
   /// Religious
   Widget _buildcanChangeReligiousInput(BuildContext context) {
-    return CustomInputFormBar(controller: canChangeReligiousController, hintText: "多神教");
+    return CustomDropDownBar(controller: canChangeReligiousController, hintText: religions[0], itemArray: religions);
   }
 
   /// Introduce

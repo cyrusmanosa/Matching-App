@@ -1,7 +1,9 @@
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
+import 'package:dating_your_date/models/listData.dart';
 import 'package:dating_your_date/pb/rpc_lover.pb.dart';
+import 'package:dating_your_date/widgets/Custom_dropdown_Bar.dart';
 import 'package:dating_your_date/widgets/app_bar/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Word_button.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
@@ -10,7 +12,6 @@ import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/Custom_Loading.dart';
 import 'package:dating_your_date/widgets/button/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
 
 class LoverCondition extends StatefulWidget {
@@ -24,12 +25,12 @@ class _LoverConditionState extends State<LoverCondition> {
   bool? haveTable;
   bool confirmBtn = false;
 
-  TextEditingController resetLoverMinAgeController = TextEditingController();
-  TextEditingController resetLoverMaxAgeController = TextEditingController();
-  TextEditingController resetLoverCityController = TextEditingController();
-  TextEditingController resetLoverGenderController = TextEditingController();
-  TextEditingController resetLoverSexualController = TextEditingController();
-  TextEditingController resetLoverSpeakLanguageController = TextEditingController();
+  TextEditingController loverMinAgeController = TextEditingController();
+  TextEditingController loverMaxAgeController = TextEditingController();
+  TextEditingController loverCityController = TextEditingController();
+  TextEditingController loverGenderController = TextEditingController();
+  TextEditingController loverSexualController = TextEditingController();
+  TextEditingController loverSpeakLanguageController = TextEditingController();
 
   @override
   void initState() {
@@ -45,12 +46,12 @@ class _LoverConditionState extends State<LoverCondition> {
       final response = await GrpcInfoService.client.getLover(request);
       setState(() {
         haveTable = true;
-        resetLoverMinAgeController = TextEditingController(text: response.l.minAge.toString());
-        resetLoverMaxAgeController = TextEditingController(text: response.l.maxAge.toString());
-        resetLoverCityController = TextEditingController(text: response.l.city.toString());
-        resetLoverGenderController = TextEditingController(text: response.l.gender.toString());
-        resetLoverSexualController = TextEditingController(text: response.l.sexual.toString());
-        resetLoverSpeakLanguageController = TextEditingController(text: response.l.speaklanguage.toString());
+        loverMinAgeController = TextEditingController(text: response.l.minAge.toString());
+        loverMaxAgeController = TextEditingController(text: response.l.maxAge.toString());
+        loverCityController = TextEditingController(text: response.l.city.toString());
+        loverGenderController = TextEditingController(text: response.l.gender.toString());
+        loverSexualController = TextEditingController(text: response.l.sexual.toString());
+        loverSpeakLanguageController = TextEditingController(text: response.l.speaklanguage.toString());
       });
     } on GrpcError {
       haveTable = false;
@@ -68,37 +69,37 @@ class _LoverConditionState extends State<LoverCondition> {
       try {
         final request = UpdateLoverRequest(
           sessionID: apiKeyS,
-          minAge: int.parse(resetLoverMinAgeController.text),
-          maxAge: int.parse(resetLoverMaxAgeController.text),
-          city: resetLoverCityController.text,
-          gender: resetLoverGenderController.text,
-          speaklanguage: resetLoverSpeakLanguageController.text,
+          minAge: int.parse(loverMinAgeController.text),
+          maxAge: int.parse(loverMaxAgeController.text),
+          city: loverCityController.text,
+          gender: loverGenderController.text,
+          speaklanguage: loverSpeakLanguageController.text,
         );
 
         await GrpcInfoService.client.updateLover(request);
         onTapNextPage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data for update");
-        throw Exception("Error occurred while fetching update Lover.");
+        showErrorDialog(context, "エラー：更新用の検証可能な入力データがありません。");
+        throw Exception("恋人条件の更新中にエラーが発生しました。");
       }
     } else {
       try {
         final request = CreateLoverRequest(
           sessionID: apiKeyS,
-          minAge: int.parse(resetLoverMinAgeController.text),
-          maxAge: int.parse(resetLoverMaxAgeController.text),
-          city: resetLoverCityController.text,
-          gender: resetLoverGenderController.text,
-          speaklanguage: resetLoverSpeakLanguageController.text,
+          minAge: int.parse(loverMinAgeController.text),
+          maxAge: int.parse(loverMaxAgeController.text),
+          city: loverCityController.text,
+          gender: loverGenderController.text,
+          speaklanguage: loverSpeakLanguageController.text,
         );
 
         await GrpcInfoService.client.createLover(request);
         onTapNextPage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data for create Lover");
-        throw Exception("Error occurred while fetching Create Lover.");
+        showErrorDialog(context, "エラー：作成用の検証可能な入力データがありません。");
+        throw Exception("恋人条件を入力中にエラーが発生しました。");
       }
     }
   }
@@ -112,11 +113,14 @@ class _LoverConditionState extends State<LoverCondition> {
     return Scaffold(
       appBar: buildAppBar(context, "恋人の条件", true),
       // 鍵盤彈出後自動調節Size - 要test先知
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: appTheme.bgColor,
-      body: SizedBox(
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
+          padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 50),
           child: Column(
             children: [
               Row(
@@ -135,7 +139,7 @@ class _LoverConditionState extends State<LoverCondition> {
               SizedBox(height: mediaH / 50),
 
               // Gender
-              CustomInputBar(titleName: "性別:", backendPart: _buildLoverResetGenderInput(context)),
+              CustomInputBar(titleName: "相手の性別:", backendPart: _buildLoverResetGenderInput(context)),
               SizedBox(height: mediaH / 50),
 
               // Sexual
@@ -173,7 +177,7 @@ class _LoverConditionState extends State<LoverCondition> {
       height: mediaH / 16,
       width: mediaW / 7.5,
       maxLength: 3,
-      controller: resetLoverMaxAgeController,
+      controller: loverMaxAgeController,
       hintText: "20",
     );
   }
@@ -185,29 +189,29 @@ class _LoverConditionState extends State<LoverCondition> {
       height: mediaH / 16,
       width: mediaW / 7.5,
       maxLength: 3,
-      controller: resetLoverMinAgeController,
+      controller: loverMinAgeController,
       hintText: "20",
     );
   }
 
   /// City
   Widget _buildLoverResetCityInput(BuildContext context) {
-    return CustomInputFormBar(controller: resetLoverCityController, hintText: "大阪");
+    return CustomInputFormBar(controller: loverCityController, hintText: "大阪");
   }
 
   /// Gender
   Widget _buildLoverResetGenderInput(BuildContext context) {
-    return CustomInputFormBar(controller: resetLoverGenderController, hintText: "男");
+    return CustomDropDownBar(controller: loverGenderController, hintText: genderList[0], itemArray: genderList);
   }
 
   /// Sexual
   Widget _buildLoverResetSexualInput(BuildContext context) {
-    return CustomInputFormBar(controller: resetLoverSexualController, hintText: "異性愛");
+    return CustomDropDownBar(controller: loverSexualController, hintText: sexualList[0], itemArray: sexualList);
   }
 
   /// Speak Language
   Widget _buildLoverSpeakLanguageInput(BuildContext context) {
-    return CustomInputFormBar(controller: resetLoverSpeakLanguageController, hintText: "日本語");
+    return CustomInputFormBar(controller: loverSpeakLanguageController, hintText: "日本語");
   }
 
   /// Next Button
