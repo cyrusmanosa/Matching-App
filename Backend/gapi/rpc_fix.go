@@ -29,7 +29,7 @@ func (server *Server) CreateFix(ctx context.Context, req *pb.CreateFixRequest) (
 		return nil, status.Errorf(codes.Internal, "failed Code: %s", err)
 	}
 
-	B, Berr := util.BirthstringtoInt(req.GetBirth())
+	B, Berr := util.BirthStringToInt(req.GetBirth())
 	if Berr != nil {
 		return nil, status.Errorf(codes.Internal, "Birth Error: %s", Berr)
 	}

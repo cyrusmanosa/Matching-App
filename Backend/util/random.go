@@ -9,191 +9,109 @@ import (
 	"github.com/sethvargo/go-password/password"
 )
 
-const charset = alphabet + "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 const alphabet = "abcdefghijklmnopqrstuvwxyz"
+const charset = alphabet + "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 var seededRand *rand.Rand = rand.New(rand.NewSource(time.Now().UnixNano()))
 
-func Randomstring(n int) string {
+func RandomString(n int) string {
 	var sb strings.Builder
 	k := len(alphabet)
 	for i := 0; i < n; i++ {
-		c := alphabet[rand.Intn(k)]
+		c := alphabet[seededRand.Intn(k)]
 		sb.WriteByte(c)
 	}
 	return sb.String()
 }
 
 func RandomRole() string {
-	role := []string{"sender", "receiver"}
-	r := rand.Intn(2)
-	return role[r]
+	roles := []string{"sender", "receiver"}
+	r := seededRand.Intn(2)
+	return roles[r]
 }
 
 func RandomBlood() string {
-	r := rand.Intn(4)
-	Gender := []string{"A", "B", "AB", "O"}
-	a := Gender[r]
-	return a
+	r := seededRand.Intn(4)
+	bloodTypes := []string{"A", "B", "AB", "O"}
+	return bloodTypes[r]
 }
 
 func SwitchConstellation(M, D int) string {
 	switch M {
 	case 1:
 		if D < 20 {
-			return "Capricorn"
+			return "山羊座"
 		} else {
-			return "Aquarius"
+			return "水瓶座"
 		}
 	case 2:
 		if D < 19 {
-			return "Aquarius"
+			return "水瓶座"
 		} else {
-			return "Pisces"
+			return "魚座"
 		}
 	case 3:
 		if D < 21 {
-			return "Pisces"
+			return "魚座"
 		} else {
-			return "Aries"
+			return "牡羊座"
 		}
 	case 4:
 		if D < 20 {
-			return "Aries"
+			return "牡羊座"
 		} else {
-			return "Taurus"
+			return "牡牛座"
 		}
 	case 5:
 		if D < 21 {
-			return "Taurus"
+			return "牡牛座"
 		} else {
-			return "Gemini"
+			return "双子座"
 		}
 	case 6:
 		if D < 21 {
-			return "Gemini"
+			return "双子座"
 		} else {
-			return "Cancer"
+			return "蟹座"
 		}
 	case 7:
 		if D < 23 {
-			return "Cancer"
+			return "蟹座"
 		} else {
-			return "Leo"
+			return "獅子座"
 		}
 	case 8:
 		if D < 23 {
-			return "Leo"
+			return "獅子座"
 		} else {
-			return "Virgo"
+			return "乙女座"
 		}
 	case 9:
 		if D < 23 {
-			return "Virgo"
+			return "乙女座"
 		} else {
-			return "Libra"
+			return "天秤座"
 		}
 	case 10:
 		if D < 24 {
-			return "Libra"
+			return "天秤座"
 		} else {
-			return "Scorpio"
+			return "蠍座"
 		}
 	case 11:
 		if D < 23 {
-			return "Scorpio"
+			return "蠍座"
 		} else {
-			return "Sagittarius"
+			return "射手座"
 		}
 	case 12:
 		if D < 22 {
-			return "Sagittarius"
+			return "射手座"
 		} else {
-			return "Capricorn"
+			return "山羊座"
 		}
 	default:
-		return "無效的月份"
-	}
-}
-
-func RandomConstellation() string {
-	M := rand.Intn(12) + 1
-	D := rand.Intn(31) + 1
-	switch M {
-	case 1:
-		if D < 20 {
-			return "Capricorn"
-		} else {
-			return "Aquarius"
-		}
-	case 2:
-		if D < 19 {
-			return "Aquarius"
-		} else {
-			return "Pisces"
-		}
-	case 3:
-		if D < 21 {
-			return "Pisces"
-		} else {
-			return "Aries"
-		}
-	case 4:
-		if D < 20 {
-			return "Aries"
-		} else {
-			return "Taurus"
-		}
-	case 5:
-		if D < 21 {
-			return "Taurus"
-		} else {
-			return "Gemini"
-		}
-	case 6:
-		if D < 21 {
-			return "Gemini"
-		} else {
-			return "Cancer"
-		}
-	case 7:
-		if D < 23 {
-			return "Cancer"
-		} else {
-			return "Leo"
-		}
-	case 8:
-		if D < 23 {
-			return "Leo"
-		} else {
-			return "Virgo"
-		}
-	case 9:
-		if D < 23 {
-			return "Virgo"
-		} else {
-			return "Libra"
-		}
-	case 10:
-		if D < 24 {
-			return "Libra"
-		} else {
-			return "Scorpio"
-		}
-	case 11:
-		if D < 23 {
-			return "Scorpio"
-		} else {
-			return "Sagittarius"
-		}
-	case 12:
-		if D < 22 {
-			return "Sagittarius"
-		} else {
-			return "Capricorn"
-		}
-	default:
-		return "無效的月份"
+		return "無効な月"
 	}
 }
 
@@ -203,92 +121,92 @@ func RandomPassword(len int) string {
 }
 
 func RandomEra() int32 {
-	return (rand.Int31n(9) + 1) * 10
+	return (seededRand.Int31n(9) + 1) * 10
 }
 
 func RandomHobbyType() string {
 	hobbies := []string{
-		"Sports and Outdoor Activities",
-		"Arts and Creativity",
-		"Collecting and Crafts",
-		"Music and Performance",
-		"Reading and Writing",
-		"Cooking and Baking",
-		"Health and Fitness",
-		"Video Games",
-		"Travel and Adventure",
+		"スポーツとアウトドア活動",
+		"芸術と創造性",
+		"コレクションとクラフト",
+		"音楽とパフォーマンス",
+		"読書と書き物",
+		"料理とベーキング",
+		"健康とフィットネス",
+		"ビデオゲーム",
+		"旅行と冒険",
 	}
-	randomHobby := hobbies[rand.Intn(len(hobbies))]
+	randomHobby := hobbies[seededRand.Intn(len(hobbies))]
 	var H string
 	switch randomHobby {
-	case "Sports and Outdoor Activities":
-		sports := []string{"Basketball", "Football", "Tennis", "Golf", "Swimming", "Running", "Skiing", "Hiking", "Camping", "Fishing"}
-		H = sports[rand.Intn(len(sports))]
+	case "スポーツとアウトドア活動":
+		sports := []string{"バスケットボール", "フットボール", "テニス", "ゴルフ", "スイミング", "ランニング", "スキー", "ハイキング", "キャンプ", "釣り"}
+		H = sports[seededRand.Intn(len(sports))]
 	}
 	return H
 }
 
-func RandomAccompantType() string {
+func RandomAccompanimentType() string {
 	actions := []string{
-		"Listen and understand",
-		"Engage in activities together",
-		"Encourage",
-		"Support",
-		"Seek help",
+		"聞き入る",
+		"一緒に活動する",
+		"励ます",
+		"サポートする",
+		"助けを求める",
 	}
-	return actions[rand.Intn(len(actions))]
+	return actions[seededRand.Intn(len(actions))]
 }
 
 func RandomSociability() string {
 	socialPersonalities := []string{
-		"Social Butterfly",
-		"Introverted and Shy",
-		"Socially Anxious",
-		"Small Group Lover",
-		"Independent",
+		"社交的な人",
+		"内向的でシャイ",
+		"社交不安",
+		"少人数派",
+		"独立心の強い人",
 	}
-	return socialPersonalities[rand.Intn(len(socialPersonalities))]
+	return socialPersonalities[seededRand.Intn(len(socialPersonalities))]
 }
 
 func RandomSexual() string {
-	var genders = []string{
-		"Male",
-		"Female",
-		"Non-Binary",
-		"Transgender",
-		"Intersex",
+	genders := []string{
+		"男性",
+		"女性",
+		"非バイナリー",
+		"トランスジェンダー",
+		"インターセックス",
 	}
-	return genders[rand.Intn(len(genders))]
+	return genders[seededRand.Intn(len(genders))]
 }
 
 func RandomEducation() string {
-	var educationLevels = []string{
-		"Primary Education",
-		"Secondary Education",
-		"High School Graduate",
-		"Vocational School",
-		"Associate's Degree",
-		"Bachelor's Degree",
-		"Master's Degree",
-		"Doctoral Degree",
+	educationLevels := []string{
+		"小学校",
+		"中学校",
+		"高校",
+		"専門学校",
+		"準学士",
+		"学士",
+		"修士",
+		"博士",
 	}
-	return educationLevels[rand.Intn(len(educationLevels))]
+	return educationLevels[seededRand.Intn(len(educationLevels))]
 }
 
 func RandomReligious() string {
-	var religions = []string{
-		"Christianity",
-		"Islam",
-		"Buddhism",
-		"Hinduism",
-		"Judaism",
-		"Taoism",
-		"Sikhism",
-		"Catholicism",
-		"Protestantism",
-		"Confucianism",
+	religions := []string{
+		"キリスト教",
+		"イスラム教",
+		"仏教",
+		"ヒンドゥー教",
+		"ユダヤ教",
+		"道教",
+		"シク教",
+		"カトリック教",
+		"プロテスタント教",
+		"儒教",
 	}
-	return religions[rand.Intn(len(religions))]
+	return religions[seededRand.Intn(len(religions))]
 }
 
 func RandomCheckCode() string {
@@ -299,7 +217,7 @@ func RandomCheckCode() string {
 	return string(b)
 }
 
-func BirthstringtoInt(Bday string) (map[string]int, error) {
+func BirthStringToInt(Bday string) (map[string]int, error) {
 	BirthInt := map[string]int{
 		"year":  0,
 		"month": 0,
@@ -308,13 +226,13 @@ func BirthstringtoInt(Bday string) (map[string]int, error) {
 
 	date, err := time.Parse("2006-01-02", Bday)
 	if err != nil {
-		fmt.Println("日期解析錯誤:", err)
+		fmt.Println("日付の解析エラー:", err)
 		return nil, err
 	}
 
-	BirthInt["year"] = int(date.Year())
+	BirthInt["year"] = date.Year()
 	BirthInt["month"] = int(date.Month())
-	BirthInt["day"] = int(date.Day())
+	BirthInt["day"] = date.Day()
 
 	return BirthInt, nil
 }
@@ -325,18 +243,18 @@ func SwitchAge(Y, M, D int) int32 {
 	currentMonth := int(currentDate.Month())
 	currentDay := currentDate.Day()
 
-	age := currentYear - Y
+	age := int32(currentYear - Y)
 
 	if currentMonth < M || (currentMonth == M && currentDay < D) {
 		age--
 	}
 
-	return int32(age)
+	return age
 }
 
 func RandomTT() string {
-	t := []string{"Hobby", "Lover", "Accompany"}
-	r := rand.Intn(3)
+	t := []string{"趣味", "恋人", "お相伴"}
+	r := seededRand.Intn(3)
 
 	return t[r]
 }
