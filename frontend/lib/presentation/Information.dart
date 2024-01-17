@@ -9,7 +9,10 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class Information extends StatefulWidget {
-  Information({Key? key, this.canData, this.fixData, this.imgIcon}) : super(key: key);
+  Information({Key? key, this.canData, this.fixData, this.imgIcon, this.hobbyType, this.accompanyType}) : super(key: key);
+
+  final String? hobbyType;
+  final String? accompanyType;
   final CanChange? canData;
   final List<File>? imgIcon;
   final Fix? fixData;
@@ -72,7 +75,7 @@ class _InformationState extends State<Information> {
         decoration: BoxDecoration(
           color: Color.fromARGB(255, 233, 233, 233),
           borderRadius: BorderRadiusStyle.r15,
-          boxShadow: [BoxShadow(color: appTheme.gray800.withOpacity(0.4), blurRadius: 5, offset: Offset(0, 4))],
+          boxShadow: [BoxShadow(color: appTheme.grey800.withOpacity(0.4), blurRadius: 5, offset: Offset(0, 4))],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,9 +120,9 @@ class _InformationState extends State<Information> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         decoration: BoxDecoration(
-          color: appTheme.gray100,
+          color: appTheme.grey100,
           borderRadius: BorderRadiusStyle.r15,
-          boxShadow: [BoxShadow(color: appTheme.gray800.withOpacity(0.4), blurRadius: 5, offset: Offset(0, 4))],
+          boxShadow: [BoxShadow(color: appTheme.grey800.withOpacity(0.4), blurRadius: 5, offset: Offset(0, 4))],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -141,7 +144,7 @@ class _InformationState extends State<Information> {
             SizedBox(height: mediaH / 40),
             // hobby
             // TODO: 1
-            ShownDataBarWidget(item: "趣味", data: "#################"),
+            ShownDataBarWidget(item: "趣味 - タイプ", data: widget.hobbyType!),
             SizedBox(height: mediaH / 40),
             // job
             ShownDataBarWidget(item: "職種", data: widget.canData!.job),
@@ -154,12 +157,9 @@ class _InformationState extends State<Information> {
             SizedBox(height: mediaH / 40),
             // find target
             // TODO: 2
-            ShownDataBarWidget(item: "探す対象", data: "#########"),
+            ShownDataBarWidget(item: "相伴のタイプ", data: widget.accompanyType!),
             SizedBox(height: mediaH / 40),
-            // find reason
-            // TODO: 3
-            ShownDataBarWidget(item: "目的", data: "############"),
-            SizedBox(height: mediaH / 40),
+
             // religious
             ShownDataBarWidget(item: "宗教", data: widget.canData!.religious),
             SizedBox(height: mediaH / 100),

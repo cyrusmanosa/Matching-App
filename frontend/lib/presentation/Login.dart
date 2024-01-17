@@ -40,9 +40,10 @@ class _LoginState extends State<Login> {
       final useridRequest = GetUserIDRequest(sessionID: apiKeyS);
       final useridResponse = await GrpcInfoService.client.getUserID(useridRequest);
       await globalUserId.write(key: 'UserID', value: '${useridResponse.userID}');
+      getCanChangeGrpc(context);
     } on GrpcError {
       Navigator.pop(context);
-      showErrorDialog(context, "メールアドレスまたはパスワードに誤りがあります。");
+      await showErrorDialog(context, "メールアドレスまたはパスワードに誤りがあります。");
       throw Exception("ログインの取得中にエラーが発生しました。");
     }
   }
@@ -57,7 +58,7 @@ class _LoginState extends State<Login> {
       await GrpcInfoService.client.getCanChange(req);
       Navigator.pushNamed(context, AppRoutes.containerScreen);
     } on GrpcError {
-      showErrorDialog(context, "エラー：必要なデータはまだ入力していません");
+      await showErrorDialog(context, "エラー：必要なデータはまだ入力していません");
       Navigator.pushNamed(context, AppRoutes.canChangeInformation_1);
     }
   }
@@ -72,7 +73,6 @@ class _LoginState extends State<Login> {
         return Scaffold(
           appBar: AppBar(backgroundColor: Colors.transparent, systemOverlayStyle: SystemUiOverlayStyle.dark, toolbarHeight: 0),
           backgroundColor: appTheme.bgColor,
-          // 鍵盤彈出後自動調節Size - 要test先知
           resizeToAvoidBottomInset: true,
           body: GestureDetector(
             onTap: () {
@@ -173,7 +173,7 @@ class _LoginState extends State<Login> {
       },
       suffix: IconButton(
         icon: Icon(passwordVisible ? Icons.visibility : Icons.visibility_off),
-        color: appTheme.gray500,
+        color: appTheme.grey500,
         onPressed: () {
           setState(() {
             passwordVisible = !passwordVisible;
@@ -232,7 +232,7 @@ class _LoginState extends State<Login> {
             margin: EdgeInsets.only(right: mediaW / 15),
             child: CustomImageView(imagePath: ImageConstant.imgClose, width: mediaW / 14),
           ),
-          buttonStyle: CustomButtonStyles.fillDarkGray,
+          buttonStyle: CustomButtonStyles.fillDarkgrey,
           buttonTextStyle: CustomTextStyles.outlineWhiteWordButton,
         ),
         SizedBox(height: mediaH / 50),

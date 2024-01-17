@@ -3,16 +3,21 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/presentation/Target/widgets/ResetTargetButton.dart';
 
 // ignore: must_be_immutable
-class Target extends StatelessWidget {
-  static List<TargetInfo> targetList = [
-    TargetInfo(title: "趣味", style: CustomButtonStyles.fillDarkGray, sendPage: AppRoutes.hobbyCondition),
-    TargetInfo(title: "お相伴", style: CustomButtonStyles.fillScallopSeashell, sendPage: AppRoutes.accompanyCondition),
-    TargetInfo(title: "恋人", style: CustomButtonStyles.fillPink, sendPage: AppRoutes.loverCondition),
-  ];
-
+class Target extends StatefulWidget {
   Target({Key? key, this.head}) : super(key: key);
 
   String? head;
+
+  @override
+  _TargetState createState() => _TargetState();
+}
+
+class _TargetState extends State<Target> {
+  static List<TargetInfo> targetList = [
+    TargetInfo(title: "趣味", style: CustomButtonStyles.fillDarkgrey, sendPage: AppRoutes.hobbyCondition),
+    TargetInfo(title: "相伴", style: CustomButtonStyles.fillScallopSeashell, sendPage: AppRoutes.accompanyCondition),
+    TargetInfo(title: "恋人", style: CustomButtonStyles.fillPink, sendPage: AppRoutes.loverCondition),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +29,8 @@ class Target extends StatelessWidget {
       body: Container(
         child: Column(
           children: [
-            if (head! == "head") _buildHeader(context, mediaH, mediaW),
-            if (head! == "logo") _buildLogo(context, mediaH, mediaW),
+            if (widget.head! == "head") _buildHeader(context, mediaH, mediaW),
+            if (widget.head! == "logo") _buildLogo(context, mediaH, mediaW),
             SizedBox(height: mediaH / 30),
             Text("探すターゲットの種類", style: CustomTextStyles.profileData),
             _buildTargetResetList(context, mediaH, mediaW),
@@ -46,7 +51,11 @@ class Target extends StatelessWidget {
             final targetInfo = targetList[index];
             return Padding(
               padding: EdgeInsets.symmetric(vertical: mediaH / 60),
-              child: ResetTargetButton(title: targetInfo.title, color: targetInfo.style, sendPage: targetInfo.sendPage),
+              child: ResetTargetButton(
+                title: targetInfo.title,
+                color: targetInfo.style,
+                sendPage: targetInfo.sendPage,
+              ),
             );
           },
         ),

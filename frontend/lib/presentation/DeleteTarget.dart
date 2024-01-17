@@ -41,7 +41,7 @@ class _DeleteTargetState extends State<DeleteTarget> {
       changeUserRecord(context, tid);
     } on GrpcError catch (e) {
       Navigator.pop(context);
-      showErrorDialog(context, "Error: $e");
+      await showErrorDialog(context, "Error: $e");
       throw Exception("Error occurred while fetching Target List.");
     }
   }
@@ -72,7 +72,7 @@ class _DeleteTargetState extends State<DeleteTarget> {
       onTapNextPage(context);
     } on GrpcError catch (e) {
       Navigator.pop(context);
-      showErrorDialog(context, "Error: $e");
+      await showErrorDialog(context, "Error: $e");
       throw Exception("Error occurred while fetching Login.");
     }
   }
@@ -137,7 +137,7 @@ class _DeleteTargetState extends State<DeleteTarget> {
         height: mediaH / 1.5,
         width: mediaW / 1.2,
         decoration: BoxDecoration(
-          color: appTheme.gray500,
+          color: appTheme.grey500,
           borderRadius: BorderRadiusStyle.r30,
           boxShadow: isSelectedList[index] ? [BoxShadow(color: Colors.red.withOpacity(1), blurRadius: 5, spreadRadius: 5)] : [],
         ),

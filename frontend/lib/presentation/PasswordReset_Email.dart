@@ -20,7 +20,6 @@ class PasswordResetEmail extends StatelessWidget {
     return Scaffold(
       appBar: buildAppBar(context, "", true),
       backgroundColor: appTheme.bgColor,
-      // 鍵盤彈出後自動調節Size - 要test先知
       resizeToAvoidBottomInset: true,
       body: GestureDetector(
         onTap: () {

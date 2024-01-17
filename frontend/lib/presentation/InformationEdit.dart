@@ -138,7 +138,7 @@ class _InformationEditState extends State<InformationEdit> {
       await GrpcInfoService.client.updateImages(request);
     } on GrpcError catch (e) {
       Navigator.pop(context);
-      showErrorDialog(context, "Error: validatable update image in Image at $e");
+      await showErrorDialog(context, "Error: validatable update image in Image at $e");
       throw Exception("Error occurred while fetching profile edit.");
     }
   }
@@ -146,31 +146,31 @@ class _InformationEditState extends State<InformationEdit> {
   // Grpc
   void updateDataGrpcRequest(BuildContext context) async {
     if (updateNickNameController.text.isEmpty) {
-      showErrorDialog(context, "ニックネームはまだ入力されていません");
+      await showErrorDialog(context, "ニックネームはまだ入力されていません");
     } else if (updateCityController.text.isEmpty) {
-      showErrorDialog(context, "居住地はまだ入力されていません");
+      await showErrorDialog(context, "居住地はまだ入力されていません");
     } else if (updateSexualController.text.isEmpty) {
-      showErrorDialog(context, "性的指向はまだ入力されていません");
+      await showErrorDialog(context, "性的指向はまだ入力されていません");
     } else if (updateHeightController.text.isEmpty) {
-      showErrorDialog(context, " 身長 - cmはまだ入力されていません");
+      await showErrorDialog(context, " 身長 - cmはまだ入力されていません");
     } else if (!isPureNumber(updateHeightController.text)) {
-      showErrorDialog(context, "入力した 身長 - cmは数字じゃありません");
+      await showErrorDialog(context, "入力した 身長 - cmは数字じゃありません");
     } else if (updateWeightController.text.isEmpty) {
-      showErrorDialog(context, " 体重 - kgはまだ入力されていません");
+      await showErrorDialog(context, " 体重 - kgはまだ入力されていません");
     } else if (!isPureNumber(updateWeightController.text)) {
-      showErrorDialog(context, "入力した 体重 - kgは数字じゃありません");
+      await showErrorDialog(context, "入力した 体重 - kgは数字じゃありません");
     } else if (updateSpeakLanguageController.text.isEmpty) {
-      showErrorDialog(context, "学歴はまだ入力されていません");
+      await showErrorDialog(context, "学歴はまだ入力されていません");
     } else if (updateJobController.text.isEmpty) {
-      showErrorDialog(context, "仕事はまだ入力されていません");
+      await showErrorDialog(context, "仕事はまだ入力されていません");
     } else if (!isPureNumber(updateAnnualSalaryController.text)) {
-      showErrorDialog(context, "入力した年収は数字じゃありません");
+      await showErrorDialog(context, "入力した年収は数字じゃありません");
     } else if (updateSociabilityController.text.isEmpty) {
-      showErrorDialog(context, "社交力はまだ入力されていません");
+      await showErrorDialog(context, "社交力はまだ入力されていません");
     } else if (updateReligiousController.text.isEmpty) {
-      showErrorDialog(context, "宗教はまだ入力されていません");
+      await showErrorDialog(context, "宗教はまだ入力されていません");
     } else if (updateIntroduceController.text.isEmpty) {
-      showErrorDialog(context, "自己紹介はまだ入力されていません");
+      await showErrorDialog(context, "自己紹介はまだ入力されていません");
     } else {
       setState(() {
         showLoadDialog(context);
@@ -194,14 +194,14 @@ class _InformationEditState extends State<InformationEdit> {
         );
         await GrpcInfoService.client.updateCanChange(request);
         updateImage(context);
-        showLogoDialog(context, "個人情報もアップしました", false);
+        await showLogoDialog(context, "個人情報もアップしました", false);
         Future.delayed(Duration(seconds: 1), () {
           Navigator.pop(context);
           Navigator.push(context, MaterialPageRoute(builder: (context) => ContainerScreen(number: 3)));
         });
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "エラー：検証可能な入力データがありません。");
+        await showErrorDialog(context, "エラー：検証可能な入力データがありません。");
         throw Exception("プロフィールの編集中にエラーが発生しました。");
       }
     }
@@ -215,7 +215,6 @@ class _InformationEditState extends State<InformationEdit> {
     return Scaffold(
       appBar: _buildheader(context, mediaH, mediaW),
       backgroundColor: appTheme.bgColor,
-      // 鍵盤彈出後自動調節Size - 要test先知
       resizeToAvoidBottomInset: true,
       body: GestureDetector(
         onTap: () {
@@ -312,12 +311,12 @@ class _InformationEditState extends State<InformationEdit> {
         if (_newimageFile!.length < 5)
           Container(
             margin: EdgeInsets.symmetric(horizontal: mediaW / 50),
-            decoration: BoxDecoration(color: appTheme.gray300, shape: BoxShape.circle),
+            decoration: BoxDecoration(color: appTheme.grey300, shape: BoxShape.circle),
             child: IconButton(
               onPressed: () {
                 _addUploadPhotoToNewFile(_newimageFile!.length);
               },
-              icon: Icon(Icons.add, size: mediaH / 30, color: appTheme.gray800),
+              icon: Icon(Icons.add, size: mediaH / 30, color: appTheme.grey800),
             ),
           ),
       ],
@@ -388,7 +387,7 @@ class _InformationEditState extends State<InformationEdit> {
 
   /// Speak Language
   Widget _buildUpdateSpeakLanguageInput(BuildContext context) {
-    return CustomInputFormBar(controller: updateSpeakLanguageController, hintText: "言語");
+    return CustomInputFormBar(controller: updateSpeakLanguageController, hintText: "言語 - メイン");
   }
 
   /// Job

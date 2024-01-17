@@ -5,7 +5,7 @@ import 'package:dating_your_date/widgets/custom_image_view.dart';
 import 'package:dating_your_date/widgets/button/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 
-void showLogoDialog(BuildContext context, String errorMessage, bool havebtn) {
+Future<void> showLogoDialog(BuildContext context, String errorMessage, bool havebtn) async {
   MediaQueryData mediaQueryData = MediaQuery.of(context);
   double mediaH = mediaQueryData.size.height;
   double mediaW = mediaQueryData.size.width;

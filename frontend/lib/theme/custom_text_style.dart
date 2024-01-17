@@ -17,13 +17,13 @@ class CustomTextStyles {
   static get chatBoxUserName => theme.textTheme.headlineMedium!.copyWith(fontSize: 16);
 
   // body
-  static get pwRuleGray500 => theme.textTheme.bodySmall!.copyWith(fontSize: 12);
+  static get pwRulegrey500 => theme.textTheme.bodySmall!.copyWith(fontSize: 12);
 
   static get infoTitle => theme.textTheme.headlineLarge!.copyWith(fontSize: 24, fontWeight: FontWeight.w600);
   static get sideBarTitle => TextStyle(color: appTheme.black, fontSize: 16, fontWeight: FontWeight.w900);
-  static get sideBarButtonGray => TextStyle(color: appTheme.gray500, fontSize: 20, fontWeight: FontWeight.w400);
+  static get sideBarButtongrey => TextStyle(color: appTheme.grey500, fontSize: 20, fontWeight: FontWeight.w400);
   static get sideBarButtonGreen => TextStyle(color: appTheme.green, fontSize: 20, fontWeight: FontWeight.w400);
-  static get confirmGray => TextStyle(color: appTheme.gray500, fontSize: 12, fontWeight: FontWeight.w800);
+  static get confirmgrey => TextStyle(color: appTheme.grey500, fontSize: 12, fontWeight: FontWeight.w800);
   static get confirmGreen => TextStyle(color: appTheme.green, fontSize: 12, fontWeight: FontWeight.w800);
   static get mainButtonC => TextStyle(color: appTheme.black, fontSize: 12, fontWeight: FontWeight.w800);
   static get mainButtonW => TextStyle(color: appTheme.white, fontSize: 12, fontWeight: FontWeight.w800);

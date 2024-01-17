@@ -10,45 +10,35 @@ import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/button/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:grpc/grpc.dart';
 
-class ContactPage extends StatefulWidget {
-  ContactPage({Key? key}) : super(key: key);
+class DeleteAccount extends StatefulWidget {
+  DeleteAccount({Key? key}) : super(key: key);
   @override
-  _ContactPageState createState() => _ContactPageState();
+  _DeleteAccountPageState createState() => _DeleteAccountPageState();
 }
 
-class _ContactPageState extends State<ContactPage> {
-  TextEditingController msgTypeController = TextEditingController();
+class _DeleteAccountPageState extends State<DeleteAccount> {
   TextEditingController messageBoxController = TextEditingController();
 
   void createContact(BuildContext context) async {
-    if (msgTypeController.text.isEmpty || messageBoxController.text.isEmpty) {
-      await showErrorDialog(context, "正しく入力してください");
+    if (messageBoxController.text.isEmpty) {
+      await showErrorDialog(context, "削除する理由は入力してください");
     } else {
-      try {
-        setState(() {
-          showLoadDialog(context);
-        });
-        String? apiKeyS = await globalSession.read(key: 'SessionId');
-        final request = CreateContactRequest(
-          sessionID: apiKeyS,
-          contactType: msgTypeController.text,
-          message: messageBoxController.text,
-          status: "Sended",
-        );
-        await GrpcInfoService.client.createContact(request);
-        await showLogoDialog(context, "送信が完了しました。担当者よりご連絡いたします。", false);
-        Future.delayed(Duration(seconds: 1), () {
-          Navigator.pop(context);
-          Navigator.pop(context);
-          Navigator.pop(context);
-        });
-      } on GrpcError {
-        await showErrorDialog(context, "エラー：検証可能なメッセージの送信");
-        throw Exception("データの取得中にエラーが発生しました。");
-      }
+      // setState(() {
+      //   showLoadDialog(context);
+      // });
+      // String? apiKeyS = await globalSession.read(key: 'SessionId');
+      // final request = CreateContactRequest(
+      //   sessionID: apiKeyS,
+      //   contactType: "削除",
+      //   message: messageBoxController.text,
+      //   status: "Sended",
+      // );
+      // await GrpcInfoService.client.createContact(request);
+
+      await showLogoDialog(context, "アカウントは削除しました。ご利用ありがとうございました。", true);
+      await Future.delayed(Duration(seconds: 1));
+      Navigator.popAndPushNamed(context, AppRoutes.login);
     }
   }
 
@@ -77,16 +67,12 @@ class _ContactPageState extends State<ContactPage> {
               // msg
               Container(
                 alignment: Alignment.centerLeft,
-                child: Text("送信後、弊社担当者よりメールにてご返信いたします", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
+                child: Text("アカウントを削除する理由を入力してください", overflow: TextOverflow.ellipsis, style: CustomTextStyles.titleOfUnderLogo),
               ),
               SizedBox(height: mediaH / 50),
 
               // Input
-              CustomInputBar(titleName: "メッセージの種類:", backendPart: _buildMessageTypeInput(context)),
-              SizedBox(height: mediaH / 50),
-
-              // Input
-              CustomInputBar(titleName: "メッセージボックス:", backendPart: _buildMessageBoxInput(context, mediaH, mediaW)),
+              CustomInputBar(titleName: "削除の理由:", backendPart: _buildMessageBoxInput(context, mediaH, mediaW)),
               SizedBox(height: mediaH / 50),
 
               // button
@@ -96,11 +82,6 @@ class _ContactPageState extends State<ContactPage> {
         ),
       ),
     );
-  }
-
-  /// Message Type
-  Widget _buildMessageTypeInput(BuildContext context) {
-    return CustomInputFormBar(controller: msgTypeController, hintText: "ewqeqweqw");
   }
 
   /// Introduce

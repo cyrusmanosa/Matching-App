@@ -35,7 +35,7 @@ class _MainframeItemWidget extends State<MainframeItemWidget> {
                   height: widget.mediaH! / 1.6,
                   width: widget.mediaW! / 1.25,
                   decoration: BoxDecoration(
-                    color: appTheme.gray500,
+                    color: appTheme.grey500,
                     borderRadius: BorderRadiusStyle.r30,
                     boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.3), spreadRadius: 5, blurRadius: 10)],
                   ),

@@ -1,7 +1,39 @@
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
-class CustomDropDownCheckBox extends StatefulWidget {
+class CustomMultiSelectDropDownBar extends StatefulWidget {
+  CustomMultiSelectDropDownBar({
+    Key? key,
+    this.alignment,
+    this.borderDecoration,
+    this.contentPadding,
+    this.fillColor,
+    this.focusNode,
+    this.hintText,
+    this.hintStyle,
+    this.initialValue,
+    this.maxLines,
+    this.maxLength,
+    this.prefix,
+    this.prefixConstraints,
+    this.suffix,
+    this.suffixConstraints,
+    this.textStyle,
+    this.width,
+    this.height,
+    this.validator,
+    this.textInputAction,
+    this.textInputType,
+    this.autofocus = true,
+    this.filled,
+    this.obscureText,
+    this.onTap,
+    this.items,
+    this.itemArray,
+    this.value,
+    this.onChanged,
+  }) : super(key: key);
+
   final Alignment? alignment;
   final bool autofocus;
   final bool? filled;
@@ -19,7 +51,6 @@ class CustomDropDownCheckBox extends StatefulWidget {
   final InputBorder? borderDecoration;
   final String? hintText;
   final String? initialValue;
-  final TextEditingController? controller;
   final TextInputAction? textInputAction;
   final TextInputType? textInputType;
   final TextStyle? hintStyle;
@@ -30,54 +61,24 @@ class CustomDropDownCheckBox extends StatefulWidget {
   final List<DropdownMenuItem<String>>? items;
   final List<String>? itemArray;
   final String? value;
-  final ValueChanged<String?>? onChanged;
-  final String? selectedItem;
-
-  CustomDropDownCheckBox({
-    Key? key,
-    this.alignment,
-    this.autofocus = true,
-    this.filled,
-    this.obscureText,
-    this.prefixConstraints,
-    this.suffixConstraints,
-    this.fillColor,
-    this.width,
-    this.height,
-    this.contentPadding,
-    this.focusNode,
-    this.validator,
-    this.maxLines,
-    this.maxLength,
-    this.borderDecoration,
-    this.hintText,
-    this.initialValue,
-    this.controller,
-    this.textInputAction,
-    this.textInputType,
-    this.hintStyle,
-    this.textStyle,
-    this.prefix,
-    this.suffix,
-    this.onTap,
-    this.items,
-    this.itemArray,
-    this.value,
-    this.onChanged,
-    this.selectedItem,
-  }) : super(key: key);
+  final ValueChanged<List<String>>? onChanged;
 
   @override
-  _CustomDropDownBarState createState() => _CustomDropDownBarState();
+  _CustomMultiSelectDropDownBarState createState() => _CustomMultiSelectDropDownBarState();
 }
 
-class _CustomDropDownBarState extends State<CustomDropDownCheckBox> {
-  String? selectedItem;
+class _CustomMultiSelectDropDownBarState extends State<CustomMultiSelectDropDownBar> {
+  List<String> selectedValues = [];
 
-  @override
-  void initState() {
-    super.initState();
-    selectedItem = widget.selectedItem;
+  void _toggleSelection(String option) {
+    setState(() {
+      if (selectedValues.contains(option)) {
+        selectedValues.remove(option);
+      } else if (selectedValues.length <= widget.itemArray!.length) {
+        selectedValues.add(option);
+      }
+    });
+    widget.onChanged?.call(selectedValues);
   }
 
   @override
@@ -85,48 +86,48 @@ class _CustomDropDownBarState extends State<CustomDropDownCheckBox> {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return widget.alignment != null
-            ? Align(alignment: widget.alignment ?? Alignment.center, child: dropdownCheckBoxWidget(mediaH, mediaW))
-            : dropdownCheckBoxWidget(mediaH, mediaW);
-      },
-    );
-  }
-
-  Widget dropdownCheckBoxWidget(double mediaH, double mediaW) {
     return SizedBox(
-      height: widget.height ?? mediaH / 25,
+      height: widget.height ?? mediaH / 13.1,
       width: widget.width ?? mediaW / 1.2,
-      child: DropdownButtonFormField(
-        decoration: decoration,
-        value: selectedItem,
-        items: widget.itemArray!.map((option) {
-          return DropdownMenuItem(value: option, child: Text(option));
-        }).toList(),
-        onChanged: (value) {
-          widget.controller!.text = value!;
-          widget.onChanged!(value);
-          setState(() {
-            selectedItem = value;
-          });
-        },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          DropdownButtonFormField<String>(
+            isDense: true,
+            itemHeight: mediaH / 18,
+            decoration: decoration,
+            hint: Text('Select options'),
+            items: widget.itemArray?.map((option) {
+              return DropdownMenuItem<String>(
+                value: option,
+                child: InkWell(
+                  onTap: () {
+                    _toggleSelection(option);
+                  },
+                  child: Row(
+                    children: [Text(option), if (selectedValues.contains(option)) Icon(Icons.check, color: appTheme.green)],
+                  ),
+                ),
+              );
+            }).toList(),
+            onChanged: (value) {},
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: mediaH / 300),
+            child: Text("ご選択：${selectedValues.join(', ')}", style: TextStyle(color: appTheme.grey800)),
+          )
+        ],
       ),
     );
   }
 
   InputDecoration get decoration => InputDecoration(
-        contentPadding: widget.contentPadding ?? EdgeInsets.only(top: -30),
-        filled: widget.filled,
+        contentPadding: widget.contentPadding ?? EdgeInsets.zero,
         hintText: widget.hintText,
         hintStyle: widget.hintStyle,
         isDense: false,
         prefix: widget.prefix ?? Padding(padding: EdgeInsets.only(left: 15.0)),
-        prefixIconConstraints: widget.prefixConstraints,
-        suffixIcon: selectedItem != null ? Icon(selectedItem == '項目1' ? Icons.check_box : Icons.check_box_outline_blank) : null,
-        suffixIconConstraints: widget.suffixConstraints,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0), borderSide: BorderSide(width: 2)),
-        focusedBorder:
-            OutlineInputBorder(borderRadius: BorderRadius.circular(15.0), borderSide: BorderSide(color: appTheme.pinkA100, width: 2)),
+        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0), borderSide: BorderSide(color: Colors.pink, width: 2)),
       );
 }

@@ -2,7 +2,7 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/widgets/button/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 
-void showErrorDialog(BuildContext context, String errorMessage) {
+Future<void> showErrorDialog(BuildContext context, String errorMessage) async {
   MediaQueryData mediaQueryData = MediaQuery.of(context);
   double mediaH = mediaQueryData.size.height;
   double mediaW = mediaQueryData.size.width;

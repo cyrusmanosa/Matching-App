@@ -1,5 +1,6 @@
 import 'package:dating_your_date/presentation/AccompanyCondition.dart';
 import 'package:dating_your_date/presentation/ContactPage.dart';
+import 'package:dating_your_date/presentation/DeleteAccount.dart';
 import 'package:dating_your_date/presentation/HobbyCondition.dart';
 import 'package:dating_your_date/presentation/LoverCondition.dart';
 import 'package:dating_your_date/presentation/Password_Setup.dart';
@@ -39,6 +40,7 @@ class AppRoutes {
   static String contactPage = '/ContactPage';
   static String accompanyCondition = '/AccompanyCondition';
   static String deleteTarget = '/deleteTarget';
+  static String deleteAccount = '/deleteAccount';
   static String emailConfirmation = '/emailConfirmation';
   static String information = '/information';
   static String loadingPage = '/loadingPage';
@@ -74,6 +76,7 @@ class AppRoutes {
     confirmationCore: (context) => ConfirmationCore(),
     contactPage: (context) => ContactPage(),
     deleteTarget: (context) => DeleteTarget(),
+    deleteAccount: (context) => DeleteAccount(),
     emailConfirmation: (context) => EmailConfirmation(),
     home: (context) => Home(),
     hobbyCondition: (context) => HobbyCondition(),

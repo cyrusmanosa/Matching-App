@@ -38,7 +38,7 @@ class _ConversationListState extends State<ConversationList> {
       final request = UpdateReadRequest(userID: userid, targetID: widget.targetid);
       await GrpcChatService.client.updateRead(request);
     } on GrpcError catch (e) {
-      showErrorDialog(context, "Error: ${e.codeName}");
+      await showErrorDialog(context, "Error: ${e.codeName}");
     }
   }
 
@@ -76,7 +76,7 @@ class _ConversationListState extends State<ConversationList> {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 13,
-                      color: appTheme.gray800,
+                      color: appTheme.grey800,
                       fontWeight: widget.isMessageRead! ? FontWeight.normal : FontWeight.w900,
                     ),
                   ),

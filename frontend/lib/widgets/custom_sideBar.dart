@@ -33,12 +33,12 @@ class _CustomSideBarState extends State<CustomSideBar> {
               child: Container(
                 height: mediaH / 45,
                 width: mediaW / 20,
-                decoration: BoxDecoration(color: btn ? appTheme.green : appTheme.gray500, borderRadius: BorderRadiusStyle.r15),
+                decoration: BoxDecoration(color: btn ? appTheme.green : appTheme.grey500, borderRadius: BorderRadiusStyle.r15),
               ),
             ),
             Padding(
               padding: EdgeInsets.only(left: mediaW / 50),
-              child: Text(widget.item!, style: btn ? CustomTextStyles.sideBarButtonGreen : CustomTextStyles.sideBarButtonGray),
+              child: Text(widget.item!, style: btn ? CustomTextStyles.sideBarButtonGreen : CustomTextStyles.sideBarButtongrey),
             ),
           ],
         ),

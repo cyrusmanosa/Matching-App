@@ -9,7 +9,6 @@ dependencies:
     sdk: flutter
   cached_network_image:
   carousel_slider:
-  dropdown_button2:
   flutter_bloc:
   flutter_launcher_icons:
   flutter_svg: 
@@ -17,19 +16,18 @@ dependencies:
   flutter_verification_code:
   flutter_secure_storage:
   google_fonts:
-  google_maps_flutter:
   grpc:
   image_field:
   image_picker:
   intl: 
+  multiselect:
   path_provider:
   permission_handler:
-  postgres: 
   protobuf:
   protoc_builder: 
   protoc_plugin: 
   shared_preferences:
-  uuid:
+  states_rebuilder:
   image:
   xml:
 

@@ -72,40 +72,31 @@ class CustomDropDownBar extends StatelessWidget {
     double mediaW = mediaQueryData.size.width;
     return LayoutBuilder(
       builder: (context, constraints) {
-        return alignment != null
-            ? Align(alignment: alignment ?? Alignment.center, child: dropdownFormFieldWidget(mediaH, mediaW))
-            : dropdownFormFieldWidget(mediaH, mediaW);
+        return SizedBox(
+          height: height ?? mediaH / 25,
+          width: width ?? mediaW / 1.2,
+          child: DropdownButtonFormField(
+            decoration: decoration,
+            value: value,
+            items: itemArray!.map((option) {
+              return DropdownMenuItem(value: option, child: Text(option));
+            }).toList(),
+            onChanged: (value) {
+              controller!.text = value!;
+            },
+            style: theme.textTheme.displayLarge,
+          ),
+        );
       },
-    );
-  }
-
-  Widget dropdownFormFieldWidget(double mediaH, double mediaW) {
-    return SizedBox(
-      height: height ?? mediaH / 25,
-      width: width ?? mediaW / 1.2,
-      child: DropdownButtonFormField(
-        decoration: decoration,
-        value: value,
-        items: itemArray!.map((option) {
-          return DropdownMenuItem(value: option, child: Text(option));
-        }).toList(),
-        onChanged: (value) {
-          controller!.text = value!;
-        },
-      ),
     );
   }
 
   InputDecoration get decoration => InputDecoration(
         contentPadding: contentPadding ?? EdgeInsets.only(top: -30),
-        filled: filled,
         hintText: hintText,
         hintStyle: theme.textTheme.bodySmall,
         isDense: false,
         prefix: prefix ?? Padding(padding: EdgeInsets.only(left: 15.0)),
-        prefixIconConstraints: prefixConstraints,
-        suffixIcon: suffix,
-        suffixIconConstraints: suffixConstraints,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0), borderSide: BorderSide(width: 2)),
         focusedBorder:
             OutlineInputBorder(borderRadius: BorderRadius.circular(15.0), borderSide: BorderSide(color: appTheme.pinkA100, width: 2)),

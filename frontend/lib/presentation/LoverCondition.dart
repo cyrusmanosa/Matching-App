@@ -2,10 +2,13 @@ import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/models/listData.dart';
+import 'package:dating_your_date/pb/rpc_fix.pb.dart';
 import 'package:dating_your_date/pb/rpc_lover.pb.dart';
+import 'package:dating_your_date/pb/rpc_targetList.pb.dart';
+import 'package:dating_your_date/widgets/Custom_IconLogoBox.dart';
 import 'package:dating_your_date/widgets/Custom_dropdown_Bar.dart';
+import 'package:dating_your_date/widgets/Custom_dropdown_checkBox_Bar.dart';
 import 'package:dating_your_date/widgets/app_bar/Custom_App_bar.dart';
-import 'package:dating_your_date/widgets/Custom_Word_button.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
@@ -24,6 +27,7 @@ class LoverCondition extends StatefulWidget {
 class _LoverConditionState extends State<LoverCondition> {
   bool? haveTable;
   bool confirmBtn = false;
+  List<String> loverAddress = [];
 
   TextEditingController loverMinAgeController = TextEditingController();
   TextEditingController loverMaxAgeController = TextEditingController();
@@ -36,12 +40,28 @@ class _LoverConditionState extends State<LoverCondition> {
   void initState() {
     super.initState();
     getLoverGrpcRequest(context);
+    getCountry(context);
+  }
+
+  String country = "";
+
+  void getCountry(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
+    // take country
+    final crequest = GetFixRequest(sessionID: apiKeyS, userID: userid);
+    final result = await GrpcInfoService.client.getFix(crequest);
+    setState(() {
+      country = result.fix.country;
+    });
   }
 
   // check tabel
   void getLoverGrpcRequest(BuildContext context) async {
     try {
       String? apiKeyS = await globalSession.read(key: 'SessionId');
+      // check tabel
       final request = GetLoverRequest(sessionID: apiKeyS);
       final response = await GrpcInfoService.client.getLover(request);
       setState(() {
@@ -58,48 +78,82 @@ class _LoverConditionState extends State<LoverCondition> {
     }
   }
 
+  void checkTargetUserTable(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
+    final request = GetTargetListRequest(sessionID: apiKeyS);
+    final response = await GrpcInfoService.client.getTargetList(request);
+    if (response.tl.target1ID != 0 && response.tl.target2ID != 0 && response.tl.target3ID != 0) {
+      Navigator.pushNamed(context, AppRoutes.deleteTarget);
+    } else {
+      onTapPaymentPage(context);
+    }
+  }
+
+  bool isPureNumber(String value) {
+    final pattern = RegExp(r'^\d+$');
+    return pattern.hasMatch(value);
+  }
+
 // Grpc
   void updateLoverGrpcRequest(BuildContext context) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
-    setState(() {
-      showLoadDialog(context);
-    });
-    await Future.delayed(Duration(seconds: 1));
-    if (haveTable == true) {
-      try {
-        final request = UpdateLoverRequest(
-          sessionID: apiKeyS,
-          minAge: int.parse(loverMinAgeController.text),
-          maxAge: int.parse(loverMaxAgeController.text),
-          city: loverCityController.text,
-          gender: loverGenderController.text,
-          speaklanguage: loverSpeakLanguageController.text,
-        );
-
-        await GrpcInfoService.client.updateLover(request);
-        onTapNextPage(context);
-      } on GrpcError {
-        Navigator.pop(context);
-        showErrorDialog(context, "エラー：更新用の検証可能な入力データがありません。");
-        throw Exception("恋人条件の更新中にエラーが発生しました。");
-      }
+    if (!isPureNumber(loverMinAgeController.text) || !isPureNumber(loverMaxAgeController.text)) {
+      await showErrorDialog(context, "入力した年齢は数字ではありません");
+    } else if (loverMinAgeController.text.isEmpty || loverMaxAgeController.text.isEmpty) {
+      await showErrorDialog(context, "年齢はまだ設定していません");
+    } else if (loverMinAgeController.text.isEmpty || loverMaxAgeController.text.isEmpty) {
+      await showErrorDialog(context, "最低年齢と最高年齢はまだ設定していません");
+    } else if (loverGenderController.text.isEmpty) {
+      await showErrorDialog(context, "相手の性別はまだ設定していません");
+    } else if (loverSexualController.text.isEmpty) {
+      await showErrorDialog(context, "性的指向はまだ設定していません");
     } else {
-      try {
-        final request = CreateLoverRequest(
-          sessionID: apiKeyS,
-          minAge: int.parse(loverMinAgeController.text),
-          maxAge: int.parse(loverMaxAgeController.text),
-          city: loverCityController.text,
-          gender: loverGenderController.text,
-          speaklanguage: loverSpeakLanguageController.text,
-        );
+      if (haveTable == true) {
+        setState(() {
+          showLoadDialog(context);
+        });
+        try {
+          final request = UpdateLoverRequest(
+            sessionID: apiKeyS,
+            minAge: int.parse(loverMinAgeController.text),
+            maxAge: int.parse(loverMaxAgeController.text),
+            city: loverCityController.text,
+            gender: loverGenderController.text,
+            speaklanguage: loverSpeakLanguageController.text,
+          );
 
-        await GrpcInfoService.client.createLover(request);
-        onTapNextPage(context);
-      } on GrpcError {
-        Navigator.pop(context);
-        showErrorDialog(context, "エラー：作成用の検証可能な入力データがありません。");
-        throw Exception("恋人条件を入力中にエラーが発生しました。");
+          await GrpcInfoService.client.updateLover(request);
+          await showLogoDialog(context, "恋人の条件を更新しました", false);
+          await Future.delayed(Duration(seconds: 1));
+          checkTargetUserTable(context);
+        } on GrpcError {
+          Navigator.pop(context);
+          await showErrorDialog(context, "エラー：更新用の検証可能な入力データがありません。");
+          throw Exception("恋人条件の更新中にエラーが発生しました。");
+        }
+      } else {
+        setState(() {
+          showLoadDialog(context);
+        });
+        try {
+          final request = CreateLoverRequest(
+            sessionID: apiKeyS,
+            minAge: int.parse(loverMinAgeController.text),
+            maxAge: int.parse(loverMaxAgeController.text),
+            city: loverCityController.text,
+            gender: loverGenderController.text,
+            speaklanguage: loverSpeakLanguageController.text,
+          );
+
+          await GrpcInfoService.client.createLover(request);
+          await showLogoDialog(context, "恋人の条件を記録しました", false);
+          await Future.delayed(Duration(seconds: 1));
+          checkTargetUserTable(context);
+        } on GrpcError {
+          Navigator.pop(context);
+          await showErrorDialog(context, "エラー：作成用の検証可能な入力データがありません。");
+          throw Exception("恋人条件を入力中にエラーが発生しました。");
+        }
       }
     }
   }
@@ -112,7 +166,6 @@ class _LoverConditionState extends State<LoverCondition> {
 
     return Scaffold(
       appBar: buildAppBar(context, "恋人の条件", true),
-      // 鍵盤彈出後自動調節Size - 要test先知
       resizeToAvoidBottomInset: true,
       backgroundColor: appTheme.bgColor,
       body: GestureDetector(
@@ -125,7 +178,7 @@ class _LoverConditionState extends State<LoverCondition> {
             children: [
               Row(
                 children: [
-                  CustomInputBar(titleName: "年齢:", backendPart: _buildLoverMinAgeInput(context, mediaH, mediaW)),
+                  CustomInputBar(titleName: "*年齢:", backendPart: _buildLoverMinAgeInput(context, mediaH, mediaW)),
                   SizedBox(width: mediaW / 30),
                   Text("から"),
                   SizedBox(width: mediaW / 30),
@@ -134,32 +187,21 @@ class _LoverConditionState extends State<LoverCondition> {
               ),
               SizedBox(height: mediaH / 100),
 
-              // City
-              CustomInputBar(titleName: "居住地:", backendPart: _buildLoverResetCityInput(context)),
-              SizedBox(height: mediaH / 50),
-
               // Gender
-              CustomInputBar(titleName: "相手の性別:", backendPart: _buildLoverResetGenderInput(context)),
+              CustomInputBar(titleName: "*相手の性別:", backendPart: _buildLoverResetGenderInput(context)),
               SizedBox(height: mediaH / 50),
 
               // Sexual
-              CustomInputBar(titleName: "性的指向:", backendPart: _buildLoverResetSexualInput(context)),
+              CustomInputBar(titleName: "*性的指向:", backendPart: _buildLoverResetSexualInput(context)),
               SizedBox(height: mediaH / 50),
 
               // Speak Language
-              CustomInputBar(titleName: "言語:", backendPart: _buildLoverSpeakLanguageInput(context)),
+              CustomInputBar(titleName: "言語 - メイン:", backendPart: _buildLoverSpeakLanguageInput(context)),
               SizedBox(height: mediaH / 50),
 
-              // 本人認証の丸
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    confirmBtn = !confirmBtn;
-                  });
-                },
-                child: WordButton(msg: "本人認証を確認しました", mediaH: mediaH, mediaW: mediaW, boolbtn: confirmBtn),
-              ),
-              SizedBox(height: mediaH / 25),
+              // City
+              if (country.isNotEmpty) CustomInputBar(titleName: "*居住地:", backendPart: _buildLoverResetCityInput(context)),
+              SizedBox(height: mediaH / 35),
 
               // button
               _buildNextButton(context),
@@ -178,7 +220,7 @@ class _LoverConditionState extends State<LoverCondition> {
       width: mediaW / 7.5,
       maxLength: 3,
       controller: loverMaxAgeController,
-      hintText: "20",
+      hintText: "25",
     );
   }
 
@@ -190,13 +232,18 @@ class _LoverConditionState extends State<LoverCondition> {
       width: mediaW / 7.5,
       maxLength: 3,
       controller: loverMinAgeController,
-      hintText: "20",
+      hintText: "30",
     );
   }
 
-  /// City
+  /// Reset City
   Widget _buildLoverResetCityInput(BuildContext context) {
-    return CustomInputFormBar(controller: loverCityController, hintText: "大阪");
+    return CustomMultiSelectDropDownBar(
+      itemArray: asiaCities[country],
+      onChanged: (value) {
+        loverAddress = value;
+      },
+    );
   }
 
   /// Gender
@@ -211,7 +258,7 @@ class _LoverConditionState extends State<LoverCondition> {
 
   /// Speak Language
   Widget _buildLoverSpeakLanguageInput(BuildContext context) {
-    return CustomInputFormBar(controller: loverSpeakLanguageController, hintText: "日本語");
+    return CustomDropDownBar(controller: loverSpeakLanguageController, hintText: languages[0], itemArray: languages);
   }
 
   /// Next Button
@@ -224,11 +271,7 @@ class _LoverConditionState extends State<LoverCondition> {
     );
   }
 
-  onTapReturn(BuildContext context) {
-    Navigator.pop(context);
-  }
-
-  onTapNextPage(BuildContext context) {
+  onTapPaymentPage(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.payDone);
   }
 }

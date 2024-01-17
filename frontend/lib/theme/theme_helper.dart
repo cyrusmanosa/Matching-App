@@ -51,11 +51,12 @@ class TextThemes {
   static TextTheme textTheme(ColorScheme colorScheme) => TextTheme(
         /// S: w400, M: w600, L: w800
 
-        // Dark Gray
-        displaySmall: TextStyle(color: appTheme.gray800, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
-        displayMedium: TextStyle(color: appTheme.gray800, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w600),
-        // Gray
-        bodySmall: TextStyle(color: appTheme.gray500, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
+        // Dark grey
+        displaySmall: TextStyle(color: appTheme.grey800, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
+        displayMedium: TextStyle(color: appTheme.grey800, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w600),
+        displayLarge: TextStyle(color: appTheme.grey800, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w800),
+        // grey
+        bodySmall: TextStyle(color: appTheme.grey500, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
         // Black
         headlineSmall: TextStyle(color: appTheme.black, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w400),
         headlineMedium: TextStyle(color: appTheme.black, fontFamily: 'Rounded Mplus 1c', fontWeight: FontWeight.w600),
@@ -89,12 +90,12 @@ class PrimaryColors {
 
   Color get test => Color.fromARGB(255, 223, 198, 87);
 
-  // Gray
-  Color get profileBtnGray => Color.fromARGB(255, 238, 238, 238);
-  Color get gray100 => Color.fromARGB(255, 233, 233, 233);
-  Color get gray300 => Color.fromARGB(255, 184, 184, 184);
-  Color get gray500 => Color(0XFFA49393);
-  Color get gray800 => Color(0XFF454545);
+  // grey
+  Color get profileBtngrey => Color.fromARGB(255, 238, 238, 238);
+  Color get grey100 => Color.fromARGB(255, 233, 233, 233);
+  Color get grey300 => Color.fromARGB(255, 184, 184, 184);
+  Color get grey500 => Color(0XFFA49393);
+  Color get grey800 => Color(0XFF454545);
 
   // Pink
   Color get maroon => Color(0XFF9C3D3D);

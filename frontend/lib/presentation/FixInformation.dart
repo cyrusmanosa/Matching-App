@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -71,21 +70,21 @@ class _FixInformationState extends State<FixInformation> {
   // Grpc
   void fixInformationGrpcRequest(BuildContext context) async {
     if (fixFirstNameController.text.isEmpty) {
-      showErrorDialog(context, "姓はまだ入力されていません");
+      await showErrorDialog(context, "姓はまだ入力されていません");
     } else if (fixLastNameController.text.isEmpty) {
-      showErrorDialog(context, "名はまだ入力されていません");
+      await showErrorDialog(context, "名はまだ入力されていません");
     } else if (fixBirthController.text.isEmpty) {
-      showErrorDialog(context, "生年月日はまだ入力されていません");
+      await showErrorDialog(context, "生年月日はまだ入力されていません");
     } else if (fixCountryController.text.isEmpty) {
-      showErrorDialog(context, "国籍はまだ入力されていません");
+      await showErrorDialog(context, "国籍はまだ入力されていません");
     } else if (fixGenderController.text.isEmpty) {
-      showErrorDialog(context, "性別はまだ入力されていません");
+      await showErrorDialog(context, "性別はまだ入力されていません");
     } else if (fixBloodController.text.isEmpty) {
-      showErrorDialog(context, "血液型はまだ入力されていません");
+      await showErrorDialog(context, "血液型はまだ入力されていません");
     } else if (confirm18Btn == false) {
-      showErrorDialog(context, "１８歳以上のボタンを押してください");
+      await showErrorDialog(context, "１８歳以上のボタンを押してください");
     } else if (confirmAgreeBtn == false) {
-      showErrorDialog(context, "同意のボタンを押してください");
+      await showErrorDialog(context, "同意のボタンを押してください");
     } else {
       try {
         setState(() {
@@ -112,7 +111,7 @@ class _FixInformationState extends State<FixInformation> {
         saveImage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "エラー：検証可能な入力データ");
+        await showErrorDialog(context, "エラー：検証可能な入力データ");
         throw Exception("データの送信中にエラーが発生しました。");
       }
     }
@@ -240,7 +239,7 @@ class _FixInformationState extends State<FixInformation> {
             },
             icon: _imageFile != null
                 ? Container(width: mediaH / 6.5, height: mediaH / 6.5, child: ClipOval(child: Image.file(_imageFile!, fit: BoxFit.cover)))
-                : Icon(Icons.account_circle, size: mediaH / 6.5, color: appTheme.gray800),
+                : Icon(Icons.account_circle, size: mediaH / 6.5, color: appTheme.grey800),
           ),
         ],
       ),
@@ -285,9 +284,7 @@ class _FixInformationState extends State<FixInformation> {
           builder: (BuildContext context, Widget? child) {
             return Theme(
               data: ThemeData.light().copyWith(
-                colorScheme: ColorScheme.light().copyWith(
-                  primary: appTheme.black,
-                ),
+                colorScheme: ColorScheme.dark().copyWith(primary: appTheme.white, surface: appTheme.grey500),
               ),
               child: child!,
             );

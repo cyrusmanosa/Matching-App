@@ -1,10 +1,10 @@
-List<String> sexualList = ["男性", "女性", "非バイナリー", "トランスジェンダー", "インターセックス"];
-List<String> genderList = ["男性", "女性", "中性", "両性", "無性"];
-List<String> religions = ["キリスト教", "イスラム教", "仏教", "ヒンドゥー教", "ユダヤ教", "道教", "シク教", "カトリック教", "プロテスタント教", "儒教"];
-List<String> educationLevels = ["小学校", "中学校", "高校", "専門学校", "準学士", "学士", "修士", "博士"];
-List<String> socialPersonalities = ["社交的", "内向的でシャイ", "社交不安", "少人数派", "独立心の強い"];
-List<String> accompanyType = ["聞き入る", "一緒に活動", "励ます", "サポート", "助けを求める"];
-List<String> blood = ["A", "B", "AB", "O"];
+final List<String> sexualList = ["男性", "女性", "非バイナリー", "トランスジェンダー", "インターセックス"];
+final List<String> genderList = ["男性", "女性", "中性", "両性", "無性"];
+final List<String> religions = ["無い", "キリスト教", "イスラム教", "仏教", "ヒンドゥー教", "ユダヤ教", "道教", "シク教", "カトリック教", "プロテスタント教", "儒教"];
+final List<String> educationLevels = ["小学校", "中学校", "高校", "専門学校", "準学士", "学士", "修士", "博士"];
+final List<String> socialPersonalities = ["社交的", "内向的でシャイ", "社交不安", "少人数派", "独立心の強い"];
+final List<String> accompanyType = ["聞き入る", "一緒に活動", "励ます", "サポート", "助けを求める"];
+final List<String> blood = ["A", "B", "AB", "O"];
 
 final asiaCities = {
   "日本": [
@@ -125,4 +125,28 @@ final List<String> occupations = [
   '音楽',
   '映画・テレビ',
   '出版',
+];
+
+final List<String> languages = ["広東語", "ヒンディー語", "日本語", "韓国語", "インドネシア語", "タイ語", "ベトナム語", "中国語", "閩南語"];
+final List<String> hobbyTpye = [
+  "運動",
+  "アウトドア",
+  "旅行",
+  "食べ歩き",
+  "語学",
+  "ボランティア",
+  "音楽",
+  "絵画",
+  "彫刻",
+  "手芸",
+  "写真",
+  "料理",
+  "園芸",
+  "読書",
+  "映画鑑賞",
+  "テレビ鑑賞",
+  "ゲーム",
+  "ネットサーフィン",
+  "音楽鑑賞",
+  "演劇"
 ];

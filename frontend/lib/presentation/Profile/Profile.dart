@@ -4,10 +4,12 @@ import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/canChange.pb.dart';
 import 'package:dating_your_date/pb/fix.pb.dart';
+import 'package:dating_your_date/pb/rpc_accompany.pb.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_changeTarget.pb.dart';
 import 'package:dating_your_date/pb/rpc_chatRecord.pb.dart';
 import 'package:dating_your_date/pb/rpc_fix.pb.dart';
+import 'package:dating_your_date/pb/rpc_hobby.pb.dart';
 import 'package:dating_your_date/pb/rpc_images.pb.dart';
 import 'package:dating_your_date/presentation/Information.dart';
 import 'package:dating_your_date/presentation/InformationEdit.dart';
@@ -39,6 +41,8 @@ class _ProfileState extends State<Profile> {
 
   String send = "";
   String changeTime = "";
+  String hobbyType = "";
+  String accompanyType = "";
   CanChange cCData = CanChange();
   Fix myFixData = Fix();
   @override
@@ -52,7 +56,7 @@ class _ProfileState extends State<Profile> {
     await getChangeGrpcRequest(context);
     await getImagesGrpcRequest(context);
     await getMyselfInfoGrpcRequest(context);
-
+    await getHobbyAccompany(context);
     allMyImg = [myImg1, myImg2, myImg3, myImg4, myImg5];
   }
 
@@ -61,6 +65,7 @@ class _ProfileState extends State<Profile> {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
     String? apiKeyU = await globalUserId.read(key: 'UserID');
     final userid = int.tryParse(apiKeyU!);
+    // fix
     try {
       final fRequest = GetFixRequest(sessionID: apiKeyS, userID: userid);
       final fResponse = await GrpcInfoService.client.getFix(fRequest);
@@ -68,9 +73,10 @@ class _ProfileState extends State<Profile> {
         myFixData = fResponse.fix;
       });
     } on GrpcError catch (e) {
-      showErrorDialog(context, "Error: validatable input UserId in Fixinfo! at $e");
+      await showErrorDialog(context, "Error: validatable input UserId in Fixinfo! at $e");
       throw Exception("Error occurred while fetching Fixinfo.");
     }
+    // Can Change
     try {
       final cRequest = GetCanChangeRequest(sessionID: apiKeyS, userID: userid);
       final cResponse = await GrpcInfoService.client.getCanChange(cRequest);
@@ -78,7 +84,7 @@ class _ProfileState extends State<Profile> {
         cCData = cResponse.canChangeInfo;
       });
     } on GrpcError catch (e) {
-      showErrorDialog(context, "Error: validatable input UserId in Fixinfo! at $e");
+      await showErrorDialog(context, "Error: validatable input UserId in Fixinfo! at $e");
       throw Exception("Error occurred while fetching Fixinfo.");
     }
   }
@@ -144,7 +150,7 @@ class _ProfileState extends State<Profile> {
         });
       }
     } on GrpcError {
-      showErrorDialog(context, "エラー：検証可能な入力データ");
+      await showErrorDialog(context, "エラー：検証可能な入力データ");
       throw Exception("データの送信中にエラーが発生しました。");
     }
   }
@@ -164,7 +170,7 @@ class _ProfileState extends State<Profile> {
       if (e.code == 13) {
         changeTime = "0";
       } else {
-        showErrorDialog(context, "Error: validatable input UserId in ChangeTarget! $e");
+        await showErrorDialog(context, "Error: validatable input UserId in ChangeTarget! $e");
         throw Exception("Error occurred while fetching canChangeInfo.");
       }
     }
@@ -175,8 +181,37 @@ class _ProfileState extends State<Profile> {
         send = sendResponse.row.toString();
       });
     } on GrpcError {
-      showErrorDialog(context, "Error: validatable input UserId in Chat Record!");
+      await showErrorDialog(context, "Error: validatable input UserId in Chat Record!");
       throw Exception("Error occurred while fetching canChangeInfo.");
+    }
+  }
+
+  Future<void> getHobbyAccompany(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
+    // hobby
+    try {
+      final hRequest = GetHobbyRequest(sessionID: apiKeyS);
+      final hResponse = await GrpcInfoService.client.getHobby(hRequest);
+      setState(() {
+        hobbyType = hResponse.h.findType;
+      });
+    } on GrpcError {
+      setState(() {
+        hobbyType = "まだ設定しません";
+      });
+    }
+
+    // accompany
+    try {
+      final aRequest = GetAccompanyRequest(sessionID: apiKeyS);
+      final aResponse = await GrpcInfoService.client.getAccompany(aRequest);
+      setState(() {
+        accompanyType = aResponse.ac.findType;
+      });
+    } on GrpcError {
+      setState(() {
+        accompanyType = "まだ設定しません";
+      });
     }
   }
 
@@ -243,13 +278,14 @@ class _ProfileState extends State<Profile> {
           await GrpcInfoService.client.updateImages(updateImagesRequest);
           break;
       }
-      showLogoDialog(context, "アバターも更新しました", true);
+      await showLogoDialog(context, "アバターも更新しました", true);
     } on GrpcError {
-      showErrorDialog(context, "エラー：検証可能な入力データ");
+      await showErrorDialog(context, "エラー：検証可能な入力データ");
       throw Exception("データの送信中にエラーが発生しました。");
     }
   }
 
+// appBar icon to information edit
   void onTapNextPage(BuildContext context) {
     List<File> newAllMyImg = [allMyImg[0]];
     if (allMyImg[1].existsSync()) newAllMyImg.add(allMyImg[1]);
@@ -396,9 +432,9 @@ class _ProfileState extends State<Profile> {
       padding: EdgeInsets.symmetric(horizontal: mediaW / 15),
       child: Container(
         decoration: BoxDecoration(
-          color: appTheme.profileBtnGray,
+          color: appTheme.profileBtngrey,
           borderRadius: BorderRadiusStyle.r15,
-          boxShadow: [BoxShadow(color: appTheme.gray800.withOpacity(0.4), blurRadius: 5, offset: Offset(0, 4))],
+          boxShadow: [BoxShadow(color: appTheme.grey800.withOpacity(0.4), blurRadius: 5, offset: Offset(0, 4))],
         ),
         padding: EdgeInsets.symmetric(horizontal: mediaW / 10),
         child: Row(
@@ -438,7 +474,13 @@ class _ProfileState extends State<Profile> {
                 if (allMyImg[2].existsSync()) newAllMyImg.add(allMyImg[2]);
                 if (allMyImg[3].existsSync()) newAllMyImg.add(allMyImg[3]);
                 if (allMyImg[4].existsSync()) newAllMyImg.add(allMyImg[4]);
-                return Information(canData: cCData, fixData: myFixData, imgIcon: allMyImg);
+                return Information(
+                  canData: cCData,
+                  fixData: myFixData,
+                  imgIcon: allMyImg,
+                  hobbyType: hobbyType,
+                  accompanyType: accompanyType,
+                );
               },
             );
           },
@@ -446,7 +488,7 @@ class _ProfileState extends State<Profile> {
             width: mediaW / 2.5,
             margin: EdgeInsets.symmetric(horizontal: mediaW / 50),
             decoration: BoxDecoration(
-              color: appTheme.profileBtnGray,
+              color: appTheme.profileBtngrey,
               borderRadius: BorderRadiusStyle.r15,
               boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.5), spreadRadius: 2, blurRadius: 5, offset: Offset(0, 3))],
             ),
@@ -478,9 +520,9 @@ class _ProfileState extends State<Profile> {
         child: ProfileButton(
           mediaW: mediaW,
           mediaH: mediaH,
-          iconData: Icons.sensor_occupied_sharp,
-          page: AppRoutes.information,
-          title: "SNS",
+          iconData: Icons.no_accounts_rounded,
+          page: AppRoutes.deleteAccount,
+          title: "ユーザー削除",
           padding: false,
         ),
       ),

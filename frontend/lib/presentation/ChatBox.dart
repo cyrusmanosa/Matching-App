@@ -46,7 +46,7 @@ class _ChatBoxState extends State<ChatBox> {
       final crResponse = await GrpcChatService.client.getChatRecord(crRequest);
       return crResponse.chatRecordNoID;
     } on GrpcError {
-      showErrorDialog(context, "エラー：検証可能な情報の入力データ");
+      await showErrorDialog(context, "エラー：検証可能な情報の入力データ");
       throw Exception("データの取得中にエラーが発生しました。");
     }
   }
@@ -73,7 +73,7 @@ class _ChatBoxState extends State<ChatBox> {
         });
       }
     } on GrpcError {
-      showErrorDialog(context, "エラー：検証可能なデータの入力データ");
+      await showErrorDialog(context, "エラー：検証可能なデータの入力データ");
       throw Exception("データの取得中にエラーが発生しました。");
     }
   }
@@ -92,7 +92,7 @@ class _ChatBoxState extends State<ChatBox> {
       );
       await GrpcChatService.client.createChatRecord(myRequest);
     } on GrpcError {
-      showErrorDialog(context, "エラー：検証可能なメッセージの送信");
+      await showErrorDialog(context, "エラー：検証可能なメッセージの送信");
       throw Exception("データの取得中にエラーが発生しました。");
     }
   }
@@ -110,7 +110,7 @@ class _ChatBoxState extends State<ChatBox> {
       );
       await GrpcChatService.client.createChatRecord(targetRequest);
     } on GrpcError {
-      showErrorDialog(context, "エラー：検証可能なメッセージの送信");
+      await showErrorDialog(context, "エラー：検証可能なメッセージの送信");
       throw Exception("データの取得中にエラーが発生しました。");
     }
     newMsgTextController = TextEditingController();
@@ -131,7 +131,6 @@ class _ChatBoxState extends State<ChatBox> {
       key: _scaffoldKey,
       appBar: _buildHeader(context, mediaW),
       drawer: Drawer(child: SideBar(name: widget.name, imageUrl: widget.imageUrl, purpose: purpose)),
-      // 鍵盤彈出後自動調節Size - 要test先知
       resizeToAvoidBottomInset: true,
       backgroundColor: appTheme.bgColor,
       body: GestureDetector(
@@ -287,7 +286,7 @@ class _ChatBoxState extends State<ChatBox> {
 
   Widget checkShow(BuildContext context) {
     if (checktime) {
-      return Text("Online", style: CustomTextStyles.pwRuleGray500);
+      return Text("Online", style: CustomTextStyles.pwRulegrey500);
     }
     return Container();
   }

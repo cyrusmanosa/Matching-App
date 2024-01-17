@@ -54,7 +54,7 @@ class _HomeState extends State<Home> {
       final tlResponse = await GrpcInfoService.client.getTargetList(tlRequest);
       return tlResponse.tl;
     } on GrpcError {
-      showErrorDialog(context, "エラー：検証可能な入力データ");
+      await showErrorDialog(context, "エラー：検証可能な入力データ");
       throw Exception("データの送信中にエラーが発生しました。");
     }
   }
@@ -142,7 +142,7 @@ class _HomeState extends State<Home> {
             allTargetFix[i] = response.fix;
           });
         } on GrpcError {
-          showErrorDialog(context, "エラー：検証可能な入力データ");
+          await showErrorDialog(context, "エラー：検証可能な入力データ");
           throw Exception("データの送信中にエラーが発生しました。");
         }
 
@@ -154,7 +154,7 @@ class _HomeState extends State<Home> {
             allTargetCanChange[i] = response.canChangeInfo;
           });
         } on GrpcError {
-          showErrorDialog(context, "エラー：検証可能な入力データ");
+          await showErrorDialog(context, "エラー：検証可能な入力データ");
           throw Exception("データの送信中にエラーが発生しました。");
         }
       }

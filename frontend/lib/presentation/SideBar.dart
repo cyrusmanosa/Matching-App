@@ -30,7 +30,7 @@ class _SideBarState extends State<SideBar> {
           mainAxisSize: MainAxisSize.min,
           children: [
             // add date
-            Text("2023-11-01から", style: TextStyle(color: appTheme.gray800)),
+            Text("2023-11-01から", style: TextStyle(color: appTheme.grey800)),
             SizedBox(height: mediaH / 300),
 
             _buildUserRow(context, mediaH, mediaW),

@@ -25,13 +25,13 @@ class _WordButtonState extends State<WordButton> {
           height: widget.mediaW! / 25,
           width: widget.mediaW! / 25,
           decoration: BoxDecoration(
-            color: widget.boolbtn! ? appTheme.green : appTheme.gray500,
+            color: widget.boolbtn! ? appTheme.green : appTheme.grey500,
             borderRadius: BorderRadiusStyle.r15,
           ),
         ),
         Padding(
           padding: EdgeInsets.only(left: widget.mediaW! / 50),
-          child: Text(widget.msg!, style: widget.boolbtn! ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmGray),
+          child: Text(widget.msg!, style: widget.boolbtn! ? CustomTextStyles.confirmGreen : CustomTextStyles.confirmgrey),
         ),
       ],
     );

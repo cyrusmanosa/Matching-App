@@ -50,7 +50,7 @@ class _ChatState extends State<Chat> {
       });
     } on GrpcError {
       isEmpty = true;
-      showErrorDialog(context, "エラー：検証可能な入力データ");
+      await showErrorDialog(context, "エラー：検証可能な入力データ");
       throw Exception("データの送信中にエラーが発生しました。");
     }
   }

@@ -28,7 +28,7 @@ class _ProfileButtonState extends State<ProfileButton> {
             width: widget.width ?? widget.mediaW! / 2.5,
             margin: EdgeInsets.symmetric(horizontal: widget.mediaW! / 50),
             decoration: BoxDecoration(
-              color: appTheme.profileBtnGray,
+              color: appTheme.profileBtngrey,
               borderRadius: BorderRadiusStyle.r15,
               boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.5), spreadRadius: 2, blurRadius: 5, offset: Offset(0, 3))],
             ),

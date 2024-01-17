@@ -9,7 +9,6 @@ import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_Loading.dart';
 import 'package:dating_your_date/widgets/button/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
 
 class PasswordSetup extends StatefulWidget {
@@ -26,11 +25,11 @@ class _PasswordSetupState extends State<PasswordSetup> {
   // Grpc
   void inputPasswordGrpcRequest(BuildContext context) async {
     if (passwordSetupController.text != passwordSetupConfirmController.text) {
-      showErrorDialog(context, "パスワード（確認）とパスワードは一致しません");
+      await showErrorDialog(context, "パスワード（確認）とパスワードは一致しません");
     } else if (isPureText(passwordSetupController.text) || isPureNumber(passwordSetupController.text)) {
-      showErrorDialog(context, "パスワードの組み合わせは英数字は必要です");
+      await showErrorDialog(context, "パスワードの組み合わせは英数字は必要です");
     } else if (passwordSetupController.text.length < 8) {
-      showErrorDialog(context, "パスワードの長さは 8 以上です。");
+      await showErrorDialog(context, "パスワードの長さは 8 以上です。");
     } else {
       setState(() {
         showLoadDialog(context);
@@ -44,7 +43,7 @@ class _PasswordSetupState extends State<PasswordSetup> {
         onTapNextPage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "エラー：検証可能な入力データがありません。");
+        await showErrorDialog(context, "エラー：検証可能な入力データがありません。");
         throw Exception("パスワードの設定中にエラーが発生しました。");
       }
     }
@@ -69,7 +68,6 @@ class _PasswordSetupState extends State<PasswordSetup> {
     return Scaffold(
       appBar: buildAppBar(context, "", true),
       backgroundColor: appTheme.bgColor,
-      // 鍵盤彈出後自動調節Size - 要test先知
       resizeToAvoidBottomInset: true,
       body: GestureDetector(
         onTap: () {
@@ -88,7 +86,7 @@ class _PasswordSetupState extends State<PasswordSetup> {
               CustomInputBar(titleName: "パスワード", backendPart: _buildPasswordInput(context)),
 
               // msg
-              Align(alignment: Alignment.centerLeft, child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.pwRuleGray500)),
+              Align(alignment: Alignment.centerLeft, child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.pwRulegrey500)),
               SizedBox(height: mediaH / 25),
 
               // New Password Confirm
@@ -157,10 +155,6 @@ class _PasswordSetupState extends State<PasswordSetup> {
         inputPasswordGrpcRequest(context);
       },
     );
-  }
-
-  onTapReturn(BuildContext context) {
-    Navigator.pop(context);
   }
 
   onTapNextPage(BuildContext context) {

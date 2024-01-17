@@ -3,10 +3,12 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/models/listData.dart';
 import 'package:dating_your_date/pb/rpc_accompany.pb.dart';
+import 'package:dating_your_date/pb/rpc_fix.pb.dart';
+import 'package:dating_your_date/pb/rpc_targetList.pb.dart';
+import 'package:dating_your_date/widgets/Custom_IconLogoBox.dart';
 import 'package:dating_your_date/widgets/Custom_dropdown_Bar.dart';
 import 'package:dating_your_date/widgets/app_bar/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
-import 'package:dating_your_date/widgets/Custom_Word_button.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/Custom_Loading.dart';
@@ -29,11 +31,25 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
   TextEditingController accompanySpeakLanguageController = TextEditingController();
   TextEditingController accompanyFindTypeController = TextEditingController();
   TextEditingController accompanySociabilityController = TextEditingController();
+  String country = "";
 
   @override
   void initState() {
     super.initState();
     getAccompanyGrpcRequest(context);
+    getCountry(context);
+  }
+
+  void getCountry(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
+    // take country
+    final crequest = GetFixRequest(sessionID: apiKeyS, userID: userid);
+    final result = await GrpcInfoService.client.getFix(crequest);
+    setState(() {
+      country = result.fix.country;
+    });
   }
 
   // check tabel
@@ -54,44 +70,74 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
     }
   }
 
+  void checkTargetUserTable(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
+    final request = GetTargetListRequest(sessionID: apiKeyS);
+    final response = await GrpcInfoService.client.getTargetList(request);
+    if (response.tl.target1ID != 0 && response.tl.target2ID != 0 && response.tl.target3ID != 0) {
+      Navigator.pushNamed(context, AppRoutes.deleteTarget);
+    } else {
+      onTapPaymentPage(context);
+    }
+  }
+
+  bool isPureNumber(String value) {
+    final pattern = RegExp(r'^\d+$');
+    return pattern.hasMatch(value);
+  }
+
   // Grpc
   void createAccompanyGrpcRequest(BuildContext context) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
-    setState(() {
-      showLoadDialog(context);
-    });
-    await Future.delayed(Duration(seconds: 1));
-    if (haveTable == true) {
-      try {
-        final request = UpdateAccompanyRequest(
-          sessionID: apiKeyS,
-          era: int.parse(accompanyEraController.text),
-          speaklanguage: accompanySpeakLanguageController.text,
-          findType: accompanyFindTypeController.text,
-          sociability: accompanySociabilityController.text,
-        );
-        await GrpcInfoService.client.updateAccompany(request);
-        onTapNextPage(context);
-      } on GrpcError {
-        Navigator.pop(context);
-        showErrorDialog(context, "エラー：更新用の検証可能な入力データがありません。");
-        throw Exception("更新の取得中にエラーが発生しました。");
-      }
+    if (!isPureNumber(accompanyEraController.text)) {
+      await showErrorDialog(context, "入力した年代は数字ではありません");
+    } else if (accompanyEraController.text.isEmpty) {
+      await showErrorDialog(context, "年代はまだ設定していません");
+    } else if (accompanyFindTypeController.text.isEmpty) {
+      await showErrorDialog(context, "相伴 - タイプはまだ設定していません");
     } else {
-      try {
-        final request = CreateAccompanyRequest(
-          sessionID: apiKeyS,
-          era: int.parse(accompanyEraController.text),
-          speaklanguage: accompanySpeakLanguageController.text,
-          findType: accompanyFindTypeController.text,
-          sociability: accompanySociabilityController.text,
-        );
-        await GrpcInfoService.client.createAccompany(request);
-        onTapNextPage(context);
-      } on GrpcError {
-        Navigator.pop(context);
-        showErrorDialog(context, "エラー：作成用の検証可能な入力データがありません。");
-        throw Exception("作成アカンパニーの取得中にエラーが発生しました。");
+      if (haveTable == true) {
+        setState(() {
+          showLoadDialog(context);
+        });
+        try {
+          final request = UpdateAccompanyRequest(
+            sessionID: apiKeyS,
+            era: int.parse(accompanyEraController.text),
+            speaklanguage: accompanySpeakLanguageController.text,
+            findType: accompanyFindTypeController.text,
+            sociability: accompanySociabilityController.text,
+          );
+          await GrpcInfoService.client.updateAccompany(request);
+          await showLogoDialog(context, "相伴の条件を記録しました", false);
+          await Future.delayed(Duration(seconds: 1));
+          checkTargetUserTable(context);
+        } on GrpcError {
+          Navigator.pop(context);
+          await showErrorDialog(context, "エラー：更新用の検証可能な入力データがありません。");
+          throw Exception("相伴の条件を入力中にエラーが発生しました。");
+        }
+      } else {
+        setState(() {
+          showLoadDialog(context);
+        });
+        try {
+          final request = CreateAccompanyRequest(
+            sessionID: apiKeyS,
+            era: int.parse(accompanyEraController.text),
+            speaklanguage: accompanySpeakLanguageController.text,
+            findType: accompanyFindTypeController.text,
+            sociability: accompanySociabilityController.text,
+          );
+          await GrpcInfoService.client.createAccompany(request);
+          await showLogoDialog(context, "相伴の条件を記録しました", false);
+          await Future.delayed(Duration(seconds: 1));
+          checkTargetUserTable(context);
+        } on GrpcError {
+          Navigator.pop(context);
+          await showErrorDialog(context, "エラー：作成用の検証可能な入力データがありません。");
+          throw Exception("相伴の条件を入力中にエラーが発生しました。");
+        }
       }
     }
   }
@@ -102,8 +148,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return Scaffold(
-      appBar: buildAppBar(context, "お相伴の条件更改", true),
-      // 鍵盤彈出後自動調節Size - 要test先知
+      appBar: buildAppBar(context, "相伴の条件更改", true),
       resizeToAvoidBottomInset: true,
       backgroundColor: appTheme.bgColor,
       body: GestureDetector(
@@ -116,30 +161,21 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
             child: Column(
               children: [
                 // Era
-                CustomInputBar(titleName: "年代:", backendPart: _buildAccompanyResetEraInput(context)),
+                CustomInputBar(titleName: "*年代:", backendPart: _buildAccompanyResetEraInput(context)),
                 SizedBox(height: mediaH / 50),
 
                 // Language
-                CustomInputBar(titleName: "言語:", backendPart: _buildAccompanyResetSpeakLanguageInput(context)),
+                CustomInputBar(titleName: "言語 - メイン:", backendPart: _buildAccompanyResetSpeakLanguageInput(context)),
                 SizedBox(height: mediaH / 50),
 
                 // Accompany Type
-                CustomInputBar(titleName: "お相伴のタイプ:", backendPart: _buildAccompanyTypeInput(context)),
+                CustomInputBar(titleName: "*相伴のタイプ:", backendPart: _buildAccompanyTypeInput(context)),
                 SizedBox(height: mediaH / 50),
 
                 // Sociability
                 CustomInputBar(titleName: "社交力:", backendPart: _buildAccompanyResetSociabilityInput(context)),
                 SizedBox(height: mediaH / 50),
 
-                // 本人認証の丸
-                InkWell(
-                  onTap: () {
-                    setState(() {
-                      confirmBtn = !confirmBtn;
-                    });
-                  },
-                  child: WordButton(msg: "本人認証を確認しました", mediaH: mediaH, mediaW: mediaW, boolbtn: confirmBtn),
-                ),
                 SizedBox(height: mediaH / 25),
                 _buildNextButton(context),
               ],
@@ -162,7 +198,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
 
   /// Accompany Type
   Widget _buildAccompanyResetSpeakLanguageInput(BuildContext context) {
-    return CustomInputFormBar(controller: accompanySpeakLanguageController, hintText: "日本語");
+    return CustomDropDownBar(controller: accompanySpeakLanguageController, hintText: languages[0], itemArray: languages);
   }
 
   /// Section Widget
@@ -180,11 +216,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
     );
   }
 
-  onTapReturn(BuildContext context) {
-    Navigator.pop(context);
-  }
-
-  onTapNextPage(BuildContext context) {
+  onTapPaymentPage(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.payDone);
   }
 }

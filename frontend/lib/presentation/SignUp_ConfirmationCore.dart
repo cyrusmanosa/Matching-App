@@ -32,7 +32,7 @@ class _ConfirmationCoreState extends State<ConfirmationCore> {
       onTapNextPage(context);
     } on GrpcError {
       Navigator.pop(context);
-      showErrorDialog(context, "コードにエラーがあります。");
+      await showErrorDialog(context, "コードにエラーがあります。");
       throw Exception("チェックコードの確認中にエラーが発生しました。");
     }
   }

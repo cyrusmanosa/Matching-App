@@ -39,15 +39,13 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
   // Grpc
   void createCanChangeGrpcRequest(BuildContext context) async {
     if (canChangeJobController.text.isEmpty) {
-      showErrorDialog(context, "仕事はまだ入力されていません");
-    } else if (!isPureNumber(canChangeAnnualSalaryController.text)) {
-      showErrorDialog(context, "入力した年収は数字じゃありません");
+      await showErrorDialog(context, "仕事はまだ入力されていません");
     } else if (canChangeSociabilityController.text.isEmpty) {
-      showErrorDialog(context, "社交力はまだ入力されていません");
+      await showErrorDialog(context, "社交力はまだ入力されていません");
     } else if (canChangeReligiousController.text.isEmpty) {
-      showErrorDialog(context, "宗教はまだ入力されていません");
+      await showErrorDialog(context, "宗教はまだ入力されていません");
     } else if (canChangeIntroduceController.text.isEmpty) {
-      showErrorDialog(context, "自己紹介はまだ入力されていません");
+      await showErrorDialog(context, "自己紹介はまだ入力されていません");
     } else {
       try {
         String? apiKeyS = await globalSession.read(key: 'SessionId');
@@ -71,7 +69,7 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
         onTapNextPage(context);
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "エラー：検証可能な入力データがありません。");
+        await showErrorDialog(context, "エラー：検証可能な入力データがありません。");
         throw Exception("基本個人情報 - B の取得中にエラーが発生しました。");
       }
     }
@@ -90,7 +88,7 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
       await GrpcChatService.client.createChatTable(request);
     } on GrpcError {
       Navigator.pop(context);
-      showErrorDialog(context, "エラー：検証可能なチャットレコードの作成");
+      await showErrorDialog(context, "エラー：検証可能なチャットレコードの作成");
       throw Exception("チャットレコードの取得中にエラーが発生しました。");
     }
   }
@@ -103,7 +101,6 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
     return Scaffold(
       appBar: buildAppBar(context, "基本個人情報 - B", true),
       backgroundColor: appTheme.bgColor,
-      // 鍵盤彈出後自動調節Size - 要test先知
       resizeToAvoidBottomInset: true,
       body: GestureDetector(
         onTap: () {
@@ -149,9 +146,6 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
   }
 
   // turn back
-  onTapReturn(BuildContext context) {
-    Navigator.pop(context);
-  }
 
   /// Job
   Widget _buildcanChangeJobInput(BuildContext context) {

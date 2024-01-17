@@ -76,7 +76,7 @@ class _UserPageState extends State<UserPage> {
         decoration: BoxDecoration(
           color: Color.fromARGB(255, 233, 233, 233),
           borderRadius: BorderRadiusStyle.r15,
-          boxShadow: [BoxShadow(color: appTheme.gray800.withOpacity(0.4), blurRadius: 5, offset: Offset(0, 4))],
+          boxShadow: [BoxShadow(color: appTheme.grey800.withOpacity(0.4), blurRadius: 5, offset: Offset(0, 4))],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,9 +118,9 @@ class _UserPageState extends State<UserPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         decoration: BoxDecoration(
-          color: appTheme.gray100,
+          color: appTheme.grey100,
           borderRadius: BorderRadiusStyle.r15,
-          boxShadow: [BoxShadow(color: appTheme.gray800.withOpacity(0.4), blurRadius: 5, offset: Offset(0, 4))],
+          boxShadow: [BoxShadow(color: appTheme.grey800.withOpacity(0.4), blurRadius: 5, offset: Offset(0, 4))],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -146,7 +146,7 @@ class _UserPageState extends State<UserPage> {
             SizedBox(height: mediaH / 40),
 
             // hobby
-            ShownDataBarWidget(item: "趣味", data: "まだ設定しません"),
+            ShownDataBarWidget(item: "趣味 - タイプ", data: "まだ設定しません"),
             SizedBox(height: mediaH / 40),
 
             // job

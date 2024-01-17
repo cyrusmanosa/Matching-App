@@ -26,7 +26,7 @@ class _EmailConfirmationtate extends State<EmailConfirmation> {
 
   void emailConfirmationGrpcRequest(BuildContext context) async {
     if (!isEmailValid(emailController.text)) {
-      showErrorDialog(context, "無効なメールアドレス");
+      await showErrorDialog(context, "無効なメールアドレス");
     } else {
       try {
         setState(() {
@@ -37,8 +37,8 @@ class _EmailConfirmationtate extends State<EmailConfirmation> {
         onTapNextPage(context);
       } catch (error) {
         Navigator.pop(context);
-        showErrorDialog(context, "Error: validatable input data");
-        throw Exception("Error occurred while fetching email Confirmation.");
+        await showErrorDialog(context, "エラー：メール確認してください");
+        throw Exception("メール確認の取得中にエラーが発生しました。");
       }
     }
   }

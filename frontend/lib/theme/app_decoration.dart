@@ -3,7 +3,7 @@ import 'package:dating_your_date/core/app_export.dart';
 
 class AppDecoration {
   // Fill decorations
-  static BoxDecoration get fillGray => BoxDecoration(color: appTheme.gray500);
+  static BoxDecoration get fillgrey => BoxDecoration(color: appTheme.grey500);
   static BoxDecoration get fillPink => BoxDecoration(color: appTheme.pinkA100);
   static BoxDecoration get fillPrimary => BoxDecoration(color: appTheme.white);
 }

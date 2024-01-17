@@ -27,9 +27,9 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
   // Grpc
   void resetPasswordGrpcRequest(BuildContext context) async {
     if (newPasswordSetupController.text != newPasswordSetupConfirmController.text) {
-      showErrorDialog(context, "パスワード（確認）とパスワードは一致しません");
+      await showErrorDialog(context, "パスワード（確認）とパスワードは一致しません");
     } else if (isPureText(newPasswordSetupController.text) || isPureNumber(newPasswordSetupController.text)) {
-      showErrorDialog(context, "パスワードの組み合わせは英数字は必要です");
+      await showErrorDialog(context, "パスワードの組み合わせは英数字は必要です");
     } else {
       try {
         String? apiKeyS = await globalSession.read(key: 'SessionId');
@@ -38,13 +38,13 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
           password: newPasswordSetupController.text,
         );
         await GrpcInfoService.client.resetPassword(request);
-        showLogoDialog(context, "新しいパスワード設定しました", false);
+        await showLogoDialog(context, "新しいパスワード設定しました", false);
         await Future.delayed(Duration(seconds: 1));
         Navigator.pop(context);
         Navigator.push(context, MaterialPageRoute(builder: (context) => ContainerScreen(number: 3)));
       } on GrpcError {
         Navigator.pop(context);
-        showErrorDialog(context, "エラー：検証可能な入力データがありません。");
+        await showErrorDialog(context, "エラー：検証可能な入力データがありません。");
         throw Exception("新しいパスワードの設定中にエラーが発生しました。");
       }
     }
@@ -69,7 +69,6 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
     return Scaffold(
       appBar: buildAppBar(context, "", true),
       backgroundColor: appTheme.bgColor,
-      // 鍵盤彈出後自動調節Size - 要test先知
       resizeToAvoidBottomInset: true,
       body: GestureDetector(
         onTap: () {
@@ -88,7 +87,7 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
               CustomInputBar(titleName: "新しいパスワード", backendPart: _buildNewPasswordInput(context)),
 
               // msg
-              Align(alignment: Alignment.centerLeft, child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.pwRuleGray500)),
+              Align(alignment: Alignment.centerLeft, child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.pwRulegrey500)),
               SizedBox(height: mediaH / 25),
 
               // New Password Confirm

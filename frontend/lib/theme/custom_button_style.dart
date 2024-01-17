@@ -7,12 +7,12 @@ class CustomButtonStyles {
         backgroundColor: appTheme.maroon,
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
       );
-  static ButtonStyle get fillLightGray => ElevatedButton.styleFrom(
-        backgroundColor: appTheme.gray500,
+  static ButtonStyle get fillLightgrey => ElevatedButton.styleFrom(
+        backgroundColor: appTheme.grey500,
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
       );
-  static ButtonStyle get fillDarkGray => ElevatedButton.styleFrom(
-        backgroundColor: appTheme.gray800,
+  static ButtonStyle get fillDarkgrey => ElevatedButton.styleFrom(
+        backgroundColor: appTheme.grey800,
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
       );
   static ButtonStyle get fillPink => ElevatedButton.styleFrom(
@@ -40,7 +40,7 @@ class CustomButtonStyles {
   // Google Button
   static ButtonStyle get outlineGoogleButton => OutlinedButton.styleFrom(
         backgroundColor: appTheme.white,
-        side: BorderSide(color: appTheme.gray500),
+        side: BorderSide(color: appTheme.grey500),
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
       );
 }
