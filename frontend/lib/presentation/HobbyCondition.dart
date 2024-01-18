@@ -43,7 +43,8 @@ class _HobbyConditionState extends State<HobbyCondition> {
   }
 
   String country = "";
-  List<String> hoobyAddress = [];
+  Iterable<String> hoobyAddress = [];
+  Iterable<String> hoobylanguage = [];
 
   void getCountry(BuildContext context) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
@@ -61,7 +62,6 @@ class _HobbyConditionState extends State<HobbyCondition> {
   void getHobbyGrpcRequest(BuildContext context) async {
     try {
       String? apiKeyS = await globalSession.read(key: 'SessionId');
-
       // Hobby
       final request = GetHobbyRequest(sessionID: apiKeyS);
       final response = await GrpcInfoService.client.getHobby(request);
@@ -102,6 +102,8 @@ class _HobbyConditionState extends State<HobbyCondition> {
       await showErrorDialog(context, "年代はまだ設定していません");
     } else if (hoobyAddress.isEmpty) {
       await showErrorDialog(context, "居住地はまだ設定していません");
+    } else if (hoobylanguage.isEmpty) {
+      await showErrorDialog(context, "言語はまだ設定していません");
     } else if (hobbyFindTypeController.text.isEmpty) {
       await showErrorDialog(context, "趣味 - タイプはまだ設定していません");
     } else {
@@ -116,13 +118,12 @@ class _HobbyConditionState extends State<HobbyCondition> {
             await showErrorDialog(context, "エラー：数値を入力してください");
             return;
           }
-
           final request = UpdateHobbyRequest(
             sessionID: apiKeyS,
             era: era,
-            city: hoobyAddress.toString(),
+            city: hoobyAddress,
             gender: hobbyGenderController.text,
-            speaklanguage: hobbySpeakLanguageController.text,
+            speaklanguage: hoobylanguage,
             findType: hobbyFindTypeController.text,
             experience: experience,
           );
@@ -150,16 +151,16 @@ class _HobbyConditionState extends State<HobbyCondition> {
           final request = CreateHobbyRequest(
             sessionID: apiKeyS,
             era: era,
-            city: hoobyAddress.toString(),
+            city: hoobyAddress,
             gender: hobbyGenderController.text,
-            speaklanguage: hobbySpeakLanguageController.text,
+            speaklanguage: hoobylanguage,
             findType: hobbyFindTypeController.text,
             experience: experience,
           );
           await GrpcInfoService.client.createHobby(request);
           await showLogoDialog(context, "ホビーの条件を記録しました", false);
           await Future.delayed(Duration(seconds: 1));
-          onTapPaymentPage(context);
+          checkTargetUserTable(context);
         } on GrpcError {
           Navigator.pop(context);
           await showErrorDialog(context, "エラー：作成用の検証可能な入力データがありません。");
@@ -192,11 +193,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
                 SizedBox(height: mediaH / 50),
 
                 // Gender
-                CustomInputBar(titleName: "性別:", backendPart: _buildHobbyResetGenderInput(context)),
-                SizedBox(height: mediaH / 50),
-
-                // Language
-                CustomInputBar(titleName: "言語 - メイン:", backendPart: _buildHobbySpeakLanguageInput(context)),
+                CustomInputBar(titleName: "相手の性別:", backendPart: _buildHobbyResetGenderInput(context)),
                 SizedBox(height: mediaH / 50),
 
                 // Hobby Type
@@ -205,6 +202,10 @@ class _HobbyConditionState extends State<HobbyCondition> {
 
                 // Experience
                 CustomInputBar(titleName: "経験 - 年:", backendPart: _buildHobbyResetExperienceInput(context)),
+                SizedBox(height: mediaH / 50),
+
+                // Language
+                CustomInputBar(titleName: "言語:", backendPart: _buildHobbySpeakLanguageInput(context)),
                 SizedBox(height: mediaH / 50),
 
                 // City
@@ -242,7 +243,12 @@ class _HobbyConditionState extends State<HobbyCondition> {
 
   /// Speak Language
   Widget _buildHobbySpeakLanguageInput(BuildContext context) {
-    return CustomDropDownBar(controller: hobbySpeakLanguageController, hintText: hobbySpeakLanguageController.text, itemArray: languages);
+    return CustomMultiSelectDropDownBar(
+      itemArray: languages,
+      onChanged: (value) {
+        hoobylanguage = value;
+      },
+    );
   }
 
   /// Reset Hobby Type

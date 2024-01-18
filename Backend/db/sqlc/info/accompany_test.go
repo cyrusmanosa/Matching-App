@@ -5,7 +5,6 @@ import (
 	"context"
 	"testing"
 
-	"github.com/brianvoe/gofakeit/v6"
 	"github.com/stretchr/testify/require"
 )
 
@@ -15,11 +14,10 @@ func TestRandomCreateAccompanyRequest(t *testing.T) {
 }
 
 func CreateRandomAccompanyRequest(t *testing.T, user Fixinformation) Accompany {
-
 	arg := CreateAccompanyParams{
 		UserID:        user.UserID,
 		Era:           util.RandomEra(),
-		Speaklanguage: gofakeit.Language(),
+		Speaklanguage: util.SwitchLanguage(user.Country),
 		FindType:      util.RandomAccompantType(),
 		Sociability:   util.RandomSociability(),
 	}
@@ -46,7 +44,7 @@ func TestUpdateUserAccompany(t *testing.T) {
 	Nac := UpdateAccompanyParams{
 		UserID:        ac.UserID,
 		Era:           util.RandomEra(),
-		Speaklanguage: gofakeit.Language(),
+		Speaklanguage: util.SwitchLanguage(arg.Country),
 		FindType:      util.RandomAccompantType(),
 		Sociability:   util.RandomSociability(),
 	}

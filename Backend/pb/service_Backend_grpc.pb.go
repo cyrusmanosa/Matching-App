@@ -20,48 +20,51 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Information_LoginUser_FullMethodName          = "/pb.Information/LoginUser"
-	Information_CheckEmail_FullMethodName         = "/pb.Information/CheckEmail"
-	Information_CheckEmailCode_FullMethodName     = "/pb.Information/CheckEmailCode"
-	Information_InputPassword_FullMethodName      = "/pb.Information/InputPassword"
-	Information_ResetPassword_FullMethodName      = "/pb.Information/ResetPassword"
-	Information_CreateFix_FullMethodName          = "/pb.Information/CreateFix"
-	Information_GetFix_FullMethodName             = "/pb.Information/GetFix"
-	Information_DeleteFix_FullMethodName          = "/pb.Information/DeleteFix"
-	Information_CreateCanChange_FullMethodName    = "/pb.Information/CreateCanChange"
-	Information_GetCanChange_FullMethodName       = "/pb.Information/GetCanChange"
-	Information_UpdateCanChange_FullMethodName    = "/pb.Information/UpdateCanChange"
-	Information_DeleteCanChange_FullMethodName    = "/pb.Information/DeleteCanChange"
-	Information_CreateAccompany_FullMethodName    = "/pb.Information/CreateAccompany"
-	Information_GetAccompany_FullMethodName       = "/pb.Information/GetAccompany"
-	Information_UpdateAccompany_FullMethodName    = "/pb.Information/UpdateAccompany"
-	Information_DeleteAccompany_FullMethodName    = "/pb.Information/DeleteAccompany"
-	Information_CreateHobby_FullMethodName        = "/pb.Information/CreateHobby"
-	Information_GetHobby_FullMethodName           = "/pb.Information/GetHobby"
-	Information_UpdateHobby_FullMethodName        = "/pb.Information/UpdateHobby"
-	Information_DeleteHobby_FullMethodName        = "/pb.Information/DeleteHobby"
-	Information_CreateLover_FullMethodName        = "/pb.Information/CreateLover"
-	Information_GetLover_FullMethodName           = "/pb.Information/GetLover"
-	Information_UpdateLover_FullMethodName        = "/pb.Information/UpdateLover"
-	Information_DeleteLover_FullMethodName        = "/pb.Information/DeleteLover"
-	Information_CreateContact_FullMethodName      = "/pb.Information/CreateContact"
-	Information_GetContact_FullMethodName         = "/pb.Information/GetContact"
-	Information_UpdateContact_FullMethodName      = "/pb.Information/UpdateContact"
-	Information_DeleteContact_FullMethodName      = "/pb.Information/DeleteContact"
-	Information_CreateTargetList_FullMethodName   = "/pb.Information/CreateTargetList"
-	Information_GetTargetList_FullMethodName      = "/pb.Information/GetTargetList"
-	Information_UpdateTargetList_FullMethodName   = "/pb.Information/UpdateTargetList"
-	Information_DeleteTargetList_FullMethodName   = "/pb.Information/DeleteTargetList"
-	Information_CreateChangeTarget_FullMethodName = "/pb.Information/CreateChangeTarget"
-	Information_GetChangeTarget_FullMethodName    = "/pb.Information/GetChangeTarget"
-	Information_DeleteChangeTarget_FullMethodName = "/pb.Information/DeleteChangeTarget"
-	Information_CreateImages_FullMethodName       = "/pb.Information/CreateImages"
-	Information_GetImages_FullMethodName          = "/pb.Information/GetImages"
-	Information_UpdateImages_FullMethodName       = "/pb.Information/UpdateImages"
-	Information_DeleteImages_FullMethodName       = "/pb.Information/DeleteImages"
-	Information_CreatePayment_FullMethodName      = "/pb.Information/CreatePayment"
-	Information_GetPayment_FullMethodName         = "/pb.Information/GetPayment"
-	Information_GetUserID_FullMethodName          = "/pb.Information/GetUserID"
+	Information_LoginUser_FullMethodName             = "/pb.Information/LoginUser"
+	Information_CheckEmail_FullMethodName            = "/pb.Information/CheckEmail"
+	Information_CheckEmailCode_FullMethodName        = "/pb.Information/CheckEmailCode"
+	Information_InputPassword_FullMethodName         = "/pb.Information/InputPassword"
+	Information_ResetPassword_FullMethodName         = "/pb.Information/ResetPassword"
+	Information_CreateFix_FullMethodName             = "/pb.Information/CreateFix"
+	Information_GetFix_FullMethodName                = "/pb.Information/GetFix"
+	Information_DeleteFix_FullMethodName             = "/pb.Information/DeleteFix"
+	Information_CreateCanChange_FullMethodName       = "/pb.Information/CreateCanChange"
+	Information_GetCanChange_FullMethodName          = "/pb.Information/GetCanChange"
+	Information_UpdateCanChange_FullMethodName       = "/pb.Information/UpdateCanChange"
+	Information_DeleteCanChange_FullMethodName       = "/pb.Information/DeleteCanChange"
+	Information_CreateAccompany_FullMethodName       = "/pb.Information/CreateAccompany"
+	Information_GetAccompany_FullMethodName          = "/pb.Information/GetAccompany"
+	Information_UpdateAccompany_FullMethodName       = "/pb.Information/UpdateAccompany"
+	Information_DeleteAccompany_FullMethodName       = "/pb.Information/DeleteAccompany"
+	Information_CreateHobby_FullMethodName           = "/pb.Information/CreateHobby"
+	Information_GetHobby_FullMethodName              = "/pb.Information/GetHobby"
+	Information_UpdateHobby_FullMethodName           = "/pb.Information/UpdateHobby"
+	Information_DeleteHobby_FullMethodName           = "/pb.Information/DeleteHobby"
+	Information_CreateLover_FullMethodName           = "/pb.Information/CreateLover"
+	Information_GetLover_FullMethodName              = "/pb.Information/GetLover"
+	Information_UpdateLover_FullMethodName           = "/pb.Information/UpdateLover"
+	Information_DeleteLover_FullMethodName           = "/pb.Information/DeleteLover"
+	Information_CreateContact_FullMethodName         = "/pb.Information/CreateContact"
+	Information_GetContact_FullMethodName            = "/pb.Information/GetContact"
+	Information_UpdateContact_FullMethodName         = "/pb.Information/UpdateContact"
+	Information_DeleteContact_FullMethodName         = "/pb.Information/DeleteContact"
+	Information_CreateTargetList_FullMethodName      = "/pb.Information/CreateTargetList"
+	Information_GetTargetList_FullMethodName         = "/pb.Information/GetTargetList"
+	Information_UpdateTargetList_FullMethodName      = "/pb.Information/UpdateTargetList"
+	Information_DeleteTargetList_FullMethodName      = "/pb.Information/DeleteTargetList"
+	Information_CreateChangeTarget_FullMethodName    = "/pb.Information/CreateChangeTarget"
+	Information_GetChangeTarget_FullMethodName       = "/pb.Information/GetChangeTarget"
+	Information_DeleteChangeTarget_FullMethodName    = "/pb.Information/DeleteChangeTarget"
+	Information_CreateImages_FullMethodName          = "/pb.Information/CreateImages"
+	Information_GetImages_FullMethodName             = "/pb.Information/GetImages"
+	Information_UpdateImages_FullMethodName          = "/pb.Information/UpdateImages"
+	Information_DeleteImages_FullMethodName          = "/pb.Information/DeleteImages"
+	Information_CreatePayment_FullMethodName         = "/pb.Information/CreatePayment"
+	Information_GetPayment_FullMethodName            = "/pb.Information/GetPayment"
+	Information_GetUserID_FullMethodName             = "/pb.Information/GetUserID"
+	Information_SearchTargetHobby_FullMethodName     = "/pb.Information/SearchTargetHobby"
+	Information_SearchTargetLover_FullMethodName     = "/pb.Information/SearchTargetLover"
+	Information_SearchTargetAccompany_FullMethodName = "/pb.Information/SearchTargetAccompany"
 )
 
 // InformationClient is the client API for Information service.
@@ -124,6 +127,10 @@ type InformationClient interface {
 	GetPayment(ctx context.Context, in *GetPaymentRequest, opts ...grpc.CallOption) (*GetPaymentResponse, error)
 	// Session
 	GetUserID(ctx context.Context, in *GetUserIDRequest, opts ...grpc.CallOption) (*GetUserIDResponse, error)
+	// / -------- Search --------------
+	SearchTargetHobby(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error)
+	SearchTargetLover(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error)
+	SearchTargetAccompany(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error)
 }
 
 type informationClient struct {
@@ -512,6 +519,33 @@ func (c *informationClient) GetUserID(ctx context.Context, in *GetUserIDRequest,
 	return out, nil
 }
 
+func (c *informationClient) SearchTargetHobby(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error) {
+	out := new(SearchResponse)
+	err := c.cc.Invoke(ctx, Information_SearchTargetHobby_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *informationClient) SearchTargetLover(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error) {
+	out := new(SearchResponse)
+	err := c.cc.Invoke(ctx, Information_SearchTargetLover_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *informationClient) SearchTargetAccompany(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error) {
+	out := new(SearchResponse)
+	err := c.cc.Invoke(ctx, Information_SearchTargetAccompany_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // InformationServer is the server API for Information service.
 // All implementations must embed UnimplementedInformationServer
 // for forward compatibility
@@ -572,6 +606,10 @@ type InformationServer interface {
 	GetPayment(context.Context, *GetPaymentRequest) (*GetPaymentResponse, error)
 	// Session
 	GetUserID(context.Context, *GetUserIDRequest) (*GetUserIDResponse, error)
+	// / -------- Search --------------
+	SearchTargetHobby(context.Context, *SearchRequest) (*SearchResponse, error)
+	SearchTargetLover(context.Context, *SearchRequest) (*SearchResponse, error)
+	SearchTargetAccompany(context.Context, *SearchRequest) (*SearchResponse, error)
 	mustEmbedUnimplementedInformationServer()
 }
 
@@ -704,6 +742,15 @@ func (UnimplementedInformationServer) GetPayment(context.Context, *GetPaymentReq
 }
 func (UnimplementedInformationServer) GetUserID(context.Context, *GetUserIDRequest) (*GetUserIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserID not implemented")
+}
+func (UnimplementedInformationServer) SearchTargetHobby(context.Context, *SearchRequest) (*SearchResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchTargetHobby not implemented")
+}
+func (UnimplementedInformationServer) SearchTargetLover(context.Context, *SearchRequest) (*SearchResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchTargetLover not implemented")
+}
+func (UnimplementedInformationServer) SearchTargetAccompany(context.Context, *SearchRequest) (*SearchResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchTargetAccompany not implemented")
 }
 func (UnimplementedInformationServer) mustEmbedUnimplementedInformationServer() {}
 
@@ -1474,6 +1521,60 @@ func _Information_GetUserID_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Information_SearchTargetHobby_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).SearchTargetHobby(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_SearchTargetHobby_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).SearchTargetHobby(ctx, req.(*SearchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Information_SearchTargetLover_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).SearchTargetLover(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_SearchTargetLover_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).SearchTargetLover(ctx, req.(*SearchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Information_SearchTargetAccompany_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).SearchTargetAccompany(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_SearchTargetAccompany_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).SearchTargetAccompany(ctx, req.(*SearchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Information_ServiceDesc is the grpc.ServiceDesc for Information service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1649,6 +1750,18 @@ var Information_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "GetUserID",
 			Handler:    _Information_GetUserID_Handler,
 		},
+		{
+			MethodName: "SearchTargetHobby",
+			Handler:    _Information_SearchTargetHobby_Handler,
+		},
+		{
+			MethodName: "SearchTargetLover",
+			Handler:    _Information_SearchTargetLover_Handler,
+		},
+		{
+			MethodName: "SearchTargetAccompany",
+			Handler:    _Information_SearchTargetAccompany_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "service_Backend.proto",
@@ -1659,7 +1772,7 @@ const (
 	Chat_CreateChatRecord_FullMethodName = "/pb.Chat/CreateChatRecord"
 	Chat_GetChatRecord_FullMethodName    = "/pb.Chat/GetChatRecord"
 	Chat_UpdateChatRecord_FullMethodName = "/pb.Chat/UpdateChatRecord"
-	Chat_DeleteChatRecord_FullMethodName = "/pb.Chat/DeleteChatRecord"
+	Chat_DeleteChatTable_FullMethodName  = "/pb.Chat/DeleteChatTable"
 	Chat_GetTargetID_FullMethodName      = "/pb.Chat/GetTargetID"
 	Chat_GetLastMsg_FullMethodName       = "/pb.Chat/GetLastMsg"
 	Chat_GetChatRow_FullMethodName       = "/pb.Chat/GetChatRow"
@@ -1674,7 +1787,7 @@ type ChatClient interface {
 	CreateChatRecord(ctx context.Context, in *CreateChatRecordRequest, opts ...grpc.CallOption) (*CreateChatRecordResponse, error)
 	GetChatRecord(ctx context.Context, in *GetChatRecordRequest, opts ...grpc.CallOption) (*GetChatRecordResponse, error)
 	UpdateChatRecord(ctx context.Context, in *UpdateChatRecordRequest, opts ...grpc.CallOption) (*UpdateChatRecordResponse, error)
-	DeleteChatRecord(ctx context.Context, in *DeleteChatRecordRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteChatTable(ctx context.Context, in *DeleteChatTableRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetTargetID(ctx context.Context, in *GetTargetIDRequest, opts ...grpc.CallOption) (*GetTargetIDResponse, error)
 	GetLastMsg(ctx context.Context, in *GetLastMsgRequest, opts ...grpc.CallOption) (*GetLastMsgResponse, error)
 	GetChatRow(ctx context.Context, in *GetChatRowRequest, opts ...grpc.CallOption) (*GetChatRowResponse, error)
@@ -1725,9 +1838,9 @@ func (c *chatClient) UpdateChatRecord(ctx context.Context, in *UpdateChatRecordR
 	return out, nil
 }
 
-func (c *chatClient) DeleteChatRecord(ctx context.Context, in *DeleteChatRecordRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *chatClient) DeleteChatTable(ctx context.Context, in *DeleteChatTableRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Chat_DeleteChatRecord_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Chat_DeleteChatTable_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1778,7 +1891,7 @@ type ChatServer interface {
 	CreateChatRecord(context.Context, *CreateChatRecordRequest) (*CreateChatRecordResponse, error)
 	GetChatRecord(context.Context, *GetChatRecordRequest) (*GetChatRecordResponse, error)
 	UpdateChatRecord(context.Context, *UpdateChatRecordRequest) (*UpdateChatRecordResponse, error)
-	DeleteChatRecord(context.Context, *DeleteChatRecordRequest) (*emptypb.Empty, error)
+	DeleteChatTable(context.Context, *DeleteChatTableRequest) (*emptypb.Empty, error)
 	GetTargetID(context.Context, *GetTargetIDRequest) (*GetTargetIDResponse, error)
 	GetLastMsg(context.Context, *GetLastMsgRequest) (*GetLastMsgResponse, error)
 	GetChatRow(context.Context, *GetChatRowRequest) (*GetChatRowResponse, error)
@@ -1802,8 +1915,8 @@ func (UnimplementedChatServer) GetChatRecord(context.Context, *GetChatRecordRequ
 func (UnimplementedChatServer) UpdateChatRecord(context.Context, *UpdateChatRecordRequest) (*UpdateChatRecordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateChatRecord not implemented")
 }
-func (UnimplementedChatServer) DeleteChatRecord(context.Context, *DeleteChatRecordRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteChatRecord not implemented")
+func (UnimplementedChatServer) DeleteChatTable(context.Context, *DeleteChatTableRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteChatTable not implemented")
 }
 func (UnimplementedChatServer) GetTargetID(context.Context, *GetTargetIDRequest) (*GetTargetIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTargetID not implemented")
@@ -1902,20 +2015,20 @@ func _Chat_UpdateChatRecord_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Chat_DeleteChatRecord_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteChatRecordRequest)
+func _Chat_DeleteChatTable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteChatTableRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ChatServer).DeleteChatRecord(ctx, in)
+		return srv.(ChatServer).DeleteChatTable(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Chat_DeleteChatRecord_FullMethodName,
+		FullMethod: Chat_DeleteChatTable_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ChatServer).DeleteChatRecord(ctx, req.(*DeleteChatRecordRequest))
+		return srv.(ChatServer).DeleteChatTable(ctx, req.(*DeleteChatTableRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2016,8 +2129,8 @@ var Chat_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Chat_UpdateChatRecord_Handler,
 		},
 		{
-			MethodName: "DeleteChatRecord",
-			Handler:    _Chat_DeleteChatRecord_Handler,
+			MethodName: "DeleteChatTable",
+			Handler:    _Chat_DeleteChatTable_Handler,
 		},
 		{
 			MethodName: "GetTargetID",

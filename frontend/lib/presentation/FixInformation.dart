@@ -48,22 +48,13 @@ class _FixInformationState extends State<FixInformation> {
   void _uploadPhotoToNewFile() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
     if (pickedFile != null) {
       final file = File(pickedFile.path);
-      final directory = await getApplicationDocumentsDirectory();
-      try {
-        await for (var oldFile in Directory(directory.path).list()) {
-          await oldFile.delete();
-        }
-        final newFilePath = path.join(directory.path, '${DateTime.now().millisecondsSinceEpoch}.jpg');
-        await file.copy(newFilePath);
 
-        setState(() {
-          _imageFile = File(newFilePath);
-        });
-      } catch (e) {
-        print("Error: $e");
-      }
+      setState(() {
+        _imageFile = file;
+      });
     }
   }
 
@@ -104,7 +95,6 @@ class _FixInformationState extends State<FixInformation> {
         // take user id
         final useridRequest = GetUserIDRequest(sessionID: response.sessionsID);
         final useridResponse = await GrpcInfoService.client.getUserID(useridRequest);
-        print(useridResponse.userID);
         // set user ID
         await globalUserId.write(key: 'UserID', value: '${useridResponse.userID}');
 
@@ -120,12 +110,6 @@ class _FixInformationState extends State<FixInformation> {
   void saveImage(BuildContext context) async {
     try {
       String? apiKeyS = await globalSession.read(key: 'SessionId');
-      String? apiKeyU = await globalUserId.read(key: 'UserID');
-      final createFolderPath = '/Users/cyrusman/Desktop/ProgrammingLearning/Apps/Flutter/userImage/u$apiKeyU';
-      Directory(createFolderPath).createSync(recursive: true);
-      String targetFilePath = path.join(createFolderPath, path.basename(_imageFile!.path));
-      _imageFile!.copySync(targetFilePath);
-
       Uint8List bytes = await _imageFile!.readAsBytes();
       List<int> img = bytes.toList();
       final request = CreateImagesRequest(sessionID: apiKeyS, img1: img, img2: null, img3: null, img4: null, img5: null);

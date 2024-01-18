@@ -13,18 +13,18 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $16;
+import 'google/protobuf/timestamp.pb.dart' as $17;
 
 class Lover extends $pb.GeneratedMessage {
   factory Lover({
     $core.int? userID,
     $core.int? minAge,
     $core.int? maxAge,
-    $core.String? city,
+    $core.Iterable<$core.String>? city,
     $core.String? gender,
     $core.String? sexual,
-    $core.String? speaklanguage,
-    $16.Timestamp? infoChangedAt,
+    $core.Iterable<$core.String>? speaklanguage,
+    $17.Timestamp? infoChangedAt,
   }) {
     final $result = create();
     if (userID != null) {
@@ -37,7 +37,7 @@ class Lover extends $pb.GeneratedMessage {
       $result.maxAge = maxAge;
     }
     if (city != null) {
-      $result.city = city;
+      $result.city.addAll(city);
     }
     if (gender != null) {
       $result.gender = gender;
@@ -46,7 +46,7 @@ class Lover extends $pb.GeneratedMessage {
       $result.sexual = sexual;
     }
     if (speaklanguage != null) {
-      $result.speaklanguage = speaklanguage;
+      $result.speaklanguage.addAll(speaklanguage);
     }
     if (infoChangedAt != null) {
       $result.infoChangedAt = infoChangedAt;
@@ -61,11 +61,11 @@ class Lover extends $pb.GeneratedMessage {
     ..a<$core.int>(1, _omitFieldNames ? '' : 'UserID', $pb.PbFieldType.O3, protoName: 'UserID')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'MinAge', $pb.PbFieldType.O3, protoName: 'MinAge')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'MaxAge', $pb.PbFieldType.O3, protoName: 'MaxAge')
-    ..aOS(4, _omitFieldNames ? '' : 'City', protoName: 'City')
+    ..pPS(4, _omitFieldNames ? '' : 'City', protoName: 'City')
     ..aOS(5, _omitFieldNames ? '' : 'Gender', protoName: 'Gender')
     ..aOS(6, _omitFieldNames ? '' : 'Sexual', protoName: 'Sexual')
-    ..aOS(7, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
-    ..aOM<$16.Timestamp>(8, _omitFieldNames ? '' : 'InfoChangedAt', protoName: 'InfoChangedAt', subBuilder: $16.Timestamp.create)
+    ..pPS(7, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
+    ..aOM<$17.Timestamp>(8, _omitFieldNames ? '' : 'InfoChangedAt', protoName: 'InfoChangedAt', subBuilder: $17.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -118,13 +118,7 @@ class Lover extends $pb.GeneratedMessage {
   void clearMaxAge() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get city => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set city($core.String v) { $_setString(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasCity() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearCity() => clearField(4);
+  $core.List<$core.String> get city => $_getList(3);
 
   @$pb.TagNumber(5)
   $core.String get gender => $_getSZ(4);
@@ -145,24 +139,18 @@ class Lover extends $pb.GeneratedMessage {
   void clearSexual() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.String get speaklanguage => $_getSZ(6);
-  @$pb.TagNumber(7)
-  set speaklanguage($core.String v) { $_setString(6, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasSpeaklanguage() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearSpeaklanguage() => clearField(7);
+  $core.List<$core.String> get speaklanguage => $_getList(6);
 
   @$pb.TagNumber(8)
-  $16.Timestamp get infoChangedAt => $_getN(7);
+  $17.Timestamp get infoChangedAt => $_getN(7);
   @$pb.TagNumber(8)
-  set infoChangedAt($16.Timestamp v) { setField(8, v); }
+  set infoChangedAt($17.Timestamp v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasInfoChangedAt() => $_has(7);
   @$pb.TagNumber(8)
   void clearInfoChangedAt() => clearField(8);
   @$pb.TagNumber(8)
-  $16.Timestamp ensureInfoChangedAt() => $_ensure(7);
+  $17.Timestamp ensureInfoChangedAt() => $_ensure(7);
 }
 
 

@@ -207,19 +207,15 @@ final $typed_data.Uint8List updateReadRequestDescriptor = $convert.base64Decode(
     'ChFVcGRhdGVSZWFkUmVxdWVzdBIWCgZVc2VySUQYASABKAVSBlVzZXJJRBIaCghUYXJnZXRJRB'
     'gCIAEoBVIIVGFyZ2V0SUQ=');
 
-@$core.Deprecated('Use deleteChatRecordRequestDescriptor instead')
-const DeleteChatRecordRequest$json = {
-  '1': 'DeleteChatRecordRequest',
+@$core.Deprecated('Use deleteChatTableRequestDescriptor instead')
+const DeleteChatTableRequest$json = {
+  '1': 'DeleteChatTableRequest',
   '2': [
     {'1': 'UserID', '3': 1, '4': 1, '5': 5, '10': 'UserID'},
-    {'1': 'TargetID', '3': 2, '4': 1, '5': 5, '10': 'TargetID'},
-    {'1': 'CreateAt', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'CreateAt'},
   ],
 };
 
-/// Descriptor for `DeleteChatRecordRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List deleteChatRecordRequestDescriptor = $convert.base64Decode(
-    'ChdEZWxldGVDaGF0UmVjb3JkUmVxdWVzdBIWCgZVc2VySUQYASABKAVSBlVzZXJJRBIaCghUYX'
-    'JnZXRJRBgCIAEoBVIIVGFyZ2V0SUQSNgoIQ3JlYXRlQXQYAyABKAsyGi5nb29nbGUucHJvdG9i'
-    'dWYuVGltZXN0YW1wUghDcmVhdGVBdA==');
+/// Descriptor for `DeleteChatTableRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List deleteChatTableRequestDescriptor = $convert.base64Decode(
+    'ChZEZWxldGVDaGF0VGFibGVSZXF1ZXN0EhYKBlVzZXJJRBgBIAEoBVIGVXNlcklE');
 

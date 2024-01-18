@@ -27,6 +27,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool check = false;
   List<int> allTargetId = [];
   List<List<File>> allTargetImage = [];
   List<Fix> allTargetFix = List<Fix>.filled(3, Fix());
@@ -39,11 +40,13 @@ class _HomeState extends State<Home> {
 
   Future<void> fetchData(BuildContext context) async {
     Targetlist allTarget = await getTargetListGrpc(context);
-    allTargetId = await [allTarget.target1ID, allTarget.target2ID, allTarget.target3ID];
-    for (int i = 0; i < 3; i++) {
-      getTargetImageGrpc(context, allTargetId[i]);
+    if (!check) {
+      allTargetId = await [allTarget.target1ID, allTarget.target2ID, allTarget.target3ID];
+      for (int i = 0; i < 3; i++) {
+        getTargetImageGrpc(context, allTargetId[i]);
+      }
+      getTargetDataGrpc(context, allTargetId);
     }
-    getTargetDataGrpc(context, allTargetId);
   }
 
   /// get target list
@@ -54,7 +57,7 @@ class _HomeState extends State<Home> {
       final tlResponse = await GrpcInfoService.client.getTargetList(tlRequest);
       return tlResponse.tl;
     } on GrpcError {
-      await showErrorDialog(context, "エラー：検証可能な入力データ");
+      check = true;
       throw Exception("データの送信中にエラーが発生しました。");
     }
   }

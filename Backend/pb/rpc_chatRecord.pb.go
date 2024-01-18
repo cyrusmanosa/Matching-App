@@ -798,18 +798,16 @@ func (x *UpdateReadRequest) GetTargetID() int32 {
 }
 
 // Delete
-type DeleteChatRecordRequest struct {
+type DeleteChatTableRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	UserID   int32                  `protobuf:"varint,1,opt,name=UserID,proto3" json:"UserID,omitempty"`
-	TargetID int32                  `protobuf:"varint,2,opt,name=TargetID,proto3" json:"TargetID,omitempty"`
-	CreateAt *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=CreateAt,proto3" json:"CreateAt,omitempty"`
+	UserID int32 `protobuf:"varint,1,opt,name=UserID,proto3" json:"UserID,omitempty"`
 }
 
-func (x *DeleteChatRecordRequest) Reset() {
-	*x = DeleteChatRecordRequest{}
+func (x *DeleteChatTableRequest) Reset() {
+	*x = DeleteChatTableRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_rpc_chatRecord_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -817,13 +815,13 @@ func (x *DeleteChatRecordRequest) Reset() {
 	}
 }
 
-func (x *DeleteChatRecordRequest) String() string {
+func (x *DeleteChatTableRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeleteChatRecordRequest) ProtoMessage() {}
+func (*DeleteChatTableRequest) ProtoMessage() {}
 
-func (x *DeleteChatRecordRequest) ProtoReflect() protoreflect.Message {
+func (x *DeleteChatTableRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_rpc_chatRecord_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -835,30 +833,16 @@ func (x *DeleteChatRecordRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteChatRecordRequest.ProtoReflect.Descriptor instead.
-func (*DeleteChatRecordRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use DeleteChatTableRequest.ProtoReflect.Descriptor instead.
+func (*DeleteChatTableRequest) Descriptor() ([]byte, []int) {
 	return file_rpc_chatRecord_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *DeleteChatRecordRequest) GetUserID() int32 {
+func (x *DeleteChatTableRequest) GetUserID() int32 {
 	if x != nil {
 		return x.UserID
 	}
 	return 0
-}
-
-func (x *DeleteChatRecordRequest) GetTargetID() int32 {
-	if x != nil {
-		return x.TargetID
-	}
-	return 0
-}
-
-func (x *DeleteChatRecordRequest) GetCreateAt() *timestamppb.Timestamp {
-	if x != nil {
-		return x.CreateAt
-	}
-	return nil
 }
 
 var File_rpc_chatRecord_proto protoreflect.FileDescriptor
@@ -943,16 +927,11 @@ var file_rpc_chatRecord_proto_rawDesc = []byte{
 	0x55, 0x73, 0x65, 0x72, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x55, 0x73,
 	0x65, 0x72, 0x49, 0x44, 0x12, 0x1a, 0x0a, 0x08, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x49, 0x44,
 	0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x49, 0x44,
-	0x22, 0x85, 0x01, 0x0a, 0x17, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x68, 0x61, 0x74, 0x52,
-	0x65, 0x63, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x16, 0x0a, 0x06,
-	0x55, 0x73, 0x65, 0x72, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x55, 0x73,
-	0x65, 0x72, 0x49, 0x44, 0x12, 0x1a, 0x0a, 0x08, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x49, 0x44,
-	0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x08, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x49, 0x44,
-	0x12, 0x36, 0x0a, 0x08, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x41, 0x74, 0x18, 0x03, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x08,
-	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x41, 0x74, 0x42, 0x0c, 0x5a, 0x0a, 0x42, 0x61, 0x63, 0x6b,
-	0x65, 0x6e, 0x64, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x22, 0x30, 0x0a, 0x16, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x68, 0x61, 0x74, 0x54, 0x61,
+	0x62, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x55, 0x73,
+	0x65, 0x72, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x55, 0x73, 0x65, 0x72,
+	0x49, 0x44, 0x42, 0x0c, 0x5a, 0x0a, 0x42, 0x61, 0x63, 0x6b, 0x65, 0x6e, 0x64, 0x2f, 0x70, 0x62,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -983,7 +962,7 @@ var file_rpc_chatRecord_proto_goTypes = []interface{}{
 	(*UpdateChatRecordRequest)(nil),  // 11: pb.UpdateChatRecordRequest
 	(*UpdateChatRecordResponse)(nil), // 12: pb.UpdateChatRecordResponse
 	(*UpdateReadRequest)(nil),        // 13: pb.UpdateReadRequest
-	(*DeleteChatRecordRequest)(nil),  // 14: pb.DeleteChatRecordRequest
+	(*DeleteChatTableRequest)(nil),   // 14: pb.DeleteChatTableRequest
 	(*ChatRecord)(nil),               // 15: pb.ChatRecord
 	(*ChatRecordNoID)(nil),           // 16: pb.ChatRecordNoID
 	(*timestamppb.Timestamp)(nil),    // 17: google.protobuf.Timestamp
@@ -993,12 +972,11 @@ var file_rpc_chatRecord_proto_depIdxs = []int32{
 	16, // 1: pb.GetChatRecordResponse.ChatRecordNoID:type_name -> pb.ChatRecordNoID
 	17, // 2: pb.UpdateChatRecordRequest.CreateAt:type_name -> google.protobuf.Timestamp
 	15, // 3: pb.UpdateChatRecordResponse.ChatRecord:type_name -> pb.ChatRecord
-	17, // 4: pb.DeleteChatRecordRequest.CreateAt:type_name -> google.protobuf.Timestamp
-	5,  // [5:5] is the sub-list for method output_type
-	5,  // [5:5] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	4,  // [4:4] is the sub-list for method output_type
+	4,  // [4:4] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_rpc_chatRecord_proto_init() }
@@ -1178,7 +1156,7 @@ func file_rpc_chatRecord_proto_init() {
 			}
 		}
 		file_rpc_chatRecord_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteChatRecordRequest); i {
+			switch v := v.(*DeleteChatTableRequest); i {
 			case 0:
 				return &v.state
 			case 1:

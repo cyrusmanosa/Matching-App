@@ -19,9 +19,9 @@ const CreateHobbyRequest$json = {
   '2': [
     {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
     {'1': 'Era', '3': 2, '4': 1, '5': 5, '10': 'Era'},
-    {'1': 'City', '3': 3, '4': 1, '5': 9, '10': 'City'},
+    {'1': 'City', '3': 3, '4': 3, '5': 9, '10': 'City'},
     {'1': 'Gender', '3': 4, '4': 1, '5': 9, '10': 'Gender'},
-    {'1': 'Speaklanguage', '3': 5, '4': 1, '5': 9, '10': 'Speaklanguage'},
+    {'1': 'Speaklanguage', '3': 5, '4': 3, '5': 9, '10': 'Speaklanguage'},
     {'1': 'FindType', '3': 6, '4': 1, '5': 9, '10': 'FindType'},
     {'1': 'Experience', '3': 7, '4': 1, '5': 5, '10': 'Experience'},
   ],
@@ -30,8 +30,8 @@ const CreateHobbyRequest$json = {
 /// Descriptor for `CreateHobbyRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createHobbyRequestDescriptor = $convert.base64Decode(
     'ChJDcmVhdGVIb2JieVJlcXVlc3QSHAoJU2Vzc2lvbklEGAEgASgJUglTZXNzaW9uSUQSEAoDRX'
-    'JhGAIgASgFUgNFcmESEgoEQ2l0eRgDIAEoCVIEQ2l0eRIWCgZHZW5kZXIYBCABKAlSBkdlbmRl'
-    'chIkCg1TcGVha2xhbmd1YWdlGAUgASgJUg1TcGVha2xhbmd1YWdlEhoKCEZpbmRUeXBlGAYgAS'
+    'JhGAIgASgFUgNFcmESEgoEQ2l0eRgDIAMoCVIEQ2l0eRIWCgZHZW5kZXIYBCABKAlSBkdlbmRl'
+    'chIkCg1TcGVha2xhbmd1YWdlGAUgAygJUg1TcGVha2xhbmd1YWdlEhoKCEZpbmRUeXBlGAYgAS'
     'gJUghGaW5kVHlwZRIeCgpFeHBlcmllbmNlGAcgASgFUgpFeHBlcmllbmNl');
 
 @$core.Deprecated('Use createHobbyResponseDescriptor instead')
@@ -76,9 +76,9 @@ const UpdateHobbyRequest$json = {
   '2': [
     {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
     {'1': 'Era', '3': 2, '4': 1, '5': 5, '10': 'Era'},
-    {'1': 'City', '3': 3, '4': 1, '5': 9, '10': 'City'},
+    {'1': 'City', '3': 3, '4': 3, '5': 9, '10': 'City'},
     {'1': 'Gender', '3': 4, '4': 1, '5': 9, '10': 'Gender'},
-    {'1': 'Speaklanguage', '3': 5, '4': 1, '5': 9, '10': 'Speaklanguage'},
+    {'1': 'Speaklanguage', '3': 5, '4': 3, '5': 9, '10': 'Speaklanguage'},
     {'1': 'FindType', '3': 6, '4': 1, '5': 9, '10': 'FindType'},
     {'1': 'Experience', '3': 7, '4': 1, '5': 5, '10': 'Experience'},
   ],
@@ -87,8 +87,8 @@ const UpdateHobbyRequest$json = {
 /// Descriptor for `UpdateHobbyRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateHobbyRequestDescriptor = $convert.base64Decode(
     'ChJVcGRhdGVIb2JieVJlcXVlc3QSHAoJU2Vzc2lvbklEGAEgASgJUglTZXNzaW9uSUQSEAoDRX'
-    'JhGAIgASgFUgNFcmESEgoEQ2l0eRgDIAEoCVIEQ2l0eRIWCgZHZW5kZXIYBCABKAlSBkdlbmRl'
-    'chIkCg1TcGVha2xhbmd1YWdlGAUgASgJUg1TcGVha2xhbmd1YWdlEhoKCEZpbmRUeXBlGAYgAS'
+    'JhGAIgASgFUgNFcmESEgoEQ2l0eRgDIAMoCVIEQ2l0eRIWCgZHZW5kZXIYBCABKAlSBkdlbmRl'
+    'chIkCg1TcGVha2xhbmd1YWdlGAUgAygJUg1TcGVha2xhbmd1YWdlEhoKCEZpbmRUeXBlGAYgAS'
     'gJUghGaW5kVHlwZRIeCgpFeHBlcmllbmNlGAcgASgFUgpFeHBlcmllbmNl');
 
 @$core.Deprecated('Use updateHobbyResponseDescriptor instead')

@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'lover.pb.dart' as $26;
+import 'lover.pb.dart' as $27;
 
 /// Create
 class CreateLoverRequest extends $pb.GeneratedMessage {
@@ -21,10 +21,10 @@ class CreateLoverRequest extends $pb.GeneratedMessage {
     $core.String? sessionID,
     $core.int? minAge,
     $core.int? maxAge,
-    $core.String? city,
+    $core.Iterable<$core.String>? city,
     $core.String? gender,
     $core.String? sexual,
-    $core.String? speaklanguage,
+    $core.Iterable<$core.String>? speaklanguage,
   }) {
     final $result = create();
     if (sessionID != null) {
@@ -37,7 +37,7 @@ class CreateLoverRequest extends $pb.GeneratedMessage {
       $result.maxAge = maxAge;
     }
     if (city != null) {
-      $result.city = city;
+      $result.city.addAll(city);
     }
     if (gender != null) {
       $result.gender = gender;
@@ -46,7 +46,7 @@ class CreateLoverRequest extends $pb.GeneratedMessage {
       $result.sexual = sexual;
     }
     if (speaklanguage != null) {
-      $result.speaklanguage = speaklanguage;
+      $result.speaklanguage.addAll(speaklanguage);
     }
     return $result;
   }
@@ -58,10 +58,10 @@ class CreateLoverRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'MinAge', $pb.PbFieldType.O3, protoName: 'MinAge')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'MaxAge', $pb.PbFieldType.O3, protoName: 'MaxAge')
-    ..aOS(4, _omitFieldNames ? '' : 'City', protoName: 'City')
+    ..pPS(4, _omitFieldNames ? '' : 'City', protoName: 'City')
     ..aOS(5, _omitFieldNames ? '' : 'Gender', protoName: 'Gender')
     ..aOS(6, _omitFieldNames ? '' : 'Sexual', protoName: 'Sexual')
-    ..aOS(7, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
+    ..pPS(7, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
     ..hasRequiredFields = false
   ;
 
@@ -114,13 +114,7 @@ class CreateLoverRequest extends $pb.GeneratedMessage {
   void clearMaxAge() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get city => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set city($core.String v) { $_setString(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasCity() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearCity() => clearField(4);
+  $core.List<$core.String> get city => $_getList(3);
 
   @$pb.TagNumber(5)
   $core.String get gender => $_getSZ(4);
@@ -141,18 +135,12 @@ class CreateLoverRequest extends $pb.GeneratedMessage {
   void clearSexual() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.String get speaklanguage => $_getSZ(6);
-  @$pb.TagNumber(7)
-  set speaklanguage($core.String v) { $_setString(6, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasSpeaklanguage() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearSpeaklanguage() => clearField(7);
+  $core.List<$core.String> get speaklanguage => $_getList(6);
 }
 
 class CreateLoverResponse extends $pb.GeneratedMessage {
   factory CreateLoverResponse({
-    $26.Lover? l,
+    $27.Lover? l,
   }) {
     final $result = create();
     if (l != null) {
@@ -165,7 +153,7 @@ class CreateLoverResponse extends $pb.GeneratedMessage {
   factory CreateLoverResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateLoverResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$26.Lover>(1, _omitFieldNames ? '' : 'l', subBuilder: $26.Lover.create)
+    ..aOM<$27.Lover>(1, _omitFieldNames ? '' : 'l', subBuilder: $27.Lover.create)
     ..hasRequiredFields = false
   ;
 
@@ -191,15 +179,15 @@ class CreateLoverResponse extends $pb.GeneratedMessage {
   static CreateLoverResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $26.Lover get l => $_getN(0);
+  $27.Lover get l => $_getN(0);
   @$pb.TagNumber(1)
-  set l($26.Lover v) { setField(1, v); }
+  set l($27.Lover v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasL() => $_has(0);
   @$pb.TagNumber(1)
   void clearL() => clearField(1);
   @$pb.TagNumber(1)
-  $26.Lover ensureL() => $_ensure(0);
+  $27.Lover ensureL() => $_ensure(0);
 }
 
 /// Get
@@ -255,7 +243,7 @@ class GetLoverRequest extends $pb.GeneratedMessage {
 
 class GetLoverResponse extends $pb.GeneratedMessage {
   factory GetLoverResponse({
-    $26.Lover? l,
+    $27.Lover? l,
   }) {
     final $result = create();
     if (l != null) {
@@ -268,7 +256,7 @@ class GetLoverResponse extends $pb.GeneratedMessage {
   factory GetLoverResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetLoverResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$26.Lover>(1, _omitFieldNames ? '' : 'l', subBuilder: $26.Lover.create)
+    ..aOM<$27.Lover>(1, _omitFieldNames ? '' : 'l', subBuilder: $27.Lover.create)
     ..hasRequiredFields = false
   ;
 
@@ -294,15 +282,15 @@ class GetLoverResponse extends $pb.GeneratedMessage {
   static GetLoverResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $26.Lover get l => $_getN(0);
+  $27.Lover get l => $_getN(0);
   @$pb.TagNumber(1)
-  set l($26.Lover v) { setField(1, v); }
+  set l($27.Lover v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasL() => $_has(0);
   @$pb.TagNumber(1)
   void clearL() => clearField(1);
   @$pb.TagNumber(1)
-  $26.Lover ensureL() => $_ensure(0);
+  $27.Lover ensureL() => $_ensure(0);
 }
 
 /// Update
@@ -311,10 +299,10 @@ class UpdateLoverRequest extends $pb.GeneratedMessage {
     $core.String? sessionID,
     $core.int? minAge,
     $core.int? maxAge,
-    $core.String? city,
+    $core.Iterable<$core.String>? city,
     $core.String? gender,
     $core.String? sexual,
-    $core.String? speaklanguage,
+    $core.Iterable<$core.String>? speaklanguage,
   }) {
     final $result = create();
     if (sessionID != null) {
@@ -327,7 +315,7 @@ class UpdateLoverRequest extends $pb.GeneratedMessage {
       $result.maxAge = maxAge;
     }
     if (city != null) {
-      $result.city = city;
+      $result.city.addAll(city);
     }
     if (gender != null) {
       $result.gender = gender;
@@ -336,7 +324,7 @@ class UpdateLoverRequest extends $pb.GeneratedMessage {
       $result.sexual = sexual;
     }
     if (speaklanguage != null) {
-      $result.speaklanguage = speaklanguage;
+      $result.speaklanguage.addAll(speaklanguage);
     }
     return $result;
   }
@@ -348,10 +336,10 @@ class UpdateLoverRequest extends $pb.GeneratedMessage {
     ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'MinAge', $pb.PbFieldType.O3, protoName: 'MinAge')
     ..a<$core.int>(3, _omitFieldNames ? '' : 'MaxAge', $pb.PbFieldType.O3, protoName: 'MaxAge')
-    ..aOS(4, _omitFieldNames ? '' : 'City', protoName: 'City')
+    ..pPS(4, _omitFieldNames ? '' : 'City', protoName: 'City')
     ..aOS(5, _omitFieldNames ? '' : 'Gender', protoName: 'Gender')
     ..aOS(6, _omitFieldNames ? '' : 'Sexual', protoName: 'Sexual')
-    ..aOS(7, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
+    ..pPS(7, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
     ..hasRequiredFields = false
   ;
 
@@ -404,13 +392,7 @@ class UpdateLoverRequest extends $pb.GeneratedMessage {
   void clearMaxAge() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get city => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set city($core.String v) { $_setString(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasCity() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearCity() => clearField(4);
+  $core.List<$core.String> get city => $_getList(3);
 
   @$pb.TagNumber(5)
   $core.String get gender => $_getSZ(4);
@@ -431,18 +413,12 @@ class UpdateLoverRequest extends $pb.GeneratedMessage {
   void clearSexual() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.String get speaklanguage => $_getSZ(6);
-  @$pb.TagNumber(7)
-  set speaklanguage($core.String v) { $_setString(6, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasSpeaklanguage() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearSpeaklanguage() => clearField(7);
+  $core.List<$core.String> get speaklanguage => $_getList(6);
 }
 
 class UpdateLoverResponse extends $pb.GeneratedMessage {
   factory UpdateLoverResponse({
-    $26.Lover? l,
+    $27.Lover? l,
   }) {
     final $result = create();
     if (l != null) {
@@ -455,7 +431,7 @@ class UpdateLoverResponse extends $pb.GeneratedMessage {
   factory UpdateLoverResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateLoverResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$26.Lover>(1, _omitFieldNames ? '' : 'l', subBuilder: $26.Lover.create)
+    ..aOM<$27.Lover>(1, _omitFieldNames ? '' : 'l', subBuilder: $27.Lover.create)
     ..hasRequiredFields = false
   ;
 
@@ -481,15 +457,15 @@ class UpdateLoverResponse extends $pb.GeneratedMessage {
   static UpdateLoverResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $26.Lover get l => $_getN(0);
+  $27.Lover get l => $_getN(0);
   @$pb.TagNumber(1)
-  set l($26.Lover v) { setField(1, v); }
+  set l($27.Lover v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasL() => $_has(0);
   @$pb.TagNumber(1)
   void clearL() => clearField(1);
   @$pb.TagNumber(1)
-  $26.Lover ensureL() => $_ensure(0);
+  $27.Lover ensureL() => $_ensure(0);
 }
 
 /// Delete

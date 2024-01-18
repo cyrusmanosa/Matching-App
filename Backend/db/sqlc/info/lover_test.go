@@ -15,14 +15,15 @@ func TestCreateLoverRequest(t *testing.T) {
 }
 
 func CreateRandomLoverRequest(t *testing.T, user Fixinformation) Lover {
+	address := []string{util.RandomAddress(user.Country), util.RandomAddress(user.Country), util.RandomAddress(user.Country)}
 	Lover := CreateLoverParams{
 		UserID:        user.UserID,
 		MinAge:        int32(gofakeit.Number(20, 60)),
 		MaxAge:        int32(gofakeit.Number(20, 60)),
-		City:          gofakeit.City(),
-		Gender:        gofakeit.Gender(),
+		City:          util.SwitchLanguage(user.Country),
+		Gender:        util.RandomGender(),
 		Sexual:        util.RandomSexual(),
-		Speaklanguage: gofakeit.Language(),
+		Speaklanguage: address,
 	}
 
 	L, err := testinfoQueries.CreateLover(context.Background(), Lover)
@@ -43,15 +44,15 @@ func CreateRandomLoverRequest(t *testing.T, user Fixinformation) Lover {
 func TestUpdateUserLover(t *testing.T) {
 	arg := CreateRandomUserFixInformaion(t)
 	old := CreateRandomLoverRequest(t, arg)
-
+	Naddress := []string{util.RandomAddress(arg.Country), util.RandomAddress(arg.Country), util.RandomAddress(arg.Country)}
 	Lover := UpdateLoverParams{
-		UserID:        old.UserID,
+		UserID:        arg.UserID,
 		MinAge:        int32(gofakeit.Number(20, 60)),
 		MaxAge:        int32(gofakeit.Number(20, 60)),
-		City:          gofakeit.City(),
-		Gender:        gofakeit.Gender(),
+		City:          Naddress,
+		Gender:        util.RandomGender(),
 		Sexual:        util.RandomSexual(),
-		Speaklanguage: gofakeit.Language(),
+		Speaklanguage: util.SwitchLanguage(arg.Country),
 	}
 
 	UpdateL, err := testinfoQueries.UpdateLover(context.Background(), Lover)

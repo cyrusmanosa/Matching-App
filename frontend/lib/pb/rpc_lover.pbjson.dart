@@ -20,19 +20,19 @@ const CreateLoverRequest$json = {
     {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
     {'1': 'MinAge', '3': 2, '4': 1, '5': 5, '10': 'MinAge'},
     {'1': 'MaxAge', '3': 3, '4': 1, '5': 5, '10': 'MaxAge'},
-    {'1': 'City', '3': 4, '4': 1, '5': 9, '10': 'City'},
+    {'1': 'City', '3': 4, '4': 3, '5': 9, '10': 'City'},
     {'1': 'Gender', '3': 5, '4': 1, '5': 9, '10': 'Gender'},
     {'1': 'Sexual', '3': 6, '4': 1, '5': 9, '10': 'Sexual'},
-    {'1': 'Speaklanguage', '3': 7, '4': 1, '5': 9, '10': 'Speaklanguage'},
+    {'1': 'Speaklanguage', '3': 7, '4': 3, '5': 9, '10': 'Speaklanguage'},
   ],
 };
 
 /// Descriptor for `CreateLoverRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createLoverRequestDescriptor = $convert.base64Decode(
     'ChJDcmVhdGVMb3ZlclJlcXVlc3QSHAoJU2Vzc2lvbklEGAEgASgJUglTZXNzaW9uSUQSFgoGTW'
-    'luQWdlGAIgASgFUgZNaW5BZ2USFgoGTWF4QWdlGAMgASgFUgZNYXhBZ2USEgoEQ2l0eRgEIAEo'
+    'luQWdlGAIgASgFUgZNaW5BZ2USFgoGTWF4QWdlGAMgASgFUgZNYXhBZ2USEgoEQ2l0eRgEIAMo'
     'CVIEQ2l0eRIWCgZHZW5kZXIYBSABKAlSBkdlbmRlchIWCgZTZXh1YWwYBiABKAlSBlNleHVhbB'
-    'IkCg1TcGVha2xhbmd1YWdlGAcgASgJUg1TcGVha2xhbmd1YWdl');
+    'IkCg1TcGVha2xhbmd1YWdlGAcgAygJUg1TcGVha2xhbmd1YWdl');
 
 @$core.Deprecated('Use createLoverResponseDescriptor instead')
 const CreateLoverResponse$json = {
@@ -77,19 +77,19 @@ const UpdateLoverRequest$json = {
     {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
     {'1': 'MinAge', '3': 2, '4': 1, '5': 5, '10': 'MinAge'},
     {'1': 'MaxAge', '3': 3, '4': 1, '5': 5, '10': 'MaxAge'},
-    {'1': 'City', '3': 4, '4': 1, '5': 9, '10': 'City'},
+    {'1': 'City', '3': 4, '4': 3, '5': 9, '10': 'City'},
     {'1': 'Gender', '3': 5, '4': 1, '5': 9, '10': 'Gender'},
     {'1': 'Sexual', '3': 6, '4': 1, '5': 9, '10': 'Sexual'},
-    {'1': 'Speaklanguage', '3': 7, '4': 1, '5': 9, '10': 'Speaklanguage'},
+    {'1': 'Speaklanguage', '3': 7, '4': 3, '5': 9, '10': 'Speaklanguage'},
   ],
 };
 
 /// Descriptor for `UpdateLoverRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateLoverRequestDescriptor = $convert.base64Decode(
     'ChJVcGRhdGVMb3ZlclJlcXVlc3QSHAoJU2Vzc2lvbklEGAEgASgJUglTZXNzaW9uSUQSFgoGTW'
-    'luQWdlGAIgASgFUgZNaW5BZ2USFgoGTWF4QWdlGAMgASgFUgZNYXhBZ2USEgoEQ2l0eRgEIAEo'
+    'luQWdlGAIgASgFUgZNaW5BZ2USFgoGTWF4QWdlGAMgASgFUgZNYXhBZ2USEgoEQ2l0eRgEIAMo'
     'CVIEQ2l0eRIWCgZHZW5kZXIYBSABKAlSBkdlbmRlchIWCgZTZXh1YWwYBiABKAlSBlNleHVhbB'
-    'IkCg1TcGVha2xhbmd1YWdlGAcgASgJUg1TcGVha2xhbmd1YWdl');
+    'IkCg1TcGVha2xhbmd1YWdlGAcgAygJUg1TcGVha2xhbmd1YWdl');
 
 @$core.Deprecated('Use updateLoverResponseDescriptor instead')
 const UpdateLoverResponse$json = {

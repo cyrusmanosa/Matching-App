@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $16;
+import 'google/protobuf/timestamp.pb.dart' as $17;
 
 class Fix extends $pb.GeneratedMessage {
   factory Fix({
@@ -26,7 +26,7 @@ class Fix extends $pb.GeneratedMessage {
     $core.int? age,
     $core.String? constellation,
     $core.bool? certification,
-    $16.Timestamp? createAt,
+    $17.Timestamp? createAt,
   }) {
     final $result = create();
     if (firstName != null) {
@@ -75,7 +75,7 @@ class Fix extends $pb.GeneratedMessage {
     ..a<$core.int>(7, _omitFieldNames ? '' : 'age', $pb.PbFieldType.O3)
     ..aOS(8, _omitFieldNames ? '' : 'constellation')
     ..aOB(9, _omitFieldNames ? '' : 'certification')
-    ..aOM<$16.Timestamp>(10, _omitFieldNames ? '' : 'CreateAt', protoName: 'CreateAt', subBuilder: $16.Timestamp.create)
+    ..aOM<$17.Timestamp>(10, _omitFieldNames ? '' : 'CreateAt', protoName: 'CreateAt', subBuilder: $17.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -182,15 +182,15 @@ class Fix extends $pb.GeneratedMessage {
   void clearCertification() => clearField(9);
 
   @$pb.TagNumber(10)
-  $16.Timestamp get createAt => $_getN(9);
+  $17.Timestamp get createAt => $_getN(9);
   @$pb.TagNumber(10)
-  set createAt($16.Timestamp v) { setField(10, v); }
+  set createAt($17.Timestamp v) { setField(10, v); }
   @$pb.TagNumber(10)
   $core.bool hasCreateAt() => $_has(9);
   @$pb.TagNumber(10)
   void clearCreateAt() => clearField(10);
   @$pb.TagNumber(10)
-  $16.Timestamp ensureCreateAt() => $_ensure(9);
+  $17.Timestamp ensureCreateAt() => $_ensure(9);
 }
 
 

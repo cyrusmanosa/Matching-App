@@ -168,23 +168,18 @@ func (server *Server) UpdateChatRecord(ctx context.Context, req *pb.UpdateChatRe
 	return rsp, nil
 }
 
-func (server *Server) DeleteChatRecord(ctx context.Context, req *pb.DeleteChatRecordRequest) (*emptypb.Empty, error) {
+// func (server *Server) DeleteChatRecord(ctx context.Context, req *pb.DeleteChatTableRequest) (*emptypb.Empty, error) {
 
-	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
+// 	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
 
-	d := ch.DeleteRecordParams{
-		TargetID:  req.GetTargetID(),
-		CreatedAt: req.GetCreateAt().AsTime(),
-	}
+// 	err := server.chatStore.DeleteRecord(ctx, d, tablename)
+// 	if err != nil {
+// 		errCode := db.ErrorCode(err)
+// 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+// 			return nil, status.Errorf(codes.NotFound, "user not found")
+// 		}
+// 		return nil, status.Errorf(codes.Internal, "failed to input UserID: %s", err)
+// 	}
 
-	err := server.chatStore.DeleteRecord(ctx, d, tablename)
-	if err != nil {
-		errCode := db.ErrorCode(err)
-		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
-			return nil, status.Errorf(codes.NotFound, "user not found")
-		}
-		return nil, status.Errorf(codes.Internal, "failed to input UserID: %s", err)
-	}
-
-	return &emptypb.Empty{}, nil
-}
+// 	return &emptypb.Empty{}, nil
+// }

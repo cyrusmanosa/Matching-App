@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $16;
+import 'google/protobuf/timestamp.pb.dart' as $17;
 
 class CanChange extends $pb.GeneratedMessage {
   factory CanChange({
@@ -23,14 +23,17 @@ class CanChange extends $pb.GeneratedMessage {
     $core.String? sexual,
     $core.int? height,
     $core.int? weight,
-    $core.String? speaklanguage,
+    $core.Iterable<$core.String>? speaklanguage,
     $core.String? education,
     $core.String? job,
     $core.int? annualSalary,
     $core.String? sociability,
+    $core.String? hobbyType,
+    $core.int? experience,
+    $core.String? accompanyType,
     $core.String? religious,
     $core.String? introduce,
-    $16.Timestamp? infoChangedAt,
+    $17.Timestamp? infoChangedAt,
   }) {
     final $result = create();
     if (userID != null) {
@@ -52,7 +55,7 @@ class CanChange extends $pb.GeneratedMessage {
       $result.weight = weight;
     }
     if (speaklanguage != null) {
-      $result.speaklanguage = speaklanguage;
+      $result.speaklanguage.addAll(speaklanguage);
     }
     if (education != null) {
       $result.education = education;
@@ -65,6 +68,15 @@ class CanChange extends $pb.GeneratedMessage {
     }
     if (sociability != null) {
       $result.sociability = sociability;
+    }
+    if (hobbyType != null) {
+      $result.hobbyType = hobbyType;
+    }
+    if (experience != null) {
+      $result.experience = experience;
+    }
+    if (accompanyType != null) {
+      $result.accompanyType = accompanyType;
     }
     if (religious != null) {
       $result.religious = religious;
@@ -88,14 +100,17 @@ class CanChange extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'Sexual', protoName: 'Sexual')
     ..a<$core.int>(5, _omitFieldNames ? '' : 'Height', $pb.PbFieldType.O3, protoName: 'Height')
     ..a<$core.int>(6, _omitFieldNames ? '' : 'Weight', $pb.PbFieldType.O3, protoName: 'Weight')
-    ..aOS(7, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
+    ..pPS(7, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
     ..aOS(8, _omitFieldNames ? '' : 'Education', protoName: 'Education')
     ..aOS(9, _omitFieldNames ? '' : 'Job', protoName: 'Job')
     ..a<$core.int>(10, _omitFieldNames ? '' : 'AnnualSalary', $pb.PbFieldType.O3, protoName: 'AnnualSalary')
     ..aOS(11, _omitFieldNames ? '' : 'Sociability', protoName: 'Sociability')
-    ..aOS(12, _omitFieldNames ? '' : 'Religious', protoName: 'Religious')
-    ..aOS(13, _omitFieldNames ? '' : 'Introduce', protoName: 'Introduce')
-    ..aOM<$16.Timestamp>(14, _omitFieldNames ? '' : 'InfoChangedAt', protoName: 'InfoChangedAt', subBuilder: $16.Timestamp.create)
+    ..aOS(12, _omitFieldNames ? '' : 'hobbyType', protoName: 'hobbyType')
+    ..a<$core.int>(13, _omitFieldNames ? '' : 'Experience', $pb.PbFieldType.O3, protoName: 'Experience')
+    ..aOS(14, _omitFieldNames ? '' : 'AccompanyType', protoName: 'AccompanyType')
+    ..aOS(15, _omitFieldNames ? '' : 'Religious', protoName: 'Religious')
+    ..aOS(16, _omitFieldNames ? '' : 'Introduce', protoName: 'Introduce')
+    ..aOM<$17.Timestamp>(17, _omitFieldNames ? '' : 'InfoChangedAt', protoName: 'InfoChangedAt', subBuilder: $17.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -175,13 +190,7 @@ class CanChange extends $pb.GeneratedMessage {
   void clearWeight() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.String get speaklanguage => $_getSZ(6);
-  @$pb.TagNumber(7)
-  set speaklanguage($core.String v) { $_setString(6, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasSpeaklanguage() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearSpeaklanguage() => clearField(7);
+  $core.List<$core.String> get speaklanguage => $_getList(6);
 
   @$pb.TagNumber(8)
   $core.String get education => $_getSZ(7);
@@ -220,33 +229,60 @@ class CanChange extends $pb.GeneratedMessage {
   void clearSociability() => clearField(11);
 
   @$pb.TagNumber(12)
-  $core.String get religious => $_getSZ(11);
+  $core.String get hobbyType => $_getSZ(11);
   @$pb.TagNumber(12)
-  set religious($core.String v) { $_setString(11, v); }
+  set hobbyType($core.String v) { $_setString(11, v); }
   @$pb.TagNumber(12)
-  $core.bool hasReligious() => $_has(11);
+  $core.bool hasHobbyType() => $_has(11);
   @$pb.TagNumber(12)
-  void clearReligious() => clearField(12);
+  void clearHobbyType() => clearField(12);
 
   @$pb.TagNumber(13)
-  $core.String get introduce => $_getSZ(12);
+  $core.int get experience => $_getIZ(12);
   @$pb.TagNumber(13)
-  set introduce($core.String v) { $_setString(12, v); }
+  set experience($core.int v) { $_setSignedInt32(12, v); }
   @$pb.TagNumber(13)
-  $core.bool hasIntroduce() => $_has(12);
+  $core.bool hasExperience() => $_has(12);
   @$pb.TagNumber(13)
-  void clearIntroduce() => clearField(13);
+  void clearExperience() => clearField(13);
 
   @$pb.TagNumber(14)
-  $16.Timestamp get infoChangedAt => $_getN(13);
+  $core.String get accompanyType => $_getSZ(13);
   @$pb.TagNumber(14)
-  set infoChangedAt($16.Timestamp v) { setField(14, v); }
+  set accompanyType($core.String v) { $_setString(13, v); }
   @$pb.TagNumber(14)
-  $core.bool hasInfoChangedAt() => $_has(13);
+  $core.bool hasAccompanyType() => $_has(13);
   @$pb.TagNumber(14)
-  void clearInfoChangedAt() => clearField(14);
-  @$pb.TagNumber(14)
-  $16.Timestamp ensureInfoChangedAt() => $_ensure(13);
+  void clearAccompanyType() => clearField(14);
+
+  @$pb.TagNumber(15)
+  $core.String get religious => $_getSZ(14);
+  @$pb.TagNumber(15)
+  set religious($core.String v) { $_setString(14, v); }
+  @$pb.TagNumber(15)
+  $core.bool hasReligious() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearReligious() => clearField(15);
+
+  @$pb.TagNumber(16)
+  $core.String get introduce => $_getSZ(15);
+  @$pb.TagNumber(16)
+  set introduce($core.String v) { $_setString(15, v); }
+  @$pb.TagNumber(16)
+  $core.bool hasIntroduce() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearIntroduce() => clearField(16);
+
+  @$pb.TagNumber(17)
+  $17.Timestamp get infoChangedAt => $_getN(16);
+  @$pb.TagNumber(17)
+  set infoChangedAt($17.Timestamp v) { setField(17, v); }
+  @$pb.TagNumber(17)
+  $core.bool hasInfoChangedAt() => $_has(16);
+  @$pb.TagNumber(17)
+  void clearInfoChangedAt() => clearField(17);
+  @$pb.TagNumber(17)
+  $17.Timestamp ensureInfoChangedAt() => $_ensure(16);
 }
 
 

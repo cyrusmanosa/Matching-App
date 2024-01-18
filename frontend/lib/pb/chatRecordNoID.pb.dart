@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $16;
+import 'google/protobuf/timestamp.pb.dart' as $17;
 
 class ChatRecordNoID extends $pb.GeneratedMessage {
   factory ChatRecordNoID({
@@ -21,7 +21,7 @@ class ChatRecordNoID extends $pb.GeneratedMessage {
     $core.String? mediaType,
     $core.String? media,
     $core.bool? isread,
-    $16.Timestamp? createdAt,
+    $17.Timestamp? createdAt,
   }) {
     final $result = create();
     if (roleType != null) {
@@ -50,7 +50,7 @@ class ChatRecordNoID extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'MediaType', protoName: 'MediaType')
     ..aOS(3, _omitFieldNames ? '' : 'Media', protoName: 'Media')
     ..aOB(4, _omitFieldNames ? '' : 'Isread', protoName: 'Isread')
-    ..aOM<$16.Timestamp>(5, _omitFieldNames ? '' : 'CreatedAt', protoName: 'CreatedAt', subBuilder: $16.Timestamp.create)
+    ..aOM<$17.Timestamp>(5, _omitFieldNames ? '' : 'CreatedAt', protoName: 'CreatedAt', subBuilder: $17.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -112,15 +112,15 @@ class ChatRecordNoID extends $pb.GeneratedMessage {
   void clearIsread() => clearField(4);
 
   @$pb.TagNumber(5)
-  $16.Timestamp get createdAt => $_getN(4);
+  $17.Timestamp get createdAt => $_getN(4);
   @$pb.TagNumber(5)
-  set createdAt($16.Timestamp v) { setField(5, v); }
+  set createdAt($17.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCreatedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearCreatedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $16.Timestamp ensureCreatedAt() => $_ensure(4);
+  $17.Timestamp ensureCreatedAt() => $_ensure(4);
 }
 
 

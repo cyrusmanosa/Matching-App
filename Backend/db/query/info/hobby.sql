@@ -33,3 +33,4 @@ RETURNING *;
 -- name: DeleteHobby :exec
 DELETE FROM hobby 
 WHERE user_id = $1;
+

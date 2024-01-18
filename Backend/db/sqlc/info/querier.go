@@ -13,6 +13,9 @@ import (
 type InfoQuerier interface {
 	AllChangeTargetUserList(ctx context.Context) ([]Changetargetuser, error)
 	AllTargetUserList(ctx context.Context) ([]Targetlist, error)
+	CanChangeSearchAccompany(ctx context.Context, arg CanChangeSearchAccompanyParams) ([]Canchangeinformation, error)
+	CanChangeSearchHobby(ctx context.Context, arg CanChangeSearchHobbyParams) ([]Canchangeinformation, error)
+	CanChangeSearchLover(ctx context.Context, arg CanChangeSearchLoverParams) ([]Canchangeinformation, error)
 	CreateAccompany(ctx context.Context, arg CreateAccompanyParams) (Accompany, error)
 	CreateChangeTargetUser(ctx context.Context, arg CreateChangeTargetUserParams) (Changetargetuser, error)
 	CreateContact(ctx context.Context, arg CreateContactParams) (Contact, error)
@@ -32,6 +35,9 @@ type InfoQuerier interface {
 	DeleteLover(ctx context.Context, userID int32) error
 	DeleteTargetList(ctx context.Context, userID int32) error
 	DeleteUser(ctx context.Context, userID int32) error
+	FixSearchAccompany(ctx context.Context, arg FixSearchAccompanyParams) ([]Fixinformation, error)
+	FixSearchHobby(ctx context.Context, arg FixSearchHobbyParams) ([]Fixinformation, error)
+	FixSearchLover(ctx context.Context, arg FixSearchLoverParams) ([]Fixinformation, error)
 	GetAccompany(ctx context.Context, userID int32) (Accompany, error)
 	GetChangeTargetUserList(ctx context.Context, userID int32) (Changetargetuser, error)
 	GetHobby(ctx context.Context, userID int32) (Hobby, error)

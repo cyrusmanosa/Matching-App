@@ -1,4 +1,5 @@
 import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:flutter/material.dart';
 
 class CustomMultiSelectDropDownBar extends StatefulWidget {
@@ -75,7 +76,11 @@ class _CustomMultiSelectDropDownBarState extends State<CustomMultiSelectDropDown
       if (selectedValues.contains(option)) {
         selectedValues.remove(option);
       } else if (selectedValues.length <= widget.itemArray!.length) {
-        selectedValues.add(option);
+        if (selectedValues.length < 3) {
+          selectedValues.add(option);
+        } else {
+          showErrorDialog(context, "選択項目は最大限３個です。");
+        }
       }
     });
     widget.onChanged?.call(selectedValues);
@@ -87,7 +92,7 @@ class _CustomMultiSelectDropDownBarState extends State<CustomMultiSelectDropDown
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return SizedBox(
-      height: widget.height ?? mediaH / 13.1,
+      height: widget.height ?? mediaH / 13,
       width: widget.width ?? mediaW / 1.2,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,7 +115,9 @@ class _CustomMultiSelectDropDownBarState extends State<CustomMultiSelectDropDown
                 ),
               );
             }).toList(),
-            onChanged: (value) {},
+            onChanged: (value) {
+              widget.onChanged?.call(selectedValues);
+            },
           ),
           Padding(
             padding: EdgeInsets.only(top: mediaH / 300),

@@ -92,13 +92,17 @@ evans:
 # package pb
 # service Backend
 
-resetdb:
+resetdb_info:
 	make dropdb_info 
 	make createdb_info 
 	make info_migrateup
+resetdb_chat:
+	make dropdb_chat
+	make createdb_chat
+	make chat_migrateup
 
 
 
 .PHONY: dockernetwork postgres createdb_info dropdb_info createdb_chat dropdb_chat test sqlc server 
 		createmigrate_info info_migrateup info_migrateup1 info_migrateup2 info_migratedown info_migratedown1 info_migratedown2
-		createmigrate_chat chat_migrateup chat_migratedown mock db_docs db_schema protob resetdb
+		createmigrate_chat chat_migrateup chat_migratedown mock db_docs db_schema protob resetdb_info resetdb_chat

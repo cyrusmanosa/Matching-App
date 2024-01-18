@@ -13,16 +13,16 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $16;
+import 'google/protobuf/timestamp.pb.dart' as $17;
 
 class Accompany extends $pb.GeneratedMessage {
   factory Accompany({
     $core.int? userID,
     $core.int? era,
-    $core.String? speaklanguage,
+    $core.Iterable<$core.String>? speaklanguage,
     $core.String? findType,
     $core.String? sociability,
-    $16.Timestamp? infoChangedAt,
+    $17.Timestamp? infoChangedAt,
   }) {
     final $result = create();
     if (userID != null) {
@@ -32,7 +32,7 @@ class Accompany extends $pb.GeneratedMessage {
       $result.era = era;
     }
     if (speaklanguage != null) {
-      $result.speaklanguage = speaklanguage;
+      $result.speaklanguage.addAll(speaklanguage);
     }
     if (findType != null) {
       $result.findType = findType;
@@ -52,10 +52,10 @@ class Accompany extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Accompany', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'UserID', $pb.PbFieldType.O3, protoName: 'UserID')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'Era', $pb.PbFieldType.O3, protoName: 'Era')
-    ..aOS(3, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
+    ..pPS(3, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
     ..aOS(4, _omitFieldNames ? '' : 'FindType', protoName: 'FindType')
     ..aOS(5, _omitFieldNames ? '' : 'Sociability', protoName: 'Sociability')
-    ..aOM<$16.Timestamp>(6, _omitFieldNames ? '' : 'InfoChangedAt', protoName: 'InfoChangedAt', subBuilder: $16.Timestamp.create)
+    ..aOM<$17.Timestamp>(6, _omitFieldNames ? '' : 'InfoChangedAt', protoName: 'InfoChangedAt', subBuilder: $17.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -99,13 +99,7 @@ class Accompany extends $pb.GeneratedMessage {
   void clearEra() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get speaklanguage => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set speaklanguage($core.String v) { $_setString(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasSpeaklanguage() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearSpeaklanguage() => clearField(3);
+  $core.List<$core.String> get speaklanguage => $_getList(2);
 
   @$pb.TagNumber(4)
   $core.String get findType => $_getSZ(3);
@@ -126,15 +120,15 @@ class Accompany extends $pb.GeneratedMessage {
   void clearSociability() => clearField(5);
 
   @$pb.TagNumber(6)
-  $16.Timestamp get infoChangedAt => $_getN(5);
+  $17.Timestamp get infoChangedAt => $_getN(5);
   @$pb.TagNumber(6)
-  set infoChangedAt($16.Timestamp v) { setField(6, v); }
+  set infoChangedAt($17.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasInfoChangedAt() => $_has(5);
   @$pb.TagNumber(6)
   void clearInfoChangedAt() => clearField(6);
   @$pb.TagNumber(6)
-  $16.Timestamp ensureInfoChangedAt() => $_ensure(5);
+  $17.Timestamp ensureInfoChangedAt() => $_ensure(5);
 }
 
 

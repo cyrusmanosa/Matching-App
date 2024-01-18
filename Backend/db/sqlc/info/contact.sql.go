@@ -25,7 +25,7 @@ type CreateContactParams struct {
 	UserID      int32       `json:"user_id"`
 	ContactType string      `json:"contact_type"`
 	Message     string      `json:"message"`
-	Status      string`json:"status"`
+	Status      string `json:"status"`
 }
 
 func (q *Queries) CreateContact(ctx context.Context, arg CreateContactParams) (Contact, error) {
@@ -117,7 +117,7 @@ RETURNING contact_id, user_id, contact_type, message, status, contact_at
 
 type UpdateUserContactParams struct {
 	ContactID int32       `json:"contact_id"`
-	Status    string`json:"status"`
+	Status    string `json:"status"`
 }
 
 func (q *Queries) UpdateUserContact(ctx context.Context, arg UpdateUserContactParams) (Contact, error) {

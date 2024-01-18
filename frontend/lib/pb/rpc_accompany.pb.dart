@@ -13,14 +13,14 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'accompany.pb.dart' as $17;
+import 'accompany.pb.dart' as $18;
 
 /// Create
 class CreateAccompanyRequest extends $pb.GeneratedMessage {
   factory CreateAccompanyRequest({
     $core.String? sessionID,
     $core.int? era,
-    $core.String? speaklanguage,
+    $core.Iterable<$core.String>? speaklanguage,
     $core.String? findType,
     $core.String? sociability,
   }) {
@@ -32,7 +32,7 @@ class CreateAccompanyRequest extends $pb.GeneratedMessage {
       $result.era = era;
     }
     if (speaklanguage != null) {
-      $result.speaklanguage = speaklanguage;
+      $result.speaklanguage.addAll(speaklanguage);
     }
     if (findType != null) {
       $result.findType = findType;
@@ -49,7 +49,7 @@ class CreateAccompanyRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateAccompanyRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'Era', $pb.PbFieldType.O3, protoName: 'Era')
-    ..aOS(3, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
+    ..pPS(3, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
     ..aOS(4, _omitFieldNames ? '' : 'FindType', protoName: 'FindType')
     ..aOS(5, _omitFieldNames ? '' : 'Sociability', protoName: 'Sociability')
     ..hasRequiredFields = false
@@ -95,13 +95,7 @@ class CreateAccompanyRequest extends $pb.GeneratedMessage {
   void clearEra() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get speaklanguage => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set speaklanguage($core.String v) { $_setString(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasSpeaklanguage() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearSpeaklanguage() => clearField(3);
+  $core.List<$core.String> get speaklanguage => $_getList(2);
 
   @$pb.TagNumber(4)
   $core.String get findType => $_getSZ(3);
@@ -124,7 +118,7 @@ class CreateAccompanyRequest extends $pb.GeneratedMessage {
 
 class CreateAccompanyResponse extends $pb.GeneratedMessage {
   factory CreateAccompanyResponse({
-    $17.Accompany? ac,
+    $18.Accompany? ac,
   }) {
     final $result = create();
     if (ac != null) {
@@ -137,7 +131,7 @@ class CreateAccompanyResponse extends $pb.GeneratedMessage {
   factory CreateAccompanyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateAccompanyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$17.Accompany>(1, _omitFieldNames ? '' : 'ac', subBuilder: $17.Accompany.create)
+    ..aOM<$18.Accompany>(1, _omitFieldNames ? '' : 'ac', subBuilder: $18.Accompany.create)
     ..hasRequiredFields = false
   ;
 
@@ -163,15 +157,15 @@ class CreateAccompanyResponse extends $pb.GeneratedMessage {
   static CreateAccompanyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $17.Accompany get ac => $_getN(0);
+  $18.Accompany get ac => $_getN(0);
   @$pb.TagNumber(1)
-  set ac($17.Accompany v) { setField(1, v); }
+  set ac($18.Accompany v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAc() => $_has(0);
   @$pb.TagNumber(1)
   void clearAc() => clearField(1);
   @$pb.TagNumber(1)
-  $17.Accompany ensureAc() => $_ensure(0);
+  $18.Accompany ensureAc() => $_ensure(0);
 }
 
 /// Get
@@ -227,7 +221,7 @@ class GetAccompanyRequest extends $pb.GeneratedMessage {
 
 class GetAccompanyResponse extends $pb.GeneratedMessage {
   factory GetAccompanyResponse({
-    $17.Accompany? ac,
+    $18.Accompany? ac,
   }) {
     final $result = create();
     if (ac != null) {
@@ -240,7 +234,7 @@ class GetAccompanyResponse extends $pb.GeneratedMessage {
   factory GetAccompanyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetAccompanyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$17.Accompany>(1, _omitFieldNames ? '' : 'ac', subBuilder: $17.Accompany.create)
+    ..aOM<$18.Accompany>(1, _omitFieldNames ? '' : 'ac', subBuilder: $18.Accompany.create)
     ..hasRequiredFields = false
   ;
 
@@ -266,15 +260,15 @@ class GetAccompanyResponse extends $pb.GeneratedMessage {
   static GetAccompanyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $17.Accompany get ac => $_getN(0);
+  $18.Accompany get ac => $_getN(0);
   @$pb.TagNumber(1)
-  set ac($17.Accompany v) { setField(1, v); }
+  set ac($18.Accompany v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAc() => $_has(0);
   @$pb.TagNumber(1)
   void clearAc() => clearField(1);
   @$pb.TagNumber(1)
-  $17.Accompany ensureAc() => $_ensure(0);
+  $18.Accompany ensureAc() => $_ensure(0);
 }
 
 /// Update
@@ -282,7 +276,7 @@ class UpdateAccompanyRequest extends $pb.GeneratedMessage {
   factory UpdateAccompanyRequest({
     $core.String? sessionID,
     $core.int? era,
-    $core.String? speaklanguage,
+    $core.Iterable<$core.String>? speaklanguage,
     $core.String? findType,
     $core.String? sociability,
   }) {
@@ -294,7 +288,7 @@ class UpdateAccompanyRequest extends $pb.GeneratedMessage {
       $result.era = era;
     }
     if (speaklanguage != null) {
-      $result.speaklanguage = speaklanguage;
+      $result.speaklanguage.addAll(speaklanguage);
     }
     if (findType != null) {
       $result.findType = findType;
@@ -311,7 +305,7 @@ class UpdateAccompanyRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateAccompanyRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'Era', $pb.PbFieldType.O3, protoName: 'Era')
-    ..aOS(3, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
+    ..pPS(3, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
     ..aOS(4, _omitFieldNames ? '' : 'FindType', protoName: 'FindType')
     ..aOS(5, _omitFieldNames ? '' : 'Sociability', protoName: 'Sociability')
     ..hasRequiredFields = false
@@ -357,13 +351,7 @@ class UpdateAccompanyRequest extends $pb.GeneratedMessage {
   void clearEra() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get speaklanguage => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set speaklanguage($core.String v) { $_setString(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasSpeaklanguage() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearSpeaklanguage() => clearField(3);
+  $core.List<$core.String> get speaklanguage => $_getList(2);
 
   @$pb.TagNumber(4)
   $core.String get findType => $_getSZ(3);
@@ -386,7 +374,7 @@ class UpdateAccompanyRequest extends $pb.GeneratedMessage {
 
 class UpdateAccompanyResponse extends $pb.GeneratedMessage {
   factory UpdateAccompanyResponse({
-    $17.Accompany? ac,
+    $18.Accompany? ac,
   }) {
     final $result = create();
     if (ac != null) {
@@ -399,7 +387,7 @@ class UpdateAccompanyResponse extends $pb.GeneratedMessage {
   factory UpdateAccompanyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateAccompanyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$17.Accompany>(1, _omitFieldNames ? '' : 'ac', subBuilder: $17.Accompany.create)
+    ..aOM<$18.Accompany>(1, _omitFieldNames ? '' : 'ac', subBuilder: $18.Accompany.create)
     ..hasRequiredFields = false
   ;
 
@@ -425,15 +413,15 @@ class UpdateAccompanyResponse extends $pb.GeneratedMessage {
   static UpdateAccompanyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $17.Accompany get ac => $_getN(0);
+  $18.Accompany get ac => $_getN(0);
   @$pb.TagNumber(1)
-  set ac($17.Accompany v) { setField(1, v); }
+  set ac($18.Accompany v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAc() => $_has(0);
   @$pb.TagNumber(1)
   void clearAc() => clearField(1);
   @$pb.TagNumber(1)
-  $17.Accompany ensureAc() => $_ensure(0);
+  $18.Accompany ensureAc() => $_ensure(0);
 }
 
 /// Delete

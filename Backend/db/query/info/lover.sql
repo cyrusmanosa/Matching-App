@@ -33,3 +33,5 @@ RETURNING *;
 -- name: DeleteLover :exec
 DELETE FROM lover 
 WHERE user_id = $1;
+
+

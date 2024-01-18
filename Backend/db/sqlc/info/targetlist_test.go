@@ -12,14 +12,14 @@ import (
 
 func TestTargetUserList(t *testing.T) {
 	user := CreateRandomUserFixInformaion(t)
-	RandomTargetUserList(t, user)
-}
-
-func RandomTargetUserList(t *testing.T, user Fixinformation) Targetlist {
 	arg1 := CreateRandomUserFixInformaion(t)
 	arg2 := CreateRandomUserFixInformaion(t)
 	arg3 := CreateRandomUserFixInformaion(t)
 
+	CretaRandomTargetUserList(t, user, arg1, arg2, arg3)
+}
+
+func CretaRandomTargetUserList(t *testing.T, user, arg1, arg2, arg3 Fixinformation) Targetlist {
 	Targetlist := TargetUserListParams{
 		UserID:    user.UserID,
 		Target1ID: arg1.UserID,
@@ -47,7 +47,11 @@ func RandomTargetUserList(t *testing.T, user Fixinformation) Targetlist {
 
 func TestGetTargetUserList(t *testing.T) {
 	user := CreateRandomUserFixInformaion(t)
-	tl := RandomTargetUserList(t, user)
+	arg1 := CreateRandomUserFixInformaion(t)
+	arg2 := CreateRandomUserFixInformaion(t)
+	arg3 := CreateRandomUserFixInformaion(t)
+
+	tl := CretaRandomTargetUserList(t, user, arg1, arg2, arg3)
 
 	GetTL, err := testinfoQueries.GetTargetUserList(context.Background(), tl.UserID)
 	require.NoError(t, err)
@@ -66,7 +70,12 @@ func TestGetTargetUserList(t *testing.T) {
 func TestAllTargetUserList(t *testing.T) {
 	for i := 0; i < 10; i++ {
 		user := CreateRandomUserFixInformaion(t)
-		RandomTargetUserList(t, user)
+		arg1 := CreateRandomUserFixInformaion(t)
+		arg2 := CreateRandomUserFixInformaion(t)
+		arg3 := CreateRandomUserFixInformaion(t)
+
+		CretaRandomTargetUserList(t, user, arg1, arg2, arg3)
+
 	}
 
 	ListTL, err := testinfoQueries.AllTargetUserList(context.Background())
@@ -76,7 +85,11 @@ func TestAllTargetUserList(t *testing.T) {
 
 func TestDeleteTargetList(t *testing.T) {
 	user := CreateRandomUserFixInformaion(t)
-	tl := RandomTargetUserList(t, user)
+	arg1 := CreateRandomUserFixInformaion(t)
+	arg2 := CreateRandomUserFixInformaion(t)
+	arg3 := CreateRandomUserFixInformaion(t)
+
+	tl := CretaRandomTargetUserList(t, user, arg1, arg2, arg3)
 
 	err := testinfoQueries.DeleteTargetList(context.Background(), tl.UserID)
 	require.NoError(t, err)
@@ -84,7 +97,11 @@ func TestDeleteTargetList(t *testing.T) {
 
 func TestUpdateTargetList(t *testing.T) {
 	user := CreateRandomUserFixInformaion(t)
-	tl := RandomTargetUserList(t, user)
+	arg1 := CreateRandomUserFixInformaion(t)
+	arg2 := CreateRandomUserFixInformaion(t)
+	arg3 := CreateRandomUserFixInformaion(t)
+
+	tl := CretaRandomTargetUserList(t, user, arg1, arg2, arg3)
 
 	Narg1 := CreateRandomUserFixInformaion(t)
 	Narg2 := CreateRandomUserFixInformaion(t)

@@ -29,3 +29,4 @@ RETURNING *;
 -- name: DeleteAccompany :exec
 DELETE FROM accompany 
 WHERE user_id = $1;
+

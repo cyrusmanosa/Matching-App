@@ -11,9 +11,9 @@ message Lover {
     int32 UserID = 1;
     int32 MinAge = 2;
     int32 MaxAge = 3;
-    string City = 4;
+    repeated string City = 4;
     string Gender = 5;
     string Sexual = 6;
-    string Speaklanguage = 7;
+    repeated string Speaklanguage = 7;
     google.protobuf.Timestamp InfoChangedAt = 8;
 }

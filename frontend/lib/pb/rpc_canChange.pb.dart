@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'canChange.pb.dart' as $18;
+import 'canChange.pb.dart' as $19;
 
 /// Create
 class CreateCanChangeRequest extends $pb.GeneratedMessage {
@@ -24,11 +24,14 @@ class CreateCanChangeRequest extends $pb.GeneratedMessage {
     $core.String? sexual,
     $core.int? height,
     $core.int? weight,
-    $core.String? speaklanguage,
+    $core.Iterable<$core.String>? speaklanguage,
     $core.String? education,
     $core.String? job,
     $core.int? annualSalary,
     $core.String? sociability,
+    $core.String? hobbyType,
+    $core.int? experience,
+    $core.String? accompanyType,
     $core.String? religious,
     $core.String? introduce,
   }) {
@@ -52,7 +55,7 @@ class CreateCanChangeRequest extends $pb.GeneratedMessage {
       $result.weight = weight;
     }
     if (speaklanguage != null) {
-      $result.speaklanguage = speaklanguage;
+      $result.speaklanguage.addAll(speaklanguage);
     }
     if (education != null) {
       $result.education = education;
@@ -65,6 +68,15 @@ class CreateCanChangeRequest extends $pb.GeneratedMessage {
     }
     if (sociability != null) {
       $result.sociability = sociability;
+    }
+    if (hobbyType != null) {
+      $result.hobbyType = hobbyType;
+    }
+    if (experience != null) {
+      $result.experience = experience;
+    }
+    if (accompanyType != null) {
+      $result.accompanyType = accompanyType;
     }
     if (religious != null) {
       $result.religious = religious;
@@ -85,13 +97,16 @@ class CreateCanChangeRequest extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'Sexual', protoName: 'Sexual')
     ..a<$core.int>(5, _omitFieldNames ? '' : 'Height', $pb.PbFieldType.O3, protoName: 'Height')
     ..a<$core.int>(6, _omitFieldNames ? '' : 'Weight', $pb.PbFieldType.O3, protoName: 'Weight')
-    ..aOS(7, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
+    ..pPS(7, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
     ..aOS(8, _omitFieldNames ? '' : 'Education', protoName: 'Education')
     ..aOS(9, _omitFieldNames ? '' : 'Job', protoName: 'Job')
     ..a<$core.int>(10, _omitFieldNames ? '' : 'AnnualSalary', $pb.PbFieldType.O3, protoName: 'AnnualSalary')
     ..aOS(11, _omitFieldNames ? '' : 'Sociability', protoName: 'Sociability')
-    ..aOS(12, _omitFieldNames ? '' : 'Religious', protoName: 'Religious')
-    ..aOS(13, _omitFieldNames ? '' : 'Introduce', protoName: 'Introduce')
+    ..aOS(12, _omitFieldNames ? '' : 'hobbyType', protoName: 'hobbyType')
+    ..a<$core.int>(13, _omitFieldNames ? '' : 'Experience', $pb.PbFieldType.O3, protoName: 'Experience')
+    ..aOS(14, _omitFieldNames ? '' : 'AccompanyType', protoName: 'AccompanyType')
+    ..aOS(15, _omitFieldNames ? '' : 'Religious', protoName: 'Religious')
+    ..aOS(16, _omitFieldNames ? '' : 'Introduce', protoName: 'Introduce')
     ..hasRequiredFields = false
   ;
 
@@ -171,13 +186,7 @@ class CreateCanChangeRequest extends $pb.GeneratedMessage {
   void clearWeight() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.String get speaklanguage => $_getSZ(6);
-  @$pb.TagNumber(7)
-  set speaklanguage($core.String v) { $_setString(6, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasSpeaklanguage() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearSpeaklanguage() => clearField(7);
+  $core.List<$core.String> get speaklanguage => $_getList(6);
 
   @$pb.TagNumber(8)
   $core.String get education => $_getSZ(7);
@@ -216,27 +225,54 @@ class CreateCanChangeRequest extends $pb.GeneratedMessage {
   void clearSociability() => clearField(11);
 
   @$pb.TagNumber(12)
-  $core.String get religious => $_getSZ(11);
+  $core.String get hobbyType => $_getSZ(11);
   @$pb.TagNumber(12)
-  set religious($core.String v) { $_setString(11, v); }
+  set hobbyType($core.String v) { $_setString(11, v); }
   @$pb.TagNumber(12)
-  $core.bool hasReligious() => $_has(11);
+  $core.bool hasHobbyType() => $_has(11);
   @$pb.TagNumber(12)
-  void clearReligious() => clearField(12);
+  void clearHobbyType() => clearField(12);
 
   @$pb.TagNumber(13)
-  $core.String get introduce => $_getSZ(12);
+  $core.int get experience => $_getIZ(12);
   @$pb.TagNumber(13)
-  set introduce($core.String v) { $_setString(12, v); }
+  set experience($core.int v) { $_setSignedInt32(12, v); }
   @$pb.TagNumber(13)
-  $core.bool hasIntroduce() => $_has(12);
+  $core.bool hasExperience() => $_has(12);
   @$pb.TagNumber(13)
-  void clearIntroduce() => clearField(13);
+  void clearExperience() => clearField(13);
+
+  @$pb.TagNumber(14)
+  $core.String get accompanyType => $_getSZ(13);
+  @$pb.TagNumber(14)
+  set accompanyType($core.String v) { $_setString(13, v); }
+  @$pb.TagNumber(14)
+  $core.bool hasAccompanyType() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearAccompanyType() => clearField(14);
+
+  @$pb.TagNumber(15)
+  $core.String get religious => $_getSZ(14);
+  @$pb.TagNumber(15)
+  set religious($core.String v) { $_setString(14, v); }
+  @$pb.TagNumber(15)
+  $core.bool hasReligious() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearReligious() => clearField(15);
+
+  @$pb.TagNumber(16)
+  $core.String get introduce => $_getSZ(15);
+  @$pb.TagNumber(16)
+  set introduce($core.String v) { $_setString(15, v); }
+  @$pb.TagNumber(16)
+  $core.bool hasIntroduce() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearIntroduce() => clearField(16);
 }
 
 class CreateCanChangeResponse extends $pb.GeneratedMessage {
   factory CreateCanChangeResponse({
-    $18.CanChange? canChangeInfo,
+    $19.CanChange? canChangeInfo,
   }) {
     final $result = create();
     if (canChangeInfo != null) {
@@ -249,7 +285,7 @@ class CreateCanChangeResponse extends $pb.GeneratedMessage {
   factory CreateCanChangeResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateCanChangeResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$18.CanChange>(1, _omitFieldNames ? '' : 'CanChangeInfo', protoName: 'CanChangeInfo', subBuilder: $18.CanChange.create)
+    ..aOM<$19.CanChange>(1, _omitFieldNames ? '' : 'CanChangeInfo', protoName: 'CanChangeInfo', subBuilder: $19.CanChange.create)
     ..hasRequiredFields = false
   ;
 
@@ -275,15 +311,15 @@ class CreateCanChangeResponse extends $pb.GeneratedMessage {
   static CreateCanChangeResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $18.CanChange get canChangeInfo => $_getN(0);
+  $19.CanChange get canChangeInfo => $_getN(0);
   @$pb.TagNumber(1)
-  set canChangeInfo($18.CanChange v) { setField(1, v); }
+  set canChangeInfo($19.CanChange v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasCanChangeInfo() => $_has(0);
   @$pb.TagNumber(1)
   void clearCanChangeInfo() => clearField(1);
   @$pb.TagNumber(1)
-  $18.CanChange ensureCanChangeInfo() => $_ensure(0);
+  $19.CanChange ensureCanChangeInfo() => $_ensure(0);
 }
 
 /// Get
@@ -353,7 +389,7 @@ class GetCanChangeRequest extends $pb.GeneratedMessage {
 
 class GetCanChangeResponse extends $pb.GeneratedMessage {
   factory GetCanChangeResponse({
-    $18.CanChange? canChangeInfo,
+    $19.CanChange? canChangeInfo,
   }) {
     final $result = create();
     if (canChangeInfo != null) {
@@ -366,7 +402,7 @@ class GetCanChangeResponse extends $pb.GeneratedMessage {
   factory GetCanChangeResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetCanChangeResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$18.CanChange>(1, _omitFieldNames ? '' : 'CanChangeInfo', protoName: 'CanChangeInfo', subBuilder: $18.CanChange.create)
+    ..aOM<$19.CanChange>(1, _omitFieldNames ? '' : 'CanChangeInfo', protoName: 'CanChangeInfo', subBuilder: $19.CanChange.create)
     ..hasRequiredFields = false
   ;
 
@@ -392,15 +428,15 @@ class GetCanChangeResponse extends $pb.GeneratedMessage {
   static GetCanChangeResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $18.CanChange get canChangeInfo => $_getN(0);
+  $19.CanChange get canChangeInfo => $_getN(0);
   @$pb.TagNumber(1)
-  set canChangeInfo($18.CanChange v) { setField(1, v); }
+  set canChangeInfo($19.CanChange v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasCanChangeInfo() => $_has(0);
   @$pb.TagNumber(1)
   void clearCanChangeInfo() => clearField(1);
   @$pb.TagNumber(1)
-  $18.CanChange ensureCanChangeInfo() => $_ensure(0);
+  $19.CanChange ensureCanChangeInfo() => $_ensure(0);
 }
 
 /// Update
@@ -412,11 +448,14 @@ class UpdateCanChangeRequest extends $pb.GeneratedMessage {
     $core.String? sexual,
     $core.int? height,
     $core.int? weight,
-    $core.String? speaklanguage,
+    $core.Iterable<$core.String>? speaklanguage,
     $core.String? education,
     $core.String? job,
     $core.int? annualSalary,
     $core.String? sociability,
+    $core.String? hobbyType,
+    $core.int? experience,
+    $core.String? accompanyType,
     $core.String? religious,
     $core.String? introduce,
   }) {
@@ -440,7 +479,7 @@ class UpdateCanChangeRequest extends $pb.GeneratedMessage {
       $result.weight = weight;
     }
     if (speaklanguage != null) {
-      $result.speaklanguage = speaklanguage;
+      $result.speaklanguage.addAll(speaklanguage);
     }
     if (education != null) {
       $result.education = education;
@@ -453,6 +492,15 @@ class UpdateCanChangeRequest extends $pb.GeneratedMessage {
     }
     if (sociability != null) {
       $result.sociability = sociability;
+    }
+    if (hobbyType != null) {
+      $result.hobbyType = hobbyType;
+    }
+    if (experience != null) {
+      $result.experience = experience;
+    }
+    if (accompanyType != null) {
+      $result.accompanyType = accompanyType;
     }
     if (religious != null) {
       $result.religious = religious;
@@ -473,13 +521,16 @@ class UpdateCanChangeRequest extends $pb.GeneratedMessage {
     ..aOS(4, _omitFieldNames ? '' : 'Sexual', protoName: 'Sexual')
     ..a<$core.int>(5, _omitFieldNames ? '' : 'Height', $pb.PbFieldType.O3, protoName: 'Height')
     ..a<$core.int>(6, _omitFieldNames ? '' : 'Weight', $pb.PbFieldType.O3, protoName: 'Weight')
-    ..aOS(7, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
+    ..pPS(7, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
     ..aOS(8, _omitFieldNames ? '' : 'Education', protoName: 'Education')
     ..aOS(9, _omitFieldNames ? '' : 'Job', protoName: 'Job')
     ..a<$core.int>(10, _omitFieldNames ? '' : 'AnnualSalary', $pb.PbFieldType.O3, protoName: 'AnnualSalary')
     ..aOS(11, _omitFieldNames ? '' : 'Sociability', protoName: 'Sociability')
-    ..aOS(12, _omitFieldNames ? '' : 'Religious', protoName: 'Religious')
-    ..aOS(13, _omitFieldNames ? '' : 'Introduce', protoName: 'Introduce')
+    ..aOS(12, _omitFieldNames ? '' : 'hobbyType', protoName: 'hobbyType')
+    ..a<$core.int>(13, _omitFieldNames ? '' : 'Experience', $pb.PbFieldType.O3, protoName: 'Experience')
+    ..aOS(14, _omitFieldNames ? '' : 'AccompanyType', protoName: 'AccompanyType')
+    ..aOS(15, _omitFieldNames ? '' : 'Religious', protoName: 'Religious')
+    ..aOS(16, _omitFieldNames ? '' : 'Introduce', protoName: 'Introduce')
     ..hasRequiredFields = false
   ;
 
@@ -559,13 +610,7 @@ class UpdateCanChangeRequest extends $pb.GeneratedMessage {
   void clearWeight() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.String get speaklanguage => $_getSZ(6);
-  @$pb.TagNumber(7)
-  set speaklanguage($core.String v) { $_setString(6, v); }
-  @$pb.TagNumber(7)
-  $core.bool hasSpeaklanguage() => $_has(6);
-  @$pb.TagNumber(7)
-  void clearSpeaklanguage() => clearField(7);
+  $core.List<$core.String> get speaklanguage => $_getList(6);
 
   @$pb.TagNumber(8)
   $core.String get education => $_getSZ(7);
@@ -604,27 +649,54 @@ class UpdateCanChangeRequest extends $pb.GeneratedMessage {
   void clearSociability() => clearField(11);
 
   @$pb.TagNumber(12)
-  $core.String get religious => $_getSZ(11);
+  $core.String get hobbyType => $_getSZ(11);
   @$pb.TagNumber(12)
-  set religious($core.String v) { $_setString(11, v); }
+  set hobbyType($core.String v) { $_setString(11, v); }
   @$pb.TagNumber(12)
-  $core.bool hasReligious() => $_has(11);
+  $core.bool hasHobbyType() => $_has(11);
   @$pb.TagNumber(12)
-  void clearReligious() => clearField(12);
+  void clearHobbyType() => clearField(12);
 
   @$pb.TagNumber(13)
-  $core.String get introduce => $_getSZ(12);
+  $core.int get experience => $_getIZ(12);
   @$pb.TagNumber(13)
-  set introduce($core.String v) { $_setString(12, v); }
+  set experience($core.int v) { $_setSignedInt32(12, v); }
   @$pb.TagNumber(13)
-  $core.bool hasIntroduce() => $_has(12);
+  $core.bool hasExperience() => $_has(12);
   @$pb.TagNumber(13)
-  void clearIntroduce() => clearField(13);
+  void clearExperience() => clearField(13);
+
+  @$pb.TagNumber(14)
+  $core.String get accompanyType => $_getSZ(13);
+  @$pb.TagNumber(14)
+  set accompanyType($core.String v) { $_setString(13, v); }
+  @$pb.TagNumber(14)
+  $core.bool hasAccompanyType() => $_has(13);
+  @$pb.TagNumber(14)
+  void clearAccompanyType() => clearField(14);
+
+  @$pb.TagNumber(15)
+  $core.String get religious => $_getSZ(14);
+  @$pb.TagNumber(15)
+  set religious($core.String v) { $_setString(14, v); }
+  @$pb.TagNumber(15)
+  $core.bool hasReligious() => $_has(14);
+  @$pb.TagNumber(15)
+  void clearReligious() => clearField(15);
+
+  @$pb.TagNumber(16)
+  $core.String get introduce => $_getSZ(15);
+  @$pb.TagNumber(16)
+  set introduce($core.String v) { $_setString(15, v); }
+  @$pb.TagNumber(16)
+  $core.bool hasIntroduce() => $_has(15);
+  @$pb.TagNumber(16)
+  void clearIntroduce() => clearField(16);
 }
 
 class UpdateCanChangeResponse extends $pb.GeneratedMessage {
   factory UpdateCanChangeResponse({
-    $18.CanChange? canChangeInfo,
+    $19.CanChange? canChangeInfo,
   }) {
     final $result = create();
     if (canChangeInfo != null) {
@@ -637,7 +709,7 @@ class UpdateCanChangeResponse extends $pb.GeneratedMessage {
   factory UpdateCanChangeResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateCanChangeResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$18.CanChange>(1, _omitFieldNames ? '' : 'CanChangeInfo', protoName: 'CanChangeInfo', subBuilder: $18.CanChange.create)
+    ..aOM<$19.CanChange>(1, _omitFieldNames ? '' : 'CanChangeInfo', protoName: 'CanChangeInfo', subBuilder: $19.CanChange.create)
     ..hasRequiredFields = false
   ;
 
@@ -663,15 +735,15 @@ class UpdateCanChangeResponse extends $pb.GeneratedMessage {
   static UpdateCanChangeResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $18.CanChange get canChangeInfo => $_getN(0);
+  $19.CanChange get canChangeInfo => $_getN(0);
   @$pb.TagNumber(1)
-  set canChangeInfo($18.CanChange v) { setField(1, v); }
+  set canChangeInfo($19.CanChange v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasCanChangeInfo() => $_has(0);
   @$pb.TagNumber(1)
   void clearCanChangeInfo() => clearField(1);
   @$pb.TagNumber(1)
-  $18.CanChange ensureCanChangeInfo() => $_ensure(0);
+  $19.CanChange ensureCanChangeInfo() => $_ensure(0);
 }
 
 /// Delete

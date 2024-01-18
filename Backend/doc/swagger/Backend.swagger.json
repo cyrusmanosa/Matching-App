@@ -546,7 +546,7 @@
     },
     "/v1/Del_ChatRecord": {
       "delete": {
-        "operationId": "Chat_DeleteChatRecord",
+        "operationId": "Chat_DeleteChatTable",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -569,20 +569,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "TargetID",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "CreateAt",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
           }
         ],
         "tags": [
@@ -1347,6 +1333,103 @@
         ]
       }
     },
+    "/v1/Search_Accompany": {
+      "post": {
+        "operationId": "Information_SearchTargetAccompany",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbSearchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbSearchRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Search_hobby": {
+      "post": {
+        "summary": "/ -------- Search --------------",
+        "operationId": "Information_SearchTargetHobby",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbSearchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbSearchRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Search_lover": {
+      "post": {
+        "operationId": "Information_SearchTargetLover",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbSearchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbSearchRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
     "/v1/Sign_Up": {
       "post": {
         "summary": "/ SignUp",
@@ -1714,7 +1797,10 @@
           "format": "int32"
         },
         "Speaklanguage": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "FindType": {
           "type": "string"
@@ -1753,7 +1839,10 @@
           "format": "int32"
         },
         "Speaklanguage": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "Education": {
           "type": "string"
@@ -1766,6 +1855,16 @@
           "format": "int32"
         },
         "Sociability": {
+          "type": "string"
+        },
+        "hobbyType": {
+          "type": "string"
+        },
+        "Experience": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "AccompanyType": {
           "type": "string"
         },
         "Religious": {
@@ -1917,7 +2016,10 @@
           "format": "int32"
         },
         "Speaklanguage": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "FindType": {
           "type": "string"
@@ -1960,7 +2062,10 @@
           "format": "int32"
         },
         "Speaklanguage": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "Education": {
           "type": "string"
@@ -1973,6 +2078,16 @@
           "format": "int32"
         },
         "Sociability": {
+          "type": "string"
+        },
+        "hobbyType": {
+          "type": "string"
+        },
+        "Experience": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "AccompanyType": {
           "type": "string"
         },
         "Religious": {
@@ -2137,13 +2252,19 @@
           "format": "int32"
         },
         "City": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "Gender": {
           "type": "string"
         },
         "Speaklanguage": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "FindType": {
           "type": "string"
@@ -2215,7 +2336,10 @@
           "format": "int32"
         },
         "City": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "Gender": {
           "type": "string"
@@ -2224,7 +2348,10 @@
           "type": "string"
         },
         "Speaklanguage": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "title": "Create"
@@ -2486,13 +2613,19 @@
           "format": "int32"
         },
         "City": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "Gender": {
           "type": "string"
         },
         "Speaklanguage": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "FindType": {
           "type": "string"
@@ -2601,7 +2734,10 @@
           "format": "int32"
         },
         "City": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "Gender": {
           "type": "string"
@@ -2610,7 +2746,10 @@
           "type": "string"
         },
         "Speaklanguage": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "InfoChangedAt": {
           "type": "string",
@@ -2663,6 +2802,26 @@
         "PasswordChangedAt": {
           "type": "string",
           "format": "date-time"
+        }
+      }
+    },
+    "pbSearchRequest": {
+      "type": "object",
+      "properties": {
+        "SessionID": {
+          "type": "string"
+        }
+      }
+    },
+    "pbSearchResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "rank": {
+          "type": "string"
         }
       }
     },
@@ -2719,7 +2878,10 @@
           "format": "int32"
         },
         "Speaklanguage": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "FindType": {
           "type": "string"
@@ -2762,7 +2924,10 @@
           "format": "int32"
         },
         "Speaklanguage": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "Education": {
           "type": "string"
@@ -2775,6 +2940,16 @@
           "format": "int32"
         },
         "Sociability": {
+          "type": "string"
+        },
+        "hobbyType": {
+          "type": "string"
+        },
+        "Experience": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "AccompanyType": {
           "type": "string"
         },
         "Religious": {
@@ -2870,13 +3045,19 @@
           "format": "int32"
         },
         "City": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "Gender": {
           "type": "string"
         },
         "Speaklanguage": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "FindType": {
           "type": "string"
@@ -2948,7 +3129,10 @@
           "format": "int32"
         },
         "City": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "Gender": {
           "type": "string"
@@ -2957,7 +3141,10 @@
           "type": "string"
         },
         "Speaklanguage": {
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "title": "Update"

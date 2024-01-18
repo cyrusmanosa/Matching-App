@@ -15,12 +15,13 @@ func TestCreateHobbyRequest(t *testing.T) {
 }
 
 func CreateRandomHobbyRequest(t *testing.T, user Fixinformation) Hobby {
+	address := []string{util.RandomAddress(user.Country), util.RandomAddress(user.Country), util.RandomAddress(user.Country)}
 	hobby := CreateHobbyParams{
 		UserID:        user.UserID,
 		Era:           util.RandomEra(),
-		City:          gofakeit.City(),
-		Gender:        gofakeit.Gender(),
-		Speaklanguage: gofakeit.Language(),
+		City:          address,
+		Gender:        util.RandomGender(),
+		Speaklanguage: util.SwitchLanguage(user.Country),
 		FindType:      util.RandomHobbyType(),
 		Experience:    int32(gofakeit.Number(0, 30)),
 	}
@@ -42,13 +43,13 @@ func CreateRandomHobbyRequest(t *testing.T, user Fixinformation) Hobby {
 func TestUpdateUserHobby(t *testing.T) {
 	arg := CreateRandomUserFixInformaion(t)
 	H := CreateRandomHobbyRequest(t, arg)
-
+	Naddress := []string{util.RandomAddress(arg.Country), util.RandomAddress(arg.Country), util.RandomAddress(arg.Country)}
 	NH := UpdateHobbyParams{
-		UserID:        H.UserID,
+		UserID:        arg.UserID,
 		Era:           util.RandomEra(),
-		City:          gofakeit.City(),
-		Gender:        gofakeit.Gender(),
-		Speaklanguage: gofakeit.Language(),
+		City:          util.SwitchLanguage(arg.Country),
+		Gender:        util.RandomGender(),
+		Speaklanguage: Naddress,
 		FindType:      util.RandomHobbyType(),
 		Experience:    int32(gofakeit.Number(0, 30)),
 	}

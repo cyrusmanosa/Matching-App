@@ -3,6 +3,7 @@ package db
 import (
 	"Backend/util"
 	"context"
+	"math/rand"
 	"testing"
 
 	"github.com/brianvoe/gofakeit/v6"
@@ -15,17 +16,22 @@ func TestCreateUserCanChangeInformation(t *testing.T) {
 }
 
 func CreateRandomUserCanChangeInformation(t *testing.T, user Fixinformation) Canchangeinformation {
+
+	exp := rand.Int31n(20) + 1
 	Can := CreateUserCanChangeInformationParams{
 		UserID:        user.UserID,
 		Nickname:      gofakeit.FirstName(),
-		City:          gofakeit.City(),
+		City:          util.RandomAddress(user.Country),
 		Sexual:        util.RandomSexual(),
 		Height:        int32(gofakeit.Number(140, 200)),
 		Weight:        int32(gofakeit.Number(40, 150)),
-		Speaklanguage: gofakeit.Language(),
+		Speaklanguage: util.SwitchLanguage(user.Country),
 		Education:     util.RandomEducation(),
-		Job:           gofakeit.JobTitle(),
+		Job:           util.RandomJob(),
 		AnnualSalary:  int32(gofakeit.Number(200, 600)),
+		HobbyType:     util.RandomHobbyType(),
+		AccompanyType: util.RandomAccompantType(),
+		Experience:    exp,
 		Sociability:   util.RandomSociability(),
 		Religious:     util.RandomReligious(),
 		Introduce:     gofakeit.HackerPhrase(),
@@ -55,18 +61,22 @@ func CreateRandomUserCanChangeInformation(t *testing.T, user Fixinformation) Can
 func TestUpdateInformation(t *testing.T) {
 	arg := CreateRandomUserFixInformaion(t)
 	user := CreateRandomUserCanChangeInformation(t, arg)
+	exp := rand.Int31n(20) + 1
 
 	Can := UpdateInformationParams{
 		UserID:        user.UserID,
 		Nickname:      gofakeit.FirstName(),
-		City:          gofakeit.City(),
+		City:          util.RandomAddress(arg.Country),
 		Sexual:        util.RandomSexual(),
 		Height:        int32(gofakeit.Number(140, 200)),
 		Weight:        int32(gofakeit.Number(40, 150)),
-		Speaklanguage: gofakeit.Language(),
+		Speaklanguage: util.SwitchLanguage(arg.Country),
 		Education:     util.RandomEducation(),
-		Job:           gofakeit.JobTitle(),
+		Job:           util.RandomJob(),
 		AnnualSalary:  int32(gofakeit.Number(200, 600)),
+		HobbyType:     util.RandomHobbyType(),
+		AccompanyType: util.RandomAccompantType(),
+		Experience:    exp,
 		Sociability:   util.RandomSociability(),
 		Religious:     util.RandomReligious(),
 		Introduce:     gofakeit.HackerPhrase(),
@@ -130,4 +140,51 @@ func TestDeleteInformation(t *testing.T) {
 
 	err := testinfoQueries.DeleteCanChangeInformation(context.Background(), Can.UserID)
 	require.NoError(t, err)
+}
+
+func TestCanChangeSearchAccompany(t *testing.T) {
+	user := CreateRandomUserFixInformaion(t)
+	Can := CreateRandomUserCanChangeInformation(t, user)
+
+	se := CanChangeSearchAccompanyParams{
+		UserID:        Can.UserID,
+		Speaklanguage: &Can.Speaklanguage,
+		AccompanyType: &Can.AccompanyType,
+		Sociability:   &Can.Sociability,
+	}
+
+	cc, err := testinfoQueries.CanChangeSearchAccompany(context.Background(), se)
+	require.NoError(t, err)
+	require.NotEmpty(t, cc)
+}
+
+func TestCanChangeSearchHobby(t *testing.T) {
+	user := CreateRandomUserFixInformaion(t)
+	Can := CreateRandomUserCanChangeInformation(t, user)
+
+	se := CanChangeSearchHobbyParams{
+		UserID:        Can.UserID,
+		Speaklanguage: &Can.Speaklanguage,
+		HobbyType:     &Can.HobbyType,
+		City:          &Can.City,
+		Experience:    &Can.Experience,
+	}
+
+	cc, err := testinfoQueries.CanChangeSearchHobby(context.Background(), se)
+	require.NoError(t, err)
+	require.NotEmpty(t, cc)
+}
+
+func TestCanChangeSearchLover(t *testing.T) {
+	user := CreateRandomUserFixInformaion(t)
+	Can := CreateRandomUserCanChangeInformation(t, user)
+	se := CanChangeSearchLoverParams{
+		UserID:        user.UserID,
+		Speaklanguage: &Can.Speaklanguage,
+		City:          &Can.City,
+		Sexual:        &Can.Sexual,
+	}
+	cc, err := testinfoQueries.CanChangeSearchLover(context.Background(), se)
+	require.NoError(t, err)
+	require.NotEmpty(t, cc)
 }

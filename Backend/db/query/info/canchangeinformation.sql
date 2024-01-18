@@ -11,10 +11,13 @@ INSERT INTO canchangeinformation (
     job,
     annual_salary,
     sociability,
+    hobby_type,
+    experience,
+    accompany_type,
     religious,
     introduce
 ) VALUES (
-    $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13
+    $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16
 ) RETURNING *;
 
 -- name: GetUserCanChangeInformation :one
@@ -38,10 +41,38 @@ SET nickname = $2,
     annual_salary = $10,
     sociability = $11,
     religious = $12,
-    introduce = $13
+    hobby_type = $13,
+    experience = $14,
+    accompany_type = $15,
+    introduce = $16
 WHERE user_id = $1
 RETURNING *;
 
 -- name: DeleteCanChangeInformation :exec
 DELETE FROM canchangeinformation 
 WHERE user_id = $1;
+
+
+-- name: CanChangeSearchHobby :many
+SELECT * FROM canchangeinformation
+WHERE user_id != $1
+    AND (city = $2 OR $2 IS NULL)
+    AND (speaklanguage = $3 OR $3 IS NULL)
+    AND (hobby_type = $4 OR $4 IS NULL)
+    AND (experience >= $5 OR $5 IS NULL);
+
+
+-- name: CanChangeSearchAccompany :many
+SELECT * FROM canchangeinformation
+WHERE user_id != $1
+    AND (speaklanguage = $2 OR $2 IS NULL)
+    AND (accompany_type = $3 OR $3 IS NULL)
+    AND (sociability = $4 OR $4 IS NULL);
+
+
+-- name: CanChangeSearchLover :many
+SELECT * FROM canchangeinformation
+WHERE user_id != $1  
+    AND (sexual = $2 OR $2 IS NULL)
+    AND (speaklanguage = $3 OR $3 IS NULL)
+    AND (city = $4 OR $4 IS NULL);

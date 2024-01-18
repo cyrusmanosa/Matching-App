@@ -7,6 +7,7 @@ package db
 
 import (
 	"context"
+
 )
 
 const createLover = `-- name: CreateLover :one
@@ -24,13 +25,13 @@ INSERT INTO lover (
 `
 
 type CreateLoverParams struct {
-	UserID        int32  `json:"user_id"`
-	MinAge        int32  `json:"min_age"`
-	MaxAge        int32  `json:"max_age"`
-	City          string `json:"city"`
+	UserID        int32       `json:"user_id"`
+	MinAge        int32 `json:"min_age"`
+	MaxAge        int32 `json:"max_age"`
+	City          []string    `json:"city"`
 	Gender        string `json:"gender"`
 	Sexual        string `json:"sexual"`
-	Speaklanguage string `json:"speaklanguage"`
+	Speaklanguage []string    `json:"speaklanguage"`
 }
 
 func (q *Queries) CreateLover(ctx context.Context, arg CreateLoverParams) (Lover, error) {
@@ -135,13 +136,13 @@ RETURNING user_id, min_age, max_age, city, gender, sexual, speaklanguage, info_c
 `
 
 type UpdateLoverParams struct {
-	UserID        int32  `json:"user_id"`
-	MinAge        int32  `json:"min_age"`
-	MaxAge        int32  `json:"max_age"`
-	City          string `json:"city"`
+	UserID        int32       `json:"user_id"`
+	MinAge        int32 `json:"min_age"`
+	MaxAge        int32 `json:"max_age"`
+	City          []string    `json:"city"`
 	Gender        string `json:"gender"`
 	Sexual        string `json:"sexual"`
-	Speaklanguage string `json:"speaklanguage"`
+	Speaklanguage []string    `json:"speaklanguage"`
 }
 
 func (q *Queries) UpdateLover(ctx context.Context, arg UpdateLoverParams) (Lover, error) {

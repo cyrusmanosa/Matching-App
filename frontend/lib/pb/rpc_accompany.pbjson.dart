@@ -19,7 +19,7 @@ const CreateAccompanyRequest$json = {
   '2': [
     {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
     {'1': 'Era', '3': 2, '4': 1, '5': 5, '10': 'Era'},
-    {'1': 'Speaklanguage', '3': 3, '4': 1, '5': 9, '10': 'Speaklanguage'},
+    {'1': 'Speaklanguage', '3': 3, '4': 3, '5': 9, '10': 'Speaklanguage'},
     {'1': 'FindType', '3': 4, '4': 1, '5': 9, '10': 'FindType'},
     {'1': 'Sociability', '3': 5, '4': 1, '5': 9, '10': 'Sociability'},
   ],
@@ -28,7 +28,7 @@ const CreateAccompanyRequest$json = {
 /// Descriptor for `CreateAccompanyRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List createAccompanyRequestDescriptor = $convert.base64Decode(
     'ChZDcmVhdGVBY2NvbXBhbnlSZXF1ZXN0EhwKCVNlc3Npb25JRBgBIAEoCVIJU2Vzc2lvbklEEh'
-    'AKA0VyYRgCIAEoBVIDRXJhEiQKDVNwZWFrbGFuZ3VhZ2UYAyABKAlSDVNwZWFrbGFuZ3VhZ2US'
+    'AKA0VyYRgCIAEoBVIDRXJhEiQKDVNwZWFrbGFuZ3VhZ2UYAyADKAlSDVNwZWFrbGFuZ3VhZ2US'
     'GgoIRmluZFR5cGUYBCABKAlSCEZpbmRUeXBlEiAKC1NvY2lhYmlsaXR5GAUgASgJUgtTb2NpYW'
     'JpbGl0eQ==');
 
@@ -75,7 +75,7 @@ const UpdateAccompanyRequest$json = {
   '2': [
     {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
     {'1': 'Era', '3': 2, '4': 1, '5': 5, '10': 'Era'},
-    {'1': 'Speaklanguage', '3': 3, '4': 1, '5': 9, '10': 'Speaklanguage'},
+    {'1': 'Speaklanguage', '3': 3, '4': 3, '5': 9, '10': 'Speaklanguage'},
     {'1': 'FindType', '3': 4, '4': 1, '5': 9, '10': 'FindType'},
     {'1': 'Sociability', '3': 5, '4': 1, '5': 9, '10': 'Sociability'},
   ],
@@ -84,7 +84,7 @@ const UpdateAccompanyRequest$json = {
 /// Descriptor for `UpdateAccompanyRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List updateAccompanyRequestDescriptor = $convert.base64Decode(
     'ChZVcGRhdGVBY2NvbXBhbnlSZXF1ZXN0EhwKCVNlc3Npb25JRBgBIAEoCVIJU2Vzc2lvbklEEh'
-    'AKA0VyYRgCIAEoBVIDRXJhEiQKDVNwZWFrbGFuZ3VhZ2UYAyABKAlSDVNwZWFrbGFuZ3VhZ2US'
+    'AKA0VyYRgCIAEoBVIDRXJhEiQKDVNwZWFrbGFuZ3VhZ2UYAyADKAlSDVNwZWFrbGFuZ3VhZ2US'
     'GgoIRmluZFR5cGUYBCABKAlSCEZpbmRUeXBlEiAKC1NvY2lhYmlsaXR5GAUgASgJUgtTb2NpYW'
     'JpbGl0eQ==');
 

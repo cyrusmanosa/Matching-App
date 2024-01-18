@@ -15,6 +15,7 @@ import "rpc_login.proto";
 import "rpc_payment.proto";
 import "rpc_password.proto";
 import "rpc_session.proto";
+import "rpc_search.proto";
 import "rpc_checkEmail.proto";
 import "rpc_chatRecord.proto";
 import "google/api/annotations.proto";
@@ -296,6 +297,25 @@ service Information {
             get: "/v1/Get_UserID"
         };
     }
+/// -------- Search --------------
+    rpc SearchTargetHobby(SearchRequest) returns (SearchResponse){
+        option (google.api.http) = {
+            post: "/v1/Search_hobby"
+            body: "*"
+        };
+    }
+    rpc SearchTargetLover(SearchRequest) returns (SearchResponse){
+        option (google.api.http) = {
+            post: "/v1/Search_lover"
+            body: "*"
+        };
+    }
+    rpc SearchTargetAccompany(SearchRequest) returns (SearchResponse){
+        option (google.api.http) = {
+            post: "/v1/Search_Accompany"
+            body: "*"
+        };
+    }
 }
 
 /// -------- Chat --------------
@@ -325,7 +345,7 @@ service Chat {
             body: "*"
         };
     }
-    rpc DeleteChatRecord(DeleteChatRecordRequest) returns (google.protobuf.Empty){
+    rpc DeleteChatTable(DeleteChatTableRequest) returns (google.protobuf.Empty){
         option (google.api.http) = {
             delete: "/v1/Del_ChatRecord"
         };

@@ -25,9 +25,9 @@ INSERT INTO accompany (
 type CreateAccompanyParams struct {
 	UserID        int32       `json:"user_id"`
 	Era           int32 `json:"era"`
-	Speaklanguage string      `json:"speaklanguage"`
-	FindType      string      `json:"find_type"`
-	Sociability   string      `json:"sociability"`
+	Speaklanguage []string    `json:"speaklanguage"`
+	FindType      string `json:"find_type"`
+	Sociability   string `json:"sociability"`
 }
 
 func (q *Queries) CreateAccompany(ctx context.Context, arg CreateAccompanyParams) (Accompany, error) {
@@ -124,9 +124,9 @@ RETURNING user_id, era, speaklanguage, find_type, sociability, info_changed_at
 type UpdateAccompanyParams struct {
 	UserID        int32       `json:"user_id"`
 	Era           int32 `json:"era"`
-	Speaklanguage string      `json:"speaklanguage"`
-	FindType      string      `json:"find_type"`
-	Sociability   string      `json:"sociability"`
+	Speaklanguage []string    `json:"speaklanguage"`
+	FindType      string `json:"find_type"`
+	Sociability   string `json:"sociability"`
 }
 
 func (q *Queries) UpdateAccompany(ctx context.Context, arg UpdateAccompanyParams) (Accompany, error) {

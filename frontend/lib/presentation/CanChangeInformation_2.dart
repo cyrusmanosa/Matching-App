@@ -28,8 +28,10 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
   TextEditingController canChangeJobController = TextEditingController();
   TextEditingController canChangeAnnualSalaryController = TextEditingController();
   TextEditingController canChangeSociabilityController = TextEditingController();
-  TextEditingController canChangeReligiousController = TextEditingController();
   TextEditingController canChangeIntroduceController = TextEditingController();
+  TextEditingController accompanyFindTypeController = TextEditingController();
+  TextEditingController hobbyFindTypeController = TextEditingController();
+  TextEditingController hobbyExperienceController = TextEditingController();
 
   bool isPureNumber(String value) {
     final pattern = RegExp(r'^\d+$');
@@ -42,8 +44,6 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
       await showErrorDialog(context, "仕事はまだ入力されていません");
     } else if (canChangeSociabilityController.text.isEmpty) {
       await showErrorDialog(context, "社交力はまだ入力されていません");
-    } else if (canChangeReligiousController.text.isEmpty) {
-      await showErrorDialog(context, "宗教はまだ入力されていません");
     } else if (canChangeIntroduceController.text.isEmpty) {
       await showErrorDialog(context, "自己紹介はまだ入力されていません");
     } else {
@@ -59,9 +59,11 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
           speaklanguage: widget.can1?.speaklanguage,
           education: widget.can1?.education,
           job: canChangeJobController.text,
+          hobbyType: hobbyFindTypeController.text,
+          experience: int.parse(hobbyExperienceController.text),
+          accompanyType: accompanyFindTypeController.text,
           annualSalary: int.parse(canChangeAnnualSalaryController.text),
           sociability: canChangeSociabilityController.text,
-          religious: canChangeReligiousController.text,
           introduce: canChangeIntroduceController.text,
         );
         await GrpcInfoService.client.createCanChange(request);
@@ -107,12 +109,13 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
+          padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
           child: Column(
             children: [
+              SizedBox(height: mediaH / 75),
               // Job
               CustomInputBar(titleName: "仕事:", backendPart: _buildcanChangeJobInput(context)),
-              SizedBox(height: mediaH / 50),
+              SizedBox(height: mediaH / 90),
 
               // Annual Salary
               CustomInputBar(titleName: "年収:", backendPart: _buildcanChangeAnnualSalaryInput(context)),
@@ -123,15 +126,23 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
                   child: Text("＊入力しなくても大丈夫です。", style: CustomTextStyles.wordOnlySmallButton),
                 ),
               ),
-              SizedBox(height: mediaH / 50),
+              SizedBox(height: mediaH / 90),
 
               // Sociability
               CustomInputBar(titleName: "社交力:", backendPart: _buildcanChangeSociabilityInput(context)),
+              SizedBox(height: mediaH / 55),
+
+              // hobby
+              CustomInputBar(titleName: "趣味 - タイプ:", backendPart: _buildHobbyhobbyTypeInput(context)),
+              SizedBox(height: mediaH / 55),
+
+              // Experience
+              CustomInputBar(titleName: "経験 - 年:", backendPart: _buildHobbyResetExperienceInput(context)),
               SizedBox(height: mediaH / 50),
 
-              // Religious
-              CustomInputBar(titleName: "宗教:", backendPart: _buildcanChangeReligiousInput(context)),
-              SizedBox(height: mediaH / 50),
+              // Sociability
+              CustomInputBar(titleName: "相伴のタイプ:", backendPart: _buildAccompanyTypeInput(context)),
+              SizedBox(height: mediaH / 55),
 
               // Introduce
               CustomInputBar(titleName: "自己紹介:", backendPart: _buildcanChangeIntroduceInput(context, mediaH, mediaW)),
@@ -146,6 +157,14 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
   }
 
   // turn back
+  Widget _buildHobbyhobbyTypeInput(BuildContext context) {
+    return CustomDropDownBar(controller: hobbyFindTypeController, hintText: hobbyTpye[0], itemArray: hobbyTpye);
+  }
+
+  /// Section Widget
+  Widget _buildAccompanyTypeInput(BuildContext context) {
+    return CustomDropDownBar(controller: accompanyFindTypeController, hintText: accompanyType[0], itemArray: accompanyType);
+  }
 
   /// Job
   Widget _buildcanChangeJobInput(BuildContext context) {
@@ -157,21 +176,21 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
     return CustomInputFormBar(controller: canChangeAnnualSalaryController, hintText: "4000");
   }
 
+  /// Reset Experience
+  Widget _buildHobbyResetExperienceInput(BuildContext context) {
+    return CustomInputFormBar(controller: hobbyExperienceController, hintText: "3");
+  }
+
   /// Sociability
   Widget _buildcanChangeSociabilityInput(BuildContext context) {
     return CustomDropDownBar(controller: canChangeSociabilityController, hintText: socialPersonalities[0], itemArray: socialPersonalities);
-  }
-
-  /// Religious
-  Widget _buildcanChangeReligiousInput(BuildContext context) {
-    return CustomDropDownBar(controller: canChangeReligiousController, hintText: religions[0], itemArray: religions);
   }
 
   /// Introduce
   Widget _buildcanChangeIntroduceInput(BuildContext context, double mediaH, double mediaW) {
     return CustomInputFormBar(
       prefix: Padding(padding: EdgeInsets.symmetric(horizontal: mediaW / 75)),
-      height: mediaH / 5,
+      height: mediaH / 5.5,
       controller: canChangeIntroduceController,
       hintText: "亜dさdさだだ",
       textInputAction: TextInputAction.done,
@@ -180,7 +199,7 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
       onTap: () {
         FocusNode().requestFocus();
       },
-      contentPadding: EdgeInsets.symmetric(horizontal: mediaH / 200, vertical: mediaW / 50),
+      contentPadding: EdgeInsets.symmetric(horizontal: mediaH / 200, vertical: mediaW / 55),
     );
   }
 

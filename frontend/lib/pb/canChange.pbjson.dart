@@ -23,14 +23,17 @@ const CanChange$json = {
     {'1': 'Sexual', '3': 4, '4': 1, '5': 9, '10': 'Sexual'},
     {'1': 'Height', '3': 5, '4': 1, '5': 5, '10': 'Height'},
     {'1': 'Weight', '3': 6, '4': 1, '5': 5, '10': 'Weight'},
-    {'1': 'Speaklanguage', '3': 7, '4': 1, '5': 9, '10': 'Speaklanguage'},
+    {'1': 'Speaklanguage', '3': 7, '4': 3, '5': 9, '10': 'Speaklanguage'},
     {'1': 'Education', '3': 8, '4': 1, '5': 9, '10': 'Education'},
     {'1': 'Job', '3': 9, '4': 1, '5': 9, '10': 'Job'},
     {'1': 'AnnualSalary', '3': 10, '4': 1, '5': 5, '10': 'AnnualSalary'},
     {'1': 'Sociability', '3': 11, '4': 1, '5': 9, '10': 'Sociability'},
-    {'1': 'Religious', '3': 12, '4': 1, '5': 9, '10': 'Religious'},
-    {'1': 'Introduce', '3': 13, '4': 1, '5': 9, '10': 'Introduce'},
-    {'1': 'InfoChangedAt', '3': 14, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'InfoChangedAt'},
+    {'1': 'hobbyType', '3': 12, '4': 1, '5': 9, '10': 'hobbyType'},
+    {'1': 'Experience', '3': 13, '4': 1, '5': 5, '10': 'Experience'},
+    {'1': 'AccompanyType', '3': 14, '4': 1, '5': 9, '10': 'AccompanyType'},
+    {'1': 'Religious', '3': 15, '4': 1, '5': 9, '10': 'Religious'},
+    {'1': 'Introduce', '3': 16, '4': 1, '5': 9, '10': 'Introduce'},
+    {'1': 'InfoChangedAt', '3': 17, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'InfoChangedAt'},
   ],
 };
 
@@ -39,9 +42,11 @@ final $typed_data.Uint8List canChangeDescriptor = $convert.base64Decode(
     'CglDYW5DaGFuZ2USFgoGVXNlcklEGAEgASgFUgZVc2VySUQSGgoITmlja05hbWUYAiABKAlSCE'
     '5pY2tOYW1lEhIKBENpdHkYAyABKAlSBENpdHkSFgoGU2V4dWFsGAQgASgJUgZTZXh1YWwSFgoG'
     'SGVpZ2h0GAUgASgFUgZIZWlnaHQSFgoGV2VpZ2h0GAYgASgFUgZXZWlnaHQSJAoNU3BlYWtsYW'
-    '5ndWFnZRgHIAEoCVINU3BlYWtsYW5ndWFnZRIcCglFZHVjYXRpb24YCCABKAlSCUVkdWNhdGlv'
+    '5ndWFnZRgHIAMoCVINU3BlYWtsYW5ndWFnZRIcCglFZHVjYXRpb24YCCABKAlSCUVkdWNhdGlv'
     'bhIQCgNKb2IYCSABKAlSA0pvYhIiCgxBbm51YWxTYWxhcnkYCiABKAVSDEFubnVhbFNhbGFyeR'
-    'IgCgtTb2NpYWJpbGl0eRgLIAEoCVILU29jaWFiaWxpdHkSHAoJUmVsaWdpb3VzGAwgASgJUglS'
-    'ZWxpZ2lvdXMSHAoJSW50cm9kdWNlGA0gASgJUglJbnRyb2R1Y2USQAoNSW5mb0NoYW5nZWRBdB'
-    'gOIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSDUluZm9DaGFuZ2VkQXQ=');
+    'IgCgtTb2NpYWJpbGl0eRgLIAEoCVILU29jaWFiaWxpdHkSHAoJaG9iYnlUeXBlGAwgASgJUglo'
+    'b2JieVR5cGUSHgoKRXhwZXJpZW5jZRgNIAEoBVIKRXhwZXJpZW5jZRIkCg1BY2NvbXBhbnlUeX'
+    'BlGA4gASgJUg1BY2NvbXBhbnlUeXBlEhwKCVJlbGlnaW91cxgPIAEoCVIJUmVsaWdpb3VzEhwK'
+    'CUludHJvZHVjZRgQIAEoCVIJSW50cm9kdWNlEkAKDUluZm9DaGFuZ2VkQXQYESABKAsyGi5nb2'
+    '9nbGUucHJvdG9idWYuVGltZXN0YW1wUg1JbmZvQ2hhbmdlZEF0');
 

@@ -22,11 +22,14 @@ CREATE TABLE "canchangeinformation" (
   "sexual" VARCHAR,
   "height" INT,
   "weight" INT,
-  "speaklanguage" VARCHAR,
+  "speaklanguage" VARCHAR[],
   "education" VARCHAR,
   "job" VARCHAR,
   "annual_salary" INT,
   "sociability" VARCHAR,
+  "hobby_type" VARCHAR,
+  "experience" INT,
+  "accompany_type" VARCHAR,
   "religious" VARCHAR,
   "introduce" VARCHAR,
   "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
@@ -34,22 +37,22 @@ CREATE TABLE "canchangeinformation" (
 
 CREATE TABLE "lover" (
   "user_id" INT PRIMARY KEY,
-  "min_age" INT NOT NULL,
-  "max_age" INT NOT NULL,
-  "city" VARCHAR NOT NULL,
-  "gender" VARCHAR NOT NULL,
-  "sexual" VARCHAR NOT NULL,
-  "speaklanguage" VARCHAR NOT NULL,
+  "min_age" INT,
+  "max_age" INT,
+  "city" VARCHAR[],
+  "gender" VARCHAR,
+  "sexual" VARCHAR,
+  "speaklanguage" VARCHAR[],
   "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
 
 CREATE TABLE "hobby" (
   "user_id" INT PRIMARY KEY,
   "era" INT,
-  "city" VARCHAR NOT NULL,
-  "gender" VARCHAR NOT NULL,
-  "speaklanguage" VARCHAR NOT NULL,
-  "find_type" VARCHAR NOT NULL,
+  "city" VARCHAR[],
+  "gender" VARCHAR,
+  "speaklanguage" VARCHAR[],
+  "find_type" VARCHAR,
   "experience" INT,
   "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
@@ -57,9 +60,9 @@ CREATE TABLE "hobby" (
 CREATE TABLE "accompany" (
   "user_id" INT PRIMARY KEY,
   "era" INT,
-  "speaklanguage" VARCHAR NOT NULL,
-  "find_type" VARCHAR NOT NULL,
-  "sociability" VARCHAR NOT NULL,
+  "speaklanguage" VARCHAR[],
+  "find_type" VARCHAR,
+  "sociability" VARCHAR,
   "info_changed_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
 

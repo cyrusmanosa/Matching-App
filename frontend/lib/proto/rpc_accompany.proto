@@ -10,7 +10,7 @@ option go_package = "Backend/pb";
 message CreateAccompanyRequest {
     string SessionID = 1; 
     int32 Era = 2;
-    string Speaklanguage = 3;
+    repeated string Speaklanguage = 3;
     string FindType = 4;
     string Sociability = 5;
 }
@@ -30,7 +30,7 @@ message GetAccompanyResponse {
 message UpdateAccompanyRequest {
     string SessionID = 1; 
     int32 Era = 2;
-    string Speaklanguage = 3;
+    repeated string Speaklanguage = 3;
     string FindType = 4;
     string Sociability = 5;
 }
@@ -42,4 +42,3 @@ message UpdateAccompanyResponse {
 message DeleteAccompanyRequest {
     string SessionID = 1; 
 }
- 

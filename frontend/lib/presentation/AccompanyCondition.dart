@@ -7,6 +7,7 @@ import 'package:dating_your_date/pb/rpc_fix.pb.dart';
 import 'package:dating_your_date/pb/rpc_targetList.pb.dart';
 import 'package:dating_your_date/widgets/Custom_IconLogoBox.dart';
 import 'package:dating_your_date/widgets/Custom_dropdown_Bar.dart';
+import 'package:dating_your_date/widgets/Custom_dropdown_checkBox_Bar.dart';
 import 'package:dating_your_date/widgets/app_bar/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
@@ -32,6 +33,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
   TextEditingController accompanyFindTypeController = TextEditingController();
   TextEditingController accompanySociabilityController = TextEditingController();
   String country = "";
+  List<String> accompanyLanguages = [];
 
   @override
   void initState() {
@@ -95,6 +97,8 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
       await showErrorDialog(context, "年代はまだ設定していません");
     } else if (accompanyFindTypeController.text.isEmpty) {
       await showErrorDialog(context, "相伴 - タイプはまだ設定していません");
+    } else if (languages.isEmpty) {
+      await showErrorDialog(context, "言語はまだ設定していません");
     } else {
       if (haveTable == true) {
         setState(() {
@@ -104,7 +108,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
           final request = UpdateAccompanyRequest(
             sessionID: apiKeyS,
             era: int.parse(accompanyEraController.text),
-            speaklanguage: accompanySpeakLanguageController.text,
+            speaklanguage: languages,
             findType: accompanyFindTypeController.text,
             sociability: accompanySociabilityController.text,
           );
@@ -125,7 +129,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
           final request = CreateAccompanyRequest(
             sessionID: apiKeyS,
             era: int.parse(accompanyEraController.text),
-            speaklanguage: accompanySpeakLanguageController.text,
+            speaklanguage: languages,
             findType: accompanyFindTypeController.text,
             sociability: accompanySociabilityController.text,
           );
@@ -164,10 +168,6 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
                 CustomInputBar(titleName: "*年代:", backendPart: _buildAccompanyResetEraInput(context)),
                 SizedBox(height: mediaH / 50),
 
-                // Language
-                CustomInputBar(titleName: "言語 - メイン:", backendPart: _buildAccompanyResetSpeakLanguageInput(context)),
-                SizedBox(height: mediaH / 50),
-
                 // Accompany Type
                 CustomInputBar(titleName: "*相伴のタイプ:", backendPart: _buildAccompanyTypeInput(context)),
                 SizedBox(height: mediaH / 50),
@@ -176,6 +176,8 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
                 CustomInputBar(titleName: "社交力:", backendPart: _buildAccompanyResetSociabilityInput(context)),
                 SizedBox(height: mediaH / 50),
 
+                // Language
+                CustomInputBar(titleName: "言語:", backendPart: _buildAccompanyResetSpeakLanguageInput(context)),
                 SizedBox(height: mediaH / 25),
                 _buildNextButton(context),
               ],
@@ -198,7 +200,12 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
 
   /// Accompany Type
   Widget _buildAccompanyResetSpeakLanguageInput(BuildContext context) {
-    return CustomDropDownBar(controller: accompanySpeakLanguageController, hintText: languages[0], itemArray: languages);
+    return CustomMultiSelectDropDownBar(
+      itemArray: languages,
+      onChanged: (value) {
+        accompanyLanguages = value;
+      },
+    );
   }
 
   /// Section Widget

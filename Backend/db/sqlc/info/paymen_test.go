@@ -10,17 +10,18 @@ import (
 )
 
 func TestCreatePayment(t *testing.T) {
-	CreateRandomPayment(t)
+	user := CreateRandomUserFixInformaion(t)
+	CreateRandomPayment(t, user)
 }
 
-func CreateRandomPayment(t *testing.T) Payment {
+func CreateRandomPayment(t *testing.T, user Fixinformation) Payment {
 	id, _ := uuid.NewRandom()
 	arg := CreatePaymentParams{
 		PayID:       id,
-		Fullname:    gofakeit.FirstName() + gofakeit.LastName(),
+		Fullname:    user.FirstName + user.LastName,
 		PaymentType: gofakeit.CreditCardType(),
 		Amount:      int32(gofakeit.Price(2000, 4000)),
-		Product:     gofakeit.ProductName(),
+		Product:     "ターゲット",
 	}
 
 	Pay, err := testinfoQueries.CreatePayment(context.Background(), arg)
@@ -39,7 +40,8 @@ func CreateRandomPayment(t *testing.T) Payment {
 }
 
 func TestGetPayment(t *testing.T) {
-	pay := CreateRandomPayment(t)
+	user := CreateRandomUserFixInformaion(t)
+	pay := CreateRandomPayment(t, user)
 
 	GetP, err := testinfoQueries.GetPayment(context.Background(), pay.PayID)
 	require.NoError(t, err)

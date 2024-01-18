@@ -78,7 +78,7 @@ class CustomDropDownBar extends StatelessWidget {
           child: DropdownButtonFormField(
             decoration: decoration,
             value: value,
-            items: itemArray!.map((option) {
+            items: itemArray!.toSet().map((option) {
               return DropdownMenuItem(value: option, child: Text(option));
             }).toList(),
             onChanged: (value) {

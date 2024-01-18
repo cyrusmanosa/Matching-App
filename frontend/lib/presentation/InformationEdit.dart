@@ -3,12 +3,14 @@ import 'dart:io';
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
+import 'package:dating_your_date/models/listData.dart';
 import 'package:dating_your_date/pb/canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_images.pb.dart';
 import 'package:dating_your_date/presentation/ContainerScreen.dart';
 import 'package:dating_your_date/widgets/Custom_IconLogoBox.dart';
 import 'package:dating_your_date/widgets/Custom_Show_Image.dart';
+import 'package:dating_your_date/widgets/Custom_dropdown_checkBox_Bar.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
@@ -47,6 +49,7 @@ class _InformationEditState extends State<InformationEdit> {
 
   String? oldPath;
   List<File>? _newimageFile;
+  List<String> myLanguages = [];
 
   @override
   void initState() {
@@ -57,7 +60,6 @@ class _InformationEditState extends State<InformationEdit> {
     updateHeightController = TextEditingController(text: widget.canData?.height.toString());
     updateWeightController = TextEditingController(text: widget.canData?.weight.toString());
     updateEducationController = TextEditingController(text: widget.canData?.education);
-    updateSpeakLanguageController = TextEditingController(text: widget.canData?.speaklanguage);
     updateJobController = TextEditingController(text: widget.canData?.job);
     updateAnnualSalaryController = TextEditingController(text: widget.canData?.annualSalary.toString());
     updateSociabilityController = TextEditingController(text: widget.canData?.sociability);
@@ -184,7 +186,7 @@ class _InformationEditState extends State<InformationEdit> {
           sexual: updateSexualController.text,
           height: int.parse(updateHeightController.text),
           weight: int.parse(updateWeightController.text),
-          speaklanguage: updateSpeakLanguageController.text,
+          speaklanguage: languages,
           education: updateEducationController.text,
           job: updateJobController.text,
           annualSalary: int.parse(updateAnnualSalaryController.text),
@@ -387,7 +389,12 @@ class _InformationEditState extends State<InformationEdit> {
 
   /// Speak Language
   Widget _buildUpdateSpeakLanguageInput(BuildContext context) {
-    return CustomInputFormBar(controller: updateSpeakLanguageController, hintText: "言語 - メイン");
+    return CustomMultiSelectDropDownBar(
+      itemArray: languages,
+      onChanged: (value) {
+        myLanguages = value;
+      },
+    );
   }
 
   /// Job

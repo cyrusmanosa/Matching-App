@@ -14,13 +14,16 @@ message CreateCanChangeRequest {
   string Sexual = 4;
   int32 Height = 5;
   int32 Weight = 6;
-  string Speaklanguage = 7;
+  repeated string Speaklanguage = 7;
   string Education = 8;
   string Job = 9;
   int32 AnnualSalary = 10;
   string Sociability = 11;
-  string Religious = 12;
-  string Introduce = 13;
+  string hobbyType = 12;
+  int32 Experience = 13;
+  string AccompanyType = 14;
+  string Religious = 15;
+  string Introduce = 16;
 }
 message CreateCanChangeResponse {
   CanChange CanChangeInfo = 1;
@@ -44,13 +47,16 @@ message UpdateCanChangeRequest {
   string Sexual = 4;
   int32 Height = 5;
   int32 Weight = 6;
-  string Speaklanguage = 7;
+  repeated string Speaklanguage = 7;
   string Education = 8;
   string Job = 9;
   int32 AnnualSalary = 10;
   string Sociability = 11;
-  string Religious = 12;
-  string Introduce = 13;
+  string hobbyType = 12;
+  int32 Experience = 13;
+  string AccompanyType = 14;
+  string Religious = 15;
+  string Introduce = 16;
 }
 
 message UpdateCanChangeResponse {

@@ -13,18 +13,18 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $16;
+import 'google/protobuf/timestamp.pb.dart' as $17;
 
 class Hobby extends $pb.GeneratedMessage {
   factory Hobby({
     $core.int? userID,
     $core.int? era,
-    $core.String? city,
+    $core.Iterable<$core.String>? city,
     $core.String? gender,
-    $core.String? speaklanguage,
+    $core.Iterable<$core.String>? speaklanguage,
     $core.String? findType,
     $core.int? experience,
-    $16.Timestamp? infoChangedAt,
+    $17.Timestamp? infoChangedAt,
   }) {
     final $result = create();
     if (userID != null) {
@@ -34,13 +34,13 @@ class Hobby extends $pb.GeneratedMessage {
       $result.era = era;
     }
     if (city != null) {
-      $result.city = city;
+      $result.city.addAll(city);
     }
     if (gender != null) {
       $result.gender = gender;
     }
     if (speaklanguage != null) {
-      $result.speaklanguage = speaklanguage;
+      $result.speaklanguage.addAll(speaklanguage);
     }
     if (findType != null) {
       $result.findType = findType;
@@ -60,12 +60,12 @@ class Hobby extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'Hobby', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..a<$core.int>(1, _omitFieldNames ? '' : 'UserID', $pb.PbFieldType.O3, protoName: 'UserID')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'Era', $pb.PbFieldType.O3, protoName: 'Era')
-    ..aOS(3, _omitFieldNames ? '' : 'City', protoName: 'City')
+    ..pPS(3, _omitFieldNames ? '' : 'City', protoName: 'City')
     ..aOS(4, _omitFieldNames ? '' : 'Gender', protoName: 'Gender')
-    ..aOS(5, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
+    ..pPS(5, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
     ..aOS(6, _omitFieldNames ? '' : 'FindType', protoName: 'FindType')
     ..a<$core.int>(7, _omitFieldNames ? '' : 'Experience', $pb.PbFieldType.O3, protoName: 'Experience')
-    ..aOM<$16.Timestamp>(8, _omitFieldNames ? '' : 'InfoChangedAt', protoName: 'InfoChangedAt', subBuilder: $16.Timestamp.create)
+    ..aOM<$17.Timestamp>(8, _omitFieldNames ? '' : 'InfoChangedAt', protoName: 'InfoChangedAt', subBuilder: $17.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -109,13 +109,7 @@ class Hobby extends $pb.GeneratedMessage {
   void clearEra() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get city => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set city($core.String v) { $_setString(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasCity() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearCity() => clearField(3);
+  $core.List<$core.String> get city => $_getList(2);
 
   @$pb.TagNumber(4)
   $core.String get gender => $_getSZ(3);
@@ -127,13 +121,7 @@ class Hobby extends $pb.GeneratedMessage {
   void clearGender() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get speaklanguage => $_getSZ(4);
-  @$pb.TagNumber(5)
-  set speaklanguage($core.String v) { $_setString(4, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasSpeaklanguage() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearSpeaklanguage() => clearField(5);
+  $core.List<$core.String> get speaklanguage => $_getList(4);
 
   @$pb.TagNumber(6)
   $core.String get findType => $_getSZ(5);
@@ -154,15 +142,15 @@ class Hobby extends $pb.GeneratedMessage {
   void clearExperience() => clearField(7);
 
   @$pb.TagNumber(8)
-  $16.Timestamp get infoChangedAt => $_getN(7);
+  $17.Timestamp get infoChangedAt => $_getN(7);
   @$pb.TagNumber(8)
-  set infoChangedAt($16.Timestamp v) { setField(8, v); }
+  set infoChangedAt($17.Timestamp v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasInfoChangedAt() => $_has(7);
   @$pb.TagNumber(8)
   void clearInfoChangedAt() => clearField(8);
   @$pb.TagNumber(8)
-  $16.Timestamp ensureInfoChangedAt() => $_ensure(7);
+  $17.Timestamp ensureInfoChangedAt() => $_ensure(7);
 }
 
 

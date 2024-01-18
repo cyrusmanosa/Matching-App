@@ -44,6 +44,8 @@ class _LoverConditionState extends State<LoverCondition> {
   }
 
   String country = "";
+  List<String> loverLanguages = [];
+  List<String> lovercity = [];
 
   void getCountry(BuildContext context) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
@@ -94,7 +96,6 @@ class _LoverConditionState extends State<LoverCondition> {
     return pattern.hasMatch(value);
   }
 
-// Grpc
   void updateLoverGrpcRequest(BuildContext context) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
     if (!isPureNumber(loverMinAgeController.text) || !isPureNumber(loverMaxAgeController.text)) {
@@ -103,10 +104,12 @@ class _LoverConditionState extends State<LoverCondition> {
       await showErrorDialog(context, "年齢はまだ設定していません");
     } else if (loverMinAgeController.text.isEmpty || loverMaxAgeController.text.isEmpty) {
       await showErrorDialog(context, "最低年齢と最高年齢はまだ設定していません");
+    } else if (int.parse(loverMinAgeController.text) < 18) {
+      await showErrorDialog(context, "最低年齢は18歳です");
     } else if (loverGenderController.text.isEmpty) {
       await showErrorDialog(context, "相手の性別はまだ設定していません");
     } else if (loverSexualController.text.isEmpty) {
-      await showErrorDialog(context, "性的指向はまだ設定していません");
+      await showErrorDialog(context, "相手の性的指向はまだ設定していません");
     } else {
       if (haveTable == true) {
         setState(() {
@@ -117,11 +120,11 @@ class _LoverConditionState extends State<LoverCondition> {
             sessionID: apiKeyS,
             minAge: int.parse(loverMinAgeController.text),
             maxAge: int.parse(loverMaxAgeController.text),
-            city: loverCityController.text,
+            city: loverAddress,
             gender: loverGenderController.text,
-            speaklanguage: loverSpeakLanguageController.text,
+            sexual: loverSexualController.text,
+            speaklanguage: loverLanguages,
           );
-
           await GrpcInfoService.client.updateLover(request);
           await showLogoDialog(context, "恋人の条件を更新しました", false);
           await Future.delayed(Duration(seconds: 1));
@@ -140,9 +143,9 @@ class _LoverConditionState extends State<LoverCondition> {
             sessionID: apiKeyS,
             minAge: int.parse(loverMinAgeController.text),
             maxAge: int.parse(loverMaxAgeController.text),
-            city: loverCityController.text,
+            city: loverAddress,
             gender: loverGenderController.text,
-            speaklanguage: loverSpeakLanguageController.text,
+            speaklanguage: loverLanguages,
           );
 
           await GrpcInfoService.client.createLover(request);
@@ -163,7 +166,6 @@ class _LoverConditionState extends State<LoverCondition> {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
-
     return Scaffold(
       appBar: buildAppBar(context, "恋人の条件", true),
       resizeToAvoidBottomInset: true,
@@ -192,11 +194,11 @@ class _LoverConditionState extends State<LoverCondition> {
               SizedBox(height: mediaH / 50),
 
               // Sexual
-              CustomInputBar(titleName: "*性的指向:", backendPart: _buildLoverResetSexualInput(context)),
+              CustomInputBar(titleName: "*相手の性的指向:", backendPart: _buildLoverResetSexualInput(context)),
               SizedBox(height: mediaH / 50),
 
               // Speak Language
-              CustomInputBar(titleName: "言語 - メイン:", backendPart: _buildLoverSpeakLanguageInput(context)),
+              CustomInputBar(titleName: "言語:", backendPart: _buildLoverSpeakLanguageInput(context)),
               SizedBox(height: mediaH / 50),
 
               // City
@@ -219,7 +221,7 @@ class _LoverConditionState extends State<LoverCondition> {
       height: mediaH / 16,
       width: mediaW / 7.5,
       maxLength: 3,
-      controller: loverMaxAgeController,
+      controller: loverMinAgeController,
       hintText: "25",
     );
   }
@@ -231,7 +233,7 @@ class _LoverConditionState extends State<LoverCondition> {
       height: mediaH / 16,
       width: mediaW / 7.5,
       maxLength: 3,
-      controller: loverMinAgeController,
+      controller: loverMaxAgeController,
       hintText: "30",
     );
   }
@@ -258,7 +260,12 @@ class _LoverConditionState extends State<LoverCondition> {
 
   /// Speak Language
   Widget _buildLoverSpeakLanguageInput(BuildContext context) {
-    return CustomDropDownBar(controller: loverSpeakLanguageController, hintText: languages[0], itemArray: languages);
+    return CustomMultiSelectDropDownBar(
+      itemArray: languages,
+      onChanged: (value) {
+        loverLanguages = value;
+      },
+    );
   }
 
   /// Next Button

@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $16;
+import 'google/protobuf/timestamp.pb.dart' as $17;
 
 class Targetlist extends $pb.GeneratedMessage {
   factory Targetlist({
@@ -24,7 +24,7 @@ class Targetlist extends $pb.GeneratedMessage {
     $core.String? t2Type,
     $core.int? target3ID,
     $core.String? t3Type,
-    $16.Timestamp? updatedAt,
+    $17.Timestamp? updatedAt,
   }) {
     final $result = create();
     if (userID != null) {
@@ -65,7 +65,7 @@ class Targetlist extends $pb.GeneratedMessage {
     ..aOS(5, _omitFieldNames ? '' : 'T2Type', protoName: 'T2Type')
     ..a<$core.int>(6, _omitFieldNames ? '' : 'Target3ID', $pb.PbFieldType.O3, protoName: 'Target3ID')
     ..aOS(7, _omitFieldNames ? '' : 'T3Type', protoName: 'T3Type')
-    ..aOM<$16.Timestamp>(8, _omitFieldNames ? '' : 'UpdatedAt', protoName: 'UpdatedAt', subBuilder: $16.Timestamp.create)
+    ..aOM<$17.Timestamp>(8, _omitFieldNames ? '' : 'UpdatedAt', protoName: 'UpdatedAt', subBuilder: $17.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -154,15 +154,15 @@ class Targetlist extends $pb.GeneratedMessage {
   void clearT3Type() => clearField(7);
 
   @$pb.TagNumber(8)
-  $16.Timestamp get updatedAt => $_getN(7);
+  $17.Timestamp get updatedAt => $_getN(7);
   @$pb.TagNumber(8)
-  set updatedAt($16.Timestamp v) { setField(8, v); }
+  set updatedAt($17.Timestamp v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasUpdatedAt() => $_has(7);
   @$pb.TagNumber(8)
   void clearUpdatedAt() => clearField(8);
   @$pb.TagNumber(8)
-  $16.Timestamp ensureUpdatedAt() => $_ensure(7);
+  $17.Timestamp ensureUpdatedAt() => $_ensure(7);
 }
 
 

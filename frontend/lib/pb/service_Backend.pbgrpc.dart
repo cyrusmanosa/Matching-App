@@ -19,7 +19,7 @@ import 'google/protobuf/empty.pb.dart' as $4;
 import 'rpc_accompany.pb.dart' as $6;
 import 'rpc_canChange.pb.dart' as $5;
 import 'rpc_changeTarget.pb.dart' as $11;
-import 'rpc_chatRecord.pb.dart' as $15;
+import 'rpc_chatRecord.pb.dart' as $16;
 import 'rpc_checkEmail.pb.dart' as $1;
 import 'rpc_contact.pb.dart' as $9;
 import 'rpc_fix.pb.dart' as $3;
@@ -29,6 +29,7 @@ import 'rpc_login.pb.dart' as $0;
 import 'rpc_lover.pb.dart' as $8;
 import 'rpc_password.pb.dart' as $2;
 import 'rpc_payment.pb.dart' as $13;
+import 'rpc_search.pb.dart' as $15;
 import 'rpc_session.pb.dart' as $14;
 import 'rpc_targetList.pb.dart' as $10;
 
@@ -204,6 +205,18 @@ class InformationClient extends $grpc.Client {
       '/pb.Information/GetUserID',
       ($14.GetUserIDRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $14.GetUserIDResponse.fromBuffer(value));
+  static final _$searchTargetHobby = $grpc.ClientMethod<$15.SearchRequest, $15.SearchResponse>(
+      '/pb.Information/SearchTargetHobby',
+      ($15.SearchRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $15.SearchResponse.fromBuffer(value));
+  static final _$searchTargetLover = $grpc.ClientMethod<$15.SearchRequest, $15.SearchResponse>(
+      '/pb.Information/SearchTargetLover',
+      ($15.SearchRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $15.SearchResponse.fromBuffer(value));
+  static final _$searchTargetAccompany = $grpc.ClientMethod<$15.SearchRequest, $15.SearchResponse>(
+      '/pb.Information/SearchTargetAccompany',
+      ($15.SearchRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $15.SearchResponse.fromBuffer(value));
 
   InformationClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -377,6 +390,18 @@ class InformationClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$14.GetUserIDResponse> getUserID($14.GetUserIDRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getUserID, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$15.SearchResponse> searchTargetHobby($15.SearchRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$searchTargetHobby, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$15.SearchResponse> searchTargetLover($15.SearchRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$searchTargetLover, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$15.SearchResponse> searchTargetAccompany($15.SearchRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$searchTargetAccompany, request, options: options);
   }
 }
 
@@ -679,6 +704,27 @@ abstract class InformationServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $14.GetUserIDRequest.fromBuffer(value),
         ($14.GetUserIDResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$15.SearchRequest, $15.SearchResponse>(
+        'SearchTargetHobby',
+        searchTargetHobby_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $15.SearchRequest.fromBuffer(value),
+        ($15.SearchResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$15.SearchRequest, $15.SearchResponse>(
+        'SearchTargetLover',
+        searchTargetLover_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $15.SearchRequest.fromBuffer(value),
+        ($15.SearchResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$15.SearchRequest, $15.SearchResponse>(
+        'SearchTargetAccompany',
+        searchTargetAccompany_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $15.SearchRequest.fromBuffer(value),
+        ($15.SearchResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.LoginUserResponse> loginUser_Pre($grpc.ServiceCall call, $async.Future<$0.LoginUserRequest> request) async {
@@ -849,6 +895,18 @@ abstract class InformationServiceBase extends $grpc.Service {
     return getUserID(call, await request);
   }
 
+  $async.Future<$15.SearchResponse> searchTargetHobby_Pre($grpc.ServiceCall call, $async.Future<$15.SearchRequest> request) async {
+    return searchTargetHobby(call, await request);
+  }
+
+  $async.Future<$15.SearchResponse> searchTargetLover_Pre($grpc.ServiceCall call, $async.Future<$15.SearchRequest> request) async {
+    return searchTargetLover(call, await request);
+  }
+
+  $async.Future<$15.SearchResponse> searchTargetAccompany_Pre($grpc.ServiceCall call, $async.Future<$15.SearchRequest> request) async {
+    return searchTargetAccompany(call, await request);
+  }
+
   $async.Future<$0.LoginUserResponse> loginUser($grpc.ServiceCall call, $0.LoginUserRequest request);
   $async.Future<$1.CheckEmailResponse> checkEmail($grpc.ServiceCall call, $1.CheckEmailRequest request);
   $async.Future<$1.CheckedEmailResponse> checkEmailCode($grpc.ServiceCall call, $1.SendEmailRequest request);
@@ -891,44 +949,47 @@ abstract class InformationServiceBase extends $grpc.Service {
   $async.Future<$13.CreatePaymentResponse> createPayment($grpc.ServiceCall call, $13.CreatePaymentRequest request);
   $async.Future<$13.GetPaymentResponse> getPayment($grpc.ServiceCall call, $13.GetPaymentRequest request);
   $async.Future<$14.GetUserIDResponse> getUserID($grpc.ServiceCall call, $14.GetUserIDRequest request);
+  $async.Future<$15.SearchResponse> searchTargetHobby($grpc.ServiceCall call, $15.SearchRequest request);
+  $async.Future<$15.SearchResponse> searchTargetLover($grpc.ServiceCall call, $15.SearchRequest request);
+  $async.Future<$15.SearchResponse> searchTargetAccompany($grpc.ServiceCall call, $15.SearchRequest request);
 }
 @$pb.GrpcServiceName('pb.Chat')
 class ChatClient extends $grpc.Client {
-  static final _$createChatTable = $grpc.ClientMethod<$15.CreateChatTableRequest, $4.Empty>(
+  static final _$createChatTable = $grpc.ClientMethod<$16.CreateChatTableRequest, $4.Empty>(
       '/pb.Chat/CreateChatTable',
-      ($15.CreateChatTableRequest value) => value.writeToBuffer(),
+      ($16.CreateChatTableRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $4.Empty.fromBuffer(value));
-  static final _$createChatRecord = $grpc.ClientMethod<$15.CreateChatRecordRequest, $15.CreateChatRecordResponse>(
+  static final _$createChatRecord = $grpc.ClientMethod<$16.CreateChatRecordRequest, $16.CreateChatRecordResponse>(
       '/pb.Chat/CreateChatRecord',
-      ($15.CreateChatRecordRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.CreateChatRecordResponse.fromBuffer(value));
-  static final _$getChatRecord = $grpc.ClientMethod<$15.GetChatRecordRequest, $15.GetChatRecordResponse>(
+      ($16.CreateChatRecordRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.CreateChatRecordResponse.fromBuffer(value));
+  static final _$getChatRecord = $grpc.ClientMethod<$16.GetChatRecordRequest, $16.GetChatRecordResponse>(
       '/pb.Chat/GetChatRecord',
-      ($15.GetChatRecordRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.GetChatRecordResponse.fromBuffer(value));
-  static final _$updateChatRecord = $grpc.ClientMethod<$15.UpdateChatRecordRequest, $15.UpdateChatRecordResponse>(
+      ($16.GetChatRecordRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.GetChatRecordResponse.fromBuffer(value));
+  static final _$updateChatRecord = $grpc.ClientMethod<$16.UpdateChatRecordRequest, $16.UpdateChatRecordResponse>(
       '/pb.Chat/UpdateChatRecord',
-      ($15.UpdateChatRecordRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.UpdateChatRecordResponse.fromBuffer(value));
-  static final _$deleteChatRecord = $grpc.ClientMethod<$15.DeleteChatRecordRequest, $4.Empty>(
-      '/pb.Chat/DeleteChatRecord',
-      ($15.DeleteChatRecordRequest value) => value.writeToBuffer(),
+      ($16.UpdateChatRecordRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.UpdateChatRecordResponse.fromBuffer(value));
+  static final _$deleteChatTable = $grpc.ClientMethod<$16.DeleteChatTableRequest, $4.Empty>(
+      '/pb.Chat/DeleteChatTable',
+      ($16.DeleteChatTableRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $4.Empty.fromBuffer(value));
-  static final _$getTargetID = $grpc.ClientMethod<$15.GetTargetIDRequest, $15.GetTargetIDResponse>(
+  static final _$getTargetID = $grpc.ClientMethod<$16.GetTargetIDRequest, $16.GetTargetIDResponse>(
       '/pb.Chat/GetTargetID',
-      ($15.GetTargetIDRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.GetTargetIDResponse.fromBuffer(value));
-  static final _$getLastMsg = $grpc.ClientMethod<$15.GetLastMsgRequest, $15.GetLastMsgResponse>(
+      ($16.GetTargetIDRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.GetTargetIDResponse.fromBuffer(value));
+  static final _$getLastMsg = $grpc.ClientMethod<$16.GetLastMsgRequest, $16.GetLastMsgResponse>(
       '/pb.Chat/GetLastMsg',
-      ($15.GetLastMsgRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.GetLastMsgResponse.fromBuffer(value));
-  static final _$getChatRow = $grpc.ClientMethod<$15.GetChatRowRequest, $15.GetChatRowResponse>(
+      ($16.GetLastMsgRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.GetLastMsgResponse.fromBuffer(value));
+  static final _$getChatRow = $grpc.ClientMethod<$16.GetChatRowRequest, $16.GetChatRowResponse>(
       '/pb.Chat/GetChatRow',
-      ($15.GetChatRowRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.GetChatRowResponse.fromBuffer(value));
-  static final _$updateRead = $grpc.ClientMethod<$15.UpdateReadRequest, $4.Empty>(
+      ($16.GetChatRowRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $16.GetChatRowResponse.fromBuffer(value));
+  static final _$updateRead = $grpc.ClientMethod<$16.UpdateReadRequest, $4.Empty>(
       '/pb.Chat/UpdateRead',
-      ($15.UpdateReadRequest value) => value.writeToBuffer(),
+      ($16.UpdateReadRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $4.Empty.fromBuffer(value));
 
   ChatClient($grpc.ClientChannel channel,
@@ -937,39 +998,39 @@ class ChatClient extends $grpc.Client {
       : super(channel, options: options,
         interceptors: interceptors);
 
-  $grpc.ResponseFuture<$4.Empty> createChatTable($15.CreateChatTableRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$4.Empty> createChatTable($16.CreateChatTableRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createChatTable, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.CreateChatRecordResponse> createChatRecord($15.CreateChatRecordRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.CreateChatRecordResponse> createChatRecord($16.CreateChatRecordRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createChatRecord, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.GetChatRecordResponse> getChatRecord($15.GetChatRecordRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.GetChatRecordResponse> getChatRecord($16.GetChatRecordRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getChatRecord, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.UpdateChatRecordResponse> updateChatRecord($15.UpdateChatRecordRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.UpdateChatRecordResponse> updateChatRecord($16.UpdateChatRecordRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateChatRecord, request, options: options);
   }
 
-  $grpc.ResponseFuture<$4.Empty> deleteChatRecord($15.DeleteChatRecordRequest request, {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$deleteChatRecord, request, options: options);
+  $grpc.ResponseFuture<$4.Empty> deleteChatTable($16.DeleteChatTableRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$deleteChatTable, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.GetTargetIDResponse> getTargetID($15.GetTargetIDRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.GetTargetIDResponse> getTargetID($16.GetTargetIDRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getTargetID, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.GetLastMsgResponse> getLastMsg($15.GetLastMsgRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.GetLastMsgResponse> getLastMsg($16.GetLastMsgRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getLastMsg, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.GetChatRowResponse> getChatRow($15.GetChatRowRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$16.GetChatRowResponse> getChatRow($16.GetChatRowRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getChatRow, request, options: options);
   }
 
-  $grpc.ResponseFuture<$4.Empty> updateRead($15.UpdateReadRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$4.Empty> updateRead($16.UpdateReadRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateRead, request, options: options);
   }
 }
@@ -979,114 +1040,114 @@ abstract class ChatServiceBase extends $grpc.Service {
   $core.String get $name => 'pb.Chat';
 
   ChatServiceBase() {
-    $addMethod($grpc.ServiceMethod<$15.CreateChatTableRequest, $4.Empty>(
+    $addMethod($grpc.ServiceMethod<$16.CreateChatTableRequest, $4.Empty>(
         'CreateChatTable',
         createChatTable_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.CreateChatTableRequest.fromBuffer(value),
+        ($core.List<$core.int> value) => $16.CreateChatTableRequest.fromBuffer(value),
         ($4.Empty value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.CreateChatRecordRequest, $15.CreateChatRecordResponse>(
+    $addMethod($grpc.ServiceMethod<$16.CreateChatRecordRequest, $16.CreateChatRecordResponse>(
         'CreateChatRecord',
         createChatRecord_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.CreateChatRecordRequest.fromBuffer(value),
-        ($15.CreateChatRecordResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.GetChatRecordRequest, $15.GetChatRecordResponse>(
+        ($core.List<$core.int> value) => $16.CreateChatRecordRequest.fromBuffer(value),
+        ($16.CreateChatRecordResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.GetChatRecordRequest, $16.GetChatRecordResponse>(
         'GetChatRecord',
         getChatRecord_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.GetChatRecordRequest.fromBuffer(value),
-        ($15.GetChatRecordResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.UpdateChatRecordRequest, $15.UpdateChatRecordResponse>(
+        ($core.List<$core.int> value) => $16.GetChatRecordRequest.fromBuffer(value),
+        ($16.GetChatRecordResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.UpdateChatRecordRequest, $16.UpdateChatRecordResponse>(
         'UpdateChatRecord',
         updateChatRecord_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.UpdateChatRecordRequest.fromBuffer(value),
-        ($15.UpdateChatRecordResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.DeleteChatRecordRequest, $4.Empty>(
-        'DeleteChatRecord',
-        deleteChatRecord_Pre,
+        ($core.List<$core.int> value) => $16.UpdateChatRecordRequest.fromBuffer(value),
+        ($16.UpdateChatRecordResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.DeleteChatTableRequest, $4.Empty>(
+        'DeleteChatTable',
+        deleteChatTable_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.DeleteChatRecordRequest.fromBuffer(value),
+        ($core.List<$core.int> value) => $16.DeleteChatTableRequest.fromBuffer(value),
         ($4.Empty value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.GetTargetIDRequest, $15.GetTargetIDResponse>(
+    $addMethod($grpc.ServiceMethod<$16.GetTargetIDRequest, $16.GetTargetIDResponse>(
         'GetTargetID',
         getTargetID_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.GetTargetIDRequest.fromBuffer(value),
-        ($15.GetTargetIDResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.GetLastMsgRequest, $15.GetLastMsgResponse>(
+        ($core.List<$core.int> value) => $16.GetTargetIDRequest.fromBuffer(value),
+        ($16.GetTargetIDResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.GetLastMsgRequest, $16.GetLastMsgResponse>(
         'GetLastMsg',
         getLastMsg_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.GetLastMsgRequest.fromBuffer(value),
-        ($15.GetLastMsgResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.GetChatRowRequest, $15.GetChatRowResponse>(
+        ($core.List<$core.int> value) => $16.GetLastMsgRequest.fromBuffer(value),
+        ($16.GetLastMsgResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.GetChatRowRequest, $16.GetChatRowResponse>(
         'GetChatRow',
         getChatRow_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.GetChatRowRequest.fromBuffer(value),
-        ($15.GetChatRowResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.UpdateReadRequest, $4.Empty>(
+        ($core.List<$core.int> value) => $16.GetChatRowRequest.fromBuffer(value),
+        ($16.GetChatRowResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$16.UpdateReadRequest, $4.Empty>(
         'UpdateRead',
         updateRead_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.UpdateReadRequest.fromBuffer(value),
+        ($core.List<$core.int> value) => $16.UpdateReadRequest.fromBuffer(value),
         ($4.Empty value) => value.writeToBuffer()));
   }
 
-  $async.Future<$4.Empty> createChatTable_Pre($grpc.ServiceCall call, $async.Future<$15.CreateChatTableRequest> request) async {
+  $async.Future<$4.Empty> createChatTable_Pre($grpc.ServiceCall call, $async.Future<$16.CreateChatTableRequest> request) async {
     return createChatTable(call, await request);
   }
 
-  $async.Future<$15.CreateChatRecordResponse> createChatRecord_Pre($grpc.ServiceCall call, $async.Future<$15.CreateChatRecordRequest> request) async {
+  $async.Future<$16.CreateChatRecordResponse> createChatRecord_Pre($grpc.ServiceCall call, $async.Future<$16.CreateChatRecordRequest> request) async {
     return createChatRecord(call, await request);
   }
 
-  $async.Future<$15.GetChatRecordResponse> getChatRecord_Pre($grpc.ServiceCall call, $async.Future<$15.GetChatRecordRequest> request) async {
+  $async.Future<$16.GetChatRecordResponse> getChatRecord_Pre($grpc.ServiceCall call, $async.Future<$16.GetChatRecordRequest> request) async {
     return getChatRecord(call, await request);
   }
 
-  $async.Future<$15.UpdateChatRecordResponse> updateChatRecord_Pre($grpc.ServiceCall call, $async.Future<$15.UpdateChatRecordRequest> request) async {
+  $async.Future<$16.UpdateChatRecordResponse> updateChatRecord_Pre($grpc.ServiceCall call, $async.Future<$16.UpdateChatRecordRequest> request) async {
     return updateChatRecord(call, await request);
   }
 
-  $async.Future<$4.Empty> deleteChatRecord_Pre($grpc.ServiceCall call, $async.Future<$15.DeleteChatRecordRequest> request) async {
-    return deleteChatRecord(call, await request);
+  $async.Future<$4.Empty> deleteChatTable_Pre($grpc.ServiceCall call, $async.Future<$16.DeleteChatTableRequest> request) async {
+    return deleteChatTable(call, await request);
   }
 
-  $async.Future<$15.GetTargetIDResponse> getTargetID_Pre($grpc.ServiceCall call, $async.Future<$15.GetTargetIDRequest> request) async {
+  $async.Future<$16.GetTargetIDResponse> getTargetID_Pre($grpc.ServiceCall call, $async.Future<$16.GetTargetIDRequest> request) async {
     return getTargetID(call, await request);
   }
 
-  $async.Future<$15.GetLastMsgResponse> getLastMsg_Pre($grpc.ServiceCall call, $async.Future<$15.GetLastMsgRequest> request) async {
+  $async.Future<$16.GetLastMsgResponse> getLastMsg_Pre($grpc.ServiceCall call, $async.Future<$16.GetLastMsgRequest> request) async {
     return getLastMsg(call, await request);
   }
 
-  $async.Future<$15.GetChatRowResponse> getChatRow_Pre($grpc.ServiceCall call, $async.Future<$15.GetChatRowRequest> request) async {
+  $async.Future<$16.GetChatRowResponse> getChatRow_Pre($grpc.ServiceCall call, $async.Future<$16.GetChatRowRequest> request) async {
     return getChatRow(call, await request);
   }
 
-  $async.Future<$4.Empty> updateRead_Pre($grpc.ServiceCall call, $async.Future<$15.UpdateReadRequest> request) async {
+  $async.Future<$4.Empty> updateRead_Pre($grpc.ServiceCall call, $async.Future<$16.UpdateReadRequest> request) async {
     return updateRead(call, await request);
   }
 
-  $async.Future<$4.Empty> createChatTable($grpc.ServiceCall call, $15.CreateChatTableRequest request);
-  $async.Future<$15.CreateChatRecordResponse> createChatRecord($grpc.ServiceCall call, $15.CreateChatRecordRequest request);
-  $async.Future<$15.GetChatRecordResponse> getChatRecord($grpc.ServiceCall call, $15.GetChatRecordRequest request);
-  $async.Future<$15.UpdateChatRecordResponse> updateChatRecord($grpc.ServiceCall call, $15.UpdateChatRecordRequest request);
-  $async.Future<$4.Empty> deleteChatRecord($grpc.ServiceCall call, $15.DeleteChatRecordRequest request);
-  $async.Future<$15.GetTargetIDResponse> getTargetID($grpc.ServiceCall call, $15.GetTargetIDRequest request);
-  $async.Future<$15.GetLastMsgResponse> getLastMsg($grpc.ServiceCall call, $15.GetLastMsgRequest request);
-  $async.Future<$15.GetChatRowResponse> getChatRow($grpc.ServiceCall call, $15.GetChatRowRequest request);
-  $async.Future<$4.Empty> updateRead($grpc.ServiceCall call, $15.UpdateReadRequest request);
+  $async.Future<$4.Empty> createChatTable($grpc.ServiceCall call, $16.CreateChatTableRequest request);
+  $async.Future<$16.CreateChatRecordResponse> createChatRecord($grpc.ServiceCall call, $16.CreateChatRecordRequest request);
+  $async.Future<$16.GetChatRecordResponse> getChatRecord($grpc.ServiceCall call, $16.GetChatRecordRequest request);
+  $async.Future<$16.UpdateChatRecordResponse> updateChatRecord($grpc.ServiceCall call, $16.UpdateChatRecordRequest request);
+  $async.Future<$4.Empty> deleteChatTable($grpc.ServiceCall call, $16.DeleteChatTableRequest request);
+  $async.Future<$16.GetTargetIDResponse> getTargetID($grpc.ServiceCall call, $16.GetTargetIDRequest request);
+  $async.Future<$16.GetLastMsgResponse> getLastMsg($grpc.ServiceCall call, $16.GetLastMsgRequest request);
+  $async.Future<$16.GetChatRowResponse> getChatRow($grpc.ServiceCall call, $16.GetChatRowRequest request);
+  $async.Future<$4.Empty> updateRead($grpc.ServiceCall call, $16.UpdateReadRequest request);
 }

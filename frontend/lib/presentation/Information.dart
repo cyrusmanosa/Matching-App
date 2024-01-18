@@ -9,10 +9,8 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class Information extends StatefulWidget {
-  Information({Key? key, this.canData, this.fixData, this.imgIcon, this.hobbyType, this.accompanyType}) : super(key: key);
+  Information({Key? key, this.canData, this.fixData, this.imgIcon}) : super(key: key);
 
-  final String? hobbyType;
-  final String? accompanyType;
   final CanChange? canData;
   final List<File>? imgIcon;
   final Fix? fixData;
@@ -144,7 +142,7 @@ class _InformationState extends State<Information> {
             SizedBox(height: mediaH / 40),
             // hobby
             // TODO: 1
-            ShownDataBarWidget(item: "趣味 - タイプ", data: widget.hobbyType!),
+            ShownDataBarWidget(item: "趣味 - タイプ", data: widget.canData!.hobbyType),
             SizedBox(height: mediaH / 40),
             // job
             ShownDataBarWidget(item: "職種", data: widget.canData!.job),
@@ -157,7 +155,7 @@ class _InformationState extends State<Information> {
             SizedBox(height: mediaH / 40),
             // find target
             // TODO: 2
-            ShownDataBarWidget(item: "相伴のタイプ", data: widget.accompanyType!),
+            ShownDataBarWidget(item: "相伴のタイプ", data: widget.canData!.accompanyType),
             SizedBox(height: mediaH / 40),
 
             // religious

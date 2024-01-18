@@ -19,7 +19,7 @@ const Accompany$json = {
   '2': [
     {'1': 'UserID', '3': 1, '4': 1, '5': 5, '10': 'UserID'},
     {'1': 'Era', '3': 2, '4': 1, '5': 5, '10': 'Era'},
-    {'1': 'Speaklanguage', '3': 3, '4': 1, '5': 9, '10': 'Speaklanguage'},
+    {'1': 'Speaklanguage', '3': 3, '4': 3, '5': 9, '10': 'Speaklanguage'},
     {'1': 'FindType', '3': 4, '4': 1, '5': 9, '10': 'FindType'},
     {'1': 'Sociability', '3': 5, '4': 1, '5': 9, '10': 'Sociability'},
     {'1': 'InfoChangedAt', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'InfoChangedAt'},
@@ -29,7 +29,7 @@ const Accompany$json = {
 /// Descriptor for `Accompany`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List accompanyDescriptor = $convert.base64Decode(
     'CglBY2NvbXBhbnkSFgoGVXNlcklEGAEgASgFUgZVc2VySUQSEAoDRXJhGAIgASgFUgNFcmESJA'
-    'oNU3BlYWtsYW5ndWFnZRgDIAEoCVINU3BlYWtsYW5ndWFnZRIaCghGaW5kVHlwZRgEIAEoCVII'
+    'oNU3BlYWtsYW5ndWFnZRgDIAMoCVINU3BlYWtsYW5ndWFnZRIaCghGaW5kVHlwZRgEIAEoCVII'
     'RmluZFR5cGUSIAoLU29jaWFiaWxpdHkYBSABKAlSC1NvY2lhYmlsaXR5EkAKDUluZm9DaGFuZ2'
     'VkQXQYBiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUg1JbmZvQ2hhbmdlZEF0');
 

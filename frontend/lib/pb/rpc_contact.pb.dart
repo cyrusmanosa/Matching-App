@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'contact.pb.dart' as $22;
+import 'contact.pb.dart' as $23;
 
 /// Create
 class CreateContactRequest extends $pb.GeneratedMessage {
@@ -110,7 +110,7 @@ class CreateContactRequest extends $pb.GeneratedMessage {
 
 class CreateContactResponse extends $pb.GeneratedMessage {
   factory CreateContactResponse({
-    $22.Contact? c,
+    $23.Contact? c,
   }) {
     final $result = create();
     if (c != null) {
@@ -123,7 +123,7 @@ class CreateContactResponse extends $pb.GeneratedMessage {
   factory CreateContactResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateContactResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$22.Contact>(1, _omitFieldNames ? '' : 'c', subBuilder: $22.Contact.create)
+    ..aOM<$23.Contact>(1, _omitFieldNames ? '' : 'c', subBuilder: $23.Contact.create)
     ..hasRequiredFields = false
   ;
 
@@ -149,15 +149,15 @@ class CreateContactResponse extends $pb.GeneratedMessage {
   static CreateContactResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $22.Contact get c => $_getN(0);
+  $23.Contact get c => $_getN(0);
   @$pb.TagNumber(1)
-  set c($22.Contact v) { setField(1, v); }
+  set c($23.Contact v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasC() => $_has(0);
   @$pb.TagNumber(1)
   void clearC() => clearField(1);
   @$pb.TagNumber(1)
-  $22.Contact ensureC() => $_ensure(0);
+  $23.Contact ensureC() => $_ensure(0);
 }
 
 /// Get
@@ -227,7 +227,7 @@ class GetContactRequest extends $pb.GeneratedMessage {
 
 class GetContactResponse extends $pb.GeneratedMessage {
   factory GetContactResponse({
-    $22.Contact? c,
+    $23.Contact? c,
   }) {
     final $result = create();
     if (c != null) {
@@ -240,7 +240,7 @@ class GetContactResponse extends $pb.GeneratedMessage {
   factory GetContactResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetContactResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$22.Contact>(1, _omitFieldNames ? '' : 'c', subBuilder: $22.Contact.create)
+    ..aOM<$23.Contact>(1, _omitFieldNames ? '' : 'c', subBuilder: $23.Contact.create)
     ..hasRequiredFields = false
   ;
 
@@ -266,15 +266,15 @@ class GetContactResponse extends $pb.GeneratedMessage {
   static GetContactResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $22.Contact get c => $_getN(0);
+  $23.Contact get c => $_getN(0);
   @$pb.TagNumber(1)
-  set c($22.Contact v) { setField(1, v); }
+  set c($23.Contact v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasC() => $_has(0);
   @$pb.TagNumber(1)
   void clearC() => clearField(1);
   @$pb.TagNumber(1)
-  $22.Contact ensureC() => $_ensure(0);
+  $23.Contact ensureC() => $_ensure(0);
 }
 
 /// Update
@@ -386,7 +386,7 @@ class UpdateContactRequest extends $pb.GeneratedMessage {
 
 class UpdateContactResponse extends $pb.GeneratedMessage {
   factory UpdateContactResponse({
-    $22.Contact? c,
+    $23.Contact? c,
   }) {
     final $result = create();
     if (c != null) {
@@ -399,7 +399,7 @@ class UpdateContactResponse extends $pb.GeneratedMessage {
   factory UpdateContactResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateContactResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$22.Contact>(1, _omitFieldNames ? '' : 'c', subBuilder: $22.Contact.create)
+    ..aOM<$23.Contact>(1, _omitFieldNames ? '' : 'c', subBuilder: $23.Contact.create)
     ..hasRequiredFields = false
   ;
 
@@ -425,15 +425,15 @@ class UpdateContactResponse extends $pb.GeneratedMessage {
   static UpdateContactResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $22.Contact get c => $_getN(0);
+  $23.Contact get c => $_getN(0);
   @$pb.TagNumber(1)
-  set c($22.Contact v) { setField(1, v); }
+  set c($23.Contact v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasC() => $_has(0);
   @$pb.TagNumber(1)
   void clearC() => clearField(1);
   @$pb.TagNumber(1)
-  $22.Contact ensureC() => $_ensure(0);
+  $23.Contact ensureC() => $_ensure(0);
 }
 
 /// Delete

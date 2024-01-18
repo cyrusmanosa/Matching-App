@@ -86,9 +86,7 @@ message UpdateReadRequest {
 
 
 // Delete
-message DeleteChatRecordRequest {
+message DeleteChatTableRequest {
     int32 UserID = 1;
-    int32 TargetID = 2;
-    google.protobuf.Timestamp CreateAt = 3;
 }
 

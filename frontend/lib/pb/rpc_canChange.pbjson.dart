@@ -23,13 +23,16 @@ const CreateCanChangeRequest$json = {
     {'1': 'Sexual', '3': 4, '4': 1, '5': 9, '10': 'Sexual'},
     {'1': 'Height', '3': 5, '4': 1, '5': 5, '10': 'Height'},
     {'1': 'Weight', '3': 6, '4': 1, '5': 5, '10': 'Weight'},
-    {'1': 'Speaklanguage', '3': 7, '4': 1, '5': 9, '10': 'Speaklanguage'},
+    {'1': 'Speaklanguage', '3': 7, '4': 3, '5': 9, '10': 'Speaklanguage'},
     {'1': 'Education', '3': 8, '4': 1, '5': 9, '10': 'Education'},
     {'1': 'Job', '3': 9, '4': 1, '5': 9, '10': 'Job'},
     {'1': 'AnnualSalary', '3': 10, '4': 1, '5': 5, '10': 'AnnualSalary'},
     {'1': 'Sociability', '3': 11, '4': 1, '5': 9, '10': 'Sociability'},
-    {'1': 'Religious', '3': 12, '4': 1, '5': 9, '10': 'Religious'},
-    {'1': 'Introduce', '3': 13, '4': 1, '5': 9, '10': 'Introduce'},
+    {'1': 'hobbyType', '3': 12, '4': 1, '5': 9, '10': 'hobbyType'},
+    {'1': 'Experience', '3': 13, '4': 1, '5': 5, '10': 'Experience'},
+    {'1': 'AccompanyType', '3': 14, '4': 1, '5': 9, '10': 'AccompanyType'},
+    {'1': 'Religious', '3': 15, '4': 1, '5': 9, '10': 'Religious'},
+    {'1': 'Introduce', '3': 16, '4': 1, '5': 9, '10': 'Introduce'},
   ],
 };
 
@@ -38,11 +41,12 @@ final $typed_data.Uint8List createCanChangeRequestDescriptor = $convert.base64De
     'ChZDcmVhdGVDYW5DaGFuZ2VSZXF1ZXN0EhwKCVNlc3Npb25JRBgBIAEoCVIJU2Vzc2lvbklEEh'
     'oKCE5pY2tOYW1lGAIgASgJUghOaWNrTmFtZRISCgRDaXR5GAMgASgJUgRDaXR5EhYKBlNleHVh'
     'bBgEIAEoCVIGU2V4dWFsEhYKBkhlaWdodBgFIAEoBVIGSGVpZ2h0EhYKBldlaWdodBgGIAEoBV'
-    'IGV2VpZ2h0EiQKDVNwZWFrbGFuZ3VhZ2UYByABKAlSDVNwZWFrbGFuZ3VhZ2USHAoJRWR1Y2F0'
+    'IGV2VpZ2h0EiQKDVNwZWFrbGFuZ3VhZ2UYByADKAlSDVNwZWFrbGFuZ3VhZ2USHAoJRWR1Y2F0'
     'aW9uGAggASgJUglFZHVjYXRpb24SEAoDSm9iGAkgASgJUgNKb2ISIgoMQW5udWFsU2FsYXJ5GA'
     'ogASgFUgxBbm51YWxTYWxhcnkSIAoLU29jaWFiaWxpdHkYCyABKAlSC1NvY2lhYmlsaXR5EhwK'
-    'CVJlbGlnaW91cxgMIAEoCVIJUmVsaWdpb3VzEhwKCUludHJvZHVjZRgNIAEoCVIJSW50cm9kdW'
-    'Nl');
+    'CWhvYmJ5VHlwZRgMIAEoCVIJaG9iYnlUeXBlEh4KCkV4cGVyaWVuY2UYDSABKAVSCkV4cGVyaW'
+    'VuY2USJAoNQWNjb21wYW55VHlwZRgOIAEoCVINQWNjb21wYW55VHlwZRIcCglSZWxpZ2lvdXMY'
+    'DyABKAlSCVJlbGlnaW91cxIcCglJbnRyb2R1Y2UYECABKAlSCUludHJvZHVjZQ==');
 
 @$core.Deprecated('Use createCanChangeResponseDescriptor instead')
 const CreateCanChangeResponse$json = {
@@ -94,13 +98,16 @@ const UpdateCanChangeRequest$json = {
     {'1': 'Sexual', '3': 4, '4': 1, '5': 9, '10': 'Sexual'},
     {'1': 'Height', '3': 5, '4': 1, '5': 5, '10': 'Height'},
     {'1': 'Weight', '3': 6, '4': 1, '5': 5, '10': 'Weight'},
-    {'1': 'Speaklanguage', '3': 7, '4': 1, '5': 9, '10': 'Speaklanguage'},
+    {'1': 'Speaklanguage', '3': 7, '4': 3, '5': 9, '10': 'Speaklanguage'},
     {'1': 'Education', '3': 8, '4': 1, '5': 9, '10': 'Education'},
     {'1': 'Job', '3': 9, '4': 1, '5': 9, '10': 'Job'},
     {'1': 'AnnualSalary', '3': 10, '4': 1, '5': 5, '10': 'AnnualSalary'},
     {'1': 'Sociability', '3': 11, '4': 1, '5': 9, '10': 'Sociability'},
-    {'1': 'Religious', '3': 12, '4': 1, '5': 9, '10': 'Religious'},
-    {'1': 'Introduce', '3': 13, '4': 1, '5': 9, '10': 'Introduce'},
+    {'1': 'hobbyType', '3': 12, '4': 1, '5': 9, '10': 'hobbyType'},
+    {'1': 'Experience', '3': 13, '4': 1, '5': 5, '10': 'Experience'},
+    {'1': 'AccompanyType', '3': 14, '4': 1, '5': 9, '10': 'AccompanyType'},
+    {'1': 'Religious', '3': 15, '4': 1, '5': 9, '10': 'Religious'},
+    {'1': 'Introduce', '3': 16, '4': 1, '5': 9, '10': 'Introduce'},
   ],
 };
 
@@ -109,11 +116,12 @@ final $typed_data.Uint8List updateCanChangeRequestDescriptor = $convert.base64De
     'ChZVcGRhdGVDYW5DaGFuZ2VSZXF1ZXN0EhwKCVNlc3Npb25JRBgBIAEoCVIJU2Vzc2lvbklEEh'
     'oKCE5pY2tOYW1lGAIgASgJUghOaWNrTmFtZRISCgRDaXR5GAMgASgJUgRDaXR5EhYKBlNleHVh'
     'bBgEIAEoCVIGU2V4dWFsEhYKBkhlaWdodBgFIAEoBVIGSGVpZ2h0EhYKBldlaWdodBgGIAEoBV'
-    'IGV2VpZ2h0EiQKDVNwZWFrbGFuZ3VhZ2UYByABKAlSDVNwZWFrbGFuZ3VhZ2USHAoJRWR1Y2F0'
+    'IGV2VpZ2h0EiQKDVNwZWFrbGFuZ3VhZ2UYByADKAlSDVNwZWFrbGFuZ3VhZ2USHAoJRWR1Y2F0'
     'aW9uGAggASgJUglFZHVjYXRpb24SEAoDSm9iGAkgASgJUgNKb2ISIgoMQW5udWFsU2FsYXJ5GA'
     'ogASgFUgxBbm51YWxTYWxhcnkSIAoLU29jaWFiaWxpdHkYCyABKAlSC1NvY2lhYmlsaXR5EhwK'
-    'CVJlbGlnaW91cxgMIAEoCVIJUmVsaWdpb3VzEhwKCUludHJvZHVjZRgNIAEoCVIJSW50cm9kdW'
-    'Nl');
+    'CWhvYmJ5VHlwZRgMIAEoCVIJaG9iYnlUeXBlEh4KCkV4cGVyaWVuY2UYDSABKAVSCkV4cGVyaW'
+    'VuY2USJAoNQWNjb21wYW55VHlwZRgOIAEoCVINQWNjb21wYW55VHlwZRIcCglSZWxpZ2lvdXMY'
+    'DyABKAlSCVJlbGlnaW91cxIcCglJbnRyb2R1Y2UYECABKAlSCUludHJvZHVjZQ==');
 
 @$core.Deprecated('Use updateCanChangeResponseDescriptor instead')
 const UpdateCanChangeResponse$json = {

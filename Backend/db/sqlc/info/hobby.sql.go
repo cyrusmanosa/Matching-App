@@ -27,10 +27,10 @@ INSERT INTO hobby (
 type CreateHobbyParams struct {
 	UserID        int32       `json:"user_id"`
 	Era           int32 `json:"era"`
-	City          string      `json:"city"`
-	Gender        string      `json:"gender"`
-	Speaklanguage string      `json:"speaklanguage"`
-	FindType      string      `json:"find_type"`
+	City          []string    `json:"city"`
+	Gender        string `json:"gender"`
+	Speaklanguage []string    `json:"speaklanguage"`
+	FindType      string `json:"find_type"`
 	Experience    int32 `json:"experience"`
 }
 
@@ -138,10 +138,10 @@ RETURNING user_id, era, city, gender, speaklanguage, find_type, experience, info
 type UpdateHobbyParams struct {
 	UserID        int32       `json:"user_id"`
 	Era           int32 `json:"era"`
-	City          string      `json:"city"`
-	Gender        string      `json:"gender"`
-	Speaklanguage string      `json:"speaklanguage"`
-	FindType      string      `json:"find_type"`
+	City          []string    `json:"city"`
+	Gender        string `json:"gender"`
+	Speaklanguage []string    `json:"speaklanguage"`
+	FindType      string `json:"find_type"`
 	Experience    int32 `json:"experience"`
 }
 

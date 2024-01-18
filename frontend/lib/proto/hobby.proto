@@ -10,9 +10,9 @@ option go_package = "Backend/pb";
 message Hobby {
     int32 UserID = 1;
     int32 Era = 2;
-    string City = 3;
+    repeated string City = 3;
     string Gender = 4;
-    string Speaklanguage = 5;
+    repeated string Speaklanguage = 5;
     string FindType = 6;
     int32 Experience = 7;
     google.protobuf.Timestamp InfoChangedAt = 8;

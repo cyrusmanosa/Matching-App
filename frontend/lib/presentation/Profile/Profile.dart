@@ -4,12 +4,10 @@ import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/canChange.pb.dart';
 import 'package:dating_your_date/pb/fix.pb.dart';
-import 'package:dating_your_date/pb/rpc_accompany.pb.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_changeTarget.pb.dart';
 import 'package:dating_your_date/pb/rpc_chatRecord.pb.dart';
 import 'package:dating_your_date/pb/rpc_fix.pb.dart';
-import 'package:dating_your_date/pb/rpc_hobby.pb.dart';
 import 'package:dating_your_date/pb/rpc_images.pb.dart';
 import 'package:dating_your_date/presentation/Information.dart';
 import 'package:dating_your_date/presentation/InformationEdit.dart';
@@ -41,8 +39,6 @@ class _ProfileState extends State<Profile> {
 
   String send = "";
   String changeTime = "";
-  String hobbyType = "";
-  String accompanyType = "";
   CanChange cCData = CanChange();
   Fix myFixData = Fix();
   @override
@@ -56,7 +52,6 @@ class _ProfileState extends State<Profile> {
     await getChangeGrpcRequest(context);
     await getImagesGrpcRequest(context);
     await getMyselfInfoGrpcRequest(context);
-    await getHobbyAccompany(context);
     allMyImg = [myImg1, myImg2, myImg3, myImg4, myImg5];
   }
 
@@ -183,35 +178,6 @@ class _ProfileState extends State<Profile> {
     } on GrpcError {
       await showErrorDialog(context, "Error: validatable input UserId in Chat Record!");
       throw Exception("Error occurred while fetching canChangeInfo.");
-    }
-  }
-
-  Future<void> getHobbyAccompany(BuildContext context) async {
-    String? apiKeyS = await globalSession.read(key: 'SessionId');
-    // hobby
-    try {
-      final hRequest = GetHobbyRequest(sessionID: apiKeyS);
-      final hResponse = await GrpcInfoService.client.getHobby(hRequest);
-      setState(() {
-        hobbyType = hResponse.h.findType;
-      });
-    } on GrpcError {
-      setState(() {
-        hobbyType = "まだ設定しません";
-      });
-    }
-
-    // accompany
-    try {
-      final aRequest = GetAccompanyRequest(sessionID: apiKeyS);
-      final aResponse = await GrpcInfoService.client.getAccompany(aRequest);
-      setState(() {
-        accompanyType = aResponse.ac.findType;
-      });
-    } on GrpcError {
-      setState(() {
-        accompanyType = "まだ設定しません";
-      });
     }
   }
 
@@ -478,8 +444,6 @@ class _ProfileState extends State<Profile> {
                   canData: cCData,
                   fixData: myFixData,
                   imgIcon: allMyImg,
-                  hobbyType: hobbyType,
-                  accompanyType: accompanyType,
                 );
               },
             );

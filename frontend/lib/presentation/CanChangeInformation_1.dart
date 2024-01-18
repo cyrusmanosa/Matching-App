@@ -25,7 +25,7 @@ class CanChangeInformation1 extends StatefulWidget {
 
 class _CanChangeInformation1State extends State<CanChangeInformation1> {
   String country = "";
-  List<String> cClanguage = [];
+  Iterable<String> cClanguage = [];
   bool isPureNumber(String value) {
     final pattern = RegExp(r'^\d+$');
     return pattern.hasMatch(value);
@@ -60,6 +60,7 @@ class _CanChangeInformation1State extends State<CanChangeInformation1> {
   TextEditingController canChangeHeightController = TextEditingController();
   TextEditingController canChangeWeightController = TextEditingController();
   TextEditingController canChangeEducationController = TextEditingController();
+  TextEditingController canChangeReligiousController = TextEditingController();
 
   // Grpc
   void canChangeGrpcRequest(BuildContext context) async {
@@ -73,6 +74,8 @@ class _CanChangeInformation1State extends State<CanChangeInformation1> {
       await showErrorDialog(context, " 身長 - cmはまだ入力されていません");
     } else if (!isPureNumber(canChangeHeightController.text)) {
       await showErrorDialog(context, "入力した 身長 - cmは数字じゃありません");
+    } else if (canChangeReligiousController.text.isEmpty) {
+      await showErrorDialog(context, "宗教はまだ入力されていません");
     } else if (canChangeWeightController.text.isEmpty) {
       await showErrorDialog(context, " 体重 - kgはまだ入力されていません");
     } else if (!isPureNumber(canChangeWeightController.text)) {
@@ -93,10 +96,10 @@ class _CanChangeInformation1State extends State<CanChangeInformation1> {
           sexual: canChangeSexualController.text,
           height: int.parse(canChangeHeightController.text),
           weight: int.parse(canChangeWeightController.text),
-          speaklanguage: cClanguage.toString(),
+          speaklanguage: cClanguage,
           education: canChangeEducationController.text,
+          religious: canChangeReligiousController.text,
         );
-
         onTapNextPage(context, request);
       } on GrpcError {
         Navigator.pop(context);
@@ -120,9 +123,10 @@ class _CanChangeInformation1State extends State<CanChangeInformation1> {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 20),
+          padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
           child: Column(
             children: [
+              SizedBox(height: mediaH / 75),
               // Nick Name
               CustomInputBar(titleName: "ニックネーム:", backendPart: _buildcanChangeNickNameInput(context)),
               SizedBox(height: mediaH / 50),
@@ -146,6 +150,11 @@ class _CanChangeInformation1State extends State<CanChangeInformation1> {
               // Job
               CustomInputBar(titleName: "学歴:", backendPart: _buildcanChangeEducationInput(context)),
               SizedBox(height: mediaH / 50),
+
+              // Religious
+              CustomInputBar(titleName: "宗教:", backendPart: _buildcanChangeReligiousInput(context)),
+              SizedBox(height: mediaH / 50),
+
               // Speak Language
               CustomInputBar(titleName: "言語:", backendPart: _buildcanChangeSpeakLanguageInput(context)),
               SizedBox(height: mediaH / 25),
@@ -189,6 +198,11 @@ class _CanChangeInformation1State extends State<CanChangeInformation1> {
   /// Width
   Widget _buildcanChangeWeightInput(BuildContext context) {
     return CustomInputFormBar(controller: canChangeWeightController, hintText: "60");
+  }
+
+  /// Religious
+  Widget _buildcanChangeReligiousInput(BuildContext context) {
+    return CustomDropDownBar(controller: canChangeReligiousController, hintText: religions[0], itemArray: religions);
   }
 
   /// Education

@@ -13,16 +13,16 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'hobby.pb.dart' as $24;
+import 'hobby.pb.dart' as $25;
 
 /// Create
 class CreateHobbyRequest extends $pb.GeneratedMessage {
   factory CreateHobbyRequest({
     $core.String? sessionID,
     $core.int? era,
-    $core.String? city,
+    $core.Iterable<$core.String>? city,
     $core.String? gender,
-    $core.String? speaklanguage,
+    $core.Iterable<$core.String>? speaklanguage,
     $core.String? findType,
     $core.int? experience,
   }) {
@@ -34,13 +34,13 @@ class CreateHobbyRequest extends $pb.GeneratedMessage {
       $result.era = era;
     }
     if (city != null) {
-      $result.city = city;
+      $result.city.addAll(city);
     }
     if (gender != null) {
       $result.gender = gender;
     }
     if (speaklanguage != null) {
-      $result.speaklanguage = speaklanguage;
+      $result.speaklanguage.addAll(speaklanguage);
     }
     if (findType != null) {
       $result.findType = findType;
@@ -57,9 +57,9 @@ class CreateHobbyRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateHobbyRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'Era', $pb.PbFieldType.O3, protoName: 'Era')
-    ..aOS(3, _omitFieldNames ? '' : 'City', protoName: 'City')
+    ..pPS(3, _omitFieldNames ? '' : 'City', protoName: 'City')
     ..aOS(4, _omitFieldNames ? '' : 'Gender', protoName: 'Gender')
-    ..aOS(5, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
+    ..pPS(5, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
     ..aOS(6, _omitFieldNames ? '' : 'FindType', protoName: 'FindType')
     ..a<$core.int>(7, _omitFieldNames ? '' : 'Experience', $pb.PbFieldType.O3, protoName: 'Experience')
     ..hasRequiredFields = false
@@ -105,13 +105,7 @@ class CreateHobbyRequest extends $pb.GeneratedMessage {
   void clearEra() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get city => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set city($core.String v) { $_setString(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasCity() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearCity() => clearField(3);
+  $core.List<$core.String> get city => $_getList(2);
 
   @$pb.TagNumber(4)
   $core.String get gender => $_getSZ(3);
@@ -123,13 +117,7 @@ class CreateHobbyRequest extends $pb.GeneratedMessage {
   void clearGender() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get speaklanguage => $_getSZ(4);
-  @$pb.TagNumber(5)
-  set speaklanguage($core.String v) { $_setString(4, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasSpeaklanguage() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearSpeaklanguage() => clearField(5);
+  $core.List<$core.String> get speaklanguage => $_getList(4);
 
   @$pb.TagNumber(6)
   $core.String get findType => $_getSZ(5);
@@ -152,7 +140,7 @@ class CreateHobbyRequest extends $pb.GeneratedMessage {
 
 class CreateHobbyResponse extends $pb.GeneratedMessage {
   factory CreateHobbyResponse({
-    $24.Hobby? h,
+    $25.Hobby? h,
   }) {
     final $result = create();
     if (h != null) {
@@ -165,7 +153,7 @@ class CreateHobbyResponse extends $pb.GeneratedMessage {
   factory CreateHobbyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateHobbyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$24.Hobby>(1, _omitFieldNames ? '' : 'h', subBuilder: $24.Hobby.create)
+    ..aOM<$25.Hobby>(1, _omitFieldNames ? '' : 'h', subBuilder: $25.Hobby.create)
     ..hasRequiredFields = false
   ;
 
@@ -191,15 +179,15 @@ class CreateHobbyResponse extends $pb.GeneratedMessage {
   static CreateHobbyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $24.Hobby get h => $_getN(0);
+  $25.Hobby get h => $_getN(0);
   @$pb.TagNumber(1)
-  set h($24.Hobby v) { setField(1, v); }
+  set h($25.Hobby v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasH() => $_has(0);
   @$pb.TagNumber(1)
   void clearH() => clearField(1);
   @$pb.TagNumber(1)
-  $24.Hobby ensureH() => $_ensure(0);
+  $25.Hobby ensureH() => $_ensure(0);
 }
 
 /// Get
@@ -255,7 +243,7 @@ class GetHobbyRequest extends $pb.GeneratedMessage {
 
 class GetHobbyResponse extends $pb.GeneratedMessage {
   factory GetHobbyResponse({
-    $24.Hobby? h,
+    $25.Hobby? h,
   }) {
     final $result = create();
     if (h != null) {
@@ -268,7 +256,7 @@ class GetHobbyResponse extends $pb.GeneratedMessage {
   factory GetHobbyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetHobbyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$24.Hobby>(1, _omitFieldNames ? '' : 'h', subBuilder: $24.Hobby.create)
+    ..aOM<$25.Hobby>(1, _omitFieldNames ? '' : 'h', subBuilder: $25.Hobby.create)
     ..hasRequiredFields = false
   ;
 
@@ -294,15 +282,15 @@ class GetHobbyResponse extends $pb.GeneratedMessage {
   static GetHobbyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $24.Hobby get h => $_getN(0);
+  $25.Hobby get h => $_getN(0);
   @$pb.TagNumber(1)
-  set h($24.Hobby v) { setField(1, v); }
+  set h($25.Hobby v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasH() => $_has(0);
   @$pb.TagNumber(1)
   void clearH() => clearField(1);
   @$pb.TagNumber(1)
-  $24.Hobby ensureH() => $_ensure(0);
+  $25.Hobby ensureH() => $_ensure(0);
 }
 
 /// Update
@@ -310,9 +298,9 @@ class UpdateHobbyRequest extends $pb.GeneratedMessage {
   factory UpdateHobbyRequest({
     $core.String? sessionID,
     $core.int? era,
-    $core.String? city,
+    $core.Iterable<$core.String>? city,
     $core.String? gender,
-    $core.String? speaklanguage,
+    $core.Iterable<$core.String>? speaklanguage,
     $core.String? findType,
     $core.int? experience,
   }) {
@@ -324,13 +312,13 @@ class UpdateHobbyRequest extends $pb.GeneratedMessage {
       $result.era = era;
     }
     if (city != null) {
-      $result.city = city;
+      $result.city.addAll(city);
     }
     if (gender != null) {
       $result.gender = gender;
     }
     if (speaklanguage != null) {
-      $result.speaklanguage = speaklanguage;
+      $result.speaklanguage.addAll(speaklanguage);
     }
     if (findType != null) {
       $result.findType = findType;
@@ -347,9 +335,9 @@ class UpdateHobbyRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateHobbyRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
     ..a<$core.int>(2, _omitFieldNames ? '' : 'Era', $pb.PbFieldType.O3, protoName: 'Era')
-    ..aOS(3, _omitFieldNames ? '' : 'City', protoName: 'City')
+    ..pPS(3, _omitFieldNames ? '' : 'City', protoName: 'City')
     ..aOS(4, _omitFieldNames ? '' : 'Gender', protoName: 'Gender')
-    ..aOS(5, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
+    ..pPS(5, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
     ..aOS(6, _omitFieldNames ? '' : 'FindType', protoName: 'FindType')
     ..a<$core.int>(7, _omitFieldNames ? '' : 'Experience', $pb.PbFieldType.O3, protoName: 'Experience')
     ..hasRequiredFields = false
@@ -395,13 +383,7 @@ class UpdateHobbyRequest extends $pb.GeneratedMessage {
   void clearEra() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get city => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set city($core.String v) { $_setString(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasCity() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearCity() => clearField(3);
+  $core.List<$core.String> get city => $_getList(2);
 
   @$pb.TagNumber(4)
   $core.String get gender => $_getSZ(3);
@@ -413,13 +395,7 @@ class UpdateHobbyRequest extends $pb.GeneratedMessage {
   void clearGender() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get speaklanguage => $_getSZ(4);
-  @$pb.TagNumber(5)
-  set speaklanguage($core.String v) { $_setString(4, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasSpeaklanguage() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearSpeaklanguage() => clearField(5);
+  $core.List<$core.String> get speaklanguage => $_getList(4);
 
   @$pb.TagNumber(6)
   $core.String get findType => $_getSZ(5);
@@ -442,7 +418,7 @@ class UpdateHobbyRequest extends $pb.GeneratedMessage {
 
 class UpdateHobbyResponse extends $pb.GeneratedMessage {
   factory UpdateHobbyResponse({
-    $24.Hobby? h,
+    $25.Hobby? h,
   }) {
     final $result = create();
     if (h != null) {
@@ -455,7 +431,7 @@ class UpdateHobbyResponse extends $pb.GeneratedMessage {
   factory UpdateHobbyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateHobbyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$24.Hobby>(1, _omitFieldNames ? '' : 'h', subBuilder: $24.Hobby.create)
+    ..aOM<$25.Hobby>(1, _omitFieldNames ? '' : 'h', subBuilder: $25.Hobby.create)
     ..hasRequiredFields = false
   ;
 
@@ -481,15 +457,15 @@ class UpdateHobbyResponse extends $pb.GeneratedMessage {
   static UpdateHobbyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $24.Hobby get h => $_getN(0);
+  $25.Hobby get h => $_getN(0);
   @$pb.TagNumber(1)
-  set h($24.Hobby v) { setField(1, v); }
+  set h($25.Hobby v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasH() => $_has(0);
   @$pb.TagNumber(1)
   void clearH() => clearField(1);
   @$pb.TagNumber(1)
-  $24.Hobby ensureH() => $_ensure(0);
+  $25.Hobby ensureH() => $_ensure(0);
 }
 
 /// Delete

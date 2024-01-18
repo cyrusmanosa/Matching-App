@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'changeTarget.pb.dart' as $19;
+import 'changeTarget.pb.dart' as $20;
 
 /// Create
 class CreateChangeTargetRequest extends $pb.GeneratedMessage {
@@ -96,7 +96,7 @@ class CreateChangeTargetRequest extends $pb.GeneratedMessage {
 
 class CreateChangeTargetResponse extends $pb.GeneratedMessage {
   factory CreateChangeTargetResponse({
-    $19.ChangeTarget? ct,
+    $20.ChangeTarget? ct,
   }) {
     final $result = create();
     if (ct != null) {
@@ -109,7 +109,7 @@ class CreateChangeTargetResponse extends $pb.GeneratedMessage {
   factory CreateChangeTargetResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateChangeTargetResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$19.ChangeTarget>(1, _omitFieldNames ? '' : 'ct', subBuilder: $19.ChangeTarget.create)
+    ..aOM<$20.ChangeTarget>(1, _omitFieldNames ? '' : 'ct', subBuilder: $20.ChangeTarget.create)
     ..hasRequiredFields = false
   ;
 
@@ -135,15 +135,15 @@ class CreateChangeTargetResponse extends $pb.GeneratedMessage {
   static CreateChangeTargetResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $19.ChangeTarget get ct => $_getN(0);
+  $20.ChangeTarget get ct => $_getN(0);
   @$pb.TagNumber(1)
-  set ct($19.ChangeTarget v) { setField(1, v); }
+  set ct($20.ChangeTarget v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasCt() => $_has(0);
   @$pb.TagNumber(1)
   void clearCt() => clearField(1);
   @$pb.TagNumber(1)
-  $19.ChangeTarget ensureCt() => $_ensure(0);
+  $20.ChangeTarget ensureCt() => $_ensure(0);
 }
 
 /// Get
@@ -199,7 +199,7 @@ class GetChangeTargetRequest extends $pb.GeneratedMessage {
 
 class GetChangeTargetResponse extends $pb.GeneratedMessage {
   factory GetChangeTargetResponse({
-    $19.ChangeTarget? ct,
+    $20.ChangeTarget? ct,
   }) {
     final $result = create();
     if (ct != null) {
@@ -212,7 +212,7 @@ class GetChangeTargetResponse extends $pb.GeneratedMessage {
   factory GetChangeTargetResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetChangeTargetResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$19.ChangeTarget>(1, _omitFieldNames ? '' : 'ct', subBuilder: $19.ChangeTarget.create)
+    ..aOM<$20.ChangeTarget>(1, _omitFieldNames ? '' : 'ct', subBuilder: $20.ChangeTarget.create)
     ..hasRequiredFields = false
   ;
 
@@ -238,15 +238,15 @@ class GetChangeTargetResponse extends $pb.GeneratedMessage {
   static GetChangeTargetResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $19.ChangeTarget get ct => $_getN(0);
+  $20.ChangeTarget get ct => $_getN(0);
   @$pb.TagNumber(1)
-  set ct($19.ChangeTarget v) { setField(1, v); }
+  set ct($20.ChangeTarget v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasCt() => $_has(0);
   @$pb.TagNumber(1)
   void clearCt() => clearField(1);
   @$pb.TagNumber(1)
-  $19.ChangeTarget ensureCt() => $_ensure(0);
+  $20.ChangeTarget ensureCt() => $_ensure(0);
 }
 
 /// Delete

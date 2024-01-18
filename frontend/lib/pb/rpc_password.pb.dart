@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $16;
+import 'google/protobuf/timestamp.pb.dart' as $17;
 
 class InputPasswordRequest extends $pb.GeneratedMessage {
   factory InputPasswordRequest({
@@ -82,7 +82,7 @@ class InputPasswordRequest extends $pb.GeneratedMessage {
 class InputPasswordResponse extends $pb.GeneratedMessage {
   factory InputPasswordResponse({
     $core.String? message,
-    $16.Timestamp? passwordChangedAt,
+    $17.Timestamp? passwordChangedAt,
   }) {
     final $result = create();
     if (message != null) {
@@ -99,7 +99,7 @@ class InputPasswordResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'InputPasswordResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'Message', protoName: 'Message')
-    ..aOM<$16.Timestamp>(3, _omitFieldNames ? '' : 'PasswordChangedAt', protoName: 'PasswordChangedAt', subBuilder: $16.Timestamp.create)
+    ..aOM<$17.Timestamp>(3, _omitFieldNames ? '' : 'PasswordChangedAt', protoName: 'PasswordChangedAt', subBuilder: $17.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -134,15 +134,15 @@ class InputPasswordResponse extends $pb.GeneratedMessage {
   void clearMessage() => clearField(1);
 
   @$pb.TagNumber(3)
-  $16.Timestamp get passwordChangedAt => $_getN(1);
+  $17.Timestamp get passwordChangedAt => $_getN(1);
   @$pb.TagNumber(3)
-  set passwordChangedAt($16.Timestamp v) { setField(3, v); }
+  set passwordChangedAt($17.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasPasswordChangedAt() => $_has(1);
   @$pb.TagNumber(3)
   void clearPasswordChangedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $16.Timestamp ensurePasswordChangedAt() => $_ensure(1);
+  $17.Timestamp ensurePasswordChangedAt() => $_ensure(1);
 }
 
 class ResetPasswordRequest extends $pb.GeneratedMessage {
@@ -212,7 +212,7 @@ class ResetPasswordRequest extends $pb.GeneratedMessage {
 class ResetPasswordResponse extends $pb.GeneratedMessage {
   factory ResetPasswordResponse({
     $core.String? message,
-    $16.Timestamp? passwordChangedAt,
+    $17.Timestamp? passwordChangedAt,
   }) {
     final $result = create();
     if (message != null) {
@@ -229,7 +229,7 @@ class ResetPasswordResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ResetPasswordResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'Message', protoName: 'Message')
-    ..aOM<$16.Timestamp>(3, _omitFieldNames ? '' : 'PasswordChangedAt', protoName: 'PasswordChangedAt', subBuilder: $16.Timestamp.create)
+    ..aOM<$17.Timestamp>(3, _omitFieldNames ? '' : 'PasswordChangedAt', protoName: 'PasswordChangedAt', subBuilder: $17.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -264,15 +264,15 @@ class ResetPasswordResponse extends $pb.GeneratedMessage {
   void clearMessage() => clearField(1);
 
   @$pb.TagNumber(3)
-  $16.Timestamp get passwordChangedAt => $_getN(1);
+  $17.Timestamp get passwordChangedAt => $_getN(1);
   @$pb.TagNumber(3)
-  set passwordChangedAt($16.Timestamp v) { setField(3, v); }
+  set passwordChangedAt($17.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasPasswordChangedAt() => $_has(1);
   @$pb.TagNumber(3)
   void clearPasswordChangedAt() => clearField(3);
   @$pb.TagNumber(3)
-  $16.Timestamp ensurePasswordChangedAt() => $_ensure(1);
+  $17.Timestamp ensurePasswordChangedAt() => $_ensure(1);
 }
 
 

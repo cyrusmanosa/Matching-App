@@ -3,14 +3,22 @@ package db
 import (
 	"Backend/util"
 	"context"
+	"strconv"
 	"testing"
 
-	"github.com/brianvoe/gofakeit"
 	"github.com/stretchr/testify/require"
 )
 
 const TId = 1
-const TN = "u47"
+const TN = "u3"
+
+func TestCreateRecordTable(t *testing.T) {
+	for i := 2; i < 200; i++ {
+		tablename := "u" + strconv.Itoa(int(i))
+		err := testChatQueries.CreateChatTable(context.Background(), tablename)
+		require.NoError(t, err)
+	}
+}
 
 func TestCreateRecord(t *testing.T) {
 	CreateRandomRecord(t)
@@ -20,9 +28,9 @@ func CreateRandomRecord(t *testing.T) Record {
 	arg := CreateRecordParams{
 		TargetID:  TId,
 		RoleType:  util.RandomRole(),
-		MediaType: util.Randomstring(3),
-		Media:     gofakeit.HackerPhrase(),
-		Isread:    gofakeit.Bool(),
+		MediaType: util.RandomMediaType(),
+		Media:     util.RandomString(10),
+		Isread:    util.RandomBool(),
 	}
 
 	InsertR, err := testChatQueries.CreateRecord(context.Background(), arg, TN)
@@ -65,7 +73,7 @@ func TestUpdateRecord(t *testing.T) {
 	New := UpdateRecordParams{
 		TargetID:  arg.TargetID,
 		MediaType: arg.MediaType,
-		Media:     gofakeit.HackerPhrase(),
+		Media:     util.RandomString(10),
 		CreatedAt: arg.CreatedAt,
 	}
 
