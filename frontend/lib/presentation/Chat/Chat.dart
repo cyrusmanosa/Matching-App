@@ -23,7 +23,7 @@ class Chat extends StatefulWidget {
 }
 
 class _ChatState extends State<Chat> {
-  bool? isEmpty;
+  bool isEmpty = false;
   List<int> targetID = [];
   List<TargetInfos> users = [];
 
@@ -47,15 +47,17 @@ class _ChatState extends State<Chat> {
       final tid = await GrpcChatService.client.getTargetID(targetIDRequest);
       setState(() {
         targetID = tid.targetID;
+        if (targetID == []) {
+          isEmpty = true;
+        }
       });
     } on GrpcError {
-      isEmpty = true;
       await showErrorDialog(context, "エラー：検証可能な入力データ");
       throw Exception("データの送信中にエラーが発生しました。");
     }
   }
 
-  void _getUserInfoGrpcRequest(BuildContext context) async {
+  Future<void> _getUserInfoGrpcRequest(BuildContext context) async {
     try {
       String? apiKeyS = await globalSession.read(key: 'SessionId');
       String? apiKeyU = await globalUserId.read(key: 'UserID');
@@ -64,28 +66,19 @@ class _ChatState extends State<Chat> {
         // take info
         final infoRequest = GetCanChangeRequest(sessionID: apiKeyS, userID: targetID[i]);
         final infoResponse = await GrpcInfoService.client.getCanChange(infoRequest);
-
         // take icon
         final imgRequest = GetImagesRequest(sessionID: apiKeyS, userID: targetID[i]);
         final imgResponse = await GrpcInfoService.client.getImages(imgRequest);
-
         // take last msg
         final lmsgRequest = GetLastMsgRequest(userID: userid!, targetID: targetID[i]);
         final lmsgResponse = await GrpcChatService.client.getLastMsg(lmsgRequest);
-
         Uint8List bytes = Uint8List.fromList(imgResponse.img.img1);
         Directory tempDir = await getTemporaryDirectory();
         File file = File('${tempDir.path}/data_$i.bin');
         await file.writeAsBytes(bytes);
-
         setState(() {
           users.add(TargetInfos(
-            userid: targetID[i],
-            img: file,
-            info: infoResponse.canChangeInfo,
-            lastMsg: lmsgResponse.media,
-            isRead: lmsgResponse.isread,
-          ));
+              userid: targetID[i], img: file, info: infoResponse.canChangeInfo, lastMsg: lmsgResponse.media, isRead: lmsgResponse.isRead));
         });
       }
       isEmpty = false;
@@ -107,24 +100,28 @@ class _ChatState extends State<Chat> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             if (isEmpty == true)
-              Center(child: Text("相手とまだおしゃべりしておりません", style: CustomTextStyles.smallTitle20))
-            else
-              ListView.separated(
-                itemCount: users.length,
-                shrinkWrap: true,
-                padding: EdgeInsets.only(top: mediaH / 50),
-                physics: NeverScrollableScrollPhysics(),
-                separatorBuilder: (context, index) => Divider(),
-                itemBuilder: (context, index) {
-                  return ConversationList(
-                    targetid: users[index].userid,
-                    name: users[index].info.nickName,
-                    messageText: users[index].lastMsg,
-                    imageUrl: users[index].img,
-                    isMessageRead: users[index].isRead,
-                  );
-                },
+              Center(
+                child: Padding(
+                  padding: EdgeInsets.only(top: mediaH / 4),
+                  child: Text("相手とまだおしゃべりしておりません", style: CustomTextStyles.smallTitle20),
+                ),
               ),
+            ListView.separated(
+              itemCount: users.length,
+              shrinkWrap: true,
+              padding: EdgeInsets.only(top: mediaH / 50),
+              physics: NeverScrollableScrollPhysics(),
+              separatorBuilder: (context, index) => SizedBox(height: mediaH / 50),
+              itemBuilder: (context, index) {
+                return ConversationList(
+                  targetid: users[index].userid,
+                  name: users[index].info.nickName,
+                  messageText: users[index].lastMsg,
+                  imageUrl: users[index].img,
+                  isMessageRead: users[index].isRead,
+                );
+              },
+            ),
           ],
         ),
       ),

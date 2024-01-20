@@ -10,6 +10,6 @@ message ChatRecordNoID{
     string RoleType = 1;
     string MediaType = 2;
     string Media = 3;
-    bool Isread = 4;
+    bool IsRead = 4;
     google.protobuf.Timestamp CreatedAt = 5;
 }

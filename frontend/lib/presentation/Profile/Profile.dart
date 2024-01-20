@@ -52,7 +52,6 @@ class _ProfileState extends State<Profile> {
     await getChangeGrpcRequest(context);
     await getImagesGrpcRequest(context);
     await getMyselfInfoGrpcRequest(context);
-    allMyImg = [myImg1, myImg2, myImg3, myImg4, myImg5];
   }
 
   /// get myself info
@@ -101,7 +100,7 @@ class _ProfileState extends State<Profile> {
         Uint8List bytes1 = Uint8List.fromList(imgResponse.img.img1);
         await file1.writeAsBytes(bytes1);
         setState(() {
-          myImg1 = file1;
+          allMyImg.add(file1);
         });
       }
 
@@ -111,7 +110,7 @@ class _ProfileState extends State<Profile> {
         Uint8List bytes2 = Uint8List.fromList(imgResponse.img.img2);
         await file2.writeAsBytes(bytes2);
         setState(() {
-          myImg2 = file2;
+          allMyImg.add(file2);
         });
       }
 
@@ -121,7 +120,7 @@ class _ProfileState extends State<Profile> {
         Uint8List bytes3 = Uint8List.fromList(imgResponse.img.img3);
         await file3.writeAsBytes(bytes3);
         setState(() {
-          myImg3 = file3;
+          allMyImg.add(file3);
         });
       }
 
@@ -131,7 +130,7 @@ class _ProfileState extends State<Profile> {
         Uint8List bytes4 = Uint8List.fromList(imgResponse.img.img4);
         await file4.writeAsBytes(bytes4);
         setState(() {
-          myImg4 = file4;
+          allMyImg.add(file4);
         });
       }
 
@@ -141,7 +140,7 @@ class _ProfileState extends State<Profile> {
         Uint8List bytes5 = Uint8List.fromList(imgResponse.img.img5);
         await file5.writeAsBytes(bytes5);
         setState(() {
-          myImg5 = file5;
+          allMyImg.add(file5);
         });
       }
     } on GrpcError {
@@ -254,14 +253,20 @@ class _ProfileState extends State<Profile> {
 // appBar icon to information edit
   void onTapNextPage(BuildContext context) {
     List<File> newAllMyImg = [allMyImg[0]];
-    if (allMyImg[1].existsSync()) newAllMyImg.add(allMyImg[1]);
-    if (allMyImg[2].existsSync()) newAllMyImg.add(allMyImg[2]);
-    if (allMyImg[3].existsSync()) newAllMyImg.add(allMyImg[3]);
-    if (allMyImg[4].existsSync()) newAllMyImg.add(allMyImg[4]);
+    if (allMyImg.length >= 2) newAllMyImg.add(allMyImg[1]);
+    if (allMyImg.length >= 3) newAllMyImg.add(allMyImg[2]);
+    if (allMyImg.length >= 4) newAllMyImg.add(allMyImg[3]);
+    if (allMyImg.length >= 5) newAllMyImg.add(allMyImg[4]);
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => InformationEdit(canData: cCData, imgIcon: newAllMyImg), fullscreenDialog: true),
+      MaterialPageRoute(
+          builder: (context) => InformationEdit(
+                canData: cCData,
+                imgIcon: newAllMyImg,
+                country: myFixData.country,
+              ),
+          fullscreenDialog: true),
     );
   }
 
@@ -353,10 +358,10 @@ class _ProfileState extends State<Profile> {
             SizedBox(width: mediaW / 25),
             // image
             _buildImageContainer(context, mediaH, mediaW, allMyImg[0], 0),
-            if (allMyImg[1].existsSync()) _buildImageContainer(context, mediaH, mediaW, allMyImg[1], 1),
-            if (allMyImg[2].existsSync()) _buildImageContainer(context, mediaH, mediaW, allMyImg[2], 2),
-            if (allMyImg[3].existsSync()) _buildImageContainer(context, mediaH, mediaW, allMyImg[3], 3),
-            if (allMyImg[4].existsSync()) _buildImageContainer(context, mediaH, mediaW, allMyImg[4], 4),
+            if (allMyImg.length >= 2) _buildImageContainer(context, mediaH, mediaW, allMyImg[1], 1),
+            if (allMyImg.length >= 3) _buildImageContainer(context, mediaH, mediaW, allMyImg[2], 2),
+            if (allMyImg.length >= 4) _buildImageContainer(context, mediaH, mediaW, allMyImg[3], 3),
+            if (allMyImg.length >= 5) _buildImageContainer(context, mediaH, mediaW, allMyImg[4], 4),
 
             // far right
             SizedBox(width: mediaW / 25),
@@ -436,15 +441,11 @@ class _ProfileState extends State<Profile> {
               isScrollControlled: true,
               builder: (BuildContext context) {
                 List<File> newAllMyImg = [allMyImg[0]];
-                if (allMyImg[1].existsSync()) newAllMyImg.add(allMyImg[1]);
-                if (allMyImg[2].existsSync()) newAllMyImg.add(allMyImg[2]);
-                if (allMyImg[3].existsSync()) newAllMyImg.add(allMyImg[3]);
-                if (allMyImg[4].existsSync()) newAllMyImg.add(allMyImg[4]);
-                return Information(
-                  canData: cCData,
-                  fixData: myFixData,
-                  imgIcon: allMyImg,
-                );
+                if (allMyImg.length >= 2) newAllMyImg.add(allMyImg[1]);
+                if (allMyImg.length >= 3) newAllMyImg.add(allMyImg[2]);
+                if (allMyImg.length >= 4) newAllMyImg.add(allMyImg[3]);
+                if (allMyImg.length >= 5) newAllMyImg.add(allMyImg[4]);
+                return Information(canData: cCData, fixData: myFixData, imgIcon: allMyImg);
               },
             );
           },

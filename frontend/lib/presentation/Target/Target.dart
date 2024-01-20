@@ -1,3 +1,6 @@
+import 'package:dating_your_date/client/grpc_services.dart';
+import 'package:dating_your_date/models/GlobalModel.dart';
+import 'package:dating_your_date/pb/rpc_targetList.pb.dart';
 import 'package:flutter/material.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/presentation/Target/widgets/ResetTargetButton.dart';
@@ -20,6 +23,28 @@ class _TargetState extends State<Target> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    createTargetList(context);
+  }
+
+  Future<void> createTargetList(BuildContext context) async {
+    if (widget.head! == "logo") {
+      String? apiKeyS = await globalSession.read(key: 'SessionId');
+      final req = CreateTargetListRequest(
+        sessionID: apiKeyS,
+        target1ID: 0,
+        target2ID: 0,
+        target3ID: 0,
+        t1Type: null,
+        t2Type: null,
+        t3Type: null,
+      );
+      await GrpcInfoService.client.createTargetList(req);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
@@ -32,7 +57,7 @@ class _TargetState extends State<Target> {
             if (widget.head! == "head") _buildHeader(context, mediaH, mediaW),
             if (widget.head! == "logo") _buildLogo(context, mediaH, mediaW),
             SizedBox(height: mediaH / 30),
-            Text("探すターゲットの種類", style: CustomTextStyles.profileData),
+            Text("探すターゲットの種類", style: CustomTextStyles.dataWord),
             _buildTargetResetList(context, mediaH, mediaW),
           ],
         ),

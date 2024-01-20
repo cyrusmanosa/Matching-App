@@ -21,7 +21,7 @@ class ChatRecord extends $pb.GeneratedMessage {
     $core.String? roleType,
     $core.String? mediaType,
     $core.String? media,
-    $core.bool? isread,
+    $core.bool? isRead,
     $17.Timestamp? createdAt,
   }) {
     final $result = create();
@@ -37,8 +37,8 @@ class ChatRecord extends $pb.GeneratedMessage {
     if (media != null) {
       $result.media = media;
     }
-    if (isread != null) {
-      $result.isread = isread;
+    if (isRead != null) {
+      $result.isRead = isRead;
     }
     if (createdAt != null) {
       $result.createdAt = createdAt;
@@ -54,7 +54,7 @@ class ChatRecord extends $pb.GeneratedMessage {
     ..aOS(2, _omitFieldNames ? '' : 'RoleType', protoName: 'RoleType')
     ..aOS(3, _omitFieldNames ? '' : 'MediaType', protoName: 'MediaType')
     ..aOS(4, _omitFieldNames ? '' : 'Media', protoName: 'Media')
-    ..aOB(5, _omitFieldNames ? '' : 'Isread', protoName: 'Isread')
+    ..aOB(5, _omitFieldNames ? '' : 'IsRead', protoName: 'IsRead')
     ..aOM<$17.Timestamp>(6, _omitFieldNames ? '' : 'CreatedAt', protoName: 'CreatedAt', subBuilder: $17.Timestamp.create)
     ..hasRequiredFields = false
   ;
@@ -117,13 +117,13 @@ class ChatRecord extends $pb.GeneratedMessage {
   void clearMedia() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.bool get isread => $_getBF(4);
+  $core.bool get isRead => $_getBF(4);
   @$pb.TagNumber(5)
-  set isread($core.bool v) { $_setBool(4, v); }
+  set isRead($core.bool v) { $_setBool(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasIsread() => $_has(4);
+  $core.bool hasIsRead() => $_has(4);
   @$pb.TagNumber(5)
-  void clearIsread() => clearField(5);
+  void clearIsRead() => clearField(5);
 
   @$pb.TagNumber(6)
   $17.Timestamp get createdAt => $_getN(5);

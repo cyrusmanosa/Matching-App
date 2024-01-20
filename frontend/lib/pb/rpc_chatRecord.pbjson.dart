@@ -127,14 +127,14 @@ const GetLastMsgResponse$json = {
   '2': [
     {'1': 'MediaType', '3': 1, '4': 1, '5': 9, '10': 'MediaType'},
     {'1': 'Media', '3': 2, '4': 1, '5': 9, '10': 'Media'},
-    {'1': 'Isread', '3': 3, '4': 1, '5': 8, '10': 'Isread'},
+    {'1': 'IsRead', '3': 3, '4': 1, '5': 8, '10': 'IsRead'},
   ],
 };
 
 /// Descriptor for `GetLastMsgResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getLastMsgResponseDescriptor = $convert.base64Decode(
     'ChJHZXRMYXN0TXNnUmVzcG9uc2USHAoJTWVkaWFUeXBlGAEgASgJUglNZWRpYVR5cGUSFAoFTW'
-    'VkaWEYAiABKAlSBU1lZGlhEhYKBklzcmVhZBgDIAEoCFIGSXNyZWFk');
+    'VkaWEYAiABKAlSBU1lZGlhEhYKBklzUmVhZBgDIAEoCFIGSXNSZWFk');
 
 @$core.Deprecated('Use getChatRowRequestDescriptor instead')
 const GetChatRowRequest$json = {

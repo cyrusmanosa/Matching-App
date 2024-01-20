@@ -58,6 +58,7 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
           weight: widget.can1?.weight,
           speaklanguage: widget.can1?.speaklanguage,
           education: widget.can1?.education,
+          religious: widget.can1?.religious,
           job: canChangeJobController.text,
           hobbyType: hobbyFindTypeController.text,
           experience: int.parse(hobbyExperienceController.text),

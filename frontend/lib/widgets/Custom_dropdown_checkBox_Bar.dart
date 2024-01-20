@@ -70,7 +70,7 @@ class CustomMultiSelectDropDownBar extends StatefulWidget {
 
 class _CustomMultiSelectDropDownBarState extends State<CustomMultiSelectDropDownBar> {
   List<String> selectedValues = [];
-
+  bool onicon = false;
   void _toggleSelection(String option) {
     setState(() {
       if (selectedValues.contains(option)) {
@@ -92,16 +92,16 @@ class _CustomMultiSelectDropDownBarState extends State<CustomMultiSelectDropDown
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
     return SizedBox(
-      height: widget.height ?? mediaH / 13,
+      height: widget.height ?? mediaH / 15,
       width: widget.width ?? mediaW / 1.2,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           DropdownButtonFormField<String>(
-            isDense: true,
-            itemHeight: mediaH / 18,
+            style: theme.textTheme.headlineMedium,
+            borderRadius: BorderRadiusStyle.r15,
             decoration: decoration,
-            hint: Text('Select options'),
+            hint: Text('${selectedValues.join(', ')}'),
             items: widget.itemArray?.map((option) {
               return DropdownMenuItem<String>(
                 value: option,
@@ -110,7 +110,11 @@ class _CustomMultiSelectDropDownBarState extends State<CustomMultiSelectDropDown
                     _toggleSelection(option);
                   },
                   child: Row(
-                    children: [Text(option), if (selectedValues.contains(option)) Icon(Icons.check, color: appTheme.green)],
+                    children: [
+                      SizedBox(height: mediaH / 20),
+                      Text(option),
+                      if (selectedValues.contains(option)) Icon(Icons.check, color: appTheme.green),
+                    ],
                   ),
                 ),
               );
@@ -119,10 +123,6 @@ class _CustomMultiSelectDropDownBarState extends State<CustomMultiSelectDropDown
               widget.onChanged?.call(selectedValues);
             },
           ),
-          Padding(
-            padding: EdgeInsets.only(top: mediaH / 300),
-            child: Text("ご選択：${selectedValues.join(', ')}", style: TextStyle(color: appTheme.grey800)),
-          )
         ],
       ),
     );
@@ -131,10 +131,10 @@ class _CustomMultiSelectDropDownBarState extends State<CustomMultiSelectDropDown
   InputDecoration get decoration => InputDecoration(
         contentPadding: widget.contentPadding ?? EdgeInsets.zero,
         hintText: widget.hintText,
-        hintStyle: widget.hintStyle,
+        hintStyle: theme.textTheme.bodySmall,
         isDense: false,
         prefix: widget.prefix ?? Padding(padding: EdgeInsets.only(left: 15.0)),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0), borderSide: BorderSide(width: 2)),
-        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0), borderSide: BorderSide(color: Colors.pink, width: 2)),
+        border: OutlineInputBorder(borderRadius: BorderRadiusStyle.r15, borderSide: BorderSide(width: 2)),
+        focusedBorder: OutlineInputBorder(borderRadius: BorderRadiusStyle.r15, borderSide: BorderSide(color: appTheme.pinkA100, width: 2)),
       );
 }

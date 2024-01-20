@@ -20,10 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart' as path;
 import 'package:intl/intl.dart';
-
-import 'package:path_provider/path_provider.dart';
 
 class FixInformation extends StatefulWidget {
   FixInformation({Key? key}) : super(key: key);

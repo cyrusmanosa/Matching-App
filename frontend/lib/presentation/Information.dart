@@ -51,7 +51,6 @@ class _InformationState extends State<Information> {
                       Text("基本情報", style: CustomTextStyles.infoTitle),
                       _buildPart2(context, mediaH, mediaW),
                       SizedBox(height: mediaH / 30),
-                      // edit button
                       _buildEditButton(context, widget.canData!),
                     ],
                   ),
@@ -150,9 +149,11 @@ class _InformationState extends State<Information> {
             // sexual
             ShownDataBarWidget(item: "性的指向", data: widget.canData!.sexual),
             SizedBox(height: mediaH / 40),
+
             // sociability
             ShownDataBarWidget(item: "社交力", data: widget.canData!.sociability),
             SizedBox(height: mediaH / 40),
+
             // find target
             // TODO: 2
             ShownDataBarWidget(item: "相伴のタイプ", data: widget.canData!.accompanyType),
@@ -180,7 +181,9 @@ class _InformationState extends State<Information> {
   void onTapNextPage(BuildContext context, CanChange request) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => InformationEdit(canData: request, imgIcon: widget.imgIcon), fullscreenDialog: true),
+      MaterialPageRoute(
+          builder: (context) => InformationEdit(canData: request, imgIcon: widget.imgIcon, country: widget.fixData!.country),
+          fullscreenDialog: true),
     );
   }
 }

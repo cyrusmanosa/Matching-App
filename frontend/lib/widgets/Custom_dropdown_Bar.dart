@@ -76,6 +76,7 @@ class CustomDropDownBar extends StatelessWidget {
           height: height ?? mediaH / 25,
           width: width ?? mediaW / 1.2,
           child: DropdownButtonFormField(
+            borderRadius: BorderRadiusStyle.r15,
             decoration: decoration,
             value: value,
             items: itemArray!.toSet().map((option) {
@@ -97,8 +98,7 @@ class CustomDropDownBar extends StatelessWidget {
         hintStyle: theme.textTheme.bodySmall,
         isDense: false,
         prefix: prefix ?? Padding(padding: EdgeInsets.only(left: 15.0)),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0), borderSide: BorderSide(width: 2)),
-        focusedBorder:
-            OutlineInputBorder(borderRadius: BorderRadius.circular(15.0), borderSide: BorderSide(color: appTheme.pinkA100, width: 2)),
+        border: OutlineInputBorder(borderRadius: BorderRadiusStyle.r15, borderSide: BorderSide(width: 2)),
+        focusedBorder: OutlineInputBorder(borderRadius: BorderRadiusStyle.r15, borderSide: BorderSide(color: appTheme.pinkA100, width: 2)),
       );
 }

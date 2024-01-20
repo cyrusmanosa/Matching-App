@@ -30,7 +30,7 @@ class _MainframeItemWidget extends State<MainframeItemWidget> {
           if (widget.canChange!.userID == 0)
             Column(
               children: [
-                SizedBox(height: widget.mediaH! / 25),
+                SizedBox(height: widget.mediaH! / 20),
                 Container(
                   height: widget.mediaH! / 1.6,
                   width: widget.mediaW! / 1.25,
@@ -57,8 +57,7 @@ class _MainframeItemWidget extends State<MainframeItemWidget> {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("観賞回数: 0", style: CustomTextStyles.smallTitle20),
-                SizedBox(height: widget.mediaH! / 100),
+                SizedBox(height: widget.mediaH! / 20),
                 //  user slider
                 GestureDetector(
                   onTap: () {

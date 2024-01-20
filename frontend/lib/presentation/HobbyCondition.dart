@@ -4,7 +4,10 @@ import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/models/listData.dart';
 import 'package:dating_your_date/pb/rpc_fix.pb.dart';
 import 'package:dating_your_date/pb/rpc_hobby.pb.dart';
+import 'package:dating_your_date/pb/rpc_search.pb.dart';
 import 'package:dating_your_date/pb/rpc_targetList.pb.dart';
+import 'package:dating_your_date/presentation/DeleteTarget.dart';
+import 'package:dating_your_date/presentation/PayDone.dart';
 import 'package:dating_your_date/widgets/Custom_IconLogoBox.dart';
 import 'package:dating_your_date/widgets/Custom_dropdown_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_dropdown_checkBox_Bar.dart';
@@ -28,7 +31,11 @@ class HobbyCondition extends StatefulWidget {
 class _HobbyConditionState extends State<HobbyCondition> {
   bool? haveTable;
   bool confirmBtn = false;
-
+  String country = "";
+  Iterable<String> oldHobbyAddress = [];
+  Iterable<String> oldHobbylanguage = [];
+  Iterable<String> newHoobyAddress = [];
+  Iterable<String> newHobbylanguage = [];
   TextEditingController hobbyEraController = TextEditingController();
   TextEditingController hobbyGenderController = TextEditingController();
   TextEditingController hobbySpeakLanguageController = TextEditingController();
@@ -38,13 +45,14 @@ class _HobbyConditionState extends State<HobbyCondition> {
   @override
   void initState() {
     super.initState();
-    getHobbyGrpcRequest(context);
+    getHobby(context);
     getCountry(context);
   }
 
-  String country = "";
-  Iterable<String> hoobyAddress = [];
-  Iterable<String> hoobylanguage = [];
+  bool isPureNumber(String value) {
+    final pattern = RegExp(r'^\d+$');
+    return pattern.hasMatch(value);
+  }
 
   void getCountry(BuildContext context) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
@@ -58,8 +66,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
     });
   }
 
-  // check tabel
-  void getHobbyGrpcRequest(BuildContext context) async {
+  void getHobby(BuildContext context) async {
     try {
       String? apiKeyS = await globalSession.read(key: 'SessionId');
       // Hobby
@@ -69,9 +76,10 @@ class _HobbyConditionState extends State<HobbyCondition> {
         haveTable = true;
         hobbyEraController = TextEditingController(text: response.h.era.toString());
         hobbyGenderController = TextEditingController(text: response.h.gender.toString());
-        hobbySpeakLanguageController = TextEditingController(text: response.h.speaklanguage.toString());
         hobbyFindTypeController = TextEditingController(text: response.h.findType.toString());
         hobbyExperienceController = TextEditingController(text: response.h.experience.toString());
+        oldHobbyAddress = response.h.city;
+        oldHobbylanguage = response.h.speaklanguage;
       });
     } on GrpcError {
       haveTable = false;
@@ -80,84 +88,174 @@ class _HobbyConditionState extends State<HobbyCondition> {
 
   Future<void> checkTargetUserTable(BuildContext context) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
-    final request = GetTargetListRequest(sessionID: apiKeyS);
-    final response = await GrpcInfoService.client.getTargetList(request);
-    if (response.tl.target1ID != 0 && response.tl.target2ID != 0 && response.tl.target3ID != 0) {
-      Navigator.pushNamed(context, AppRoutes.deleteTarget);
-    } else {
-      onTapPaymentPage(context);
+    // Search
+    try {
+      final req = SearchRequestH(sessionID: apiKeyS);
+      final rsp = await GrpcInfoService.client.searchTargetHobby(req);
+      if (rsp.resu.len != 0) {
+        checkTargetList(context, rsp);
+      } else {
+        Navigator.pop(context);
+        showErrorDialog(context, "新しい条件で合わせるパーセントは0%です。");
+      }
+    } on GrpcError {
+      await showErrorDialog(context, "検索エンジニアリングにエラーがあります。");
+      throw Exception("検索エンジニアリングにエラーがあります。");
     }
   }
 
-  bool isPureNumber(String value) {
-    final pattern = RegExp(r'^\d+$');
-    return pattern.hasMatch(value);
-  }
-
-  void hobbyGrpcRequest(BuildContext context) async {
+  void checkTargetList(BuildContext context, SearchResponseH rsp) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
-    if (!isPureNumber(hobbyEraController.text)) {
-      await showErrorDialog(context, "入力した年代は数字ではありません");
-    } else if (hobbyEraController.text.isEmpty) {
-      await showErrorDialog(context, "年代はまだ設定していません");
-    } else if (hoobyAddress.isEmpty) {
-      await showErrorDialog(context, "居住地はまだ設定していません");
-    } else if (hoobylanguage.isEmpty) {
-      await showErrorDialog(context, "言語はまだ設定していません");
-    } else if (hobbyFindTypeController.text.isEmpty) {
-      await showErrorDialog(context, "趣味 - タイプはまだ設定していません");
-    } else {
-      if (haveTable == true) {
-        setState(() {
-          showLoadDialog(context);
-        });
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
+    // take target list
+    final myRequest = GetTargetListRequest(sessionID: apiKeyS, userID: userid);
+    final myResponse = await GrpcInfoService.client.getTargetList(myRequest);
+    for (int i = 0; i < rsp.resu.resultID.length; i++) {
+      // myself
+      if (rsp.resu.resultID[i] != myResponse.tl.target1ID &&
+          rsp.resu.resultID[i] != myResponse.tl.target2ID &&
+          rsp.resu.resultID[i] != myResponse.tl.target3ID) {
         try {
-          final era = int.tryParse(hobbyEraController.text);
-          final experience = int.tryParse(hobbyExperienceController.text);
-          if (era == null || experience == null) {
-            await showErrorDialog(context, "エラー：数値を入力してください");
-            return;
+          // check new target list
+          final newRequest = GetTargetListRequest(sessionID: apiKeyS, userID: rsp.resu.resultID[i]);
+          final newResponse = await GrpcInfoService.client.getTargetList(newRequest);
+          if (newResponse.tl.target1ID != userid && newResponse.tl.target2ID != userid && newResponse.tl.target3ID != userid) {
+            if (myResponse.tl.target1ID != 0 && myResponse.tl.target2ID != 0 && myResponse.tl.target3ID != 0) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DeleteTarget(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Hobby"),
+                  fullscreenDialog: true,
+                ),
+              );
+              break;
+            } else {
+              await Future.delayed(Duration(seconds: 1));
+              await showLogoDialog(context, "新しいターゲットも準備しました", false);
+              await Future.delayed(Duration(seconds: 1));
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PayDone(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Hobby"),
+                  fullscreenDialog: true,
+                ),
+              );
+              break;
+            }
+          } else {
+            if (rsp.resu.len > 1) {
+              checkTargetUserTable(context);
+            }
+            Navigator.pop(context);
+            showErrorDialog(context, "新しい条件で合わせるパーセントは0%です。");
           }
-          final request = UpdateHobbyRequest(
-            sessionID: apiKeyS,
-            era: era,
-            city: hoobyAddress,
-            gender: hobbyGenderController.text,
-            speaklanguage: hoobylanguage,
-            findType: hobbyFindTypeController.text,
-            experience: experience,
-          );
-          await GrpcInfoService.client.updateHobby(request);
-          await showLogoDialog(context, "ホビーの条件を更新しました", false);
-          await Future.delayed(Duration(seconds: 1));
-          await checkTargetUserTable(context);
         } on GrpcError {
-          Navigator.pop(context);
-          await showErrorDialog(context, "エラー：更新用の検証可能な入力データがありません。");
-          throw Exception("ホビーの更新中にエラーが発生しました。");
+          if (myResponse.tl.target1ID != 0 && myResponse.tl.target2ID != 0 && myResponse.tl.target3ID != 0) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DeleteTarget(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Hobby"),
+                fullscreenDialog: true,
+              ),
+            );
+            break;
+          } else {
+            await Future.delayed(Duration(seconds: 1));
+            await showLogoDialog(context, "新しいターゲットも準備しました", false);
+            await Future.delayed(Duration(seconds: 1));
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PayDone(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Hobby"),
+                fullscreenDialog: true,
+              ),
+            );
+            break;
+          }
         }
       } else {
+        if (rsp.resu.len > 1 && rsp.resu.len < 3) {
+          int sID = 0;
+          for (int i = 0; i < rsp.resu.len; i++) {
+            if (rsp.resu.resultID[i] == myResponse.tl.target1ID ||
+                rsp.resu.resultID[i] == myResponse.tl.target2ID ||
+                rsp.resu.resultID[i] == myResponse.tl.target3ID) {
+              sID++;
+            }
+          }
+
+          if (sID == 2) {
+            showErrorDialog(context, "新しい条件で合わせるパーセントは0%です。");
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  void updatehobby(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
+    if (haveTable == true) {
+      // Update
+      try {
         setState(() {
           showLoadDialog(context);
         });
+        final request = UpdateHobbyRequest(
+          sessionID: apiKeyS,
+          era: int.tryParse(hobbyEraController.text),
+          city: newHoobyAddress.isEmpty ? oldHobbyAddress : newHoobyAddress,
+          gender: hobbyGenderController.text,
+          speaklanguage: newHobbylanguage.isEmpty ? oldHobbylanguage : newHobbylanguage,
+          findType: hobbyFindTypeController.text,
+          experience: int.tryParse(hobbyExperienceController.text),
+        );
+        await GrpcInfoService.client.updateHobby(request);
+        await Future.delayed(Duration(seconds: 1));
+        await showLogoDialog(context, "ホビーの条件を更新しました", false);
+        await Future.delayed(Duration(seconds: 1));
+        Navigator.pop(context);
+        await checkTargetUserTable(context);
+      } on GrpcError {
+        Navigator.pop(context);
+        await showErrorDialog(context, "エラー：更新用の検証可能な入力データがありません。");
+        throw Exception("ホビーの更新中にエラーが発生しました。");
+      }
+    } else {
+      if (!isPureNumber(hobbyEraController.text)) {
+        await showErrorDialog(context, "入力した年代は数字ではありません");
+      } else if (hobbyEraController.text.isEmpty) {
+        await showErrorDialog(context, "年代はまだ設定していません");
+      } else if (hobbyGenderController.text.isEmpty) {
+        await showErrorDialog(context, "相手の性別はまだ設定していません");
+      } else if (hobbyFindTypeController.text.isEmpty) {
+        await showErrorDialog(context, "趣味 - タイプはまだ設定していません");
+      } else if (!isPureNumber(hobbyExperienceController.text)) {
+        await showErrorDialog(context, "入力した経験は数字ではありません");
+      } else if (hobbyExperienceController.text.isEmpty) {
+        await showErrorDialog(context, "経験はまだ設定していません");
+      } else if (newHobbylanguage.isEmpty) {
+        await showErrorDialog(context, "言語はまだ設定していません");
+      } else if (newHoobyAddress.isEmpty) {
+        await showErrorDialog(context, "居住地はまだ設定していません");
+      } else {
+        // Create
         try {
-          final era = int.tryParse(hobbyEraController.text);
-          final experience = int.tryParse(hobbyExperienceController.text);
-          if (era == null || experience == null) {
-            await showErrorDialog(context, "エラー：数値を入力してください");
-            return;
-          }
-
+          setState(() {
+            showLoadDialog(context);
+          });
           final request = CreateHobbyRequest(
             sessionID: apiKeyS,
-            era: era,
-            city: hoobyAddress,
+            era: int.tryParse(hobbyEraController.text),
+            city: newHoobyAddress,
             gender: hobbyGenderController.text,
-            speaklanguage: hoobylanguage,
+            speaklanguage: newHobbylanguage,
             findType: hobbyFindTypeController.text,
-            experience: experience,
+            experience: int.tryParse(hobbyExperienceController.text),
           );
           await GrpcInfoService.client.createHobby(request);
+          await Future.delayed(Duration(seconds: 1));
           await showLogoDialog(context, "ホビーの条件を記録しました", false);
           await Future.delayed(Duration(seconds: 1));
           checkTargetUserTable(context);
@@ -201,12 +299,12 @@ class _HobbyConditionState extends State<HobbyCondition> {
                 SizedBox(height: mediaH / 50),
 
                 // Experience
-                CustomInputBar(titleName: "経験 - 年:", backendPart: _buildHobbyResetExperienceInput(context)),
+                CustomInputBar(titleName: "経験 - 年以上:", backendPart: _buildHobbyResetExperienceInput(context)),
                 SizedBox(height: mediaH / 50),
 
                 // Language
                 CustomInputBar(titleName: "言語:", backendPart: _buildHobbySpeakLanguageInput(context)),
-                SizedBox(height: mediaH / 50),
+                SizedBox(height: mediaH / 100),
 
                 // City
                 if (country.isNotEmpty) CustomInputBar(titleName: "*居住地:", backendPart: _buildHobbyResetCityInput(context)),
@@ -222,23 +320,24 @@ class _HobbyConditionState extends State<HobbyCondition> {
     );
   }
 
+  /// Era
   Widget _buildHobbyResetEraInput(BuildContext context) {
     return CustomInputFormBar(controller: hobbyEraController, hintText: "30");
   }
 
-  /// Reset City
-  Widget _buildHobbyResetCityInput(BuildContext context) {
-    return CustomMultiSelectDropDownBar(
-      itemArray: asiaCities[country],
-      onChanged: (value) {
-        hoobyAddress = value;
-      },
-    );
-  }
-
-  /// Reset Gender
+  /// Gender
   Widget _buildHobbyResetGenderInput(BuildContext context) {
     return CustomDropDownBar(controller: hobbyGenderController, hintText: hobbyGenderController.text, itemArray: genderList);
+  }
+
+  /// Hobby Type
+  Widget _buildHobbyhobbyTypeInput(BuildContext context) {
+    return CustomDropDownBar(controller: hobbyFindTypeController, hintText: hobbyFindTypeController.text, itemArray: hobbyTpye);
+  }
+
+  /// Experience
+  Widget _buildHobbyResetExperienceInput(BuildContext context) {
+    return CustomInputFormBar(controller: hobbyExperienceController, hintText: "3");
   }
 
   /// Speak Language
@@ -246,32 +345,28 @@ class _HobbyConditionState extends State<HobbyCondition> {
     return CustomMultiSelectDropDownBar(
       itemArray: languages,
       onChanged: (value) {
-        hoobylanguage = value;
+        newHobbylanguage = value;
       },
     );
   }
 
-  /// Reset Hobby Type
-  Widget _buildHobbyhobbyTypeInput(BuildContext context) {
-    return CustomDropDownBar(controller: hobbyFindTypeController, hintText: hobbyFindTypeController.text, itemArray: hobbyTpye);
+  /// City
+  Widget _buildHobbyResetCityInput(BuildContext context) {
+    return CustomMultiSelectDropDownBar(
+      itemArray: asiaCities[country],
+      onChanged: (value) {
+        newHoobyAddress = value;
+      },
+    );
   }
 
-  /// Reset Experience
-  Widget _buildHobbyResetExperienceInput(BuildContext context) {
-    return CustomInputFormBar(controller: hobbyExperienceController, hintText: "3");
-  }
-
-  /// Next Button
+  /// Button
   Widget _buildNextButton(BuildContext context) {
     return CustomOutlinedButton(
       text: "条件確認",
       onPressed: () {
-        hobbyGrpcRequest(context);
+        updatehobby(context);
       },
     );
-  }
-
-  onTapPaymentPage(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.payDone);
   }
 }

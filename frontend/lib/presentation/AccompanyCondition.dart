@@ -4,7 +4,10 @@ import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/models/listData.dart';
 import 'package:dating_your_date/pb/rpc_accompany.pb.dart';
 import 'package:dating_your_date/pb/rpc_fix.pb.dart';
+import 'package:dating_your_date/pb/rpc_search.pb.dart';
 import 'package:dating_your_date/pb/rpc_targetList.pb.dart';
+import 'package:dating_your_date/presentation/DeleteTarget.dart';
+import 'package:dating_your_date/presentation/PayDone.dart';
 import 'package:dating_your_date/widgets/Custom_IconLogoBox.dart';
 import 'package:dating_your_date/widgets/Custom_dropdown_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_dropdown_checkBox_Bar.dart';
@@ -33,13 +36,19 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
   TextEditingController accompanyFindTypeController = TextEditingController();
   TextEditingController accompanySociabilityController = TextEditingController();
   String country = "";
-  List<String> accompanyLanguages = [];
+  List<String> newAccompanyLanguages = [];
+  Iterable<String> oldAccompanyLanguages = [];
 
   @override
   void initState() {
     super.initState();
-    getAccompanyGrpcRequest(context);
+    getAccompany(context);
     getCountry(context);
+  }
+
+  bool isPureNumber(String value) {
+    final pattern = RegExp(r'^\d+$');
+    return pattern.hasMatch(value);
   }
 
   void getCountry(BuildContext context) async {
@@ -54,8 +63,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
     });
   }
 
-  // check tabel
-  void getAccompanyGrpcRequest(BuildContext context) async {
+  void getAccompany(BuildContext context) async {
     try {
       String? apiKeyS = await globalSession.read(key: 'SessionId');
       final request = GetAccompanyRequest(sessionID: apiKeyS);
@@ -66,74 +74,170 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
         accompanySpeakLanguageController.text = response.ac.speaklanguage.toString();
         accompanyFindTypeController.text = response.ac.findType.toString();
         accompanySociabilityController.text = response.ac.sociability.toString();
+        oldAccompanyLanguages = response.ac.speaklanguage;
       });
     } on GrpcError {
       haveTable = false;
     }
   }
 
-  void checkTargetUserTable(BuildContext context) async {
+  Future<void> checkTargetUserTable(BuildContext context) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
-    final request = GetTargetListRequest(sessionID: apiKeyS);
-    final response = await GrpcInfoService.client.getTargetList(request);
-    if (response.tl.target1ID != 0 && response.tl.target2ID != 0 && response.tl.target3ID != 0) {
-      Navigator.pushNamed(context, AppRoutes.deleteTarget);
-    } else {
-      onTapPaymentPage(context);
+    // Search
+    try {
+      final req = SearchRequestA(sessionID: apiKeyS);
+      final rsp = await GrpcInfoService.client.searchTargetAccompany(req);
+      print(rsp.resu);
+      if (rsp.resu.len != 0) {
+        checkTargetList(context, rsp);
+      } else {
+        Navigator.pop(context);
+        showErrorDialog(context, "新しい条件で合わせるパーセントは0%です。");
+      }
+    } on GrpcError {
+      await showErrorDialog(context, "検索エンジニアリングにエラーがあります。");
+      throw Exception("検索エンジニアリングにエラーがあります。");
     }
   }
 
-  bool isPureNumber(String value) {
-    final pattern = RegExp(r'^\d+$');
-    return pattern.hasMatch(value);
+  void checkTargetList(BuildContext context, SearchResponseA rsp) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
+    // take target list
+    final myRequest = GetTargetListRequest(sessionID: apiKeyS, userID: userid);
+    final myResponse = await GrpcInfoService.client.getTargetList(myRequest);
+    for (int i = 0; i < rsp.resu.resultID.length; i++) {
+      // myself
+      if (rsp.resu.resultID[i] != myResponse.tl.target1ID &&
+          rsp.resu.resultID[i] != myResponse.tl.target2ID &&
+          rsp.resu.resultID[i] != myResponse.tl.target3ID) {
+        try {
+          // check new target list
+          final newRequest = GetTargetListRequest(sessionID: apiKeyS, userID: rsp.resu.resultID[i]);
+          final newResponse = await GrpcInfoService.client.getTargetList(newRequest);
+          // check new target list not my userID
+          if (newResponse.tl.target1ID != userid && newResponse.tl.target2ID != userid && newResponse.tl.target3ID != userid) {
+            // check target list have a empty
+            if (myResponse.tl.target1ID != 0 && myResponse.tl.target2ID != 0 && myResponse.tl.target3ID != 0) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      DeleteTarget(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Accompany"),
+                  fullscreenDialog: true,
+                ),
+              );
+              break;
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PayDone(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Accompany"),
+                  fullscreenDialog: true,
+                ),
+              );
+              break;
+            }
+          } else {
+            if (rsp.resu.len > 1) {
+              checkTargetUserTable(context);
+            }
+            Navigator.pop(context);
+            showErrorDialog(context, "新しい条件で合わせるパーセントは0%です。ppppp");
+          }
+        } on GrpcError {
+          if (myResponse.tl.target1ID != 0 && myResponse.tl.target2ID != 0 && myResponse.tl.target3ID != 0) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DeleteTarget(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Accompany"),
+                fullscreenDialog: true,
+              ),
+            );
+            break;
+          } else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PayDone(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Accompany"),
+                fullscreenDialog: true,
+              ),
+            );
+            break;
+          }
+        }
+      } else {
+        if (rsp.resu.len > 1 && rsp.resu.len < 3) {
+          int sID = 0;
+          for (int i = 0; i < rsp.resu.len; i++) {
+            if (rsp.resu.resultID[i] == myResponse.tl.target1ID ||
+                rsp.resu.resultID[i] == myResponse.tl.target2ID ||
+                rsp.resu.resultID[i] == myResponse.tl.target3ID) {
+              sID++;
+            }
+          }
+          if (sID == 2) {
+            showErrorDialog(context, "新しい条件で合わせるパーセントは0%です。");
+            break;
+          }
+        }
+      }
+    }
   }
 
   // Grpc
-  void createAccompanyGrpcRequest(BuildContext context) async {
+  void updateAccompany(BuildContext context) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
-    if (!isPureNumber(accompanyEraController.text)) {
-      await showErrorDialog(context, "入力した年代は数字ではありません");
-    } else if (accompanyEraController.text.isEmpty) {
-      await showErrorDialog(context, "年代はまだ設定していません");
-    } else if (accompanyFindTypeController.text.isEmpty) {
-      await showErrorDialog(context, "相伴 - タイプはまだ設定していません");
-    } else if (languages.isEmpty) {
-      await showErrorDialog(context, "言語はまだ設定していません");
+    if (haveTable == true) {
+      try {
+        setState(() {
+          showLoadDialog(context);
+        });
+        final request = UpdateAccompanyRequest(
+          sessionID: apiKeyS,
+          era: int.parse(accompanyEraController.text),
+          speaklanguage: newAccompanyLanguages.isEmpty ? oldAccompanyLanguages : newAccompanyLanguages,
+          findType: accompanyFindTypeController.text,
+          sociability: accompanySociabilityController.text,
+        );
+        await GrpcInfoService.client.updateAccompany(request);
+        await Future.delayed(Duration(seconds: 1));
+        await showLogoDialog(context, "相伴の条件を更新しました", false);
+        await Future.delayed(Duration(seconds: 1));
+        Navigator.pop(context);
+        checkTargetUserTable(context);
+      } on GrpcError {
+        Navigator.pop(context);
+        await showErrorDialog(context, "エラー：更新用の検証可能な入力データがありません。");
+        throw Exception("相伴の条件を入力中にエラーが発生しました。");
+      }
     } else {
-      if (haveTable == true) {
-        setState(() {
-          showLoadDialog(context);
-        });
-        try {
-          final request = UpdateAccompanyRequest(
-            sessionID: apiKeyS,
-            era: int.parse(accompanyEraController.text),
-            speaklanguage: languages,
-            findType: accompanyFindTypeController.text,
-            sociability: accompanySociabilityController.text,
-          );
-          await GrpcInfoService.client.updateAccompany(request);
-          await showLogoDialog(context, "相伴の条件を記録しました", false);
-          await Future.delayed(Duration(seconds: 1));
-          checkTargetUserTable(context);
-        } on GrpcError {
-          Navigator.pop(context);
-          await showErrorDialog(context, "エラー：更新用の検証可能な入力データがありません。");
-          throw Exception("相伴の条件を入力中にエラーが発生しました。");
-        }
+      if (!isPureNumber(accompanyEraController.text)) {
+        await showErrorDialog(context, "入力した年代は数字ではありません");
+      } else if (accompanyEraController.text.isEmpty) {
+        await showErrorDialog(context, "年代はまだ設定していません");
+      } else if (accompanyFindTypeController.text.isEmpty) {
+        await showErrorDialog(context, "相伴 - タイプはまだ設定していません");
+      } else if (accompanySociabilityController.text.isEmpty) {
+        await showErrorDialog(context, "社交力はまだ設定していません");
+      } else if (newAccompanyLanguages.isEmpty) {
+        await showErrorDialog(context, "言語はまだ設定していません");
       } else {
-        setState(() {
-          showLoadDialog(context);
-        });
+        // Create
         try {
+          setState(() {
+            showLoadDialog(context);
+          });
           final request = CreateAccompanyRequest(
             sessionID: apiKeyS,
             era: int.parse(accompanyEraController.text),
-            speaklanguage: languages,
+            speaklanguage: newAccompanyLanguages,
             findType: accompanyFindTypeController.text,
             sociability: accompanySociabilityController.text,
           );
           await GrpcInfoService.client.createAccompany(request);
+          await Future.delayed(Duration(seconds: 1));
           await showLogoDialog(context, "相伴の条件を記録しました", false);
           await Future.delayed(Duration(seconds: 1));
           checkTargetUserTable(context);
@@ -203,7 +307,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
     return CustomMultiSelectDropDownBar(
       itemArray: languages,
       onChanged: (value) {
-        accompanyLanguages = value;
+        newAccompanyLanguages = value;
       },
     );
   }
@@ -218,12 +322,8 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
     return CustomOutlinedButton(
       text: "条件確認",
       onPressed: () {
-        createAccompanyGrpcRequest(context);
+        updateAccompany(context);
       },
     );
-  }
-
-  onTapPaymentPage(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.payDone);
   }
 }

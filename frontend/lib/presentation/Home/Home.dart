@@ -41,7 +41,7 @@ class _HomeState extends State<Home> {
   Future<void> fetchData(BuildContext context) async {
     Targetlist allTarget = await getTargetListGrpc(context);
     if (!check) {
-      allTargetId = await [allTarget.target1ID, allTarget.target2ID, allTarget.target3ID];
+      allTargetId = [allTarget.target1ID, allTarget.target2ID, allTarget.target3ID];
       for (int i = 0; i < 3; i++) {
         getTargetImageGrpc(context, allTargetId[i]);
       }
@@ -51,9 +51,11 @@ class _HomeState extends State<Home> {
 
   /// get target list
   Future<Targetlist> getTargetListGrpc(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
     try {
-      String? apiKeyS = await globalSession.read(key: 'SessionId');
-      final tlRequest = GetTargetListRequest(sessionID: apiKeyS);
+      final tlRequest = GetTargetListRequest(sessionID: apiKeyS, userID: userid);
       final tlResponse = await GrpcInfoService.client.getTargetList(tlRequest);
       return tlResponse.tl;
     } on GrpcError {
@@ -133,7 +135,7 @@ class _HomeState extends State<Home> {
     }
   }
 
-  /// get Target Fix
+  /// get Target Data
   Future<void> getTargetDataGrpc(BuildContext context, List<int> allTargetId) async {
     for (int i = 0; i < allTargetId.length; i++) {
       if (allTargetId[i] != 0) {
@@ -172,23 +174,28 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: buildAppBar(context, "ホーム", false),
       backgroundColor: appTheme.bgColor,
-      body: SizedBox(
-        height: mediaH / 1.35,
-        child: ListView.separated(
-          padding: EdgeInsets.symmetric(horizontal: mediaW / 10),
-          scrollDirection: Axis.horizontal,
-          separatorBuilder: (context, index) => SizedBox(width: mediaW / 20),
-          itemCount: allTargetImage.length != 0 ? 3 : 0,
-          itemBuilder: (context, index) {
-            return MainframeItemWidget(
-              mediaH: mediaH,
-              mediaW: mediaW,
-              img: allTargetImage[index],
-              fix: allTargetFix[index],
-              canChange: allTargetCanChange[index],
-            );
-          },
-        ),
+      body: Column(
+        children: [
+          if (allTargetImage.isNotEmpty)
+            SizedBox(
+              height: mediaH / 1.35,
+              child: ListView.separated(
+                padding: EdgeInsets.symmetric(horizontal: mediaW / 10),
+                scrollDirection: Axis.horizontal,
+                separatorBuilder: (context, index) => SizedBox(width: mediaW / 20),
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  return MainframeItemWidget(
+                    mediaH: mediaH,
+                    mediaW: mediaW,
+                    img: allTargetImage[index],
+                    fix: allTargetFix[index],
+                    canChange: allTargetCanChange[index],
+                  );
+                },
+              ),
+            ),
+        ],
       ),
     );
   }

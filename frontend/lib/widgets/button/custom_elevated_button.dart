@@ -22,7 +22,7 @@ class CustomElevatedButton extends BaseButton {
           onPressed: onPressed,
           buttonStyle: buttonStyle,
           isDisabled: isDisabled,
-          buttonTextStyle: buttonTextStyle,
+          buttonTextStyle: buttonTextStyle ?? CustomTextStyles.outlineWhiteWordButton,
           height: height,
           width: width,
           alignment: alignment,

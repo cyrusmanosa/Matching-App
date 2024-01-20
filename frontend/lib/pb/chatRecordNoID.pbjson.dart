@@ -20,7 +20,7 @@ const ChatRecordNoID$json = {
     {'1': 'RoleType', '3': 1, '4': 1, '5': 9, '10': 'RoleType'},
     {'1': 'MediaType', '3': 2, '4': 1, '5': 9, '10': 'MediaType'},
     {'1': 'Media', '3': 3, '4': 1, '5': 9, '10': 'Media'},
-    {'1': 'Isread', '3': 4, '4': 1, '5': 8, '10': 'Isread'},
+    {'1': 'IsRead', '3': 4, '4': 1, '5': 8, '10': 'IsRead'},
     {'1': 'CreatedAt', '3': 5, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'CreatedAt'},
   ],
 };
@@ -28,7 +28,7 @@ const ChatRecordNoID$json = {
 /// Descriptor for `ChatRecordNoID`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List chatRecordNoIDDescriptor = $convert.base64Decode(
     'Cg5DaGF0UmVjb3JkTm9JRBIaCghSb2xlVHlwZRgBIAEoCVIIUm9sZVR5cGUSHAoJTWVkaWFUeX'
-    'BlGAIgASgJUglNZWRpYVR5cGUSFAoFTWVkaWEYAyABKAlSBU1lZGlhEhYKBklzcmVhZBgEIAEo'
-    'CFIGSXNyZWFkEjgKCUNyZWF0ZWRBdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbX'
+    'BlGAIgASgJUglNZWRpYVR5cGUSFAoFTWVkaWEYAyABKAlSBU1lZGlhEhYKBklzUmVhZBgEIAEo'
+    'CFIGSXNSZWFkEjgKCUNyZWF0ZWRBdBgFIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbX'
     'BSCUNyZWF0ZWRBdA==');
 

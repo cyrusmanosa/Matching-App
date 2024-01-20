@@ -21,9 +21,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  bool passwordVisible = false;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  bool passwordVisible = false;
 
   // Grpc
   void loginGrpcUser(BuildContext context) async {
@@ -36,8 +36,7 @@ class _LoginState extends State<Login> {
       final loginResponse = await GrpcInfoService.client.loginUser(loginRequest);
       await globalSession.write(key: 'SessionId', value: loginResponse.sessionsID);
       // take user id
-      String? apiKeyS = await globalSession.read(key: 'SessionId');
-      final useridRequest = GetUserIDRequest(sessionID: apiKeyS);
+      final useridRequest = GetUserIDRequest(sessionID: loginResponse.sessionsID);
       final useridResponse = await GrpcInfoService.client.getUserID(useridRequest);
       await globalUserId.write(key: 'UserID', value: '${useridResponse.userID}');
       getCanChangeGrpc(context);
@@ -56,6 +55,7 @@ class _LoginState extends State<Login> {
       final userid = int.tryParse(apiKeyU!);
       final req = GetCanChangeRequest(sessionID: apiKeyS, userID: userid);
       await GrpcInfoService.client.getCanChange(req);
+      await Future.delayed(Duration(milliseconds: 500));
       Navigator.pushNamed(context, AppRoutes.containerScreen);
     } on GrpcError {
       await showErrorDialog(context, "エラー：必要なデータはまだ入力していません");
@@ -101,7 +101,7 @@ class _LoginState extends State<Login> {
                     alignment: Alignment.centerLeft,
                     child: GestureDetector(
                       onTap: () {
-                        onTapPasswordResetEmail(context);
+                        Navigator.pushNamed(context, AppRoutes.passwordResetEmail);
                       },
                       child: Padding(
                         padding: EdgeInsets.only(left: mediaW / 100),
@@ -121,17 +121,11 @@ class _LoginState extends State<Login> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       // line 1
-                      Padding(
-                        padding: EdgeInsets.only(top: 10, bottom: 10, right: 10),
-                        child: SizedBox(width: mediaW / 3.5, child: Divider()),
-                      ),
+                      Padding(padding: EdgeInsets.all(10), child: SizedBox(width: mediaW / 3.5, child: Divider())),
                       // Word
                       Text("または", style: theme.textTheme.titleMedium),
                       // line 2
-                      Padding(
-                        padding: EdgeInsets.only(top: 10, bottom: 10, left: 10),
-                        child: SizedBox(width: mediaW / 3.5, child: Divider()),
-                      ),
+                      Padding(padding: EdgeInsets.all(10), child: SizedBox(width: mediaW / 3.5, child: Divider())),
                     ],
                   ),
                   SizedBox(height: mediaH / 35),
@@ -193,11 +187,6 @@ class _LoginState extends State<Login> {
     );
   }
 
-  /// PasswordResetEmail
-  onTapPasswordResetEmail(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.passwordResetEmail);
-  }
-
   /// SignUp Part
   Widget _buildSignUpPart(BuildContext context, double mediaH, double mediaW) {
     return Column(
@@ -206,7 +195,6 @@ class _LoginState extends State<Login> {
         CustomElevatedButton(
           text: "メールアドレスで登録",
           buttonStyle: CustomButtonStyles.fillPink,
-          buttonTextStyle: CustomTextStyles.outlineWhiteWordButton,
           onPressed: () {
             Navigator.pushNamed(context, AppRoutes.emailConfirmation);
           },
@@ -221,7 +209,6 @@ class _LoginState extends State<Login> {
             child: CustomImageView(imagePath: ImageConstant.imgLogosfacebook, width: mediaW / 23),
           ),
           buttonStyle: CustomButtonStyles.fillBlue,
-          buttonTextStyle: CustomTextStyles.outlineWhiteWordButton,
         ),
         SizedBox(height: mediaH / 50),
 
@@ -233,7 +220,6 @@ class _LoginState extends State<Login> {
             child: CustomImageView(imagePath: ImageConstant.imgClose, width: mediaW / 14),
           ),
           buttonStyle: CustomButtonStyles.fillDarkgrey,
-          buttonTextStyle: CustomTextStyles.outlineWhiteWordButton,
         ),
         SizedBox(height: mediaH / 50),
 
@@ -241,7 +227,7 @@ class _LoginState extends State<Login> {
         CustomElevatedButton(
           text: "グーグルで続ける",
           leftIcon: Container(
-            margin: EdgeInsets.only(right: mediaW / 15),
+            margin: EdgeInsets.only(right: mediaW / 13),
             child: CustomImageView(imagePath: ImageConstant.imgDevicongoogle, width: mediaW / 13),
           ),
           buttonStyle: CustomButtonStyles.outlineGoogleButton,

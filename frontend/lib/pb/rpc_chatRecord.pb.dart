@@ -500,7 +500,7 @@ class GetLastMsgResponse extends $pb.GeneratedMessage {
   factory GetLastMsgResponse({
     $core.String? mediaType,
     $core.String? media,
-    $core.bool? isread,
+    $core.bool? isRead,
   }) {
     final $result = create();
     if (mediaType != null) {
@@ -509,8 +509,8 @@ class GetLastMsgResponse extends $pb.GeneratedMessage {
     if (media != null) {
       $result.media = media;
     }
-    if (isread != null) {
-      $result.isread = isread;
+    if (isRead != null) {
+      $result.isRead = isRead;
     }
     return $result;
   }
@@ -521,7 +521,7 @@ class GetLastMsgResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetLastMsgResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'MediaType', protoName: 'MediaType')
     ..aOS(2, _omitFieldNames ? '' : 'Media', protoName: 'Media')
-    ..aOB(3, _omitFieldNames ? '' : 'Isread', protoName: 'Isread')
+    ..aOB(3, _omitFieldNames ? '' : 'IsRead', protoName: 'IsRead')
     ..hasRequiredFields = false
   ;
 
@@ -565,13 +565,13 @@ class GetLastMsgResponse extends $pb.GeneratedMessage {
   void clearMedia() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.bool get isread => $_getBF(2);
+  $core.bool get isRead => $_getBF(2);
   @$pb.TagNumber(3)
-  set isread($core.bool v) { $_setBool(2, v); }
+  set isRead($core.bool v) { $_setBool(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasIsread() => $_has(2);
+  $core.bool hasIsRead() => $_has(2);
   @$pb.TagNumber(3)
-  void clearIsread() => clearField(3);
+  void clearIsRead() => clearField(3);
 }
 
 class GetChatRowRequest extends $pb.GeneratedMessage {

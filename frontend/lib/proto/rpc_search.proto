@@ -2,15 +2,31 @@ syntax = "proto3";
 
 package pb;
 
+import "search.proto";
+
 option go_package = "Backend/pb";
 
 
-message SearchRequest {
+message SearchRequestH {
     string SessionID = 1;
 }
 
-message SearchResponse {
-    int32 result = 1;
-    string rank = 2;
+message SearchResponseH {
+    sH resu = 1;
 }
 
+message SearchRequestL {
+    string SessionID = 1;
+}
+
+message SearchResponseL {
+    sL resu = 1;
+}
+
+message SearchRequestA {
+    string SessionID = 1;
+}
+
+message SearchResponseA {
+    sA resu = 1;
+}

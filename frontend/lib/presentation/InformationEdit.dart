@@ -10,6 +10,7 @@ import 'package:dating_your_date/pb/rpc_images.pb.dart';
 import 'package:dating_your_date/presentation/ContainerScreen.dart';
 import 'package:dating_your_date/widgets/Custom_IconLogoBox.dart';
 import 'package:dating_your_date/widgets/Custom_Show_Image.dart';
+import 'package:dating_your_date/widgets/Custom_dropdown_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_dropdown_checkBox_Bar.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
@@ -25,7 +26,8 @@ import 'package:path/path.dart' as path;
 import 'package:image/image.dart' as customImage;
 
 class InformationEdit extends StatefulWidget {
-  InformationEdit({Key? key, this.canData, this.imgIcon}) : super(key: key);
+  InformationEdit({Key? key, this.canData, this.imgIcon, this.country}) : super(key: key);
+  final String? country;
   final CanChange? canData;
   final List<File>? imgIcon;
 
@@ -46,26 +48,22 @@ class _InformationEditState extends State<InformationEdit> {
   TextEditingController updateSociabilityController = TextEditingController();
   TextEditingController updateReligiousController = TextEditingController();
   TextEditingController updateIntroduceController = TextEditingController();
+  TextEditingController updateHobbyTypeController = TextEditingController();
+  TextEditingController updateAccompanyController = TextEditingController();
+  TextEditingController updateExperienceController = TextEditingController();
 
   String? oldPath;
   List<File>? _newimageFile;
   List<String> myLanguages = [];
-
   @override
   void initState() {
     super.initState();
     updateNickNameController = TextEditingController(text: widget.canData?.nickName);
-    updateCityController = TextEditingController(text: widget.canData?.city);
-    updateSexualController = TextEditingController(text: widget.canData?.sexual);
     updateHeightController = TextEditingController(text: widget.canData?.height.toString());
     updateWeightController = TextEditingController(text: widget.canData?.weight.toString());
-    updateEducationController = TextEditingController(text: widget.canData?.education);
-    updateJobController = TextEditingController(text: widget.canData?.job);
     updateAnnualSalaryController = TextEditingController(text: widget.canData?.annualSalary.toString());
-    updateSociabilityController = TextEditingController(text: widget.canData?.sociability);
-    updateReligiousController = TextEditingController(text: widget.canData?.religious);
     updateIntroduceController = TextEditingController(text: widget.canData?.introduce);
-
+    updateExperienceController = TextEditingController(text: widget.canData?.experience.toString());
     _newimageFile = widget.imgIcon;
   }
 
@@ -147,67 +145,72 @@ class _InformationEditState extends State<InformationEdit> {
 
   // Grpc
   void updateDataGrpcRequest(BuildContext context) async {
-    if (updateNickNameController.text.isEmpty) {
-      await showErrorDialog(context, "ニックネームはまだ入力されていません");
-    } else if (updateCityController.text.isEmpty) {
-      await showErrorDialog(context, "居住地はまだ入力されていません");
-    } else if (updateSexualController.text.isEmpty) {
-      await showErrorDialog(context, "性的指向はまだ入力されていません");
-    } else if (updateHeightController.text.isEmpty) {
-      await showErrorDialog(context, " 身長 - cmはまだ入力されていません");
-    } else if (!isPureNumber(updateHeightController.text)) {
-      await showErrorDialog(context, "入力した 身長 - cmは数字じゃありません");
-    } else if (updateWeightController.text.isEmpty) {
-      await showErrorDialog(context, " 体重 - kgはまだ入力されていません");
-    } else if (!isPureNumber(updateWeightController.text)) {
-      await showErrorDialog(context, "入力した 体重 - kgは数字じゃありません");
-    } else if (updateSpeakLanguageController.text.isEmpty) {
-      await showErrorDialog(context, "学歴はまだ入力されていません");
-    } else if (updateJobController.text.isEmpty) {
-      await showErrorDialog(context, "仕事はまだ入力されていません");
-    } else if (!isPureNumber(updateAnnualSalaryController.text)) {
-      await showErrorDialog(context, "入力した年収は数字じゃありません");
-    } else if (updateSociabilityController.text.isEmpty) {
-      await showErrorDialog(context, "社交力はまだ入力されていません");
-    } else if (updateReligiousController.text.isEmpty) {
-      await showErrorDialog(context, "宗教はまだ入力されていません");
-    } else if (updateIntroduceController.text.isEmpty) {
-      await showErrorDialog(context, "自己紹介はまだ入力されていません");
-    } else {
-      setState(() {
-        showLoadDialog(context);
-      });
-      try {
-        String? apiKeyS = await globalSession.read(key: 'SessionId');
-        final request = UpdateCanChangeRequest(
-          sessionID: apiKeyS,
-          nickName: updateNickNameController.text,
-          city: updateCityController.text,
-          sexual: updateSexualController.text,
-          height: int.parse(updateHeightController.text),
-          weight: int.parse(updateWeightController.text),
-          speaklanguage: languages,
-          education: updateEducationController.text,
-          job: updateJobController.text,
-          annualSalary: int.parse(updateAnnualSalaryController.text),
-          sociability: updateSociabilityController.text,
-          religious: updateReligiousController.text,
-          introduce: updateIntroduceController.text,
-        );
-        await GrpcInfoService.client.updateCanChange(request);
-        updateImage(context);
-        await showLogoDialog(context, "個人情報もアップしました", false);
-        Future.delayed(Duration(seconds: 1), () {
-          Navigator.pop(context);
-          Navigator.push(context, MaterialPageRoute(builder: (context) => ContainerScreen(number: 3)));
-        });
-      } on GrpcError {
+    // if (updateNickNameController.text.isEmpty) {
+    //   await showErrorDialog(context, "ニックネームはまだ入力されていません");
+    // } else if (updateCityController.text.isEmpty) {
+    //   await showErrorDialog(context, "居住地はまだ入力されていません");
+    // } else if (updateSexualController.text.isEmpty) {
+    //   await showErrorDialog(context, "性的指向はまだ入力されていません");
+    // } else if (updateHeightController.text.isEmpty) {
+    //   await showErrorDialog(context, " 身長 - cmはまだ入力されていません");
+    // } else if (!isPureNumber(updateHeightController.text)) {
+    //   await showErrorDialog(context, "入力した 身長 - cmは数字じゃありません");
+    // } else if (updateWeightController.text.isEmpty) {
+    //   await showErrorDialog(context, " 体重 - kgはまだ入力されていません");
+    // } else if (!isPureNumber(updateWeightController.text)) {
+    //   await showErrorDialog(context, "入力した 体重 - kgは数字じゃありません");
+    // } else if (updateSpeakLanguageController.text.isEmpty) {
+    //   await showErrorDialog(context, "学歴はまだ入力されていません");
+    // } else if (updateJobController.text.isEmpty) {
+    //   await showErrorDialog(context, "仕事はまだ入力されていません");
+    // } else if (!isPureNumber(updateAnnualSalaryController.text)) {
+    //   await showErrorDialog(context, "入力した年収は数字じゃありません");
+    // } else if (updateSociabilityController.text.isEmpty) {
+    //   await showErrorDialog(context, "社交力はまだ入力されていません");
+    // } else if (updateReligiousController.text.isEmpty) {
+    //   await showErrorDialog(context, "宗教はまだ入力されていません");
+    // } else if (updateIntroduceController.text.isEmpty) {
+    //   await showErrorDialog(context, "自己紹介はまだ入力されていません");
+    // } else {
+    setState(() {
+      showLoadDialog(context);
+    });
+    try {
+      String? apiKeyS = await globalSession.read(key: 'SessionId');
+      final request = UpdateCanChangeRequest(
+        sessionID: apiKeyS,
+        nickName: updateNickNameController.text,
+        city: updateCityController.text == "" ? widget.canData!.city : updateCityController.text,
+        sexual: updateSexualController.text == "" ? widget.canData!.sexual : updateSexualController.text,
+        height: int.parse(updateHeightController.text),
+        weight: int.parse(updateWeightController.text),
+        speaklanguage: myLanguages.isEmpty ? widget.canData!.speaklanguage : myLanguages,
+        education: updateEducationController.text == "" ? widget.canData!.education : updateEducationController.text,
+        job: updateJobController.text == "" ? widget.canData!.job : updateJobController.text,
+        annualSalary: int.parse(updateAnnualSalaryController.text),
+        hobbyType: updateHobbyTypeController.text == "" ? widget.canData!.hobbyType : updateHobbyTypeController.text,
+        experience: int.tryParse(updateExperienceController.text),
+        accompanyType: updateAccompanyController.text == "" ? widget.canData!.accompanyType : updateAccompanyController.text,
+        sociability: updateSociabilityController.text == "" ? widget.canData!.sociability : updateSociabilityController.text,
+        religious: updateReligiousController.text == "" ? widget.canData!.religious : updateReligiousController.text,
+        introduce: updateIntroduceController.text,
+      );
+
+      print(request);
+      await GrpcInfoService.client.updateCanChange(request);
+      updateImage(context);
+      await showLogoDialog(context, "個人情報もアップしました", false);
+      Future.delayed(Duration(seconds: 1), () {
         Navigator.pop(context);
-        await showErrorDialog(context, "エラー：検証可能な入力データがありません。");
-        throw Exception("プロフィールの編集中にエラーが発生しました。");
-      }
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ContainerScreen(number: 3)));
+      });
+    } on GrpcError {
+      Navigator.pop(context);
+      await showErrorDialog(context, "エラー：検証可能な入力データがありません。");
+      throw Exception("プロフィールの編集中にエラーが発生しました。");
     }
   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -252,10 +255,6 @@ class _InformationEditState extends State<InformationEdit> {
               CustomInputBar(titleName: "学歴:", backendPart: _buildUpdateEducationInput(context)),
               SizedBox(height: mediaH / 50),
 
-              // Speak Language
-              CustomInputBar(titleName: "言語:", backendPart: _buildUpdateSpeakLanguageInput(context)),
-              SizedBox(height: mediaH / 50),
-
               // Job
               CustomInputBar(titleName: "職種:", backendPart: _buildUpdateJobInput(context)),
               SizedBox(height: mediaH / 50),
@@ -272,13 +271,29 @@ class _InformationEditState extends State<InformationEdit> {
               CustomInputBar(titleName: "社交力:", backendPart: _buildUpdateSociabilityInput(context)),
               SizedBox(height: mediaH / 50),
 
+              // hobby
+              CustomInputBar(titleName: "趣味 - タイプ:", backendPart: _buildHobbyhobbyTypeInput(context)),
+              SizedBox(height: mediaH / 55),
+
+              // Experience
+              CustomInputBar(titleName: "経験 - 年:", backendPart: _buildHobbyResetExperienceInput(context)),
+              SizedBox(height: mediaH / 50),
+
+              // Sociability
+              CustomInputBar(titleName: "相伴のタイプ:", backendPart: _buildAccompanyTypeInput(context)),
+              SizedBox(height: mediaH / 55),
+
               // Relighious
               CustomInputBar(titleName: "宗教:", backendPart: _buildUpdateReligiousInput(context)),
-              SizedBox(height: mediaH / 25),
+              SizedBox(height: mediaH / 75),
+
+              // Speak Language
+              CustomInputBar(titleName: "言語:", backendPart: _buildUpdateSpeakLanguageInput(context)),
+              SizedBox(height: mediaH / 50),
 
               // button
               _buildSubmitButton(context),
-              SizedBox(height: mediaH / 20),
+              SizedBox(height: mediaH / 15),
             ],
           ),
         ),
@@ -357,64 +372,82 @@ class _InformationEditState extends State<InformationEdit> {
     );
   }
 
+  // Hobby Type
+  Widget _buildHobbyhobbyTypeInput(BuildContext context) {
+    return CustomDropDownBar(controller: updateHobbyTypeController, hintText: widget.canData!.hobbyType, itemArray: hobbyTpye);
+  }
+
+  /// Accompany Type
+  Widget _buildAccompanyTypeInput(BuildContext context) {
+    return CustomDropDownBar(controller: updateAccompanyController, hintText: widget.canData!.accompanyType, itemArray: accompanyType);
+  }
+
+  /// Reset Experience
+  Widget _buildHobbyResetExperienceInput(BuildContext context) {
+    return CustomInputFormBar(controller: updateExperienceController);
+  }
+
   /// Nickname
   Widget _buildUpdateNickNameInput(BuildContext context) {
-    return CustomInputFormBar(controller: updateNickNameController, hintText: "仆街");
+    return CustomInputFormBar(controller: updateNickNameController);
   }
 
   /// City
   Widget _buildUpdateCityInput(BuildContext context) {
-    return CustomInputFormBar(controller: updateCityController, hintText: "大阪");
+    return CustomDropDownBar(controller: updateCityController, hintText: widget.canData!.city, itemArray: asiaCities[widget.country!]);
   }
 
   /// Sexual
   Widget _buildUpdateSexualInput(BuildContext context) {
-    return CustomInputFormBar(controller: updateSexualController, hintText: "異性愛");
+    return CustomDropDownBar(controller: updateSexualController, hintText: widget.canData!.sexual, itemArray: sexualList);
   }
 
   /// Height
   Widget _buildUpdateHeightInput(BuildContext context) {
-    return CustomInputFormBar(controller: updateHeightController, hintText: "170");
+    return CustomInputFormBar(controller: updateHeightController);
   }
 
   /// Weight
   Widget _buildUpdateWeightInput(BuildContext context) {
-    return CustomInputFormBar(controller: updateWeightController, hintText: "60");
+    return CustomInputFormBar(controller: updateWeightController);
   }
 
   /// Education
   Widget _buildUpdateEducationInput(BuildContext context) {
-    return CustomInputFormBar(controller: updateEducationController, hintText: "高校生");
+    return CustomDropDownBar(controller: updateEducationController, hintText: widget.canData!.education, itemArray: educationLevels);
   }
 
   /// Speak Language
   Widget _buildUpdateSpeakLanguageInput(BuildContext context) {
+    String hintL = "${widget.canData!.speaklanguage[0]} , ${widget.canData!.speaklanguage[1]} , ${widget.canData!.speaklanguage[2]}";
     return CustomMultiSelectDropDownBar(
       itemArray: languages,
       onChanged: (value) {
         myLanguages = value;
       },
+      hintText: hintL,
     );
   }
 
   /// Job
   Widget _buildUpdateJobInput(BuildContext context) {
-    return CustomInputFormBar(controller: updateJobController, hintText: "ホスト");
+    return CustomDropDownBar(controller: updateJobController, hintText: widget.canData!.job, itemArray: occupations);
   }
 
   /// Annual Salary
   Widget _buildUpdateAnnualSalaryInput(BuildContext context) {
-    return CustomInputFormBar(controller: updateAnnualSalaryController, hintText: "4000");
+    return CustomInputFormBar(controller: updateAnnualSalaryController);
   }
 
   /// Sociability
   Widget _buildUpdateSociabilityInput(BuildContext context) {
-    return CustomInputFormBar(controller: updateSociabilityController, hintText: "人たら神");
+    return CustomDropDownBar(
+        controller: updateSociabilityController, hintText: widget.canData!.sociability, itemArray: socialPersonalities);
   }
 
   /// Religious
   Widget _buildUpdateReligiousInput(BuildContext context) {
-    return CustomInputFormBar(controller: updateReligiousController, hintText: "多神教");
+    return CustomDropDownBar(controller: updateReligiousController, hintText: widget.canData!.religious, itemArray: religions);
   }
 
   /// Introduce
@@ -439,7 +472,6 @@ class _InformationEditState extends State<InformationEdit> {
       text: "確認",
       onPressed: () {
         updateDataGrpcRequest(context);
-        Navigator.pop(context);
       },
     );
   }

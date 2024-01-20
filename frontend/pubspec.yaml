@@ -25,7 +25,7 @@ dependencies:
   permission_handler:
   protobuf:
   protoc_builder: 
-  protoc_plugin: 
+  protoc_plugin: ^21.1.2 
   shared_preferences:
   states_rebuilder:
   image:

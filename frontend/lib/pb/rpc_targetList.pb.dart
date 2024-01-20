@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'targetList.pb.dart' as $29;
+import 'targetList.pb.dart' as $30;
 
 /// Create
 class CreateTargetListRequest extends $pb.GeneratedMessage {
@@ -152,7 +152,7 @@ class CreateTargetListRequest extends $pb.GeneratedMessage {
 
 class CreateTargetListResponse extends $pb.GeneratedMessage {
   factory CreateTargetListResponse({
-    $29.Targetlist? tl,
+    $30.Targetlist? tl,
   }) {
     final $result = create();
     if (tl != null) {
@@ -165,7 +165,7 @@ class CreateTargetListResponse extends $pb.GeneratedMessage {
   factory CreateTargetListResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateTargetListResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$29.Targetlist>(1, _omitFieldNames ? '' : 'tl', subBuilder: $29.Targetlist.create)
+    ..aOM<$30.Targetlist>(1, _omitFieldNames ? '' : 'tl', subBuilder: $30.Targetlist.create)
     ..hasRequiredFields = false
   ;
 
@@ -191,25 +191,29 @@ class CreateTargetListResponse extends $pb.GeneratedMessage {
   static CreateTargetListResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $29.Targetlist get tl => $_getN(0);
+  $30.Targetlist get tl => $_getN(0);
   @$pb.TagNumber(1)
-  set tl($29.Targetlist v) { setField(1, v); }
+  set tl($30.Targetlist v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTl() => $_has(0);
   @$pb.TagNumber(1)
   void clearTl() => clearField(1);
   @$pb.TagNumber(1)
-  $29.Targetlist ensureTl() => $_ensure(0);
+  $30.Targetlist ensureTl() => $_ensure(0);
 }
 
 /// Get
 class GetTargetListRequest extends $pb.GeneratedMessage {
   factory GetTargetListRequest({
     $core.String? sessionID,
+    $core.int? userID,
   }) {
     final $result = create();
     if (sessionID != null) {
       $result.sessionID = sessionID;
+    }
+    if (userID != null) {
+      $result.userID = userID;
     }
     return $result;
   }
@@ -219,6 +223,7 @@ class GetTargetListRequest extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetTargetListRequest', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'SessionID', protoName: 'SessionID')
+    ..a<$core.int>(2, _omitFieldNames ? '' : 'UserID', $pb.PbFieldType.O3, protoName: 'UserID')
     ..hasRequiredFields = false
   ;
 
@@ -251,11 +256,20 @@ class GetTargetListRequest extends $pb.GeneratedMessage {
   $core.bool hasSessionID() => $_has(0);
   @$pb.TagNumber(1)
   void clearSessionID() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get userID => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set userID($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasUserID() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUserID() => clearField(2);
 }
 
 class GetTargetListResponse extends $pb.GeneratedMessage {
   factory GetTargetListResponse({
-    $29.Targetlist? tl,
+    $30.Targetlist? tl,
   }) {
     final $result = create();
     if (tl != null) {
@@ -268,7 +282,7 @@ class GetTargetListResponse extends $pb.GeneratedMessage {
   factory GetTargetListResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetTargetListResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$29.Targetlist>(1, _omitFieldNames ? '' : 'tl', subBuilder: $29.Targetlist.create)
+    ..aOM<$30.Targetlist>(1, _omitFieldNames ? '' : 'tl', subBuilder: $30.Targetlist.create)
     ..hasRequiredFields = false
   ;
 
@@ -294,15 +308,15 @@ class GetTargetListResponse extends $pb.GeneratedMessage {
   static GetTargetListResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $29.Targetlist get tl => $_getN(0);
+  $30.Targetlist get tl => $_getN(0);
   @$pb.TagNumber(1)
-  set tl($29.Targetlist v) { setField(1, v); }
+  set tl($30.Targetlist v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTl() => $_has(0);
   @$pb.TagNumber(1)
   void clearTl() => clearField(1);
   @$pb.TagNumber(1)
-  $29.Targetlist ensureTl() => $_ensure(0);
+  $30.Targetlist ensureTl() => $_ensure(0);
 }
 
 /// Update
@@ -442,7 +456,7 @@ class UpdateTargetListRequest extends $pb.GeneratedMessage {
 
 class UpdateTargetListResponse extends $pb.GeneratedMessage {
   factory UpdateTargetListResponse({
-    $29.Targetlist? tl,
+    $30.Targetlist? tl,
   }) {
     final $result = create();
     if (tl != null) {
@@ -455,7 +469,7 @@ class UpdateTargetListResponse extends $pb.GeneratedMessage {
   factory UpdateTargetListResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateTargetListResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$29.Targetlist>(1, _omitFieldNames ? '' : 'tl', subBuilder: $29.Targetlist.create)
+    ..aOM<$30.Targetlist>(1, _omitFieldNames ? '' : 'tl', subBuilder: $30.Targetlist.create)
     ..hasRequiredFields = false
   ;
 
@@ -481,15 +495,15 @@ class UpdateTargetListResponse extends $pb.GeneratedMessage {
   static UpdateTargetListResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $29.Targetlist get tl => $_getN(0);
+  $30.Targetlist get tl => $_getN(0);
   @$pb.TagNumber(1)
-  set tl($29.Targetlist v) { setField(1, v); }
+  set tl($30.Targetlist v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasTl() => $_has(0);
   @$pb.TagNumber(1)
   void clearTl() => clearField(1);
   @$pb.TagNumber(1)
-  $29.Targetlist ensureTl() => $_ensure(0);
+  $30.Targetlist ensureTl() => $_ensure(0);
 }
 
 /// Delete

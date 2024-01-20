@@ -64,11 +64,6 @@ class AppNavigationScreen extends StatelessWidget {
                       ),
                       _buildScreenTitle(
                         context,
-                        userName: "新しい条件と合わせる条件は30％",
-                        onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.lowPercentageHeightWarnning),
-                      ),
-                      _buildScreenTitle(
-                        context,
                         userName: "Warnning of Return Page",
                         onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.warningMsgReturnResetPage),
                       ),
@@ -116,11 +111,6 @@ class AppNavigationScreen extends StatelessWidget {
                         context,
                         userName: "ターゲットを準備しました",
                         onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.targetReady),
-                      ),
-                      _buildScreenTitle(
-                        context,
-                        userName: "条件と合わせる条件は30％",
-                        onTapScreenTitle: () => onTapScreenTitle(context, AppRoutes.lowPercentageLowWarnning),
                       ),
                       _buildScreenTitle(
                         context,

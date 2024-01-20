@@ -15,8 +15,6 @@ import 'package:dating_your_date/presentation/DeleteTarget.dart';
 import 'package:dating_your_date/presentation/SignUp_EmailConfirmation.dart';
 import 'package:dating_your_date/presentation/Home/Home.dart';
 import 'package:dating_your_date/presentation/Login.dart';
-import 'package:dating_your_date/presentation/LowPercentageHeightWarnning.dart';
-import 'package:dating_your_date/presentation/LowPercentageLowWarnning.dart';
 import 'package:dating_your_date/presentation/NewPassword_Setup.dart';
 import 'package:dating_your_date/presentation/NewTargetReady.dart';
 import 'package:dating_your_date/presentation/PayDone.dart';
@@ -45,8 +43,6 @@ class AppRoutes {
   static String information = '/information';
   static String loadingPage = '/loadingPage';
   static String login = '/login';
-  static String lowPercentageHeightWarnning = '/lowPercentageHeightWarnning';
-  static String lowPercentageLowWarnning = '/lowPercentageLowWarnning';
   static String loverCondition = '/loverCondition';
   static String home = '/home';
   static String hobbyCondition = '/hobbyCondition';
@@ -84,8 +80,6 @@ class AppRoutes {
     accompanyCondition: (context) => AccompanyCondition(),
     information: (context) => Information(),
     login: (context) => Login(),
-    lowPercentageHeightWarnning: (context) => LowPercentageHeightWarnning(),
-    lowPercentageLowWarnning: (context) => LowPercentageLowWarnning(),
     newPasswordSetup: (context) => NewPasswordSetup(),
     newTargetReady: (context) => NewTargetReady(),
     passwordSetup: (context) => PasswordSetup(),

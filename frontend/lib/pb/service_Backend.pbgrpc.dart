@@ -205,18 +205,18 @@ class InformationClient extends $grpc.Client {
       '/pb.Information/GetUserID',
       ($14.GetUserIDRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $14.GetUserIDResponse.fromBuffer(value));
-  static final _$searchTargetHobby = $grpc.ClientMethod<$15.SearchRequest, $15.SearchResponse>(
+  static final _$searchTargetHobby = $grpc.ClientMethod<$15.SearchRequestH, $15.SearchResponseH>(
       '/pb.Information/SearchTargetHobby',
-      ($15.SearchRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.SearchResponse.fromBuffer(value));
-  static final _$searchTargetLover = $grpc.ClientMethod<$15.SearchRequest, $15.SearchResponse>(
+      ($15.SearchRequestH value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $15.SearchResponseH.fromBuffer(value));
+  static final _$searchTargetLover = $grpc.ClientMethod<$15.SearchRequestL, $15.SearchResponseL>(
       '/pb.Information/SearchTargetLover',
-      ($15.SearchRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.SearchResponse.fromBuffer(value));
-  static final _$searchTargetAccompany = $grpc.ClientMethod<$15.SearchRequest, $15.SearchResponse>(
+      ($15.SearchRequestL value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $15.SearchResponseL.fromBuffer(value));
+  static final _$searchTargetAccompany = $grpc.ClientMethod<$15.SearchRequestA, $15.SearchResponseA>(
       '/pb.Information/SearchTargetAccompany',
-      ($15.SearchRequest value) => value.writeToBuffer(),
-      ($core.List<$core.int> value) => $15.SearchResponse.fromBuffer(value));
+      ($15.SearchRequestA value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $15.SearchResponseA.fromBuffer(value));
 
   InformationClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -392,15 +392,15 @@ class InformationClient extends $grpc.Client {
     return $createUnaryCall(_$getUserID, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.SearchResponse> searchTargetHobby($15.SearchRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$15.SearchResponseH> searchTargetHobby($15.SearchRequestH request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$searchTargetHobby, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.SearchResponse> searchTargetLover($15.SearchRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$15.SearchResponseL> searchTargetLover($15.SearchRequestL request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$searchTargetLover, request, options: options);
   }
 
-  $grpc.ResponseFuture<$15.SearchResponse> searchTargetAccompany($15.SearchRequest request, {$grpc.CallOptions? options}) {
+  $grpc.ResponseFuture<$15.SearchResponseA> searchTargetAccompany($15.SearchRequestA request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$searchTargetAccompany, request, options: options);
   }
 }
@@ -704,27 +704,27 @@ abstract class InformationServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $14.GetUserIDRequest.fromBuffer(value),
         ($14.GetUserIDResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.SearchRequest, $15.SearchResponse>(
+    $addMethod($grpc.ServiceMethod<$15.SearchRequestH, $15.SearchResponseH>(
         'SearchTargetHobby',
         searchTargetHobby_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.SearchRequest.fromBuffer(value),
-        ($15.SearchResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.SearchRequest, $15.SearchResponse>(
+        ($core.List<$core.int> value) => $15.SearchRequestH.fromBuffer(value),
+        ($15.SearchResponseH value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$15.SearchRequestL, $15.SearchResponseL>(
         'SearchTargetLover',
         searchTargetLover_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.SearchRequest.fromBuffer(value),
-        ($15.SearchResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$15.SearchRequest, $15.SearchResponse>(
+        ($core.List<$core.int> value) => $15.SearchRequestL.fromBuffer(value),
+        ($15.SearchResponseL value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$15.SearchRequestA, $15.SearchResponseA>(
         'SearchTargetAccompany',
         searchTargetAccompany_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $15.SearchRequest.fromBuffer(value),
-        ($15.SearchResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $15.SearchRequestA.fromBuffer(value),
+        ($15.SearchResponseA value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.LoginUserResponse> loginUser_Pre($grpc.ServiceCall call, $async.Future<$0.LoginUserRequest> request) async {
@@ -895,15 +895,15 @@ abstract class InformationServiceBase extends $grpc.Service {
     return getUserID(call, await request);
   }
 
-  $async.Future<$15.SearchResponse> searchTargetHobby_Pre($grpc.ServiceCall call, $async.Future<$15.SearchRequest> request) async {
+  $async.Future<$15.SearchResponseH> searchTargetHobby_Pre($grpc.ServiceCall call, $async.Future<$15.SearchRequestH> request) async {
     return searchTargetHobby(call, await request);
   }
 
-  $async.Future<$15.SearchResponse> searchTargetLover_Pre($grpc.ServiceCall call, $async.Future<$15.SearchRequest> request) async {
+  $async.Future<$15.SearchResponseL> searchTargetLover_Pre($grpc.ServiceCall call, $async.Future<$15.SearchRequestL> request) async {
     return searchTargetLover(call, await request);
   }
 
-  $async.Future<$15.SearchResponse> searchTargetAccompany_Pre($grpc.ServiceCall call, $async.Future<$15.SearchRequest> request) async {
+  $async.Future<$15.SearchResponseA> searchTargetAccompany_Pre($grpc.ServiceCall call, $async.Future<$15.SearchRequestA> request) async {
     return searchTargetAccompany(call, await request);
   }
 
@@ -949,9 +949,9 @@ abstract class InformationServiceBase extends $grpc.Service {
   $async.Future<$13.CreatePaymentResponse> createPayment($grpc.ServiceCall call, $13.CreatePaymentRequest request);
   $async.Future<$13.GetPaymentResponse> getPayment($grpc.ServiceCall call, $13.GetPaymentRequest request);
   $async.Future<$14.GetUserIDResponse> getUserID($grpc.ServiceCall call, $14.GetUserIDRequest request);
-  $async.Future<$15.SearchResponse> searchTargetHobby($grpc.ServiceCall call, $15.SearchRequest request);
-  $async.Future<$15.SearchResponse> searchTargetLover($grpc.ServiceCall call, $15.SearchRequest request);
-  $async.Future<$15.SearchResponse> searchTargetAccompany($grpc.ServiceCall call, $15.SearchRequest request);
+  $async.Future<$15.SearchResponseH> searchTargetHobby($grpc.ServiceCall call, $15.SearchRequestH request);
+  $async.Future<$15.SearchResponseL> searchTargetLover($grpc.ServiceCall call, $15.SearchRequestL request);
+  $async.Future<$15.SearchResponseA> searchTargetAccompany($grpc.ServiceCall call, $15.SearchRequestA request);
 }
 @$pb.GrpcServiceName('pb.Chat')
 class ChatClient extends $grpc.Client {

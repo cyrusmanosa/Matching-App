@@ -298,22 +298,19 @@ service Information {
         };
     }
 /// -------- Search --------------
-    rpc SearchTargetHobby(SearchRequest) returns (SearchResponse){
+    rpc SearchTargetHobby(SearchRequestH) returns (SearchResponseH) {
         option (google.api.http) = {
-            post: "/v1/Search_hobby"
-            body: "*"
+            get: "/v1/Search_hobby"
         };
     }
-    rpc SearchTargetLover(SearchRequest) returns (SearchResponse){
+    rpc SearchTargetLover(SearchRequestL) returns (SearchResponseL) {
         option (google.api.http) = {
-            post: "/v1/Search_lover"
-            body: "*"
+            get: "/v1/Search_lover"
         };
     }
-    rpc SearchTargetAccompany(SearchRequest) returns (SearchResponse){
+    rpc SearchTargetAccompany(SearchRequestA) returns (SearchResponseA) {
         option (google.api.http) = {
-            post: "/v1/Search_Accompany"
-            body: "*"
+            get: "/v1/Search_accompany"
         };
     }
 }

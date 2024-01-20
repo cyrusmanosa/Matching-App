@@ -2,7 +2,8 @@ import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_changeTarget.pb.dart';
-import 'package:dating_your_date/pb/rpc_targetList.pb.dart';
+import 'package:dating_your_date/pb/targetList.pb.dart';
+import 'package:dating_your_date/presentation/PayDone.dart';
 import 'package:dating_your_date/widgets/app_bar/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/Custom_Loading.dart';
@@ -11,7 +12,12 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
 class DeleteTarget extends StatefulWidget {
-  DeleteTarget({Key? key}) : super(key: key);
+  DeleteTarget({Key? key, this.oldData, this.newU, this.le, this.type}) : super(key: key);
+
+  final Targetlist? oldData;
+  final int? newU;
+  final int? le;
+  final String? type;
 
   @override
   State<DeleteTarget> createState() => _DeleteTargetState();
@@ -19,37 +25,14 @@ class DeleteTarget extends StatefulWidget {
 
 class _DeleteTargetState extends State<DeleteTarget> {
   List<bool> isSelectedList = [false, false, false];
-
-  void changeTargetUser(BuildContext context) async {
-    try {
-      setState(() {
-        showLoadDialog(context);
-      });
-      String? apiKeyS = await globalSession.read(key: 'SessionId');
-      // take target id
-      final targetIDRequest = GetTargetListRequest(sessionID: apiKeyS);
-      final tid = await GrpcInfoService.client.getTargetList(targetIDRequest);
-      // update target user
-      final updateTargetRequest = UpdateTargetListRequest(
-        sessionID: apiKeyS,
-        target1ID: isSelectedList[0] ? null : tid.tl.target1ID,
-        target2ID: isSelectedList[1] ? null : tid.tl.target2ID,
-        target3ID: isSelectedList[2] ? null : tid.tl.target3ID,
-      );
-
-      await GrpcInfoService.client.updateTargetList(updateTargetRequest);
-      changeUserRecord(context, tid);
-    } on GrpcError catch (e) {
-      Navigator.pop(context);
-      await showErrorDialog(context, "Error: $e");
-      throw Exception("Error occurred while fetching Target List.");
-    }
-  }
-
-  void changeUserRecord(BuildContext context, GetTargetListResponse data) async {
+  void changeUserRecord(BuildContext context) async {
     int tnum = 0;
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
+    final Targetlist newData = widget.oldData!;
+    setState(() {
+      showLoadDialog(context);
+    });
     try {
-      String? apiKeyS = await globalSession.read(key: 'SessionId');
       for (int i = 0; i < isSelectedList.length; i++) {
         if (isSelectedList[i] == true) {
           tnum = i;
@@ -58,18 +41,30 @@ class _DeleteTargetState extends State<DeleteTarget> {
       }
       switch (tnum) {
         case 0:
-          tnum = data.tl.target1ID;
+          tnum = widget.oldData!.target1ID;
+          newData.target1ID = 0;
+          newData.t1Type = "null";
           break;
         case 1:
-          tnum = data.tl.target2ID;
+          tnum = widget.oldData!.target2ID;
+          newData.target2ID = 0;
+          newData.t2Type = "null";
           break;
         case 2:
-          tnum = data.tl.target3ID;
+          tnum = widget.oldData!.target3ID;
+          newData.target3ID = 0;
+          newData.t3Type = "null";
           break;
       }
       final changeRequest = CreateChangeTargetRequest(sessionID: apiKeyS, changeUserID: tnum, reason: "123");
       await GrpcInfoService.client.createChangeTarget(changeRequest);
-      onTapNextPage(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => PayDone(oldData: newData, newU: widget.newU!, le: widget.le!, type: widget.type!),
+          fullscreenDialog: true,
+        ),
+      );
     } on GrpcError catch (e) {
       Navigator.pop(context);
       await showErrorDialog(context, "Error: $e");
@@ -82,14 +77,11 @@ class _DeleteTargetState extends State<DeleteTarget> {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
-
     return Scaffold(
       appBar: buildAppBar(context, "ターゲットを削除", true),
       backgroundColor: appTheme.bgColor,
       body: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-        ),
+        decoration: BoxDecoration(color: Colors.white),
         child: Column(
           children: [
             _buildMainFrame(context, mediaH, mediaW, isSelectedList),
@@ -149,12 +141,8 @@ class _DeleteTargetState extends State<DeleteTarget> {
     return CustomOutlinedButton(
       text: "削除",
       onPressed: () {
-        changeTargetUser(context);
+        changeUserRecord(context);
       },
     );
-  }
-
-  void onTapNextPage(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.payDone);
   }
 }

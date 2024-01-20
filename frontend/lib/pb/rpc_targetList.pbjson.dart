@@ -52,12 +52,14 @@ const GetTargetListRequest$json = {
   '1': 'GetTargetListRequest',
   '2': [
     {'1': 'SessionID', '3': 1, '4': 1, '5': 9, '10': 'SessionID'},
+    {'1': 'UserID', '3': 2, '4': 1, '5': 5, '10': 'UserID'},
   ],
 };
 
 /// Descriptor for `GetTargetListRequest`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getTargetListRequestDescriptor = $convert.base64Decode(
-    'ChRHZXRUYXJnZXRMaXN0UmVxdWVzdBIcCglTZXNzaW9uSUQYASABKAlSCVNlc3Npb25JRA==');
+    'ChRHZXRUYXJnZXRMaXN0UmVxdWVzdBIcCglTZXNzaW9uSUQYASABKAlSCVNlc3Npb25JRBIWCg'
+    'ZVc2VySUQYAiABKAVSBlVzZXJJRA==');
 
 @$core.Deprecated('Use getTargetListResponseDescriptor instead')
 const GetTargetListResponse$json = {

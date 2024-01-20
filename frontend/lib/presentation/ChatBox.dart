@@ -33,43 +33,39 @@ class _ChatBoxState extends State<ChatBox> {
   @override
   void initState() {
     super.initState();
-    getChatRecords(context);
-    // checkStatus(widget.time!);
     getPurpose(context);
   }
 
   Future<List<ChatRecordNoID>> getChatRecords(BuildContext context) async {
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
     try {
-      String? apiKeyU = await globalUserId.read(key: 'UserID');
-      final userid = int.tryParse(apiKeyU!);
       final crRequest = GetChatRecordRequest(userID: userid!, targetID: widget.targetid);
       final crResponse = await GrpcChatService.client.getChatRecord(crRequest);
       return crResponse.chatRecordNoID;
     } on GrpcError {
-      await showErrorDialog(context, "エラー：検証可能な情報の入力データ");
-      throw Exception("データの取得中にエラーが発生しました。");
+      throw Exception('No chat records found');
     }
   }
 
   void getPurpose(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
     try {
-      String? apiKeyS = await globalSession.read(key: 'SessionId');
-      final request = GetTargetListRequest(sessionID: apiKeyS);
+      final request = GetTargetListRequest(sessionID: apiKeyS, userID: userid);
       final response = await GrpcInfoService.client.getTargetList(request);
-      if (response.tl.target1ID == widget.targetid) {
+      if (response.tl.target1ID == widget.targetid && response.tl.target1ID != 0) {
         setState(() {
           purpose = response.tl.t1Type;
-          print(purpose);
         });
-      } else if (response.tl.target2ID == widget.targetid) {
+      } else if (response.tl.target2ID == widget.targetid && response.tl.target2ID != 0) {
         setState(() {
           purpose = response.tl.t2Type;
-          print(purpose);
         });
-      } else {
+      } else if (response.tl.target3ID == widget.targetid && response.tl.target3ID != 0) {
         setState(() {
           purpose = response.tl.t3Type;
-          print(purpose);
         });
       }
     } on GrpcError {
@@ -81,44 +77,29 @@ class _ChatBoxState extends State<ChatBox> {
   // Grpc
   void senderMsgGrpcRequest(BuildContext context) async {
     try {
+      // myself
       String? apiKeyU = await globalUserId.read(key: 'UserID');
-      final userid = int.tryParse(apiKeyU!);
+      final uid = int.tryParse(apiKeyU!);
       final myRequest = CreateChatRecordRequest(
-        userID: userid,
+        userID: uid,
         targetID: widget.targetid,
         roleType: "sender",
         mediaType: "text",
         media: newMsgTextController.text,
       );
       await GrpcChatService.client.createChatRecord(myRequest);
-    } on GrpcError {
-      await showErrorDialog(context, "エラー：検証可能なメッセージの送信");
-      throw Exception("データの取得中にエラーが発生しました。");
-    }
-  }
-
-  void receiverMsgGrpcRequest(BuildContext context) async {
-    try {
-      String? apiKeyU = await globalUserId.read(key: 'UserID');
-      final userid = int.tryParse(apiKeyU!);
       final targetRequest = CreateChatRecordRequest(
         userID: widget.targetid,
-        targetID: userid,
+        targetID: uid,
         roleType: "receiver",
         mediaType: "text",
         media: newMsgTextController.text,
       );
       await GrpcChatService.client.createChatRecord(targetRequest);
+      newMsgTextController = TextEditingController();
     } on GrpcError {
-      await showErrorDialog(context, "エラー：検証可能なメッセージの送信");
+      await showErrorDialog(context, "エラー：検証可能なメッセージの送信 at myself");
       throw Exception("データの取得中にエラーが発生しました。");
-    }
-    newMsgTextController = TextEditingController();
-  }
-
-  void checkStatus(String t) {
-    if (t != "Now") {
-      checktime = false;
     }
   }
 
@@ -244,9 +225,8 @@ class _ChatBoxState extends State<ChatBox> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          if (newMsgTextController.text.isNotEmpty || newMsgTextController.text != " ") {
+          if (newMsgTextController.text.isNotEmpty) {
             senderMsgGrpcRequest(context);
-            receiverMsgGrpcRequest(context);
           }
         });
       },
@@ -259,6 +239,7 @@ class _ChatBoxState extends State<ChatBox> {
     );
   }
 
+  // no do
   Widget optionBarButton(BuildContext context, double s, double mediaH, double mediaW) {
     return GestureDetector(
       onTap: () {},

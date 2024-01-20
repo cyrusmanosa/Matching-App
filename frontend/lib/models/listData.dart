@@ -1,4 +1,4 @@
-final List<String> sexualList = ["男性", "女性", "非バイナリー", "トランスジェンダー", "インターセックス"];
+final List<String> sexualList = ["男性", "女性", "その他"];
 final List<String> genderList = ["男性", "女性", "その他"];
 final List<String> religions = ["無い", "キリスト教", "イスラム教", "仏教", "ヒンドゥー教", "ユダヤ教", "道教", "シク教", "カトリック教", "プロテスタント教", "儒教"];
 final List<String> educationLevels = ["小学校", "中学校", "高校", "専門学校", "準学士", "学士", "修士", "博士"];
@@ -137,9 +137,7 @@ final List<String> hobbyTpye = [
   "運動",
   "アウトドア",
   "旅行",
-  "食べ歩き",
   "語学",
-  "ボランティア",
   "音楽",
   "絵画",
   "彫刻",
@@ -151,7 +149,6 @@ final List<String> hobbyTpye = [
   "映画鑑賞",
   "テレビ鑑賞",
   "ゲーム",
-  "ネットサーフィン",
   "音楽鑑賞",
   "演劇"
 ];

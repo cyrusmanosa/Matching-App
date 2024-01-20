@@ -146,7 +146,11 @@ class _UserPageState extends State<UserPage> {
             SizedBox(height: mediaH / 40),
 
             // hobby
-            ShownDataBarWidget(item: "趣味 - タイプ", data: "まだ設定しません"),
+            ShownDataBarWidget(item: "趣味 - タイプ", data: widget.canData!.hobbyType),
+            SizedBox(height: mediaH / 40),
+
+            // hobby
+            ShownDataBarWidget(item: "経験 - 年:", data: widget.canData!.experience.toString()),
             SizedBox(height: mediaH / 40),
 
             // job
@@ -162,7 +166,7 @@ class _UserPageState extends State<UserPage> {
             SizedBox(height: mediaH / 40),
 
             // find target
-            ShownDataBarWidget(item: "探す対象", data: "まだ設定しません"),
+            ShownDataBarWidget(item: "探す対象", data: widget.canData!.accompanyType),
             SizedBox(height: mediaH / 40),
 
             // religious
