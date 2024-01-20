@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "Backend/pb";
+
+message sH {
+    repeated int32 resultID = 1;
+    string rank = 2;
+    int32 len = 3;
+}
+
+message sL {
+    repeated int32 resultID = 1;
+    string rank = 2;
+    int32 len = 3;
+
+}
+
+message sA {
+    repeated int32 resultID = 1;
+    string rank = 2;
+    int32 len = 3;
+}
