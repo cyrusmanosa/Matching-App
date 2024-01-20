@@ -6,14 +6,13 @@ import (
 	"Backend/pb"
 	"context"
 	"fmt"
-	"math/rand"
 
 	"github.com/google/uuid"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
-func (server *Server) SearchTargetAccompany(ctx context.Context, req *pb.SearchRequest) (*pb.SearchResponse, error) {
+func (server *Server) SearchTargetAccompany(ctx context.Context, req *pb.SearchRequestA) (*pb.SearchResponseA, error) {
 	Gid, err := uuid.Parse(req.GetSessionID())
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
@@ -59,17 +58,21 @@ func (server *Server) SearchTargetAccompany(ctx context.Context, req *pb.SearchR
 			for i := 0; i < len(C_step1_75); i++ {
 				CF, err1 := server.infoStore.GetUserFixInformation(ctx, C_step1_75[i].UserID)
 				if err1 != nil {
+					if i < len(C_step1_75) {
+						continue
+					}
 					return nil, status.Errorf(codes.Internal, "failed to get user with Fix")
 				}
 				F_step2_75 = append(F_step2_75, CF)
 			}
+
+			// 75% to 100
 			if len(F_step2_75) > 0 {
-				full, msg := checkAccompany100(F_step2_75, myAccompany)
+				full, msg, le := checkAccompany100(F_step2_75, myAccompany)
 				// 100%
-				if full > 0 {
-					return &pb.SearchResponse{
-						Result: full,
-						Rank:   msg,
+				if len(full) > 0 {
+					return &pb.SearchResponseA{
+						Resu: convertSearchA(full, le, msg),
 					}, nil
 				}
 			}
@@ -81,37 +84,44 @@ func (server *Server) SearchTargetAccompany(ctx context.Context, req *pb.SearchR
 			for i := 0; i < len(C_step1_63); i++ {
 				CF, err1 := server.infoStore.GetUserFixInformation(ctx, C_step1_63[i].UserID)
 				if err1 != nil {
+					if i < len(C_step1_63) {
+						continue
+					}
 					return nil, status.Errorf(codes.Internal, "failed to get user with Fix")
 				}
 				F_step2_63 = append(F_step2_63, CF)
 			}
 			if len(F_step2_63) > 0 {
-				f75, msg := checkAccompany100(F_step2_63, myAccompany)
+				f75, msg, le := checkAccompany100(F_step2_63, myAccompany)
 				// 62.5% to 75%
-				if f75 != 0 {
-					return &pb.SearchResponse{
-						Result: f75,
-						Rank:   msg,
+				if len(f75) != 0 {
+					return &pb.SearchResponseA{
+						Resu: convertSearchA(f75, le, msg),
 					}, nil
 				}
 			} else {
-				return &pb.SearchResponse{
-					Result: C_step1_63[rand.Intn(len(C_step1_63))].UserID,
-					Rank:   "50%",
+				var C_step1_63_id []int32
+				for i := range Cc {
+					C_step1_63_id = append(C_step1_63_id, C_step1_63[i].UserID)
+				}
+				return &pb.SearchResponseA{
+					Resu: convertSearchA(C_step1_63_id, int32(len(C_step1_63)), "50%"),
 				}, nil
 			}
 		}
 
 	} else {
-		return &pb.SearchResponse{
-			Result: Cc[rand.Intn(len(Cc))].UserID,
-			Rank:   "50%",
+		var Cc_id []int32
+		for i := range Cc {
+			Cc_id = append(Cc_id, Cc[i].UserID)
+		}
+		return &pb.SearchResponseA{
+			Resu: convertSearchA(Cc_id, int32(len(Cc)), "50%"),
 		}, nil
 	}
 	// 50% 未満
-	return &pb.SearchResponse{
-		Result: 0,
-		Rank:   "No search results found",
+	return &pb.SearchResponseA{
+		Resu: convertSearchA(nil, 0, "No search results found"),
 	}, nil
 }
 
@@ -119,6 +129,7 @@ func checkAccompany75(Cc []info.Canchangeinformation, myAccompany info.Accompany
 	// if Max :: 62.5% to 75%
 	var C_step1_63 []info.Canchangeinformation
 	var C_step1_75 []info.Canchangeinformation
+
 	for i := 0; i < len(Cc); i++ {
 		for j := 0; j < len(Cc[i].Speaklanguage); j++ {
 			for k := 0; k < len(myAccompany.Speaklanguage); k++ {
@@ -127,22 +138,30 @@ func checkAccompany75(Cc []info.Canchangeinformation, myAccompany info.Accompany
 					break
 				} else {
 					C_step1_63 = append(C_step1_63, Cc[i])
+					break
 				}
 			}
 		}
 	}
+
 	return C_step1_75, C_step1_63
 }
 
-func checkAccompany100(F_step2_75 []info.Fixinformation, myAccompany info.Accompany) (int32, string) {
+func checkAccompany100(F_step2_75 []info.Fixinformation, myAccompany info.Accompany) ([]int32, string, int32) {
 	var F_step2_100 []info.Fixinformation
+
 	for i := 0; i < len(F_step2_75); i++ {
 		if F_step2_75[i].Age >= myAccompany.Era && F_step2_75[i].Age < myAccompany.Era+10 {
 			F_step2_100 = append(F_step2_100, F_step2_75[i])
 		}
 	}
+
 	if len(F_step2_100) > 0 {
-		return F_step2_100[rand.Intn(len(F_step2_100))].UserID, "100%"
+		var F_step2_100_id []int32
+		for i := range F_step2_100 {
+			F_step2_100_id = append(F_step2_100_id, F_step2_100[i].UserID)
+		}
+		return F_step2_100_id, "100%", int32(len(F_step2_100))
 	}
-	return 0, "Not Found"
+	return nil, "Not Found", 0
 }

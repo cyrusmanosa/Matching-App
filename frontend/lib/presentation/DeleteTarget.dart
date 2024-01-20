@@ -1,7 +1,11 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_changeTarget.pb.dart';
+import 'package:dating_your_date/pb/rpc_images.pb.dart';
 import 'package:dating_your_date/pb/targetList.pb.dart';
 import 'package:dating_your_date/presentation/PayDone.dart';
 import 'package:dating_your_date/widgets/app_bar/Custom_App_bar.dart';
@@ -10,6 +14,7 @@ import 'package:dating_your_date/widgets/Custom_Loading.dart';
 import 'package:dating_your_date/widgets/button/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
+import 'package:path_provider/path_provider.dart';
 
 class DeleteTarget extends StatefulWidget {
   DeleteTarget({Key? key, this.oldData, this.newU, this.le, this.type}) : super(key: key);
@@ -25,6 +30,53 @@ class DeleteTarget extends StatefulWidget {
 
 class _DeleteTargetState extends State<DeleteTarget> {
   List<bool> isSelectedList = [false, false, false];
+  List<File> icon = [];
+  @override
+  void initState() {
+    super.initState();
+    getIcon(context);
+  }
+
+  void getIcon(BuildContext context) async {
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
+    Uint8List imgBytes = Uint8List(0);
+    for (int i = 0; i < 3; i++) {
+      switch (i) {
+        case 0:
+          final req = GetImagesRequest(sessionID: apiKeyS, userID: widget.oldData!.target1ID);
+          final rsp = await GrpcInfoService.client.getImages(req);
+          imgBytes = Uint8List.fromList(rsp.img.img1);
+          String filePath = '${documentsDirectory.path}/img1.bin';
+          File file = File(filePath);
+          await file.writeAsBytes(imgBytes);
+          setState(() {
+            icon.add(file);
+          });
+        case 1:
+          final req = GetImagesRequest(sessionID: apiKeyS, userID: widget.oldData!.target2ID);
+          final rsp = await GrpcInfoService.client.getImages(req);
+          imgBytes = Uint8List.fromList(rsp.img.img1);
+          String filePath = '${documentsDirectory.path}/img1.bin';
+          File file = File(filePath);
+          await file.writeAsBytes(imgBytes);
+          setState(() {
+            icon.add(file);
+          });
+        case 2:
+          final req = GetImagesRequest(sessionID: apiKeyS, userID: widget.oldData!.target3ID);
+          final rsp = await GrpcInfoService.client.getImages(req);
+          imgBytes = Uint8List.fromList(rsp.img.img1);
+          String filePath = '${documentsDirectory.path}/img1.bin';
+          File file = File(filePath);
+          await file.writeAsBytes(imgBytes);
+          setState(() {
+            icon.add(file);
+          });
+      }
+    }
+  }
+
   void changeUserRecord(BuildContext context) async {
     int tnum = 0;
     String? apiKeyS = await globalSession.read(key: 'SessionId');
@@ -129,8 +181,8 @@ class _DeleteTargetState extends State<DeleteTarget> {
         height: mediaH / 1.5,
         width: mediaW / 1.2,
         decoration: BoxDecoration(
-          color: appTheme.grey500,
           borderRadius: BorderRadiusStyle.r30,
+          image: DecorationImage(image: FileImage(icon[index]), fit: BoxFit.cover),
           boxShadow: isSelectedList[index] ? [BoxShadow(color: Colors.red.withOpacity(1), blurRadius: 5, spreadRadius: 5)] : [],
         ),
       ),

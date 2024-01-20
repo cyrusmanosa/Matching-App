@@ -6,14 +6,13 @@ import (
 	"Backend/pb"
 	"context"
 	"fmt"
-	"math/rand"
 
 	"github.com/google/uuid"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
-func (server *Server) SearchTargetHobby(ctx context.Context, req *pb.SearchRequest) (*pb.SearchResponse, error) {
+func (server *Server) SearchTargetHobby(ctx context.Context, req *pb.SearchRequestH) (*pb.SearchResponseH, error) {
 	Gid, err := uuid.Parse(req.GetSessionID())
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
@@ -22,6 +21,7 @@ func (server *Server) SearchTargetHobby(ctx context.Context, req *pb.SearchReque
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
 	}
+
 	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
 	if err != nil {
 		return nil, fmt.Errorf("invalid access token: %v", err)
@@ -61,64 +61,62 @@ func (server *Server) SearchTargetHobby(ctx context.Context, req *pb.SearchReque
 			for i := 0; i < len(C_step1_75); i++ {
 				CF, err1 := server.infoStore.GetUserFixInformation(ctx, C_step1_75[i].UserID)
 				if err1 != nil {
+					if i < len(C_step1_75) {
+						continue
+					}
 					return nil, status.Errorf(codes.Internal, "failed to get user with Fix")
 				}
 				F_step2_75 = append(F_step2_75, CF)
 			}
+
 			if len(F_step2_75) > 0 {
-				full, msg := checkHobby100(F_step2_75, myHobby)
+				full, msg, le := checkHobby100(F_step2_75, myHobby)
 				// 100%
-				if full > 0 {
-					return &pb.SearchResponse{
-						Result: int32(full),
-						Rank:   msg,
+				if len(full) > 0 {
+					return &pb.SearchResponseH{
+						Resu: convertSearchH(full, le, msg),
 					}, nil
 				}
-			} else {
-				return &pb.SearchResponse{
-					Result: C_step1_75[rand.Intn(len(C_step1_75))].UserID,
-					Rank:   "75%",
-				}, nil
 			}
 		}
 
 		// 62.5% to take Fix Data
 		if len(C_step1_63) > 0 {
-			var F_step2_50 []info.Fixinformation
+			var F_step2_63 []info.Fixinformation
 			for i := 0; i < len(C_step1_63); i++ {
 				CF, err1 := server.infoStore.GetUserFixInformation(ctx, C_step1_63[i].UserID)
 				if err1 != nil {
+					if i < len(C_step1_63) {
+						continue
+					}
 					return nil, status.Errorf(codes.Internal, "failed to get user with Fix")
 				}
-				F_step2_50 = append(F_step2_50, CF)
+				F_step2_63 = append(F_step2_63, CF)
 			}
-			if len(F_step2_50) > 0 {
-				f75, msg := checkHobby75(F_step2_50, myHobby)
+
+			if len(F_step2_63) > 0 {
+				f75, msg, le := checkHobby100(F_step2_63, myHobby)
 				// 62.5% to 75%
-				if f75 != 0 {
-					return &pb.SearchResponse{
-						Result: int32(f75),
-						Rank:   msg,
+				if len(f75) != 0 {
+					return &pb.SearchResponseH{
+						Resu: convertSearchH(f75, le, msg),
 					}, nil
 				}
-			} else {
-				return &pb.SearchResponse{
-					Result: C_step1_63[rand.Intn(len(C_step1_63))].UserID,
-					Rank:   "50%",
-				}, nil
 			}
 		}
 
 	} else {
-		return &pb.SearchResponse{
-			Result: Cc[rand.Intn(len(Cc))].UserID,
-			Rank:   "50%",
+		var Cc_id []int32
+		for i := range Cc {
+			Cc_id = append(Cc_id, Cc[i].UserID)
+		}
+		return &pb.SearchResponseH{
+			Resu: convertSearchH(Cc_id, int32(len(Cc)), "50%"),
 		}, nil
 	}
 	// 50% 未満
-	return &pb.SearchResponse{
-		Result: 0,
-		Rank:   "No search results found",
+	return &pb.SearchResponseH{
+		Resu: convertSearchH(nil, 0, "No search results found"),
 	}, nil
 }
 
@@ -142,48 +140,38 @@ func checkHobby63(Cc []info.Canchangeinformation, myHobby info.Hobby) ([]info.Ca
 	return C_step1_75, C_step1_63
 }
 
-func checkHobby75(F_step2_50 []info.Fixinformation, myHobby info.Hobby) (int, string) {
-	var step2Result []info.Fixinformation
-	var step1Result75 []info.Fixinformation
-	for i := 0; i < len(F_step2_50); i++ {
-		if F_step2_50[i].Age >= myHobby.Era && F_step2_50[i].Age < myHobby.Era+10 && F_step2_50[i].Gender == myHobby.Gender {
-			step2Result = append(step2Result, F_step2_50[i])
-		}
-	}
-	if len(step2Result) > 3 {
-		return int(step2Result[rand.Intn(len(step2Result))].UserID), "100%"
-	} else {
-		for i := 0; i < len(F_step2_50); i++ {
-			if F_step2_50[i].Age >= myHobby.Era && F_step2_50[i].Age < myHobby.Era+10 || F_step2_50[i].Gender == myHobby.Gender {
-				step1Result75 = append(step1Result75, F_step2_50[i])
-			}
-		}
-		if len(step1Result75) > 3 {
-			return int(step1Result75[rand.Intn(len(step1Result75))].UserID), "75%"
-		}
-	}
-	return 0, "Not Found"
-}
-
-func checkHobby100(F_step2_75 []info.Fixinformation, myHobby info.Hobby) (int, string) {
-	var step1Result63 []info.Fixinformation
-	var step1Result75 []info.Fixinformation
+func checkHobby100(F_step2_75 []info.Fixinformation, myHobby info.Hobby) ([]int32, string, int32) {
+	var step2Result75 []info.Fixinformation
+	var step2Result100 []info.Fixinformation
+	// 100% proccess
 	for i := 0; i < len(F_step2_75); i++ {
 		if F_step2_75[i].Age >= myHobby.Era && F_step2_75[i].Age < myHobby.Era+10 && F_step2_75[i].Gender == myHobby.Gender {
-			step1Result63 = append(step1Result63, F_step2_75[i])
+			step2Result100 = append(step2Result100, F_step2_75[i])
 		}
 	}
-	if len(step1Result63) > 3 {
-		return int(step1Result63[rand.Intn(len(step1Result63))].UserID), "63%"
-	} else {
-		for i := 0; i < len(F_step2_75); i++ {
-			if F_step2_75[i].Age >= myHobby.Era && F_step2_75[i].Age < myHobby.Era+10 || F_step2_75[i].Gender == myHobby.Gender {
-				step1Result75 = append(step1Result75, F_step2_75[i])
-			}
-		}
-		if len(step1Result75) > 3 {
-			return int(step1Result75[rand.Intn(len(step1Result75))].UserID), "75%"
+	// 75% Proccess
+	for i := 0; i < len(F_step2_75); i++ {
+		if F_step2_75[i].Age >= myHobby.Era && F_step2_75[i].Age < myHobby.Era+10 || F_step2_75[i].Gender == myHobby.Gender {
+			step2Result75 = append(step2Result75, F_step2_75[i])
 		}
 	}
-	return 0, "Not Found"
+
+	// 100 % return
+	if len(step2Result100) > 0 {
+		var step2Result100_id []int32
+		for i := range step2Result100 {
+			step2Result100_id = append(step2Result100_id, step2Result100[i].UserID)
+		}
+		return step2Result100_id, "100%", int32(len(step2Result100_id))
+	}
+	// 75 % return
+	if len(step2Result75) > 0 {
+		var step2Result75_id []int32
+		for i := range step2Result75 {
+			step2Result75_id = append(step2Result75_id, step2Result75[i].UserID)
+		}
+		return step2Result75_id, "63%", int32(len(step2Result75_id))
+	}
+
+	return nil, "Not Found", 0
 }

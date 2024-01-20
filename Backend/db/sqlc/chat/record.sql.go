@@ -13,11 +13,11 @@ import (
 
 func (q *Queries) CreateChatTable(ctx context.Context, tablename string) error {
     createTable := fmt.Sprintf(`CREATE TABLE %s (
-        "target_id" INT UNIQUE NOT NULL,
+        "target_id" INT NOT NULL,
         "role_type" VARCHAR NOT NULL,
         "media_type" VARCHAR NOT NULL,
         "media" VARCHAR,
-        "isRead" BOOLEAN,
+        "isread" BOOLEAN,
         "created_at" TIMESTAMPTZ NOT NULL DEFAULT (now())
     );`, tablename)
 

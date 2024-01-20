@@ -6,14 +6,13 @@ import (
 	"Backend/pb"
 	"context"
 	"fmt"
-	"math/rand"
 
 	"github.com/google/uuid"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
-func (server *Server) SearchTargetLover(ctx context.Context, req *pb.SearchRequest) (*pb.SearchResponse, error) {
+func (server *Server) SearchTargetLover(ctx context.Context, req *pb.SearchRequestL) (*pb.SearchResponseL, error) {
 	Gid, err := uuid.Parse(req.GetSessionID())
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
@@ -56,6 +55,9 @@ func (server *Server) SearchTargetLover(ctx context.Context, req *pb.SearchReque
 		for i := 0; i < len(Ff); i++ {
 			FC, err1 := server.infoStore.GetUserCanChangeInformation(ctx, Ff[i].UserID)
 			if err1 != nil {
+				if i < len(Ff) {
+					continue
+				}
 				return nil, status.Errorf(codes.Internal, "failed to get user with Fix")
 			}
 			C_step1_50 = append(C_step1_50, FC)
@@ -64,45 +66,52 @@ func (server *Server) SearchTargetLover(ctx context.Context, req *pb.SearchReque
 
 		// 75%
 		if len(C_step2_75) > 0 {
-			full, msg := checkLover100(C_step2_75, myLover)
-			if full > 0 {
-				return &pb.SearchResponse{
-					Result: full,
-					Rank:   msg,
+			full, msg, le := checkLover100(C_step2_75, myLover)
+			if len(full) > 0 {
+				return &pb.SearchResponseL{
+					Resu: convertSearchL(full, le, msg),
 				}, nil
 			} else {
-				return &pb.SearchResponse{
-					Result: C_step2_75[rand.Intn(len(C_step2_75))].UserID,
-					Rank:   "75%",
+				var C_step2_75_id []int32
+				for i := range C_step2_75 {
+					C_step2_75_id = append(C_step2_75_id, C_step2_75[i].UserID)
+				}
+				return &pb.SearchResponseL{
+					Resu: convertSearchL(C_step2_75_id, int32(len(C_step2_75)), "75%"),
 				}, nil
 			}
 		}
 
 		// 62.5%
 		if len(C_step2_50) > 0 {
-			f75, msg := checkLover100(C_step2_50, myLover)
-			if f75 > 0 {
-				return &pb.SearchResponse{
-					Result: f75,
-					Rank:   msg,
+			f75, msg, le := checkLover100(C_step2_50, myLover)
+			if len(f75) > 0 {
+				return &pb.SearchResponseL{
+					Resu: convertSearchL(f75, le, msg),
 				}, nil
 			} else {
-				return &pb.SearchResponse{
-					Result: C_step2_50[rand.Intn(len(C_step2_50))].UserID,
-					Rank:   "50%",
+				var C_step2_50_id []int32
+				for i := range C_step2_50 {
+					C_step2_50_id = append(C_step2_50_id, C_step2_50[i].UserID)
+				}
+				return &pb.SearchResponseL{
+					Resu: convertSearchL(C_step2_50_id, int32(len(C_step2_50)), "50%"),
 				}, nil
 			}
 		}
 	} else {
-		return &pb.SearchResponse{
-			Result: Ff[rand.Intn(len(Ff))].UserID,
-			Rank:   "50%",
+		var Ff_id []int32
+		for i := range Ff {
+			Ff_id = append(Ff_id, Ff[i].UserID)
+		}
+		return &pb.SearchResponseL{
+			Resu: convertSearchL(Ff_id, int32(len(Ff)), "50%"),
 		}, nil
 	}
 	// 50% 未満
-	return &pb.SearchResponse{
-		Result: 0,
-		Rank:   "No search results found",
+
+	return &pb.SearchResponseL{
+		Resu: convertSearchL(nil, 0, "No search results found"),
 	}, nil
 }
 
@@ -130,7 +139,7 @@ func check75Loverup(C_step1_50 []info.Canchangeinformation, myLover info.Lover) 
 	return C_step2_75, C_step2_50
 }
 
-func checkLover100(C_step2_75 []info.Canchangeinformation, myLover info.Lover) (int32, string) {
+func checkLover100(C_step2_75 []info.Canchangeinformation, myLover info.Lover) ([]int32, string, int32) {
 	var C_step3_100 []info.Canchangeinformation
 	// Address
 	for i := 0; i < len(C_step2_75); i++ {
@@ -140,5 +149,9 @@ func checkLover100(C_step2_75 []info.Canchangeinformation, myLover info.Lover) (
 			}
 		}
 	}
-	return C_step3_100[rand.Intn(len(C_step3_100))].UserID, "100%"
+	var C_step3_100_id []int32
+	for i := range C_step3_100 {
+		C_step3_100_id = append(C_step3_100_id, C_step3_100[i].UserID)
+	}
+	return C_step3_100_id, "100%", int32(len(C_step3_100))
 }

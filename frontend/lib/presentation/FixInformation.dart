@@ -45,10 +45,8 @@ class _FixInformationState extends State<FixInformation> {
   void _uploadPhotoToNewFile() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
     if (pickedFile != null) {
       final file = File(pickedFile.path);
-
       setState(() {
         _imageFile = file;
       });
@@ -94,7 +92,6 @@ class _FixInformationState extends State<FixInformation> {
         final useridResponse = await GrpcInfoService.client.getUserID(useridRequest);
         // set user ID
         await globalUserId.write(key: 'UserID', value: '${useridResponse.userID}');
-
         saveImage(context);
       } on GrpcError {
         Navigator.pop(context);

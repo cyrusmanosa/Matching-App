@@ -125,7 +125,7 @@ class _LoverConditionState extends State<LoverCondition> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => DeleteTarget(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Lover"),
+                  builder: (context) => DeleteTarget(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "恋人"),
                   fullscreenDialog: true,
                 ),
               );
@@ -134,7 +134,7 @@ class _LoverConditionState extends State<LoverCondition> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => PayDone(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Lover"),
+                  builder: (context) => PayDone(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "恋人"),
                   fullscreenDialog: true,
                 ),
               );
@@ -152,7 +152,7 @@ class _LoverConditionState extends State<LoverCondition> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => DeleteTarget(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Lover"),
+                builder: (context) => DeleteTarget(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "恋人"),
                 fullscreenDialog: true,
               ),
             );
@@ -161,7 +161,7 @@ class _LoverConditionState extends State<LoverCondition> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => PayDone(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Lover"),
+                  builder: (context) => PayDone(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "恋人"),
                   fullscreenDialog: true),
             );
             break;

@@ -14,7 +14,12 @@ WHERE user_id = $1;
 
 -- name: GetChangeTargetUserList :one
 SELECT * FROM changetargetuser
-WHERE user_id = $1;
+WHERE user_id = $1
+AND change_time = (
+    SELECT MAX(change_time)
+    FROM changetargetuser
+    WHERE user_id = $1
+);
 
 -- name: AllChangeTargetUserList :many
 SELECT * FROM changetargetuser

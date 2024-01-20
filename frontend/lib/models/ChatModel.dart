@@ -1,5 +1,6 @@
 // ignore: file_names
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:dating_your_date/pb/canChange.pb.dart';
 
@@ -10,7 +11,7 @@ class ChatUsers {
 
 class TargetInfos {
   int userid;
-  File img;
+  Uint8List img;
   String lastMsg;
   bool isRead;
   CanChange info;

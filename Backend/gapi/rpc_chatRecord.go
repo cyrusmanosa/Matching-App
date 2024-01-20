@@ -37,7 +37,7 @@ func (server *Server) CreateChatRecord(ctx context.Context, req *pb.CreateChatRe
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
-			return nil, status.Errorf(codes.NotFound, "table not found")
+			return nil, status.Errorf(codes.NotFound, "table not found %s", tablename)
 		}
 		return nil, status.Errorf(codes.Internal, "failed to input table: %s", err)
 	}
@@ -57,6 +57,9 @@ func (server *Server) GetChatRecord(ctx context.Context, req *pb.GetChatRecordRe
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
 			return nil, status.Errorf(codes.NotFound, "chat record not found")
+		}
+		if err == db.ErrRecordNotFound {
+			return nil, status.Errorf(codes.NotFound, "Not found Record in table")
 		}
 		return nil, status.Errorf(codes.Internal, "failed: %s And tablename %s at targetid %d", err, tablename, req.GetTargetID())
 	}
@@ -102,7 +105,7 @@ func (server *Server) GetLastMsg(ctx context.Context, req *pb.GetLastMsgRequest)
 	rsp := &pb.GetLastMsgResponse{
 		MediaType: lmsg.MediaType,
 		Media:     lmsg.Media,
-		Isread:    lmsg.Isread,
+		IsRead:    lmsg.Isread,
 	}
 
 	return rsp, nil

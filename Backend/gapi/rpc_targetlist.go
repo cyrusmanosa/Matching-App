@@ -69,7 +69,7 @@ func (server *Server) GetTargetList(ctx context.Context, req *pb.GetTargetListRe
 		return nil, fmt.Errorf("invalid access token: %v", err)
 	}
 
-	targetlist, err := server.infoStore.GetTargetUserList(ctx, token.UserID)
+	targetlist, err := server.infoStore.GetTargetUserList(ctx, req.GetUserID())
 	if err != nil {
 		errCode := db.ErrorCode(err)
 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
@@ -102,6 +102,7 @@ func (server *Server) UpdateTargetList(ctx context.Context, req *pb.UpdateTarget
 
 	tl := info.UpdateTargetListParams{
 		UserID:    token.UserID,
+		Target1ID: req.GetTarget1ID(),
 		T1Type:    req.GetT1Type(),
 		Target2ID: req.GetTarget2ID(),
 		T2Type:    req.GetT2Type(),

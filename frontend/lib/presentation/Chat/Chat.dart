@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/ChatModel.dart';
@@ -13,7 +11,6 @@ import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
-import 'package:path_provider/path_provider.dart';
 
 class Chat extends StatefulWidget {
   Chat({Key? key}) : super(key: key);
@@ -73,12 +70,9 @@ class _ChatState extends State<Chat> {
         final lmsgRequest = GetLastMsgRequest(userID: userid!, targetID: targetID[i]);
         final lmsgResponse = await GrpcChatService.client.getLastMsg(lmsgRequest);
         Uint8List bytes = Uint8List.fromList(imgResponse.img.img1);
-        Directory tempDir = await getTemporaryDirectory();
-        File file = File('${tempDir.path}/data_$i.bin');
-        await file.writeAsBytes(bytes);
         setState(() {
           users.add(TargetInfos(
-              userid: targetID[i], img: file, info: infoResponse.canChangeInfo, lastMsg: lmsgResponse.media, isRead: lmsgResponse.isRead));
+              userid: targetID[i], img: bytes, info: infoResponse.canChangeInfo, lastMsg: lmsgResponse.media, isRead: lmsgResponse.isRead));
         });
       }
       isEmpty = false;

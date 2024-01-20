@@ -125,7 +125,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => DeleteTarget(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Hobby"),
+                  builder: (context) => DeleteTarget(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "趣味"),
                   fullscreenDialog: true,
                 ),
               );
@@ -137,7 +137,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => PayDone(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Hobby"),
+                  builder: (context) => PayDone(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "趣味"),
                   fullscreenDialog: true,
                 ),
               );
@@ -155,7 +155,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => DeleteTarget(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Hobby"),
+                builder: (context) => DeleteTarget(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "趣味"),
                 fullscreenDialog: true,
               ),
             );
@@ -167,7 +167,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => PayDone(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Hobby"),
+                builder: (context) => PayDone(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "趣味"),
                 fullscreenDialog: true,
               ),
             );

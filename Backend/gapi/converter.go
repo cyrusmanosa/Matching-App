@@ -73,6 +73,9 @@ func convertCanChange(cc info.Canchangeinformation) *pb.CanChange {
 		Education:     cc.Education,
 		Job:           cc.Job,
 		AnnualSalary:  cc.AnnualSalary,
+		HobbyType:     cc.HobbyType,
+		Experience:    cc.Experience,
+		AccompanyType: cc.AccompanyType,
 		Sociability:   cc.Sociability,
 		Religious:     cc.Religious,
 		Introduce:     cc.Introduce,
@@ -142,7 +145,7 @@ func convertChat(chat ch.Record) *pb.ChatRecord {
 		RoleType:  chat.RoleType,
 		MediaType: chat.MediaType,
 		Media:     chat.Media,
-		Isread:    chat.Isread,
+		IsRead:    chat.Isread,
 		CreatedAt: timestamppb.New(chat.CreatedAt),
 	}
 }
@@ -155,9 +158,31 @@ func convertChatList(chats []ch.Record) []*pb.ChatRecordNoID {
 			RoleType:  chat.RoleType,
 			MediaType: chat.MediaType,
 			Media:     chat.Media,
-			Isread:    chat.Isread,
+			IsRead:    chat.Isread,
 			CreatedAt: timestamppb.New(chat.CreatedAt),
 		}
 	}
 	return pbChats
+}
+
+func convertSearchH(re []int32, len int32, ra string) *pb.SH {
+	return &pb.SH{
+		ResultID: re,
+		Rank:     ra,
+		Len:      len,
+	}
+}
+func convertSearchL(re []int32, len int32, ra string) *pb.SL {
+	return &pb.SL{
+		ResultID: re,
+		Rank:     ra,
+		Len:      len,
+	}
+}
+func convertSearchA(re []int32, len int32, ra string) *pb.SA {
+	return &pb.SA{
+		ResultID: re,
+		Rank:     ra,
+		Len:      len,
+	}
 }

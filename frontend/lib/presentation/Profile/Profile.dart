@@ -261,12 +261,7 @@ class _ProfileState extends State<Profile> {
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => InformationEdit(
-                canData: cCData,
-                imgIcon: newAllMyImg,
-                country: myFixData.country,
-              ),
-          fullscreenDialog: true),
+          builder: (context) => InformationEdit(canData: cCData, imgIcon: newAllMyImg, country: myFixData.country), fullscreenDialog: true),
     );
   }
 
@@ -362,7 +357,6 @@ class _ProfileState extends State<Profile> {
             if (allMyImg.length >= 3) _buildImageContainer(context, mediaH, mediaW, allMyImg[2], 2),
             if (allMyImg.length >= 4) _buildImageContainer(context, mediaH, mediaW, allMyImg[3], 3),
             if (allMyImg.length >= 5) _buildImageContainer(context, mediaH, mediaW, allMyImg[4], 4),
-
             // far right
             SizedBox(width: mediaW / 25),
           ],

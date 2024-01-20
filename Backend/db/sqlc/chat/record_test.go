@@ -13,7 +13,7 @@ const TId = 1
 const TN = "u3"
 
 func TestCreateRecordTable(t *testing.T) {
-	for i := 2; i < 200; i++ {
+	for i := 402; i <= 611; i++ {
 		tablename := "u" + strconv.Itoa(int(i))
 		err := testChatQueries.CreateChatTable(context.Background(), tablename)
 		require.NoError(t, err)

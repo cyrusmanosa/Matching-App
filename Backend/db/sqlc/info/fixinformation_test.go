@@ -13,7 +13,7 @@ import (
 )
 
 func TestCreateRandomUserFixInformaion(t *testing.T) {
-	for i := 0; i < 50; i++ {
+	for i := 0; i < 100; i++ {
 		arg := CreateRandomUserFixInformaion(t)
 		CreateRandomImage(t, arg)
 		CreateRandomUserCanChangeInformation(t, arg)
@@ -22,6 +22,7 @@ func TestCreateRandomUserFixInformaion(t *testing.T) {
 		CreateRandomAccompanyRequest(t, arg)
 		CreateRandomPayment(t, arg)
 		CreateRandomContact(t, arg)
+		///----------------------------------------------------------------
 		arg1 := CreateRandomUserFixInformaion(t)
 		CreateRandomImage(t, arg1)
 		CreateRandomUserCanChangeInformation(t, arg1)
@@ -30,6 +31,7 @@ func TestCreateRandomUserFixInformaion(t *testing.T) {
 		CreateRandomAccompanyRequest(t, arg1)
 		CreateRandomPayment(t, arg1)
 		CreateRandomContact(t, arg1)
+		///----------------------------------------------------------------
 		arg2 := CreateRandomUserFixInformaion(t)
 		CreateRandomImage(t, arg2)
 		CreateRandomUserCanChangeInformation(t, arg2)
@@ -38,6 +40,7 @@ func TestCreateRandomUserFixInformaion(t *testing.T) {
 		CreateRandomAccompanyRequest(t, arg2)
 		CreateRandomPayment(t, arg2)
 		CreateRandomContact(t, arg2)
+		///----------------------------------------------------------------
 		arg3 := CreateRandomUserFixInformaion(t)
 		CreateRandomImage(t, arg3)
 		CreateRandomUserCanChangeInformation(t, arg3)

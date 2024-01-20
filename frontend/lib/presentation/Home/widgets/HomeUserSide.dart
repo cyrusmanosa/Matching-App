@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/pb/canChange.pb.dart';
@@ -7,11 +7,12 @@ import 'package:dating_your_date/presentation/UserPage.dart';
 import 'package:flutter/material.dart';
 
 class MainframeItemWidget extends StatefulWidget {
-  MainframeItemWidget({Key? key, this.mediaH, this.mediaW, this.img, this.fix, this.canChange}) : super(key: key);
+  MainframeItemWidget({Key? key, this.mediaH, this.mediaW, this.img, this.fix, this.canChange, this.allImage}) : super(key: key);
 
   final double? mediaH;
   final double? mediaW;
-  final List<File>? img;
+  final Uint8List? img;
+  final List<Uint8List>? allImage;
   final Fix? fix;
   final CanChange? canChange;
 
@@ -65,9 +66,10 @@ class _MainframeItemWidget extends State<MainframeItemWidget> {
                       context,
                       PageRouteBuilder(
                         pageBuilder: (context, animation, secondaryAnimation) => UserPage(
-                          fixData: widget.fix,
-                          canData: widget.canChange,
+                          fixData: widget.fix!,
+                          canData: widget.canChange!,
                           img: widget.img!,
+                          allImage: widget.allImage!,
                         ),
                         transitionsBuilder: (context, animation, secondaryAnimation, child) {
                           return SlideTransition(
@@ -84,7 +86,7 @@ class _MainframeItemWidget extends State<MainframeItemWidget> {
                     width: widget.mediaW! / 1.25,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadiusStyle.r30,
-                      image: DecorationImage(image: FileImage(widget.img![0]), fit: BoxFit.cover),
+                      image: DecorationImage(image: MemoryImage(widget.img!), fit: BoxFit.cover),
                       boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.5), spreadRadius: 5, blurRadius: 10)],
                     ),
                   ),

@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
@@ -16,7 +16,7 @@ class ChatBox extends StatefulWidget {
   ChatBox({Key? key, this.name, this.imageUrl, this.time, this.targetid}) : super(key: key);
 
   final String? name;
-  final File? imageUrl;
+  final Uint8List? imageUrl;
   final String? time;
   final int? targetid;
 
@@ -111,7 +111,7 @@ class _ChatBoxState extends State<ChatBox> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: _buildHeader(context, mediaW),
-      drawer: Drawer(child: SideBar(name: widget.name, imageUrl: widget.imageUrl, purpose: purpose)),
+      drawer: Drawer(child: SideBar()),
       resizeToAvoidBottomInset: true,
       backgroundColor: appTheme.bgColor,
       body: GestureDetector(
@@ -197,7 +197,7 @@ class _ChatBoxState extends State<ChatBox> {
             children: [
               Container(margin: EdgeInsets.only(left: mediaW / 8)),
               // image
-              CircleAvatar(backgroundImage: FileImage(widget.imageUrl!), maxRadius: 20),
+              CircleAvatar(backgroundImage: MemoryImage(widget.imageUrl!), maxRadius: 20),
               SizedBox(width: mediaW / 50),
               // name and status
               Expanded(

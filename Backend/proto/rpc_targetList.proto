@@ -24,6 +24,7 @@ message CreateTargetListResponse {
 // Get
 message GetTargetListRequest {
     string SessionID = 1;
+    int32 UserID = 2;
 }
 message GetTargetListResponse {
     Targetlist tl = 1;

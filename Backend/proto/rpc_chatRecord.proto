@@ -55,7 +55,7 @@ message GetLastMsgRequest{
 message GetLastMsgResponse{
     string MediaType = 1;
     string Media = 2;
-    bool Isread = 3;
+    bool IsRead = 3;
 }
 
 message GetChatRowRequest{

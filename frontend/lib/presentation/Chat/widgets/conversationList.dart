@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
@@ -11,18 +11,11 @@ import 'package:grpc/grpc.dart';
 
 // ignore: must_be_immutable
 class ConversationList extends StatefulWidget {
-  ConversationList({
-    Key? key,
-    this.targetid,
-    this.name,
-    this.messageText,
-    this.imageUrl,
-    this.isMessageRead,
-  }) : super(key: key);
+  ConversationList({Key? key, this.targetid, this.name, this.messageText, this.imageUrl, this.isMessageRead}) : super(key: key);
   final int? targetid;
   final String? name;
   final String? messageText;
-  final File? imageUrl;
+  final Uint8List? imageUrl;
   bool? isMessageRead;
 
   @override
@@ -52,7 +45,7 @@ class _ConversationListState extends State<ConversationList> {
         updateReadGrpcRequest(context);
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ChatBox(name: widget.name, imageUrl: widget.imageUrl, targetid: widget.targetid)),
+          MaterialPageRoute(builder: (context) => ChatBox(name: widget.name!, imageUrl: widget.imageUrl!, targetid: widget.targetid!)),
         );
       },
       child: Container(
@@ -62,7 +55,7 @@ class _ConversationListState extends State<ConversationList> {
             BoxDecoration(color: Colors.white, border: Border.all(color: Colors.black, width: 3), borderRadius: BorderRadiusStyle.r15),
         child: Row(
           children: [
-            CircleAvatar(backgroundImage: FileImage(widget.imageUrl!), maxRadius: 30),
+            CircleAvatar(backgroundImage: MemoryImage(widget.imageUrl!), maxRadius: 30),
             SizedBox(width: mediaW / 25),
             Expanded(
               child: Column(
@@ -84,7 +77,6 @@ class _ConversationListState extends State<ConversationList> {
               ),
             ),
             Padding(padding: EdgeInsets.only(left: mediaW / 50)),
-            // Text(widget.time!, style: TextStyle(fontSize: 12, fontWeight: widget.isMessageRead! ? FontWeight.bold : FontWeight.normal)),
           ],
         ),
       ),

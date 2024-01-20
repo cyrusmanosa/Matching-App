@@ -135,7 +135,7 @@ func RandomAccompantType() string {
 
 func RandomSociability() string {
 	socialPersonalities := []string{
-		"社交的な人",
+		"社交的",
 		"内向的でシャイ",
 		"社交不安",
 		"少人数派",
@@ -145,13 +145,7 @@ func RandomSociability() string {
 }
 
 func RandomSexual() string {
-	genders := []string{
-		"男性",
-		"女性",
-		"非バイナリー",
-		"トランスジェンダー",
-		"インターセックス",
-	}
+	genders := []string{"男性", "女性", "その他"}
 	return genders[seededRand.Intn(len(genders))]
 }
 
@@ -208,108 +202,88 @@ func SwitchLanguage(country string) []string {
 		Language = []string{"日本語", "英語"}
 		for i := 0; i < len(LanguageList); i++ {
 			ans := LanguageList[rand.Intn(len(LanguageList))]
-			if ans == Language[0] {
-				continue
-			} else {
+			if ans != Language[0] && ans != Language[1] {
 				Language = append(Language, ans)
 				break
 			}
 		}
 	case "香港":
-		Language = []string{"広東語", "英語", LanguageList[rand.Intn(len(LanguageList))]}
+		Language = []string{"広東語", "英語"}
 		for i := 0; i < len(LanguageList); i++ {
 			ans := LanguageList[rand.Intn(len(LanguageList))]
-			if ans == Language[0] {
-				continue
-			} else {
+			if ans != Language[0] && ans != Language[1] {
 				Language = append(Language, ans)
 				break
 			}
 		}
 	case "マカオ":
-		Language = []string{"広東語", "英語", LanguageList[rand.Intn(len(LanguageList))]}
+		Language = []string{"広東語", "英語"}
 		for i := 0; i < len(LanguageList); i++ {
 			ans := LanguageList[rand.Intn(len(LanguageList))]
-			if ans == Language[0] {
-				continue
-			} else {
+			if ans != Language[0] && ans != Language[1] {
 				Language = append(Language, ans)
 				break
 			}
 		}
 	case "中国":
-		Language = []string{"中国語", "英語", LanguageList[rand.Intn(len(LanguageList))]}
+		Language = []string{"中国語", "英語"}
 		for i := 0; i < len(LanguageList); i++ {
 			ans := LanguageList[rand.Intn(len(LanguageList))]
-			if ans == Language[0] {
-				continue
-			} else {
+			if ans != Language[0] && ans != Language[1] {
 				Language = append(Language, ans)
 				break
 			}
 		}
 	case "インドネシア":
-		Language = []string{"インドネシア語", "英語", LanguageList[rand.Intn(len(LanguageList))]}
+		Language = []string{"インドネシア語", "英語"}
 		for i := 0; i < len(LanguageList); i++ {
 			ans := LanguageList[rand.Intn(len(LanguageList))]
-			if ans == Language[0] {
-				continue
-			} else {
+			if ans != Language[0] && ans != Language[1] {
 				Language = append(Language, ans)
 				break
 			}
 		}
 	case "タイ":
-		Language = []string{"タイ語", "英語", LanguageList[rand.Intn(len(LanguageList))]}
+		Language = []string{"タイ語", "英語"}
 		for i := 0; i < len(LanguageList); i++ {
 			ans := LanguageList[rand.Intn(len(LanguageList))]
-			if ans == Language[0] {
-				continue
-			} else {
+			if ans != Language[0] && ans != Language[1] {
 				Language = append(Language, ans)
 				break
 			}
 		}
 	case "韓国":
-		Language = []string{"韓国語", "英語", LanguageList[rand.Intn(len(LanguageList))]}
+		Language = []string{"韓国語", "英語"}
 		for i := 0; i < len(LanguageList); i++ {
 			ans := LanguageList[rand.Intn(len(LanguageList))]
-			if ans == Language[0] {
-				continue
-			} else {
+			if ans != Language[0] && ans != Language[1] {
 				Language = append(Language, ans)
 				break
 			}
 		}
 	case "ベトナム":
-		Language = []string{"ベトナム", "英語", LanguageList[rand.Intn(len(LanguageList))]}
+		Language = []string{"ベトナム", "英語"}
 		for i := 0; i < len(LanguageList); i++ {
 			ans := LanguageList[rand.Intn(len(LanguageList))]
-			if ans == Language[0] {
-				continue
-			} else {
+			if ans != Language[0] && ans != Language[1] {
 				Language = append(Language, ans)
 				break
 			}
 		}
 	case "マレーシア":
-		Language = []string{"マレーシア", "英語", LanguageList[rand.Intn(len(LanguageList))]}
+		Language = []string{"マレーシア", "英語"}
 		for i := 0; i < len(LanguageList); i++ {
 			ans := LanguageList[rand.Intn(len(LanguageList))]
-			if ans == Language[0] {
-				continue
-			} else {
+			if ans != Language[0] && ans != Language[1] {
 				Language = append(Language, ans)
 				break
 			}
 		}
 	case "台湾":
-		Language = []string{"中国語", "英語", LanguageList[rand.Intn(len(LanguageList))]}
+		Language = []string{"中国語", "英語"}
 		for i := 0; i < len(LanguageList); i++ {
 			ans := LanguageList[rand.Intn(len(LanguageList))]
-			if ans == Language[0] {
-				continue
-			} else {
+			if ans != Language[0] && ans != Language[1] {
 				Language = append(Language, ans)
 				break
 			}
@@ -392,7 +366,7 @@ func SwitchAge(Y, M, D int) int32 {
 }
 
 func RandomTT() string {
-	t := []string{"趣味", "恋人", "お相伴"}
+	t := []string{"趣味", "恋人", "相伴"}
 	r := seededRand.Intn(3)
 
 	return t[r]

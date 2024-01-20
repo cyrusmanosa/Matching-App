@@ -89,6 +89,11 @@ func (q *Queries) DeleteChangeTargetUser(ctx context.Context, userID int32) erro
 const getChangeTargetUserList = `-- name: GetChangeTargetUserList :one
 SELECT user_id, change_user_id, reason, frequency, change_time FROM changetargetuser
 WHERE user_id = $1
+AND change_time = (
+    SELECT MAX(change_time)
+    FROM changetargetuser
+    WHERE user_id = $1
+)
 `
 
 func (q *Queries) GetChangeTargetUserList(ctx context.Context, userID int32) (Changetargetuser, error) {

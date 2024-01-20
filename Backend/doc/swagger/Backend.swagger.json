@@ -1166,6 +1166,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "UserID",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "tags": [
@@ -1333,14 +1340,14 @@
         ]
       }
     },
-    "/v1/Search_Accompany": {
-      "post": {
+    "/v1/Search_accompany": {
+      "get": {
         "operationId": "Information_SearchTargetAccompany",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbSearchResponse"
+              "$ref": "#/definitions/pbSearchResponseA"
             }
           },
           "default": {
@@ -1352,12 +1359,10 @@
         },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/pbSearchRequest"
-            }
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -1366,14 +1371,14 @@
       }
     },
     "/v1/Search_hobby": {
-      "post": {
+      "get": {
         "summary": "/ -------- Search --------------",
         "operationId": "Information_SearchTargetHobby",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbSearchResponse"
+              "$ref": "#/definitions/pbSearchResponseH"
             }
           },
           "default": {
@@ -1385,12 +1390,10 @@
         },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/pbSearchRequest"
-            }
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -1399,13 +1402,13 @@
       }
     },
     "/v1/Search_lover": {
-      "post": {
+      "get": {
         "operationId": "Information_SearchTargetLover",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/pbSearchResponse"
+              "$ref": "#/definitions/pbSearchResponseL"
             }
           },
           "default": {
@@ -1417,12 +1420,10 @@
         },
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/pbSearchRequest"
-            }
+            "name": "SessionID",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -1919,7 +1920,7 @@
         "Media": {
           "type": "string"
         },
-        "Isread": {
+        "IsRead": {
           "type": "boolean"
         },
         "CreatedAt": {
@@ -1940,7 +1941,7 @@
         "Media": {
           "type": "string"
         },
-        "Isread": {
+        "IsRead": {
           "type": "boolean"
         },
         "CreatedAt": {
@@ -2551,7 +2552,7 @@
         "Media": {
           "type": "string"
         },
-        "Isread": {
+        "IsRead": {
           "type": "boolean"
         }
       }
@@ -2805,23 +2806,27 @@
         }
       }
     },
-    "pbSearchRequest": {
+    "pbSearchResponseA": {
       "type": "object",
       "properties": {
-        "SessionID": {
-          "type": "string"
+        "resu": {
+          "$ref": "#/definitions/pbsA"
         }
       }
     },
-    "pbSearchResponse": {
+    "pbSearchResponseH": {
       "type": "object",
       "properties": {
-        "result": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "rank": {
-          "type": "string"
+        "resu": {
+          "$ref": "#/definitions/pbsH"
+        }
+      }
+    },
+    "pbSearchResponseL": {
+      "type": "object",
+      "properties": {
+        "resu": {
+          "$ref": "#/definitions/pbsL"
         }
       }
     },
@@ -3205,6 +3210,63 @@
       "properties": {
         "tl": {
           "$ref": "#/definitions/pbTargetlist"
+        }
+      }
+    },
+    "pbsA": {
+      "type": "object",
+      "properties": {
+        "resultID": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "rank": {
+          "type": "string"
+        },
+        "len": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "pbsH": {
+      "type": "object",
+      "properties": {
+        "resultID": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "rank": {
+          "type": "string"
+        },
+        "len": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "pbsL": {
+      "type": "object",
+      "properties": {
+        "resultID": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "rank": {
+          "type": "string"
+        },
+        "len": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

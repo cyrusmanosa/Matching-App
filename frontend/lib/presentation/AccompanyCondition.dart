@@ -123,8 +123,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      DeleteTarget(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Accompany"),
+                  builder: (context) => DeleteTarget(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "相伴"),
                   fullscreenDialog: true,
                 ),
               );
@@ -133,7 +132,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => PayDone(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Accompany"),
+                  builder: (context) => PayDone(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "相伴"),
                   fullscreenDialog: true,
                 ),
               );
@@ -151,7 +150,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => DeleteTarget(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Accompany"),
+                builder: (context) => DeleteTarget(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "相伴"),
                 fullscreenDialog: true,
               ),
             );
@@ -160,7 +159,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => PayDone(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Accompany"),
+                builder: (context) => PayDone(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "相伴"),
                 fullscreenDialog: true,
               ),
             );

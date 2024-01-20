@@ -1,20 +1,23 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/pb/canChange.pb.dart';
 import 'package:dating_your_date/pb/fix.pb.dart';
 import 'package:dating_your_date/presentation/ChatBox.dart';
 import 'package:dating_your_date/presentation/Profile/widgets/showDataBar.dart';
+import 'package:dating_your_date/widgets/Custom_Show_Image.dart';
 import 'package:dating_your_date/widgets/app_bar/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/button/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 
 class UserPage extends StatefulWidget {
-  UserPage({super.key, this.canData, this.fixData, this.img});
+  UserPage({super.key, this.canData, this.fixData, this.img, this.allImage});
 
   final Fix? fixData;
-  final List<File>? img;
+  final Uint8List? img;
   final CanChange? canData;
+  final List<Uint8List>? allImage;
+
   @override
   State<UserPage> createState() => _UserPageState();
 }
@@ -33,11 +36,13 @@ class _UserPageState extends State<UserPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // image
-            Container(
-              decoration: BoxDecoration(shape: BoxShape.circle),
-              child: CircleAvatar(radius: 80, backgroundImage: FileImage(widget.img![0])),
-            ),
-            SizedBox(height: mediaH / 50),
+            // Container(
+            //   decoration: BoxDecoration(shape: BoxShape.circle),
+            //   child: CircleAvatar(radius: 80, backgroundImage: MemoryImage(widget.img!)),
+            // ),
+            // SizedBox(height: mediaH / 50),
+
+            _buildImages(context, mediaH, mediaW),
 
             // name
             Text(
@@ -61,6 +66,29 @@ class _UserPageState extends State<UserPage> {
             // btn
             _buildNextButton(context),
             SizedBox(height: mediaH / 15),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildImages(BuildContext context, double mediaH, double mediaW) {
+    return SizedBox(
+      child: Container(
+        height: mediaH / 6.5,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: [
+            // far left
+            SizedBox(width: mediaW / 25),
+            // image
+            customImageDesignImage(context, widget.allImage![0], mediaH, mediaW),
+            if (widget.allImage!.length >= 2) customImageDesignImage(context, widget.allImage![1], mediaH, mediaW),
+            if (widget.allImage!.length >= 3) customImageDesignImage(context, widget.allImage![2], mediaH, mediaW),
+            if (widget.allImage!.length >= 4) customImageDesignImage(context, widget.allImage![3], mediaH, mediaW),
+            if (widget.allImage!.length >= 5) customImageDesignImage(context, widget.allImage![4], mediaH, mediaW),
+            // far right
+            SizedBox(width: mediaW / 25),
           ],
         ),
       ),
@@ -185,7 +213,7 @@ class _UserPageState extends State<UserPage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => ChatBox(name: widget.canData!.nickName, imageUrl: widget.img![0], targetid: widget.canData!.userID)),
+              builder: (context) => ChatBox(name: widget.canData!.nickName, imageUrl: widget.img!, targetid: widget.canData!.userID)),
         );
       },
     );
