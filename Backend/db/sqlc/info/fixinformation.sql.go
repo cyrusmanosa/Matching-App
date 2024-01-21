@@ -202,9 +202,9 @@ WHERE user_id != $1
 
 type FixSearchLoverParams struct {
 	UserID int32  `json:"user_id"`
-	Age    *int32  `json:"age"`
-	Age_2  *int32  `json:"age_2"`
-	Gender *string `json:"gender"`
+	Age    int32  `json:"age"`
+	Age_2  int32  `json:"age_2"`
+	Gender string `json:"gender"`
 }
 
 func (q *Queries) FixSearchLover(ctx context.Context, arg FixSearchLoverParams) ([]Fixinformation, error) {

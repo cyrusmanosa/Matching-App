@@ -38,8 +38,8 @@ func (server *Server) SearchTargetAccompany(ctx context.Context, req *pb.SearchR
 	datac := info.CanChangeSearchAccompanyParams{
 		UserID:        token.UserID,
 		Speaklanguage: nil,
-		Sociability:   &myAccompany.Sociability,
-		AccompanyType: &myAccompany.FindType,
+		Sociability:   myAccompany.Sociability,
+		AccompanyType: myAccompany.FindType,
 	}
 	Cc, err1 := server.infoStore.CanChangeSearchAccompany(ctx, datac)
 	if err1 != nil {
@@ -127,20 +127,26 @@ func (server *Server) SearchTargetAccompany(ctx context.Context, req *pb.SearchR
 
 func checkAccompany75(Cc []info.Canchangeinformation, myAccompany info.Accompany) ([]info.Canchangeinformation, []info.Canchangeinformation) {
 	// if Max :: 62.5% to 75%
-	var C_step1_63 []info.Canchangeinformation
-	var C_step1_75 []info.Canchangeinformation
+	C_step1_63 := make([]info.Canchangeinformation, 0)
+	C_step1_75 := make([]info.Canchangeinformation, 0)
 
 	for i := 0; i < len(Cc); i++ {
+		found := false
 		for j := 0; j < len(Cc[i].Speaklanguage); j++ {
 			for k := 0; k < len(myAccompany.Speaklanguage); k++ {
 				if Cc[i].Speaklanguage[j] == myAccompany.Speaklanguage[k] {
 					C_step1_75 = append(C_step1_75, Cc[i])
-					break
-				} else {
-					C_step1_63 = append(C_step1_63, Cc[i])
+					found = true
 					break
 				}
 			}
+			if found {
+				break
+			}
+		}
+
+		if !found {
+			C_step1_63 = append(C_step1_63, Cc[i])
 		}
 	}
 

@@ -21,8 +21,8 @@ WHERE user_id != $1
 type CanChangeSearchAccompanyParams struct {
 	UserID        int32       `json:"user_id"`
 	Speaklanguage *[]string    `json:"speaklanguage"`
-	AccompanyType *string `json:"accompany_type"`
-	Sociability   *string `json:"sociability"`
+	AccompanyType string `json:"accompany_type"`
+	Sociability   string `json:"sociability"`
 }
 
 func (q *Queries) CanChangeSearchAccompany(ctx context.Context, arg CanChangeSearchAccompanyParams) ([]Canchangeinformation, error) {
@@ -81,8 +81,8 @@ type CanChangeSearchHobbyParams struct {
 	UserID        int32       `json:"user_id"`
 	City          *string `json:"city"`
 	Speaklanguage *[]string    `json:"speaklanguage"`
-	HobbyType     *string `json:"hobby_type"`
-	Experience    *int32 `json:"experience"`
+	HobbyType     string `json:"hobby_type"`
+	Experience    int32 `json:"experience"`
 }
 
 func (q *Queries) CanChangeSearchHobby(ctx context.Context, arg CanChangeSearchHobbyParams) ([]Canchangeinformation, error) {

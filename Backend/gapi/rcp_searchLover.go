@@ -37,9 +37,9 @@ func (server *Server) SearchTargetLover(ctx context.Context, req *pb.SearchReque
 	/// Search start :: 50% Up
 	datac := info.FixSearchLoverParams{
 		UserID: token.UserID,
-		Age:    &myLover.MinAge,
-		Age_2:  &myLover.MaxAge,
-		Gender: &myLover.Gender,
+		Age:    myLover.MinAge,
+		Age_2:  myLover.MaxAge,
+		Gender: myLover.Gender,
 	}
 	Ff, err1 := server.infoStore.FixSearchLover(ctx, datac)
 	if err1 != nil {
@@ -62,7 +62,8 @@ func (server *Server) SearchTargetLover(ctx context.Context, req *pb.SearchReque
 			}
 			C_step1_50 = append(C_step1_50, FC)
 		}
-		C_step2_75, C_step2_50 := check75Loverup(C_step1_50, myLover)
+
+		C_step2_75, C_step2_63 := check75Loverup(C_step1_50, myLover)
 
 		// 75%
 		if len(C_step2_75) > 0 {
@@ -83,19 +84,19 @@ func (server *Server) SearchTargetLover(ctx context.Context, req *pb.SearchReque
 		}
 
 		// 62.5%
-		if len(C_step2_50) > 0 {
-			f75, msg, le := checkLover100(C_step2_50, myLover)
+		if len(C_step2_63) > 0 {
+			f75, msg, le := checkLover100(C_step2_63, myLover)
 			if len(f75) > 0 {
 				return &pb.SearchResponseL{
 					Resu: convertSearchL(f75, le, msg),
 				}, nil
 			} else {
 				var C_step2_50_id []int32
-				for i := range C_step2_50 {
-					C_step2_50_id = append(C_step2_50_id, C_step2_50[i].UserID)
+				for i := range C_step2_63 {
+					C_step2_50_id = append(C_step2_50_id, C_step2_63[i].UserID)
 				}
 				return &pb.SearchResponseL{
-					Resu: convertSearchL(C_step2_50_id, int32(len(C_step2_50)), "50%"),
+					Resu: convertSearchL(C_step2_50_id, int32(len(C_step2_63)), "50%"),
 				}, nil
 			}
 		}
@@ -116,27 +117,39 @@ func (server *Server) SearchTargetLover(ctx context.Context, req *pb.SearchReque
 }
 
 func check75Loverup(C_step1_50 []info.Canchangeinformation, myLover info.Lover) ([]info.Canchangeinformation, []info.Canchangeinformation) {
-	var C_step2_75 []info.Canchangeinformation
-	var C_step2_50 []info.Canchangeinformation
+	var C_step2_63 []info.Canchangeinformation
+	C_step2_75 := make([]info.Canchangeinformation, 0)
 	// Sexual and Language
 	for i := 0; i < len(C_step1_50); i++ {
 		// Sexual
-		if C_step1_50[i].Sexual >= myLover.Sexual {
-			for i := 0; i < len(C_step1_50); i++ {
-				// Language
-				for j := 0; j < len(C_step1_50[i].Speaklanguage); j++ {
-					for k := 0; k < len(myLover.Speaklanguage); k++ {
-						if C_step1_50[i].Speaklanguage[j] == myLover.Speaklanguage[k] {
-							C_step2_75 = append(C_step2_75, C_step1_50[i])
-							break
-						}
-					}
+		if C_step1_50[i].Sexual == myLover.Sexual {
+			C_step2_63 = append(C_step2_63, C_step1_50[i])
+			break
+		}
+	}
+
+	for i := 0; i < len(C_step2_63); i++ {
+		found := false
+		for j := 0; j < len(C_step2_63[i].Speaklanguage); j++ {
+			for k := 0; k < len(myLover.Speaklanguage); k++ {
+				if C_step2_63[i].Speaklanguage[j] == myLover.Speaklanguage[k] {
+					C_step2_75 = append(C_step2_75, C_step2_63[i])
+					found = true
+					break
 				}
-				C_step2_50 = append(C_step2_50, C_step1_50[i])
+			}
+			if found {
+				break
 			}
 		}
 	}
-	return C_step2_75, C_step2_50
+
+	for i := 0; i < len(C_step2_75); i++ {
+		fmt.Println(C_step2_75[i])
+		fmt.Println("----------------------------------------------------")
+	}
+
+	return C_step2_75, C_step2_63
 }
 
 func checkLover100(C_step2_75 []info.Canchangeinformation, myLover info.Lover) ([]int32, string, int32) {
@@ -149,6 +162,7 @@ func checkLover100(C_step2_75 []info.Canchangeinformation, myLover info.Lover) (
 			}
 		}
 	}
+
 	var C_step3_100_id []int32
 	for i := range C_step3_100 {
 		C_step3_100_id = append(C_step3_100_id, C_step3_100[i].UserID)

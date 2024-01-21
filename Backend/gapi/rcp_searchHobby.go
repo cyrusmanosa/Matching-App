@@ -40,8 +40,8 @@ func (server *Server) SearchTargetHobby(ctx context.Context, req *pb.SearchReque
 		UserID:        token.UserID,
 		City:          nil,
 		Speaklanguage: nil,
-		HobbyType:     &myHobby.FindType,
-		Experience:    &myHobby.Experience,
+		HobbyType:     myHobby.FindType,
+		Experience:    myHobby.Experience,
 	}
 	Cc, err1 := server.infoStore.CanChangeSearchHobby(ctx, datac)
 	if err1 != nil {
@@ -76,6 +76,14 @@ func (server *Server) SearchTargetHobby(ctx context.Context, req *pb.SearchReque
 					return &pb.SearchResponseH{
 						Resu: convertSearchH(full, le, msg),
 					}, nil
+				} else {
+					var f75 []int32
+					for i := 0; i < len(F_step2_75); i++ {
+						f75 = append(f75, F_step2_75[i].UserID)
+					}
+					return &pb.SearchResponseH{
+						Resu: convertSearchH(f75, int32(len(f75)), "75%"),
+					}, nil
 				}
 			}
 		}
@@ -101,6 +109,14 @@ func (server *Server) SearchTargetHobby(ctx context.Context, req *pb.SearchReque
 					return &pb.SearchResponseH{
 						Resu: convertSearchH(f75, le, msg),
 					}, nil
+				} else {
+					var f63 []int32
+					for i := 0; i < len(F_step2_63); i++ {
+						f63 = append(f63, F_step2_63[i].UserID)
+					}
+					return &pb.SearchResponseH{
+						Resu: convertSearchH(f63, int32(len(f63)), "63%"),
+					}, nil
 				}
 			}
 		}
@@ -122,26 +138,41 @@ func (server *Server) SearchTargetHobby(ctx context.Context, req *pb.SearchReque
 
 func checkHobby63(Cc []info.Canchangeinformation, myHobby info.Hobby) ([]info.Canchangeinformation, []info.Canchangeinformation) {
 	// if Max :: 62.5% to 75%
-	var C_step1_63 []info.Canchangeinformation
 	var C_step1_75 []info.Canchangeinformation
+	C_step1_63 := make([]info.Canchangeinformation, 0)
 	for i := 0; i < len(Cc); i++ {
-		for j := 0; j < len(myHobby.City); j++ {
-			if Cc[i].City == myHobby.City[j] {
-				for k := 0; k < len(myHobby.Speaklanguage); k++ {
-					if Cc[i].Speaklanguage[j] == myHobby.Speaklanguage[k] {
-						C_step1_75 = append(C_step1_75, Cc[i])
-						break
-					}
+		found := false
+		for j := 0; j < len(Cc[i].Speaklanguage); j++ {
+			for k := 0; k < len(myHobby.Speaklanguage); k++ {
+				if Cc[i].Speaklanguage[j] == myHobby.Speaklanguage[k] {
+					found = true
+					break
 				}
-				C_step1_63 = append(C_step1_63, Cc[i])
+			}
+			if found {
+				break
+			}
+		}
+		if found {
+			C_step1_63 = append(C_step1_63, Cc[i])
+		}
+	}
+
+	for i := 0; i < len(C_step1_63); i++ {
+		// City
+		for j := 0; j < len(myHobby.City); j++ {
+			if C_step1_63[i].City == myHobby.City[j] {
+				C_step1_75 = append(C_step1_75, C_step1_63[i])
+				break
 			}
 		}
 	}
+
 	return C_step1_75, C_step1_63
 }
 
 func checkHobby100(F_step2_75 []info.Fixinformation, myHobby info.Hobby) ([]int32, string, int32) {
-	var step2Result75 []info.Fixinformation
+	var step2Result87 []info.Fixinformation
 	var step2Result100 []info.Fixinformation
 	// 100% proccess
 	for i := 0; i < len(F_step2_75); i++ {
@@ -149,10 +180,11 @@ func checkHobby100(F_step2_75 []info.Fixinformation, myHobby info.Hobby) ([]int3
 			step2Result100 = append(step2Result100, F_step2_75[i])
 		}
 	}
+
 	// 75% Proccess
 	for i := 0; i < len(F_step2_75); i++ {
 		if F_step2_75[i].Age >= myHobby.Era && F_step2_75[i].Age < myHobby.Era+10 || F_step2_75[i].Gender == myHobby.Gender {
-			step2Result75 = append(step2Result75, F_step2_75[i])
+			step2Result87 = append(step2Result87, F_step2_75[i])
 		}
 	}
 
@@ -165,12 +197,12 @@ func checkHobby100(F_step2_75 []info.Fixinformation, myHobby info.Hobby) ([]int3
 		return step2Result100_id, "100%", int32(len(step2Result100_id))
 	}
 	// 75 % return
-	if len(step2Result75) > 0 {
+	if len(step2Result87) > 0 {
 		var step2Result75_id []int32
-		for i := range step2Result75 {
-			step2Result75_id = append(step2Result75_id, step2Result75[i].UserID)
+		for i := range step2Result87 {
+			step2Result75_id = append(step2Result75_id, step2Result87[i].UserID)
 		}
-		return step2Result75_id, "63%", int32(len(step2Result75_id))
+		return step2Result75_id, "75%", int32(len(step2Result75_id))
 	}
 
 	return nil, "Not Found", 0
