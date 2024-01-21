@@ -77,9 +77,24 @@ class _InformationEditState extends State<InformationEdit> {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
+<<<<<<< HEAD
       setState(() {
         _newimageFile![item] = File(pickedFile.path);
       });
+=======
+      final file = File(pickedFile.path);
+      final directory = await getApplicationDocumentsDirectory();
+      try {
+        final newFilePath = path.join(directory.path, '${DateTime.now().millisecondsSinceEpoch}.jpg');
+        await file.copy(newFilePath);
+
+        setState(() {
+          _newimageFile![item] = File(newFilePath);
+        });
+      } catch (e) {
+        print("Error: $e");
+      }
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
     }
   }
 
@@ -88,9 +103,24 @@ class _InformationEditState extends State<InformationEdit> {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
+<<<<<<< HEAD
       setState(() {
         _newimageFile!.add(File(pickedFile.path));
       });
+=======
+      final file = File(pickedFile.path);
+      final directory = await getApplicationDocumentsDirectory();
+      try {
+        final newFilePath = path.join(directory.path, '${DateTime.now().millisecondsSinceEpoch}.jpg');
+        await file.copy(newFilePath);
+
+        setState(() {
+          _newimageFile!.add(File(newFilePath));
+        });
+      } catch (e) {
+        print("Error: $e");
+      }
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
     }
   }
 
@@ -127,6 +157,36 @@ class _InformationEditState extends State<InformationEdit> {
 
   // Grpc
   void updateDataGrpcRequest(BuildContext context) async {
+<<<<<<< HEAD
+=======
+    // if (updateNickNameController.text.isEmpty) {
+    //   await showErrorDialog(context, "ニックネームはまだ入力されていません");
+    // } else if (updateCityController.text.isEmpty) {
+    //   await showErrorDialog(context, "居住地はまだ入力されていません");
+    // } else if (updateSexualController.text.isEmpty) {
+    //   await showErrorDialog(context, "性的指向はまだ入力されていません");
+    // } else if (updateHeightController.text.isEmpty) {
+    //   await showErrorDialog(context, " 身長 - cmはまだ入力されていません");
+    // } else if (!isPureNumber(updateHeightController.text)) {
+    //   await showErrorDialog(context, "入力した 身長 - cmは数字じゃありません");
+    // } else if (updateWeightController.text.isEmpty) {
+    //   await showErrorDialog(context, " 体重 - kgはまだ入力されていません");
+    // } else if (!isPureNumber(updateWeightController.text)) {
+    //   await showErrorDialog(context, "入力した 体重 - kgは数字じゃありません");
+    // } else if (updateSpeakLanguageController.text.isEmpty) {
+    //   await showErrorDialog(context, "学歴はまだ入力されていません");
+    // } else if (updateJobController.text.isEmpty) {
+    //   await showErrorDialog(context, "仕事はまだ入力されていません");
+    // } else if (!isPureNumber(updateAnnualSalaryController.text)) {
+    //   await showErrorDialog(context, "入力した年収は数字じゃありません");
+    // } else if (updateSociabilityController.text.isEmpty) {
+    //   await showErrorDialog(context, "社交力はまだ入力されていません");
+    // } else if (updateReligiousController.text.isEmpty) {
+    //   await showErrorDialog(context, "宗教はまだ入力されていません");
+    // } else if (updateIntroduceController.text.isEmpty) {
+    //   await showErrorDialog(context, "自己紹介はまだ入力されていません");
+    // } else {
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
     setState(() {
       showLoadDialog(context);
     });
@@ -151,6 +211,10 @@ class _InformationEditState extends State<InformationEdit> {
         introduce: updateIntroduceController.text,
       );
 
+<<<<<<< HEAD
+=======
+      print(request);
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
       await GrpcInfoService.client.updateCanChange(request);
       updateImage(context);
       await showLogoDialog(context, "個人情報もアップしました", false);
@@ -164,6 +228,10 @@ class _InformationEditState extends State<InformationEdit> {
       throw Exception("プロフィールの編集中にエラーが発生しました。");
     }
   }
+<<<<<<< HEAD
+=======
+  // }
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 
   @override
   Widget build(BuildContext context) {
@@ -372,6 +440,7 @@ class _InformationEditState extends State<InformationEdit> {
 
   /// Speak Language
   Widget _buildUpdateSpeakLanguageInput(BuildContext context) {
+<<<<<<< HEAD
     String hintL = "";
     for (int i = 0; i < widget.canData!.speaklanguage.length; i++) {
       if (i > 0) {
@@ -379,6 +448,9 @@ class _InformationEditState extends State<InformationEdit> {
       }
       hintL += widget.canData!.speaklanguage[i];
     }
+=======
+    String hintL = "${widget.canData!.speaklanguage[0]} , ${widget.canData!.speaklanguage[1]} , ${widget.canData!.speaklanguage[2]}";
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
     return CustomMultiSelectDropDownBar(
       itemArray: languages,
       onChanged: (value) {

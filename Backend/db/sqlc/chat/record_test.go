@@ -10,15 +10,29 @@ import (
 )
 
 const TId = 1
+<<<<<<< HEAD
 const TN = "u3"
 
 func TestCreateRecordTable(t *testing.T) {
 	for i := 402; i <= 611; i++ {
+=======
+<<<<<<< HEAD
+const TN = "u47"
+=======
+const TN = "u3"
+
+func TestCreateRecordTable(t *testing.T) {
+	for i := 2; i < 200; i++ {
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 		tablename := "u" + strconv.Itoa(int(i))
 		err := testChatQueries.CreateChatTable(context.Background(), tablename)
 		require.NoError(t, err)
 	}
 }
+<<<<<<< HEAD
+=======
+>>>>>>> parent of f9b9b1f (delete bug)
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 
 func TestCreateRecord(t *testing.T) {
 	CreateRandomRecord(t)

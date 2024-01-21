@@ -1,11 +1,17 @@
+<<<<<<< HEAD
 import 'dart:io';
 import 'dart:typed_data';
 
+=======
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_changeTarget.pb.dart';
+<<<<<<< HEAD
 import 'package:dating_your_date/pb/rpc_images.pb.dart';
+=======
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 import 'package:dating_your_date/pb/targetList.pb.dart';
 import 'package:dating_your_date/presentation/PayDone.dart';
 import 'package:dating_your_date/widgets/app_bar/Custom_App_bar.dart';
@@ -14,7 +20,10 @@ import 'package:dating_your_date/widgets/Custom_Loading.dart';
 import 'package:dating_your_date/widgets/button/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
+<<<<<<< HEAD
 import 'package:path_provider/path_provider.dart';
+=======
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 
 class DeleteTarget extends StatefulWidget {
   DeleteTarget({Key? key, this.oldData, this.newU, this.le, this.type}) : super(key: key);
@@ -30,6 +39,7 @@ class DeleteTarget extends StatefulWidget {
 
 class _DeleteTargetState extends State<DeleteTarget> {
   List<bool> isSelectedList = [false, false, false];
+<<<<<<< HEAD
   List<File> icon = [];
   @override
   void initState() {
@@ -77,6 +87,8 @@ class _DeleteTargetState extends State<DeleteTarget> {
     }
   }
 
+=======
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
   void changeUserRecord(BuildContext context) async {
     int tnum = 0;
     String? apiKeyS = await globalSession.read(key: 'SessionId');
@@ -181,8 +193,13 @@ class _DeleteTargetState extends State<DeleteTarget> {
         height: mediaH / 1.5,
         width: mediaW / 1.2,
         decoration: BoxDecoration(
+<<<<<<< HEAD
           borderRadius: BorderRadiusStyle.r30,
           image: DecorationImage(image: FileImage(icon[index]), fit: BoxFit.cover),
+=======
+          color: appTheme.grey500,
+          borderRadius: BorderRadiusStyle.r30,
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
           boxShadow: isSelectedList[index] ? [BoxShadow(color: Colors.red.withOpacity(1), blurRadius: 5, spreadRadius: 5)] : [],
         ),
       ),

@@ -125,7 +125,11 @@ class _LoverConditionState extends State<LoverCondition> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
+<<<<<<< HEAD
                   builder: (context) => DeleteTarget(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "恋人"),
+=======
+                  builder: (context) => DeleteTarget(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Lover"),
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
                   fullscreenDialog: true,
                 ),
               );
@@ -134,7 +138,11 @@ class _LoverConditionState extends State<LoverCondition> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
+<<<<<<< HEAD
                   builder: (context) => PayDone(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "恋人"),
+=======
+                  builder: (context) => PayDone(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Lover"),
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
                   fullscreenDialog: true,
                 ),
               );
@@ -152,7 +160,11 @@ class _LoverConditionState extends State<LoverCondition> {
             Navigator.push(
               context,
               MaterialPageRoute(
+<<<<<<< HEAD
                 builder: (context) => DeleteTarget(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "恋人"),
+=======
+                builder: (context) => DeleteTarget(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Lover"),
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
                 fullscreenDialog: true,
               ),
             );
@@ -161,7 +173,11 @@ class _LoverConditionState extends State<LoverCondition> {
             Navigator.push(
               context,
               MaterialPageRoute(
+<<<<<<< HEAD
                   builder: (context) => PayDone(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "恋人"),
+=======
+                  builder: (context) => PayDone(oldData: myResponse.tl, newU: rsp.resu.resultID[i], le: rsp.resu.len, type: "Lover"),
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
                   fullscreenDialog: true),
             );
             break;

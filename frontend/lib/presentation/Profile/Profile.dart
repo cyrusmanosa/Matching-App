@@ -260,8 +260,22 @@ class _ProfileState extends State<Profile> {
 
     Navigator.push(
       context,
+<<<<<<< HEAD:frontend/lib/presentation/Profile/Profile.dart
       MaterialPageRoute(
           builder: (context) => InformationEdit(canData: cCData, imgIcon: newAllMyImg, country: myFixData.country), fullscreenDialog: true),
+=======
+<<<<<<< HEAD:Flutter/lib/presentation/Profile/Profile.dart
+      MaterialPageRoute(builder: (context) => InformationEdit(canData: data, imgIcon: allimg), fullscreenDialog: true),
+=======
+      MaterialPageRoute(
+          builder: (context) => InformationEdit(
+                canData: cCData,
+                imgIcon: newAllMyImg,
+                country: myFixData.country,
+              ),
+          fullscreenDialog: true),
+>>>>>>> parent of f9b9b1f (delete bug):frontend/lib/presentation/Profile/Profile.dart
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a:Flutter/lib/presentation/Profile/Profile.dart
     );
   }
 
@@ -343,6 +357,33 @@ class _ProfileState extends State<Profile> {
 
 // images
   Widget _buildImages(BuildContext context, double mediaH, double mediaW) {
+<<<<<<< HEAD:frontend/lib/presentation/Profile/Profile.dart
+=======
+<<<<<<< HEAD:Flutter/lib/presentation/Profile/Profile.dart
+    return Container(
+      height: mediaH / 6.5,
+      padding: EdgeInsets.only(left: mediaW / 15),
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: [
+          _buildImageContainer(context, mediaH, mediaW, imgIcon1, 0),
+          if (imgIcon2.existsSync()) _buildImageContainer(context, mediaH, mediaW, imgIcon2, 1),
+          if (imgIcon3.existsSync()) _buildImageContainer(context, mediaH, mediaW, imgIcon3, 2),
+          if (imgIcon4.existsSync()) _buildImageContainer(context, mediaH, mediaW, imgIcon4, 3),
+          if (imgIcon5.existsSync()) _buildImageContainer(context, mediaH, mediaW, imgIcon5, 4),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: mediaW / 50),
+            decoration: BoxDecoration(color: Colors.grey, shape: BoxShape.circle),
+            child: IconButton(
+              onPressed: () {
+                onTapNextPage(context);
+              },
+              icon: Icon(Icons.add, size: mediaH / 15, color: appTheme.gray800),
+            ),
+          ),
+        ],
+=======
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a:Flutter/lib/presentation/Profile/Profile.dart
     return SizedBox(
       child: Container(
         height: mediaH / 6.5,
@@ -357,10 +398,18 @@ class _ProfileState extends State<Profile> {
             if (allMyImg.length >= 3) _buildImageContainer(context, mediaH, mediaW, allMyImg[2], 2),
             if (allMyImg.length >= 4) _buildImageContainer(context, mediaH, mediaW, allMyImg[3], 3),
             if (allMyImg.length >= 5) _buildImageContainer(context, mediaH, mediaW, allMyImg[4], 4),
+<<<<<<< HEAD:frontend/lib/presentation/Profile/Profile.dart
+=======
+
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a:Flutter/lib/presentation/Profile/Profile.dart
             // far right
             SizedBox(width: mediaW / 25),
           ],
         ),
+<<<<<<< HEAD:frontend/lib/presentation/Profile/Profile.dart
+=======
+>>>>>>> parent of f9b9b1f (delete bug):frontend/lib/presentation/Profile/Profile.dart
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a:Flutter/lib/presentation/Profile/Profile.dart
       ),
     );
   }
