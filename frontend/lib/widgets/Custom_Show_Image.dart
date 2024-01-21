@@ -1,8 +1,7 @@
-import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 
-Widget customImageDesign(BuildContext context, File img, double mediaH, double mediaW) {
+Widget customImageDesign(BuildContext context, Uint8List img, double mediaH, double mediaW) {
   return Container(
     margin: EdgeInsets.symmetric(horizontal: mediaW / 40),
     decoration: BoxDecoration(shape: BoxShape.circle),
@@ -11,7 +10,7 @@ Widget customImageDesign(BuildContext context, File img, double mediaH, double m
         width: mediaH / 6.5,
         height: mediaH / 6.5,
         decoration: BoxDecoration(color: Colors.transparent),
-        child: Image.file(img, fit: BoxFit.cover),
+        child: Image(image: MemoryImage(img), fit: BoxFit.cover),
       ),
     ),
   );

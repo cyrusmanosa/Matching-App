@@ -20,7 +20,6 @@ import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 
 class Profile extends StatefulWidget {
   Profile({Key? key}) : super(key: key);
@@ -35,7 +34,7 @@ class _ProfileState extends State<Profile> {
   File myImg3 = File('');
   File myImg4 = File('');
   File myImg5 = File('');
-  List<File> allMyImg = [];
+  List<Uint8List> allMyImg = [];
 
   String send = "";
   String changeTime = "";
@@ -49,108 +48,13 @@ class _ProfileState extends State<Profile> {
 
   /// all Manager
   Future<void> fetchData(BuildContext context) async {
-    await getChangeGrpcRequest(context);
-    await getImagesGrpcRequest(context);
-    await getMyselfInfoGrpcRequest(context);
-  }
-
-  /// get myself info
-  Future<void> getMyselfInfoGrpcRequest(BuildContext context) async {
-    String? apiKeyS = await globalSession.read(key: 'SessionId');
-    String? apiKeyU = await globalUserId.read(key: 'UserID');
-    final userid = int.tryParse(apiKeyU!);
-    // fix
-    try {
-      final fRequest = GetFixRequest(sessionID: apiKeyS, userID: userid);
-      final fResponse = await GrpcInfoService.client.getFix(fRequest);
-      setState(() {
-        myFixData = fResponse.fix;
-      });
-    } on GrpcError catch (e) {
-      await showErrorDialog(context, "Error: validatable input UserId in Fixinfo! at $e");
-      throw Exception("Error occurred while fetching Fixinfo.");
-    }
-    // Can Change
-    try {
-      final cRequest = GetCanChangeRequest(sessionID: apiKeyS, userID: userid);
-      final cResponse = await GrpcInfoService.client.getCanChange(cRequest);
-      setState(() {
-        cCData = cResponse.canChangeInfo;
-      });
-    } on GrpcError catch (e) {
-      await showErrorDialog(context, "Error: validatable input UserId in Fixinfo! at $e");
-      throw Exception("Error occurred while fetching Fixinfo.");
-    }
-  }
-
-  /// get myself Image
-  Future<void> getImagesGrpcRequest(BuildContext context) async {
-    String? apiKeyS = await globalSession.read(key: 'SessionId');
-    String? apiKeyU = await globalUserId.read(key: 'UserID');
-    final userid = int.tryParse(apiKeyU!);
-    try {
-      // image
-      final imgRequest = GetImagesRequest(sessionID: apiKeyS, userID: userid);
-      final imgResponse = await GrpcInfoService.client.getImages(imgRequest);
-      Directory documentsDirectory = await getApplicationDocumentsDirectory();
-
-      if (imgResponse.img.img1.isNotEmpty) {
-        String filePath1 = '${documentsDirectory.path}/img1.bin';
-        File file1 = File(filePath1);
-        Uint8List bytes1 = Uint8List.fromList(imgResponse.img.img1);
-        await file1.writeAsBytes(bytes1);
-        setState(() {
-          allMyImg.add(file1);
-        });
-      }
-
-      if (imgResponse.img.img2.isNotEmpty) {
-        String filePath2 = '${documentsDirectory.path}/img2.bin';
-        File file2 = File(filePath2);
-        Uint8List bytes2 = Uint8List.fromList(imgResponse.img.img2);
-        await file2.writeAsBytes(bytes2);
-        setState(() {
-          allMyImg.add(file2);
-        });
-      }
-
-      if (imgResponse.img.img3.isNotEmpty) {
-        String filePath3 = '${documentsDirectory.path}/img3.bin';
-        File file3 = File(filePath3);
-        Uint8List bytes3 = Uint8List.fromList(imgResponse.img.img3);
-        await file3.writeAsBytes(bytes3);
-        setState(() {
-          allMyImg.add(file3);
-        });
-      }
-
-      if (imgResponse.img.img4.isNotEmpty) {
-        String filePath4 = '${documentsDirectory.path}/img4.bin';
-        File file4 = File(filePath4);
-        Uint8List bytes4 = Uint8List.fromList(imgResponse.img.img4);
-        await file4.writeAsBytes(bytes4);
-        setState(() {
-          allMyImg.add(file4);
-        });
-      }
-
-      if (imgResponse.img.img5.isNotEmpty) {
-        String filePath5 = '${documentsDirectory.path}/img5.bin';
-        File file5 = File(filePath5);
-        Uint8List bytes5 = Uint8List.fromList(imgResponse.img.img5);
-        await file5.writeAsBytes(bytes5);
-        setState(() {
-          allMyImg.add(file5);
-        });
-      }
-    } on GrpcError {
-      await showErrorDialog(context, "エラー：検証可能な入力データ");
-      throw Exception("データの送信中にエラーが発生しました。");
-    }
+    getChangeGrpc(context);
+    getImagesGrpc(context);
+    getMyselfInfoGrpc(context);
   }
 
   /// get Myself Data
-  Future<void> getChangeGrpcRequest(BuildContext context) async {
+  Future<void> getChangeGrpc(BuildContext context) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
     String? apiKeyU = await globalUserId.read(key: 'UserID');
     final userid = int.tryParse(apiKeyU!);
@@ -180,6 +84,85 @@ class _ProfileState extends State<Profile> {
     }
   }
 
+  /// get myself Image
+  Future<void> getImagesGrpc(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
+    try {
+      // image
+      final imgRequest = GetImagesRequest(sessionID: apiKeyS, userID: userid);
+      final imgResponse = await GrpcInfoService.client.getImages(imgRequest);
+
+      if (imgResponse.img.img1.isNotEmpty) {
+        Uint8List bytes = Uint8List.fromList(imgResponse.img.img1);
+        setState(() {
+          allMyImg.add(bytes);
+        });
+      }
+
+      if (imgResponse.img.img2.isNotEmpty) {
+        Uint8List bytes = Uint8List.fromList(imgResponse.img.img2);
+        setState(() {
+          allMyImg.add(bytes);
+        });
+      }
+
+      if (imgResponse.img.img3.isNotEmpty) {
+        Uint8List bytes = Uint8List.fromList(imgResponse.img.img3);
+        setState(() {
+          allMyImg.add(bytes);
+        });
+      }
+
+      if (imgResponse.img.img4.isNotEmpty) {
+        Uint8List bytes = Uint8List.fromList(imgResponse.img.img4);
+        setState(() {
+          allMyImg.add(bytes);
+        });
+      }
+
+      if (imgResponse.img.img5.isNotEmpty) {
+        Uint8List bytes = Uint8List.fromList(imgResponse.img.img5);
+        setState(() {
+          allMyImg.add(bytes);
+        });
+      }
+    } on GrpcError {
+      await showErrorDialog(context, "エラー：検証可能な入力データ");
+      throw Exception("データの送信中にエラーが発生しました。");
+    }
+  }
+
+  /// get myself info
+  Future<void> getMyselfInfoGrpc(BuildContext context) async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
+    // fix
+    try {
+      final fRequest = GetFixRequest(sessionID: apiKeyS, userID: userid);
+      final fResponse = await GrpcInfoService.client.getFix(fRequest);
+      setState(() {
+        myFixData = fResponse.fix;
+      });
+    } on GrpcError catch (e) {
+      await showErrorDialog(context, "Error: validatable input UserId in Fixinfo! at $e");
+      throw Exception("Error occurred while fetching Fixinfo.");
+    }
+    // Can Change
+    try {
+      final cRequest = GetCanChangeRequest(sessionID: apiKeyS, userID: userid);
+      final cResponse = await GrpcInfoService.client.getCanChange(cRequest);
+      setState(() {
+        cCData = cResponse.canChangeInfo;
+      });
+    } on GrpcError catch (e) {
+      await showErrorDialog(context, "Error: validatable input UserId in Fixinfo! at $e");
+      throw Exception("Error occurred while fetching Fixinfo.");
+    }
+  }
+
 // update icon
   void updateIconGrpcRequest(BuildContext context, int item) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
@@ -191,8 +174,7 @@ class _ProfileState extends State<Profile> {
     try {
       switch (item) {
         case 1:
-          Uint8List bytes = allMyImg[1].readAsBytesSync();
-          List<int> img2B = bytes.toList();
+          List<int> img2B = allMyImg[1].toList();
           final updateImagesRequest = UpdateImagesRequest(
             sessionID: apiKeyS,
             img1: img2B,
@@ -204,8 +186,7 @@ class _ProfileState extends State<Profile> {
           await GrpcInfoService.client.updateImages(updateImagesRequest);
           break;
         case 2:
-          Uint8List bytes = allMyImg[2].readAsBytesSync();
-          List<int> img3B = bytes.toList();
+          List<int> img3B = allMyImg[2].toList();
           final updateImagesRequest = UpdateImagesRequest(
             sessionID: apiKeyS,
             img1: img3B,
@@ -217,8 +198,7 @@ class _ProfileState extends State<Profile> {
           await GrpcInfoService.client.updateImages(updateImagesRequest);
           break;
         case 3:
-          Uint8List bytes = allMyImg[3].readAsBytesSync();
-          List<int> img4B = bytes.toList();
+          List<int> img4B = allMyImg[3].toList();
           final updateImagesRequest = UpdateImagesRequest(
             sessionID: apiKeyS,
             img1: img4B,
@@ -230,8 +210,7 @@ class _ProfileState extends State<Profile> {
           await GrpcInfoService.client.updateImages(updateImagesRequest);
           break;
         case 4:
-          Uint8List bytes = allMyImg[4].readAsBytesSync();
-          List<int> img5B = bytes.toList();
+          List<int> img5B = allMyImg[4].toList();
           final updateImagesRequest = UpdateImagesRequest(
             sessionID: apiKeyS,
             img1: img5B,
@@ -252,7 +231,7 @@ class _ProfileState extends State<Profile> {
 
 // appBar icon to information edit
   void onTapNextPage(BuildContext context) {
-    List<File> newAllMyImg = [allMyImg[0]];
+    List<Uint8List> newAllMyImg = [allMyImg[0]];
     if (allMyImg.length >= 2) newAllMyImg.add(allMyImg[1]);
     if (allMyImg.length >= 3) newAllMyImg.add(allMyImg[2]);
     if (allMyImg.length >= 4) newAllMyImg.add(allMyImg[3]);
@@ -365,13 +344,13 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget _buildImageContainer(BuildContext context, double mediaH, double mediaW, File imageFile, int item) {
+  Widget _buildImageContainer(BuildContext context, double mediaH, double mediaW, Uint8List imageFile, int item) {
     return InkWell(
       onTap: () {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            content: Image.file(imageFile),
+            content: Image(image: MemoryImage(imageFile)),
             actions: [
               if (item != 0)
                 CustomOutlinedButton(
@@ -434,7 +413,7 @@ class _ProfileState extends State<Profile> {
               context: context,
               isScrollControlled: true,
               builder: (BuildContext context) {
-                List<File> newAllMyImg = [allMyImg[0]];
+                List<Uint8List> newAllMyImg = [allMyImg[0]];
                 if (allMyImg.length >= 2) newAllMyImg.add(allMyImg[1]);
                 if (allMyImg.length >= 3) newAllMyImg.add(allMyImg[2]);
                 if (allMyImg.length >= 4) newAllMyImg.add(allMyImg[3]);

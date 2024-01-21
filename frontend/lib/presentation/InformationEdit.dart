@@ -21,15 +21,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as path;
 import 'package:image/image.dart' as customImage;
 
 class InformationEdit extends StatefulWidget {
   InformationEdit({Key? key, this.canData, this.imgIcon, this.country}) : super(key: key);
   final String? country;
   final CanChange? canData;
-  final List<File>? imgIcon;
+  final List<Uint8List>? imgIcon;
 
   @override
   _InformationEditState createState() => _InformationEditState();
@@ -53,7 +51,7 @@ class _InformationEditState extends State<InformationEdit> {
   TextEditingController updateExperienceController = TextEditingController();
 
   String? oldPath;
-  List<File>? _newimageFile;
+  List<Uint8List>? _newimageFile;
   List<String> myLanguages = [];
   @override
   void initState() {
@@ -77,8 +75,12 @@ class _InformationEditState extends State<InformationEdit> {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
+      final file = File(pickedFile.path);
+      final bytes = await file.readAsBytes();
+      final uint8List = bytes.buffer.asUint8List();
+
       setState(() {
-        _newimageFile![item] = File(pickedFile.path);
+        _newimageFile![item] = uint8List;
       });
     }
   }
@@ -88,19 +90,22 @@ class _InformationEditState extends State<InformationEdit> {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
+      final file = File(pickedFile.path);
+      final bytes = await file.readAsBytes();
+      final uint8List = bytes.buffer.asUint8List();
+
       setState(() {
-        _newimageFile!.add(File(pickedFile.path));
+        _newimageFile![item] = uint8List;
       });
     }
   }
 
-  void updateImage(BuildContext context) async {
+  Future<void> updateImage(BuildContext context) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
     try {
       List<List<int>> imageBytesList = [];
       for (var imageFile in _newimageFile!) {
-        Uint8List bytes = await imageFile.readAsBytes();
-        final image = customImage.decodeImage(bytes);
+        final image = customImage.decodeImage(imageFile);
         final double ratio = image!.width / image.height;
         final int targetWidth = 1024;
         final int targetHeight = (targetWidth / ratio).round();
@@ -127,9 +132,6 @@ class _InformationEditState extends State<InformationEdit> {
 
   // Grpc
   void updateDataGrpcRequest(BuildContext context) async {
-    setState(() {
-      showLoadDialog(context);
-    });
     try {
       String? apiKeyS = await globalSession.read(key: 'SessionId');
       final request = UpdateCanChangeRequest(
@@ -150,12 +152,14 @@ class _InformationEditState extends State<InformationEdit> {
         religious: updateReligiousController.text == "" ? widget.canData!.religious : updateReligiousController.text,
         introduce: updateIntroduceController.text,
       );
-
+      setState(() {
+        showLoadDialog(context);
+      });
+      Future.delayed(Duration(seconds: 1));
       await GrpcInfoService.client.updateCanChange(request);
       updateImage(context);
       await showLogoDialog(context, "個人情報もアップしました", false);
-      Future.delayed(Duration(seconds: 1), () {
-        Navigator.pop(context);
+      Future.delayed(Duration(seconds: 2), () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => ContainerScreen(number: 3)));
       });
     } on GrpcError {
@@ -316,7 +320,7 @@ class _InformationEditState extends State<InformationEdit> {
     );
   }
 
-  Widget _buildImageContainer(BuildContext context, double mediaH, double mediaW, File imageFile, int item) {
+  Widget _buildImageContainer(BuildContext context, double mediaH, double mediaW, Uint8List imageFile, int item) {
     return InkWell(
       onTap: () {
         _uploadPhotoToNewFile(item);

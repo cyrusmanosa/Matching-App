@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:dating_your_date/pb/canChange.pb.dart';
 import 'package:dating_your_date/pb/fix.pb.dart';
 import 'package:dating_your_date/presentation/InformationEdit.dart';
@@ -12,7 +13,7 @@ class Information extends StatefulWidget {
   Information({Key? key, this.canData, this.fixData, this.imgIcon}) : super(key: key);
 
   final CanChange? canData;
-  final List<File>? imgIcon;
+  final List<Uint8List>? imgIcon;
   final Fix? fixData;
 
   @override

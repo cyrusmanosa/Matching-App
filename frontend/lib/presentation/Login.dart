@@ -89,7 +89,7 @@ class _LoginState extends State<Login> {
                   SizedBox(height: mediaH / 35),
 
                   // ID
-                  CustomInputBar(titleName: "ユーザーID:", backendPart: _buildEmailInput(context)),
+                  CustomInputBar(titleName: "メールアドレス:", backendPart: _buildEmailInput(context)),
                   SizedBox(height: mediaH / 80),
 
                   // Password

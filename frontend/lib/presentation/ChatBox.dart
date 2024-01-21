@@ -96,10 +96,11 @@ class _ChatBoxState extends State<ChatBox> {
         media: newMsgTextController.text,
       );
       await GrpcChatService.client.createChatRecord(targetRequest);
-      newMsgTextController = TextEditingController();
     } on GrpcError {
       await showErrorDialog(context, "エラー：検証可能なメッセージの送信 at myself");
       throw Exception("データの取得中にエラーが発生しました。");
+    } finally {
+      newMsgTextController = TextEditingController();
     }
   }
 

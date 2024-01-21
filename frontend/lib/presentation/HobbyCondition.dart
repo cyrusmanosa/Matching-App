@@ -96,7 +96,9 @@ class _HobbyConditionState extends State<HobbyCondition> {
         checkTargetList(context, rsp);
       } else {
         Navigator.pop(context);
-        showErrorDialog(context, "新しい条件で合わせるパーセントは0%です。");
+        await showLogoDialog(context, "新しい条件で合わせるパーセントは0%です。", false);
+        await Future.delayed(Duration(seconds: 2));
+        Navigator.pop(context);
       }
     } on GrpcError {
       await showErrorDialog(context, "検索エンジニアリングにエラーがあります。");
@@ -148,7 +150,9 @@ class _HobbyConditionState extends State<HobbyCondition> {
               checkTargetUserTable(context);
             }
             Navigator.pop(context);
-            showErrorDialog(context, "新しい条件で合わせるパーセントは0%です。");
+            await showLogoDialog(context, "新しい条件で合わせるパーセントは0%です。", false);
+            await Future.delayed(Duration(seconds: 2));
+            Navigator.pop(context);
           }
         } on GrpcError {
           if (myResponse.tl.target1ID != 0 && myResponse.tl.target2ID != 0 && myResponse.tl.target3ID != 0) {
@@ -186,7 +190,9 @@ class _HobbyConditionState extends State<HobbyCondition> {
           }
 
           if (sID == 2) {
-            showErrorDialog(context, "新しい条件で合わせるパーセントは0%です。");
+            await showLogoDialog(context, "新しい条件で合わせるパーセントは0%です。", false);
+            await Future.delayed(Duration(seconds: 2));
+            Navigator.pop(context);
             break;
           }
         }

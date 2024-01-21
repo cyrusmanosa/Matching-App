@@ -41,9 +41,9 @@ class _HomeState extends State<Home> {
     Targetlist allTarget = await getTargetListGrpc(context);
     if (check == false) {
       allTargetId = [allTarget.target1ID, allTarget.target2ID, allTarget.target3ID];
-      for (int i = 0; i < 3; i++) {
-        getTargetImageGrpc(context, allTargetId[i]);
-      }
+
+      getTargetImageGrpc(context, allTargetId);
+
       getTargetDataGrpc(context, allTargetId);
     }
   }
@@ -63,53 +63,54 @@ class _HomeState extends State<Home> {
     }
   }
 
-  /// get Target icon
-  Future<void> getTargetImageGrpc(BuildContext context, int tid) async {
+  Future<void> getTargetImageGrpc(BuildContext context, List<int> tid) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
-    List<Uint8List> one = [];
-    if (tid != 0) {
-      final imgData = await GrpcInfoService.client.getImages(GetImagesRequest(sessionID: apiKeyS, userID: tid));
-      for (int j = 0; j < 5; j++) {
-        switch (j) {
-          case 0:
-            Uint8List imgBytes = Uint8List.fromList(imgData.img.img1);
-            setState(() {
-              allicon.add(imgBytes);
-              one.add(imgBytes);
-            });
-            break;
-          case 1:
-            if (imgData.img.img2.isNotEmpty) {
-              Uint8List imgBytes = Uint8List.fromList(imgData.img.img2);
+    for (int i = 0; i < tid.length; i++) {
+      if (tid[i] != 0) {
+        final imgData = await GrpcInfoService.client.getImages(GetImagesRequest(sessionID: apiKeyS, userID: tid[i]));
+        List<Uint8List> one = [];
+        for (int j = 0; j < 5; j++) {
+          switch (j) {
+            case 0:
+              Uint8List imgBytes = Uint8List.fromList(imgData.img.img1);
               setState(() {
+                allicon.add(imgBytes);
                 one.add(imgBytes);
               });
-            }
-            break;
-          case 2:
-            if (imgData.img.img3.isNotEmpty) {
-              Uint8List imgBytes = Uint8List.fromList(imgData.img.img3);
-              setState(() {
-                one.add(imgBytes);
-              });
-            }
-            break;
-          case 3:
-            if (imgData.img.img4.isNotEmpty) {
-              Uint8List imgBytes = Uint8List.fromList(imgData.img.img4);
-              setState(() {
-                one.add(imgBytes);
-              });
-            }
-            break;
-          case 4:
-            if (imgData.img.img5.isNotEmpty) {
-              Uint8List imgBytes = Uint8List.fromList(imgData.img.img5);
-              setState(() {
-                one.add(imgBytes);
-              });
-            }
-            break;
+              break;
+            case 1:
+              if (imgData.img.img2.isNotEmpty) {
+                Uint8List imgBytes = Uint8List.fromList(imgData.img.img2);
+                setState(() {
+                  one.add(imgBytes);
+                });
+              }
+              break;
+            case 2:
+              if (imgData.img.img3.isNotEmpty) {
+                Uint8List imgBytes = Uint8List.fromList(imgData.img.img3);
+                setState(() {
+                  one.add(imgBytes);
+                });
+              }
+              break;
+            case 3:
+              if (imgData.img.img4.isNotEmpty) {
+                Uint8List imgBytes = Uint8List.fromList(imgData.img.img4);
+                setState(() {
+                  one.add(imgBytes);
+                });
+              }
+              break;
+            case 4:
+              if (imgData.img.img5.isNotEmpty) {
+                Uint8List imgBytes = Uint8List.fromList(imgData.img.img5);
+                setState(() {
+                  one.add(imgBytes);
+                });
+              }
+              break;
+          }
         }
         setState(() {
           allTargetImage.add(one);
