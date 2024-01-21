@@ -1,5 +1,8 @@
 import 'dart:io';
+<<<<<<< HEAD
 import 'dart:typed_data';
+=======
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 import 'package:flutter/material.dart';
 
 Widget customImageDesign(BuildContext context, File img, double mediaH, double mediaW) {
@@ -16,6 +19,7 @@ Widget customImageDesign(BuildContext context, File img, double mediaH, double m
     ),
   );
 }
+<<<<<<< HEAD
 
 Widget customImageDesignImage(BuildContext context, Uint8List img, double mediaH, double mediaW) {
   return Container(
@@ -30,3 +34,5 @@ Widget customImageDesignImage(BuildContext context, Uint8List img, double mediaH
     ),
   );
 }
+=======
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a

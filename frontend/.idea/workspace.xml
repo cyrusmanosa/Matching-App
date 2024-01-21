@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d6d2fac3-ce18-48d7-8657-fce2e2788d1a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Backend/Dbdiagram/apps_info.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/Dbdiagram/apps_info.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/api/accompany.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/api/canChangeInfo.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/api/changeTarget.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/api/checkMailCode.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/api/complaint.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/api/fixInfo.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/api/hobby.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/api/image.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/api/lover.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/api/main_test.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/api/middleware.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/api/middleware_test.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/api/routes.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/api/targetList.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/migration/info/000001_info_schema.down.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/migration/info/000001_info_schema.down.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/migration/info/000001_info_schema.up.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/migration/info/000001_info_schema.up.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/migration/info/000002_info_schema.down.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/migration/info/000002_info_schema.down.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/migration/info/000002_init_info_schema.up.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/migration/info/000002_init_info_schema.up.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/migration/info/000003_add_sessions.up.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/migration/info/000003_add_sessions.up.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/query/chat/record.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/query/chat/record.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/query/info/accompanyrequest.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/query/info/hobbyrequest.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/query/info/image.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/query/info/image.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/query/info/loverrequest.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/query/info/session.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/query/info/session.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/query/info/targetlist.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/query/info/targetlist.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/sqlc/chat/querier.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/sqlc/chat/querier.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/sqlc/chat/record.sql.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/sqlc/chat/record.sql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/sqlc/info/accompanyrequest.sql.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/sqlc/info/accompanyrequest_test.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/sqlc/info/canchangeinformation.sql.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/sqlc/info/canchangeinformation.sql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/sqlc/info/changetargetuser.sql.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/sqlc/info/changetargetuser.sql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/sqlc/info/complaint.sql.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/sqlc/info/complaint.sql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/sqlc/info/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/sqlc/info/db.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/sqlc/info/fixinformation.sql.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/sqlc/info/fixinformation.sql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/sqlc/info/hobbyrequest.sql.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/sqlc/info/hobbyrequest_test.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/sqlc/info/image.sql.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/sqlc/info/image.sql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/sqlc/info/image_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/sqlc/info/image_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/sqlc/info/loverrequest.sql.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/sqlc/info/loverrequest_test.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/sqlc/info/models.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/sqlc/info/models.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/sqlc/info/payment.sql.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/sqlc/info/payment.sql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/sqlc/info/querier.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/sqlc/info/querier.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/sqlc/info/session.sql.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/sqlc/info/session.sql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/sqlc/info/targetlist.sql.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/sqlc/info/targetlist.sql.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/db/sqlc/info/targetlist_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/db/sqlc/info/targetlist_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/doc/db.dbml" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/doc/db.dbml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/doc/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/doc/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/doc/swagger/Backend.swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/doc/swagger/Backend.swagger.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/gapi/converter.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/gapi/converter.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/gapi/rpc_accompany.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/gapi/rpc_accompany.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/gapi/rpc_changeTarget.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/gapi/rpc_changeTarget.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/gapi/rpc_chatRecord.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/gapi/rpc_chatRecord.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/gapi/rpc_fix.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/gapi/rpc_fix.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/gapi/rpc_hobby.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/gapi/rpc_hobby.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/gapi/rpc_images.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/gapi/rpc_images.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/gapi/rpc_login.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/gapi/rpc_login.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/gapi/rpc_lover.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/gapi/rpc_lover.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/gapi/rpc_password.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/gapi/rpc_password.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/gapi/rpc_targetlist.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/gapi/rpc_targetlist.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/pb/accompany.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/pb/accompany.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/pb/hobby.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/pb/hobby.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/pb/images.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/pb/images.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/pb/lover.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/pb/lover.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/pb/rpc_accompany.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/pb/rpc_accompany.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/pb/rpc_chatRecord.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/pb/rpc_chatRecord.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/pb/rpc_fix.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/pb/rpc_fix.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/pb/rpc_hobby.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/pb/rpc_hobby.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/pb/rpc_images.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/pb/rpc_images.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/pb/rpc_lover.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/pb/rpc_lover.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/pb/rpc_targetList.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/pb/rpc_targetList.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/pb/service_Backend.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/pb/service_Backend.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/pb/service_Backend.pb.gw.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/pb/service_Backend.pb.gw.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/pb/service_Backend_grpc.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/pb/service_Backend_grpc.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/pb/targetList.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/pb/targetList.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/proto/accompany.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/proto/accompany.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/proto/hobby.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/proto/hobby.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/proto/images.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/proto/images.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/proto/lover.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/proto/lover.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/proto/rpc_accompany.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/proto/rpc_accompany.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/proto/rpc_canChange.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/proto/rpc_canChange.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/proto/rpc_changeTarget.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/proto/rpc_changeTarget.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/proto/rpc_chatRecord.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/proto/rpc_chatRecord.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/proto/rpc_fix.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/proto/rpc_fix.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/proto/rpc_hobby.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/proto/rpc_hobby.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/proto/rpc_images.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/proto/rpc_images.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/proto/rpc_lover.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/proto/rpc_lover.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/proto/rpc_targetList.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/proto/rpc_targetList.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/proto/service_Backend.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/proto/service_Backend.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/proto/targetList.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/proto/targetList.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/util/CreateQR.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/util/random.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/util/random.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/util/sendMail.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/util/sendMail.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Flutter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Flutter.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/123/1704872074726.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/123/1704872437545.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/accompany.pb.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/accompany.pb.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/accompany.pbjson.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/accompany.pbjson.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/hobby.pb.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/hobby.pb.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/hobby.pbjson.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/hobby.pbjson.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/images.pb.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/images.pb.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/images.pbjson.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/images.pbjson.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/lover.pb.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/lover.pb.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/lover.pbjson.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/lover.pbjson.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/rpc_accompany.pb.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/rpc_accompany.pb.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/rpc_accompany.pbjson.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/rpc_accompany.pbjson.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/rpc_chatRecord.pb.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/rpc_chatRecord.pb.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/rpc_chatRecord.pbjson.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/rpc_chatRecord.pbjson.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/rpc_fix.pb.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/rpc_fix.pb.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/rpc_fix.pbjson.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/rpc_fix.pbjson.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/rpc_hobby.pb.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/rpc_hobby.pb.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/rpc_hobby.pbjson.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/rpc_hobby.pbjson.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/rpc_images.pb.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/rpc_images.pb.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/rpc_images.pbjson.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/rpc_images.pbjson.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/rpc_lover.pb.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/rpc_lover.pb.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/rpc_lover.pbjson.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/rpc_lover.pbjson.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/rpc_targetList.pb.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/rpc_targetList.pb.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/rpc_targetList.pbjson.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/rpc_targetList.pbjson.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/service_Backend.pbgrpc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/service_Backend.pbgrpc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/targetList.pb.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/targetList.pb.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pb/targetList.pbjson.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pb/targetList.pbjson.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/AccompanyConditionRepair.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/Chat/Chat.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/Chat/Chat.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/Chat/widgets/conversationList.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/Chat/widgets/conversationList.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/ChatBox.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/ChatBox.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/DeleteTarget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/DeleteTarget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/FixInformation.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/FixInformation.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/HobbyConditionRepair.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/Home/Home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/Home/Home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/Home/widgets/HomeUserSide.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/Home/widgets/HomeUserSide.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/Login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/Login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/LoverConditionRepair.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/NewPassword_Done.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/NewPassword_Setup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/NewPassword_Setup.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/PasswordReset_Email.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/PasswordReset_Email.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/Password_Setup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/Password_Setup.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/Profile/Profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/Profile/Profile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/ProfileEdit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/ProfileEdit.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/SideBar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/SideBar.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/SignUp_EmailConfirmation.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/SignUp_EmailConfirmation.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/Target/Target.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/Target/Target.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/appNavigationScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/appNavigationScreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/accompany.proto" beforeDir="false" afterPath="$PROJECT_DIR$/lib/proto/accompany.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/hobby.proto" beforeDir="false" afterPath="$PROJECT_DIR$/lib/proto/hobby.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/images.proto" beforeDir="false" afterPath="$PROJECT_DIR$/lib/proto/images.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/lover.proto" beforeDir="false" afterPath="$PROJECT_DIR$/lib/proto/lover.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/rpc_accompany.proto" beforeDir="false" afterPath="$PROJECT_DIR$/lib/proto/rpc_accompany.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/rpc_canChange.proto" beforeDir="false" afterPath="$PROJECT_DIR$/lib/proto/rpc_canChange.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/rpc_changeTarget.proto" beforeDir="false" afterPath="$PROJECT_DIR$/lib/proto/rpc_changeTarget.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/rpc_chatRecord.proto" beforeDir="false" afterPath="$PROJECT_DIR$/lib/proto/rpc_chatRecord.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/rpc_fix.proto" beforeDir="false" afterPath="$PROJECT_DIR$/lib/proto/rpc_fix.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/rpc_hobby.proto" beforeDir="false" afterPath="$PROJECT_DIR$/lib/proto/rpc_hobby.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/rpc_images.proto" beforeDir="false" afterPath="$PROJECT_DIR$/lib/proto/rpc_images.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/rpc_lover.proto" beforeDir="false" afterPath="$PROJECT_DIR$/lib/proto/rpc_lover.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/rpc_targetList.proto" beforeDir="false" afterPath="$PROJECT_DIR$/lib/proto/rpc_targetList.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/service_Backend.proto" beforeDir="false" afterPath="$PROJECT_DIR$/lib/proto/service_Backend.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/proto/targetList.proto" beforeDir="false" afterPath="$PROJECT_DIR$/lib/proto/targetList.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/routes/app_routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/routes/app_routes.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/theme/app_decoration.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/theme/app_decoration.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/theme/custom_text_style.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/theme/custom_text_style.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/Custom_IconLogoBox.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/Custom_IconLogoBox.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/custom_bottom_bar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/custom_bottom_bar.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Flutter/Flutter-Debug.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Flutter/Flutter-Release.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Podfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner/AppDelegate.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_1024.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_128.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_256.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner/Base.lproj/MainMenu.xib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner/Configs/AppInfo.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner/Configs/Debug.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner/Configs/Release.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner/Configs/Warnings.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner/DebugProfile.entitlements" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner/MainFlutterWindow.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Runner/Release.entitlements" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/RunnerTests/RunnerTests.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/favicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/icons/Icon-192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/icons/Icon-512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/icons/Icon-maskable-192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/icons/Icon-maskable-512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/manifest.json" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectId" id="2Zd3ZurcZlTCtn6W3ebte1kXat5" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;v0110&quot;,
+    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/cyrusman/Desktop/ProgrammingLearning/Apps/Flutter&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDK Location&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;scala_project_settings_configurable.last_selected_tab_index&quot;: &quot;0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
+      <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d6d2fac3-ce18-48d7-8657-fce2e2788d1a" name="Changes" comment="" />
+      <created>1702738188120</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1702738188120</updated>
+    </task>
+    <servers />
+  </component>
+</project>

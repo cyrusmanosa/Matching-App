@@ -1499,6 +1499,7 @@ func local_request_Information_GetUserID_0(ctx context.Context, marshaler runtim
 
 }
 
+<<<<<<< HEAD
 var (
 	filter_Information_SearchTargetHobby_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 )
@@ -1511,6 +1512,19 @@ func request_Information_SearchTargetHobby_0(ctx context.Context, marshaler runt
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Information_SearchTargetHobby_0); err != nil {
+=======
+<<<<<<< HEAD
+=======
+func request_Information_SearchTargetHobby_0(ctx context.Context, marshaler runtime.Marshaler, client InformationClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq SearchRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1520,6 +1534,7 @@ func request_Information_SearchTargetHobby_0(ctx context.Context, marshaler runt
 }
 
 func local_request_Information_SearchTargetHobby_0(ctx context.Context, marshaler runtime.Marshaler, server InformationServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+<<<<<<< HEAD
 	var protoReq SearchRequestH
 	var metadata runtime.ServerMetadata
 
@@ -1527,6 +1542,16 @@ func local_request_Information_SearchTargetHobby_0(ctx context.Context, marshale
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Information_SearchTargetHobby_0); err != nil {
+=======
+	var protoReq SearchRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1535,6 +1560,7 @@ func local_request_Information_SearchTargetHobby_0(ctx context.Context, marshale
 
 }
 
+<<<<<<< HEAD
 var (
 	filter_Information_SearchTargetLover_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 )
@@ -1547,6 +1573,17 @@ func request_Information_SearchTargetLover_0(ctx context.Context, marshaler runt
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Information_SearchTargetLover_0); err != nil {
+=======
+func request_Information_SearchTargetLover_0(ctx context.Context, marshaler runtime.Marshaler, client InformationClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq SearchRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1556,6 +1593,7 @@ func request_Information_SearchTargetLover_0(ctx context.Context, marshaler runt
 }
 
 func local_request_Information_SearchTargetLover_0(ctx context.Context, marshaler runtime.Marshaler, server InformationServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+<<<<<<< HEAD
 	var protoReq SearchRequestL
 	var metadata runtime.ServerMetadata
 
@@ -1563,6 +1601,16 @@ func local_request_Information_SearchTargetLover_0(ctx context.Context, marshale
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Information_SearchTargetLover_0); err != nil {
+=======
+	var protoReq SearchRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1571,6 +1619,7 @@ func local_request_Information_SearchTargetLover_0(ctx context.Context, marshale
 
 }
 
+<<<<<<< HEAD
 var (
 	filter_Information_SearchTargetAccompany_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 )
@@ -1583,6 +1632,17 @@ func request_Information_SearchTargetAccompany_0(ctx context.Context, marshaler 
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Information_SearchTargetAccompany_0); err != nil {
+=======
+func request_Information_SearchTargetAccompany_0(ctx context.Context, marshaler runtime.Marshaler, client InformationClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq SearchRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1592,6 +1652,7 @@ func request_Information_SearchTargetAccompany_0(ctx context.Context, marshaler 
 }
 
 func local_request_Information_SearchTargetAccompany_0(ctx context.Context, marshaler runtime.Marshaler, server InformationServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+<<<<<<< HEAD
 	var protoReq SearchRequestA
 	var metadata runtime.ServerMetadata
 
@@ -1599,6 +1660,16 @@ func local_request_Information_SearchTargetAccompany_0(ctx context.Context, mars
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Information_SearchTargetAccompany_0); err != nil {
+=======
+	var protoReq SearchRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1607,6 +1678,10 @@ func local_request_Information_SearchTargetAccompany_0(ctx context.Context, mars
 
 }
 
+<<<<<<< HEAD
+=======
+>>>>>>> parent of f9b9b1f (delete bug)
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 func request_Chat_CreateChatTable_0(ctx context.Context, marshaler runtime.Marshaler, client ChatClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq CreateChatTableRequest
 	var metadata runtime.ServerMetadata
@@ -2979,7 +3054,13 @@ func RegisterInformationHandlerServer(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
+<<<<<<< HEAD
 	mux.Handle("GET", pattern_Information_SearchTargetHobby_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+=======
+<<<<<<< HEAD
+=======
+	mux.Handle("POST", pattern_Information_SearchTargetHobby_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -3004,7 +3085,11 @@ func RegisterInformationHandlerServer(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
+<<<<<<< HEAD
 	mux.Handle("GET", pattern_Information_SearchTargetLover_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+=======
+	mux.Handle("POST", pattern_Information_SearchTargetLover_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -3029,7 +3114,11 @@ func RegisterInformationHandlerServer(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
+<<<<<<< HEAD
 	mux.Handle("GET", pattern_Information_SearchTargetAccompany_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+=======
+	mux.Handle("POST", pattern_Information_SearchTargetAccompany_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -3037,7 +3126,11 @@ func RegisterInformationHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
+<<<<<<< HEAD
 		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Information/SearchTargetAccompany", runtime.WithHTTPPathPattern("/v1/Search_accompany"))
+=======
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/pb.Information/SearchTargetAccompany", runtime.WithHTTPPathPattern("/v1/Search_Accompany"))
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3054,6 +3147,10 @@ func RegisterInformationHandlerServer(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
+<<<<<<< HEAD
+=======
+>>>>>>> parent of f9b9b1f (delete bug)
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 	return nil
 }
 
@@ -4253,7 +4350,13 @@ func RegisterInformationHandlerClient(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
+<<<<<<< HEAD
 	mux.Handle("GET", pattern_Information_SearchTargetHobby_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+=======
+<<<<<<< HEAD
+=======
+	mux.Handle("POST", pattern_Information_SearchTargetHobby_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -4275,7 +4378,11 @@ func RegisterInformationHandlerClient(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
+<<<<<<< HEAD
 	mux.Handle("GET", pattern_Information_SearchTargetLover_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+=======
+	mux.Handle("POST", pattern_Information_SearchTargetLover_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -4297,13 +4404,21 @@ func RegisterInformationHandlerClient(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
+<<<<<<< HEAD
 	mux.Handle("GET", pattern_Information_SearchTargetAccompany_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+=======
+	mux.Handle("POST", pattern_Information_SearchTargetAccompany_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
+<<<<<<< HEAD
 		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Information/SearchTargetAccompany", runtime.WithHTTPPathPattern("/v1/Search_accompany"))
+=======
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/pb.Information/SearchTargetAccompany", runtime.WithHTTPPathPattern("/v1/Search_Accompany"))
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4319,6 +4434,10 @@ func RegisterInformationHandlerClient(ctx context.Context, mux *runtime.ServeMux
 
 	})
 
+<<<<<<< HEAD
+=======
+>>>>>>> parent of f9b9b1f (delete bug)
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 	return nil
 }
 
@@ -4406,12 +4525,22 @@ var (
 	pattern_Information_GetPayment_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Get_Payment"}, ""))
 
 	pattern_Information_GetUserID_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Get_UserID"}, ""))
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 
 	pattern_Information_SearchTargetHobby_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Search_hobby"}, ""))
 
 	pattern_Information_SearchTargetLover_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Search_lover"}, ""))
 
+<<<<<<< HEAD
 	pattern_Information_SearchTargetAccompany_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Search_accompany"}, ""))
+=======
+	pattern_Information_SearchTargetAccompany_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "Search_Accompany"}, ""))
+>>>>>>> parent of f9b9b1f (delete bug)
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 )
 
 var (

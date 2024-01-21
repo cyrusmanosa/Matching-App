@@ -297,6 +297,7 @@ service Information {
             get: "/v1/Get_UserID"
         };
     }
+<<<<<<< HEAD
 /// -------- Search --------------
     rpc SearchTargetHobby(SearchRequestH) returns (SearchResponseH) {
         option (google.api.http) = {
@@ -313,6 +314,30 @@ service Information {
             get: "/v1/Search_accompany"
         };
     }
+=======
+<<<<<<< HEAD
+=======
+/// -------- Search --------------
+    rpc SearchTargetHobby(SearchRequest) returns (SearchResponse){
+        option (google.api.http) = {
+            post: "/v1/Search_hobby"
+            body: "*"
+        };
+    }
+    rpc SearchTargetLover(SearchRequest) returns (SearchResponse){
+        option (google.api.http) = {
+            post: "/v1/Search_lover"
+            body: "*"
+        };
+    }
+    rpc SearchTargetAccompany(SearchRequest) returns (SearchResponse){
+        option (google.api.http) = {
+            post: "/v1/Search_Accompany"
+            body: "*"
+        };
+    }
+>>>>>>> parent of f9b9b1f (delete bug)
+>>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 }
 
 /// -------- Chat --------------
