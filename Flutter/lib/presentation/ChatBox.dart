@@ -100,6 +100,7 @@ class _ChatBoxState extends State<ChatBox> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: _buildHeader(context, mediaW),
+<<<<<<< HEAD:Flutter/lib/presentation/ChatBox.dart
       drawer: Drawer(
           child: SideBar(
         name: widget.name,
@@ -129,6 +130,42 @@ class _ChatBoxState extends State<ChatBox> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadiusStyle.r30,
                               color: (data[index].roleType == "receiver" ? Colors.grey.shade200 : Colors.blue[200]),
+=======
+      drawer: Drawer(child: SideBar(name: widget.name, imageUrl: widget.imageUrl, purpose: purpose)),
+      resizeToAvoidBottomInset: true,
+      backgroundColor: appTheme.bgColor,
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: FutureBuilder<List<ChatRecordNoID>>(
+          future: getChatRecords(context),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final data = snapshot.data!;
+              return SingleChildScrollView(
+                reverse: true,
+                child: Column(
+                  children: [
+                    ListView.builder(
+                      itemCount: data.length,
+                      shrinkWrap: true,
+                      padding: EdgeInsets.symmetric(vertical: mediaH / 100),
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return Container(
+                          padding: EdgeInsets.symmetric(vertical: mediaH / 150, horizontal: mediaW / 30),
+                          child: Align(
+                            alignment: (data[index].roleType == "receiver" ? Alignment.bottomLeft : Alignment.bottomRight),
+                            child: Container(
+                              constraints: BoxConstraints(maxWidth: mediaW / 1.5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadiusStyle.r30,
+                                color: (data[index].roleType == "receiver" ? Colors.grey.shade200 : Colors.blue[200]),
+                              ),
+                              padding: EdgeInsets.symmetric(vertical: mediaH / 100, horizontal: mediaW / 30),
+                              child: Text(data[index].media, style: TextStyle(fontSize: mediaH / 60)),
+>>>>>>> parent of f9b9b1f (delete bug):frontend/lib/presentation/ChatBox.dart
                             ),
                             padding: EdgeInsets.symmetric(vertical: mediaH / 100, horizontal: mediaW / 30),
                             child: Text(data[index].media, style: TextStyle(fontSize: mediaH / 60)),

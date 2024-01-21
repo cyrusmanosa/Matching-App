@@ -1338,6 +1338,106 @@
         ]
       }
     },
+<<<<<<< HEAD
+=======
+    "/v1/Search_Accompany": {
+      "post": {
+        "operationId": "Information_SearchTargetAccompany",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbSearchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbSearchRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Search_hobby": {
+      "post": {
+        "summary": "/ -------- Search --------------",
+        "operationId": "Information_SearchTargetHobby",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbSearchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbSearchRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+    "/v1/Search_lover": {
+      "post": {
+        "operationId": "Information_SearchTargetLover",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pbSearchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pbSearchRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Information"
+        ]
+      }
+    },
+>>>>>>> parent of f9b9b1f (delete bug)
     "/v1/Sign_Up": {
       "post": {
         "operationId": "Information_CheckEmail",
@@ -2650,6 +2750,29 @@
         }
       }
     },
+<<<<<<< HEAD
+=======
+    "pbSearchRequest": {
+      "type": "object",
+      "properties": {
+        "SessionID": {
+          "type": "string"
+        }
+      }
+    },
+    "pbSearchResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "rank": {
+          "type": "string"
+        }
+      }
+    },
+>>>>>>> parent of f9b9b1f (delete bug)
     "pbSendEmailRequest": {
       "type": "object",
       "properties": {

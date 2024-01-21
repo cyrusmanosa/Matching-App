@@ -121,6 +121,13 @@ type InformationClient interface {
 	GetPayment(ctx context.Context, in *GetPaymentRequest, opts ...grpc.CallOption) (*GetPaymentResponse, error)
 	// Session
 	GetUserID(ctx context.Context, in *GetUserIDRequest, opts ...grpc.CallOption) (*GetUserIDResponse, error)
+<<<<<<< HEAD
+=======
+	// / -------- Search --------------
+	SearchTargetHobby(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error)
+	SearchTargetLover(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error)
+	SearchTargetAccompany(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error)
+>>>>>>> parent of f9b9b1f (delete bug)
 }
 
 type informationClient struct {
@@ -509,6 +516,36 @@ func (c *informationClient) GetUserID(ctx context.Context, in *GetUserIDRequest,
 	return out, nil
 }
 
+<<<<<<< HEAD
+=======
+func (c *informationClient) SearchTargetHobby(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error) {
+	out := new(SearchResponse)
+	err := c.cc.Invoke(ctx, Information_SearchTargetHobby_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *informationClient) SearchTargetLover(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error) {
+	out := new(SearchResponse)
+	err := c.cc.Invoke(ctx, Information_SearchTargetLover_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *informationClient) SearchTargetAccompany(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error) {
+	out := new(SearchResponse)
+	err := c.cc.Invoke(ctx, Information_SearchTargetAccompany_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+>>>>>>> parent of f9b9b1f (delete bug)
 // InformationServer is the server API for Information service.
 // All implementations must embed UnimplementedInformationServer
 // for forward compatibility
@@ -566,6 +603,13 @@ type InformationServer interface {
 	GetPayment(context.Context, *GetPaymentRequest) (*GetPaymentResponse, error)
 	// Session
 	GetUserID(context.Context, *GetUserIDRequest) (*GetUserIDResponse, error)
+<<<<<<< HEAD
+=======
+	// / -------- Search --------------
+	SearchTargetHobby(context.Context, *SearchRequest) (*SearchResponse, error)
+	SearchTargetLover(context.Context, *SearchRequest) (*SearchResponse, error)
+	SearchTargetAccompany(context.Context, *SearchRequest) (*SearchResponse, error)
+>>>>>>> parent of f9b9b1f (delete bug)
 	mustEmbedUnimplementedInformationServer()
 }
 
@@ -699,6 +743,18 @@ func (UnimplementedInformationServer) GetPayment(context.Context, *GetPaymentReq
 func (UnimplementedInformationServer) GetUserID(context.Context, *GetUserIDRequest) (*GetUserIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserID not implemented")
 }
+<<<<<<< HEAD
+=======
+func (UnimplementedInformationServer) SearchTargetHobby(context.Context, *SearchRequest) (*SearchResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchTargetHobby not implemented")
+}
+func (UnimplementedInformationServer) SearchTargetLover(context.Context, *SearchRequest) (*SearchResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchTargetLover not implemented")
+}
+func (UnimplementedInformationServer) SearchTargetAccompany(context.Context, *SearchRequest) (*SearchResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchTargetAccompany not implemented")
+}
+>>>>>>> parent of f9b9b1f (delete bug)
 func (UnimplementedInformationServer) mustEmbedUnimplementedInformationServer() {}
 
 // UnsafeInformationServer may be embedded to opt out of forward compatibility for this service.
@@ -1468,6 +1524,63 @@ func _Information_GetUserID_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+<<<<<<< HEAD
+=======
+func _Information_SearchTargetHobby_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).SearchTargetHobby(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_SearchTargetHobby_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).SearchTargetHobby(ctx, req.(*SearchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Information_SearchTargetLover_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).SearchTargetLover(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_SearchTargetLover_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).SearchTargetLover(ctx, req.(*SearchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Information_SearchTargetAccompany_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).SearchTargetAccompany(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_SearchTargetAccompany_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).SearchTargetAccompany(ctx, req.(*SearchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+>>>>>>> parent of f9b9b1f (delete bug)
 // Information_ServiceDesc is the grpc.ServiceDesc for Information service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)

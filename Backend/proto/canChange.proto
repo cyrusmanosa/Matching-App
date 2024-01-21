@@ -18,7 +18,16 @@ message CanChange {
   string Job = 9;
   int32 AnnualSalary = 10;
   string Sociability = 11;
+<<<<<<< HEAD
   string Religious = 12;
   string Introduce = 13;
   google.protobuf.Timestamp InfoChangedAt = 14;
+=======
+  string hobbyType = 12;
+  int32 Experience = 13;
+  string AccompanyType = 14;
+  string Religious = 15;
+  string Introduce = 16;
+  google.protobuf.Timestamp InfoChangedAt = 17;
+>>>>>>> parent of f9b9b1f (delete bug)
 }

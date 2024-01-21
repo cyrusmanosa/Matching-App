@@ -17,14 +17,20 @@ class ConversationList extends StatefulWidget {
     this.name,
     this.messageText,
     this.imageUrl,
+<<<<<<< HEAD:Flutter/lib/presentation/Chat/widgets/conversationList.dart
     this.time,
+=======
+>>>>>>> parent of f9b9b1f (delete bug):frontend/lib/presentation/Chat/widgets/conversationList.dart
     this.isMessageRead,
   }) : super(key: key);
   final int? targetid;
   final String? name;
   final String? messageText;
   final File? imageUrl;
+<<<<<<< HEAD:Flutter/lib/presentation/Chat/widgets/conversationList.dart
   final String? time;
+=======
+>>>>>>> parent of f9b9b1f (delete bug):frontend/lib/presentation/Chat/widgets/conversationList.dart
   bool? isMessageRead;
 
   @override
@@ -54,9 +60,13 @@ class _ConversationListState extends State<ConversationList> {
         updateReadGrpcRequest(context);
         Navigator.push(
           context,
+<<<<<<< HEAD:Flutter/lib/presentation/Chat/widgets/conversationList.dart
           MaterialPageRoute(
             builder: (context) => ChatBox(name: widget.name, time: widget.time, imageUrl: widget.imageUrl, targetid: widget.targetid),
           ),
+=======
+          MaterialPageRoute(builder: (context) => ChatBox(name: widget.name, imageUrl: widget.imageUrl, targetid: widget.targetid)),
+>>>>>>> parent of f9b9b1f (delete bug):frontend/lib/presentation/Chat/widgets/conversationList.dart
         );
       },
       child: Container(
@@ -88,7 +98,11 @@ class _ConversationListState extends State<ConversationList> {
               ),
             ),
             Padding(padding: EdgeInsets.only(left: mediaW / 50)),
+<<<<<<< HEAD:Flutter/lib/presentation/Chat/widgets/conversationList.dart
             Text(widget.time!, style: TextStyle(fontSize: 12, fontWeight: widget.isMessageRead! ? FontWeight.bold : FontWeight.normal)),
+=======
+            // Text(widget.time!, style: TextStyle(fontSize: 12, fontWeight: widget.isMessageRead! ? FontWeight.bold : FontWeight.normal)),
+>>>>>>> parent of f9b9b1f (delete bug):frontend/lib/presentation/Chat/widgets/conversationList.dart
           ],
         ),
       ),

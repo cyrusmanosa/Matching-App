@@ -294,6 +294,28 @@ service Information {
             get: "/v1/Get_UserID"
         };
     }
+<<<<<<< HEAD
+=======
+/// -------- Search --------------
+    rpc SearchTargetHobby(SearchRequest) returns (SearchResponse){
+        option (google.api.http) = {
+            post: "/v1/Search_hobby"
+            body: "*"
+        };
+    }
+    rpc SearchTargetLover(SearchRequest) returns (SearchResponse){
+        option (google.api.http) = {
+            post: "/v1/Search_lover"
+            body: "*"
+        };
+    }
+    rpc SearchTargetAccompany(SearchRequest) returns (SearchResponse){
+        option (google.api.http) = {
+            post: "/v1/Search_Accompany"
+            body: "*"
+        };
+    }
+>>>>>>> parent of f9b9b1f (delete bug)
 }
 
 /// -------- Chat --------------

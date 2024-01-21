@@ -13,7 +13,45 @@ import (
 )
 
 func TestCreateRandomUserFixInformaion(t *testing.T) {
+<<<<<<< HEAD
 	CreateRandomUserFixInformaion(t)
+=======
+	for i := 0; i < 50; i++ {
+		arg := CreateRandomUserFixInformaion(t)
+		CreateRandomImage(t, arg)
+		CreateRandomUserCanChangeInformation(t, arg)
+		CreateRandomHobbyRequest(t, arg)
+		CreateRandomLoverRequest(t, arg)
+		CreateRandomAccompanyRequest(t, arg)
+		CreateRandomPayment(t, arg)
+		CreateRandomContact(t, arg)
+		arg1 := CreateRandomUserFixInformaion(t)
+		CreateRandomImage(t, arg1)
+		CreateRandomUserCanChangeInformation(t, arg1)
+		CreateRandomHobbyRequest(t, arg1)
+		CreateRandomLoverRequest(t, arg1)
+		CreateRandomAccompanyRequest(t, arg1)
+		CreateRandomPayment(t, arg1)
+		CreateRandomContact(t, arg1)
+		arg2 := CreateRandomUserFixInformaion(t)
+		CreateRandomImage(t, arg2)
+		CreateRandomUserCanChangeInformation(t, arg2)
+		CreateRandomHobbyRequest(t, arg2)
+		CreateRandomLoverRequest(t, arg2)
+		CreateRandomAccompanyRequest(t, arg2)
+		CreateRandomPayment(t, arg2)
+		CreateRandomContact(t, arg2)
+		arg3 := CreateRandomUserFixInformaion(t)
+		CreateRandomImage(t, arg3)
+		CreateRandomUserCanChangeInformation(t, arg3)
+		CreateRandomHobbyRequest(t, arg3)
+		CreateRandomLoverRequest(t, arg3)
+		CreateRandomAccompanyRequest(t, arg3)
+		CreateRandomPayment(t, arg3)
+		CreateRandomContact(t, arg3)
+		CretaRandomTargetUserList(t, arg, arg1, arg2, arg3)
+	}
+>>>>>>> parent of f9b9b1f (delete bug)
 }
 
 func CreateRandomUserFixInformaion(t *testing.T) Fixinformation {

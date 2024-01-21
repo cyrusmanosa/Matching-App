@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "Backend/pb";
+
+
+message SearchRequest {
+    string SessionID = 1;
+}
+
+message SearchResponse {
+    int32 result = 1;
+    string rank = 2;
+}
+

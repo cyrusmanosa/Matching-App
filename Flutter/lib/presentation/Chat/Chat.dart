@@ -74,6 +74,7 @@ class _ChatState extends State<Chat> {
         Directory tempDir = await getTemporaryDirectory();
         File file = File('${tempDir.path}/data_$i.bin');
         await file.writeAsBytes(bytes);
+<<<<<<< HEAD:Flutter/lib/presentation/Chat/Chat.dart
 
         setState(() {
           users.add(TargetInfos(
@@ -83,6 +84,11 @@ class _ChatState extends State<Chat> {
             lastMsg: lmsgResponse.media,
             isRead: lmsgResponse.isread,
           ));
+=======
+        setState(() {
+          users.add(TargetInfos(
+              userid: targetID[i], img: file, info: infoResponse.canChangeInfo, lastMsg: lmsgResponse.media, isRead: lmsgResponse.isRead));
+>>>>>>> parent of f9b9b1f (delete bug):frontend/lib/presentation/Chat/Chat.dart
         });
       }
       isEmpty = false;

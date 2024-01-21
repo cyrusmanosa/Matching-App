@@ -10,7 +10,19 @@ import (
 )
 
 const TId = 1
+<<<<<<< HEAD
 const TN = "u47"
+=======
+const TN = "u3"
+
+func TestCreateRecordTable(t *testing.T) {
+	for i := 2; i < 200; i++ {
+		tablename := "u" + strconv.Itoa(int(i))
+		err := testChatQueries.CreateChatTable(context.Background(), tablename)
+		require.NoError(t, err)
+	}
+}
+>>>>>>> parent of f9b9b1f (delete bug)
 
 func TestCreateRecord(t *testing.T) {
 	CreateRandomRecord(t)

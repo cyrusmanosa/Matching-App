@@ -265,7 +265,17 @@ class _ProfileState extends State<Profile> {
     if (imgIcon5.existsSync()) allimg.add(imgIcon5);
     Navigator.push(
       context,
+<<<<<<< HEAD:Flutter/lib/presentation/Profile/Profile.dart
       MaterialPageRoute(builder: (context) => InformationEdit(canData: data, imgIcon: allimg), fullscreenDialog: true),
+=======
+      MaterialPageRoute(
+          builder: (context) => InformationEdit(
+                canData: cCData,
+                imgIcon: newAllMyImg,
+                country: myFixData.country,
+              ),
+          fullscreenDialog: true),
+>>>>>>> parent of f9b9b1f (delete bug):frontend/lib/presentation/Profile/Profile.dart
     );
   }
 
@@ -334,6 +344,7 @@ class _ProfileState extends State<Profile> {
 
 // images
   Widget _buildImages(BuildContext context, double mediaH, double mediaW) {
+<<<<<<< HEAD:Flutter/lib/presentation/Profile/Profile.dart
     return Container(
       height: mediaH / 6.5,
       padding: EdgeInsets.only(left: mediaW / 15),
@@ -356,6 +367,27 @@ class _ProfileState extends State<Profile> {
             ),
           ),
         ],
+=======
+    return SizedBox(
+      child: Container(
+        height: mediaH / 6.5,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: [
+            // far left
+            SizedBox(width: mediaW / 25),
+            // image
+            _buildImageContainer(context, mediaH, mediaW, allMyImg[0], 0),
+            if (allMyImg.length >= 2) _buildImageContainer(context, mediaH, mediaW, allMyImg[1], 1),
+            if (allMyImg.length >= 3) _buildImageContainer(context, mediaH, mediaW, allMyImg[2], 2),
+            if (allMyImg.length >= 4) _buildImageContainer(context, mediaH, mediaW, allMyImg[3], 3),
+            if (allMyImg.length >= 5) _buildImageContainer(context, mediaH, mediaW, allMyImg[4], 4),
+
+            // far right
+            SizedBox(width: mediaW / 25),
+          ],
+        ),
+>>>>>>> parent of f9b9b1f (delete bug):frontend/lib/presentation/Profile/Profile.dart
       ),
     );
   }
