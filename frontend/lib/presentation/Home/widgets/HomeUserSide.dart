@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import 'dart:typed_data';
-=======
-import 'dart:io';
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/pb/canChange.pb.dart';
@@ -11,20 +7,12 @@ import 'package:dating_your_date/presentation/UserPage.dart';
 import 'package:flutter/material.dart';
 
 class MainframeItemWidget extends StatefulWidget {
-<<<<<<< HEAD
   MainframeItemWidget({Key? key, this.mediaH, this.mediaW, this.img, this.fix, this.canChange, this.allImage}) : super(key: key);
 
   final double? mediaH;
   final double? mediaW;
   final Uint8List? img;
   final List<Uint8List>? allImage;
-=======
-  MainframeItemWidget({Key? key, this.mediaH, this.mediaW, this.img, this.fix, this.canChange}) : super(key: key);
-
-  final double? mediaH;
-  final double? mediaW;
-  final List<File>? img;
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
   final Fix? fix;
   final CanChange? canChange;
 
@@ -78,16 +66,10 @@ class _MainframeItemWidget extends State<MainframeItemWidget> {
                       context,
                       PageRouteBuilder(
                         pageBuilder: (context, animation, secondaryAnimation) => UserPage(
-<<<<<<< HEAD
                           fixData: widget.fix!,
                           canData: widget.canChange!,
                           img: widget.img!,
                           allImage: widget.allImage!,
-=======
-                          fixData: widget.fix,
-                          canData: widget.canChange,
-                          img: widget.img!,
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
                         ),
                         transitionsBuilder: (context, animation, secondaryAnimation, child) {
                           return SlideTransition(
@@ -104,11 +86,7 @@ class _MainframeItemWidget extends State<MainframeItemWidget> {
                     width: widget.mediaW! / 1.25,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadiusStyle.r30,
-<<<<<<< HEAD
                       image: DecorationImage(image: MemoryImage(widget.img!), fit: BoxFit.cover),
-=======
-                      image: DecorationImage(image: FileImage(widget.img![0]), fit: BoxFit.cover),
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
                       boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.5), spreadRadius: 5, blurRadius: 10)],
                     ),
                   ),

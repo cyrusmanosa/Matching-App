@@ -127,20 +127,10 @@ type InformationClient interface {
 	GetPayment(ctx context.Context, in *GetPaymentRequest, opts ...grpc.CallOption) (*GetPaymentResponse, error)
 	// Session
 	GetUserID(ctx context.Context, in *GetUserIDRequest, opts ...grpc.CallOption) (*GetUserIDResponse, error)
-<<<<<<< HEAD
 	// / -------- Search --------------
 	SearchTargetHobby(ctx context.Context, in *SearchRequestH, opts ...grpc.CallOption) (*SearchResponseH, error)
 	SearchTargetLover(ctx context.Context, in *SearchRequestL, opts ...grpc.CallOption) (*SearchResponseL, error)
 	SearchTargetAccompany(ctx context.Context, in *SearchRequestA, opts ...grpc.CallOption) (*SearchResponseA, error)
-=======
-<<<<<<< HEAD
-=======
-	// / -------- Search --------------
-	SearchTargetHobby(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error)
-	SearchTargetLover(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error)
-	SearchTargetAccompany(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error)
->>>>>>> parent of f9b9b1f (delete bug)
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 }
 
 type informationClient struct {
@@ -529,15 +519,8 @@ func (c *informationClient) GetUserID(ctx context.Context, in *GetUserIDRequest,
 	return out, nil
 }
 
-<<<<<<< HEAD
 func (c *informationClient) SearchTargetHobby(ctx context.Context, in *SearchRequestH, opts ...grpc.CallOption) (*SearchResponseH, error) {
 	out := new(SearchResponseH)
-=======
-<<<<<<< HEAD
-=======
-func (c *informationClient) SearchTargetHobby(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error) {
-	out := new(SearchResponse)
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 	err := c.cc.Invoke(ctx, Information_SearchTargetHobby_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -545,13 +528,8 @@ func (c *informationClient) SearchTargetHobby(ctx context.Context, in *SearchReq
 	return out, nil
 }
 
-<<<<<<< HEAD
 func (c *informationClient) SearchTargetLover(ctx context.Context, in *SearchRequestL, opts ...grpc.CallOption) (*SearchResponseL, error) {
 	out := new(SearchResponseL)
-=======
-func (c *informationClient) SearchTargetLover(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error) {
-	out := new(SearchResponse)
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 	err := c.cc.Invoke(ctx, Information_SearchTargetLover_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -559,13 +537,8 @@ func (c *informationClient) SearchTargetLover(ctx context.Context, in *SearchReq
 	return out, nil
 }
 
-<<<<<<< HEAD
 func (c *informationClient) SearchTargetAccompany(ctx context.Context, in *SearchRequestA, opts ...grpc.CallOption) (*SearchResponseA, error) {
 	out := new(SearchResponseA)
-=======
-func (c *informationClient) SearchTargetAccompany(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*SearchResponse, error) {
-	out := new(SearchResponse)
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 	err := c.cc.Invoke(ctx, Information_SearchTargetAccompany_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -573,10 +546,6 @@ func (c *informationClient) SearchTargetAccompany(ctx context.Context, in *Searc
 	return out, nil
 }
 
-<<<<<<< HEAD
-=======
->>>>>>> parent of f9b9b1f (delete bug)
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 // InformationServer is the server API for Information service.
 // All implementations must embed UnimplementedInformationServer
 // for forward compatibility
@@ -637,20 +606,10 @@ type InformationServer interface {
 	GetPayment(context.Context, *GetPaymentRequest) (*GetPaymentResponse, error)
 	// Session
 	GetUserID(context.Context, *GetUserIDRequest) (*GetUserIDResponse, error)
-<<<<<<< HEAD
 	// / -------- Search --------------
 	SearchTargetHobby(context.Context, *SearchRequestH) (*SearchResponseH, error)
 	SearchTargetLover(context.Context, *SearchRequestL) (*SearchResponseL, error)
 	SearchTargetAccompany(context.Context, *SearchRequestA) (*SearchResponseA, error)
-=======
-<<<<<<< HEAD
-=======
-	// / -------- Search --------------
-	SearchTargetHobby(context.Context, *SearchRequest) (*SearchResponse, error)
-	SearchTargetLover(context.Context, *SearchRequest) (*SearchResponse, error)
-	SearchTargetAccompany(context.Context, *SearchRequest) (*SearchResponse, error)
->>>>>>> parent of f9b9b1f (delete bug)
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 	mustEmbedUnimplementedInformationServer()
 }
 
@@ -784,7 +743,6 @@ func (UnimplementedInformationServer) GetPayment(context.Context, *GetPaymentReq
 func (UnimplementedInformationServer) GetUserID(context.Context, *GetUserIDRequest) (*GetUserIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserID not implemented")
 }
-<<<<<<< HEAD
 func (UnimplementedInformationServer) SearchTargetHobby(context.Context, *SearchRequestH) (*SearchResponseH, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchTargetHobby not implemented")
 }
@@ -794,20 +752,6 @@ func (UnimplementedInformationServer) SearchTargetLover(context.Context, *Search
 func (UnimplementedInformationServer) SearchTargetAccompany(context.Context, *SearchRequestA) (*SearchResponseA, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchTargetAccompany not implemented")
 }
-=======
-<<<<<<< HEAD
-=======
-func (UnimplementedInformationServer) SearchTargetHobby(context.Context, *SearchRequest) (*SearchResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SearchTargetHobby not implemented")
-}
-func (UnimplementedInformationServer) SearchTargetLover(context.Context, *SearchRequest) (*SearchResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SearchTargetLover not implemented")
-}
-func (UnimplementedInformationServer) SearchTargetAccompany(context.Context, *SearchRequest) (*SearchResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SearchTargetAccompany not implemented")
-}
->>>>>>> parent of f9b9b1f (delete bug)
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 func (UnimplementedInformationServer) mustEmbedUnimplementedInformationServer() {}
 
 // UnsafeInformationServer may be embedded to opt out of forward compatibility for this service.
@@ -1577,15 +1521,8 @@ func _Information_GetUserID_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-<<<<<<< HEAD
 func _Information_SearchTargetHobby_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SearchRequestH)
-=======
-<<<<<<< HEAD
-=======
-func _Information_SearchTargetHobby_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SearchRequest)
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1597,21 +1534,13 @@ func _Information_SearchTargetHobby_Handler(srv interface{}, ctx context.Context
 		FullMethod: Information_SearchTargetHobby_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-<<<<<<< HEAD
 		return srv.(InformationServer).SearchTargetHobby(ctx, req.(*SearchRequestH))
-=======
-		return srv.(InformationServer).SearchTargetHobby(ctx, req.(*SearchRequest))
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Information_SearchTargetLover_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-<<<<<<< HEAD
 	in := new(SearchRequestL)
-=======
-	in := new(SearchRequest)
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1623,21 +1552,13 @@ func _Information_SearchTargetLover_Handler(srv interface{}, ctx context.Context
 		FullMethod: Information_SearchTargetLover_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-<<<<<<< HEAD
 		return srv.(InformationServer).SearchTargetLover(ctx, req.(*SearchRequestL))
-=======
-		return srv.(InformationServer).SearchTargetLover(ctx, req.(*SearchRequest))
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Information_SearchTargetAccompany_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-<<<<<<< HEAD
 	in := new(SearchRequestA)
-=======
-	in := new(SearchRequest)
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1649,19 +1570,11 @@ func _Information_SearchTargetAccompany_Handler(srv interface{}, ctx context.Con
 		FullMethod: Information_SearchTargetAccompany_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-<<<<<<< HEAD
 		return srv.(InformationServer).SearchTargetAccompany(ctx, req.(*SearchRequestA))
-=======
-		return srv.(InformationServer).SearchTargetAccompany(ctx, req.(*SearchRequest))
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-<<<<<<< HEAD
-=======
->>>>>>> parent of f9b9b1f (delete bug)
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 // Information_ServiceDesc is the grpc.ServiceDesc for Information service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)

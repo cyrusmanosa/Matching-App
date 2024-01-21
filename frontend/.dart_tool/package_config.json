@@ -44,12 +44,6 @@
       "languageVersion": "2.17"
     },
     {
-      "name": "buffer",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/buffer-1.2.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "build",
       "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/build-2.4.1",
       "packageUri": "lib/",
@@ -74,14 +68,14 @@
       "languageVersion": "3.0"
     },
     {
-      "name": "characters",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/characters-1.3.0",
+      "name": "carousel_slider",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/carousel_slider-4.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
-      "name": "charcode",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/charcode-1.3.1",
+      "name": "characters",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/characters-1.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -128,12 +122,6 @@
       "languageVersion": "2.19"
     },
     {
-      "name": "dropdown_button2",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/dropdown_button2-2.3.9",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
       "name": "fake_async",
       "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/fake_async-1.3.1",
       "packageUri": "lib/",
@@ -165,9 +153,9 @@
     },
     {
       "name": "file_selector_platform_interface",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/file_selector_platform_interface-2.6.1",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/file_selector_platform_interface-2.6.2",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.0"
     },
     {
       "name": "file_selector_windows",
@@ -204,6 +192,12 @@
       "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/flutter_launcher_icons-0.13.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "flutter_localizations",
+      "rootUri": "file:///opt/homebrew/Caskroom/flutter/3.13.9/flutter/packages/flutter_localizations",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
     },
     {
       "name": "flutter_plugin_android_lifecycle",
@@ -303,7 +297,7 @@
     },
     {
       "name": "http",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/http-1.1.2",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/http-1.2.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -321,7 +315,7 @@
     },
     {
       "name": "image",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/image-4.1.3",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/image-4.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
@@ -333,13 +327,13 @@
     },
     {
       "name": "image_picker",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/image_picker-1.0.6",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/image_picker-1.0.7",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "image_picker_android",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/image_picker_android-0.8.9+2",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/image_picker_android-0.8.9+3",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -351,7 +345,7 @@
     },
     {
       "name": "image_picker_ios",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.9",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/image_picker_ios-0.8.9+1",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -369,7 +363,7 @@
     },
     {
       "name": "image_picker_platform_interface",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/image_picker_platform_interface-2.9.2",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/image_picker_platform_interface-2.9.3",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -381,9 +375,9 @@
     },
     {
       "name": "intl",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/intl-0.19.0",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/intl-0.18.1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "2.12"
     },
     {
       "name": "js",
@@ -428,6 +422,18 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "multiselect",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/multiselect-0.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "navigation_builder",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/navigation_builder-0.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "nested",
       "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/nested-1.0.0",
       "packageUri": "lib/",
@@ -459,9 +465,9 @@
     },
     {
       "name": "path_provider",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/path_provider-2.1.1",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/path_provider-2.1.2",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.0"
     },
     {
       "name": "path_provider_android",
@@ -471,9 +477,9 @@
     },
     {
       "name": "path_provider_foundation",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/path_provider_foundation-2.3.1",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/path_provider_foundation-2.3.2",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.0"
     },
     {
       "name": "path_provider_linux",
@@ -483,9 +489,9 @@
     },
     {
       "name": "path_provider_platform_interface",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/path_provider_platform_interface-2.1.1",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/path_provider_platform_interface-2.1.2",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.0"
     },
     {
       "name": "path_provider_windows",
@@ -494,44 +500,38 @@
       "languageVersion": "2.19"
     },
     {
-      "name": "pedantic",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/pedantic-1.11.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "permission_handler",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/permission_handler-11.1.0",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/permission_handler-11.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "permission_handler_android",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/permission_handler_android-12.0.1",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/permission_handler_android-12.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "permission_handler_apple",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/permission_handler_apple-9.2.0",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/permission_handler_apple-9.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.15"
     },
     {
       "name": "permission_handler_html",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/permission_handler_html-0.1.0+2",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/permission_handler_html-0.1.1",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "permission_handler_platform_interface",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/permission_handler_platform_interface-4.0.2",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/permission_handler_platform_interface-4.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "permission_handler_windows",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/permission_handler_windows-0.2.0",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/permission_handler_windows-0.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -555,19 +555,7 @@
     },
     {
       "name": "pointycastle",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/pointycastle-3.7.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.14"
-    },
-    {
-      "name": "pool",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/pool-1.5.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "postgres",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/postgres-3.0.5",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/pointycastle-3.7.4",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -608,18 +596,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "sasl_scram",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/sasl_scram-0.1.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "saslprep",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/saslprep-1.0.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "scrollable_positioned_list",
       "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/scrollable_positioned_list-0.3.8",
       "packageUri": "lib/",
@@ -639,9 +615,9 @@
     },
     {
       "name": "shared_preferences_foundation",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.3.4",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.3.5",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.0"
     },
     {
       "name": "shared_preferences_linux",
@@ -651,9 +627,9 @@
     },
     {
       "name": "shared_preferences_platform_interface",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/shared_preferences_platform_interface-2.3.1",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/shared_preferences_platform_interface-2.3.2",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.0"
     },
     {
       "name": "shared_preferences_web",
@@ -710,6 +686,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "states_rebuilder",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/states_rebuilder-6.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "stream_channel",
       "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/stream_channel-2.1.2",
       "packageUri": "lib/",
@@ -746,16 +728,10 @@
       "languageVersion": "2.17"
     },
     {
-      "name": "unorm_dart",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/unorm_dart-0.2.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "uuid",
-      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/uuid-4.2.2",
+      "rootUri": "file:///Users/cyrusman/.pub-cache/hosted/pub.dev/uuid-4.3.3",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "3.0"
     },
     {
       "name": "vector_graphics",
@@ -824,7 +800,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2024-01-21T05:21:07.486219Z",
+  "generated": "2024-01-21T06:01:58.355519Z",
   "generator": "pub",
   "generatorVersion": "3.2.5"
 }

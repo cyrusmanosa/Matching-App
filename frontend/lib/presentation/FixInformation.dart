@@ -45,36 +45,11 @@ class _FixInformationState extends State<FixInformation> {
   void _uploadPhotoToNewFile() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
     if (pickedFile != null) {
       final file = File(pickedFile.path);
-<<<<<<< HEAD:frontend/lib/presentation/FixInformation.dart
       setState(() {
         _imageFile = file;
       });
-=======
-<<<<<<< HEAD:Flutter/lib/presentation/FixInformation.dart
-      final directory = await getApplicationDocumentsDirectory();
-      try {
-        await for (var oldFile in Directory(directory.path).list()) {
-          await oldFile.delete();
-        }
-        final newFilePath = path.join(directory.path, '${DateTime.now().millisecondsSinceEpoch}.jpg');
-        await file.copy(newFilePath);
-
-        setState(() {
-          _imageFile = File(newFilePath);
-        });
-      } catch (e) {
-        print("Error: $e");
-      }
-=======
-
-      setState(() {
-        _imageFile = file;
-      });
->>>>>>> parent of f9b9b1f (delete bug):frontend/lib/presentation/FixInformation.dart
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a:Flutter/lib/presentation/FixInformation.dart
     }
   }
 

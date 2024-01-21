@@ -135,32 +135,16 @@ func RandomAccompantType() string {
 
 func RandomSociability() string {
 	socialPersonalities := []string{
-<<<<<<< HEAD
 		"社交的",
-=======
-<<<<<<< HEAD
-		"Social Butterfly",
-		"Introverted and Shy",
-		"Socially Anxious",
-		"Small Group Lover",
-		"Independent",
-=======
-		"社交的な人",
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 		"内向的でシャイ",
 		"社交不安",
 		"少人数派",
 		"独立心の強い人",
-<<<<<<< HEAD
-=======
->>>>>>> parent of f9b9b1f (delete bug)
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 	}
 	return socialPersonalities[seededRand.Intn(len(socialPersonalities))]
 }
 
 func RandomSexual() string {
-<<<<<<< HEAD
 	genders := []string{"男性", "女性", "その他"}
 	return genders[seededRand.Intn(len(genders))]
 }
@@ -200,63 +184,6 @@ func RandomAddress(country string) string {
 		"香港":     {"香港島", "九龍", "新界"},
 		"台湾":     {"タイペイ", "シンペイ", "タイチュン", "タイナン", "カオシュン", "キーロン", "トウエン", "チャンファ", "ミャオリ", "ナントウ", "ウンリン", "キャイチ", "タイトン", "ファーリエン", "イーラン"},
 	}
-=======
-<<<<<<< HEAD
-	var genders = []string{
-		"Male",
-		"Female",
-		"Non-Binary",
-		"Transgender",
-		"Intersex",
-	}
-	return genders[rand.Intn(len(genders))]
-=======
-	genders := []string{
-		"男性",
-		"女性",
-		"非バイナリー",
-		"トランスジェンダー",
-		"インターセックス",
-	}
-	return genders[seededRand.Intn(len(genders))]
-}
-
-func RandomJob() string {
-	job := []string{"製造",
-		"サービス",
-		"IT",
-		"金融",
-		"医療",
-		"教育",
-		"公務員",
-		"芸能",
-		"スポーツ",
-		"研究",
-		"作家",
-		"アーティスト",
-		"広告",
-		"デザイン",
-		"芸術",
-		"音楽",
-		"映画・テレビ",
-		"出版"}
-	return job[seededRand.Intn(len(job))]
-}
-
-func RandomAddress(country string) string {
-	address := map[string][]string{
-		"インドネシア": {"ジャカルタ", "バンドン", "スラバヤ", "メダン", "ジョグジャカルタ", "バリ", "スンバワ"},
-		"タイ":     {"バンコク", "チェンマイ", "プーケット", "パタヤ", "ソンクラー", "ピピ島"},
-		"ベトナム":   {"ハノイ", "ホーチミン", "ダナン", "ハイフォン", "カントー", "ナムディン"},
-		"マカオ":    {"澳門半島", "氹仔", "路環"},
-		"マレーシア":  {"クアラルンプール", "ジョホールバル", "ペナン", "クチン"},
-		"中国":     {"北京", "上海", "広州", "深圳", "成都", "天津", "重慶", "西安", "武漢", "杭州", "蘇州", "南京", "寧波", "青島", "廈門", "泉州", "福州", "長沙", "鄭州", "瀋陽", "大連", "長春", "哈爾濱", "南寧", "海口", "貴陽", "昆明", "呼和浩特", "石家莊", "太原", "西寧", "銀川", "烏魯木齊"},
-		"日本":     {"東京", "大阪", "京都", "名古屋", "福岡", "横浜", "神戸", "奈良", "広島", "札幌", "仙台", "さいたま", "千葉", "神奈川", "新潟", "富山", "石川", "福井", "山梨", "長野", "岐阜", "静岡", "愛知", "三重", "滋賀", "兵庫", "和歌山", "鳥取", "島根", "岡山", "山口", "徳島", "香川", "愛媛", "高知", "佐賀", "長崎", "熊本", "大分", "宮崎", "鹿児島", "沖縄"},
-		"韓国":     {"ソウル", "釜山", "大邱", "仁川", "光州", "済州島"},
-		"香港":     {"香港島", "九龍", "新界"},
-		"台湾":     {"タイペイ", "シンペイ", "タイチュン", "タイナン", "カオシュン", "キーロン", "トウエン", "チャンファ", "ミャオリ", "ナントウ", "ウンリン", "キャイチ", "タイトン", "ファーリエン", "イーラン"},
-	}
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 
 	return address[country][seededRand.Intn(len(address[country]))]
 }
@@ -275,185 +202,94 @@ func SwitchLanguage(country string) []string {
 		Language = []string{"日本語", "英語"}
 		for i := 0; i < len(LanguageList); i++ {
 			ans := LanguageList[rand.Intn(len(LanguageList))]
-<<<<<<< HEAD
 			if ans != Language[0] && ans != Language[1] {
-=======
-			if ans == Language[0] {
-				continue
-			} else {
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 				Language = append(Language, ans)
 				break
 			}
 		}
 	case "香港":
-<<<<<<< HEAD
 		Language = []string{"広東語", "英語"}
 		for i := 0; i < len(LanguageList); i++ {
 			ans := LanguageList[rand.Intn(len(LanguageList))]
 			if ans != Language[0] && ans != Language[1] {
-=======
-		Language = []string{"広東語", "英語", LanguageList[rand.Intn(len(LanguageList))]}
-		for i := 0; i < len(LanguageList); i++ {
-			ans := LanguageList[rand.Intn(len(LanguageList))]
-			if ans == Language[0] {
-				continue
-			} else {
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 				Language = append(Language, ans)
 				break
 			}
 		}
 	case "マカオ":
-<<<<<<< HEAD
 		Language = []string{"広東語", "英語"}
 		for i := 0; i < len(LanguageList); i++ {
 			ans := LanguageList[rand.Intn(len(LanguageList))]
 			if ans != Language[0] && ans != Language[1] {
-=======
-		Language = []string{"広東語", "英語", LanguageList[rand.Intn(len(LanguageList))]}
-		for i := 0; i < len(LanguageList); i++ {
-			ans := LanguageList[rand.Intn(len(LanguageList))]
-			if ans == Language[0] {
-				continue
-			} else {
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 				Language = append(Language, ans)
 				break
 			}
 		}
 	case "中国":
-<<<<<<< HEAD
 		Language = []string{"中国語", "英語"}
 		for i := 0; i < len(LanguageList); i++ {
 			ans := LanguageList[rand.Intn(len(LanguageList))]
 			if ans != Language[0] && ans != Language[1] {
-=======
-		Language = []string{"中国語", "英語", LanguageList[rand.Intn(len(LanguageList))]}
-		for i := 0; i < len(LanguageList); i++ {
-			ans := LanguageList[rand.Intn(len(LanguageList))]
-			if ans == Language[0] {
-				continue
-			} else {
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 				Language = append(Language, ans)
 				break
 			}
 		}
 	case "インドネシア":
-<<<<<<< HEAD
 		Language = []string{"インドネシア語", "英語"}
 		for i := 0; i < len(LanguageList); i++ {
 			ans := LanguageList[rand.Intn(len(LanguageList))]
 			if ans != Language[0] && ans != Language[1] {
-=======
-		Language = []string{"インドネシア語", "英語", LanguageList[rand.Intn(len(LanguageList))]}
-		for i := 0; i < len(LanguageList); i++ {
-			ans := LanguageList[rand.Intn(len(LanguageList))]
-			if ans == Language[0] {
-				continue
-			} else {
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 				Language = append(Language, ans)
 				break
 			}
 		}
 	case "タイ":
-<<<<<<< HEAD
 		Language = []string{"タイ語", "英語"}
 		for i := 0; i < len(LanguageList); i++ {
 			ans := LanguageList[rand.Intn(len(LanguageList))]
 			if ans != Language[0] && ans != Language[1] {
-=======
-		Language = []string{"タイ語", "英語", LanguageList[rand.Intn(len(LanguageList))]}
-		for i := 0; i < len(LanguageList); i++ {
-			ans := LanguageList[rand.Intn(len(LanguageList))]
-			if ans == Language[0] {
-				continue
-			} else {
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 				Language = append(Language, ans)
 				break
 			}
 		}
 	case "韓国":
-<<<<<<< HEAD
 		Language = []string{"韓国語", "英語"}
 		for i := 0; i < len(LanguageList); i++ {
 			ans := LanguageList[rand.Intn(len(LanguageList))]
 			if ans != Language[0] && ans != Language[1] {
-=======
-		Language = []string{"韓国語", "英語", LanguageList[rand.Intn(len(LanguageList))]}
-		for i := 0; i < len(LanguageList); i++ {
-			ans := LanguageList[rand.Intn(len(LanguageList))]
-			if ans == Language[0] {
-				continue
-			} else {
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 				Language = append(Language, ans)
 				break
 			}
 		}
 	case "ベトナム":
-<<<<<<< HEAD
 		Language = []string{"ベトナム", "英語"}
 		for i := 0; i < len(LanguageList); i++ {
 			ans := LanguageList[rand.Intn(len(LanguageList))]
 			if ans != Language[0] && ans != Language[1] {
-=======
-		Language = []string{"ベトナム", "英語", LanguageList[rand.Intn(len(LanguageList))]}
-		for i := 0; i < len(LanguageList); i++ {
-			ans := LanguageList[rand.Intn(len(LanguageList))]
-			if ans == Language[0] {
-				continue
-			} else {
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 				Language = append(Language, ans)
 				break
 			}
 		}
 	case "マレーシア":
-<<<<<<< HEAD
 		Language = []string{"マレーシア", "英語"}
 		for i := 0; i < len(LanguageList); i++ {
 			ans := LanguageList[rand.Intn(len(LanguageList))]
 			if ans != Language[0] && ans != Language[1] {
-=======
-		Language = []string{"マレーシア", "英語", LanguageList[rand.Intn(len(LanguageList))]}
-		for i := 0; i < len(LanguageList); i++ {
-			ans := LanguageList[rand.Intn(len(LanguageList))]
-			if ans == Language[0] {
-				continue
-			} else {
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 				Language = append(Language, ans)
 				break
 			}
 		}
 	case "台湾":
-<<<<<<< HEAD
 		Language = []string{"中国語", "英語"}
 		for i := 0; i < len(LanguageList); i++ {
 			ans := LanguageList[rand.Intn(len(LanguageList))]
 			if ans != Language[0] && ans != Language[1] {
-=======
-		Language = []string{"中国語", "英語", LanguageList[rand.Intn(len(LanguageList))]}
-		for i := 0; i < len(LanguageList); i++ {
-			ans := LanguageList[rand.Intn(len(LanguageList))]
-			if ans == Language[0] {
-				continue
-			} else {
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 				Language = append(Language, ans)
 				break
 			}
 		}
 	}
 	return Language
-<<<<<<< HEAD
-=======
->>>>>>> parent of f9b9b1f (delete bug)
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 }
 
 func RandomEducation() string {
@@ -530,18 +366,8 @@ func SwitchAge(Y, M, D int) int32 {
 }
 
 func RandomTT() string {
-<<<<<<< HEAD
 	t := []string{"趣味", "恋人", "相伴"}
 	r := seededRand.Intn(3)
-=======
-<<<<<<< HEAD
-	t := []string{"Hobby", "Lover", "Accompany"}
-	r := rand.Intn(3)
-=======
-	t := []string{"趣味", "恋人", "お相伴"}
-	r := seededRand.Intn(3)
->>>>>>> parent of f9b9b1f (delete bug)
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 
 	return t[r]
 }

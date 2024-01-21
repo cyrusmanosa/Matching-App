@@ -1340,25 +1340,14 @@
         ]
       }
     },
-<<<<<<< HEAD
     "/v1/Search_accompany": {
       "get": {
-=======
-<<<<<<< HEAD
-=======
-    "/v1/Search_Accompany": {
-      "post": {
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
         "operationId": "Information_SearchTargetAccompany",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-<<<<<<< HEAD
               "$ref": "#/definitions/pbSearchResponseA"
-=======
-              "$ref": "#/definitions/pbSearchResponse"
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
             }
           },
           "default": {
@@ -1370,19 +1359,10 @@
         },
         "parameters": [
           {
-<<<<<<< HEAD
             "name": "SessionID",
             "in": "query",
             "required": false,
             "type": "string"
-=======
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/pbSearchRequest"
-            }
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
           }
         ],
         "tags": [
@@ -1391,22 +1371,14 @@
       }
     },
     "/v1/Search_hobby": {
-<<<<<<< HEAD
       "get": {
-=======
-      "post": {
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
         "summary": "/ -------- Search --------------",
         "operationId": "Information_SearchTargetHobby",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-<<<<<<< HEAD
               "$ref": "#/definitions/pbSearchResponseH"
-=======
-              "$ref": "#/definitions/pbSearchResponse"
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
             }
           },
           "default": {
@@ -1418,19 +1390,10 @@
         },
         "parameters": [
           {
-<<<<<<< HEAD
             "name": "SessionID",
             "in": "query",
             "required": false,
             "type": "string"
-=======
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/pbSearchRequest"
-            }
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
           }
         ],
         "tags": [
@@ -1439,21 +1402,13 @@
       }
     },
     "/v1/Search_lover": {
-<<<<<<< HEAD
       "get": {
-=======
-      "post": {
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
         "operationId": "Information_SearchTargetLover",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-<<<<<<< HEAD
               "$ref": "#/definitions/pbSearchResponseL"
-=======
-              "$ref": "#/definitions/pbSearchResponse"
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
             }
           },
           "default": {
@@ -1465,19 +1420,10 @@
         },
         "parameters": [
           {
-<<<<<<< HEAD
             "name": "SessionID",
             "in": "query",
             "required": false,
             "type": "string"
-=======
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/pbSearchRequest"
-            }
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
           }
         ],
         "tags": [
@@ -1485,10 +1431,6 @@
         ]
       }
     },
-<<<<<<< HEAD
-=======
->>>>>>> parent of f9b9b1f (delete bug)
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
     "/v1/Sign_Up": {
       "post": {
         "summary": "/ SignUp",
@@ -2864,7 +2806,6 @@
         }
       }
     },
-<<<<<<< HEAD
     "pbSearchResponseA": {
       "type": "object",
       "properties": {
@@ -2889,31 +2830,6 @@
         }
       }
     },
-=======
-<<<<<<< HEAD
-=======
-    "pbSearchRequest": {
-      "type": "object",
-      "properties": {
-        "SessionID": {
-          "type": "string"
-        }
-      }
-    },
-    "pbSearchResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "rank": {
-          "type": "string"
-        }
-      }
-    },
->>>>>>> parent of f9b9b1f (delete bug)
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
     "pbSendEmailRequest": {
       "type": "object",
       "properties": {

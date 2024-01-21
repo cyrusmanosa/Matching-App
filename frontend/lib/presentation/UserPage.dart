@@ -1,24 +1,16 @@
-<<<<<<< HEAD
 import 'dart:typed_data';
-=======
-import 'dart:io';
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/pb/canChange.pb.dart';
 import 'package:dating_your_date/pb/fix.pb.dart';
 import 'package:dating_your_date/presentation/ChatBox.dart';
 import 'package:dating_your_date/presentation/Profile/widgets/showDataBar.dart';
-<<<<<<< HEAD
 import 'package:dating_your_date/widgets/Custom_Show_Image.dart';
-=======
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 import 'package:dating_your_date/widgets/app_bar/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/button/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 
 class UserPage extends StatefulWidget {
-<<<<<<< HEAD
   UserPage({super.key, this.canData, this.fixData, this.img, this.allImage});
 
   final Fix? fixData;
@@ -26,13 +18,6 @@ class UserPage extends StatefulWidget {
   final CanChange? canData;
   final List<Uint8List>? allImage;
 
-=======
-  UserPage({super.key, this.canData, this.fixData, this.img});
-
-  final Fix? fixData;
-  final List<File>? img;
-  final CanChange? canData;
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
   @override
   State<UserPage> createState() => _UserPageState();
 }
@@ -51,7 +36,6 @@ class _UserPageState extends State<UserPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // image
-<<<<<<< HEAD
             // Container(
             //   decoration: BoxDecoration(shape: BoxShape.circle),
             //   child: CircleAvatar(radius: 80, backgroundImage: MemoryImage(widget.img!)),
@@ -59,13 +43,6 @@ class _UserPageState extends State<UserPage> {
             // SizedBox(height: mediaH / 50),
 
             _buildImages(context, mediaH, mediaW),
-=======
-            Container(
-              decoration: BoxDecoration(shape: BoxShape.circle),
-              child: CircleAvatar(radius: 80, backgroundImage: FileImage(widget.img![0])),
-            ),
-            SizedBox(height: mediaH / 50),
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 
             // name
             Text(
@@ -95,7 +72,6 @@ class _UserPageState extends State<UserPage> {
     );
   }
 
-<<<<<<< HEAD
   Widget _buildImages(BuildContext context, double mediaH, double mediaW) {
     return SizedBox(
       child: Container(
@@ -119,8 +95,6 @@ class _UserPageState extends State<UserPage> {
     );
   }
 
-=======
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
   /// Part 1
   Widget _buildPart1(BuildContext context, double mediaH, double mediaW) {
     return Padding(
@@ -239,11 +213,7 @@ class _UserPageState extends State<UserPage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-<<<<<<< HEAD
               builder: (context) => ChatBox(name: widget.canData!.nickName, imageUrl: widget.img!, targetid: widget.canData!.userID)),
-=======
-              builder: (context) => ChatBox(name: widget.canData!.nickName, imageUrl: widget.img![0], targetid: widget.canData!.userID)),
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
         );
       },
     );

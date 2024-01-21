@@ -13,14 +13,7 @@ import (
 )
 
 func TestCreateRandomUserFixInformaion(t *testing.T) {
-<<<<<<< HEAD
 	for i := 0; i < 100; i++ {
-=======
-<<<<<<< HEAD
-	CreateRandomUserFixInformaion(t)
-=======
-	for i := 0; i < 50; i++ {
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 		arg := CreateRandomUserFixInformaion(t)
 		CreateRandomImage(t, arg)
 		CreateRandomUserCanChangeInformation(t, arg)
@@ -29,10 +22,7 @@ func TestCreateRandomUserFixInformaion(t *testing.T) {
 		CreateRandomAccompanyRequest(t, arg)
 		CreateRandomPayment(t, arg)
 		CreateRandomContact(t, arg)
-<<<<<<< HEAD
 		///----------------------------------------------------------------
-=======
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 		arg1 := CreateRandomUserFixInformaion(t)
 		CreateRandomImage(t, arg1)
 		CreateRandomUserCanChangeInformation(t, arg1)
@@ -41,10 +31,7 @@ func TestCreateRandomUserFixInformaion(t *testing.T) {
 		CreateRandomAccompanyRequest(t, arg1)
 		CreateRandomPayment(t, arg1)
 		CreateRandomContact(t, arg1)
-<<<<<<< HEAD
 		///----------------------------------------------------------------
-=======
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 		arg2 := CreateRandomUserFixInformaion(t)
 		CreateRandomImage(t, arg2)
 		CreateRandomUserCanChangeInformation(t, arg2)
@@ -53,10 +40,7 @@ func TestCreateRandomUserFixInformaion(t *testing.T) {
 		CreateRandomAccompanyRequest(t, arg2)
 		CreateRandomPayment(t, arg2)
 		CreateRandomContact(t, arg2)
-<<<<<<< HEAD
 		///----------------------------------------------------------------
-=======
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 		arg3 := CreateRandomUserFixInformaion(t)
 		CreateRandomImage(t, arg3)
 		CreateRandomUserCanChangeInformation(t, arg3)
@@ -67,10 +51,6 @@ func TestCreateRandomUserFixInformaion(t *testing.T) {
 		CreateRandomContact(t, arg3)
 		CretaRandomTargetUserList(t, arg, arg1, arg2, arg3)
 	}
-<<<<<<< HEAD
-=======
->>>>>>> parent of f9b9b1f (delete bug)
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 }
 
 func CreateRandomUserFixInformaion(t *testing.T) Fixinformation {

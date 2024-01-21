@@ -1,24 +1,9 @@
-<<<<<<< HEAD
 import 'package:dating_your_date/core/app_export.dart';
-=======
-import 'dart:io';
-
-import 'package:dating_your_date/theme/custom_text_style.dart';
-import 'package:dating_your_date/theme/theme_helper.dart';
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 import 'package:dating_your_date/widgets/custom_sideBar.dart';
 import 'package:flutter/material.dart';
 
 class SideBar extends StatefulWidget {
-<<<<<<< HEAD
   SideBar({Key? key}) : super(key: key);
-=======
-  SideBar({Key? key, this.name, this.imageUrl, this.purpose}) : super(key: key);
-
-  final String? purpose;
-  final String? name;
-  final File? imageUrl;
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
 
   @override
   State<StatefulWidget> createState() => _SideBarState();
@@ -41,10 +26,6 @@ class _SideBarState extends State<SideBar> {
             Text("2023-11-01から", style: TextStyle(color: appTheme.grey800)),
             SizedBox(height: mediaH / 300),
 
-<<<<<<< HEAD
-=======
-            _buildUserRow(context, mediaH, mediaW),
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
             _buildCheckPointRow(context, mediaH, mediaW),
 
             // 写真解放
@@ -72,36 +53,6 @@ class _SideBarState extends State<SideBar> {
     );
   }
 
-<<<<<<< HEAD
-=======
-  /// User data box
-  Widget _buildUserRow(BuildContext context, double mediaH, double mediaW) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: mediaW / 100),
-      padding: EdgeInsets.symmetric(horizontal: mediaW / 30, vertical: mediaH / 100),
-      decoration: BoxDecoration(
-        color: appTheme.white,
-        borderRadius: BorderRadius.circular(30),
-      ),
-      child: Row(
-        children: [
-          CircleAvatar(backgroundImage: FileImage(widget.imageUrl!), maxRadius: 25),
-          Padding(
-            padding: EdgeInsets.only(left: mediaW / 75),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(widget.name!, style: CustomTextStyles.sideBarTitle),
-                Text(widget.purpose!, style: CustomTextStyles.sideBarTitle),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
->>>>>>> 538c5dbae4fcec00a3068062aca711dbf2f2ae8a
   /// item Title
   Widget _buildCheckPointRow(BuildContext context, double mediaH, double mediaW) {
     return Padding(
