@@ -260,15 +260,15 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
-    return Scaffold(
-      appBar: buildAppBar(context, "相伴の条件更改", true),
-      resizeToAvoidBottomInset: true,
-      backgroundColor: appTheme.bgColor,
-      body: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).requestFocus(FocusNode());
-        },
-        child: Container(
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child: Scaffold(
+        appBar: buildAppBar(context, "相伴の条件更改", true),
+        resizeToAvoidBottomInset: true,
+        backgroundColor: appTheme.bgColor,
+        body: Container(
           child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 50),
             child: Column(

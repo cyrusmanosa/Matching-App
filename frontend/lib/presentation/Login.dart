@@ -97,17 +97,17 @@ class _LoginState extends State<Login> {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Scaffold(
-          appBar: AppBar(backgroundColor: Colors.transparent, systemOverlayStyle: SystemUiOverlayStyle.dark, toolbarHeight: 0),
-          backgroundColor: appTheme.bgColor,
-          resizeToAvoidBottomInset: true,
-          body: GestureDetector(
-            onTap: () {
-              FocusScope.of(context).requestFocus(FocusNode());
-            },
-            child: SingleChildScrollView(
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return Scaffold(
+            appBar: AppBar(backgroundColor: Colors.transparent, systemOverlayStyle: SystemUiOverlayStyle.dark, toolbarHeight: 0),
+            backgroundColor: appTheme.bgColor,
+            resizeToAvoidBottomInset: true,
+            body: SingleChildScrollView(
               padding: EdgeInsets.symmetric(horizontal: mediaW / 10),
               child: Column(
                 children: [
@@ -162,9 +162,9 @@ class _LoginState extends State<Login> {
                 ],
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 

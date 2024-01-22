@@ -272,15 +272,15 @@ class _LoverConditionState extends State<LoverCondition> {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
-    return Scaffold(
-      appBar: buildAppBar(context, "恋人の条件", true),
-      resizeToAvoidBottomInset: true,
-      backgroundColor: appTheme.bgColor,
-      body: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).requestFocus(FocusNode());
-        },
-        child: SingleChildScrollView(
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child: Scaffold(
+        appBar: buildAppBar(context, "恋人の条件", true),
+        resizeToAvoidBottomInset: true,
+        backgroundColor: appTheme.bgColor,
+        body: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 50),
           child: Column(
             children: [

@@ -174,15 +174,15 @@ class _InformationEditState extends State<InformationEdit> {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
-    return Scaffold(
-      appBar: _buildheader(context, mediaH, mediaW),
-      backgroundColor: appTheme.bgColor,
-      resizeToAvoidBottomInset: true,
-      body: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).requestFocus(FocusNode());
-        },
-        child: SingleChildScrollView(
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child: Scaffold(
+        appBar: _buildheader(context, mediaH, mediaW),
+        backgroundColor: appTheme.bgColor,
+        resizeToAvoidBottomInset: true,
+        body: SingleChildScrollView(
           child: Column(
             children: [
               // photos

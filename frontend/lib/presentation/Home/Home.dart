@@ -155,32 +155,37 @@ class _HomeState extends State<Home> {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
-    return Scaffold(
-      appBar: buildAppBar(context, "ホーム", false),
-      backgroundColor: appTheme.bgColor,
-      body: Column(
-        children: [
-          if (allTargetImage.isNotEmpty)
-            SizedBox(
-              height: mediaH / 1.35,
-              child: ListView.separated(
-                padding: EdgeInsets.symmetric(horizontal: mediaW / 10),
-                scrollDirection: Axis.horizontal,
-                separatorBuilder: (context, index) => SizedBox(width: mediaW / 20),
-                itemCount: allicon.length,
-                itemBuilder: (context, index) {
-                  return MainframeItemWidget(
-                    allImage: allTargetImage[index],
-                    mediaH: mediaH,
-                    mediaW: mediaW,
-                    img: allicon[index],
-                    fix: allTargetFix[index],
-                    canChange: allTargetCanChange[index],
-                  );
-                },
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child: Scaffold(
+        appBar: buildAppBar(context, "ホーム", false),
+        backgroundColor: appTheme.bgColor,
+        body: Column(
+          children: [
+            if (allTargetImage.isNotEmpty)
+              SizedBox(
+                height: mediaH / 1.35,
+                child: ListView.separated(
+                  padding: EdgeInsets.symmetric(horizontal: mediaW / 10),
+                  scrollDirection: Axis.horizontal,
+                  separatorBuilder: (context, index) => SizedBox(width: mediaW / 20),
+                  itemCount: allicon.length,
+                  itemBuilder: (context, index) {
+                    return MainframeItemWidget(
+                      allImage: allTargetImage[index],
+                      mediaH: mediaH,
+                      mediaW: mediaW,
+                      img: allicon[index],
+                      fix: allTargetFix[index],
+                      canChange: allTargetCanChange[index],
+                    );
+                  },
+                ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
