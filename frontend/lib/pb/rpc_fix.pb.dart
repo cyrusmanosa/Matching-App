@@ -13,8 +13,8 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'fix.pb.dart' as $24;
-import 'google/protobuf/timestamp.pb.dart' as $17;
+import 'fix.pb.dart' as $25;
+import 'google/protobuf/timestamp.pb.dart' as $18;
 
 /// Create
 class CreateFixRequest extends $pb.GeneratedMessage {
@@ -141,8 +141,8 @@ class CreateFixResponse extends $pb.GeneratedMessage {
   factory CreateFixResponse({
     $core.String? sessionsID,
     $core.String? email,
-    $17.Timestamp? createAt,
-    $17.Timestamp? accessTokenExpiresAt,
+    $18.Timestamp? createAt,
+    $18.Timestamp? accessTokenExpiresAt,
   }) {
     final $result = create();
     if (sessionsID != null) {
@@ -166,8 +166,8 @@ class CreateFixResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateFixResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'SessionsID', protoName: 'SessionsID')
     ..aOS(2, _omitFieldNames ? '' : 'Email', protoName: 'Email')
-    ..aOM<$17.Timestamp>(3, _omitFieldNames ? '' : 'CreateAt', protoName: 'CreateAt', subBuilder: $17.Timestamp.create)
-    ..aOM<$17.Timestamp>(4, _omitFieldNames ? '' : 'AccessTokenExpiresAt', protoName: 'AccessTokenExpiresAt', subBuilder: $17.Timestamp.create)
+    ..aOM<$18.Timestamp>(3, _omitFieldNames ? '' : 'CreateAt', protoName: 'CreateAt', subBuilder: $18.Timestamp.create)
+    ..aOM<$18.Timestamp>(4, _omitFieldNames ? '' : 'AccessTokenExpiresAt', protoName: 'AccessTokenExpiresAt', subBuilder: $18.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -211,26 +211,26 @@ class CreateFixResponse extends $pb.GeneratedMessage {
   void clearEmail() => clearField(2);
 
   @$pb.TagNumber(3)
-  $17.Timestamp get createAt => $_getN(2);
+  $18.Timestamp get createAt => $_getN(2);
   @$pb.TagNumber(3)
-  set createAt($17.Timestamp v) { setField(3, v); }
+  set createAt($18.Timestamp v) { setField(3, v); }
   @$pb.TagNumber(3)
   $core.bool hasCreateAt() => $_has(2);
   @$pb.TagNumber(3)
   void clearCreateAt() => clearField(3);
   @$pb.TagNumber(3)
-  $17.Timestamp ensureCreateAt() => $_ensure(2);
+  $18.Timestamp ensureCreateAt() => $_ensure(2);
 
   @$pb.TagNumber(4)
-  $17.Timestamp get accessTokenExpiresAt => $_getN(3);
+  $18.Timestamp get accessTokenExpiresAt => $_getN(3);
   @$pb.TagNumber(4)
-  set accessTokenExpiresAt($17.Timestamp v) { setField(4, v); }
+  set accessTokenExpiresAt($18.Timestamp v) { setField(4, v); }
   @$pb.TagNumber(4)
   $core.bool hasAccessTokenExpiresAt() => $_has(3);
   @$pb.TagNumber(4)
   void clearAccessTokenExpiresAt() => clearField(4);
   @$pb.TagNumber(4)
-  $17.Timestamp ensureAccessTokenExpiresAt() => $_ensure(3);
+  $18.Timestamp ensureAccessTokenExpiresAt() => $_ensure(3);
 }
 
 /// Get
@@ -300,7 +300,7 @@ class GetFixRequest extends $pb.GeneratedMessage {
 
 class GetFixResponse extends $pb.GeneratedMessage {
   factory GetFixResponse({
-    $24.Fix? fix,
+    $25.Fix? fix,
   }) {
     final $result = create();
     if (fix != null) {
@@ -313,7 +313,7 @@ class GetFixResponse extends $pb.GeneratedMessage {
   factory GetFixResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetFixResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$24.Fix>(1, _omitFieldNames ? '' : 'fix', subBuilder: $24.Fix.create)
+    ..aOM<$25.Fix>(1, _omitFieldNames ? '' : 'fix', subBuilder: $25.Fix.create)
     ..hasRequiredFields = false
   ;
 
@@ -339,15 +339,15 @@ class GetFixResponse extends $pb.GeneratedMessage {
   static GetFixResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $24.Fix get fix => $_getN(0);
+  $25.Fix get fix => $_getN(0);
   @$pb.TagNumber(1)
-  set fix($24.Fix v) { setField(1, v); }
+  set fix($25.Fix v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasFix() => $_has(0);
   @$pb.TagNumber(1)
   void clearFix() => clearField(1);
   @$pb.TagNumber(1)
-  $24.Fix ensureFix() => $_ensure(0);
+  $25.Fix ensureFix() => $_ensure(0);
 }
 
 /// Delete

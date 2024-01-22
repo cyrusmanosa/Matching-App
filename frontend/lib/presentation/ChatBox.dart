@@ -88,6 +88,7 @@ class _ChatBoxState extends State<ChatBox> {
         media: newMsgTextController.text,
       );
       await GrpcChatService.client.createChatRecord(myRequest);
+      // target
       final targetRequest = CreateChatRecordRequest(
         userID: widget.targetid,
         targetID: uid,

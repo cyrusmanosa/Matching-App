@@ -14,6 +14,7 @@ import "rpc_lover.proto";
 import "rpc_login.proto";
 import "rpc_payment.proto";
 import "rpc_password.proto";
+import "rpc_ResetPasswordEmail.proto";
 import "rpc_session.proto";
 import "rpc_search.proto";
 import "rpc_checkEmail.proto";
@@ -295,6 +296,18 @@ service Information {
     rpc GetUserID(GetUserIDRequest) returns (GetUserIDResponse){
         option (google.api.http) = {
             get: "/v1/Get_UserID"
+        };
+    }
+
+    // Reset Password Email
+    rpc EmailResetPassword(ResetPwEmailRequest) returns (ResetPwEmailResponse){
+        option (google.api.http) = {
+            get: "/v1/Reset_Password_Email"
+        };
+    }
+    rpc ResetPwEmailConfirm(ResetPwEmailConfirmRequest) returns (google.protobuf.Empty){
+        option (google.api.http) = {
+            get: "/v1/Reset_Password_Email_Confirm"
         };
     }
 /// -------- Search --------------

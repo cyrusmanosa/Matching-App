@@ -1,8 +1,6 @@
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
-import 'package:dating_your_date/models/GlobalModel.dart';
-import 'package:dating_your_date/pb/rpc_password.pb.dart';
-import 'package:dating_your_date/presentation/ContainerScreen.dart';
+import 'package:dating_your_date/pb/rpc_ResetPasswordEmail.pb.dart';
 import 'package:dating_your_date/widgets/app_bar/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/Custom_IconLogoBox.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
@@ -12,14 +10,14 @@ import 'package:dating_your_date/widgets/button/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
-class NewPasswordSetup extends StatefulWidget {
-  NewPasswordSetup({Key? key}) : super(key: key);
+class NewPasswordEmailSetup extends StatefulWidget {
+  NewPasswordEmailSetup({Key? key}) : super(key: key);
 
   @override
-  _NewPasswordSetupState createState() => _NewPasswordSetupState();
+  _NewPasswordSetupEmailState createState() => _NewPasswordSetupEmailState();
 }
 
-class _NewPasswordSetupState extends State<NewPasswordSetup> {
+class _NewPasswordSetupEmailState extends State<NewPasswordEmailSetup> {
   TextEditingController newPasswordSetupController = TextEditingController();
   TextEditingController newPasswordSetupConfirmController = TextEditingController();
 
@@ -31,16 +29,15 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
       await showErrorDialog(context, "パスワードの組み合わせは英数字は必要です");
     } else {
       try {
-        String? apiKeyS = await globalSession.read(key: 'SessionId');
-        final request = ResetPasswordRequest(
-          sessionID: apiKeyS,
+        final request = ResetPwEmailConfirmRequest(
+          email: null,
           password: newPasswordSetupController.text,
         );
-        await GrpcInfoService.client.resetPassword(request);
+        await GrpcInfoService.client.resetPwEmailConfirm(request);
         await showLogoDialog(context, "新しいパスワード設定しました", false);
         await Future.delayed(Duration(seconds: 1));
         Navigator.pop(context);
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ContainerScreen(number: 3)));
+        Navigator.popAndPushNamed(context, AppRoutes.login);
       } on GrpcError {
         Navigator.pop(context);
         await showErrorDialog(context, "エラー：検証可能な入力データがありません。");

@@ -27,18 +27,17 @@ class ImageConstant {
   // Common images
   static String imgLogo = '$imagePath/img_logo.png';
   static String imgSlogan = '$imagePath/img_slogan.png';
-  static String imgHome = '$imagePath/img_nav.svg';
-  static String imgTarget = '$imagePath/img_nav_primary.svg';
-  static String imgChat = '$imagePath/img_nav_primary_41x41.svg';
-  static String imgProfile = '$imagePath/img_nav_41x41.svg';
-  static String imgTarget41x44 = '$imagePath/img_nav_primary_41x44.svg';
-  static String imgNavCyan600 = '$imagePath/img_nav_cyan_600.svg';
-  static String imgWarning = '$imagePath/img_warning.svg';
   static String imgUser = '$imagePath/img_user.svg';
-  static String imgNavCyan60041x41 = '$imagePath/img_nav_cyan_600_41x41.svg';
-  static String imgMenu = '$imagePath/img_menu.svg';
+  static String imgWarning = '$imagePath/img_warning.svg';
   static String imgVectorgrey500 = '$imagePath/img_vector_grey_600_01.svg';
-  static String imgPhotoSet = '$imagePath/img_photo_set.svg';
-  static String imgNav1 = '$imagePath/img_nav_1.svg';
-  static String imageNotFound = 'assets/images/image_not_found.png';
+
+  static String imgHomeW = '$imagePath/img_nav_h_white.svg';
+  static String imgTargetW = '$imagePath/img_nav_t_white.svg';
+  static String imgChatW = '$imagePath/img_nav_c_white.svg';
+  static String imgProfileW = '$imagePath/img_nav_p_white.svg';
+
+  static String imgHomeB = '$imagePath/img_nav_h_black.svg';
+  static String imgTargetB = '$imagePath/img_nav_t_black.svg';
+  static String imgChatB = '$imagePath/img_nav_c_black.svg';
+  static String imgProfileB = '$imagePath/img_nav_p_black.svg';
 }

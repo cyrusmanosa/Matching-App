@@ -40,7 +40,7 @@ class _ProfileButtonState extends State<ProfileButton> {
                   child: Icon(
                     widget.iconData!,
                     color: appTheme.pinkA100,
-                    size: widget.mediaW! / 8,
+                    size: widget.mediaW! / 10,
                   ),
                 ),
                 SizedBox(height: widget.mediaH! / 130),

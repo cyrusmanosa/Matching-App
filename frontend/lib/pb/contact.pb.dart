@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $17;
+import 'google/protobuf/timestamp.pb.dart' as $18;
 
 class Contact extends $pb.GeneratedMessage {
   factory Contact({
@@ -22,7 +22,7 @@ class Contact extends $pb.GeneratedMessage {
     $core.String? contactType,
     $core.String? message,
     $core.String? status,
-    $17.Timestamp? contactAt,
+    $18.Timestamp? contactAt,
   }) {
     final $result = create();
     if (contactID != null) {
@@ -55,7 +55,7 @@ class Contact extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'ContactType', protoName: 'ContactType')
     ..aOS(4, _omitFieldNames ? '' : 'Message', protoName: 'Message')
     ..aOS(5, _omitFieldNames ? '' : 'Status', protoName: 'Status')
-    ..aOM<$17.Timestamp>(6, _omitFieldNames ? '' : 'ContactAt', protoName: 'ContactAt', subBuilder: $17.Timestamp.create)
+    ..aOM<$18.Timestamp>(6, _omitFieldNames ? '' : 'ContactAt', protoName: 'ContactAt', subBuilder: $18.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -126,15 +126,15 @@ class Contact extends $pb.GeneratedMessage {
   void clearStatus() => clearField(5);
 
   @$pb.TagNumber(6)
-  $17.Timestamp get contactAt => $_getN(5);
+  $18.Timestamp get contactAt => $_getN(5);
   @$pb.TagNumber(6)
-  set contactAt($17.Timestamp v) { setField(6, v); }
+  set contactAt($18.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasContactAt() => $_has(5);
   @$pb.TagNumber(6)
   void clearContactAt() => clearField(6);
   @$pb.TagNumber(6)
-  $17.Timestamp ensureContactAt() => $_ensure(5);
+  $18.Timestamp ensureContactAt() => $_ensure(5);
 }
 
 

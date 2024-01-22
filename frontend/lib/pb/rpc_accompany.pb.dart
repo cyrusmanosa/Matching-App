@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'accompany.pb.dart' as $18;
+import 'accompany.pb.dart' as $19;
 
 /// Create
 class CreateAccompanyRequest extends $pb.GeneratedMessage {
@@ -118,7 +118,7 @@ class CreateAccompanyRequest extends $pb.GeneratedMessage {
 
 class CreateAccompanyResponse extends $pb.GeneratedMessage {
   factory CreateAccompanyResponse({
-    $18.Accompany? ac,
+    $19.Accompany? ac,
   }) {
     final $result = create();
     if (ac != null) {
@@ -131,7 +131,7 @@ class CreateAccompanyResponse extends $pb.GeneratedMessage {
   factory CreateAccompanyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateAccompanyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$18.Accompany>(1, _omitFieldNames ? '' : 'ac', subBuilder: $18.Accompany.create)
+    ..aOM<$19.Accompany>(1, _omitFieldNames ? '' : 'ac', subBuilder: $19.Accompany.create)
     ..hasRequiredFields = false
   ;
 
@@ -157,15 +157,15 @@ class CreateAccompanyResponse extends $pb.GeneratedMessage {
   static CreateAccompanyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $18.Accompany get ac => $_getN(0);
+  $19.Accompany get ac => $_getN(0);
   @$pb.TagNumber(1)
-  set ac($18.Accompany v) { setField(1, v); }
+  set ac($19.Accompany v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAc() => $_has(0);
   @$pb.TagNumber(1)
   void clearAc() => clearField(1);
   @$pb.TagNumber(1)
-  $18.Accompany ensureAc() => $_ensure(0);
+  $19.Accompany ensureAc() => $_ensure(0);
 }
 
 /// Get
@@ -221,7 +221,7 @@ class GetAccompanyRequest extends $pb.GeneratedMessage {
 
 class GetAccompanyResponse extends $pb.GeneratedMessage {
   factory GetAccompanyResponse({
-    $18.Accompany? ac,
+    $19.Accompany? ac,
   }) {
     final $result = create();
     if (ac != null) {
@@ -234,7 +234,7 @@ class GetAccompanyResponse extends $pb.GeneratedMessage {
   factory GetAccompanyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetAccompanyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$18.Accompany>(1, _omitFieldNames ? '' : 'ac', subBuilder: $18.Accompany.create)
+    ..aOM<$19.Accompany>(1, _omitFieldNames ? '' : 'ac', subBuilder: $19.Accompany.create)
     ..hasRequiredFields = false
   ;
 
@@ -260,15 +260,15 @@ class GetAccompanyResponse extends $pb.GeneratedMessage {
   static GetAccompanyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $18.Accompany get ac => $_getN(0);
+  $19.Accompany get ac => $_getN(0);
   @$pb.TagNumber(1)
-  set ac($18.Accompany v) { setField(1, v); }
+  set ac($19.Accompany v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAc() => $_has(0);
   @$pb.TagNumber(1)
   void clearAc() => clearField(1);
   @$pb.TagNumber(1)
-  $18.Accompany ensureAc() => $_ensure(0);
+  $19.Accompany ensureAc() => $_ensure(0);
 }
 
 /// Update
@@ -374,7 +374,7 @@ class UpdateAccompanyRequest extends $pb.GeneratedMessage {
 
 class UpdateAccompanyResponse extends $pb.GeneratedMessage {
   factory UpdateAccompanyResponse({
-    $18.Accompany? ac,
+    $19.Accompany? ac,
   }) {
     final $result = create();
     if (ac != null) {
@@ -387,7 +387,7 @@ class UpdateAccompanyResponse extends $pb.GeneratedMessage {
   factory UpdateAccompanyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateAccompanyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$18.Accompany>(1, _omitFieldNames ? '' : 'ac', subBuilder: $18.Accompany.create)
+    ..aOM<$19.Accompany>(1, _omitFieldNames ? '' : 'ac', subBuilder: $19.Accompany.create)
     ..hasRequiredFields = false
   ;
 
@@ -413,15 +413,15 @@ class UpdateAccompanyResponse extends $pb.GeneratedMessage {
   static UpdateAccompanyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $18.Accompany get ac => $_getN(0);
+  $19.Accompany get ac => $_getN(0);
   @$pb.TagNumber(1)
-  set ac($18.Accompany v) { setField(1, v); }
+  set ac($19.Accompany v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasAc() => $_has(0);
   @$pb.TagNumber(1)
   void clearAc() => clearField(1);
   @$pb.TagNumber(1)
-  $18.Accompany ensureAc() => $_ensure(0);
+  $19.Accompany ensureAc() => $_ensure(0);
 }
 
 /// Delete

@@ -9,10 +9,10 @@ class CustomBottomBar extends StatelessWidget {
   final Function(int)? onChanged;
 
   List<BottomMenuModel> bottomMenuList = [
-    BottomMenuModel(icon: ImageConstant.imgHome, activeIcon: ImageConstant.imgHome, label: "ホーム"),
-    BottomMenuModel(icon: ImageConstant.imgTarget, activeIcon: ImageConstant.imgTarget, label: "ターゲット"),
-    BottomMenuModel(icon: ImageConstant.imgChat, activeIcon: ImageConstant.imgChat, label: "チャット"),
-    BottomMenuModel(icon: ImageConstant.imgProfile, activeIcon: ImageConstant.imgProfile, label: "プロフィール"),
+    BottomMenuModel(icon: ImageConstant.imgHomeW, activeIcon: ImageConstant.imgHomeB, label: "ホーム"),
+    BottomMenuModel(icon: ImageConstant.imgTargetW, activeIcon: ImageConstant.imgTargetB, label: "ターゲット"),
+    BottomMenuModel(icon: ImageConstant.imgChatW, activeIcon: ImageConstant.imgChatB, label: "チャット"),
+    BottomMenuModel(icon: ImageConstant.imgProfileW, activeIcon: ImageConstant.imgProfileB, label: "プロフィール"),
   ];
 
   @override

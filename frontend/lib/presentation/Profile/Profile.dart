@@ -293,7 +293,7 @@ class _ProfileState extends State<Profile> {
             SizedBox(height: mediaH / 30),
             // Button 2rd
             Container(
-              padding: EdgeInsets.symmetric(horizontal: mediaW / 20),
+              padding: EdgeInsets.symmetric(horizontal: mediaW / 25),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

@@ -197,9 +197,9 @@ func TestFixSearchLover(t *testing.T) {
 	max := user.Age + 10
 	se := FixSearchLoverParams{
 		UserID: user.UserID,
-		Age:    &user.Age,
-		Age_2:  &max,
-		Gender: &user.Gender,
+		Age:    user.Age,
+		Age_2:  max,
+		Gender: user.Gender,
 	}
 	searchf, err := testinfoQueries.FixSearchLover(context.Background(), se)
 	require.NoError(t, err)

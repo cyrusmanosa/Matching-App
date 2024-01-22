@@ -149,8 +149,8 @@ func TestCanChangeSearchAccompany(t *testing.T) {
 	se := CanChangeSearchAccompanyParams{
 		UserID:        Can.UserID,
 		Speaklanguage: &Can.Speaklanguage,
-		AccompanyType: &Can.AccompanyType,
-		Sociability:   &Can.Sociability,
+		AccompanyType: Can.AccompanyType,
+		Sociability:   Can.Sociability,
 	}
 
 	cc, err := testinfoQueries.CanChangeSearchAccompany(context.Background(), se)
@@ -165,9 +165,9 @@ func TestCanChangeSearchHobby(t *testing.T) {
 	se := CanChangeSearchHobbyParams{
 		UserID:        Can.UserID,
 		Speaklanguage: &Can.Speaklanguage,
-		HobbyType:     &Can.HobbyType,
+		HobbyType:     Can.HobbyType,
 		City:          &Can.City,
-		Experience:    &Can.Experience,
+		Experience:    Can.Experience,
 	}
 
 	cc, err := testinfoQueries.CanChangeSearchHobby(context.Background(), se)

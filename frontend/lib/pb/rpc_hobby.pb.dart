@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'hobby.pb.dart' as $25;
+import 'hobby.pb.dart' as $26;
 
 /// Create
 class CreateHobbyRequest extends $pb.GeneratedMessage {
@@ -140,7 +140,7 @@ class CreateHobbyRequest extends $pb.GeneratedMessage {
 
 class CreateHobbyResponse extends $pb.GeneratedMessage {
   factory CreateHobbyResponse({
-    $25.Hobby? h,
+    $26.Hobby? h,
   }) {
     final $result = create();
     if (h != null) {
@@ -153,7 +153,7 @@ class CreateHobbyResponse extends $pb.GeneratedMessage {
   factory CreateHobbyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateHobbyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$25.Hobby>(1, _omitFieldNames ? '' : 'h', subBuilder: $25.Hobby.create)
+    ..aOM<$26.Hobby>(1, _omitFieldNames ? '' : 'h', subBuilder: $26.Hobby.create)
     ..hasRequiredFields = false
   ;
 
@@ -179,15 +179,15 @@ class CreateHobbyResponse extends $pb.GeneratedMessage {
   static CreateHobbyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $25.Hobby get h => $_getN(0);
+  $26.Hobby get h => $_getN(0);
   @$pb.TagNumber(1)
-  set h($25.Hobby v) { setField(1, v); }
+  set h($26.Hobby v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasH() => $_has(0);
   @$pb.TagNumber(1)
   void clearH() => clearField(1);
   @$pb.TagNumber(1)
-  $25.Hobby ensureH() => $_ensure(0);
+  $26.Hobby ensureH() => $_ensure(0);
 }
 
 /// Get
@@ -243,7 +243,7 @@ class GetHobbyRequest extends $pb.GeneratedMessage {
 
 class GetHobbyResponse extends $pb.GeneratedMessage {
   factory GetHobbyResponse({
-    $25.Hobby? h,
+    $26.Hobby? h,
   }) {
     final $result = create();
     if (h != null) {
@@ -256,7 +256,7 @@ class GetHobbyResponse extends $pb.GeneratedMessage {
   factory GetHobbyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetHobbyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$25.Hobby>(1, _omitFieldNames ? '' : 'h', subBuilder: $25.Hobby.create)
+    ..aOM<$26.Hobby>(1, _omitFieldNames ? '' : 'h', subBuilder: $26.Hobby.create)
     ..hasRequiredFields = false
   ;
 
@@ -282,15 +282,15 @@ class GetHobbyResponse extends $pb.GeneratedMessage {
   static GetHobbyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $25.Hobby get h => $_getN(0);
+  $26.Hobby get h => $_getN(0);
   @$pb.TagNumber(1)
-  set h($25.Hobby v) { setField(1, v); }
+  set h($26.Hobby v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasH() => $_has(0);
   @$pb.TagNumber(1)
   void clearH() => clearField(1);
   @$pb.TagNumber(1)
-  $25.Hobby ensureH() => $_ensure(0);
+  $26.Hobby ensureH() => $_ensure(0);
 }
 
 /// Update
@@ -418,7 +418,7 @@ class UpdateHobbyRequest extends $pb.GeneratedMessage {
 
 class UpdateHobbyResponse extends $pb.GeneratedMessage {
   factory UpdateHobbyResponse({
-    $25.Hobby? h,
+    $26.Hobby? h,
   }) {
     final $result = create();
     if (h != null) {
@@ -431,7 +431,7 @@ class UpdateHobbyResponse extends $pb.GeneratedMessage {
   factory UpdateHobbyResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateHobbyResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$25.Hobby>(1, _omitFieldNames ? '' : 'h', subBuilder: $25.Hobby.create)
+    ..aOM<$26.Hobby>(1, _omitFieldNames ? '' : 'h', subBuilder: $26.Hobby.create)
     ..hasRequiredFields = false
   ;
 
@@ -457,15 +457,15 @@ class UpdateHobbyResponse extends $pb.GeneratedMessage {
   static UpdateHobbyResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $25.Hobby get h => $_getN(0);
+  $26.Hobby get h => $_getN(0);
   @$pb.TagNumber(1)
-  set h($25.Hobby v) { setField(1, v); }
+  set h($26.Hobby v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasH() => $_has(0);
   @$pb.TagNumber(1)
   void clearH() => clearField(1);
   @$pb.TagNumber(1)
-  $25.Hobby ensureH() => $_ensure(0);
+  $26.Hobby ensureH() => $_ensure(0);
 }
 
 /// Delete

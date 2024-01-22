@@ -30,6 +30,8 @@ dependencies:
   states_rebuilder:
   image:
   xml:
+  uni_links:
+
 
 
 flutter_launcher_icons:

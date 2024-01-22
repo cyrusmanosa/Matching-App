@@ -3,6 +3,7 @@ import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_login.pb.dart';
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/pb/rpc_session.pb.dart';
+import 'package:dating_your_date/presentation/NewPassword_Email_Setup.dart';
 import 'package:dating_your_date/widgets/Custom_Loading.dart';
 import 'package:dating_your_date/widgets/app_bar/custom_Input_bar.dart';
 import 'package:dating_your_date/widgets/button/custom_elevated_button.dart';
@@ -13,9 +14,11 @@ import 'package:flutter/material.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
+import 'package:uni_links/uni_links.dart';
 
 class Login extends StatefulWidget {
   Login({Key? key}) : super(key: key);
+
   @override
   _LoginState createState() => _LoginState();
 }
@@ -24,6 +27,32 @@ class _LoginState extends State<Login> {
   bool passwordVisible = false;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsFlutterBinding.ensureInitialized();
+    initUniLinks(context);
+  }
+
+  void initUniLinks(BuildContext context) async {
+    await getInitialLink();
+    Uri? initialLink = await getInitialUri();
+    if (initialLink != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => NewPasswordEmailSetup()),
+      );
+    }
+    uriLinkStream.listen((Uri? uri) {
+      if (uri != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => NewPasswordEmailSetup()),
+        );
+      }
+    });
+  }
 
   // Grpc
   void loginGrpcUser(BuildContext context) async {
@@ -203,10 +232,15 @@ class _LoginState extends State<Login> {
 
         // SignUp of Facebook
         CustomElevatedButton(
+          isDisabled: true,
           text: "フェイスブックで続ける",
           leftIcon: Container(
             margin: EdgeInsets.only(left: mediaW / 20, right: mediaW / 15),
-            child: CustomImageView(imagePath: ImageConstant.imgLogosfacebook, width: mediaW / 23),
+            child: CustomImageView(
+              imagePath: ImageConstant.imgLogosfacebook,
+              width: mediaW / 23,
+              color: Colors.grey,
+            ),
           ),
           buttonStyle: CustomButtonStyles.fillBlue,
         ),
@@ -214,10 +248,15 @@ class _LoginState extends State<Login> {
 
         // SignUp of Twitter
         CustomElevatedButton(
+          isDisabled: true,
           text: "ツイッターで続ける",
           leftIcon: Container(
             margin: EdgeInsets.only(right: mediaW / 15),
-            child: CustomImageView(imagePath: ImageConstant.imgClose, width: mediaW / 14),
+            child: CustomImageView(
+              imagePath: ImageConstant.imgClose,
+              width: mediaW / 14,
+              color: Colors.grey,
+            ),
           ),
           buttonStyle: CustomButtonStyles.fillDarkgrey,
         ),
@@ -225,13 +264,14 @@ class _LoginState extends State<Login> {
 
         // SignUp of Google
         CustomElevatedButton(
+          isDisabled: true,
           text: "グーグルで続ける",
           leftIcon: Container(
             margin: EdgeInsets.only(right: mediaW / 13),
-            child: CustomImageView(imagePath: ImageConstant.imgDevicongoogle, width: mediaW / 13),
+            // child: CustomImageView(imagePath: ImageConstant.imgDevicongoogle, width: mediaW / 13, color: Colors.grey),
           ),
-          buttonStyle: CustomButtonStyles.outlineGoogleButton,
-          buttonTextStyle: theme.textTheme.displaySmall,
+          // buttonStyle: CustomButtonStyles.outlineGoogleButton,
+          // buttonTextStyle: theme.textTheme.displaySmall,
         ),
       ],
     );

@@ -12,7 +12,6 @@ import (
 var Validate *pb.CheckEmailResponse
 
 func (server *Server) CheckEmail(ctx context.Context, req *pb.CheckEmailRequest) (*pb.CheckEmailResponse, error) {
-
 	_, err := server.infoStore.LoginAtEmail(ctx, req.GetEmail())
 	if err == nil {
 		return nil, status.Errorf(codes.AlreadyExists, "failed to create user: %s", err)

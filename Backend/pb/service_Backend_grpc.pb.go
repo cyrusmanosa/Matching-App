@@ -62,6 +62,8 @@ const (
 	Information_CreatePayment_FullMethodName         = "/pb.Information/CreatePayment"
 	Information_GetPayment_FullMethodName            = "/pb.Information/GetPayment"
 	Information_GetUserID_FullMethodName             = "/pb.Information/GetUserID"
+	Information_EmailResetPassword_FullMethodName    = "/pb.Information/EmailResetPassword"
+	Information_ResetPwEmailConfirm_FullMethodName   = "/pb.Information/ResetPwEmailConfirm"
 	Information_SearchTargetHobby_FullMethodName     = "/pb.Information/SearchTargetHobby"
 	Information_SearchTargetLover_FullMethodName     = "/pb.Information/SearchTargetLover"
 	Information_SearchTargetAccompany_FullMethodName = "/pb.Information/SearchTargetAccompany"
@@ -127,6 +129,9 @@ type InformationClient interface {
 	GetPayment(ctx context.Context, in *GetPaymentRequest, opts ...grpc.CallOption) (*GetPaymentResponse, error)
 	// Session
 	GetUserID(ctx context.Context, in *GetUserIDRequest, opts ...grpc.CallOption) (*GetUserIDResponse, error)
+	// Reset Password Email
+	EmailResetPassword(ctx context.Context, in *ResetPwEmailRequest, opts ...grpc.CallOption) (*ResetPwEmailResponse, error)
+	ResetPwEmailConfirm(ctx context.Context, in *ResetPwEmailConfirmRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// / -------- Search --------------
 	SearchTargetHobby(ctx context.Context, in *SearchRequestH, opts ...grpc.CallOption) (*SearchResponseH, error)
 	SearchTargetLover(ctx context.Context, in *SearchRequestL, opts ...grpc.CallOption) (*SearchResponseL, error)
@@ -519,6 +524,24 @@ func (c *informationClient) GetUserID(ctx context.Context, in *GetUserIDRequest,
 	return out, nil
 }
 
+func (c *informationClient) EmailResetPassword(ctx context.Context, in *ResetPwEmailRequest, opts ...grpc.CallOption) (*ResetPwEmailResponse, error) {
+	out := new(ResetPwEmailResponse)
+	err := c.cc.Invoke(ctx, Information_EmailResetPassword_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *informationClient) ResetPwEmailConfirm(ctx context.Context, in *ResetPwEmailConfirmRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Information_ResetPwEmailConfirm_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *informationClient) SearchTargetHobby(ctx context.Context, in *SearchRequestH, opts ...grpc.CallOption) (*SearchResponseH, error) {
 	out := new(SearchResponseH)
 	err := c.cc.Invoke(ctx, Information_SearchTargetHobby_FullMethodName, in, out, opts...)
@@ -606,6 +629,9 @@ type InformationServer interface {
 	GetPayment(context.Context, *GetPaymentRequest) (*GetPaymentResponse, error)
 	// Session
 	GetUserID(context.Context, *GetUserIDRequest) (*GetUserIDResponse, error)
+	// Reset Password Email
+	EmailResetPassword(context.Context, *ResetPwEmailRequest) (*ResetPwEmailResponse, error)
+	ResetPwEmailConfirm(context.Context, *ResetPwEmailConfirmRequest) (*emptypb.Empty, error)
 	// / -------- Search --------------
 	SearchTargetHobby(context.Context, *SearchRequestH) (*SearchResponseH, error)
 	SearchTargetLover(context.Context, *SearchRequestL) (*SearchResponseL, error)
@@ -742,6 +768,12 @@ func (UnimplementedInformationServer) GetPayment(context.Context, *GetPaymentReq
 }
 func (UnimplementedInformationServer) GetUserID(context.Context, *GetUserIDRequest) (*GetUserIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserID not implemented")
+}
+func (UnimplementedInformationServer) EmailResetPassword(context.Context, *ResetPwEmailRequest) (*ResetPwEmailResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EmailResetPassword not implemented")
+}
+func (UnimplementedInformationServer) ResetPwEmailConfirm(context.Context, *ResetPwEmailConfirmRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResetPwEmailConfirm not implemented")
 }
 func (UnimplementedInformationServer) SearchTargetHobby(context.Context, *SearchRequestH) (*SearchResponseH, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchTargetHobby not implemented")
@@ -1521,6 +1553,42 @@ func _Information_GetUserID_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Information_EmailResetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResetPwEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).EmailResetPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_EmailResetPassword_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).EmailResetPassword(ctx, req.(*ResetPwEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Information_ResetPwEmailConfirm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResetPwEmailConfirmRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).ResetPwEmailConfirm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_ResetPwEmailConfirm_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).ResetPwEmailConfirm(ctx, req.(*ResetPwEmailConfirmRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Information_SearchTargetHobby_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SearchRequestH)
 	if err := dec(in); err != nil {
@@ -1749,6 +1817,14 @@ var Information_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserID",
 			Handler:    _Information_GetUserID_Handler,
+		},
+		{
+			MethodName: "EmailResetPassword",
+			Handler:    _Information_EmailResetPassword_Handler,
+		},
+		{
+			MethodName: "ResetPwEmailConfirm",
+			Handler:    _Information_ResetPwEmailConfirm_Handler,
 		},
 		{
 			MethodName: "SearchTargetHobby",

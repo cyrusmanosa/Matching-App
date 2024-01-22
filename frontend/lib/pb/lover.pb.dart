@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $17;
+import 'google/protobuf/timestamp.pb.dart' as $18;
 
 class Lover extends $pb.GeneratedMessage {
   factory Lover({
@@ -24,7 +24,7 @@ class Lover extends $pb.GeneratedMessage {
     $core.String? gender,
     $core.String? sexual,
     $core.Iterable<$core.String>? speaklanguage,
-    $17.Timestamp? infoChangedAt,
+    $18.Timestamp? infoChangedAt,
   }) {
     final $result = create();
     if (userID != null) {
@@ -65,7 +65,7 @@ class Lover extends $pb.GeneratedMessage {
     ..aOS(5, _omitFieldNames ? '' : 'Gender', protoName: 'Gender')
     ..aOS(6, _omitFieldNames ? '' : 'Sexual', protoName: 'Sexual')
     ..pPS(7, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
-    ..aOM<$17.Timestamp>(8, _omitFieldNames ? '' : 'InfoChangedAt', protoName: 'InfoChangedAt', subBuilder: $17.Timestamp.create)
+    ..aOM<$18.Timestamp>(8, _omitFieldNames ? '' : 'InfoChangedAt', protoName: 'InfoChangedAt', subBuilder: $18.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -142,15 +142,15 @@ class Lover extends $pb.GeneratedMessage {
   $core.List<$core.String> get speaklanguage => $_getList(6);
 
   @$pb.TagNumber(8)
-  $17.Timestamp get infoChangedAt => $_getN(7);
+  $18.Timestamp get infoChangedAt => $_getN(7);
   @$pb.TagNumber(8)
-  set infoChangedAt($17.Timestamp v) { setField(8, v); }
+  set infoChangedAt($18.Timestamp v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasInfoChangedAt() => $_has(7);
   @$pb.TagNumber(8)
   void clearInfoChangedAt() => clearField(8);
   @$pb.TagNumber(8)
-  $17.Timestamp ensureInfoChangedAt() => $_ensure(7);
+  $18.Timestamp ensureInfoChangedAt() => $_ensure(7);
 }
 
 
