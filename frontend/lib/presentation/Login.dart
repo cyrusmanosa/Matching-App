@@ -175,7 +175,6 @@ class _LoginState extends State<Login> {
       controller: emailController,
       textInputType: TextInputType.emailAddress,
       hintText: "example@email.com",
-      focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
       },
@@ -190,7 +189,6 @@ class _LoginState extends State<Login> {
       textInputAction: TextInputAction.done,
       textInputType: TextInputType.visiblePassword,
       obscureText: passwordVisible ? false : true,
-      focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
       },
