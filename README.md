@@ -16,7 +16,7 @@
 * vscode に　plugin ： go , Makefile Tools, WSL をインストール
     * cd Backend 
   　* vscodeのターミナルはWSLを変更 に https://code.visualstudio.com/docs/remote/wsl
-      ## コマンド :
+      ### コマンド :
         # migrate
         * curl -L https://packagecloud.io/golang-migrate/migrate/gpgkey | apt-key add -
         * echo "deb https://packagecloud.io/golang-migrate/migrate/ubuntu/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/migrate.list
