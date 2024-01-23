@@ -161,6 +161,7 @@ class _CanChangeInformation1State extends State<CanChangeInformation1> {
 
               // Button
               _buildNextButton(context),
+              SizedBox(height: mediaH / 25),
             ],
           ),
         ),

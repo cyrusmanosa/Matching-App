@@ -93,7 +93,6 @@ class _ProfileState extends State<Profile> {
       // image
       final imgRequest = GetImagesRequest(sessionID: apiKeyS, userID: userid);
       final imgResponse = await GrpcInfoService.client.getImages(imgRequest);
-
       if (imgResponse.img.img1.isNotEmpty) {
         Uint8List bytes = Uint8List.fromList(imgResponse.img.img1);
         setState(() {

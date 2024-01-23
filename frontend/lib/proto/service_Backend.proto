@@ -17,6 +17,7 @@ import "rpc_password.proto";
 import "rpc_ResetPasswordEmail.proto";
 import "rpc_session.proto";
 import "rpc_search.proto";
+import "rpc_socialmedia.proto";
 import "rpc_checkEmail.proto";
 import "rpc_chatRecord.proto";
 import "google/api/annotations.proto";
@@ -383,6 +384,34 @@ service Chat {
         option (google.api.http) = {
             put: "/v1/Update_Read"
             body: "*"
+        };
+    }
+
+    // Social Media
+
+    rpc CreateSocialMedia(CreateSocialMediaRequest) returns (CreateSocialMediaResponse){
+        option (google.api.http) = {
+            post: "/v1/Create_SocialMedia"
+            body: "*"
+        };
+    }
+
+    rpc UpdateSocialMedia(UpdateSocialMediaRequest) returns (UpdateSocialMediaResponse){
+        option (google.api.http) = {
+            put: "/v1/Update_SocialMedia"
+            body: "*"
+        };
+    }
+
+    rpc GetSocialMedia(GetSocialMediaRequest) returns (GetSocialMediaResponse){
+        option (google.api.http) = {
+            get: "/v1/Get_SocialMedia"
+        };
+    }
+
+    rpc DeleteSocialMedia(DeleteSocialMediaRequest) returns(google.protobuf.Empty){
+        option (google.api.http) = {
+            delete: "/v1/Del_SocialMedia"
         };
     }
 }

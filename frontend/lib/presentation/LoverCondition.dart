@@ -282,7 +282,7 @@ class _LoverConditionState extends State<LoverCondition> {
         resizeToAvoidBottomInset: true,
         backgroundColor: appTheme.bgColor,
         body: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 50),
+          padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 25),
           child: Column(
             children: [
               Row(
@@ -310,7 +310,7 @@ class _LoverConditionState extends State<LoverCondition> {
 
               // City
               if (country.isNotEmpty) CustomInputBar(titleName: "*居住地:", backendPart: _buildLoverResetCityInput(context)),
-              SizedBox(height: mediaH / 35),
+              SizedBox(height: mediaH / 40),
 
               // button
               _buildNextButton(context),

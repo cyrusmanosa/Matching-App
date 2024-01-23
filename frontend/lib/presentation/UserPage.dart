@@ -1,14 +1,18 @@
 import 'dart:typed_data';
 
+import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
+import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/canChange.pb.dart';
 import 'package:dating_your_date/pb/fix.pb.dart';
+import 'package:dating_your_date/pb/rpc_socialmedia.pb.dart';
 import 'package:dating_your_date/presentation/ChatBox.dart';
 import 'package:dating_your_date/presentation/Profile/widgets/showDataBar.dart';
 import 'package:dating_your_date/widgets/Custom_Show_Image.dart';
 import 'package:dating_your_date/widgets/app_bar/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/button/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
+import 'package:grpc/grpc.dart';
 
 class UserPage extends StatefulWidget {
   UserPage({super.key, this.canData, this.fixData, this.img, this.allImage});
@@ -23,6 +27,35 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
+  void createSocialMediaRecode(BuildContext context) async {
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
+    try {
+      final req = GetSocialMediaRequest(userID: userid, targetID: widget.canData!.userID);
+      await GrpcChatService.client.getSocialMedia(req);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ChatBox(name: widget.canData!.nickName, imageUrl: widget.img!, targetid: widget.canData!.userID)),
+      );
+    } on GrpcError catch (e) {
+      if (e.code == 5 || e.code == 13) {
+        final creq = CreateSocialMediaRequest(
+          userID: userid,
+          targetID: widget.canData!.userID,
+          image: false,
+          contact: false,
+          appointment: false,
+          sns: false,
+          location: false,
+        );
+        await GrpcChatService.client.createSocialMedia(creq);
+        createSocialMediaRecode(context);
+      }
+      throw Exception("エラーがあります。$e");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
@@ -35,13 +68,6 @@ class _UserPageState extends State<UserPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // image
-            // Container(
-            //   decoration: BoxDecoration(shape: BoxShape.circle),
-            //   child: CircleAvatar(radius: 80, backgroundImage: MemoryImage(widget.img!)),
-            // ),
-            // SizedBox(height: mediaH / 50),
-
             _buildImages(context, mediaH, mediaW),
 
             // name
@@ -210,11 +236,7 @@ class _UserPageState extends State<UserPage> {
     return CustomOutlinedButton(
       text: "チャット",
       onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => ChatBox(name: widget.canData!.nickName, imageUrl: widget.img!, targetid: widget.canData!.userID)),
-        );
+        createSocialMediaRecode(context);
       },
     );
   }

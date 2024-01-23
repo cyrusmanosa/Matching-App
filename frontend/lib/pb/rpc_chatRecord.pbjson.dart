@@ -33,7 +33,7 @@ const CreateChatRecordRequest$json = {
     {'1': 'TargetID', '3': 2, '4': 1, '5': 5, '10': 'TargetID'},
     {'1': 'RoleType', '3': 3, '4': 1, '5': 9, '10': 'RoleType'},
     {'1': 'MediaType', '3': 4, '4': 1, '5': 9, '10': 'MediaType'},
-    {'1': 'Media', '3': 6, '4': 1, '5': 9, '10': 'Media'},
+    {'1': 'Media', '3': 6, '4': 1, '5': 12, '10': 'Media'},
   ],
 };
 
@@ -41,7 +41,7 @@ const CreateChatRecordRequest$json = {
 final $typed_data.Uint8List createChatRecordRequestDescriptor = $convert.base64Decode(
     'ChdDcmVhdGVDaGF0UmVjb3JkUmVxdWVzdBIWCgZVc2VySUQYASABKAVSBlVzZXJJRBIaCghUYX'
     'JnZXRJRBgCIAEoBVIIVGFyZ2V0SUQSGgoIUm9sZVR5cGUYAyABKAlSCFJvbGVUeXBlEhwKCU1l'
-    'ZGlhVHlwZRgEIAEoCVIJTWVkaWFUeXBlEhQKBU1lZGlhGAYgASgJUgVNZWRpYQ==');
+    'ZGlhVHlwZRgEIAEoCVIJTWVkaWFUeXBlEhQKBU1lZGlhGAYgASgMUgVNZWRpYQ==');
 
 @$core.Deprecated('Use createChatRecordResponseDescriptor instead')
 const CreateChatRecordResponse$json = {
@@ -126,7 +126,7 @@ const GetLastMsgResponse$json = {
   '1': 'GetLastMsgResponse',
   '2': [
     {'1': 'MediaType', '3': 1, '4': 1, '5': 9, '10': 'MediaType'},
-    {'1': 'Media', '3': 2, '4': 1, '5': 9, '10': 'Media'},
+    {'1': 'Media', '3': 2, '4': 1, '5': 12, '10': 'Media'},
     {'1': 'IsRead', '3': 3, '4': 1, '5': 8, '10': 'IsRead'},
   ],
 };
@@ -134,7 +134,7 @@ const GetLastMsgResponse$json = {
 /// Descriptor for `GetLastMsgResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getLastMsgResponseDescriptor = $convert.base64Decode(
     'ChJHZXRMYXN0TXNnUmVzcG9uc2USHAoJTWVkaWFUeXBlGAEgASgJUglNZWRpYVR5cGUSFAoFTW'
-    'VkaWEYAiABKAlSBU1lZGlhEhYKBklzUmVhZBgDIAEoCFIGSXNSZWFk');
+    'VkaWEYAiABKAxSBU1lZGlhEhYKBklzUmVhZBgDIAEoCFIGSXNSZWFk');
 
 @$core.Deprecated('Use getChatRowRequestDescriptor instead')
 const GetChatRowRequest$json = {
@@ -168,7 +168,7 @@ const UpdateChatRecordRequest$json = {
     {'1': 'TargetID', '3': 2, '4': 1, '5': 5, '10': 'TargetID'},
     {'1': 'RoleType', '3': 3, '4': 1, '5': 9, '10': 'RoleType'},
     {'1': 'MediaType', '3': 4, '4': 1, '5': 9, '10': 'MediaType'},
-    {'1': 'Media', '3': 5, '4': 1, '5': 9, '10': 'Media'},
+    {'1': 'Media', '3': 5, '4': 1, '5': 12, '10': 'Media'},
     {'1': 'CreateAt', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'CreateAt'},
   ],
 };
@@ -177,7 +177,7 @@ const UpdateChatRecordRequest$json = {
 final $typed_data.Uint8List updateChatRecordRequestDescriptor = $convert.base64Decode(
     'ChdVcGRhdGVDaGF0UmVjb3JkUmVxdWVzdBIWCgZVc2VySUQYASABKAVSBlVzZXJJRBIaCghUYX'
     'JnZXRJRBgCIAEoBVIIVGFyZ2V0SUQSGgoIUm9sZVR5cGUYAyABKAlSCFJvbGVUeXBlEhwKCU1l'
-    'ZGlhVHlwZRgEIAEoCVIJTWVkaWFUeXBlEhQKBU1lZGlhGAUgASgJUgVNZWRpYRI2CghDcmVhdG'
+    'ZGlhVHlwZRgEIAEoCVIJTWVkaWFUeXBlEhQKBU1lZGlhGAUgASgMUgVNZWRpYRI2CghDcmVhdG'
     'VBdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCENyZWF0ZUF0');
 
 @$core.Deprecated('Use updateChatRecordResponseDescriptor instead')

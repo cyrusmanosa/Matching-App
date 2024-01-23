@@ -271,7 +271,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
         backgroundColor: appTheme.bgColor,
         body: Container(
           child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 50),
+            padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 25),
             child: Column(
               children: [
                 // Era
@@ -288,7 +288,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
 
                 // Language
                 CustomInputBar(titleName: "言語:", backendPart: _buildAccompanyResetSpeakLanguageInput(context)),
-                SizedBox(height: mediaH / 25),
+                SizedBox(height: mediaH / 40),
                 _buildNextButton(context),
               ],
             ),

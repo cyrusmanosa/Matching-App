@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/ChatModel.dart';
@@ -21,6 +23,7 @@ class Chat extends StatefulWidget {
 
 class _ChatState extends State<Chat> {
   bool isEmpty = false;
+  String lastMsg = "";
   List<int> targetID = [];
   List<TargetInfos> users = [];
 
@@ -69,10 +72,15 @@ class _ChatState extends State<Chat> {
         // take last msg
         final lmsgRequest = GetLastMsgRequest(userID: userid!, targetID: targetID[i]);
         final lmsgResponse = await GrpcChatService.client.getLastMsg(lmsgRequest);
+        if (lmsgResponse.mediaType == "text") {
+          String str = utf8.decode(lmsgResponse.media);
+          lastMsg = str;
+        }
+
         Uint8List bytes = Uint8List.fromList(imgResponse.img.img1);
         setState(() {
           users.add(TargetInfos(
-              userid: targetID[i], img: bytes, info: infoResponse.canChangeInfo, lastMsg: lmsgResponse.media, isRead: lmsgResponse.isRead));
+              userid: targetID[i], img: bytes, info: infoResponse.canChangeInfo, lastMsg: lastMsg, isRead: lmsgResponse.isRead));
         });
       }
       isEmpty = false;

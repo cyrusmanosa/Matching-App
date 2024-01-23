@@ -24,5 +24,6 @@ class CustomTextStyles {
   static get confirmGreen => TextStyle(color: appTheme.green, fontSize: 12, fontWeight: FontWeight.w800);
   static get mainButtonC => TextStyle(color: appTheme.black, fontSize: 12, fontWeight: FontWeight.w800);
   static get mainButtonW => TextStyle(color: appTheme.white, fontSize: 12, fontWeight: FontWeight.w800);
+  static get btnWordInSideBar => TextStyle(color: appTheme.white, fontSize: 18, fontWeight: FontWeight.w600);
   static get outlineWhiteWordButton => TextStyle(color: appTheme.white, fontWeight: FontWeight.w400);
 }

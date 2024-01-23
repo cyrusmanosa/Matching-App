@@ -13,9 +13,9 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'chatRecord.pb.dart' as $22;
-import 'chatRecordNoID.pb.dart' as $23;
-import 'google/protobuf/timestamp.pb.dart' as $18;
+import 'chatRecord.pb.dart' as $23;
+import 'chatRecordNoID.pb.dart' as $24;
+import 'google/protobuf/timestamp.pb.dart' as $19;
 
 /// Create Chat Table
 class CreateChatTableRequest extends $pb.GeneratedMessage {
@@ -75,7 +75,7 @@ class CreateChatRecordRequest extends $pb.GeneratedMessage {
     $core.int? targetID,
     $core.String? roleType,
     $core.String? mediaType,
-    $core.String? media,
+    $core.List<$core.int>? media,
   }) {
     final $result = create();
     if (userID != null) {
@@ -104,7 +104,7 @@ class CreateChatRecordRequest extends $pb.GeneratedMessage {
     ..a<$core.int>(2, _omitFieldNames ? '' : 'TargetID', $pb.PbFieldType.O3, protoName: 'TargetID')
     ..aOS(3, _omitFieldNames ? '' : 'RoleType', protoName: 'RoleType')
     ..aOS(4, _omitFieldNames ? '' : 'MediaType', protoName: 'MediaType')
-    ..aOS(6, _omitFieldNames ? '' : 'Media', protoName: 'Media')
+    ..a<$core.List<$core.int>>(6, _omitFieldNames ? '' : 'Media', $pb.PbFieldType.OY, protoName: 'Media')
     ..hasRequiredFields = false
   ;
 
@@ -166,9 +166,9 @@ class CreateChatRecordRequest extends $pb.GeneratedMessage {
   void clearMediaType() => clearField(4);
 
   @$pb.TagNumber(6)
-  $core.String get media => $_getSZ(4);
+  $core.List<$core.int> get media => $_getN(4);
   @$pb.TagNumber(6)
-  set media($core.String v) { $_setString(4, v); }
+  set media($core.List<$core.int> v) { $_setBytes(4, v); }
   @$pb.TagNumber(6)
   $core.bool hasMedia() => $_has(4);
   @$pb.TagNumber(6)
@@ -177,7 +177,7 @@ class CreateChatRecordRequest extends $pb.GeneratedMessage {
 
 class CreateChatRecordResponse extends $pb.GeneratedMessage {
   factory CreateChatRecordResponse({
-    $22.ChatRecord? chatRecord,
+    $23.ChatRecord? chatRecord,
   }) {
     final $result = create();
     if (chatRecord != null) {
@@ -190,7 +190,7 @@ class CreateChatRecordResponse extends $pb.GeneratedMessage {
   factory CreateChatRecordResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateChatRecordResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$22.ChatRecord>(1, _omitFieldNames ? '' : 'ChatRecord', protoName: 'ChatRecord', subBuilder: $22.ChatRecord.create)
+    ..aOM<$23.ChatRecord>(1, _omitFieldNames ? '' : 'ChatRecord', protoName: 'ChatRecord', subBuilder: $23.ChatRecord.create)
     ..hasRequiredFields = false
   ;
 
@@ -216,15 +216,15 @@ class CreateChatRecordResponse extends $pb.GeneratedMessage {
   static CreateChatRecordResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $22.ChatRecord get chatRecord => $_getN(0);
+  $23.ChatRecord get chatRecord => $_getN(0);
   @$pb.TagNumber(1)
-  set chatRecord($22.ChatRecord v) { setField(1, v); }
+  set chatRecord($23.ChatRecord v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasChatRecord() => $_has(0);
   @$pb.TagNumber(1)
   void clearChatRecord() => clearField(1);
   @$pb.TagNumber(1)
-  $22.ChatRecord ensureChatRecord() => $_ensure(0);
+  $23.ChatRecord ensureChatRecord() => $_ensure(0);
 }
 
 /// GetRecord
@@ -294,7 +294,7 @@ class GetChatRecordRequest extends $pb.GeneratedMessage {
 
 class GetChatRecordResponse extends $pb.GeneratedMessage {
   factory GetChatRecordResponse({
-    $core.Iterable<$23.ChatRecordNoID>? chatRecordNoID,
+    $core.Iterable<$24.ChatRecordNoID>? chatRecordNoID,
   }) {
     final $result = create();
     if (chatRecordNoID != null) {
@@ -307,7 +307,7 @@ class GetChatRecordResponse extends $pb.GeneratedMessage {
   factory GetChatRecordResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetChatRecordResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..pc<$23.ChatRecordNoID>(1, _omitFieldNames ? '' : 'ChatRecordNoID', $pb.PbFieldType.PM, protoName: 'ChatRecordNoID', subBuilder: $23.ChatRecordNoID.create)
+    ..pc<$24.ChatRecordNoID>(1, _omitFieldNames ? '' : 'ChatRecordNoID', $pb.PbFieldType.PM, protoName: 'ChatRecordNoID', subBuilder: $24.ChatRecordNoID.create)
     ..hasRequiredFields = false
   ;
 
@@ -333,7 +333,7 @@ class GetChatRecordResponse extends $pb.GeneratedMessage {
   static GetChatRecordResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.List<$23.ChatRecordNoID> get chatRecordNoID => $_getList(0);
+  $core.List<$24.ChatRecordNoID> get chatRecordNoID => $_getList(0);
 }
 
 /// GetTargetID
@@ -499,7 +499,7 @@ class GetLastMsgRequest extends $pb.GeneratedMessage {
 class GetLastMsgResponse extends $pb.GeneratedMessage {
   factory GetLastMsgResponse({
     $core.String? mediaType,
-    $core.String? media,
+    $core.List<$core.int>? media,
     $core.bool? isRead,
   }) {
     final $result = create();
@@ -520,7 +520,7 @@ class GetLastMsgResponse extends $pb.GeneratedMessage {
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetLastMsgResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'MediaType', protoName: 'MediaType')
-    ..aOS(2, _omitFieldNames ? '' : 'Media', protoName: 'Media')
+    ..a<$core.List<$core.int>>(2, _omitFieldNames ? '' : 'Media', $pb.PbFieldType.OY, protoName: 'Media')
     ..aOB(3, _omitFieldNames ? '' : 'IsRead', protoName: 'IsRead')
     ..hasRequiredFields = false
   ;
@@ -556,9 +556,9 @@ class GetLastMsgResponse extends $pb.GeneratedMessage {
   void clearMediaType() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get media => $_getSZ(1);
+  $core.List<$core.int> get media => $_getN(1);
   @$pb.TagNumber(2)
-  set media($core.String v) { $_setString(1, v); }
+  set media($core.List<$core.int> v) { $_setBytes(1, v); }
   @$pb.TagNumber(2)
   $core.bool hasMedia() => $_has(1);
   @$pb.TagNumber(2)
@@ -681,8 +681,8 @@ class UpdateChatRecordRequest extends $pb.GeneratedMessage {
     $core.int? targetID,
     $core.String? roleType,
     $core.String? mediaType,
-    $core.String? media,
-    $18.Timestamp? createAt,
+    $core.List<$core.int>? media,
+    $19.Timestamp? createAt,
   }) {
     final $result = create();
     if (userID != null) {
@@ -714,8 +714,8 @@ class UpdateChatRecordRequest extends $pb.GeneratedMessage {
     ..a<$core.int>(2, _omitFieldNames ? '' : 'TargetID', $pb.PbFieldType.O3, protoName: 'TargetID')
     ..aOS(3, _omitFieldNames ? '' : 'RoleType', protoName: 'RoleType')
     ..aOS(4, _omitFieldNames ? '' : 'MediaType', protoName: 'MediaType')
-    ..aOS(5, _omitFieldNames ? '' : 'Media', protoName: 'Media')
-    ..aOM<$18.Timestamp>(6, _omitFieldNames ? '' : 'CreateAt', protoName: 'CreateAt', subBuilder: $18.Timestamp.create)
+    ..a<$core.List<$core.int>>(5, _omitFieldNames ? '' : 'Media', $pb.PbFieldType.OY, protoName: 'Media')
+    ..aOM<$19.Timestamp>(6, _omitFieldNames ? '' : 'CreateAt', protoName: 'CreateAt', subBuilder: $19.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -777,29 +777,29 @@ class UpdateChatRecordRequest extends $pb.GeneratedMessage {
   void clearMediaType() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get media => $_getSZ(4);
+  $core.List<$core.int> get media => $_getN(4);
   @$pb.TagNumber(5)
-  set media($core.String v) { $_setString(4, v); }
+  set media($core.List<$core.int> v) { $_setBytes(4, v); }
   @$pb.TagNumber(5)
   $core.bool hasMedia() => $_has(4);
   @$pb.TagNumber(5)
   void clearMedia() => clearField(5);
 
   @$pb.TagNumber(6)
-  $18.Timestamp get createAt => $_getN(5);
+  $19.Timestamp get createAt => $_getN(5);
   @$pb.TagNumber(6)
-  set createAt($18.Timestamp v) { setField(6, v); }
+  set createAt($19.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasCreateAt() => $_has(5);
   @$pb.TagNumber(6)
   void clearCreateAt() => clearField(6);
   @$pb.TagNumber(6)
-  $18.Timestamp ensureCreateAt() => $_ensure(5);
+  $19.Timestamp ensureCreateAt() => $_ensure(5);
 }
 
 class UpdateChatRecordResponse extends $pb.GeneratedMessage {
   factory UpdateChatRecordResponse({
-    $22.ChatRecord? chatRecord,
+    $23.ChatRecord? chatRecord,
   }) {
     final $result = create();
     if (chatRecord != null) {
@@ -812,7 +812,7 @@ class UpdateChatRecordResponse extends $pb.GeneratedMessage {
   factory UpdateChatRecordResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateChatRecordResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$22.ChatRecord>(1, _omitFieldNames ? '' : 'ChatRecord', protoName: 'ChatRecord', subBuilder: $22.ChatRecord.create)
+    ..aOM<$23.ChatRecord>(1, _omitFieldNames ? '' : 'ChatRecord', protoName: 'ChatRecord', subBuilder: $23.ChatRecord.create)
     ..hasRequiredFields = false
   ;
 
@@ -838,15 +838,15 @@ class UpdateChatRecordResponse extends $pb.GeneratedMessage {
   static UpdateChatRecordResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $22.ChatRecord get chatRecord => $_getN(0);
+  $23.ChatRecord get chatRecord => $_getN(0);
   @$pb.TagNumber(1)
-  set chatRecord($22.ChatRecord v) { setField(1, v); }
+  set chatRecord($23.ChatRecord v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasChatRecord() => $_has(0);
   @$pb.TagNumber(1)
   void clearChatRecord() => clearField(1);
   @$pb.TagNumber(1)
-  $22.ChatRecord ensureChatRecord() => $_ensure(0);
+  $23.ChatRecord ensureChatRecord() => $_ensure(0);
 }
 
 class UpdateReadRequest extends $pb.GeneratedMessage {

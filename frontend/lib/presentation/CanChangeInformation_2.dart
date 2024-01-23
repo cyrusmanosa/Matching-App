@@ -150,6 +150,7 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
               SizedBox(height: mediaH / 25),
 
               _buildNextButton(context),
+              SizedBox(height: mediaH / 25),
             ],
           ),
         ),

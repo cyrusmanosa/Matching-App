@@ -20,7 +20,7 @@ const ChatRecord$json = {
     {'1': 'TargetID', '3': 1, '4': 1, '5': 5, '10': 'TargetID'},
     {'1': 'RoleType', '3': 2, '4': 1, '5': 9, '10': 'RoleType'},
     {'1': 'MediaType', '3': 3, '4': 1, '5': 9, '10': 'MediaType'},
-    {'1': 'Media', '3': 4, '4': 1, '5': 9, '10': 'Media'},
+    {'1': 'Media', '3': 4, '4': 1, '5': 12, '10': 'Media'},
     {'1': 'IsRead', '3': 5, '4': 1, '5': 8, '10': 'IsRead'},
     {'1': 'CreatedAt', '3': 6, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'CreatedAt'},
   ],
@@ -30,6 +30,6 @@ const ChatRecord$json = {
 final $typed_data.Uint8List chatRecordDescriptor = $convert.base64Decode(
     'CgpDaGF0UmVjb3JkEhoKCFRhcmdldElEGAEgASgFUghUYXJnZXRJRBIaCghSb2xlVHlwZRgCIA'
     'EoCVIIUm9sZVR5cGUSHAoJTWVkaWFUeXBlGAMgASgJUglNZWRpYVR5cGUSFAoFTWVkaWEYBCAB'
-    'KAlSBU1lZGlhEhYKBklzUmVhZBgFIAEoCFIGSXNSZWFkEjgKCUNyZWF0ZWRBdBgGIAEoCzIaLm'
+    'KAxSBU1lZGlhEhYKBklzUmVhZBgFIAEoCFIGSXNSZWFkEjgKCUNyZWF0ZWRBdBgGIAEoCzIaLm'
     'dvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBSCUNyZWF0ZWRBdA==');
 

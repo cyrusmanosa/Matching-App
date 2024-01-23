@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'search.pb.dart' as $30;
+import 'search.pb.dart' as $31;
 
 class SearchRequestH extends $pb.GeneratedMessage {
   factory SearchRequestH({
@@ -67,7 +67,7 @@ class SearchRequestH extends $pb.GeneratedMessage {
 
 class SearchResponseH extends $pb.GeneratedMessage {
   factory SearchResponseH({
-    $30.sH? resu,
+    $31.sH? resu,
   }) {
     final $result = create();
     if (resu != null) {
@@ -80,7 +80,7 @@ class SearchResponseH extends $pb.GeneratedMessage {
   factory SearchResponseH.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchResponseH', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$30.sH>(1, _omitFieldNames ? '' : 'resu', subBuilder: $30.sH.create)
+    ..aOM<$31.sH>(1, _omitFieldNames ? '' : 'resu', subBuilder: $31.sH.create)
     ..hasRequiredFields = false
   ;
 
@@ -106,15 +106,15 @@ class SearchResponseH extends $pb.GeneratedMessage {
   static SearchResponseH? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.sH get resu => $_getN(0);
+  $31.sH get resu => $_getN(0);
   @$pb.TagNumber(1)
-  set resu($30.sH v) { setField(1, v); }
+  set resu($31.sH v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasResu() => $_has(0);
   @$pb.TagNumber(1)
   void clearResu() => clearField(1);
   @$pb.TagNumber(1)
-  $30.sH ensureResu() => $_ensure(0);
+  $31.sH ensureResu() => $_ensure(0);
 }
 
 class SearchRequestL extends $pb.GeneratedMessage {
@@ -169,7 +169,7 @@ class SearchRequestL extends $pb.GeneratedMessage {
 
 class SearchResponseL extends $pb.GeneratedMessage {
   factory SearchResponseL({
-    $30.sL? resu,
+    $31.sL? resu,
   }) {
     final $result = create();
     if (resu != null) {
@@ -182,7 +182,7 @@ class SearchResponseL extends $pb.GeneratedMessage {
   factory SearchResponseL.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchResponseL', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$30.sL>(1, _omitFieldNames ? '' : 'resu', subBuilder: $30.sL.create)
+    ..aOM<$31.sL>(1, _omitFieldNames ? '' : 'resu', subBuilder: $31.sL.create)
     ..hasRequiredFields = false
   ;
 
@@ -208,15 +208,15 @@ class SearchResponseL extends $pb.GeneratedMessage {
   static SearchResponseL? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.sL get resu => $_getN(0);
+  $31.sL get resu => $_getN(0);
   @$pb.TagNumber(1)
-  set resu($30.sL v) { setField(1, v); }
+  set resu($31.sL v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasResu() => $_has(0);
   @$pb.TagNumber(1)
   void clearResu() => clearField(1);
   @$pb.TagNumber(1)
-  $30.sL ensureResu() => $_ensure(0);
+  $31.sL ensureResu() => $_ensure(0);
 }
 
 class SearchRequestA extends $pb.GeneratedMessage {
@@ -271,7 +271,7 @@ class SearchRequestA extends $pb.GeneratedMessage {
 
 class SearchResponseA extends $pb.GeneratedMessage {
   factory SearchResponseA({
-    $30.sA? resu,
+    $31.sA? resu,
   }) {
     final $result = create();
     if (resu != null) {
@@ -284,7 +284,7 @@ class SearchResponseA extends $pb.GeneratedMessage {
   factory SearchResponseA.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'SearchResponseA', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$30.sA>(1, _omitFieldNames ? '' : 'resu', subBuilder: $30.sA.create)
+    ..aOM<$31.sA>(1, _omitFieldNames ? '' : 'resu', subBuilder: $31.sA.create)
     ..hasRequiredFields = false
   ;
 
@@ -310,15 +310,15 @@ class SearchResponseA extends $pb.GeneratedMessage {
   static SearchResponseA? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $30.sA get resu => $_getN(0);
+  $31.sA get resu => $_getN(0);
   @$pb.TagNumber(1)
-  set resu($30.sA v) { setField(1, v); }
+  set resu($31.sA v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasResu() => $_has(0);
   @$pb.TagNumber(1)
   void clearResu() => clearField(1);
   @$pb.TagNumber(1)
-  $30.sA ensureResu() => $_ensure(0);
+  $31.sA ensureResu() => $_ensure(0);
 }
 
 

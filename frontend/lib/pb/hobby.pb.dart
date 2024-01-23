@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $18;
+import 'google/protobuf/timestamp.pb.dart' as $19;
 
 class Hobby extends $pb.GeneratedMessage {
   factory Hobby({
@@ -24,7 +24,7 @@ class Hobby extends $pb.GeneratedMessage {
     $core.Iterable<$core.String>? speaklanguage,
     $core.String? findType,
     $core.int? experience,
-    $18.Timestamp? infoChangedAt,
+    $19.Timestamp? infoChangedAt,
   }) {
     final $result = create();
     if (userID != null) {
@@ -65,7 +65,7 @@ class Hobby extends $pb.GeneratedMessage {
     ..pPS(5, _omitFieldNames ? '' : 'Speaklanguage', protoName: 'Speaklanguage')
     ..aOS(6, _omitFieldNames ? '' : 'FindType', protoName: 'FindType')
     ..a<$core.int>(7, _omitFieldNames ? '' : 'Experience', $pb.PbFieldType.O3, protoName: 'Experience')
-    ..aOM<$18.Timestamp>(8, _omitFieldNames ? '' : 'InfoChangedAt', protoName: 'InfoChangedAt', subBuilder: $18.Timestamp.create)
+    ..aOM<$19.Timestamp>(8, _omitFieldNames ? '' : 'InfoChangedAt', protoName: 'InfoChangedAt', subBuilder: $19.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -142,15 +142,15 @@ class Hobby extends $pb.GeneratedMessage {
   void clearExperience() => clearField(7);
 
   @$pb.TagNumber(8)
-  $18.Timestamp get infoChangedAt => $_getN(7);
+  $19.Timestamp get infoChangedAt => $_getN(7);
   @$pb.TagNumber(8)
-  set infoChangedAt($18.Timestamp v) { setField(8, v); }
+  set infoChangedAt($19.Timestamp v) { setField(8, v); }
   @$pb.TagNumber(8)
   $core.bool hasInfoChangedAt() => $_has(7);
   @$pb.TagNumber(8)
   void clearInfoChangedAt() => clearField(8);
   @$pb.TagNumber(8)
-  $18.Timestamp ensureInfoChangedAt() => $_ensure(7);
+  $19.Timestamp ensureInfoChangedAt() => $_ensure(7);
 }
 
 

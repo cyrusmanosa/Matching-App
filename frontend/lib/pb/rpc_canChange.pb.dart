@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'canChange.pb.dart' as $20;
+import 'canChange.pb.dart' as $21;
 
 /// Create
 class CreateCanChangeRequest extends $pb.GeneratedMessage {
@@ -272,7 +272,7 @@ class CreateCanChangeRequest extends $pb.GeneratedMessage {
 
 class CreateCanChangeResponse extends $pb.GeneratedMessage {
   factory CreateCanChangeResponse({
-    $20.CanChange? canChangeInfo,
+    $21.CanChange? canChangeInfo,
   }) {
     final $result = create();
     if (canChangeInfo != null) {
@@ -285,7 +285,7 @@ class CreateCanChangeResponse extends $pb.GeneratedMessage {
   factory CreateCanChangeResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'CreateCanChangeResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$20.CanChange>(1, _omitFieldNames ? '' : 'CanChangeInfo', protoName: 'CanChangeInfo', subBuilder: $20.CanChange.create)
+    ..aOM<$21.CanChange>(1, _omitFieldNames ? '' : 'CanChangeInfo', protoName: 'CanChangeInfo', subBuilder: $21.CanChange.create)
     ..hasRequiredFields = false
   ;
 
@@ -311,15 +311,15 @@ class CreateCanChangeResponse extends $pb.GeneratedMessage {
   static CreateCanChangeResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $20.CanChange get canChangeInfo => $_getN(0);
+  $21.CanChange get canChangeInfo => $_getN(0);
   @$pb.TagNumber(1)
-  set canChangeInfo($20.CanChange v) { setField(1, v); }
+  set canChangeInfo($21.CanChange v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasCanChangeInfo() => $_has(0);
   @$pb.TagNumber(1)
   void clearCanChangeInfo() => clearField(1);
   @$pb.TagNumber(1)
-  $20.CanChange ensureCanChangeInfo() => $_ensure(0);
+  $21.CanChange ensureCanChangeInfo() => $_ensure(0);
 }
 
 /// Get
@@ -389,7 +389,7 @@ class GetCanChangeRequest extends $pb.GeneratedMessage {
 
 class GetCanChangeResponse extends $pb.GeneratedMessage {
   factory GetCanChangeResponse({
-    $20.CanChange? canChangeInfo,
+    $21.CanChange? canChangeInfo,
   }) {
     final $result = create();
     if (canChangeInfo != null) {
@@ -402,7 +402,7 @@ class GetCanChangeResponse extends $pb.GeneratedMessage {
   factory GetCanChangeResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'GetCanChangeResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$20.CanChange>(1, _omitFieldNames ? '' : 'CanChangeInfo', protoName: 'CanChangeInfo', subBuilder: $20.CanChange.create)
+    ..aOM<$21.CanChange>(1, _omitFieldNames ? '' : 'CanChangeInfo', protoName: 'CanChangeInfo', subBuilder: $21.CanChange.create)
     ..hasRequiredFields = false
   ;
 
@@ -428,15 +428,15 @@ class GetCanChangeResponse extends $pb.GeneratedMessage {
   static GetCanChangeResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $20.CanChange get canChangeInfo => $_getN(0);
+  $21.CanChange get canChangeInfo => $_getN(0);
   @$pb.TagNumber(1)
-  set canChangeInfo($20.CanChange v) { setField(1, v); }
+  set canChangeInfo($21.CanChange v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasCanChangeInfo() => $_has(0);
   @$pb.TagNumber(1)
   void clearCanChangeInfo() => clearField(1);
   @$pb.TagNumber(1)
-  $20.CanChange ensureCanChangeInfo() => $_ensure(0);
+  $21.CanChange ensureCanChangeInfo() => $_ensure(0);
 }
 
 /// Update
@@ -696,7 +696,7 @@ class UpdateCanChangeRequest extends $pb.GeneratedMessage {
 
 class UpdateCanChangeResponse extends $pb.GeneratedMessage {
   factory UpdateCanChangeResponse({
-    $20.CanChange? canChangeInfo,
+    $21.CanChange? canChangeInfo,
   }) {
     final $result = create();
     if (canChangeInfo != null) {
@@ -709,7 +709,7 @@ class UpdateCanChangeResponse extends $pb.GeneratedMessage {
   factory UpdateCanChangeResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
 
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'UpdateCanChangeResponse', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
-    ..aOM<$20.CanChange>(1, _omitFieldNames ? '' : 'CanChangeInfo', protoName: 'CanChangeInfo', subBuilder: $20.CanChange.create)
+    ..aOM<$21.CanChange>(1, _omitFieldNames ? '' : 'CanChangeInfo', protoName: 'CanChangeInfo', subBuilder: $21.CanChange.create)
     ..hasRequiredFields = false
   ;
 
@@ -735,15 +735,15 @@ class UpdateCanChangeResponse extends $pb.GeneratedMessage {
   static UpdateCanChangeResponse? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $20.CanChange get canChangeInfo => $_getN(0);
+  $21.CanChange get canChangeInfo => $_getN(0);
   @$pb.TagNumber(1)
-  set canChangeInfo($20.CanChange v) { setField(1, v); }
+  set canChangeInfo($21.CanChange v) { setField(1, v); }
   @$pb.TagNumber(1)
   $core.bool hasCanChangeInfo() => $_has(0);
   @$pb.TagNumber(1)
   void clearCanChangeInfo() => clearField(1);
   @$pb.TagNumber(1)
-  $20.CanChange ensureCanChangeInfo() => $_ensure(0);
+  $21.CanChange ensureCanChangeInfo() => $_ensure(0);
 }
 
 /// Delete

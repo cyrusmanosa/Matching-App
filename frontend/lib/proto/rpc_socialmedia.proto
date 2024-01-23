@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package pb;
+
+import "socialmedia.proto";
+
+option go_package = "Backend/pb";
+
+message CreateSocialMediaRequest {
+    int32 UserID = 1;
+    int32 TargetID = 2;
+    bool Image = 3;
+    bool Contact = 4;
+    bool Location = 5;
+    bool Appointment = 6;
+    bool Sns = 7;
+}
+
+message CreateSocialMediaResponse {
+    SocialMedia sm = 1;
+}
+
+message UpdateSocialMediaRequest {
+    int32 UserID = 1;
+    int32 TargetID = 2;
+    bool Image = 3;
+    bool Contact = 4;
+    bool Location = 5;
+    bool Appointment = 6;
+    bool Sns = 7;
+}
+
+message UpdateSocialMediaResponse {
+    SocialMedia sm = 1;
+}
+
+message GetSocialMediaRequest {
+    int32 UserID = 1;
+    int32 TargetID = 2;
+}
+message GetSocialMediaResponse {
+    SocialMedia sm = 1;
+}
+
+message DeleteSocialMediaRequest {
+    int32 UserID = 1;
+}

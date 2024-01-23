@@ -13,7 +13,7 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $18;
+import 'google/protobuf/timestamp.pb.dart' as $19;
 
 class Payment extends $pb.GeneratedMessage {
   factory Payment({
@@ -22,7 +22,7 @@ class Payment extends $pb.GeneratedMessage {
     $core.String? paymentType,
     $core.int? amount,
     $core.String? product,
-    $18.Timestamp? payAt,
+    $19.Timestamp? payAt,
   }) {
     final $result = create();
     if (payID != null) {
@@ -55,7 +55,7 @@ class Payment extends $pb.GeneratedMessage {
     ..aOS(3, _omitFieldNames ? '' : 'PaymentType', protoName: 'PaymentType')
     ..a<$core.int>(4, _omitFieldNames ? '' : 'Amount', $pb.PbFieldType.O3, protoName: 'Amount')
     ..aOS(5, _omitFieldNames ? '' : 'Product', protoName: 'Product')
-    ..aOM<$18.Timestamp>(6, _omitFieldNames ? '' : 'PayAt', protoName: 'PayAt', subBuilder: $18.Timestamp.create)
+    ..aOM<$19.Timestamp>(6, _omitFieldNames ? '' : 'PayAt', protoName: 'PayAt', subBuilder: $19.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -126,15 +126,15 @@ class Payment extends $pb.GeneratedMessage {
   void clearProduct() => clearField(5);
 
   @$pb.TagNumber(6)
-  $18.Timestamp get payAt => $_getN(5);
+  $19.Timestamp get payAt => $_getN(5);
   @$pb.TagNumber(6)
-  set payAt($18.Timestamp v) { setField(6, v); }
+  set payAt($19.Timestamp v) { setField(6, v); }
   @$pb.TagNumber(6)
   $core.bool hasPayAt() => $_has(5);
   @$pb.TagNumber(6)
   void clearPayAt() => clearField(6);
   @$pb.TagNumber(6)
-  $18.Timestamp ensurePayAt() => $_ensure(5);
+  $19.Timestamp ensurePayAt() => $_ensure(5);
 }
 
 

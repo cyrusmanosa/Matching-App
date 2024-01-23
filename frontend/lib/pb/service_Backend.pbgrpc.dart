@@ -32,6 +32,7 @@ import 'rpc_password.pb.dart' as $2;
 import 'rpc_payment.pb.dart' as $13;
 import 'rpc_search.pb.dart' as $16;
 import 'rpc_session.pb.dart' as $14;
+import 'rpc_socialmedia.pb.dart' as $18;
 import 'rpc_targetList.pb.dart' as $10;
 
 export 'service_Backend.pb.dart';
@@ -1032,6 +1033,22 @@ class ChatClient extends $grpc.Client {
       '/pb.Chat/UpdateRead',
       ($17.UpdateReadRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $4.Empty.fromBuffer(value));
+  static final _$createSocialMedia = $grpc.ClientMethod<$18.CreateSocialMediaRequest, $18.CreateSocialMediaResponse>(
+      '/pb.Chat/CreateSocialMedia',
+      ($18.CreateSocialMediaRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.CreateSocialMediaResponse.fromBuffer(value));
+  static final _$updateSocialMedia = $grpc.ClientMethod<$18.UpdateSocialMediaRequest, $18.UpdateSocialMediaResponse>(
+      '/pb.Chat/UpdateSocialMedia',
+      ($18.UpdateSocialMediaRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.UpdateSocialMediaResponse.fromBuffer(value));
+  static final _$getSocialMedia = $grpc.ClientMethod<$18.GetSocialMediaRequest, $18.GetSocialMediaResponse>(
+      '/pb.Chat/GetSocialMedia',
+      ($18.GetSocialMediaRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $18.GetSocialMediaResponse.fromBuffer(value));
+  static final _$deleteSocialMedia = $grpc.ClientMethod<$18.DeleteSocialMediaRequest, $4.Empty>(
+      '/pb.Chat/DeleteSocialMedia',
+      ($18.DeleteSocialMediaRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $4.Empty.fromBuffer(value));
 
   ChatClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -1073,6 +1090,22 @@ class ChatClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$4.Empty> updateRead($17.UpdateReadRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateRead, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$18.CreateSocialMediaResponse> createSocialMedia($18.CreateSocialMediaRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$createSocialMedia, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$18.UpdateSocialMediaResponse> updateSocialMedia($18.UpdateSocialMediaRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$updateSocialMedia, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$18.GetSocialMediaResponse> getSocialMedia($18.GetSocialMediaRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getSocialMedia, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$4.Empty> deleteSocialMedia($18.DeleteSocialMediaRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$deleteSocialMedia, request, options: options);
   }
 }
 
@@ -1144,6 +1177,34 @@ abstract class ChatServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $17.UpdateReadRequest.fromBuffer(value),
         ($4.Empty value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$18.CreateSocialMediaRequest, $18.CreateSocialMediaResponse>(
+        'CreateSocialMedia',
+        createSocialMedia_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $18.CreateSocialMediaRequest.fromBuffer(value),
+        ($18.CreateSocialMediaResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$18.UpdateSocialMediaRequest, $18.UpdateSocialMediaResponse>(
+        'UpdateSocialMedia',
+        updateSocialMedia_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $18.UpdateSocialMediaRequest.fromBuffer(value),
+        ($18.UpdateSocialMediaResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$18.GetSocialMediaRequest, $18.GetSocialMediaResponse>(
+        'GetSocialMedia',
+        getSocialMedia_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $18.GetSocialMediaRequest.fromBuffer(value),
+        ($18.GetSocialMediaResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$18.DeleteSocialMediaRequest, $4.Empty>(
+        'DeleteSocialMedia',
+        deleteSocialMedia_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $18.DeleteSocialMediaRequest.fromBuffer(value),
+        ($4.Empty value) => value.writeToBuffer()));
   }
 
   $async.Future<$4.Empty> createChatTable_Pre($grpc.ServiceCall call, $async.Future<$17.CreateChatTableRequest> request) async {
@@ -1182,6 +1243,22 @@ abstract class ChatServiceBase extends $grpc.Service {
     return updateRead(call, await request);
   }
 
+  $async.Future<$18.CreateSocialMediaResponse> createSocialMedia_Pre($grpc.ServiceCall call, $async.Future<$18.CreateSocialMediaRequest> request) async {
+    return createSocialMedia(call, await request);
+  }
+
+  $async.Future<$18.UpdateSocialMediaResponse> updateSocialMedia_Pre($grpc.ServiceCall call, $async.Future<$18.UpdateSocialMediaRequest> request) async {
+    return updateSocialMedia(call, await request);
+  }
+
+  $async.Future<$18.GetSocialMediaResponse> getSocialMedia_Pre($grpc.ServiceCall call, $async.Future<$18.GetSocialMediaRequest> request) async {
+    return getSocialMedia(call, await request);
+  }
+
+  $async.Future<$4.Empty> deleteSocialMedia_Pre($grpc.ServiceCall call, $async.Future<$18.DeleteSocialMediaRequest> request) async {
+    return deleteSocialMedia(call, await request);
+  }
+
   $async.Future<$4.Empty> createChatTable($grpc.ServiceCall call, $17.CreateChatTableRequest request);
   $async.Future<$17.CreateChatRecordResponse> createChatRecord($grpc.ServiceCall call, $17.CreateChatRecordRequest request);
   $async.Future<$17.GetChatRecordResponse> getChatRecord($grpc.ServiceCall call, $17.GetChatRecordRequest request);
@@ -1191,4 +1268,8 @@ abstract class ChatServiceBase extends $grpc.Service {
   $async.Future<$17.GetLastMsgResponse> getLastMsg($grpc.ServiceCall call, $17.GetLastMsgRequest request);
   $async.Future<$17.GetChatRowResponse> getChatRow($grpc.ServiceCall call, $17.GetChatRowRequest request);
   $async.Future<$4.Empty> updateRead($grpc.ServiceCall call, $17.UpdateReadRequest request);
+  $async.Future<$18.CreateSocialMediaResponse> createSocialMedia($grpc.ServiceCall call, $18.CreateSocialMediaRequest request);
+  $async.Future<$18.UpdateSocialMediaResponse> updateSocialMedia($grpc.ServiceCall call, $18.UpdateSocialMediaRequest request);
+  $async.Future<$18.GetSocialMediaResponse> getSocialMedia($grpc.ServiceCall call, $18.GetSocialMediaRequest request);
+  $async.Future<$4.Empty> deleteSocialMedia($grpc.ServiceCall call, $18.DeleteSocialMediaRequest request);
 }

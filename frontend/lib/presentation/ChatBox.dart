@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dating_your_date/client/grpc_services.dart';
@@ -5,12 +7,16 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/chatRecordNoID.pb.dart';
 import 'package:dating_your_date/pb/rpc_chatRecord.pb.dart';
+import 'package:dating_your_date/pb/rpc_socialmedia.pb.dart';
 import 'package:dating_your_date/pb/rpc_targetList.pb.dart';
+import 'package:dating_your_date/pb/socialmedia.pb.dart';
 import 'package:dating_your_date/presentation/SideBar.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:image/image.dart' as customImage;
 
 class ChatBox extends StatefulWidget {
   ChatBox({Key? key, this.name, this.imageUrl, this.time, this.targetid}) : super(key: key);
@@ -27,6 +33,7 @@ class ChatBox extends StatefulWidget {
 class _ChatBoxState extends State<ChatBox> {
   String? purpose;
   bool checktime = true;
+  SocialMedia? socialmediaData;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController newMsgTextController = TextEditingController();
 
@@ -34,6 +41,7 @@ class _ChatBoxState extends State<ChatBox> {
   void initState() {
     super.initState();
     getPurpose(context);
+    getSocialMedia(context);
   }
 
   Future<List<ChatRecordNoID>> getChatRecords(BuildContext context) async {
@@ -74,8 +82,41 @@ class _ChatBoxState extends State<ChatBox> {
     }
   }
 
+  Future<void> getSocialMedia(BuildContext context) async {
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
+    try {
+      final req = GetSocialMediaRequest(userID: userid, targetID: widget.targetid!);
+      final rsp = await GrpcChatService.client.getSocialMedia(req);
+      setState(() {
+        socialmediaData = rsp.sm;
+      });
+    } on GrpcError {
+      throw Exception("エラーが発生しました。");
+    }
+  }
+
+  void uploadPhotoToNewFile() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      final file = File(pickedFile.path);
+      setState(() {
+        senderPhotoGrpcRequest(context, file);
+      });
+    }
+  }
+
   // Grpc
-  void senderMsgGrpcRequest(BuildContext context) async {
+  void senderPhotoGrpcRequest(BuildContext context, File file) async {
+    Uint8List bytes = await file.readAsBytes();
+    final image = customImage.decodeImage(bytes);
+    final double ratio = image!.width / image.height;
+    final int targetWidth = 1024;
+    final int targetHeight = (targetWidth / ratio).round();
+    final resizedImage = customImage.copyResize(image, width: targetWidth, height: targetHeight);
+    Uint8List resizedBytes = customImage.encodeJpg(resizedImage);
+    List<int> img = resizedBytes.toList();
     try {
       // myself
       String? apiKeyU = await globalUserId.read(key: 'UserID');
@@ -84,8 +125,37 @@ class _ChatBoxState extends State<ChatBox> {
         userID: uid,
         targetID: widget.targetid,
         roleType: "sender",
+        mediaType: "image",
+        media: img,
+      );
+      await GrpcChatService.client.createChatRecord(myRequest);
+      // target
+      final targetRequest = CreateChatRecordRequest(
+        userID: widget.targetid,
+        targetID: uid,
+        roleType: "receiver",
+        mediaType: "image",
+        media: img,
+      );
+      await GrpcChatService.client.createChatRecord(targetRequest);
+    } on GrpcError {
+      await showErrorDialog(context, "エラー：検証可能なメッセージの送信 at myself");
+      throw Exception("データの取得中にエラーが発生しました。");
+    }
+  }
+
+  void senderMsgGrpcRequest(BuildContext context) async {
+    try {
+      // myself
+      String? apiKeyU = await globalUserId.read(key: 'UserID');
+      final uid = int.tryParse(apiKeyU!);
+      List<int> sendText = utf8.encode(newMsgTextController.text);
+      final myRequest = CreateChatRecordRequest(
+        userID: uid,
+        targetID: widget.targetid,
+        roleType: "sender",
         mediaType: "text",
-        media: newMsgTextController.text,
+        media: sendText,
       );
       await GrpcChatService.client.createChatRecord(myRequest);
       // target
@@ -94,7 +164,7 @@ class _ChatBoxState extends State<ChatBox> {
         targetID: uid,
         roleType: "receiver",
         mediaType: "text",
-        media: newMsgTextController.text,
+        media: sendText,
       );
       await GrpcChatService.client.createChatRecord(targetRequest);
     } on GrpcError {
@@ -110,29 +180,28 @@ class _ChatBoxState extends State<ChatBox> {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: _buildHeader(context, mediaW),
-      drawer: Drawer(child: SideBar()),
-      resizeToAvoidBottomInset: true,
-      backgroundColor: appTheme.bgColor,
-      body: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).requestFocus(FocusNode());
-        },
-        child: FutureBuilder<List<ChatRecordNoID>>(
-          future: getChatRecords(context),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              final data = snapshot.data!;
-              return SingleChildScrollView(
-                reverse: true,
-                child: Column(
-                  children: [
-                    ListView.builder(
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child: Scaffold(
+        key: _scaffoldKey,
+        appBar: _buildHeader(context, mediaW),
+        drawer: Drawer(child: SideBar(sm: socialmediaData, targetId: widget.targetid!)),
+        backgroundColor: appTheme.bgColor,
+        body: SingleChildScrollView(
+          reverse: true,
+          child: Column(
+            children: [
+              FutureBuilder<List<ChatRecordNoID>>(
+                future: getChatRecords(context),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    final data = snapshot.data!;
+                    return ListView.builder(
                       itemCount: data.length,
                       shrinkWrap: true,
-                      padding: EdgeInsets.symmetric(vertical: mediaH / 100),
+                      padding: EdgeInsets.symmetric(vertical: mediaH / 50),
                       physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         return Container(
@@ -143,35 +212,42 @@ class _ChatBoxState extends State<ChatBox> {
                               constraints: BoxConstraints(maxWidth: mediaW / 1.5),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadiusStyle.r30,
-                                color: (data[index].roleType == "receiver" ? Colors.grey.shade200 : Colors.blue[200]),
+                                color: (data[index].roleType == "receiver" ? appTheme.grey100 : Colors.blue[200]),
                               ),
                               padding: EdgeInsets.symmetric(vertical: mediaH / 100, horizontal: mediaW / 30),
-                              child: Text(data[index].media, style: TextStyle(fontSize: mediaH / 60)),
+                              child: switchdata(context, data[index], mediaH),
                             ),
                           ),
                         );
                       },
-                    ),
+                    );
+                  } else {
+                    return Container();
+                  }
+                },
+              ),
+            ],
+          ),
+        ),
+        bottomNavigationBar: AnimatedContainer(
+          duration: Duration(milliseconds: 10),
+          height: mediaH / 12,
+          color: Color.fromARGB(255, 226, 226, 226),
+          margin: EdgeInsets.only(bottom: mediaQueryData.viewInsets.bottom),
+          child: Column(
+            children: [
+              SizedBox(height: mediaH / 200),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: mediaW / 20, vertical: mediaH / 100),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    optionBarButton(context, 30, mediaH, mediaW),
+                    _buildMsgInput(context, mediaH, mediaW),
+                    sendBarButton(context, 20, mediaH, mediaW),
                   ],
                 ),
-              );
-            } else {
-              return Container();
-            }
-          },
-        ),
-      ),
-      bottomNavigationBar: Container(
-        height: mediaH / 10.5,
-        color: Color.fromARGB(255, 226, 226, 226),
-        child: Padding(
-          padding: EdgeInsets.only(left: mediaW / 20, right: mediaW / 20, bottom: mediaH / 40),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              optionBarButton(context, 30, mediaH, mediaW),
-              _buildMsgInput(context, mediaH, mediaW),
-              sendBarButton(context, 20, mediaH, mediaW),
+              ),
             ],
           ),
         ),
@@ -223,6 +299,17 @@ class _ChatBoxState extends State<ChatBox> {
     );
   }
 
+  Widget switchdata(BuildContext context, ChatRecordNoID data, double mediaH) {
+    if (data.mediaType == "text") {
+      String str = utf8.decode(data.media);
+      return Text(str, style: TextStyle(fontSize: mediaH / 60));
+    } else if (data.mediaType == "image") {
+      Uint8List img = Uint8List.fromList(data.media);
+      return ClipRRect(borderRadius: BorderRadiusStyle.r15, child: Image.memory(img));
+    }
+    return Container();
+  }
+
   Widget sendBarButton(BuildContext context, double s, double mediaH, double mediaW) {
     return GestureDetector(
       onTap: () {
@@ -243,11 +330,67 @@ class _ChatBoxState extends State<ChatBox> {
 
   Widget optionBarButton(BuildContext context, double s, double mediaH, double mediaW) {
     return GestureDetector(
+      onTap: () {
+        showModalBottomSheet(
+          context: context,
+          builder: (BuildContext context) {
+            return Container(
+              height: mediaH / 3,
+              color: Color.fromARGB(255, 226, 226, 226),
+              child: Column(
+                children: [
+                  // image
+                  ListTile(
+                      enabled: socialmediaData!.image,
+                      leading: Icon(Icons.photo),
+                      title: Text('写真解放'),
+                      onTap: () {
+                        uploadPhotoToNewFile();
+                      }),
+                  Divider(indent: 10, endIndent: 10),
+
+                  // contact
+                  ListTile(
+                    enabled: socialmediaData!.contact,
+                    leading: Icon(Icons.contacts),
+                    title: Text('連絡解放'),
+                    onTap: () {},
+                  ),
+                  Divider(indent: 10, endIndent: 10),
+                  // location
+                  ListTile(
+                    enabled: socialmediaData!.location,
+                    leading: Icon(Icons.location_on),
+                    title: Text('位置共有'),
+                    onTap: () {},
+                  ),
+                  Divider(indent: 10, endIndent: 10),
+                  // dating
+                  ListTile(
+                    enabled: socialmediaData!.appointment,
+                    leading: Icon(Icons.date_range),
+                    title: Text('デート解放'),
+                    onTap: () {},
+                  ),
+                  Divider(indent: 10, endIndent: 10),
+                  // sns
+                  ListTile(
+                    enabled: socialmediaData!.sns,
+                    leading: Icon(Icons.share),
+                    title: Text('SNS共有'),
+                    onTap: () {},
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
       child: Container(
         height: mediaH / 30,
         width: mediaW / 14,
-        decoration: BoxDecoration(color: Color.fromARGB(255, 226, 226, 226), borderRadius: BorderRadiusStyle.r30),
-        child: Icon(Icons.add, color: Color.fromARGB(255, 226, 226, 226), size: s),
+        decoration: BoxDecoration(color: appTheme.black, borderRadius: BorderRadiusStyle.r30),
+        child: Icon(Icons.add, color: appTheme.white, size: s),
       ),
     );
   }

@@ -2,6 +2,10 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 class CustomButtonStyles {
+  static ButtonStyle get fillwhite => ElevatedButton.styleFrom(
+        backgroundColor: appTheme.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
+      );
   static ButtonStyle get fillDarkgrey => ElevatedButton.styleFrom(
         backgroundColor: appTheme.grey800,
         shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),

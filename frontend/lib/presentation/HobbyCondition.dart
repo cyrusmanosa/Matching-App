@@ -293,7 +293,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
         backgroundColor: appTheme.bgColor,
         body: Container(
           child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 50),
+            padding: EdgeInsets.symmetric(horizontal: mediaW / 13, vertical: mediaH / 25),
             child: Column(
               children: [
                 // Era
@@ -318,7 +318,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
 
                 // City
                 if (country.isNotEmpty) CustomInputBar(titleName: "*居住地:", backendPart: _buildHobbyResetCityInput(context)),
-                SizedBox(height: mediaH / 35),
+                SizedBox(height: mediaH / 40),
 
                 // button
                 _buildNextButton(context),

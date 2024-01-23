@@ -13,15 +13,15 @@ import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/timestamp.pb.dart' as $18;
+import 'google/protobuf/timestamp.pb.dart' as $19;
 
 class ChatRecordNoID extends $pb.GeneratedMessage {
   factory ChatRecordNoID({
     $core.String? roleType,
     $core.String? mediaType,
-    $core.String? media,
+    $core.List<$core.int>? media,
     $core.bool? isRead,
-    $18.Timestamp? createdAt,
+    $19.Timestamp? createdAt,
   }) {
     final $result = create();
     if (roleType != null) {
@@ -48,9 +48,9 @@ class ChatRecordNoID extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(_omitMessageNames ? '' : 'ChatRecordNoID', package: const $pb.PackageName(_omitMessageNames ? '' : 'pb'), createEmptyInstance: create)
     ..aOS(1, _omitFieldNames ? '' : 'RoleType', protoName: 'RoleType')
     ..aOS(2, _omitFieldNames ? '' : 'MediaType', protoName: 'MediaType')
-    ..aOS(3, _omitFieldNames ? '' : 'Media', protoName: 'Media')
+    ..a<$core.List<$core.int>>(3, _omitFieldNames ? '' : 'Media', $pb.PbFieldType.OY, protoName: 'Media')
     ..aOB(4, _omitFieldNames ? '' : 'IsRead', protoName: 'IsRead')
-    ..aOM<$18.Timestamp>(5, _omitFieldNames ? '' : 'CreatedAt', protoName: 'CreatedAt', subBuilder: $18.Timestamp.create)
+    ..aOM<$19.Timestamp>(5, _omitFieldNames ? '' : 'CreatedAt', protoName: 'CreatedAt', subBuilder: $19.Timestamp.create)
     ..hasRequiredFields = false
   ;
 
@@ -94,9 +94,9 @@ class ChatRecordNoID extends $pb.GeneratedMessage {
   void clearMediaType() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get media => $_getSZ(2);
+  $core.List<$core.int> get media => $_getN(2);
   @$pb.TagNumber(3)
-  set media($core.String v) { $_setString(2, v); }
+  set media($core.List<$core.int> v) { $_setBytes(2, v); }
   @$pb.TagNumber(3)
   $core.bool hasMedia() => $_has(2);
   @$pb.TagNumber(3)
@@ -112,15 +112,15 @@ class ChatRecordNoID extends $pb.GeneratedMessage {
   void clearIsRead() => clearField(4);
 
   @$pb.TagNumber(5)
-  $18.Timestamp get createdAt => $_getN(4);
+  $19.Timestamp get createdAt => $_getN(4);
   @$pb.TagNumber(5)
-  set createdAt($18.Timestamp v) { setField(5, v); }
+  set createdAt($19.Timestamp v) { setField(5, v); }
   @$pb.TagNumber(5)
   $core.bool hasCreatedAt() => $_has(4);
   @$pb.TagNumber(5)
   void clearCreatedAt() => clearField(5);
   @$pb.TagNumber(5)
-  $18.Timestamp ensureCreatedAt() => $_ensure(4);
+  $19.Timestamp ensureCreatedAt() => $_ensure(4);
 }
 
 
