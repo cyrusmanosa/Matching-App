@@ -31,7 +31,9 @@
         * make postgres (docker に postgres　を　インストール　COMMAND)
         * make setup_info
         * make setup_chat
-        * (入Data)
+        * make test
+    ## server 起動
+    * make server
 
 ## フロントエンド
 * flutter clean
