@@ -13,6 +13,7 @@
 ### Backend setup
 
 * vscode のターミナルまたは cmd で、以下のコマンドを実行する
+* vscode に　plugin ： go , Makefile Tools, WSL をインストール
     cd Backend 
       コマンド : make dockernetwork
                 make postgres
