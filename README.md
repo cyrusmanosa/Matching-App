@@ -5,17 +5,19 @@
 ### インストール
 
 * Windows: https://www.youtube.com/watch?v=TtCfDXfSw_0
+* Windows なら　Sqlc　を無視！！
+  
 * Mac:
     * Docker をインストールする
     * Xcode をインストールする
-    * brew install golang-migrate
+    * homebrew をインストールする　＝＞ brew install golang-migrate
 
 ### Backend setup
-
-* vscode のターミナルまたは cmd で、以下のコマンドを実行する
 * vscode に　plugin ： go , Makefile Tools, WSL をインストール
     cd Backend 
-      コマンド : make dockernetwork
+  　vscodeのターミナルはWSLを変更 に https://code.visualstudio.com/docs/remote/wsl
+      コマンド :　sudo apt install make
+  　　　　　　　　make dockernetwork
                 make postgres
                 (run docker postgres)
                 make setup_info
