@@ -10,6 +10,12 @@ import (
 
 
 type ChatQuerier interface {
+	Createsocialmedia(ctx context.Context, arg CreatesocialmediaParams) (Socialmedium, error)
+	Getsocialmedia(ctx context.Context, arg GetsocialmediaParams) (Socialmedium, error)
+	Listsocialmedia(ctx context.Context) ([]Socialmedium, error)
+	Updatesocialmedia(ctx context.Context, arg UpdatesocialmediaParams) (Socialmedium, error)
+	Deletesocialmedia(ctx context.Context, userID int32) error
+
     CreateChatTable(ctx context.Context, tablename string) error
     CreateRecord(ctx context.Context, arg CreateRecordParams, tablename string) (Record, error)
     DeleteRecord(ctx context.Context, arg DeleteRecordParams, tablename string) error

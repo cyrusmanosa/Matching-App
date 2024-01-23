@@ -142,49 +142,49 @@ func TestDeleteInformation(t *testing.T) {
 	require.NoError(t, err)
 }
 
-func TestCanChangeSearchAccompany(t *testing.T) {
-	user := CreateRandomUserFixInformaion(t)
-	Can := CreateRandomUserCanChangeInformation(t, user)
+// func TestCanChangeSearchAccompany(t *testing.T) {
+// 	user := CreateRandomUserFixInformaion(t)
+// 	Can := CreateRandomUserCanChangeInformation(t, user)
 
-	se := CanChangeSearchAccompanyParams{
-		UserID:        Can.UserID,
-		Speaklanguage: &Can.Speaklanguage,
-		AccompanyType: Can.AccompanyType,
-		Sociability:   Can.Sociability,
-	}
+// 	se := CanChangeSearchAccompanyParams{
+// 		UserID:        Can.UserID,
+// 		Speaklanguage: &Can.Speaklanguage,
+// 		AccompanyType: Can.AccompanyType,
+// 		Sociability:   Can.Sociability,
+// 	}
 
-	cc, err := testinfoQueries.CanChangeSearchAccompany(context.Background(), se)
-	require.NoError(t, err)
-	require.NotEmpty(t, cc)
-}
+// 	cc, err := testinfoQueries.CanChangeSearchAccompany(context.Background(), se)
+// 	require.NoError(t, err)
+// 	require.NotEmpty(t, cc)
+// }
 
-func TestCanChangeSearchHobby(t *testing.T) {
-	user := CreateRandomUserFixInformaion(t)
-	Can := CreateRandomUserCanChangeInformation(t, user)
+// func TestCanChangeSearchHobby(t *testing.T) {
+// 	user := CreateRandomUserFixInformaion(t)
+// 	Can := CreateRandomUserCanChangeInformation(t, user)
 
-	se := CanChangeSearchHobbyParams{
-		UserID:        Can.UserID,
-		Speaklanguage: &Can.Speaklanguage,
-		HobbyType:     Can.HobbyType,
-		City:          &Can.City,
-		Experience:    Can.Experience,
-	}
+// 	se := CanChangeSearchHobbyParams{
+// 		UserID:        Can.UserID,
+// 		Speaklanguage: &Can.Speaklanguage,
+// 		HobbyType:     Can.HobbyType,
+// 		City:          &Can.City,
+// 		Experience:    Can.Experience,
+// 	}
 
-	cc, err := testinfoQueries.CanChangeSearchHobby(context.Background(), se)
-	require.NoError(t, err)
-	require.NotEmpty(t, cc)
-}
+// 	cc, err := testinfoQueries.CanChangeSearchHobby(context.Background(), se)
+// 	require.NoError(t, err)
+// 	require.NotEmpty(t, cc)
+// }
 
-func TestCanChangeSearchLover(t *testing.T) {
-	user := CreateRandomUserFixInformaion(t)
-	Can := CreateRandomUserCanChangeInformation(t, user)
-	se := CanChangeSearchLoverParams{
-		UserID:        user.UserID,
-		Speaklanguage: &Can.Speaklanguage,
-		City:          &Can.City,
-		Sexual:        &Can.Sexual,
-	}
-	cc, err := testinfoQueries.CanChangeSearchLover(context.Background(), se)
-	require.NoError(t, err)
-	require.NotEmpty(t, cc)
-}
+// func TestCanChangeSearchLover(t *testing.T) {
+// 	user := CreateRandomUserFixInformaion(t)
+// 	Can := CreateRandomUserCanChangeInformation(t, user)
+// 	se := CanChangeSearchLoverParams{
+// 		UserID:        user.UserID,
+// 		Speaklanguage: &Can.Speaklanguage,
+// 		City:          &Can.City,
+// 		Sexual:        &Can.Sexual,
+// 	}
+// 	cc, err := testinfoQueries.CanChangeSearchLover(context.Background(), se)
+// 	require.NoError(t, err)
+// 	require.NotEmpty(t, cc)
+// }

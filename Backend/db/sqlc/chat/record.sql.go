@@ -16,7 +16,7 @@ func (q *Queries) CreateChatTable(ctx context.Context, tablename string) error {
         "target_id" INT NOT NULL,
         "role_type" VARCHAR NOT NULL,
         "media_type" VARCHAR NOT NULL,
-        "media" VARCHAR,
+        "media" BYTEA,
         "isread" BOOLEAN,
         "created_at" TIMESTAMPTZ NOT NULL DEFAULT (now())
     );`, tablename)
@@ -30,7 +30,7 @@ type CreateRecordParams struct {
     TargetID  int32     `json:"target_id"`
     RoleType  string    `json:"role_type"`
     MediaType string    `json:"media_type"`
-    Media     string    `json:"media"`
+    Media     []byte    `json:"media"`
     Isread    bool      `json:"isread"`
 }
 
@@ -143,7 +143,7 @@ func (q *Queries) GetTargetID(ctx context.Context,tablename string) ([]int32, er
 
 
 type GetLastMsgRow struct {
-    Media   string    `json:"media"`
+    Media   []byte    `json:"media"`
     MediaType string    `json:"media_type"`
     Isread    bool      `json:"isread"`
 }
@@ -177,7 +177,7 @@ func (q *Queries) GetChatRow(ctx context.Context, tablename string) (int32, erro
 type UpdateRecordParams struct {
     TargetID  int32         `json:"target_id"`
     MediaType string        `json:"media_type"`
-    Media   string        `json:"message"`
+    Media   []byte        `json:"message"`
     CreatedAt time.Time     `json:"created_at"`
 }
 

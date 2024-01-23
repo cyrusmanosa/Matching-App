@@ -6,6 +6,7 @@ import (
 	"strconv"
 	"testing"
 
+	"github.com/brianvoe/gofakeit/v6"
 	"github.com/stretchr/testify/require"
 )
 
@@ -13,7 +14,7 @@ const TId = 1
 const TN = "u3"
 
 func TestCreateRecordTable(t *testing.T) {
-	for i := 2; i <= 400; i++ {
+	for i := 2; i <= 622; i++ {
 		tablename := "u" + strconv.Itoa(int(i))
 		err := testChatQueries.CreateChatTable(context.Background(), tablename)
 		require.NoError(t, err)
@@ -29,7 +30,7 @@ func CreateRandomRecord(t *testing.T) Record {
 		TargetID:  TId,
 		RoleType:  util.RandomRole(),
 		MediaType: util.RandomMediaType(),
-		Media:     util.RandomString(10),
+		Media:     gofakeit.ImagePng(200, 200),
 		Isread:    util.RandomBool(),
 	}
 
@@ -73,7 +74,7 @@ func TestUpdateRecord(t *testing.T) {
 	New := UpdateRecordParams{
 		TargetID:  arg.TargetID,
 		MediaType: arg.MediaType,
-		Media:     util.RandomString(10),
+		Media:     gofakeit.ImagePng(200, 200),
 		CreatedAt: arg.CreatedAt,
 	}
 

@@ -12,7 +12,17 @@ type Record struct {
 	TargetID  int32              `json:"target_id"`
 	RoleType  string             `json:"role_type"`
 	MediaType string             `json:"media_type"`
-	Media     string       		 `json:"media"`
+	Media     []byte       		 `json:"media"`
 	Isread    bool               `json:"isread"`
 	CreatedAt time.Time `json:"created_at"`
+}
+
+type Socialmedium struct {
+	UserID      int32       `json:"user_id"`
+	TargetID    int32       `json:"target_id"`
+	Image       bool `json:"image"`
+	Contact     bool `json:"contact"`
+	Location    bool `json:"location"`
+	Appointment bool `json:"appointment"`
+	Sns         bool `json:"sns"`
 }

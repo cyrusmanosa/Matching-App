@@ -1844,15 +1844,19 @@ var Information_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	Chat_CreateChatTable_FullMethodName  = "/pb.Chat/CreateChatTable"
-	Chat_CreateChatRecord_FullMethodName = "/pb.Chat/CreateChatRecord"
-	Chat_GetChatRecord_FullMethodName    = "/pb.Chat/GetChatRecord"
-	Chat_UpdateChatRecord_FullMethodName = "/pb.Chat/UpdateChatRecord"
-	Chat_DeleteChatTable_FullMethodName  = "/pb.Chat/DeleteChatTable"
-	Chat_GetTargetID_FullMethodName      = "/pb.Chat/GetTargetID"
-	Chat_GetLastMsg_FullMethodName       = "/pb.Chat/GetLastMsg"
-	Chat_GetChatRow_FullMethodName       = "/pb.Chat/GetChatRow"
-	Chat_UpdateRead_FullMethodName       = "/pb.Chat/UpdateRead"
+	Chat_CreateChatTable_FullMethodName   = "/pb.Chat/CreateChatTable"
+	Chat_CreateChatRecord_FullMethodName  = "/pb.Chat/CreateChatRecord"
+	Chat_GetChatRecord_FullMethodName     = "/pb.Chat/GetChatRecord"
+	Chat_UpdateChatRecord_FullMethodName  = "/pb.Chat/UpdateChatRecord"
+	Chat_DeleteChatTable_FullMethodName   = "/pb.Chat/DeleteChatTable"
+	Chat_GetTargetID_FullMethodName       = "/pb.Chat/GetTargetID"
+	Chat_GetLastMsg_FullMethodName        = "/pb.Chat/GetLastMsg"
+	Chat_GetChatRow_FullMethodName        = "/pb.Chat/GetChatRow"
+	Chat_UpdateRead_FullMethodName        = "/pb.Chat/UpdateRead"
+	Chat_CreateSocialMedia_FullMethodName = "/pb.Chat/CreateSocialMedia"
+	Chat_UpdateSocialMedia_FullMethodName = "/pb.Chat/UpdateSocialMedia"
+	Chat_GetSocialMedia_FullMethodName    = "/pb.Chat/GetSocialMedia"
+	Chat_DeleteSocialMedia_FullMethodName = "/pb.Chat/DeleteSocialMedia"
 )
 
 // ChatClient is the client API for Chat service.
@@ -1868,6 +1872,10 @@ type ChatClient interface {
 	GetLastMsg(ctx context.Context, in *GetLastMsgRequest, opts ...grpc.CallOption) (*GetLastMsgResponse, error)
 	GetChatRow(ctx context.Context, in *GetChatRowRequest, opts ...grpc.CallOption) (*GetChatRowResponse, error)
 	UpdateRead(ctx context.Context, in *UpdateReadRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	CreateSocialMedia(ctx context.Context, in *CreateSocialMediaRequest, opts ...grpc.CallOption) (*CreateSocialMediaResponse, error)
+	UpdateSocialMedia(ctx context.Context, in *UpdateSocialMediaRequest, opts ...grpc.CallOption) (*UpdateSocialMediaResponse, error)
+	GetSocialMedia(ctx context.Context, in *GetSocialMediaRequest, opts ...grpc.CallOption) (*GetSocialMediaResponse, error)
+	DeleteSocialMedia(ctx context.Context, in *DeleteSocialMediaRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type chatClient struct {
@@ -1959,6 +1967,42 @@ func (c *chatClient) UpdateRead(ctx context.Context, in *UpdateReadRequest, opts
 	return out, nil
 }
 
+func (c *chatClient) CreateSocialMedia(ctx context.Context, in *CreateSocialMediaRequest, opts ...grpc.CallOption) (*CreateSocialMediaResponse, error) {
+	out := new(CreateSocialMediaResponse)
+	err := c.cc.Invoke(ctx, Chat_CreateSocialMedia_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatClient) UpdateSocialMedia(ctx context.Context, in *UpdateSocialMediaRequest, opts ...grpc.CallOption) (*UpdateSocialMediaResponse, error) {
+	out := new(UpdateSocialMediaResponse)
+	err := c.cc.Invoke(ctx, Chat_UpdateSocialMedia_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatClient) GetSocialMedia(ctx context.Context, in *GetSocialMediaRequest, opts ...grpc.CallOption) (*GetSocialMediaResponse, error) {
+	out := new(GetSocialMediaResponse)
+	err := c.cc.Invoke(ctx, Chat_GetSocialMedia_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *chatClient) DeleteSocialMedia(ctx context.Context, in *DeleteSocialMediaRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Chat_DeleteSocialMedia_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ChatServer is the server API for Chat service.
 // All implementations must embed UnimplementedChatServer
 // for forward compatibility
@@ -1972,6 +2016,10 @@ type ChatServer interface {
 	GetLastMsg(context.Context, *GetLastMsgRequest) (*GetLastMsgResponse, error)
 	GetChatRow(context.Context, *GetChatRowRequest) (*GetChatRowResponse, error)
 	UpdateRead(context.Context, *UpdateReadRequest) (*emptypb.Empty, error)
+	CreateSocialMedia(context.Context, *CreateSocialMediaRequest) (*CreateSocialMediaResponse, error)
+	UpdateSocialMedia(context.Context, *UpdateSocialMediaRequest) (*UpdateSocialMediaResponse, error)
+	GetSocialMedia(context.Context, *GetSocialMediaRequest) (*GetSocialMediaResponse, error)
+	DeleteSocialMedia(context.Context, *DeleteSocialMediaRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedChatServer()
 }
 
@@ -2005,6 +2053,18 @@ func (UnimplementedChatServer) GetChatRow(context.Context, *GetChatRowRequest) (
 }
 func (UnimplementedChatServer) UpdateRead(context.Context, *UpdateReadRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateRead not implemented")
+}
+func (UnimplementedChatServer) CreateSocialMedia(context.Context, *CreateSocialMediaRequest) (*CreateSocialMediaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateSocialMedia not implemented")
+}
+func (UnimplementedChatServer) UpdateSocialMedia(context.Context, *UpdateSocialMediaRequest) (*UpdateSocialMediaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSocialMedia not implemented")
+}
+func (UnimplementedChatServer) GetSocialMedia(context.Context, *GetSocialMediaRequest) (*GetSocialMediaResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSocialMedia not implemented")
+}
+func (UnimplementedChatServer) DeleteSocialMedia(context.Context, *DeleteSocialMediaRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteSocialMedia not implemented")
 }
 func (UnimplementedChatServer) mustEmbedUnimplementedChatServer() {}
 
@@ -2181,6 +2241,78 @@ func _Chat_UpdateRead_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Chat_CreateSocialMedia_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateSocialMediaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).CreateSocialMedia(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_CreateSocialMedia_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).CreateSocialMedia(ctx, req.(*CreateSocialMediaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Chat_UpdateSocialMedia_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateSocialMediaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).UpdateSocialMedia(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_UpdateSocialMedia_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).UpdateSocialMedia(ctx, req.(*UpdateSocialMediaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Chat_GetSocialMedia_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSocialMediaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).GetSocialMedia(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_GetSocialMedia_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).GetSocialMedia(ctx, req.(*GetSocialMediaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Chat_DeleteSocialMedia_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteSocialMediaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ChatServer).DeleteSocialMedia(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Chat_DeleteSocialMedia_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ChatServer).DeleteSocialMedia(ctx, req.(*DeleteSocialMediaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Chat_ServiceDesc is the grpc.ServiceDesc for Chat service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2223,6 +2355,22 @@ var Chat_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateRead",
 			Handler:    _Chat_UpdateRead_Handler,
+		},
+		{
+			MethodName: "CreateSocialMedia",
+			Handler:    _Chat_CreateSocialMedia_Handler,
+		},
+		{
+			MethodName: "UpdateSocialMedia",
+			Handler:    _Chat_UpdateSocialMedia_Handler,
+		},
+		{
+			MethodName: "GetSocialMedia",
+			Handler:    _Chat_GetSocialMedia_Handler,
+		},
+		{
+			MethodName: "DeleteSocialMedia",
+			Handler:    _Chat_DeleteSocialMedia_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

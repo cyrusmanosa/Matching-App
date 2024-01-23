@@ -20,7 +20,7 @@ WHERE user_id != $1
 
 type CanChangeSearchAccompanyParams struct {
 	UserID        int32       `json:"user_id"`
-	Speaklanguage *[]string    `json:"speaklanguage"`
+	Speaklanguage []string    `json:"speaklanguage"`
 	AccompanyType string `json:"accompany_type"`
 	Sociability   string `json:"sociability"`
 }
@@ -80,7 +80,7 @@ WHERE user_id != $1
 type CanChangeSearchHobbyParams struct {
 	UserID        int32       `json:"user_id"`
 	City          *string `json:"city"`
-	Speaklanguage *[]string    `json:"speaklanguage"`
+	Speaklanguage []string    `json:"speaklanguage"`
 	HobbyType     string `json:"hobby_type"`
 	Experience    int32 `json:"experience"`
 }
@@ -139,9 +139,9 @@ WHERE user_id != $1
 
 type CanChangeSearchLoverParams struct {
 	UserID        int32       `json:"user_id"`
-	Sexual       *string `json:"sexual"`
-	Speaklanguage *[]string    `json:"speaklanguage"`
-	City          *string `json:"city"`
+	Sexual        string `json:"sexual"`
+	Speaklanguage []string    `json:"speaklanguage"`
+	City          string `json:"city"`
 }
 
 func (q *Queries) CanChangeSearchLover(ctx context.Context, arg CanChangeSearchLoverParams) ([]Canchangeinformation, error) {

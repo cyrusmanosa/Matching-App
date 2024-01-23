@@ -150,6 +150,18 @@ func convertChat(chat ch.Record) *pb.ChatRecord {
 	}
 }
 
+func convertSocialMedia(chat ch.Socialmedium) *pb.SocialMedia {
+	return &pb.SocialMedia{
+		UserID:      chat.UserID,
+		TargetID:    chat.TargetID,
+		Image:       chat.Image,
+		Contact:     chat.Contact,
+		Location:    chat.Location,
+		Appointment: chat.Appointment,
+		Sns:         chat.Sns,
+	}
+}
+
 func convertChatList(chats []ch.Record) []*pb.ChatRecordNoID {
 	pbChats := make([]*pb.ChatRecordNoID, len(chats))
 

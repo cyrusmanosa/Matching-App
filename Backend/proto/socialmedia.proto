@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "Backend/pb";
+
+message SocialMedia {
+    int32 UserID = 1;
+    int32 TargetID = 2;
+    bool Image = 3;
+    bool Contact = 4;
+    bool Location = 5;
+    bool Appointment = 6;
+    bool Sns = 7;
+}
+

@@ -123,12 +123,7 @@ type Session struct {
 	CreatedAt   pgtype.Timestamptz `json:"created_at"`
 }
 
-type Socialmedium struct {
-	UserID    int32       `json:"user_id"`
-	Facebook  string `json:"Facebook"`
-	Instagram string `json:"Instagram"`
-	Twtter    string `json:"Twtter"`
-}
+
 
 type Targetlist struct {
 	UserID    int32              `json:"user_id"`

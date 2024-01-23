@@ -104,12 +104,6 @@ CREATE TABLE "contact" (
   "contact_at" TIMESTAMPTZ NOT NULL DEFAULT (NOW())
 );
 
-CREATE TABLE "socialmedia" (
-  "user_id" INT NOT NULL,
-  "Facebook" VARCHAR,
-  "Instagram" VARCHAR,
-  "Twtter" VARCHAR
-);
 
 
 
