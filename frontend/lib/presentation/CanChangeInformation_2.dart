@@ -196,7 +196,6 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
       hintText: "亜dさdさだだ",
       textInputAction: TextInputAction.done,
       maxLines: 8,
-      focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
       },

@@ -107,7 +107,6 @@ class _NewPasswordSetupEmailState extends State<NewPasswordEmailSetup> {
       textInputType: TextInputType.visiblePassword,
       hintText: "Ankdl2332",
       obscureText: passwordVisible ? false : true,
-      focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
       },
@@ -130,7 +129,6 @@ class _NewPasswordSetupEmailState extends State<NewPasswordEmailSetup> {
       textInputType: TextInputType.visiblePassword,
       hintText: "Ankdl2332",
       obscureText: passwordVisible ? false : true,
-      focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
       },

@@ -98,7 +98,6 @@ class _ConfirmationCoreState extends State<ConfirmationCore> {
       controller: confirmationCoreController,
       hintText: "423198",
       textInputType: TextInputType.text,
-      focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
       },

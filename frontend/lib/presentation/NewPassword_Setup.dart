@@ -110,7 +110,6 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
       textInputType: TextInputType.visiblePassword,
       hintText: "Ankdl2332",
       obscureText: passwordVisible ? false : true,
-      focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
       },
@@ -133,7 +132,6 @@ class _NewPasswordSetupState extends State<NewPasswordSetup> {
       textInputType: TextInputType.visiblePassword,
       hintText: "Ankdl2332",
       obscureText: passwordVisible ? false : true,
-      focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
       },

@@ -6,7 +6,6 @@ import 'package:grpc/grpc.dart';
 class GrpcInfoService {
   static var channel = grpc_channel.ClientChannel(
     "localhost",
-    // '172.21.172.208',
     port: 9090,
     options: ChannelOptions(credentials: ChannelCredentials.insecure()),
   );
@@ -21,7 +20,6 @@ class GrpcInfoService {
 class GrpcChatService {
   static var channel = grpc_channel.ClientChannel(
     "localhost",
-    // '172.21.172.208',
     port: 9090,
     options: ChannelOptions(credentials: ChannelCredentials.insecure()),
   );

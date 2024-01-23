@@ -89,7 +89,6 @@ class _DeleteAccountPageState extends State<DeleteAccount> {
       hintText: "亜dさdさだだ",
       textInputAction: TextInputAction.done,
       maxLines: 8,
-      focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
       },

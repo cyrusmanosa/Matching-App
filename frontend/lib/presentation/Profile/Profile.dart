@@ -510,6 +510,7 @@ class _ProfileState extends State<Profile> {
           onTap: () async {
             await globalSession.delete(key: 'SessionId');
             await globalUserId.delete(key: 'UserId');
+            await globalemail.delete(key: 'email');
           },
           child: ProfileButton(
             mediaW: mediaW,

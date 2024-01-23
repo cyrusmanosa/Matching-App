@@ -421,7 +421,6 @@ class _InformationEditState extends State<InformationEdit> {
       controller: updateIntroduceController,
       hintText: "亜dさdさだだ",
       maxLines: 8,
-      focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
       },

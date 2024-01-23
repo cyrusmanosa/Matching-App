@@ -111,7 +111,6 @@ class _ContactPageState extends State<ContactPage> {
       hintText: "亜dさdさだだ",
       textInputAction: TextInputAction.done,
       maxLines: 8,
-      focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
       },

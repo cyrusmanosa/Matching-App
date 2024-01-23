@@ -99,6 +99,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
         await showLogoDialog(context, "新しい条件で合わせるパーセントは0%です。", false);
         await Future.delayed(Duration(seconds: 2));
         Navigator.pop(context);
+        Navigator.pop(context);
       }
     } on GrpcError {
       await showErrorDialog(context, "検索エンジニアリングにエラーがあります。");
@@ -136,6 +137,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
               await Future.delayed(Duration(seconds: 1));
               await showLogoDialog(context, "新しいターゲットも準備しました", false);
               await Future.delayed(Duration(seconds: 1));
+
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -152,6 +154,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
             Navigator.pop(context);
             await showLogoDialog(context, "新しい条件で合わせるパーセントは0%です。", false);
             await Future.delayed(Duration(seconds: 2));
+            Navigator.pop(context);
             Navigator.pop(context);
           }
         } on GrpcError {
@@ -192,6 +195,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
           if (sID == 2) {
             await showLogoDialog(context, "新しい条件で合わせるパーセントは0%です。", false);
             await Future.delayed(Duration(seconds: 2));
+            Navigator.pop(context);
             Navigator.pop(context);
             break;
           }

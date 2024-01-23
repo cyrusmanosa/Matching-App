@@ -94,9 +94,9 @@ class _LoverConditionState extends State<LoverCondition> {
       if (rsp.resu.len != 0) {
         checkTargetList(context, rsp);
       } else {
-        Navigator.pop(context);
         await showLogoDialog(context, "新しい条件で合わせるパーセントは0%です。", false);
         await Future.delayed(Duration(seconds: 2));
+        Navigator.pop(context);
         Navigator.pop(context);
       }
     } on GrpcError {
@@ -146,9 +146,9 @@ class _LoverConditionState extends State<LoverCondition> {
             if (rsp.resu.len > 1) {
               checkTargetUserTable(context);
             }
-            Navigator.pop(context);
             await showLogoDialog(context, "新しい条件で合わせるパーセントは0%です。", false);
             await Future.delayed(Duration(seconds: 2));
+            Navigator.pop(context);
             Navigator.pop(context);
           }
         } on GrpcError {
@@ -185,6 +185,7 @@ class _LoverConditionState extends State<LoverCondition> {
           if (sID == 2) {
             await showLogoDialog(context, "新しい条件で合わせるパーセントは0%です。", false);
             await Future.delayed(Duration(seconds: 2));
+            Navigator.pop(context);
             Navigator.pop(context);
           }
         }

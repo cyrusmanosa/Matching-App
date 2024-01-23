@@ -68,9 +68,83 @@ class CustomMultiSelectDropDownBar extends StatefulWidget {
   _CustomMultiSelectDropDownBarState createState() => _CustomMultiSelectDropDownBarState();
 }
 
+// class _CustomMultiSelectDropDownBarState extends State<CustomMultiSelectDropDownBar> {
+//   List<String> selectedValues = [];
+//   bool onicon = false;
+//   void _toggleSelection(String option) {
+//     setState(() {
+//       if (selectedValues.contains(option)) {
+//         selectedValues.remove(option);
+//       } else if (selectedValues.length <= widget.itemArray!.length) {
+//         if (selectedValues.length < 3) {
+//           selectedValues.add(option);
+//         } else {
+//           showErrorDialog(context, "選択項目は最大限３個です。");
+//         }
+//       }
+//     });
+//     widget.onChanged?.call(selectedValues);
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     MediaQueryData mediaQueryData = MediaQuery.of(context);
+//     double mediaH = mediaQueryData.size.height;
+//     double mediaW = mediaQueryData.size.width;
+
+//     return SizedBox(
+//       height: widget.height ?? mediaH / 15,
+//       width: widget.width ?? mediaW / 1.2,
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           DropdownButtonFormField<String>(
+//             style: theme.textTheme.headlineMedium,
+//             borderRadius: BorderRadiusStyle.r15,
+//             decoration: _getDecoration(),
+//             hint: Text('${selectedValues.join(', ')}'),
+//             items: (widget.itemArray ?? []).map((option) {
+//               return DropdownMenuItem<String>(
+//                 value: option,
+//                 child: InkWell(
+//                   onTap: () {
+//                     _toggleSelection(option);
+//                   },
+//                   child: Row(
+//                     children: [
+//                       SizedBox(height: mediaH / 20),
+//                       Text(option),
+//                       if (selectedValues.contains(option)) Icon(Icons.check, color: appTheme.green),
+//                     ],
+//                   ),
+//                 ),
+//               );
+//             }).toList(),
+//             onChanged: (value) {
+//               widget.onChanged?.call(selectedValues);
+//             },
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+
+//   InputDecoration _getDecoration() => InputDecoration(
+//         contentPadding: widget.contentPadding ?? EdgeInsets.zero,
+//         hintText: widget.hintText,
+//         hintStyle: theme.textTheme.bodySmall,
+//         isDense: false,
+//         prefix: widget.prefix ?? Padding(padding: EdgeInsets.only(left: 15.0)),
+//         border: OutlineInputBorder(borderRadius: BorderRadiusStyle.r15, borderSide: BorderSide(width: 2)),
+//         focusedBorder: OutlineInputBorder(borderRadius: BorderRadiusStyle.r15, borderSide: BorderSide(color: appTheme.pinkA100, width: 2)),
+//       );
+// }
+
 class _CustomMultiSelectDropDownBarState extends State<CustomMultiSelectDropDownBar> {
   List<String> selectedValues = [];
   bool onicon = false;
+  GlobalKey _dropdownKey = GlobalKey();
+
   void _toggleSelection(String option) {
     setState(() {
       if (selectedValues.contains(option)) {
@@ -83,6 +157,8 @@ class _CustomMultiSelectDropDownBarState extends State<CustomMultiSelectDropDown
         }
       }
     });
+    Future.delayed(Duration(milliseconds: 500));
+    Navigator.of(context).pop();
     widget.onChanged?.call(selectedValues);
   }
 
@@ -91,44 +167,50 @@ class _CustomMultiSelectDropDownBarState extends State<CustomMultiSelectDropDown
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
+
     return SizedBox(
       height: widget.height ?? mediaH / 15,
       width: widget.width ?? mediaW / 1.2,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          DropdownButtonFormField<String>(
-            style: theme.textTheme.headlineMedium,
-            borderRadius: BorderRadiusStyle.r15,
-            decoration: decoration,
-            hint: Text('${selectedValues.join(', ')}'),
-            items: widget.itemArray?.map((option) {
-              return DropdownMenuItem<String>(
-                value: option,
-                child: InkWell(
-                  onTap: () {
-                    _toggleSelection(option);
-                  },
-                  child: Row(
-                    children: [
-                      SizedBox(height: mediaH / 20),
-                      Text(option),
-                      if (selectedValues.contains(option)) Icon(Icons.check, color: appTheme.green),
-                    ],
-                  ),
-                ),
-              );
-            }).toList(),
-            onChanged: (value) {
-              widget.onChanged?.call(selectedValues);
+          GestureDetector(
+            onTap: () {
+              final dynamic dropdown = _dropdownKey.currentState;
+              dropdown?.toggleDropdown();
             },
+            child: DropdownButtonFormField<String>(
+              key: _dropdownKey,
+              style: theme.textTheme.headlineMedium,
+              borderRadius: BorderRadiusStyle.r15,
+              decoration: _getDecoration(),
+              hint: Text('${selectedValues.join(', ')}'),
+              items: (widget.itemArray ?? []).map((option) {
+                return DropdownMenuItem<String>(
+                  value: option,
+                  child: InkWell(
+                    onTap: () {
+                      _toggleSelection(option);
+                    },
+                    child: Row(
+                      children: [
+                        SizedBox(height: mediaH / 20),
+                        Text(option),
+                        if (selectedValues.contains(option)) Icon(Icons.check, color: appTheme.green),
+                      ],
+                    ),
+                  ),
+                );
+              }).toList(),
+              onChanged: (value) {},
+            ),
           ),
         ],
       ),
     );
   }
 
-  InputDecoration get decoration => InputDecoration(
+  InputDecoration _getDecoration() => InputDecoration(
         contentPadding: widget.contentPadding ?? EdgeInsets.zero,
         hintText: widget.hintText,
         hintStyle: theme.textTheme.bodySmall,

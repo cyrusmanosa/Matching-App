@@ -103,7 +103,6 @@ class _EmailConfirmationtate extends State<EmailConfirmation> {
       controller: emailController,
       hintText: "example@email.com",
       textInputType: TextInputType.emailAddress,
-      focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
       },

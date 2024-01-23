@@ -229,7 +229,6 @@ class _FixInformationState extends State<FixInformation> {
     return CustomInputFormBar(
       controller: fixLastNameController,
       hintText: "山崎",
-      focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
       },
@@ -241,7 +240,6 @@ class _FixInformationState extends State<FixInformation> {
     return CustomInputFormBar(
       controller: fixFirstNameController,
       hintText: "泰一",
-      focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
       },

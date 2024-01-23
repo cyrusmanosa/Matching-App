@@ -241,15 +241,13 @@ class _ChatBoxState extends State<ChatBox> {
     );
   }
 
-  // no do
   Widget optionBarButton(BuildContext context, double s, double mediaH, double mediaW) {
     return GestureDetector(
-      onTap: () {},
       child: Container(
         height: mediaH / 30,
         width: mediaW / 14,
-        decoration: BoxDecoration(color: appTheme.black, borderRadius: BorderRadiusStyle.r30),
-        child: Icon(Icons.add, color: Colors.white, size: s),
+        decoration: BoxDecoration(color: Color.fromARGB(255, 226, 226, 226), borderRadius: BorderRadiusStyle.r30),
+        child: Icon(Icons.add, color: Color.fromARGB(255, 226, 226, 226), size: s),
       ),
     );
   }
@@ -260,7 +258,6 @@ class _ChatBoxState extends State<ChatBox> {
       width: mediaW / 1.45,
       controller: newMsgTextController,
       hintText: "Write message...",
-      focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
       },

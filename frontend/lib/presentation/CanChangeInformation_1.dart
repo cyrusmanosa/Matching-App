@@ -173,7 +173,6 @@ class _CanChangeInformation1State extends State<CanChangeInformation1> {
     return CustomInputFormBar(
       controller: canChangeNickNameController,
       hintText: "仆街",
-      focusNode: FocusNode(),
       onTap: () {
         FocusNode().requestFocus();
       },
