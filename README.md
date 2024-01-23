@@ -1,12 +1,18 @@
-実行流れ：
-バックエンド
+# 実行流れ
 
-  インストール
-    Window : https://www.youtube.com/watch?v=TtCfDXfSw_0
-    Mac : Docker install
-          Xcode install
-          brew install golang-migrate
-  Backend setup (vscode terminal or cmd)
+## バックエンド
+
+### インストール
+
+* Windows: https://www.youtube.com/watch?v=TtCfDXfSw_0
+* Mac:
+    * Docker をインストールする
+    * Xcode をインストールする
+    * brew install golang-migrate
+
+### Backend setup
+
+* vscode のターミナルまたは cmd で、以下のコマンドを実行する
     cd Backend 
       コマンド : make dockernetwork
                 make postgres
@@ -15,7 +21,8 @@
                 make setup_chat
                 (入Data)
 
-フロントエンド
-  flutter clean
-  flutter upgrade
-  flutter run
+## フロントエンド
+* flutter clean
+* flutter upgrade
+* flutter run
+
