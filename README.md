@@ -69,7 +69,6 @@ make server
 
 ## フロントエンド
 ```
-flutter clean
-flutter upgrade
+flutter pub get
 flutter run
 ```
