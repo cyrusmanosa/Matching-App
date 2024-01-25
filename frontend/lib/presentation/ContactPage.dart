@@ -64,7 +64,7 @@ class _ContactPageState extends State<ContactPage> {
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
         },
-        child: Container(
+        child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: mediaW / 13),
           child: Column(
             children: [
@@ -89,7 +89,8 @@ class _ContactPageState extends State<ContactPage> {
               SizedBox(height: mediaH / 50),
 
               // button
-              _buildNextButton(context)
+              _buildNextButton(context),
+              SizedBox(height: mediaH / 50)
             ],
           ),
         ),

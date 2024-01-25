@@ -26,6 +26,7 @@ class _ProfileButtonState extends State<ProfileButton> {
           },
           child: Container(
             width: widget.width ?? widget.mediaW! / 2.5,
+            height: widget.mediaH ?? widget.mediaH! / 15,
             margin: EdgeInsets.symmetric(horizontal: widget.mediaW! / 50),
             decoration: BoxDecoration(
               color: appTheme.profileBtngrey,
@@ -37,13 +38,8 @@ class _ProfileButtonState extends State<ProfileButton> {
                 Padding(padding: widget.padding! ? EdgeInsets.symmetric(horizontal: widget.mediaW! / 8) : EdgeInsets.zero),
                 Container(
                   padding: EdgeInsets.all(5),
-                  child: Icon(
-                    widget.iconData!,
-                    color: appTheme.pinkA100,
-                    size: widget.mediaW! / 10,
-                  ),
+                  child: Icon(widget.iconData!, color: appTheme.pinkA100, size: widget.mediaW! / 10),
                 ),
-                SizedBox(height: widget.mediaH! / 130),
                 Text(widget.title!, style: theme.textTheme.headlineSmall),
               ],
             ),

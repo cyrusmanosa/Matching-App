@@ -21,7 +21,6 @@ class _NewPasswordSetupEmailState extends State<NewPasswordEmailSetup> {
   TextEditingController newPasswordSetupController = TextEditingController();
   TextEditingController newPasswordSetupConfirmController = TextEditingController();
 
-  // Grpc
   void resetPasswordGrpcRequest(BuildContext context) async {
     if (newPasswordSetupController.text != newPasswordSetupConfirmController.text) {
       await showErrorDialog(context, "パスワード（確認）とパスワードは一致しません");

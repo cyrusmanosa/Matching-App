@@ -53,7 +53,6 @@ class _FixInformationState extends State<FixInformation> {
     }
   }
 
-  // Grpc
   void fixInformationGrpcRequest(BuildContext context) async {
     if (fixFirstNameController.text.isEmpty) {
       await showErrorDialog(context, "姓はまだ入力されていません");

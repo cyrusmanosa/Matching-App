@@ -54,7 +54,6 @@ class _LoginState extends State<Login> {
     });
   }
 
-  // Grpc
   void loginGrpcUser(BuildContext context) async {
     try {
       setState(() {
@@ -113,7 +112,7 @@ class _LoginState extends State<Login> {
                 children: [
                   // Logo and Slogan
                   SizedBox(height: mediaH / 35),
-                  CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 3.5),
+                  CustomImageView(imagePath: ImageConstant.imgLogo, width: mediaW / 4),
                   CustomImageView(imagePath: ImageConstant.imgSlogan, width: mediaW / 3),
                   SizedBox(height: mediaH / 35),
 
@@ -150,15 +149,16 @@ class _LoginState extends State<Login> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       // line 1
-                      Padding(padding: EdgeInsets.all(10), child: SizedBox(width: mediaW / 3.5, child: Divider())),
+                      Padding(padding: EdgeInsets.all(mediaW / 50), child: SizedBox(width: mediaW / 3.5, child: Divider())),
                       // Word
                       Text("または", style: theme.textTheme.titleMedium),
                       // line 2
-                      Padding(padding: EdgeInsets.all(10), child: SizedBox(width: mediaW / 3.5, child: Divider())),
+                      Padding(padding: EdgeInsets.all(mediaW / 50), child: SizedBox(width: mediaW / 3.5, child: Divider())),
                     ],
                   ),
                   SizedBox(height: mediaH / 35),
                   _buildSignUpPart(context, mediaH, mediaW),
+                  SizedBox(height: mediaH / 35),
                 ],
               ),
             ),
@@ -234,11 +234,7 @@ class _LoginState extends State<Login> {
           text: "フェイスブックで続ける",
           leftIcon: Container(
             margin: EdgeInsets.only(left: mediaW / 20, right: mediaW / 15),
-            child: CustomImageView(
-              imagePath: ImageConstant.imgLogosfacebook,
-              width: mediaW / 23,
-              color: Colors.grey,
-            ),
+            child: CustomImageView(imagePath: ImageConstant.imgLogosfacebook, width: mediaW / 23, color: Colors.grey),
           ),
           buttonStyle: CustomButtonStyles.fillBlue,
         ),
@@ -250,11 +246,7 @@ class _LoginState extends State<Login> {
           text: "ツイッターで続ける",
           leftIcon: Container(
             margin: EdgeInsets.only(right: mediaW / 15),
-            child: CustomImageView(
-              imagePath: ImageConstant.imgClose,
-              width: mediaW / 14,
-              color: Colors.grey,
-            ),
+            child: CustomImageView(imagePath: ImageConstant.imgClose, width: mediaW / 14, color: Colors.grey),
           ),
           buttonStyle: CustomButtonStyles.fillDarkgrey,
         ),

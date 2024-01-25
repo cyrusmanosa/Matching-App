@@ -116,11 +116,11 @@ class _ChatState extends State<Chat> {
               separatorBuilder: (context, index) => SizedBox(height: mediaH / 50),
               itemBuilder: (context, index) {
                 return ConversationList(
-                  targetid: users[index].userid,
-                  name: users[index].info.nickName,
-                  messageText: users[index].lastMsg,
                   imageUrl: users[index].img,
                   isMessageRead: users[index].isRead,
+                  messageText: users[index].lastMsg,
+                  name: users[index].info.nickName,
+                  targetid: users[index].userid,
                 );
               },
             ),

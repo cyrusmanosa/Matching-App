@@ -28,7 +28,7 @@ class ShownDataBarWidget extends StatelessWidget {
         ],
       ),
       decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(width: 1, color: Colors.grey)),
+        border: Border(bottom: BorderSide(width: 1, color: appTheme.grey500)),
       ),
     );
   }

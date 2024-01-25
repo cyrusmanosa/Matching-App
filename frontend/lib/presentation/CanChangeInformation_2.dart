@@ -38,7 +38,6 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
     return pattern.hasMatch(value);
   }
 
-  // Grpc
   void createCanChangeGrpcRequest(BuildContext context) async {
     if (canChangeJobController.text.isEmpty) {
       await showErrorDialog(context, "仕事はまだ入力されていません");
@@ -63,7 +62,7 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
           hobbyType: hobbyFindTypeController.text,
           experience: int.parse(hobbyExperienceController.text),
           accompanyType: accompanyFindTypeController.text,
-          annualSalary: int.parse(canChangeAnnualSalaryController.text),
+          annualSalary: int.parse(canChangeAnnualSalaryController.text) ?? 0,
           sociability: canChangeSociabilityController.text,
           introduce: canChangeIntroduceController.text,
         );
@@ -78,7 +77,6 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
     }
   }
 
-  // Grpc
   void createChatRecord(BuildContext context) async {
     try {
       setState(() {
@@ -120,13 +118,6 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
 
               // Annual Salary
               CustomInputBar(titleName: "年収:", backendPart: _buildcanChangeAnnualSalaryInput(context)),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: EdgeInsets.only(left: mediaW / 100),
-                  child: Text("＊入力しなくても大丈夫です。", style: CustomTextStyles.wordOnlySmallButton),
-                ),
-              ),
               SizedBox(height: mediaH / 90),
 
               // Sociability

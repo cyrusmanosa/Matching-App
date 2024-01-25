@@ -22,10 +22,10 @@ class Information extends StatefulWidget {
 class _InformationState extends State<Information> {
   @override
   Widget build(BuildContext context) {
-    double _containerHeight = 0.7;
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     double mediaH = mediaQueryData.size.height;
     double mediaW = mediaQueryData.size.width;
+    double _containerHeight = 0.7;
 
     return GestureDetector(
       onVerticalDragDown: (_) {},
@@ -68,7 +68,7 @@ class _InformationState extends State<Information> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: mediaW / 10, vertical: mediaH / 30),
       child: Container(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(mediaW / 20),
         decoration: BoxDecoration(
           color: Color.fromARGB(255, 233, 233, 233),
           borderRadius: BorderRadiusStyle.r15,
@@ -78,7 +78,7 @@ class _InformationState extends State<Information> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("自己紹介", style: CustomTextStyles.showDataTitle),
-            Container(decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: Colors.grey)))),
+            Container(decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: appTheme.grey500)))),
             Text(widget.canData!.introduce, style: CustomTextStyles.smallTitle20),
             SizedBox(height: mediaH / 30),
 

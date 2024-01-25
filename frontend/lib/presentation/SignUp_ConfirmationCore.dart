@@ -19,7 +19,6 @@ class ConfirmationCore extends StatefulWidget {
 class _ConfirmationCoreState extends State<ConfirmationCore> {
   TextEditingController confirmationCoreController = TextEditingController();
 
-  // Grpc
   void checkCodeGrpcRequest(BuildContext context) async {
     try {
       setState(() {

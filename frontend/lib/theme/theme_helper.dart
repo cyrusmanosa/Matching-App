@@ -83,6 +83,7 @@ class PrimaryColors {
   Color get white => Colors.white;
 
   Color get blue => Color(0XFF1877F2);
+  Color get blue200 => Color.fromRGBO(144, 202, 249, 1);
 
   Color get green => Color.fromARGB(255, 21, 179, 0);
 

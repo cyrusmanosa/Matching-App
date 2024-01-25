@@ -192,7 +192,6 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
     }
   }
 
-  // Grpc
   void updateAccompany(BuildContext context) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
     if (haveTable == true) {

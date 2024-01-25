@@ -10,7 +10,7 @@ class CustomTextStyles {
   static get smallTitle20 => theme.textTheme.headlineSmall!.copyWith(fontSize: 20);
   static get dataWord => theme.textTheme.headlineSmall!.copyWith(fontSize: 18);
   static get msgWordOfMsgBox => theme.textTheme.headlineSmall!.copyWith(fontSize: 16);
-  static get titleOfUnderLogo => theme.textTheme.headlineSmall!.copyWith(fontSize: 13);
+  static get titleOfUnderLogo => theme.textTheme.headlineSmall!.copyWith(fontSize: 13.5);
   static get wordOnlySmallButton => theme.textTheme.headlineSmall!.copyWith(fontSize: 11);
 
   // body

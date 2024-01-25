@@ -62,7 +62,6 @@ class _CanChangeInformation1State extends State<CanChangeInformation1> {
   TextEditingController canChangeEducationController = TextEditingController();
   TextEditingController canChangeReligiousController = TextEditingController();
 
-  // Grpc
   void canChangeGrpcRequest(BuildContext context) async {
     if (canChangeNickNameController.text.isEmpty) {
       await showErrorDialog(context, "ニックネームはまだ入力されていません");

@@ -7,7 +7,8 @@ import 'package:dating_your_date/presentation/UserPage.dart';
 import 'package:flutter/material.dart';
 
 class MainframeItemWidget extends StatefulWidget {
-  MainframeItemWidget({Key? key, this.mediaH, this.mediaW, this.img, this.fix, this.canChange, this.allImage}) : super(key: key);
+  MainframeItemWidget({Key? key, this.mediaH, this.mediaW, this.img, this.fix, this.canChange, this.allImage, this.tType})
+      : super(key: key);
 
   final double? mediaH;
   final double? mediaW;
@@ -15,6 +16,7 @@ class MainframeItemWidget extends StatefulWidget {
   final List<Uint8List>? allImage;
   final Fix? fix;
   final CanChange? canChange;
+  final String? tType;
 
   @override
   _MainframeItemWidget createState() => _MainframeItemWidget();
@@ -70,6 +72,7 @@ class _MainframeItemWidget extends State<MainframeItemWidget> {
                           canData: widget.canChange!,
                           img: widget.img!,
                           allImage: widget.allImage!,
+                          tType: widget.tType!,
                         ),
                         transitionsBuilder: (context, animation, secondaryAnimation, child) {
                           return SlideTransition(

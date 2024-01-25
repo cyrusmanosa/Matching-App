@@ -15,8 +15,9 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
 class UserPage extends StatefulWidget {
-  UserPage({super.key, this.canData, this.fixData, this.img, this.allImage});
+  UserPage({super.key, this.canData, this.fixData, this.img, this.allImage, this.tType});
 
+  final String? tType;
   final Fix? fixData;
   final Uint8List? img;
   final CanChange? canData;
@@ -27,20 +28,25 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
-  void createSocialMediaRecode(BuildContext context) async {
+  void checkSocialMediaRecode(BuildContext context) async {
     String? apiKeyU = await globalUserId.read(key: 'UserID');
     final userid = int.tryParse(apiKeyU!);
     try {
-      final req = GetSocialMediaRequest(userID: userid, targetID: widget.canData!.userID);
-      await GrpcChatService.client.getSocialMedia(req);
+      final myReq = GetSocialMediaRequest(userID: userid, targetID: widget.canData!.userID);
+      await GrpcChatService.client.getSocialMedia(myReq);
+      final tarReq = GetSocialMediaRequest(userID: widget.canData!.userID, targetID: userid);
+      await GrpcChatService.client.getSocialMedia(tarReq);
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => ChatBox(name: widget.canData!.nickName, imageUrl: widget.img!, targetid: widget.canData!.userID)),
+          builder: (context) =>
+              ChatBox(name: widget.canData!.nickName, imageUrl: widget.img!, targetid: widget.canData!.userID, tType: widget.tType!),
+        ),
       );
     } on GrpcError catch (e) {
       if (e.code == 5 || e.code == 13) {
-        final creq = CreateSocialMediaRequest(
+        // my
+        final mReq = CreateSocialMediaRequest(
           userID: userid,
           targetID: widget.canData!.userID,
           image: false,
@@ -49,8 +55,21 @@ class _UserPageState extends State<UserPage> {
           sns: false,
           location: false,
         );
-        await GrpcChatService.client.createSocialMedia(creq);
-        createSocialMediaRecode(context);
+        await GrpcChatService.client.createSocialMedia(mReq);
+        // target
+        final tReq = CreateSocialMediaRequest(
+          userID: widget.canData!.userID,
+          targetID: userid,
+          image: false,
+          contact: false,
+          appointment: false,
+          sns: false,
+          location: false,
+        );
+        await GrpcChatService.client.createSocialMedia(tReq);
+
+        await Future.delayed(Duration(milliseconds: 300));
+        checkSocialMediaRecode(context);
       }
       throw Exception("エラーがあります。$e");
     }
@@ -108,16 +127,28 @@ class _UserPageState extends State<UserPage> {
             // far left
             SizedBox(width: mediaW / 25),
             // image
-            customImageDesignImage(context, widget.allImage![0], mediaH, mediaW),
-            if (widget.allImage!.length >= 2) customImageDesignImage(context, widget.allImage![1], mediaH, mediaW),
-            if (widget.allImage!.length >= 3) customImageDesignImage(context, widget.allImage![2], mediaH, mediaW),
-            if (widget.allImage!.length >= 4) customImageDesignImage(context, widget.allImage![3], mediaH, mediaW),
-            if (widget.allImage!.length >= 5) customImageDesignImage(context, widget.allImage![4], mediaH, mediaW),
+            _buildImageContainer(context, widget.allImage![0], mediaH, mediaW),
+            if (widget.allImage!.length >= 2) _buildImageContainer(context, widget.allImage![1], mediaH, mediaW),
+            if (widget.allImage!.length >= 3) _buildImageContainer(context, widget.allImage![2], mediaH, mediaW),
+            if (widget.allImage!.length >= 4) _buildImageContainer(context, widget.allImage![3], mediaH, mediaW),
+            if (widget.allImage!.length >= 5) _buildImageContainer(context, widget.allImage![4], mediaH, mediaW),
             // far right
             SizedBox(width: mediaW / 25),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildImageContainer(BuildContext context, Uint8List imageFile, double mediaH, double mediaW) {
+    return InkWell(
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(content: Image(image: MemoryImage(imageFile))),
+        );
+      },
+      child: Container(child: customImageDesign(context, imageFile, mediaH, mediaW)),
     );
   }
 
@@ -236,7 +267,7 @@ class _UserPageState extends State<UserPage> {
     return CustomOutlinedButton(
       text: "チャット",
       onPressed: () {
-        createSocialMediaRecode(context);
+        checkSocialMediaRecode(context);
       },
     );
   }

@@ -22,7 +22,6 @@ class _PasswordSetupState extends State<PasswordSetup> {
   TextEditingController passwordSetupController = TextEditingController();
   TextEditingController passwordSetupConfirmController = TextEditingController();
 
-  // Grpc
   void inputPasswordGrpcRequest(BuildContext context) async {
     if (passwordSetupController.text != passwordSetupConfirmController.text) {
       await showErrorDialog(context, "パスワード（確認）とパスワードは一致しません");

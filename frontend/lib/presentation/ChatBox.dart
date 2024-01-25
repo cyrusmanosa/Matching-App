@@ -19,9 +19,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as customImage;
 
 class ChatBox extends StatefulWidget {
-  ChatBox({Key? key, this.name, this.imageUrl, this.time, this.targetid}) : super(key: key);
+  ChatBox({Key? key, this.name, this.imageUrl, this.time, this.targetid, this.tType}) : super(key: key);
 
   final String? name;
+  final String? tType;
   final Uint8List? imageUrl;
   final String? time;
   final int? targetid;
@@ -33,7 +34,9 @@ class ChatBox extends StatefulWidget {
 class _ChatBoxState extends State<ChatBox> {
   String? purpose;
   bool checktime = true;
-  SocialMedia? socialmediaData;
+  Color? hColor;
+  SocialMedia? mySocialMedia;
+  SocialMedia? tarSocialMedia;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController newMsgTextController = TextEditingController();
 
@@ -42,6 +45,13 @@ class _ChatBoxState extends State<ChatBox> {
     super.initState();
     getPurpose(context);
     getSocialMedia(context);
+    if (widget.tType! == "趣味") {
+      hColor = appTheme.grey800;
+    } else if (widget.tType! == "相伴") {
+      hColor = appTheme.scallopSeashell;
+    } else {
+      hColor = appTheme.pinkA100;
+    }
   }
 
   Future<List<ChatRecordNoID>> getChatRecords(BuildContext context) async {
@@ -53,6 +63,23 @@ class _ChatBoxState extends State<ChatBox> {
       return crResponse.chatRecordNoID;
     } on GrpcError {
       throw Exception('No chat records found');
+    }
+  }
+
+  Future<void> getSocialMedia(BuildContext context) async {
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
+    try {
+      final myReq = GetSocialMediaRequest(userID: userid, targetID: widget.targetid!);
+      final myRsp = await GrpcChatService.client.getSocialMedia(myReq);
+      final tarReq = GetSocialMediaRequest(userID: widget.targetid!, targetID: userid);
+      final tarRsp = await GrpcChatService.client.getSocialMedia(tarReq);
+      setState(() {
+        mySocialMedia = myRsp.sm;
+        tarSocialMedia = tarRsp.sm;
+      });
+    } on GrpcError {
+      throw Exception("エラーが発生しました。");
     }
   }
 
@@ -82,20 +109,6 @@ class _ChatBoxState extends State<ChatBox> {
     }
   }
 
-  Future<void> getSocialMedia(BuildContext context) async {
-    String? apiKeyU = await globalUserId.read(key: 'UserID');
-    final userid = int.tryParse(apiKeyU!);
-    try {
-      final req = GetSocialMediaRequest(userID: userid, targetID: widget.targetid!);
-      final rsp = await GrpcChatService.client.getSocialMedia(req);
-      setState(() {
-        socialmediaData = rsp.sm;
-      });
-    } on GrpcError {
-      throw Exception("エラーが発生しました。");
-    }
-  }
-
   void uploadPhotoToNewFile() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -107,7 +120,6 @@ class _ChatBoxState extends State<ChatBox> {
     }
   }
 
-  // Grpc
   void senderPhotoGrpcRequest(BuildContext context, File file) async {
     Uint8List bytes = await file.readAsBytes();
     final image = customImage.decodeImage(bytes);
@@ -187,7 +199,7 @@ class _ChatBoxState extends State<ChatBox> {
       child: Scaffold(
         key: _scaffoldKey,
         appBar: _buildHeader(context, mediaW),
-        drawer: Drawer(child: SideBar(sm: socialmediaData, targetId: widget.targetid!)),
+        drawer: Drawer(child: SideBar(sm: mySocialMedia, targetId: widget.targetid!)),
         backgroundColor: appTheme.bgColor,
         body: SingleChildScrollView(
           reverse: true,
@@ -212,7 +224,7 @@ class _ChatBoxState extends State<ChatBox> {
                               constraints: BoxConstraints(maxWidth: mediaW / 1.5),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadiusStyle.r30,
-                                color: (data[index].roleType == "receiver" ? appTheme.grey100 : Colors.blue[200]),
+                                color: (data[index].roleType == "receiver" ? appTheme.grey100 : appTheme.blue200),
                               ),
                               padding: EdgeInsets.symmetric(vertical: mediaH / 100, horizontal: mediaW / 30),
                               child: switchdata(context, data[index], mediaH),
@@ -230,7 +242,7 @@ class _ChatBoxState extends State<ChatBox> {
           ),
         ),
         bottomNavigationBar: AnimatedContainer(
-          duration: Duration(milliseconds: 10),
+          duration: Duration(milliseconds: 50),
           height: mediaH / 12,
           color: Color.fromARGB(255, 226, 226, 226),
           margin: EdgeInsets.only(bottom: mediaQueryData.viewInsets.bottom),
@@ -242,9 +254,9 @@ class _ChatBoxState extends State<ChatBox> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    optionBarButton(context, 30, mediaH, mediaW),
+                    optionBarButton(context, mediaH, mediaW),
                     _buildMsgInput(context, mediaH, mediaW),
-                    sendBarButton(context, 20, mediaH, mediaW),
+                    sendBarButton(context, mediaH, mediaW),
                   ],
                 ),
               ),
@@ -260,7 +272,7 @@ class _ChatBoxState extends State<ChatBox> {
     return AppBar(
       elevation: 0,
       automaticallyImplyLeading: false,
-      backgroundColor: Colors.yellow,
+      backgroundColor: hColor,
       leading: IconButton(
         icon: Icon(Icons.arrow_back, color: Colors.black54),
         onPressed: () {
@@ -282,7 +294,7 @@ class _ChatBoxState extends State<ChatBox> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Text(widget.name!, style: CustomTextStyles.msgWordOfMsgBox), checkShow(context)],
+                  children: [Text(widget.name!, style: CustomTextStyles.sideBarTitle), checkShow(context)],
                 ),
               ),
               // seting icon
@@ -310,7 +322,7 @@ class _ChatBoxState extends State<ChatBox> {
     return Container();
   }
 
-  Widget sendBarButton(BuildContext context, double s, double mediaH, double mediaW) {
+  Widget sendBarButton(BuildContext context, double mediaH, double mediaW) {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -320,15 +332,15 @@ class _ChatBoxState extends State<ChatBox> {
         });
       },
       child: Container(
-        height: mediaH / 30,
-        width: mediaW / 14,
+        height: mediaH / 27,
+        width: mediaW / 12,
         decoration: BoxDecoration(color: appTheme.black, borderRadius: BorderRadiusStyle.r30),
-        child: Icon(Icons.send, color: Colors.white, size: s),
+        child: Icon(Icons.send, color: appTheme.white, size: 23),
       ),
     );
   }
 
-  Widget optionBarButton(BuildContext context, double s, double mediaH, double mediaW) {
+  Widget optionBarButton(BuildContext context, double mediaH, double mediaW) {
     return GestureDetector(
       onTap: () {
         showModalBottomSheet(
@@ -341,17 +353,16 @@ class _ChatBoxState extends State<ChatBox> {
                 children: [
                   // image
                   ListTile(
-                      enabled: socialmediaData!.image,
+                      enabled: mySocialMedia!.image == true && tarSocialMedia!.image == true ? true : false,
                       leading: Icon(Icons.photo),
                       title: Text('写真解放'),
                       onTap: () {
                         uploadPhotoToNewFile();
                       }),
                   Divider(indent: 10, endIndent: 10),
-
                   // contact
                   ListTile(
-                    enabled: socialmediaData!.contact,
+                    enabled: mySocialMedia!.contact == true && tarSocialMedia!.contact == true ? true : false,
                     leading: Icon(Icons.contacts),
                     title: Text('連絡解放'),
                     onTap: () {},
@@ -359,7 +370,7 @@ class _ChatBoxState extends State<ChatBox> {
                   Divider(indent: 10, endIndent: 10),
                   // location
                   ListTile(
-                    enabled: socialmediaData!.location,
+                    enabled: mySocialMedia!.location == true && tarSocialMedia!.location == true ? true : false,
                     leading: Icon(Icons.location_on),
                     title: Text('位置共有'),
                     onTap: () {},
@@ -367,7 +378,7 @@ class _ChatBoxState extends State<ChatBox> {
                   Divider(indent: 10, endIndent: 10),
                   // dating
                   ListTile(
-                    enabled: socialmediaData!.appointment,
+                    enabled: mySocialMedia!.appointment == true && tarSocialMedia!.appointment == true ? true : false,
                     leading: Icon(Icons.date_range),
                     title: Text('デート解放'),
                     onTap: () {},
@@ -375,7 +386,7 @@ class _ChatBoxState extends State<ChatBox> {
                   Divider(indent: 10, endIndent: 10),
                   // sns
                   ListTile(
-                    enabled: socialmediaData!.sns,
+                    enabled: mySocialMedia!.sns == true && tarSocialMedia!.sns == true ? true : false,
                     leading: Icon(Icons.share),
                     title: Text('SNS共有'),
                     onTap: () {},
@@ -387,10 +398,10 @@ class _ChatBoxState extends State<ChatBox> {
         );
       },
       child: Container(
-        height: mediaH / 30,
-        width: mediaW / 14,
+        height: mediaH / 27,
+        width: mediaW / 13,
         decoration: BoxDecoration(color: appTheme.black, borderRadius: BorderRadiusStyle.r30),
-        child: Icon(Icons.add, color: appTheme.white, size: s),
+        child: Icon(Icons.add, color: appTheme.white, size: 33),
       ),
     );
   }
@@ -409,7 +420,7 @@ class _ChatBoxState extends State<ChatBox> {
 
   Widget checkShow(BuildContext context) {
     if (checktime) {
-      return Text("Online", style: CustomTextStyles.pwRulegrey500);
+      return Text("Online", style: CustomTextStyles.wordOnlySmallButton);
     }
     return Container();
   }

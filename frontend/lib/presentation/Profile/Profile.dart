@@ -258,6 +258,7 @@ class _ProfileState extends State<Profile> {
         actions: [
           if (allMyImg.length < 5)
             IconButton(
+              padding: EdgeInsets.only(right: mediaW / 30),
               icon: Icon(Icons.add_photo_alternate_outlined),
               onPressed: () {
                 onTapNextPage(context);
@@ -275,18 +276,12 @@ class _ProfileState extends State<Profile> {
             // Part 2 - cCData!
             if (send.isNotEmpty && changeTime.isNotEmpty) _buildDataBar(context, mediaH, mediaW),
             SizedBox(height: mediaH / 30),
-
             // Button 1rd
             Container(
               padding: EdgeInsets.symmetric(horizontal: mediaW / 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // User Information
-                  _buildUserInfomationBtn(context, mediaH, mediaW),
-                  // SNS
-                  _buildSNSBtn(context, mediaH, mediaW),
-                ],
+                children: [_buildUserInfomationBtn(context, mediaH, mediaW), _buildSNSBtn(context, mediaH, mediaW)],
               ),
             ),
             SizedBox(height: mediaH / 30),
@@ -295,11 +290,7 @@ class _ProfileState extends State<Profile> {
               padding: EdgeInsets.symmetric(horizontal: mediaW / 25),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildContextBtn(context, mediaH, mediaW),
-                  // Reset PW
-                  _buildResetPWtBtn(context, mediaH, mediaW),
-                ],
+                children: [_buildContextBtn(context, mediaH, mediaW), _buildResetPWtBtn(context, mediaH, mediaW)],
               ),
             ),
             SizedBox(height: mediaH / 30),
@@ -308,9 +299,7 @@ class _ProfileState extends State<Profile> {
               padding: EdgeInsets.symmetric(horizontal: mediaW / 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildLogoutBtn(context, mediaH, mediaW),
-                ],
+                children: [_buildLogoutBtn(context, mediaH, mediaW)],
               ),
             ),
           ],
@@ -383,19 +372,9 @@ class _ProfileState extends State<Profile> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              children: [
-                Text("交換回数", style: CustomTextStyles.inputTitlePink),
-                Text(changeTime, style: CustomTextStyles.dataWord),
-              ],
-            ),
+            Column(children: [Text("交換回数", style: CustomTextStyles.inputTitlePink), Text(changeTime, style: CustomTextStyles.dataWord)]),
             SizedBox(height: mediaH / 14, child: VerticalDivider(thickness: 1, indent: 10, endIndent: 10)),
-            Column(
-              children: [
-                Text("伝送回数", style: CustomTextStyles.inputTitlePink),
-                Text(send, style: CustomTextStyles.dataWord),
-              ],
-            ),
+            Column(children: [Text("伝送回数", style: CustomTextStyles.inputTitlePink), Text(send, style: CustomTextStyles.dataWord)]),
           ],
         ),
       ),
@@ -423,6 +402,7 @@ class _ProfileState extends State<Profile> {
           },
           child: Container(
             width: mediaW / 2.5,
+            height: mediaH / 15,
             margin: EdgeInsets.symmetric(horizontal: mediaW / 50),
             decoration: BoxDecoration(
               color: appTheme.profileBtngrey,
@@ -433,13 +413,8 @@ class _ProfileState extends State<Profile> {
               children: [
                 Container(
                   padding: EdgeInsets.all(5),
-                  child: Icon(
-                    Icons.manage_accounts_sharp,
-                    color: appTheme.pinkA100,
-                    size: mediaW / 8,
-                  ),
+                  child: Icon(Icons.manage_accounts_sharp, color: appTheme.pinkA100, size: mediaW / 9),
                 ),
-                SizedBox(height: mediaH / 130),
                 Text("基本情報", style: theme.textTheme.headlineSmall),
               ],
             ),
@@ -456,7 +431,7 @@ class _ProfileState extends State<Profile> {
         alignment: Alignment.center,
         child: ProfileButton(
           mediaW: mediaW,
-          mediaH: mediaH,
+          mediaH: mediaH / 15,
           iconData: Icons.no_accounts_rounded,
           page: AppRoutes.deleteAccount,
           title: "ユーザー削除",
@@ -473,7 +448,7 @@ class _ProfileState extends State<Profile> {
         alignment: Alignment.center,
         child: ProfileButton(
           mediaW: mediaW,
-          mediaH: mediaH,
+          mediaH: mediaH / 15,
           iconData: Icons.lock_clock_outlined,
           page: AppRoutes.newPasswordSetup,
           title: "パスワード更新",
@@ -490,7 +465,7 @@ class _ProfileState extends State<Profile> {
         alignment: Alignment.center,
         child: ProfileButton(
           mediaW: mediaW,
-          mediaH: mediaH,
+          mediaH: mediaH / 15,
           iconData: Icons.admin_panel_settings_outlined,
           page: AppRoutes.contactPage,
           title: "連絡",
@@ -513,7 +488,7 @@ class _ProfileState extends State<Profile> {
           },
           child: ProfileButton(
             mediaW: mediaW,
-            mediaH: mediaH,
+            mediaH: mediaH / 15,
             iconData: Icons.logout_sharp,
             page: AppRoutes.login,
             title: "ログアウト",

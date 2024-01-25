@@ -4,7 +4,6 @@ import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_socialmedia.pb.dart';
 import 'package:dating_your_date/pb/socialmedia.pb.dart';
 import 'package:dating_your_date/widgets/button/custom_elevated_button.dart';
-import 'package:dating_your_date/widgets/button/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 
 class SideBar extends StatefulWidget {
@@ -46,8 +45,9 @@ class _SideBarState extends State<SideBar> {
       location: locaBtn,
       sns: snsBtn,
     );
-    print(req);
     await GrpcChatService.client.updateSocialMedia(req);
+
+    Navigator.pop(context);
   }
 
   @override

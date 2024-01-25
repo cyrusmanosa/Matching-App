@@ -4,6 +4,7 @@ import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/rpc_chatRecord.pb.dart';
+import 'package:dating_your_date/pb/rpc_targetList.pb.dart';
 import 'package:dating_your_date/presentation/ChatBox.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:flutter/material.dart';
@@ -23,11 +24,24 @@ class ConversationList extends StatefulWidget {
 }
 
 class _ConversationListState extends State<ConversationList> {
-  // Grpc
+  String? tType;
+
   void updateReadGrpcRequest(BuildContext context) async {
     try {
+      String? apiKeyS = await globalSession.read(key: 'SessionId');
       String? apiKeyU = await globalUserId.read(key: 'UserID');
       final userid = int.tryParse(apiKeyU!);
+      final reqT = GetTargetListRequest(sessionID: apiKeyS, userID: userid);
+      final rsp = await GrpcInfoService.client.getTargetList(reqT);
+      setState(() {
+        if (widget.targetid == rsp.tl.target1ID) {
+          tType = rsp.tl.t1Type;
+        } else if (widget.targetid == rsp.tl.target2ID) {
+          tType = rsp.tl.t2Type;
+        } else {
+          tType = rsp.tl.t3Type;
+        }
+      });
       final request = UpdateReadRequest(userID: userid, targetID: widget.targetid);
       await GrpcChatService.client.updateRead(request);
     } on GrpcError catch (e) {
@@ -45,14 +59,21 @@ class _ConversationListState extends State<ConversationList> {
         updateReadGrpcRequest(context);
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ChatBox(name: widget.name!, imageUrl: widget.imageUrl!, targetid: widget.targetid!)),
+          MaterialPageRoute(
+            builder: (context) => ChatBox(
+              name: widget.name!,
+              imageUrl: widget.imageUrl!,
+              targetid: widget.targetid!,
+              tType: tType,
+            ),
+          ),
         );
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: mediaW / 50),
         padding: EdgeInsets.symmetric(horizontal: mediaW / 15, vertical: mediaH / 60),
         decoration:
-            BoxDecoration(color: Colors.white, border: Border.all(color: Colors.black, width: 3), borderRadius: BorderRadiusStyle.r15),
+            BoxDecoration(color: Colors.white, border: Border.all(color: appTheme.black, width: 3), borderRadius: BorderRadiusStyle.r15),
         child: Row(
           children: [
             CircleAvatar(backgroundImage: MemoryImage(widget.imageUrl!), maxRadius: 30),

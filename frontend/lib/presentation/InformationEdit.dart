@@ -86,16 +86,15 @@ class _InformationEditState extends State<InformationEdit> {
   }
 
   // add update icon
-  void _addUploadPhotoToNewFile(int item) async {
+  void _addUploadPhotoToNewFile() async {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       final file = File(pickedFile.path);
       final bytes = await file.readAsBytes();
       final uint8List = bytes.buffer.asUint8List();
-
       setState(() {
-        _newimageFile![item] = uint8List;
+        _newimageFile!.add(uint8List);
       });
     }
   }
@@ -130,7 +129,6 @@ class _InformationEditState extends State<InformationEdit> {
     }
   }
 
-  // Grpc
   void updateDataGrpcRequest(BuildContext context) async {
     try {
       String? apiKeyS = await globalSession.read(key: 'SessionId');
@@ -266,12 +264,11 @@ class _InformationEditState extends State<InformationEdit> {
         children: [
           // return
           IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: Icon(Icons.arrow_back_ios),
             onPressed: () {
               Navigator.pop(context);
             },
           ),
-
           // title
           Padding(
             padding: EdgeInsets.only(left: mediaW / 7),
@@ -279,7 +276,6 @@ class _InformationEditState extends State<InformationEdit> {
           ),
         ],
       ),
-
       // input
       actions: [
         if (_newimageFile!.length < 5)
@@ -288,7 +284,7 @@ class _InformationEditState extends State<InformationEdit> {
             decoration: BoxDecoration(color: appTheme.grey300, shape: BoxShape.circle),
             child: IconButton(
               onPressed: () {
-                _addUploadPhotoToNewFile(_newimageFile!.length);
+                _addUploadPhotoToNewFile();
               },
               icon: Icon(Icons.add, size: mediaH / 30, color: appTheme.grey800),
             ),

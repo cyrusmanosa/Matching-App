@@ -28,6 +28,7 @@ class _HomeState extends State<Home> {
   bool check = false;
   List<int> allTargetId = [];
   List<Uint8List> allicon = [];
+  List<String> allTypes = [];
   List<List<Uint8List>> allTargetImage = [];
   List<Fix> allTargetFix = List<Fix>.filled(3, Fix());
   List<CanChange> allTargetCanChange = List<CanChange>.filled(3, CanChange());
@@ -41,9 +42,8 @@ class _HomeState extends State<Home> {
     Targetlist allTarget = await getTargetListGrpc(context);
     if (check == false) {
       allTargetId = [allTarget.target1ID, allTarget.target2ID, allTarget.target3ID];
-
+      allTypes = [allTarget.t1Type, allTarget.t2Type, allTarget.t3Type];
       getTargetImageGrpc(context, allTargetId);
-
       getTargetDataGrpc(context, allTargetId);
     }
   }
@@ -180,6 +180,7 @@ class _HomeState extends State<Home> {
                       img: allicon[index],
                       fix: allTargetFix[index],
                       canChange: allTargetCanChange[index],
+                      tType: allTypes[index],
                     );
                   },
                 ),
