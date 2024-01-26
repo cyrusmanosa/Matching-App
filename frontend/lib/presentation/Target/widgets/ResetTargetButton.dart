@@ -23,7 +23,7 @@ class ResetTargetButton extends StatelessWidget {
         fontSize: mediaW / 15,
         fontWeight: FontWeight.w500,
         color: appTheme.white,
-        shadows: [Shadow(offset: Offset(0, 4), blurRadius: 5.0, color: Colors.black26)],
+        shadows: [Shadow(offset: Offset(0, 4), blurRadius: 5.0, color: appTheme.black)],
       ),
       buttonStyle: color,
       onPressed: () {

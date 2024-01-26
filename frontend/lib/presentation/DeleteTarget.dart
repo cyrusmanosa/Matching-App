@@ -133,7 +133,7 @@ class _DeleteTargetState extends State<DeleteTarget> {
       appBar: buildAppBar(context, "ターゲットを削除", true),
       backgroundColor: appTheme.bgColor,
       body: Container(
-        decoration: BoxDecoration(color: Colors.white),
+        decoration: BoxDecoration(color: appTheme.white),
         child: Column(
           children: [
             _buildMainFrame(context, mediaH, mediaW, isSelectedList),
@@ -183,7 +183,7 @@ class _DeleteTargetState extends State<DeleteTarget> {
         decoration: BoxDecoration(
           borderRadius: BorderRadiusStyle.r30,
           image: DecorationImage(image: FileImage(icon[index]), fit: BoxFit.cover),
-          boxShadow: isSelectedList[index] ? [BoxShadow(color: Colors.red.withOpacity(1), blurRadius: 5, spreadRadius: 5)] : [],
+          boxShadow: isSelectedList[index] ? [BoxShadow(color: appTheme.red.withOpacity(1), blurRadius: 5, spreadRadius: 5)] : [],
         ),
       ),
     );

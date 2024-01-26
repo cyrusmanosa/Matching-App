@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -78,7 +79,7 @@ class CustomImageView extends StatelessWidget {
             placeholder: (context, url) => Container(
               height: 30,
               width: 30,
-              child: LinearProgressIndicator(color: Colors.white, backgroundColor: Colors.white),
+              child: LinearProgressIndicator(color: appTheme.white, backgroundColor: appTheme.white),
             ),
             errorWidget: (context, url, error) => Image.asset(placeHolder, height: height, width: width, fit: fit ?? BoxFit.cover),
           );

@@ -104,7 +104,6 @@ class PrimaryColors {
   Color get pinkA400 => Color(0XFFFF00B7);
 
   Color get scallopSeashell => Color(0XFFDB8E6C);
-
   Color get bgColor => Colors.white;
 }
 

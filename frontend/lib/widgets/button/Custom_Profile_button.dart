@@ -31,7 +31,7 @@ class _ProfileButtonState extends State<ProfileButton> {
             decoration: BoxDecoration(
               color: appTheme.profileBtngrey,
               borderRadius: BorderRadiusStyle.r15,
-              boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.5), spreadRadius: 2, blurRadius: 5, offset: Offset(0, 3))],
+              boxShadow: [BoxShadow(color: appTheme.grey800.withOpacity(0.5), spreadRadius: 2, blurRadius: 5, offset: Offset(0, 3))],
             ),
             child: Row(
               children: [

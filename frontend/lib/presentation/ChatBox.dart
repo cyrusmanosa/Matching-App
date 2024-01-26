@@ -49,8 +49,10 @@ class _ChatBoxState extends State<ChatBox> {
       hColor = appTheme.grey800;
     } else if (widget.tType! == "相伴") {
       hColor = appTheme.scallopSeashell;
-    } else {
+    } else if (widget.tType! == "恋人") {
       hColor = appTheme.pinkA100;
+    } else {
+      hColor = appTheme.test;
     }
   }
 
@@ -274,7 +276,7 @@ class _ChatBoxState extends State<ChatBox> {
       automaticallyImplyLeading: false,
       backgroundColor: hColor,
       leading: IconButton(
-        icon: Icon(Icons.arrow_back, color: Colors.black54),
+        icon: Icon(Icons.arrow_back, color: appTheme.black),
         onPressed: () {
           Navigator.of(context).pop();
         },
@@ -299,7 +301,7 @@ class _ChatBoxState extends State<ChatBox> {
               ),
               // seting icon
               IconButton(
-                icon: Icon(Icons.settings, color: Colors.black54),
+                icon: Icon(Icons.settings, color: appTheme.black),
                 onPressed: () {
                   _scaffoldKey.currentState?.openDrawer();
                 },

@@ -38,8 +38,10 @@ class _ConversationListState extends State<ConversationList> {
           tType = rsp.tl.t1Type;
         } else if (widget.targetid == rsp.tl.target2ID) {
           tType = rsp.tl.t2Type;
-        } else {
+        } else if (widget.targetid == rsp.tl.target3ID) {
           tType = rsp.tl.t3Type;
+        } else {
+          tType = "見つけた";
         }
       });
       final request = UpdateReadRequest(userID: userid, targetID: widget.targetid);

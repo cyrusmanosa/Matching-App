@@ -92,7 +92,7 @@ class _UserPageState extends State<UserPage> {
             // name
             Text(
               widget.canData!.nickName + ',' + widget.fixData!.firstName,
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.black),
+              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: appTheme.black),
             ),
             // ago
             Text(widget.fixData!.age.toString() + ' 才', style: TextStyle(fontSize: 18, color: appTheme.black)),
@@ -167,7 +167,7 @@ class _UserPageState extends State<UserPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("自己紹介", style: CustomTextStyles.showDataTitle),
-            Container(decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: Colors.grey)))),
+            Container(decoration: BoxDecoration(border: Border(bottom: BorderSide(width: 1, color: appTheme.grey500)))),
             Text(widget.canData!.introduce, style: CustomTextStyles.smallTitle20),
             SizedBox(height: mediaH / 30),
 
