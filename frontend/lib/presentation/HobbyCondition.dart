@@ -45,45 +45,13 @@ class _HobbyConditionState extends State<HobbyCondition> {
   @override
   void initState() {
     super.initState();
-    getHobby(context);
-    getCountry(context);
+    getHobby();
+    getCountry();
   }
 
   bool isPureNumber(String value) {
     final pattern = RegExp(r'^\d+$');
     return pattern.hasMatch(value);
-  }
-
-  void getCountry(BuildContext context) async {
-    String? apiKeyS = await globalSession.read(key: 'SessionId');
-    String? apiKeyU = await globalUserId.read(key: 'UserID');
-    final userid = int.tryParse(apiKeyU!);
-    // take country
-    final crequest = GetFixRequest(sessionID: apiKeyS, userID: userid);
-    final result = await GrpcInfoService.client.getFix(crequest);
-    setState(() {
-      country = result.fix.country;
-    });
-  }
-
-  void getHobby(BuildContext context) async {
-    try {
-      String? apiKeyS = await globalSession.read(key: 'SessionId');
-      // Hobby
-      final request = GetHobbyRequest(sessionID: apiKeyS);
-      final response = await GrpcInfoService.client.getHobby(request);
-      setState(() {
-        haveTable = true;
-        hobbyEraController = TextEditingController(text: response.h.era.toString());
-        hobbyGenderController = TextEditingController(text: response.h.gender.toString());
-        hobbyFindTypeController = TextEditingController(text: response.h.findType.toString());
-        hobbyExperienceController = TextEditingController(text: response.h.experience.toString());
-        oldHobbyAddress = response.h.city;
-        oldHobbylanguage = response.h.speaklanguage;
-      });
-    } on GrpcError {
-      haveTable = false;
-    }
   }
 
   Future<void> checkTargetUserTable(BuildContext context) async {
@@ -104,6 +72,38 @@ class _HobbyConditionState extends State<HobbyCondition> {
     } on GrpcError {
       await showErrorDialog(context, "検索エンジニアリングにエラーがあります。");
       throw Exception("検索エンジニアリングにエラーがあります。");
+    }
+  }
+
+  void getCountry() async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
+    // take country
+    final crequest = GetFixRequest(sessionID: apiKeyS, userID: userid);
+    final result = await GrpcInfoService.client.getFix(crequest);
+    setState(() {
+      country = result.fix.country;
+    });
+  }
+
+  void getHobby() async {
+    try {
+      String? apiKeyS = await globalSession.read(key: 'SessionId');
+      // Hobby
+      final request = GetHobbyRequest(sessionID: apiKeyS);
+      final response = await GrpcInfoService.client.getHobby(request);
+      setState(() {
+        haveTable = true;
+        hobbyEraController = TextEditingController(text: response.h.era.toString());
+        hobbyGenderController = TextEditingController(text: response.h.gender.toString());
+        hobbyFindTypeController = TextEditingController(text: response.h.findType.toString());
+        hobbyExperienceController = TextEditingController(text: response.h.experience.toString());
+        oldHobbyAddress = response.h.city;
+        oldHobbylanguage = response.h.speaklanguage;
+      });
+    } on GrpcError {
+      haveTable = false;
     }
   }
 
@@ -297,27 +297,27 @@ class _HobbyConditionState extends State<HobbyCondition> {
             child: Column(
               children: [
                 // Era
-                CustomInputBar(titleName: "*年代:", backendPart: _buildHobbyResetEraInput(context)),
+                CustomInputBar(titleName: "*年代:", backendPart: _buildHobbyResetEraInput()),
                 SizedBox(height: mediaH / 50),
 
                 // Gender
-                CustomInputBar(titleName: "相手の性別:", backendPart: _buildHobbyResetGenderInput(context)),
+                CustomInputBar(titleName: "相手の性別:", backendPart: _buildHobbyResetGenderInput()),
                 SizedBox(height: mediaH / 50),
 
                 // Hobby Type
-                CustomInputBar(titleName: "*趣味 - タイプ:", backendPart: _buildHobbyhobbyTypeInput(context)),
+                CustomInputBar(titleName: "*趣味 - タイプ:", backendPart: _buildHobbyhobbyTypeInput()),
                 SizedBox(height: mediaH / 50),
 
                 // Experience
-                CustomInputBar(titleName: "経験 - 年以上:", backendPart: _buildHobbyResetExperienceInput(context)),
+                CustomInputBar(titleName: "経験 - 年以上:", backendPart: _buildHobbyResetExperienceInput()),
                 SizedBox(height: mediaH / 50),
 
                 // Language
-                CustomInputBar(titleName: "言語:", backendPart: _buildHobbySpeakLanguageInput(context)),
+                CustomInputBar(titleName: "言語:", backendPart: _buildHobbySpeakLanguageInput()),
                 SizedBox(height: mediaH / 100),
 
                 // City
-                if (country.isNotEmpty) CustomInputBar(titleName: "*居住地:", backendPart: _buildHobbyResetCityInput(context)),
+                if (country.isNotEmpty) CustomInputBar(titleName: "*居住地:", backendPart: _buildHobbyResetCityInput()),
                 SizedBox(height: mediaH / 40),
 
                 // button
@@ -331,27 +331,27 @@ class _HobbyConditionState extends State<HobbyCondition> {
   }
 
   /// Era
-  Widget _buildHobbyResetEraInput(BuildContext context) {
+  Widget _buildHobbyResetEraInput() {
     return CustomInputFormBar(controller: hobbyEraController, hintText: "30");
   }
 
   /// Gender
-  Widget _buildHobbyResetGenderInput(BuildContext context) {
+  Widget _buildHobbyResetGenderInput() {
     return CustomDropDownBar(controller: hobbyGenderController, hintText: hobbyGenderController.text, itemArray: genderList);
   }
 
   /// Hobby Type
-  Widget _buildHobbyhobbyTypeInput(BuildContext context) {
+  Widget _buildHobbyhobbyTypeInput() {
     return CustomDropDownBar(controller: hobbyFindTypeController, hintText: hobbyFindTypeController.text, itemArray: hobbyTpye);
   }
 
   /// Experience
-  Widget _buildHobbyResetExperienceInput(BuildContext context) {
+  Widget _buildHobbyResetExperienceInput() {
     return CustomInputFormBar(controller: hobbyExperienceController, hintText: "3");
   }
 
   /// Speak Language
-  Widget _buildHobbySpeakLanguageInput(BuildContext context) {
+  Widget _buildHobbySpeakLanguageInput() {
     return CustomMultiSelectDropDownBar(
       itemArray: languages,
       onChanged: (value) {
@@ -361,7 +361,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
   }
 
   /// City
-  Widget _buildHobbyResetCityInput(BuildContext context) {
+  Widget _buildHobbyResetCityInput() {
     return CustomMultiSelectDropDownBar(
       itemArray: asiaCities[country],
       onChanged: (value) {

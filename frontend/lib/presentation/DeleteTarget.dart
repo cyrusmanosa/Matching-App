@@ -34,10 +34,10 @@ class _DeleteTargetState extends State<DeleteTarget> {
   @override
   void initState() {
     super.initState();
-    getIcon(context);
+    getIcon();
   }
 
-  void getIcon(BuildContext context) async {
+  void getIcon() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String? apiKeyS = await globalSession.read(key: 'SessionId');
     Uint8List imgBytes = Uint8List(0);
@@ -156,7 +156,7 @@ class _DeleteTargetState extends State<DeleteTarget> {
             separatorBuilder: (context, index) => SizedBox(width: mediaW / 22),
             itemCount: 3,
             itemBuilder: (context, index) {
-              return _buildOneFrame(context, mediaH, mediaW, isSelectedList, index);
+              return _buildOneFrame(mediaH, mediaW, isSelectedList, index);
             },
           ),
         ),
@@ -164,7 +164,7 @@ class _DeleteTargetState extends State<DeleteTarget> {
     );
   }
 
-  Widget _buildOneFrame(BuildContext context, double mediaH, double mediaW, List<bool> isSelectedList, int index) {
+  Widget _buildOneFrame(double mediaH, double mediaW, List<bool> isSelectedList, int index) {
     return GestureDetector(
       onTap: () {
         setState(() {

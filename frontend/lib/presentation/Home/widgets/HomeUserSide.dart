@@ -40,7 +40,7 @@ class _MainframeItemWidget extends State<MainframeItemWidget> {
                   decoration: BoxDecoration(
                     color: appTheme.grey500,
                     borderRadius: BorderRadiusStyle.r30,
-                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.3), spreadRadius: 5, blurRadius: 10)],
+                    boxShadow: [BoxShadow(color: appTheme.black.withOpacity(0.3), spreadRadius: 5, blurRadius: 10)],
                   ),
                   child: Center(
                     child: Column(
@@ -90,7 +90,7 @@ class _MainframeItemWidget extends State<MainframeItemWidget> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadiusStyle.r30,
                       image: DecorationImage(image: MemoryImage(widget.img!), fit: BoxFit.cover),
-                      boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.5), spreadRadius: 5, blurRadius: 10)],
+                      boxShadow: [BoxShadow(color: appTheme.black.withOpacity(0.5), spreadRadius: 5, blurRadius: 10)],
                     ),
                   ),
                 ),

@@ -79,7 +79,7 @@ class PasswordResetEmail extends StatelessWidget {
               SizedBox(height: mediaH / 50),
 
               // Input
-              CustomInputBar(titleName: "メールアドレス:", backendPart: _buildResetPasswordEmailInput(context)),
+              CustomInputBar(titleName: "メールアドレス:", backendPart: _buildResetPasswordEmailInput()),
               SizedBox(height: mediaH / 50),
 
               // button
@@ -92,7 +92,7 @@ class PasswordResetEmail extends StatelessWidget {
   }
 
   /// _ResetPassword Email
-  Widget _buildResetPasswordEmailInput(BuildContext context) {
+  Widget _buildResetPasswordEmailInput() {
     return CustomInputFormBar(controller: emailController, hintText: "example@email.com", textInputType: TextInputType.emailAddress);
   }
 

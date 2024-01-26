@@ -39,17 +39,16 @@ class _HomeState extends State<Home> {
   }
 
   void fetchData(BuildContext context) async {
-    Targetlist allTarget = await getTargetListGrpc(context);
+    Targetlist allTarget = await getTargetListGrpc();
     if (check == false) {
       allTargetId = [allTarget.target1ID, allTarget.target2ID, allTarget.target3ID];
       allTypes = [allTarget.t1Type, allTarget.t2Type, allTarget.t3Type];
-      getTargetImageGrpc(context, allTargetId);
+      getTargetImageGrpc(allTargetId);
       getTargetDataGrpc(context, allTargetId);
     }
   }
 
-  /// get target list
-  Future<Targetlist> getTargetListGrpc(BuildContext context) async {
+  Future<Targetlist> getTargetListGrpc() async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
     String? apiKeyU = await globalUserId.read(key: 'UserID');
     final userid = int.tryParse(apiKeyU!);
@@ -63,7 +62,7 @@ class _HomeState extends State<Home> {
     }
   }
 
-  Future<void> getTargetImageGrpc(BuildContext context, List<int> tid) async {
+  Future<void> getTargetImageGrpc(List<int> tid) async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
     for (int i = 0; i < tid.length; i++) {
       if (tid[i] != 0) {
@@ -119,7 +118,6 @@ class _HomeState extends State<Home> {
     }
   }
 
-  /// get Target Data
   Future<void> getTargetDataGrpc(BuildContext context, List<int> allTargetId) async {
     for (int i = 0; i < allTargetId.length; i++) {
       if (allTargetId[i] != 0) {

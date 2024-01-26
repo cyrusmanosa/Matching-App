@@ -66,7 +66,7 @@ class _SideBarState extends State<SideBar> {
             Text("2023-11-01から", style: TextStyle(color: appTheme.grey800)),
             SizedBox(height: mediaH / 300),
 
-            _buildCheckPointRow(context, mediaH, mediaW),
+            _buildCheckPointRow(mediaH, mediaW),
 
             // 写真解放
             InkWell(
@@ -231,7 +231,7 @@ class _SideBarState extends State<SideBar> {
   }
 
   /// item Title
-  Widget _buildCheckPointRow(BuildContext context, double mediaH, double mediaW) {
+  Widget _buildCheckPointRow(double mediaH, double mediaW) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: mediaH / 50),
       child: Row(

@@ -60,12 +60,7 @@ class _ConversationListState extends State<ConversationList> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ChatBox(
-              name: widget.name!,
-              imageUrl: widget.imageUrl!,
-              targetid: widget.targetid!,
-              tType: tType,
-            ),
+            builder: (context) => ChatBox(name: widget.name!, imageUrl: widget.imageUrl!, targetid: widget.targetid!, tType: tType),
           ),
         );
       },
@@ -73,7 +68,7 @@ class _ConversationListState extends State<ConversationList> {
         margin: EdgeInsets.symmetric(horizontal: mediaW / 50),
         padding: EdgeInsets.symmetric(horizontal: mediaW / 15, vertical: mediaH / 60),
         decoration:
-            BoxDecoration(color: Colors.white, border: Border.all(color: appTheme.black, width: 3), borderRadius: BorderRadiusStyle.r15),
+            BoxDecoration(color: appTheme.white, border: Border.all(color: appTheme.black, width: 3), borderRadius: BorderRadiusStyle.r15),
         child: Row(
           children: [
             CircleAvatar(backgroundImage: MemoryImage(widget.imageUrl!), maxRadius: 30),

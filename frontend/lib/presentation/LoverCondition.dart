@@ -44,8 +44,8 @@ class _LoverConditionState extends State<LoverCondition> {
   @override
   void initState() {
     super.initState();
-    getLover(context);
-    getCountry(context);
+    getLover();
+    getCountry();
   }
 
   bool isPureNumber(String value) {
@@ -53,7 +53,7 @@ class _LoverConditionState extends State<LoverCondition> {
     return pattern.hasMatch(value);
   }
 
-  void getCountry(BuildContext context) async {
+  void getCountry() async {
     String? apiKeyS = await globalSession.read(key: 'SessionId');
     String? apiKeyU = await globalUserId.read(key: 'UserID');
     final userid = int.tryParse(apiKeyU!);
@@ -65,7 +65,7 @@ class _LoverConditionState extends State<LoverCondition> {
     });
   }
 
-  void getLover(BuildContext context) async {
+  void getLover() async {
     try {
       String? apiKeyS = await globalSession.read(key: 'SessionId');
       // check tabel
@@ -287,33 +287,33 @@ class _LoverConditionState extends State<LoverCondition> {
             children: [
               Row(
                 children: [
-                  CustomInputBar(titleName: "*年齢:", backendPart: _buildLoverMinAgeInput(context, mediaH, mediaW)),
+                  CustomInputBar(titleName: "*年齢:", backendPart: _buildLoverMinAgeInput(mediaH, mediaW)),
                   SizedBox(width: mediaW / 30),
                   Text("から"),
                   SizedBox(width: mediaW / 30),
-                  CustomInputBar(titleName: "", backendPart: _buildLoverMaxAgeInput(context, mediaH, mediaW)),
+                  CustomInputBar(titleName: "", backendPart: _buildLoverMaxAgeInput(mediaH, mediaW)),
                 ],
               ),
               SizedBox(height: mediaH / 100),
 
               // Gender
-              CustomInputBar(titleName: "*相手の性別:", backendPart: _buildLoverResetGenderInput(context)),
+              CustomInputBar(titleName: "*相手の性別:", backendPart: _buildLoverResetGenderInput()),
               SizedBox(height: mediaH / 50),
 
               // Sexual
-              CustomInputBar(titleName: "*相手の性的指向:", backendPart: _buildLoverResetSexualInput(context)),
+              CustomInputBar(titleName: "*相手の性的指向:", backendPart: _buildLoverResetSexualInput()),
               SizedBox(height: mediaH / 50),
 
               // Speak Language
-              CustomInputBar(titleName: "言語:", backendPart: _buildLoverSpeakLanguageInput(context)),
+              CustomInputBar(titleName: "言語:", backendPart: _buildLoverSpeakLanguageInput()),
               SizedBox(height: mediaH / 100),
 
               // City
-              if (country.isNotEmpty) CustomInputBar(titleName: "*居住地:", backendPart: _buildLoverResetCityInput(context)),
+              if (country.isNotEmpty) CustomInputBar(titleName: "*居住地:", backendPart: _buildLoverResetCityInput()),
               SizedBox(height: mediaH / 40),
 
               // button
-              _buildNextButton(context),
+              _buildNextButton(),
             ],
           ),
         ),
@@ -322,7 +322,7 @@ class _LoverConditionState extends State<LoverCondition> {
   }
 
   /// Min Age
-  Widget _buildLoverMinAgeInput(BuildContext context, double mediaH, double mediaW) {
+  Widget _buildLoverMinAgeInput(double mediaH, double mediaW) {
     return CustomInputFormBar(
       alignment: Alignment.centerLeft,
       height: mediaH / 16,
@@ -334,7 +334,7 @@ class _LoverConditionState extends State<LoverCondition> {
   }
 
   /// Min Age
-  Widget _buildLoverMaxAgeInput(BuildContext context, double mediaH, double mediaW) {
+  Widget _buildLoverMaxAgeInput(double mediaH, double mediaW) {
     return CustomInputFormBar(
       alignment: Alignment.centerLeft,
       height: mediaH / 16,
@@ -346,7 +346,7 @@ class _LoverConditionState extends State<LoverCondition> {
   }
 
   /// Reset City
-  Widget _buildLoverResetCityInput(BuildContext context) {
+  Widget _buildLoverResetCityInput() {
     return CustomMultiSelectDropDownBar(
       itemArray: asiaCities[country],
       onChanged: (value) {
@@ -356,17 +356,17 @@ class _LoverConditionState extends State<LoverCondition> {
   }
 
   /// Gender
-  Widget _buildLoverResetGenderInput(BuildContext context) {
+  Widget _buildLoverResetGenderInput() {
     return CustomDropDownBar(controller: loverGenderController, hintText: genderList[0], itemArray: genderList);
   }
 
   /// Sexual
-  Widget _buildLoverResetSexualInput(BuildContext context) {
+  Widget _buildLoverResetSexualInput() {
     return CustomDropDownBar(controller: loverSexualController, hintText: sexualList[0], itemArray: sexualList);
   }
 
   /// Speak Language
-  Widget _buildLoverSpeakLanguageInput(BuildContext context) {
+  Widget _buildLoverSpeakLanguageInput() {
     return CustomMultiSelectDropDownBar(
       itemArray: languages,
       onChanged: (value) {
@@ -376,7 +376,7 @@ class _LoverConditionState extends State<LoverCondition> {
   }
 
   /// Next Button
-  Widget _buildNextButton(BuildContext context) {
+  Widget _buildNextButton() {
     return CustomOutlinedButton(
       text: "条件確認",
       onPressed: () {

@@ -117,11 +117,11 @@ class _LoginState extends State<Login> {
                   SizedBox(height: mediaH / 35),
 
                   // ID
-                  CustomInputBar(titleName: "メールアドレス:", backendPart: _buildEmailInput(context)),
+                  CustomInputBar(titleName: "メールアドレス:", backendPart: _buildEmailInput()),
                   SizedBox(height: mediaH / 80),
 
                   // Password
-                  CustomInputBar(titleName: "パスワード:", backendPart: _buildPasswordInput(context)),
+                  CustomInputBar(titleName: "パスワード:", backendPart: _buildPasswordInput()),
                   SizedBox(height: mediaH / 350),
 
                   // reset password
@@ -140,7 +140,7 @@ class _LoginState extends State<Login> {
                   SizedBox(height: mediaH / 50),
 
                   // login button
-                  _buildLoginButton(context),
+                  _buildLoginButton(),
                   SizedBox(height: mediaH / 50),
 
                   // or
@@ -169,7 +169,7 @@ class _LoginState extends State<Login> {
   }
 
   /// Email Input Backend
-  Widget _buildEmailInput(BuildContext context) {
+  Widget _buildEmailInput() {
     return CustomInputFormBar(
       autofocus: true,
       controller: emailController,
@@ -182,7 +182,7 @@ class _LoginState extends State<Login> {
   }
 
   /// Password Input Backend
-  Widget _buildPasswordInput(BuildContext context) {
+  Widget _buildPasswordInput() {
     return CustomInputFormBar(
       controller: passwordController,
       hintText: "Secret",
@@ -205,7 +205,7 @@ class _LoginState extends State<Login> {
   }
 
   /// Login Button
-  Widget _buildLoginButton(BuildContext context) {
+  Widget _buildLoginButton() {
     return CustomOutlinedButton(
       text: "ログイン",
       onPressed: () {

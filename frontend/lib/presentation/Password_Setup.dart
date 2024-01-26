@@ -82,14 +82,14 @@ class _PasswordSetupState extends State<PasswordSetup> {
               SizedBox(height: mediaH / 30),
 
               // New Password
-              CustomInputBar(titleName: "パスワード", backendPart: _buildPasswordInput(context)),
+              CustomInputBar(titleName: "パスワード", backendPart: _buildPasswordInput()),
 
               // msg
               Align(alignment: Alignment.centerLeft, child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.pwRulegrey500)),
               SizedBox(height: mediaH / 25),
 
               // New Password Confirm
-              CustomInputBar(titleName: "パスワード（確認）", backendPart: _buildPasswordConfirm(context)),
+              CustomInputBar(titleName: "パスワード（確認）", backendPart: _buildPasswordConfirm()),
               SizedBox(height: mediaH / 25),
 
               // Button
@@ -101,7 +101,7 @@ class _PasswordSetupState extends State<PasswordSetup> {
     );
   }
 
-  Widget _buildPasswordInput(BuildContext context) {
+  Widget _buildPasswordInput() {
     return CustomInputFormBar(
       controller: passwordSetupController,
       textInputAction: TextInputAction.done,
@@ -123,7 +123,7 @@ class _PasswordSetupState extends State<PasswordSetup> {
   }
 
   /// Section Widget
-  Widget _buildPasswordConfirm(BuildContext context) {
+  Widget _buildPasswordConfirm() {
     return CustomInputFormBar(
       controller: passwordSetupConfirmController,
       textInputAction: TextInputAction.done,

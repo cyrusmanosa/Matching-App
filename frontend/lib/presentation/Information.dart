@@ -47,9 +47,9 @@ class _InformationState extends State<Information> {
                   child: Column(
                     children: [
                       Text("マイプロフィール", style: CustomTextStyles.infoTitle),
-                      _buildPart1(context, mediaH, mediaW),
+                      _buildPart1(mediaH, mediaW),
                       Text("基本情報", style: CustomTextStyles.infoTitle),
-                      _buildPart2(context, mediaH, mediaW),
+                      _buildPart2(mediaH, mediaW),
                       SizedBox(height: mediaH / 30),
                       _buildEditButton(context, widget.canData!),
                     ],
@@ -64,7 +64,7 @@ class _InformationState extends State<Information> {
   }
 
   /// Part 1
-  Widget _buildPart1(BuildContext context, double mediaH, double mediaW) {
+  Widget _buildPart1(double mediaH, double mediaW) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: mediaW / 10, vertical: mediaH / 30),
       child: Container(
@@ -111,7 +111,7 @@ class _InformationState extends State<Information> {
   }
 
   /// Part 2
-  Widget _buildPart2(BuildContext context, double mediaH, double mediaW) {
+  Widget _buildPart2(double mediaH, double mediaW) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: mediaW / 10, vertical: mediaH / 50),
       child: Container(

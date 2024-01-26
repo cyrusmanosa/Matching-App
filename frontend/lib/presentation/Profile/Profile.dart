@@ -228,7 +228,6 @@ class _ProfileState extends State<Profile> {
     }
   }
 
-// appBar icon to information edit
   void onTapNextPage(BuildContext context) {
     List<Uint8List> newAllMyImg = [allMyImg[0]];
     if (allMyImg.length >= 2) newAllMyImg.add(allMyImg[1]);
@@ -274,14 +273,14 @@ class _ProfileState extends State<Profile> {
             if (allMyImg.isNotEmpty) _buildImages(context, mediaH, mediaW),
             SizedBox(height: mediaH / 75),
             // Part 2 - cCData!
-            if (send.isNotEmpty && changeTime.isNotEmpty) _buildDataBar(context, mediaH, mediaW),
+            if (send.isNotEmpty && changeTime.isNotEmpty) _buildDataBar(mediaH, mediaW),
             SizedBox(height: mediaH / 30),
             // Button 1rd
             Container(
               padding: EdgeInsets.symmetric(horizontal: mediaW / 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [_buildUserInfomationBtn(context, mediaH, mediaW), _buildSNSBtn(context, mediaH, mediaW)],
+                children: [_buildUserInfomationBtn(context, mediaH, mediaW), _buildSNSBtn(mediaH, mediaW)],
               ),
             ),
             SizedBox(height: mediaH / 30),
@@ -290,7 +289,7 @@ class _ProfileState extends State<Profile> {
               padding: EdgeInsets.symmetric(horizontal: mediaW / 25),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [_buildContextBtn(context, mediaH, mediaW), _buildResetPWtBtn(context, mediaH, mediaW)],
+                children: [_buildContextBtn(mediaH, mediaW), _buildResetPWtBtn(mediaH, mediaW)],
               ),
             ),
             SizedBox(height: mediaH / 30),
@@ -299,7 +298,7 @@ class _ProfileState extends State<Profile> {
               padding: EdgeInsets.symmetric(horizontal: mediaW / 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [_buildLogoutBtn(context, mediaH, mediaW)],
+                children: [_buildLogoutBtn(mediaH, mediaW)],
               ),
             ),
           ],
@@ -359,7 +358,7 @@ class _ProfileState extends State<Profile> {
   }
 
 // Data Bar
-  Widget _buildDataBar(BuildContext context, double mediaH, double mediaW) {
+  Widget _buildDataBar(double mediaH, double mediaW) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: mediaW / 15),
       child: Container(
@@ -425,7 +424,7 @@ class _ProfileState extends State<Profile> {
   }
 
 // SNS
-  Widget _buildSNSBtn(BuildContext context, double mediaH, double mediaW) {
+  Widget _buildSNSBtn(double mediaH, double mediaW) {
     return Expanded(
       child: Align(
         alignment: Alignment.center,
@@ -442,7 +441,7 @@ class _ProfileState extends State<Profile> {
   }
 
 // Reset PW
-  Widget _buildResetPWtBtn(BuildContext context, double mediaH, double mediaW) {
+  Widget _buildResetPWtBtn(double mediaH, double mediaW) {
     return Expanded(
       child: Align(
         alignment: Alignment.center,
@@ -459,7 +458,7 @@ class _ProfileState extends State<Profile> {
   }
 
 // Context
-  Widget _buildContextBtn(BuildContext context, double mediaH, double mediaW) {
+  Widget _buildContextBtn(double mediaH, double mediaW) {
     return Expanded(
       child: Align(
         alignment: Alignment.center,
@@ -476,7 +475,7 @@ class _ProfileState extends State<Profile> {
   }
 
 // Logout
-  Widget _buildLogoutBtn(BuildContext context, double mediaH, double mediaW) {
+  Widget _buildLogoutBtn(double mediaH, double mediaW) {
     return Expanded(
       child: Align(
         alignment: Alignment.center,

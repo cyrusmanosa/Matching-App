@@ -64,7 +64,7 @@ class _EmailConfirmationtate extends State<EmailConfirmation> {
               SizedBox(height: mediaH / 30),
 
               // input
-              CustomInputBar(titleName: "メールアドレス", backendPart: _buildEmailInputSection(context)),
+              CustomInputBar(titleName: "メールアドレス", backendPart: _buildEmailInputSection()),
               SizedBox(height: mediaH / 50),
 
               // send button
@@ -98,7 +98,7 @@ class _EmailConfirmationtate extends State<EmailConfirmation> {
   }
 
   /// Section Widget
-  Widget _buildEmailInputSection(BuildContext context) {
+  Widget _buildEmailInputSection() {
     return CustomInputFormBar(
       controller: emailController,
       hintText: "example@email.com",

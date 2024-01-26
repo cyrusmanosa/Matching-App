@@ -79,14 +79,14 @@ class _NewPasswordSetupEmailState extends State<NewPasswordEmailSetup> {
               SizedBox(height: mediaH / 30),
 
               // New Password
-              CustomInputBar(titleName: "新しいパスワード", backendPart: _buildNewPasswordInput(context)),
+              CustomInputBar(titleName: "新しいパスワード", backendPart: _buildNewPasswordInput()),
 
               // msg
               Align(alignment: Alignment.centerLeft, child: Text("＊半角英数字の組合せ（8桁以上15桁以下）", style: CustomTextStyles.pwRulegrey500)),
               SizedBox(height: mediaH / 25),
 
               // New Password Confirm
-              CustomInputBar(titleName: "新しいパスワード（確認）", backendPart: _buildNewPasswordConfirm(context)),
+              CustomInputBar(titleName: "新しいパスワード（確認）", backendPart: _buildNewPasswordConfirm()),
               SizedBox(height: mediaH / 25),
 
               // Button
@@ -99,7 +99,7 @@ class _NewPasswordSetupEmailState extends State<NewPasswordEmailSetup> {
   }
 
   /// NPW Input
-  Widget _buildNewPasswordInput(BuildContext context) {
+  Widget _buildNewPasswordInput() {
     return CustomInputFormBar(
       controller: newPasswordSetupController,
       textInputAction: TextInputAction.done,
@@ -121,7 +121,7 @@ class _NewPasswordSetupEmailState extends State<NewPasswordEmailSetup> {
   }
 
   /// NPW Confirm Input
-  Widget _buildNewPasswordConfirm(BuildContext context) {
+  Widget _buildNewPasswordConfirm() {
     return CustomInputFormBar(
       controller: newPasswordSetupConfirmController,
       textInputAction: TextInputAction.done,

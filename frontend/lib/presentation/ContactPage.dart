@@ -85,7 +85,7 @@ class _ContactPageState extends State<ContactPage> {
               SizedBox(height: mediaH / 50),
 
               // Input
-              CustomInputBar(titleName: "メッセージボックス:", backendPart: _buildMessageBoxInput(context, mediaH, mediaW)),
+              CustomInputBar(titleName: "メッセージボックス:", backendPart: _buildMessageBoxInput(mediaH, mediaW)),
               SizedBox(height: mediaH / 50),
 
               // button
@@ -104,7 +104,7 @@ class _ContactPageState extends State<ContactPage> {
   }
 
   /// Introduce
-  Widget _buildMessageBoxInput(BuildContext context, double mediaH, double mediaW) {
+  Widget _buildMessageBoxInput(double mediaH, double mediaW) {
     return CustomInputFormBar(
       prefix: Padding(padding: EdgeInsets.symmetric(horizontal: mediaW / 75)),
       height: mediaH / 5,

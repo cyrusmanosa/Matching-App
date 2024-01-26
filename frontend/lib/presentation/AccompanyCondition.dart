@@ -31,54 +31,24 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
   bool? haveTable;
   bool confirmBtn = false;
 
+  String country = "";
+  List<String> newAccompanyLanguages = [];
+  Iterable<String> oldAccompanyLanguages = [];
   TextEditingController accompanyEraController = TextEditingController();
   TextEditingController accompanySpeakLanguageController = TextEditingController();
   TextEditingController accompanyFindTypeController = TextEditingController();
   TextEditingController accompanySociabilityController = TextEditingController();
-  String country = "";
-  List<String> newAccompanyLanguages = [];
-  Iterable<String> oldAccompanyLanguages = [];
 
   @override
   void initState() {
     super.initState();
-    getAccompany(context);
-    getCountry(context);
+    getAccompany();
+    getCountry();
   }
 
   bool isPureNumber(String value) {
     final pattern = RegExp(r'^\d+$');
     return pattern.hasMatch(value);
-  }
-
-  void getCountry(BuildContext context) async {
-    String? apiKeyS = await globalSession.read(key: 'SessionId');
-    String? apiKeyU = await globalUserId.read(key: 'UserID');
-    final userid = int.tryParse(apiKeyU!);
-    // take country
-    final crequest = GetFixRequest(sessionID: apiKeyS, userID: userid);
-    final result = await GrpcInfoService.client.getFix(crequest);
-    setState(() {
-      country = result.fix.country;
-    });
-  }
-
-  void getAccompany(BuildContext context) async {
-    try {
-      String? apiKeyS = await globalSession.read(key: 'SessionId');
-      final request = GetAccompanyRequest(sessionID: apiKeyS);
-      final response = await GrpcInfoService.client.getAccompany(request);
-      setState(() {
-        haveTable = true;
-        accompanyEraController.text = response.ac.era.toString();
-        accompanySpeakLanguageController.text = response.ac.speaklanguage.toString();
-        accompanyFindTypeController.text = response.ac.findType.toString();
-        accompanySociabilityController.text = response.ac.sociability.toString();
-        oldAccompanyLanguages = response.ac.speaklanguage;
-      });
-    } on GrpcError {
-      haveTable = false;
-    }
   }
 
   Future<void> checkTargetUserTable(BuildContext context) async {
@@ -99,6 +69,36 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
     } on GrpcError {
       await showErrorDialog(context, "検索エンジニアリングにエラーがあります。");
       throw Exception("検索エンジニアリングにエラーがあります。");
+    }
+  }
+
+  void getCountry() async {
+    String? apiKeyS = await globalSession.read(key: 'SessionId');
+    String? apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU!);
+    // take country
+    final crequest = GetFixRequest(sessionID: apiKeyS, userID: userid);
+    final result = await GrpcInfoService.client.getFix(crequest);
+    setState(() {
+      country = result.fix.country;
+    });
+  }
+
+  void getAccompany() async {
+    try {
+      String? apiKeyS = await globalSession.read(key: 'SessionId');
+      final request = GetAccompanyRequest(sessionID: apiKeyS);
+      final response = await GrpcInfoService.client.getAccompany(request);
+      setState(() {
+        haveTable = true;
+        accompanyEraController.text = response.ac.era.toString();
+        accompanySpeakLanguageController.text = response.ac.speaklanguage.toString();
+        accompanyFindTypeController.text = response.ac.findType.toString();
+        accompanySociabilityController.text = response.ac.sociability.toString();
+        oldAccompanyLanguages = response.ac.speaklanguage;
+      });
+    } on GrpcError {
+      haveTable = false;
     }
   }
 

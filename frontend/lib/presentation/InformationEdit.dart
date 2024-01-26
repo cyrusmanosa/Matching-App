@@ -187,63 +187,63 @@ class _InformationEditState extends State<InformationEdit> {
               _buildImages(context, mediaH, mediaW),
 
               // Introduce
-              CustomInputBar(titleName: "自己紹介:", backendPart: _buildUpdateIntroduceInput(context, mediaH, mediaW)),
+              CustomInputBar(titleName: "自己紹介:", backendPart: _buildUpdateIntroduceInput(mediaH, mediaW)),
               SizedBox(height: mediaH / 50),
 
               // Nickname
-              CustomInputBar(titleName: "ニックネーム:", backendPart: _buildUpdateNickNameInput(context)),
+              CustomInputBar(titleName: "ニックネーム:", backendPart: _buildUpdateNickNameInput()),
               SizedBox(height: mediaH / 50),
 
               // Height
-              CustomInputBar(titleName: " 身長 - cm:", backendPart: _buildUpdateHeightInput(context)),
+              CustomInputBar(titleName: " 身長 - cm:", backendPart: _buildUpdateHeightInput()),
               SizedBox(height: mediaH / 50),
 
               // Weight
-              CustomInputBar(titleName: " 体重 - kg:", backendPart: _buildUpdateWeightInput(context)),
+              CustomInputBar(titleName: " 体重 - kg:", backendPart: _buildUpdateWeightInput()),
               SizedBox(height: mediaH / 50),
 
               // City
-              CustomInputBar(titleName: "居住地:", backendPart: _buildUpdateCityInput(context)),
+              CustomInputBar(titleName: "居住地:", backendPart: _buildUpdateCityInput()),
               SizedBox(height: mediaH / 50),
 
               // Education
-              CustomInputBar(titleName: "学歴:", backendPart: _buildUpdateEducationInput(context)),
+              CustomInputBar(titleName: "学歴:", backendPart: _buildUpdateEducationInput()),
               SizedBox(height: mediaH / 50),
 
               // Job
-              CustomInputBar(titleName: "職種:", backendPart: _buildUpdateJobInput(context)),
+              CustomInputBar(titleName: "職種:", backendPart: _buildUpdateJobInput()),
               SizedBox(height: mediaH / 50),
 
               // Annual Salary
-              CustomInputBar(titleName: "年収:", backendPart: _buildUpdateAnnualSalaryInput(context)),
+              CustomInputBar(titleName: "年収:", backendPart: _buildUpdateAnnualSalaryInput()),
               SizedBox(height: mediaH / 50),
 
               // Sexual
-              CustomInputBar(titleName: "性的指向:", backendPart: _buildUpdateSexualInput(context)),
+              CustomInputBar(titleName: "性的指向:", backendPart: _buildUpdateSexualInput()),
               SizedBox(height: mediaH / 50),
 
               // Sociability
-              CustomInputBar(titleName: "社交力:", backendPart: _buildUpdateSociabilityInput(context)),
+              CustomInputBar(titleName: "社交力:", backendPart: _buildUpdateSociabilityInput()),
               SizedBox(height: mediaH / 50),
 
               // hobby
-              CustomInputBar(titleName: "趣味 - タイプ:", backendPart: _buildHobbyhobbyTypeInput(context)),
+              CustomInputBar(titleName: "趣味 - タイプ:", backendPart: _buildHobbyhobbyTypeInput()),
               SizedBox(height: mediaH / 55),
 
               // Experience
-              CustomInputBar(titleName: "経験 - 年:", backendPart: _buildHobbyResetExperienceInput(context)),
+              CustomInputBar(titleName: "経験 - 年:", backendPart: _buildHobbyResetExperienceInput()),
               SizedBox(height: mediaH / 50),
 
               // Sociability
-              CustomInputBar(titleName: "相伴のタイプ:", backendPart: _buildAccompanyTypeInput(context)),
+              CustomInputBar(titleName: "相伴のタイプ:", backendPart: _buildAccompanyTypeInput()),
               SizedBox(height: mediaH / 55),
 
               // Relighious
-              CustomInputBar(titleName: "宗教:", backendPart: _buildUpdateReligiousInput(context)),
+              CustomInputBar(titleName: "宗教:", backendPart: _buildUpdateReligiousInput()),
               SizedBox(height: mediaH / 75),
 
               // Speak Language
-              CustomInputBar(titleName: "言語:", backendPart: _buildUpdateSpeakLanguageInput(context)),
+              CustomInputBar(titleName: "言語:", backendPart: _buildUpdateSpeakLanguageInput()),
               SizedBox(height: mediaH / 50),
 
               // button
@@ -326,52 +326,52 @@ class _InformationEditState extends State<InformationEdit> {
   }
 
   // Hobby Type
-  Widget _buildHobbyhobbyTypeInput(BuildContext context) {
+  Widget _buildHobbyhobbyTypeInput() {
     return CustomDropDownBar(controller: updateHobbyTypeController, hintText: widget.canData!.hobbyType, itemArray: hobbyTpye);
   }
 
   /// Accompany Type
-  Widget _buildAccompanyTypeInput(BuildContext context) {
+  Widget _buildAccompanyTypeInput() {
     return CustomDropDownBar(controller: updateAccompanyController, hintText: widget.canData!.accompanyType, itemArray: accompanyType);
   }
 
   /// Reset Experience
-  Widget _buildHobbyResetExperienceInput(BuildContext context) {
+  Widget _buildHobbyResetExperienceInput() {
     return CustomInputFormBar(controller: updateExperienceController);
   }
 
   /// Nickname
-  Widget _buildUpdateNickNameInput(BuildContext context) {
+  Widget _buildUpdateNickNameInput() {
     return CustomInputFormBar(controller: updateNickNameController);
   }
 
   /// City
-  Widget _buildUpdateCityInput(BuildContext context) {
+  Widget _buildUpdateCityInput() {
     return CustomDropDownBar(controller: updateCityController, hintText: widget.canData!.city, itemArray: asiaCities[widget.country!]);
   }
 
   /// Sexual
-  Widget _buildUpdateSexualInput(BuildContext context) {
+  Widget _buildUpdateSexualInput() {
     return CustomDropDownBar(controller: updateSexualController, hintText: widget.canData!.sexual, itemArray: sexualList);
   }
 
   /// Height
-  Widget _buildUpdateHeightInput(BuildContext context) {
+  Widget _buildUpdateHeightInput() {
     return CustomInputFormBar(controller: updateHeightController);
   }
 
   /// Weight
-  Widget _buildUpdateWeightInput(BuildContext context) {
+  Widget _buildUpdateWeightInput() {
     return CustomInputFormBar(controller: updateWeightController);
   }
 
   /// Education
-  Widget _buildUpdateEducationInput(BuildContext context) {
+  Widget _buildUpdateEducationInput() {
     return CustomDropDownBar(controller: updateEducationController, hintText: widget.canData!.education, itemArray: educationLevels);
   }
 
   /// Speak Language
-  Widget _buildUpdateSpeakLanguageInput(BuildContext context) {
+  Widget _buildUpdateSpeakLanguageInput() {
     String hintL = "";
     for (int i = 0; i < widget.canData!.speaklanguage.length; i++) {
       if (i > 0) {
@@ -389,28 +389,28 @@ class _InformationEditState extends State<InformationEdit> {
   }
 
   /// Job
-  Widget _buildUpdateJobInput(BuildContext context) {
+  Widget _buildUpdateJobInput() {
     return CustomDropDownBar(controller: updateJobController, hintText: widget.canData!.job, itemArray: occupations);
   }
 
   /// Annual Salary
-  Widget _buildUpdateAnnualSalaryInput(BuildContext context) {
+  Widget _buildUpdateAnnualSalaryInput() {
     return CustomInputFormBar(controller: updateAnnualSalaryController);
   }
 
   /// Sociability
-  Widget _buildUpdateSociabilityInput(BuildContext context) {
+  Widget _buildUpdateSociabilityInput() {
     return CustomDropDownBar(
         controller: updateSociabilityController, hintText: widget.canData!.sociability, itemArray: socialPersonalities);
   }
 
   /// Religious
-  Widget _buildUpdateReligiousInput(BuildContext context) {
+  Widget _buildUpdateReligiousInput() {
     return CustomDropDownBar(controller: updateReligiousController, hintText: widget.canData!.religious, itemArray: religions);
   }
 
   /// Introduce
-  Widget _buildUpdateIntroduceInput(BuildContext context, double mediaH, double mediaW) {
+  Widget _buildUpdateIntroduceInput(double mediaH, double mediaW) {
     return CustomInputFormBar(
       prefix: Padding(padding: EdgeInsets.symmetric(horizontal: mediaW / 75)),
       height: mediaH / 5,

@@ -64,7 +64,7 @@ class _ConfirmationCoreState extends State<ConfirmationCore> {
               SizedBox(height: mediaH / 50),
 
               // Input
-              CustomInputBar(titleName: "認証コード:", backendPart: _buildConfirmationCoreInput(context)),
+              CustomInputBar(titleName: "認証コード:", backendPart: _buildConfirmationCoreInput()),
               SizedBox(height: mediaH / 350),
 
               // reset password
@@ -92,7 +92,7 @@ class _ConfirmationCoreState extends State<ConfirmationCore> {
   }
 
   /// Era
-  Widget _buildConfirmationCoreInput(BuildContext context) {
+  Widget _buildConfirmationCoreInput() {
     return CustomInputFormBar(
       controller: confirmationCoreController,
       hintText: "423198",

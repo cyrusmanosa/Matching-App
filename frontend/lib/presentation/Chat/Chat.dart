@@ -35,7 +35,7 @@ class _ChatState extends State<Chat> {
 
   Future<void> fetchData(BuildContext context) async {
     await _getTargetID(context);
-    _getUserInfoGrpcRequest(context);
+    _getUserInfoGrpcRequest();
   }
 
 // Grpc
@@ -57,7 +57,7 @@ class _ChatState extends State<Chat> {
     }
   }
 
-  Future<void> _getUserInfoGrpcRequest(BuildContext context) async {
+  Future<void> _getUserInfoGrpcRequest() async {
     try {
       String? apiKeyS = await globalSession.read(key: 'SessionId');
       String? apiKeyU = await globalUserId.read(key: 'UserID');

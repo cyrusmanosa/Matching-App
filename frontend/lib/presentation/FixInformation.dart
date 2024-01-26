@@ -148,11 +148,11 @@ class _FixInformationState extends State<FixInformation> {
                 SizedBox(height: mediaH / 75),
 
                 // Last name
-                CustomInputBar(titleName: "姓:", backendPart: _buildfixLastNameInput(context)),
+                CustomInputBar(titleName: "姓:", backendPart: _buildfixLastNameInput()),
                 SizedBox(height: mediaH / 50),
 
                 // First name
-                CustomInputBar(titleName: "名:", backendPart: _buildfixFirstNameInput(context)),
+                CustomInputBar(titleName: "名:", backendPart: _buildfixFirstNameInput()),
                 SizedBox(height: mediaH / 50),
 
                 // Birth
@@ -160,15 +160,15 @@ class _FixInformationState extends State<FixInformation> {
                 SizedBox(height: mediaH / 50),
 
                 // Country
-                CustomInputBar(titleName: "国籍:", backendPart: _buildfixCountryInput(context)),
+                CustomInputBar(titleName: "国籍:", backendPart: _buildfixCountryInput()),
                 SizedBox(height: mediaH / 50),
 
                 // Gender
-                CustomInputBar(titleName: "性別:", backendPart: _buildfixGenderInput(context)),
+                CustomInputBar(titleName: "性別:", backendPart: _buildfixGenderInput()),
                 SizedBox(height: mediaH / 50),
 
                 // 血液型
-                CustomInputBar(titleName: "血液型:", backendPart: _buildfixBloodInput(context)),
+                CustomInputBar(titleName: "血液型:", backendPart: _buildfixBloodInput()),
                 SizedBox(height: mediaH / 50),
 
                 // 18
@@ -224,7 +224,7 @@ class _FixInformationState extends State<FixInformation> {
   }
 
   /// Last Name
-  Widget _buildfixLastNameInput(BuildContext context) {
+  Widget _buildfixLastNameInput() {
     return CustomInputFormBar(
       controller: fixLastNameController,
       hintText: "山崎",
@@ -235,7 +235,7 @@ class _FixInformationState extends State<FixInformation> {
   }
 
   /// First Name
-  Widget _buildfixFirstNameInput(BuildContext context) {
+  Widget _buildfixFirstNameInput() {
     return CustomInputFormBar(
       controller: fixFirstNameController,
       hintText: "泰一",
@@ -275,18 +275,18 @@ class _FixInformationState extends State<FixInformation> {
   }
 
   /// Country
-  Widget _buildfixCountryInput(BuildContext context) {
+  Widget _buildfixCountryInput() {
     final keys = asiaCities.keys;
     return CustomDropDownBar(controller: fixCountryController, hintText: asiaCities.keys.first, itemArray: keys.toList());
   }
 
   /// Gender
-  Widget _buildfixGenderInput(BuildContext context) {
+  Widget _buildfixGenderInput() {
     return CustomDropDownBar(controller: fixGenderController, hintText: genderList[0], itemArray: genderList);
   }
 
   /// Blood
-  Widget _buildfixBloodInput(BuildContext context) {
+  Widget _buildfixBloodInput() {
     return CustomDropDownBar(controller: fixBloodController, hintText: blood[0], itemArray: blood);
   }
 
