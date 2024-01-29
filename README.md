@@ -1,4 +1,6 @@
 # 前期の準備
+## スケジュール：
+<https://trello.com/invite/b/2rzS2xb8/ATTI338144eb5f27f8aa948e24ca9b32e2277DC2E664/itシステム開発研究ll>
 ## デザイン：
 <https://www.figma.com/community/file/1333658909585515894/dating-your-data>
 
