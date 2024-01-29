@@ -415,7 +415,7 @@ class _InformationEditState extends State<InformationEdit> {
       prefix: Padding(padding: EdgeInsets.symmetric(horizontal: mediaW / 75)),
       height: mediaH / 5,
       controller: updateIntroduceController,
-      hintText: "亜dさdさだだ",
+      hintText: "私はXXXです。。。。。",
       maxLines: 8,
       onTap: () {
         FocusNode().requestFocus();

@@ -172,7 +172,7 @@ class _CanChangeInformation1State extends State<CanChangeInformation1> {
   Widget _buildcanChangeNickNameInput(BuildContext context) {
     return CustomInputFormBar(
       controller: canChangeNickNameController,
-      hintText: "仆街",
+      hintText: "大一",
       onTap: () {
         FocusNode().requestFocus();
       },

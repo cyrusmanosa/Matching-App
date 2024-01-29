@@ -63,7 +63,6 @@ class _HobbyConditionState extends State<HobbyCondition> {
       if (rsp.resu.len != 0) {
         checkTargetList(context, rsp);
       } else {
-        Navigator.pop(context);
         await showLogoDialog(context, "新しい条件で合わせるパーセントは0%です。", false);
         await Future.delayed(Duration(seconds: 2));
         Navigator.pop(context);
@@ -151,7 +150,6 @@ class _HobbyConditionState extends State<HobbyCondition> {
             if (rsp.resu.len > 1) {
               checkTargetUserTable(context);
             }
-            Navigator.pop(context);
             await showLogoDialog(context, "新しい条件で合わせるパーセントは0%です。", false);
             await Future.delayed(Duration(seconds: 2));
             Navigator.pop(context);

@@ -118,9 +118,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
           // check new target list
           final newRequest = GetTargetListRequest(sessionID: apiKeyS, userID: rsp.resu.resultID[i]);
           final newResponse = await GrpcInfoService.client.getTargetList(newRequest);
-          // check new target list not my userID
           if (newResponse.tl.target1ID != userid && newResponse.tl.target2ID != userid && newResponse.tl.target3ID != userid) {
-            // check target list have a empty
             if (myResponse.tl.target1ID != 0 && myResponse.tl.target2ID != 0 && myResponse.tl.target3ID != 0) {
               Navigator.push(
                 context,
@@ -131,6 +129,10 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
               );
               break;
             } else {
+              await Future.delayed(Duration(seconds: 1));
+              await showLogoDialog(context, "新しいターゲットも準備しました", false);
+              await Future.delayed(Duration(seconds: 1));
+
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -160,6 +162,9 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
             );
             break;
           } else {
+            await Future.delayed(Duration(seconds: 1));
+            await showLogoDialog(context, "新しいターゲットも準備しました", false);
+            await Future.delayed(Duration(seconds: 1));
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -211,7 +216,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
         await showLogoDialog(context, "相伴の条件を更新しました", false);
         await Future.delayed(Duration(seconds: 1));
         Navigator.pop(context);
-        checkTargetUserTable(context);
+        await checkTargetUserTable(context);
       } on GrpcError {
         Navigator.pop(context);
         await showErrorDialog(context, "エラー：更新用の検証可能な入力データがありません。");
@@ -220,6 +225,8 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
     } else {
       if (!isPureNumber(accompanyEraController.text)) {
         await showErrorDialog(context, "入力した年代は数字ではありません");
+      } else if (accompanyEraController.text.isEmpty) {
+        await showErrorDialog(context, "年代はまだ設定していません");
       } else if (accompanyEraController.text.isEmpty) {
         await showErrorDialog(context, "年代はまだ設定していません");
       } else if (accompanyFindTypeController.text.isEmpty) {

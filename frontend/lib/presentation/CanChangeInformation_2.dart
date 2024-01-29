@@ -62,7 +62,7 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
           hobbyType: hobbyFindTypeController.text,
           experience: int.parse(hobbyExperienceController.text),
           accompanyType: accompanyFindTypeController.text,
-          annualSalary: int.parse(canChangeAnnualSalaryController.text) ?? 0,
+          annualSalary: int.parse(canChangeAnnualSalaryController.text),
           sociability: canChangeSociabilityController.text,
           introduce: canChangeIntroduceController.text,
         );
@@ -185,7 +185,7 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
       prefix: Padding(padding: EdgeInsets.symmetric(horizontal: mediaW / 75)),
       height: mediaH / 5.5,
       controller: canChangeIntroduceController,
-      hintText: "亜dさdさだだ",
+      hintText: "私はXXXです。。。。。",
       textInputAction: TextInputAction.done,
       maxLines: 8,
       onTap: () {

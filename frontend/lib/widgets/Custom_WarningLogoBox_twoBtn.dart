@@ -25,14 +25,12 @@ Future<void> showErrorDialogTwo(BuildContext context, String errorMessage, Funct
               CustomOutlinedButton(
                 alignment: Alignment.center,
                 text: "続き",
-                // margin: EdgeInsets.only(bottom: mediaH / 100),
                 onPressed: onPressed,
               ),
               SizedBox(width: mediaW / 20),
               CustomOutlinedButton(
                 alignment: Alignment.center,
                 text: "再設定",
-                margin: EdgeInsets.only(bottom: mediaH / 100),
                 onPressed: () {
                   Navigator.pop(context);
                 },

@@ -25,8 +25,13 @@ class ConversationList extends StatefulWidget {
 
 class _ConversationListState extends State<ConversationList> {
   String? tType;
+  @override
+  void initState() {
+    super.initState();
+    updateReadGrpcRequest(context);
+  }
 
-  void updateReadGrpcRequest(BuildContext context) async {
+  Future<void> updateReadGrpcRequest(BuildContext context) async {
     try {
       String? apiKeyS = await globalSession.read(key: 'SessionId');
       String? apiKeyU = await globalUserId.read(key: 'UserID');
@@ -58,7 +63,6 @@ class _ConversationListState extends State<ConversationList> {
     double mediaW = mediaQueryData.size.width;
     return GestureDetector(
       onTap: () {
-        updateReadGrpcRequest(context);
         Navigator.push(
           context,
           MaterialPageRoute(

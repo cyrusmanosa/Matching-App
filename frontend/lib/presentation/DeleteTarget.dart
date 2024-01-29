@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dating_your_date/client/grpc_services.dart';
@@ -14,7 +13,6 @@ import 'package:dating_your_date/widgets/Custom_Loading.dart';
 import 'package:dating_your_date/widgets/button/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
-import 'package:path_provider/path_provider.dart';
 
 class DeleteTarget extends StatefulWidget {
   DeleteTarget({Key? key, this.oldData, this.newU, this.le, this.type}) : super(key: key);
@@ -30,7 +28,7 @@ class DeleteTarget extends StatefulWidget {
 
 class _DeleteTargetState extends State<DeleteTarget> {
   List<bool> isSelectedList = [false, false, false];
-  List<File> icon = [];
+  List<Uint8List> icon = [];
   @override
   void initState() {
     super.initState();
@@ -38,7 +36,6 @@ class _DeleteTargetState extends State<DeleteTarget> {
   }
 
   void getIcon() async {
-    Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String? apiKeyS = await globalSession.read(key: 'SessionId');
     Uint8List imgBytes = Uint8List(0);
     for (int i = 0; i < 3; i++) {
@@ -47,31 +44,22 @@ class _DeleteTargetState extends State<DeleteTarget> {
           final req = GetImagesRequest(sessionID: apiKeyS, userID: widget.oldData!.target1ID);
           final rsp = await GrpcInfoService.client.getImages(req);
           imgBytes = Uint8List.fromList(rsp.img.img1);
-          String filePath = '${documentsDirectory.path}/img1.bin';
-          File file = File(filePath);
-          await file.writeAsBytes(imgBytes);
           setState(() {
-            icon.add(file);
+            icon.add(imgBytes);
           });
         case 1:
           final req = GetImagesRequest(sessionID: apiKeyS, userID: widget.oldData!.target2ID);
           final rsp = await GrpcInfoService.client.getImages(req);
           imgBytes = Uint8List.fromList(rsp.img.img1);
-          String filePath = '${documentsDirectory.path}/img1.bin';
-          File file = File(filePath);
-          await file.writeAsBytes(imgBytes);
           setState(() {
-            icon.add(file);
+            icon.add(imgBytes);
           });
         case 2:
           final req = GetImagesRequest(sessionID: apiKeyS, userID: widget.oldData!.target3ID);
           final rsp = await GrpcInfoService.client.getImages(req);
           imgBytes = Uint8List.fromList(rsp.img.img1);
-          String filePath = '${documentsDirectory.path}/img1.bin';
-          File file = File(filePath);
-          await file.writeAsBytes(imgBytes);
           setState(() {
-            icon.add(file);
+            icon.add(imgBytes);
           });
       }
     }
@@ -124,6 +112,50 @@ class _DeleteTargetState extends State<DeleteTarget> {
     }
   }
 
+  Future<void> showErrorDialogTwo(BuildContext context) async {
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+    double mediaH = mediaQueryData.size.height;
+    double mediaW = mediaQueryData.size.width;
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
+          // Error Logo
+          title: CustomImageView(imagePath: ImageConstant.imgWarning, height: mediaH / 20, width: mediaW / 5, alignment: Alignment.center),
+          // Word
+          content: Container(
+            width: mediaW / 1.1,
+            child: Text("一旦、確認するボタンを押したら、ご選択のユーザーを削除しましたので、もう一度お確認してください",
+                style: CustomTextStyles.msgWordOfMsgBox, textAlign: TextAlign.center),
+          ),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomOutlinedButton(
+                  alignment: Alignment.center,
+                  text: "削除確認",
+                  onPressed: () {
+                    changeUserRecord(context);
+                  },
+                ),
+                SizedBox(width: mediaW / 20),
+                CustomOutlinedButton(
+                  alignment: Alignment.center,
+                  text: "再設定",
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
@@ -148,18 +180,19 @@ class _DeleteTargetState extends State<DeleteTarget> {
   Widget _buildMainFrame(BuildContext context, double mediaH, double mediaW, List<bool> isSelectedList) {
     return Column(
       children: [
-        SizedBox(
-          height: mediaH / 1.4,
-          child: ListView.separated(
-            padding: EdgeInsets.symmetric(horizontal: mediaW / 12),
-            scrollDirection: Axis.horizontal,
-            separatorBuilder: (context, index) => SizedBox(width: mediaW / 22),
-            itemCount: 3,
-            itemBuilder: (context, index) {
-              return _buildOneFrame(mediaH, mediaW, isSelectedList, index);
-            },
+        if (icon.length > 0)
+          SizedBox(
+            height: mediaH / 1.4,
+            child: ListView.separated(
+              padding: EdgeInsets.symmetric(horizontal: mediaW / 12),
+              scrollDirection: Axis.horizontal,
+              separatorBuilder: (context, index) => SizedBox(width: mediaW / 22),
+              itemCount: 3,
+              itemBuilder: (context, index) {
+                return _buildOneFrame(mediaH, mediaW, isSelectedList, index);
+              },
+            ),
           ),
-        ),
       ],
     );
   }
@@ -182,7 +215,7 @@ class _DeleteTargetState extends State<DeleteTarget> {
         width: mediaW / 1.2,
         decoration: BoxDecoration(
           borderRadius: BorderRadiusStyle.r30,
-          image: DecorationImage(image: FileImage(icon[index]), fit: BoxFit.cover),
+          image: DecorationImage(image: MemoryImage(icon[index]), fit: BoxFit.cover),
           boxShadow: isSelectedList[index] ? [BoxShadow(color: appTheme.red.withOpacity(1), blurRadius: 5, spreadRadius: 5)] : [],
         ),
       ),
@@ -193,7 +226,7 @@ class _DeleteTargetState extends State<DeleteTarget> {
     return CustomOutlinedButton(
       text: "削除",
       onPressed: () {
-        changeUserRecord(context);
+        showErrorDialogTwo(context);
       },
     );
   }

@@ -133,6 +133,10 @@ class _LoverConditionState extends State<LoverCondition> {
               );
               break;
             } else {
+              await Future.delayed(Duration(seconds: 1));
+              await showLogoDialog(context, "新しいターゲットも準備しました", false);
+              await Future.delayed(Duration(seconds: 1));
+
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -146,6 +150,7 @@ class _LoverConditionState extends State<LoverCondition> {
             if (rsp.resu.len > 1) {
               checkTargetUserTable(context);
             }
+            Navigator.pop(context);
             await showLogoDialog(context, "新しい条件で合わせるパーセントは0%です。", false);
             await Future.delayed(Duration(seconds: 2));
             Navigator.pop(context);
@@ -162,6 +167,9 @@ class _LoverConditionState extends State<LoverCondition> {
             );
             break;
           } else {
+            await Future.delayed(Duration(seconds: 1));
+            await showLogoDialog(context, "新しいターゲットも準備しました", false);
+            await Future.delayed(Duration(seconds: 1));
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -215,7 +223,7 @@ class _LoverConditionState extends State<LoverCondition> {
         await showLogoDialog(context, "恋人の条件を更新しました", false);
         await Future.delayed(Duration(seconds: 1));
         Navigator.pop(context);
-        checkTargetUserTable(context);
+        await checkTargetUserTable(context);
       } on GrpcError {
         Navigator.pop(context);
         await showErrorDialog(context, "エラー：更新用の検証可能な入力データがありません。");

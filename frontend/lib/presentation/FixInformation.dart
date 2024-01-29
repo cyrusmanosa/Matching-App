@@ -54,7 +54,14 @@ class _FixInformationState extends State<FixInformation> {
   }
 
   void fixInformationGrpcRequest(BuildContext context) async {
-    if (fixFirstNameController.text.isEmpty) {
+    DateTime birthday = DateTime.parse(fixBirthController.text);
+    DateTime today = DateTime.now();
+    Duration age = today.difference(birthday);
+    int ageInYears = age.inDays ~/ 365;
+
+    if (ageInYears < 18) {
+      await showErrorDialog(context, "ユーザーは少なくとも18歳以上が必要です。");
+    } else if (fixFirstNameController.text.isEmpty) {
       await showErrorDialog(context, "姓はまだ入力されていません");
     } else if (fixLastNameController.text.isEmpty) {
       await showErrorDialog(context, "名はまだ入力されていません");

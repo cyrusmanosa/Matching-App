@@ -86,7 +86,7 @@ class _DeleteAccountPageState extends State<DeleteAccount> {
       prefix: Padding(padding: EdgeInsets.symmetric(horizontal: mediaW / 75)),
       height: mediaH / 5,
       controller: messageBoxController,
-      hintText: "亜dさdさだだ",
+      hintText: "私はXXXです。。。。。",
       textInputAction: TextInputAction.done,
       maxLines: 8,
       onTap: () {

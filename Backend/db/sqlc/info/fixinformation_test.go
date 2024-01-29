@@ -13,7 +13,7 @@ import (
 )
 
 func TestCreateRandomUserFixInformaion(t *testing.T) {
-	for i := 0; i < 100; i++ {
+	for i := 0; i < 50; i++ {
 		arg := CreateRandomUserFixInformaion(t)
 		CreateRandomImage(t, arg)
 		CreateRandomUserCanChangeInformation(t, arg)

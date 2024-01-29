@@ -54,6 +54,7 @@ class _ChatBoxState extends State<ChatBox> {
     } else {
       hColor = appTheme.test;
     }
+    print(hColor);
   }
 
   Future<List<ChatRecordNoID>> getChatRecords(BuildContext context) async {
