@@ -12,5 +12,4 @@ class BorderRadiusStyle {
   // Rounded borders
   static BorderRadius get r30 => BorderRadius.circular(30);
   static BorderRadius get r15 => BorderRadius.circular(15);
-  static BorderRadius get r5 => BorderRadius.circular(5);
 }

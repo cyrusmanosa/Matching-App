@@ -234,7 +234,7 @@ class _LoginState extends State<Login> {
           text: "フェイスブックで続ける",
           leftIcon: Container(
             margin: EdgeInsets.only(left: mediaW / 20, right: mediaW / 15),
-            child: CustomImageView(imagePath: ImageConstant.imgLogosfacebook, width: mediaW / 23, color: Colors.grey),
+            child: CustomImageView(imagePath: ImageConstant.imgFacebook, width: mediaW / 23, color: Colors.grey),
           ),
           buttonStyle: CustomButtonStyles.fillBlue,
         ),
@@ -257,8 +257,9 @@ class _LoginState extends State<Login> {
           isDisabled: true,
           text: "グーグルで続ける",
           leftIcon: Container(
+            padding: EdgeInsets.only(top: mediaH / 150),
             margin: EdgeInsets.only(right: mediaW / 13),
-            // child: CustomImageView(imagePath: ImageConstant.imgDevicongoogle, width: mediaW / 13, color: Colors.grey),
+            child: CustomImageView(imagePath: ImageConstant.imgGoogle, width: mediaW / 14, color: Colors.grey),
           ),
           // buttonStyle: CustomButtonStyles.outlineGoogleButton,
           // buttonTextStyle: theme.textTheme.displaySmall,

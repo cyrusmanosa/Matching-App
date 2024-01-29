@@ -46,7 +46,6 @@ class ThemeHelper {
   ThemeData themeData() => _getThemeData();
 }
 
-/// Class containing the supported text theme styles.
 class TextThemes {
   static TextTheme textTheme(ColorScheme colorScheme) => TextTheme(
         /// S: w400, M: w600, L: w800
@@ -68,7 +67,6 @@ class TextThemes {
       );
 }
 
-/// Class containing the supported color schemes.
 class ColorSchemes {
   static final primaryColorScheme = ColorScheme.light(
     primary: Colors.white,
@@ -77,18 +75,13 @@ class ColorSchemes {
   );
 }
 
-/// Class containing custom colors for a primary theme.
 class PrimaryColors {
   Color get black => Colors.black;
   Color get white => Colors.white;
-
   Color get blue => Color(0XFF1877F2);
   Color get blue200 => Color.fromRGBO(144, 202, 249, 1);
-
   Color get green => Color.fromARGB(255, 21, 179, 0);
-
   Color get red => Colors.red;
-
   Color get test => Color.fromARGB(255, 223, 198, 87);
 
   // grey
