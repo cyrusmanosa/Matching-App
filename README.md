@@ -1,6 +1,9 @@
 # 前期の準備
 ## スケジュール：
 ![image](https://github.com/cyrusmanosa/Apps/blob/7e67cca041bcddb5de2437beee1bed861701feb2/%E8%9E%A2%E5%B9%95%E6%88%AA%E5%9C%96%202024-01-29%2013.51.58.png)
+と
+Git Branch
+
 ## デザイン：
 <https://www.figma.com/community/file/1333658909585515894/dating-your-data>
 
