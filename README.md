@@ -1,3 +1,7 @@
+# 前期の準備
+## デザイン：
+<https://www.figma.com/community/file/1333658909585515894/dating-your-data>
+
 # 実行流れ - バックエンド
 # Mac
 ### インストール
