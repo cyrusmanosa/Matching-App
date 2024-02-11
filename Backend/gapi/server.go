@@ -23,7 +23,6 @@ func NewInfoServer(config util.Config, infoStore indb.InfoStore) (*Server, error
 	if err != nil {
 		return nil, fmt.Errorf("cannot create token maker: %w", err)
 	}
-
 	server := &Server{
 		config:     config,
 		infoStore:  infoStore,
