@@ -21,13 +21,13 @@ import (
 )
 
 func main() {
+	/// ---------------------------- Unlock file ------------------------------------
 	config, err := util.LoadConfig("./")
 	if err != nil {
 		log.Fatal().Msg("cannot load config:")
 	}
 
-	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
-
+	/// ---------------------------- DB ------------------------------------
 	// Info
 	info_conn, err := pgxpool.New(context.Background(), config.DBSourceInfo)
 	if err != nil {
@@ -44,6 +44,10 @@ func main() {
 	defer info_conn.Close()
 	chstore := chdb.NewChatStore(chat_conn)
 
+	/// ---------------------------- Log ------------------------------------
+	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
+
+	/// ---------------------------- Api ------------------------------------
 	runGrpcServer(config, instore, chstore)
 }
 
@@ -53,6 +57,7 @@ func runGrpcServer(config util.Config, inStore indb.InfoStore, chStore chdb.Chat
 	if err != nil {
 		log.Print(err)
 	}
+
 	ChatServer, err := gapi.NewChatServer(config, chStore)
 	if err != nil {
 		log.Print(err)
