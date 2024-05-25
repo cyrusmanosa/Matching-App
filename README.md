@@ -1,3 +1,6 @@
+# 2年生個人開発ーマッチングアプリ
+![image](cover.png)
+
 # 前期の準備
 ## スケジュール：
 ![image](schedule.png)
