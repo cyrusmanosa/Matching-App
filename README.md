@@ -5,7 +5,7 @@
 ## スケジュール：
 ![image](schedule.png)
 
-## デザイン：
+## フロントのデザイン：
 <https://www.figma.com/community/file/1333658909585515894/dating-your-data>
 
 # 実行流れ - バックエンド
