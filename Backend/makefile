@@ -1,7 +1,7 @@
 DB_INFO_URL = postgresql://root:secret@localhost:5432/dating_date_info?sslmode=disable
 DB_CHAT_URL = postgresql://root:secret@localhost:5432/dating_date_chat?sslmode=disable
 
-# 建立PSQL
+# 建立PSQL-Network
 dockernetwork:
 	docker network create datingDate
 
