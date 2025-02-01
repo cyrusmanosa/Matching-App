@@ -1,78 +1,122 @@
 -- name: CreateUserCanChangeInformation :one
-INSERT INTO canchangeinformation (
-    user_id,
-    nickname,
-    city,
-    sexual,
-    height,
-    weight,
-    speaklanguage,
-    Education,
-    job,
-    annual_salary,
-    sociability,
-    hobby_type,
-    experience,
-    accompany_type,
-    religious,
-    introduce
+INSERT INTO CANCHANGEINFORMATION (
+    USER_ID,
+    NICKNAME,
+    CITY,
+    SEXUAL,
+    HEIGHT,
+    WEIGHT,
+    SPEAKLANGUAGE,
+    EDUCATION,
+    JOB,
+    ANNUAL_SALARY,
+    SOCIABILITY,
+    HOBBY_TYPE,
+    EXPERIENCE,
+    ACCOMPANY_TYPE,
+    RELIGIOUS,
+    INTRODUCE
 ) VALUES (
-    $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16
+    $1,
+    $2,
+    $3,
+    $4,
+    $5,
+    $6,
+    $7,
+    $8,
+    $9,
+    $10,
+    $11,
+    $12,
+    $13,
+    $14,
+    $15,
+    $16
 ) RETURNING *;
 
 -- name: GetUserCanChangeInformation :one
-SELECT * FROM canchangeinformation
-WHERE user_id = $1 LIMIT 1;
+SELECT
+    *
+FROM
+    CANCHANGEINFORMATION
+WHERE
+    USER_ID = $1 LIMIT 1;
 
 -- name: ListCanChangeInformation :many
-SELECT * FROM canchangeinformation
-ORDER BY user_id;
+SELECT
+    *
+FROM
+    CANCHANGEINFORMATION
+ORDER BY
+    USER_ID;
 
 -- name: UpdateInformation :one
-UPDATE canchangeinformation
-SET nickname = $2,
-    city = $3,
-    sexual = $4,
-    height = $5,
-    weight = $6,
-    speaklanguage = $7,
-    Education = $8,
-    job = $9,
-    annual_salary = $10,
-    sociability = $11,
-    religious = $12,
-    hobby_type = $13,
-    experience = $14,
-    accompany_type = $15,
-    introduce = $16
-WHERE user_id = $1
-RETURNING *;
+UPDATE CANCHANGEINFORMATION
+SET
+    NICKNAME = $2,
+    CITY = $3,
+    SEXUAL = $4,
+    HEIGHT = $5,
+    WEIGHT = $6,
+    SPEAKLANGUAGE = $7,
+    EDUCATION = $8,
+    JOB = $9,
+    ANNUAL_SALARY = $10,
+    SOCIABILITY = $11,
+    RELIGIOUS = $12,
+    HOBBY_TYPE = $13,
+    EXPERIENCE = $14,
+    ACCOMPANY_TYPE = $15,
+    INTRODUCE = $16
+WHERE
+    USER_ID = $1 RETURNING *;
 
 -- name: DeleteCanChangeInformation :exec
-DELETE FROM canchangeinformation 
-WHERE user_id = $1;
-
+DELETE FROM CANCHANGEINFORMATION
+WHERE
+    USER_ID = $1;
 
 -- name: CanChangeSearchHobby :many
-SELECT * FROM canchangeinformation
-WHERE user_id != $1
-    AND (city = $2 OR $2 IS NULL)
-    AND (speaklanguage = $3 OR $3 IS NULL)
-    AND (hobby_type = $4 OR $4 IS NULL)
-    AND (experience >= $5 OR $5 IS NULL);
-
+SELECT
+    *
+FROM
+    CANCHANGEINFORMATION
+WHERE
+    USER_ID != $1
+    AND (CITY = $2
+    OR $2 IS NULL)
+    AND (SPEAKLANGUAGE = $3
+    OR $3 IS NULL)
+    AND (HOBBY_TYPE = $4
+    OR $4 IS NULL)
+    AND (EXPERIENCE >= $5
+    OR $5 IS NULL);
 
 -- name: CanChangeSearchAccompany :many
-SELECT * FROM canchangeinformation
-WHERE user_id != $1
-    AND (speaklanguage = $2 OR $2 IS NULL)
-    AND (accompany_type = $3 OR $3 IS NULL)
-    AND (sociability = $4 OR $4 IS NULL);
-
+SELECT
+    *
+FROM
+    CANCHANGEINFORMATION
+WHERE
+    USER_ID != $1
+    AND (SPEAKLANGUAGE = $2
+    OR $2 IS NULL)
+    AND (ACCOMPANY_TYPE = $3
+    OR $3 IS NULL)
+    AND (SOCIABILITY = $4
+    OR $4 IS NULL);
 
 -- name: CanChangeSearchLover :many
-SELECT * FROM canchangeinformation
-WHERE user_id != $1  
-    AND (sexual = $2 OR $2 IS NULL)
-    AND (speaklanguage = $3 OR $3 IS NULL)
-    AND (city = $4 OR $4 IS NULL);
+SELECT
+    *
+FROM
+    CANCHANGEINFORMATION
+WHERE
+    USER_ID != $1
+    AND (SEXUAL = $2
+    OR $2 IS NULL)
+    AND (SPEAKLANGUAGE = $3
+    OR $3 IS NULL)
+    AND (CITY = $4
+    OR $4 IS NULL);
