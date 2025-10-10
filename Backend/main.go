@@ -34,7 +34,6 @@ func main() {
 		log.Fatal().Msg("cannot connect to Info indb")
 	}
 	defer info_conn.Close()
-
 	instore := indb.NewInfoStore(info_conn)
 
 	// Chat
@@ -43,7 +42,6 @@ func main() {
 		log.Fatal().Msg("cannot connect to Info chdb")
 	}
 	defer info_conn.Close()
-
 	chstore := chdb.NewChatStore(chat_conn)
 
 	runGrpcServer(config, instore, chstore)
@@ -66,6 +64,7 @@ func runGrpcServer(config util.Config, inStore indb.InfoStore, chStore chdb.Chat
 
 	pb.RegisterInformationServer(grpcServer, InfoServer)
 	pb.RegisterChatServer(grpcServer, ChatServer)
+
 	reflection.Register(grpcServer)
 
 	listener, err := net.Listen("tcp", config.GRPCServerAddress)

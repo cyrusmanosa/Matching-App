@@ -24,352 +24,368 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 
 option go_package = "Backend/pb";
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
-    info: {
-        title: "A Bit of Everything";
-        version: "1.0";
-        contact: {
-        name: "App";
-        url: "https://github.com/cyrusmanosa/Apps";
-        email: "cyrusmanosa@gmail.com";
-        };
-    };
+  info : {title : "A Bit of Everything";
+version : "1.0";
+contact : {
+name:
+  "App";
+url:
+  "https://github.com/cyrusmanosa/Apps";
+email:
+  "cyrusmanosa@gmail.com";
 };
+}
+;
+}
+;
 
 service Information {
-    /// Login
-    rpc LoginUser(LoginUserRequest) returns (LoginUserResponse){
-        option (google.api.http) = {
-            post: "/v1/Login_User"
-            body: "*"
-        };
-    }
+  /// Login
+  rpc LoginUser(LoginUserRequest) returns (LoginUserResponse) {
+    option (google.api.http) = {
+      post : "/v1/Login_User"
+      body : "*"
+    };
+  }
 
-    /// SignUp
-    rpc CheckEmail(CheckEmailRequest) returns (CheckEmailResponse){
-        option (google.api.http) = {
-            post: "/v1/Sign_Up"
-            body: "*"
-        };
-    }
+  /// SignUp
+  rpc CheckEmail(CheckEmailRequest) returns (CheckEmailResponse) {
+    option (google.api.http) = {
+      post : "/v1/Sign_Up"
+      body : "*"
+    };
+  }
 
-    rpc CheckEmailCode(SendEmailRequest) returns (CheckedEmailResponse){
-        option (google.api.http) = {
-            post: "/v1/Check_Code"
-            body: "*"
-        };
-    }
+  rpc CheckEmailCode(SendEmailRequest) returns (CheckedEmailResponse) {
+    option (google.api.http) = {
+      post : "/v1/Check_Code"
+      body : "*"
+    };
+  }
 
-    rpc InputPassword(InputPasswordRequest) returns (InputPasswordResponse){
-        option (google.api.http) = {
-            put: "/v1/Password_Setup"
-            body: "*"
-        };
-    }
-    /// Reset Password
-    rpc ResetPassword(ResetPasswordRequest) returns (ResetPasswordResponse){
-        option (google.api.http) = {
-            put: "/v1/Reset_Password"
-            body: "*"
-        };
-    }
+  rpc InputPassword(InputPasswordRequest) returns (InputPasswordResponse) {
+    option (google.api.http) = {
+      put : "/v1/Password_Setup"
+      body : "*"
+    };
+  }
+  /// Reset Password
+  rpc ResetPassword(ResetPasswordRequest) returns (ResetPasswordResponse) {
+    option (google.api.http) = {
+      put : "/v1/Reset_Password"
+      body : "*"
+    };
+  }
 
-    /// Fix Information
-    rpc CreateFix(CreateFixRequest) returns (CreateFixResponse){
-        option (google.api.http) = {
-            post: "/v1/Create_Fix"
-            body: "*"
-        };
-    }
-    rpc GetFix(GetFixRequest) returns (GetFixResponse){
-        option (google.api.http) = {
-            get: "/v1/Get_Fix"
-        };
-    }
-    rpc DeleteFix(DeleteFixRequest) returns (google.protobuf.Empty){
-        option (google.api.http) = {
-            delete: "/v1/Del_Fix"
-        };
-    }
+  /// Fix Information
+  rpc CreateFix(CreateFixRequest) returns (CreateFixResponse) {
+    option (google.api.http) = {
+      post : "/v1/Create_Fix"
+      body : "*"
+    };
+  }
+  rpc GetFix(GetFixRequest) returns (GetFixResponse) {
+    option (google.api.http) = {
+      get : "/v1/Get_Fix"
+    };
+  }
+  rpc DeleteFix(DeleteFixRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete : "/v1/Del_Fix"
+    };
+  }
 
-    /// Can Change Information
-    rpc CreateCanChange(CreateCanChangeRequest) returns (CreateCanChangeResponse){
-        option (google.api.http) = {
-            post: "/v1/Create_CanChange"
-            body: "*"
-        };
-    }
-    rpc GetCanChange(GetCanChangeRequest) returns (GetCanChangeResponse){
-        option (google.api.http) = {
-            get: "/v1/Get_CanChange"
-        };
-    }
-    rpc UpdateCanChange(UpdateCanChangeRequest) returns (UpdateCanChangeResponse){
-        option (google.api.http) = {
-            put: "/v1/Update_CanChange"
-            body: "*"
-        };
-    }
-    rpc DeleteCanChange(DeleteCanChangeRequest) returns (google.protobuf.Empty){
-        option (google.api.http) = {
-            delete: "/v1/Del_CanChange"
-        };
-    }
+  /// Can Change Information
+  rpc CreateCanChange(CreateCanChangeRequest)
+      returns (CreateCanChangeResponse) {
+    option (google.api.http) = {
+      post : "/v1/Create_CanChange"
+      body : "*"
+    };
+  }
+  rpc GetCanChange(GetCanChangeRequest) returns (GetCanChangeResponse) {
+    option (google.api.http) = {
+      get : "/v1/Get_CanChange"
+    };
+  }
+  rpc UpdateCanChange(UpdateCanChangeRequest)
+      returns (UpdateCanChangeResponse) {
+    option (google.api.http) = {
+      put : "/v1/Update_CanChange"
+      body : "*"
+    };
+  }
+  rpc DeleteCanChange(DeleteCanChangeRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete : "/v1/Del_CanChange"
+    };
+  }
 
-    /// Accompany
-    rpc CreateAccompany(CreateAccompanyRequest) returns (CreateAccompanyResponse){
-        option (google.api.http) = {
-            post: "/v1/Create_Accompany"
-            body: "*"
-        };
-    }
-    rpc GetAccompany(GetAccompanyRequest) returns (GetAccompanyResponse){
-        option (google.api.http) = {
-            get: "/v1/Get_Accompany"
-        };
-    }
-    rpc UpdateAccompany(UpdateAccompanyRequest) returns (UpdateAccompanyResponse){
-        option (google.api.http) = {
-            put: "/v1/Update_Accompany"
-            body: "*"
-        };
-    }
-    rpc DeleteAccompany(DeleteAccompanyRequest) returns (google.protobuf.Empty){
-        option (google.api.http) = {
-            delete: "/v1/Del_Accompany"
-        };
-    }
+  /// Accompany
+  rpc CreateAccompany(CreateAccompanyRequest)
+      returns (CreateAccompanyResponse) {
+    option (google.api.http) = {
+      post : "/v1/Create_Accompany"
+      body : "*"
+    };
+  }
+  rpc GetAccompany(GetAccompanyRequest) returns (GetAccompanyResponse) {
+    option (google.api.http) = {
+      get : "/v1/Get_Accompany"
+    };
+  }
+  rpc UpdateAccompany(UpdateAccompanyRequest)
+      returns (UpdateAccompanyResponse) {
+    option (google.api.http) = {
+      put : "/v1/Update_Accompany"
+      body : "*"
+    };
+  }
+  rpc DeleteAccompany(DeleteAccompanyRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete : "/v1/Del_Accompany"
+    };
+  }
 
-    // Hobby
-    rpc CreateHobby(CreateHobbyRequest) returns (CreateHobbyResponse){
-        option (google.api.http) = {
-            post: "/v1/Create_Hobby"
-            body: "*"
-        };
-    }
-    rpc GetHobby(GetHobbyRequest) returns (GetHobbyResponse){
-        option (google.api.http) = {
-            get: "/v1/Get_Hobby"
-        };
-    }
-    rpc UpdateHobby(UpdateHobbyRequest) returns (UpdateHobbyResponse){
-        option (google.api.http) = {
-            put: "/v1/Update_Hobby"
-            body: "*"
-        };
-    }
-    rpc DeleteHobby(DeleteHobbyRequest) returns (google.protobuf.Empty){
-        option (google.api.http) = {
-            delete: "/v1/Hobby"
-        };
-    }
+  // Hobby
+  rpc CreateHobby(CreateHobbyRequest) returns (CreateHobbyResponse) {
+    option (google.api.http) = {
+      post : "/v1/Create_Hobby"
+      body : "*"
+    };
+  }
+  rpc GetHobby(GetHobbyRequest) returns (GetHobbyResponse) {
+    option (google.api.http) = {
+      get : "/v1/Get_Hobby"
+    };
+  }
+  rpc UpdateHobby(UpdateHobbyRequest) returns (UpdateHobbyResponse) {
+    option (google.api.http) = {
+      put : "/v1/Update_Hobby"
+      body : "*"
+    };
+  }
+  rpc DeleteHobby(DeleteHobbyRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete : "/v1/Hobby"
+    };
+  }
 
-    // Lover
-    rpc CreateLover(CreateLoverRequest) returns (CreateLoverResponse){
-        option (google.api.http) = {
-            post: "/v1/Create_Lover"
-            body: "*"
-        };
-    }
-    rpc GetLover(GetLoverRequest) returns (GetLoverResponse){
-        option (google.api.http) = {
-            get: "/v1/Get_Lover"
-        };
-    }
-    rpc UpdateLover(UpdateLoverRequest) returns (UpdateLoverResponse){
-        option (google.api.http) = {
-            put: "/v1/Update_Lover"
-            body: "*"
-        };
-    }
-    rpc DeleteLover(DeleteLoverRequest) returns (google.protobuf.Empty){
-        option (google.api.http) = {
-            delete: "/v1/Del_Lover"
-        };
-    }
+  // Lover
+  rpc CreateLover(CreateLoverRequest) returns (CreateLoverResponse) {
+    option (google.api.http) = {
+      post : "/v1/Create_Lover"
+      body : "*"
+    };
+  }
+  rpc GetLover(GetLoverRequest) returns (GetLoverResponse) {
+    option (google.api.http) = {
+      get : "/v1/Get_Lover"
+    };
+  }
+  rpc UpdateLover(UpdateLoverRequest) returns (UpdateLoverResponse) {
+    option (google.api.http) = {
+      put : "/v1/Update_Lover"
+      body : "*"
+    };
+  }
+  rpc DeleteLover(DeleteLoverRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete : "/v1/Del_Lover"
+    };
+  }
 
-    // Contact
-    rpc CreateContact(CreateContactRequest) returns (CreateContactResponse){
-        option (google.api.http) = {
-            post: "/v1/Create_Contact"
-            body: "*"
-        };
-    }
-    rpc GetContact(GetContactRequest) returns (GetContactResponse){
-        option (google.api.http) = {
-            get: "/v1/Get_Contact"
-        };
-    }
-    rpc UpdateContact(UpdateContactRequest) returns (UpdateContactResponse){
-        option (google.api.http) = {
-            put: "/v1/Update_Contact"
-            body: "*"
-        };
-    }
-    rpc DeleteContact(DeleteContactRequest) returns (google.protobuf.Empty){
-        option (google.api.http) = {
-            delete: "/v1/Del_Contact"
-        };
-    }
+  // Contact
+  rpc CreateContact(CreateContactRequest) returns (CreateContactResponse) {
+    option (google.api.http) = {
+      post : "/v1/Create_Contact"
+      body : "*"
+    };
+  }
+  rpc GetContact(GetContactRequest) returns (GetContactResponse) {
+    option (google.api.http) = {
+      get : "/v1/Get_Contact"
+    };
+  }
+  rpc UpdateContact(UpdateContactRequest) returns (UpdateContactResponse) {
+    option (google.api.http) = {
+      put : "/v1/Update_Contact"
+      body : "*"
+    };
+  }
+  rpc DeleteContact(DeleteContactRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete : "/v1/Del_Contact"
+    };
+  }
 
-    // Target List
-    rpc CreateTargetList(CreateTargetListRequest) returns (CreateTargetListResponse){
-        option (google.api.http) = {
-            post: "/v1/Create_TargetList"
-            body: "*"
-        };
-    }
-    rpc GetTargetList(GetTargetListRequest) returns (GetTargetListResponse){
-        option (google.api.http) = {
-            get: "/v1/Get_TargetList"
-        };
-    }
-    rpc UpdateTargetList(UpdateTargetListRequest) returns (UpdateTargetListResponse){
-        option (google.api.http) = {
-            put: "/v1/Update_TargetList"
-            body: "*"
-        };
-    }
-    rpc DeleteTargetList(DeleteTargetListRequest) returns (google.protobuf.Empty){
-        option (google.api.http) = {
-            delete: "/v1/TargetList"
-        };
-    }
+  // Target List
+  rpc CreateTargetList(CreateTargetListRequest)
+      returns (CreateTargetListResponse) {
+    option (google.api.http) = {
+      post : "/v1/Create_TargetList"
+      body : "*"
+    };
+  }
+  rpc GetTargetList(GetTargetListRequest) returns (GetTargetListResponse) {
+    option (google.api.http) = {
+      get : "/v1/Get_TargetList"
+    };
+  }
+  rpc UpdateTargetList(UpdateTargetListRequest)
+      returns (UpdateTargetListResponse) {
+    option (google.api.http) = {
+      put : "/v1/Update_TargetList"
+      body : "*"
+    };
+  }
+  rpc DeleteTargetList(DeleteTargetListRequest)
+      returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete : "/v1/TargetList"
+    };
+  }
 
-    // Change Target
-    rpc CreateChangeTarget(CreateChangeTargetRequest) returns (CreateChangeTargetResponse) {
-        option (google.api.http) = {
-            post: "/v1/Create_ChangeTarget"
-            body: "*"
-        };
-    }
+  // Change Target
+  rpc CreateChangeTarget(CreateChangeTargetRequest)
+      returns (CreateChangeTargetResponse) {
+    option (google.api.http) = {
+      post : "/v1/Create_ChangeTarget"
+      body : "*"
+    };
+  }
 
-    rpc GetChangeTarget(GetChangeTargetRequest) returns (GetChangeTargetResponse){
-        option (google.api.http) = {
-            get: "/v1/Get_ChangeTarget"
-        };
-    }
-    rpc DeleteChangeTarget(DeleteChangeTargetRequest) returns (google.protobuf.Empty){
-        option (google.api.http) = {
-            delete: "/v1/Del_ChangeTarget"
-        };
-    }
-    
-    // images
-    rpc CreateImages(CreateImagesRequest) returns (CreateImagesResponse){
-        option (google.api.http) = {
-            post: "/v1/Create_Images"
-            body: "*"
-        };
-    }
-    rpc GetImages(GetImagesRequest) returns (GetImagesResponse){
-        option (google.api.http) = {
-            get: "/v1/Get_Images"
-        };
-    }
-    rpc UpdateImages(UpdateImagesRequest) returns (UpdateImagesResponse){
-        option (google.api.http) = {
-            put: "/v1/Update_Images"
-            body: "*"
-        };
-    }
-    rpc DeleteImages(DeleteImagesRequest) returns (google.protobuf.Empty){
-        option (google.api.http) = {
-            delete: "/v1/Del_Images"
-        };
-    }
+  rpc GetChangeTarget(GetChangeTargetRequest)
+      returns (GetChangeTargetResponse) {
+    option (google.api.http) = {
+      get : "/v1/Get_ChangeTarget"
+    };
+  }
+  rpc DeleteChangeTarget(DeleteChangeTargetRequest)
+      returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete : "/v1/Del_ChangeTarget"
+    };
+  }
 
-    // Payment
-    rpc CreatePayment(CreatePaymentRequest) returns (CreatePaymentResponse){
-        option (google.api.http) = {
-            post: "/v1/Create_Payment"
-            body: "*"
-        };
-    }
-    rpc GetPayment(GetPaymentRequest) returns (GetPaymentResponse){
-        option (google.api.http) = {
-            get: "/v1/Get_Payment"
-        };
-    }
+  // images
+  rpc CreateImages(CreateImagesRequest) returns (CreateImagesResponse) {
+    option (google.api.http) = {
+      post : "/v1/Create_Images"
+      body : "*"
+    };
+  }
+  rpc GetImages(GetImagesRequest) returns (GetImagesResponse) {
+    option (google.api.http) = {
+      get : "/v1/Get_Images"
+    };
+  }
+  rpc UpdateImages(UpdateImagesRequest) returns (UpdateImagesResponse) {
+    option (google.api.http) = {
+      put : "/v1/Update_Images"
+      body : "*"
+    };
+  }
+  rpc DeleteImages(DeleteImagesRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete : "/v1/Del_Images"
+    };
+  }
 
-    // Session
-    rpc GetUserID(GetUserIDRequest) returns (GetUserIDResponse){
-        option (google.api.http) = {
-            get: "/v1/Get_UserID"
-        };
-    }
-/// -------- Search --------------
-    rpc SearchTargetHobby(SearchRequestH) returns (SearchResponseH) {
-        option (google.api.http) = {
-            get: "/v1/Search_hobby"
-        };
-    }
-    rpc SearchTargetLover(SearchRequestL) returns (SearchResponseL) {
-        option (google.api.http) = {
-            get: "/v1/Search_lover"
-        };
-    }
-    rpc SearchTargetAccompany(SearchRequestA) returns (SearchResponseA) {
-        option (google.api.http) = {
-            get: "/v1/Search_accompany"
-        };
-    }
+  // Payment
+  rpc CreatePayment(CreatePaymentRequest) returns (CreatePaymentResponse) {
+    option (google.api.http) = {
+      post : "/v1/Create_Payment"
+      body : "*"
+    };
+  }
+  rpc GetPayment(GetPaymentRequest) returns (GetPaymentResponse) {
+    option (google.api.http) = {
+      get : "/v1/Get_Payment"
+    };
+  }
+
+  // Session
+  rpc GetUserID(GetUserIDRequest) returns (GetUserIDResponse) {
+    option (google.api.http) = {
+      get : "/v1/Get_UserID"
+    };
+  }
+  /// -------- Search --------------
+  rpc SearchTargetHobby(SearchRequestH) returns (SearchResponseH) {
+    option (google.api.http) = {
+      get : "/v1/Search_hobby"
+    };
+  }
+  rpc SearchTargetLover(SearchRequestL) returns (SearchResponseL) {
+    option (google.api.http) = {
+      get : "/v1/Search_lover"
+    };
+  }
+  rpc SearchTargetAccompany(SearchRequestA) returns (SearchResponseA) {
+    option (google.api.http) = {
+      get : "/v1/Search_accompany"
+    };
+  }
 }
 
 /// -------- Chat --------------
 
 service Chat {
-    rpc CreateChatTable(CreateChatTableRequest) returns (google.protobuf.Empty){
-        option (google.api.http) = {
-            post: "/v1/Create_ChatTable"
-            body: "*"
-        };
-    }
+  rpc CreateChatTable(CreateChatTableRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post : "/v1/Create_ChatTable"
+      body : "*"
+    };
+  }
 
-    rpc CreateChatRecord(CreateChatRecordRequest) returns (CreateChatRecordResponse){
-        option (google.api.http) = {
-            post: "/v1/Create_ChatRecord"
-            body: "*"
-        };
-    }
-    rpc GetChatRecord(GetChatRecordRequest) returns (GetChatRecordResponse){
-        option (google.api.http) = {
-            get: "/v1/Get_ChatRecord"
-        };
-    }
-    rpc UpdateChatRecord(UpdateChatRecordRequest) returns (UpdateChatRecordResponse){
-        option (google.api.http) = {
-            put: "/v1/Update_ChatRecord"
-            body: "*"
-        };
-    }
-    rpc DeleteChatTable(DeleteChatTableRequest) returns (google.protobuf.Empty){
-        option (google.api.http) = {
-            delete: "/v1/Del_ChatRecord"
-        };
-    }
+  rpc CreateChatRecord(CreateChatRecordRequest)
+      returns (CreateChatRecordResponse) {
+    option (google.api.http) = {
+      post : "/v1/Create_ChatRecord"
+      body : "*"
+    };
+  }
+  rpc GetChatRecord(GetChatRecordRequest) returns (GetChatRecordResponse) {
+    option (google.api.http) = {
+      get : "/v1/Get_ChatRecord"
+    };
+  }
+  rpc UpdateChatRecord(UpdateChatRecordRequest)
+      returns (UpdateChatRecordResponse) {
+    option (google.api.http) = {
+      put : "/v1/Update_ChatRecord"
+      body : "*"
+    };
+  }
+  rpc DeleteChatTable(DeleteChatTableRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete : "/v1/Del_ChatRecord"
+    };
+  }
 
-    rpc GetTargetID(GetTargetIDRequest) returns (GetTargetIDResponse){
-        option (google.api.http) = {
-            get: "/v1/Get_ChatTargetID"
-        };
-    }
+  rpc GetTargetID(GetTargetIDRequest) returns (GetTargetIDResponse) {
+    option (google.api.http) = {
+      get : "/v1/Get_ChatTargetID"
+    };
+  }
 
-    rpc GetLastMsg(GetLastMsgRequest) returns (GetLastMsgResponse){
-        option (google.api.http) = {
-            get: "/v1/Get_LastMsg"
-        };
-    }
+  rpc GetLastMsg(GetLastMsgRequest) returns (GetLastMsgResponse) {
+    option (google.api.http) = {
+      get : "/v1/Get_LastMsg"
+    };
+  }
 
-    rpc GetChatRow(GetChatRowRequest) returns (GetChatRowResponse){
-        option (google.api.http) = {
-            get: "/v1/Get_RowMsg"
-        };
-    }
+  rpc GetChatRow(GetChatRowRequest) returns (GetChatRowResponse) {
+    option (google.api.http) = {
+      get : "/v1/Get_RowMsg"
+    };
+  }
 
-    rpc UpdateRead(UpdateReadRequest) returns (google.protobuf.Empty){
-        option (google.api.http) = {
-            put: "/v1/Update_Read"
-            body: "*"
-        };
-    }
+  rpc UpdateRead(UpdateReadRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put : "/v1/Update_Read"
+      body : "*"
+    };
+  }
 }
