@@ -1,16 +1,16 @@
 package gapi
 
 import (
-	db "Backend/db/sqlc"
-	info "Backend/db/sqlc/info"
-
-	"Backend/pb"
 	"context"
 	"fmt"
 
 	"github.com/google/uuid"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+
+	db "Backend/db/sqlc"
+	info "Backend/db/sqlc/info"
+	"Backend/pb"
 )
 
 func (server *Server) CreatePayment(ctx context.Context, req *pb.CreatePaymentRequest) (*pb.CreatePaymentResponse, error) {
