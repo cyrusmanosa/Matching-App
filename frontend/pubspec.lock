@@ -5,37 +5,18 @@ packages:
     dependency: transitive
     description:
       name: _fe_analyzer_shared
-<<<<<<< HEAD
       sha256: da0d9209ca76bde579f2da330aeb9df62b6319c834fa7baae052021b0462401f
       url: "https://pub.dev"
     source: hosted
     version: "85.0.0"
-=======
-      sha256: f256b0c0ba6c7577c15e2e4e114755640a875e885099367bf6e012b19314c834
-      url: "https://pub.dev"
-    source: hosted
-    version: "72.0.0"
-  _macros:
-    dependency: transitive
-    description: dart
-    source: sdk
-    version: "0.3.2"
->>>>>>> a89635b7cd6c0b657da58c11c6769c0c8da644d9
   analyzer:
     dependency: transitive
     description:
       name: analyzer
-<<<<<<< HEAD
       sha256: "974859dc0ff5f37bc4313244b3218c791810d03ab3470a579580279ba971a48d"
       url: "https://pub.dev"
     source: hosted
     version: "7.7.1"
-=======
-      sha256: b652861553cd3990d8ed361f7979dc6d7053a9ac8843fa73820ab68ce5410139
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.7.0"
->>>>>>> a89635b7cd6c0b657da58c11c6769c0c8da644d9
   archive:
     dependency: transitive
     description:
