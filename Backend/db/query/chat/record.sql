@@ -39,8 +39,8 @@ RETURNING *;
 -- name: UpdateRead :many
 UPDATE "u1"
 SET isread = true
-WHERE media_type = "text"
-  AND target_id = $1
+WHERE target_id = $1
+  AND role_type = 'receiver'
 RETURNING *;
 
 -- name: DeleteRecord :exec

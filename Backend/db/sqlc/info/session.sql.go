@@ -7,8 +7,8 @@ package db
 
 import (
 	"context"
-	"time"
 	"github.com/google/uuid"
+	"time"
 )
 
 const createSession = `-- name: CreateSession :one
@@ -25,11 +25,11 @@ INSERT INTO sessions (
 `
 
 type CreateSessionParams struct {
-	ID          uuid.UUID          `json:"id"`
-	UserID      int32              `json:"user_id"`
-	AccessToken string             `json:"access_token"`
-	Status      string        `json:"status"`
-	IsBlocked   bool               `json:"is_blocked"`
+	ID          uuid.UUID `json:"id"`
+	UserID      int32     `json:"user_id"`
+	AccessToken string    `json:"access_token"`
+	Status      string    `json:"status"`
+	IsBlocked   bool      `json:"is_blocked"`
 	ExpiresAt   time.Time `json:"expires_at"`
 }
 
@@ -59,6 +59,31 @@ const getSession = `-- name: GetSession :one
 SELECT id, user_id, access_token, status, is_blocked, expires_at, created_at FROM sessions
 WHERE id = $1 LIMIT 1
 `
+
+const logoutActiveSessions = `-- name: LogoutActiveSessions :exec
+UPDATE sessions
+SET status = 'Logout',
+    is_blocked = true
+WHERE user_id = $1
+  AND is_blocked = false
+`
+
+func (q *Queries) LogoutActiveSessions(ctx context.Context, userID int32) error {
+	_, err := q.db.Exec(ctx, logoutActiveSessions, userID)
+	return err
+}
+
+const logoutSession = `-- name: LogoutSession :exec
+UPDATE sessions
+SET status = 'Logout',
+    is_blocked = true
+WHERE id = $1
+`
+
+func (q *Queries) LogoutSession(ctx context.Context, id uuid.UUID) error {
+	_, err := q.db.Exec(ctx, logoutSession, id)
+	return err
+}
 
 func (q *Queries) GetSession(ctx context.Context, id uuid.UUID) (Session, error) {
 	row := q.db.QueryRow(ctx, getSession, id)

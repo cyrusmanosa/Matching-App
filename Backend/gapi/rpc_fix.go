@@ -6,7 +6,6 @@ import (
 	"Backend/pb"
 	"Backend/util"
 	"context"
-	"fmt"
 
 	"github.com/google/uuid"
 	"google.golang.org/grpc/codes"
@@ -65,10 +64,13 @@ func (server *Server) CreateFix(ctx context.Context, req *pb.CreateFixRequest) (
 		ID:          payload.ID,
 		UserID:      fix.UserID,
 		AccessToken: aToken,
-		Status:      "SignUp",
+		Status:      sessionStatusSignUp,
 		IsBlocked:   false,
 		ExpiresAt:   payload.ExpiredAt,
 	})
+	if err != nil {
+		return nil, status.Error(codes.Internal, "failed to create session")
+	}
 
 	rsp := &pb.CreateFixResponse{
 		SessionsID:           sessions.ID.String(),
@@ -83,25 +85,14 @@ func (server *Server) CreateFix(ctx context.Context, req *pb.CreateFixRequest) (
 }
 
 func (server *Server) GetFix(ctx context.Context, req *pb.GetFixRequest) (*pb.GetFixResponse, error) {
-	Gid, err := uuid.Parse(req.GetSessionID())
+	_, err := server.userFromSession(ctx, req.GetSessionID())
 	if err != nil {
-		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
-	}
-
-	token, err := server.infoStore.GetSession(ctx, Gid)
-	if err != nil {
-		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
-	}
-
-	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
-	if err != nil {
-		return nil, fmt.Errorf("invalid access token: %v", err)
+		return nil, err
 	}
 
 	getFix, err := server.infoStore.GetUserFixInformation(ctx, req.GetUserID())
 	if err != nil {
-		errCode := db.ErrorCode(err)
-		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "user not found")
 		}
 		return nil, status.Errorf(codes.Internal, "failed to input UserID: %s", err)
@@ -114,25 +105,14 @@ func (server *Server) GetFix(ctx context.Context, req *pb.GetFixRequest) (*pb.Ge
 }
 
 func (server *Server) Deletefix(ctx context.Context, req *pb.DeleteFixRequest) (*emptypb.Empty, error) {
-	Gid, err := uuid.Parse(req.GetSessionID())
+	token, err := server.userFromSession(ctx, req.GetSessionID())
 	if err != nil {
-		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
-	}
-
-	token, err := server.infoStore.GetSession(ctx, Gid)
-	if err != nil {
-		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
-	}
-
-	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
-	if err != nil {
-		return nil, fmt.Errorf("invalid access token: %v", err)
+		return nil, err
 	}
 
 	err = server.infoStore.DeleteUser(ctx, token.UserID)
 	if err != nil {
-		errCode := db.ErrorCode(err)
-		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "user not found")
 		}
 		return nil, status.Errorf(codes.Internal, "failed to input UserID: %s", err)

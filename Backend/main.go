@@ -41,7 +41,7 @@ func main() {
 	if err != nil {
 		log.Fatal().Msg("cannot connect to Info chdb")
 	}
-	defer info_conn.Close()
+	defer chat_conn.Close()
 	chstore := chdb.NewChatStore(chat_conn)
 
 	/// ---------------------------- Log ------------------------------------
@@ -55,12 +55,12 @@ func main() {
 func runGrpcServer(config util.Config, inStore indb.InfoStore, chStore chdb.ChatStore) {
 	InfoServer, err := gapi.NewInfoServer(config, inStore)
 	if err != nil {
-		log.Print(err)
+		log.Fatal().Err(err).Msg("cannot create info server")
 	}
 
 	ChatServer, err := gapi.NewChatServer(config, chStore)
 	if err != nil {
-		log.Print(err)
+		log.Fatal().Err(err).Msg("cannot create chat server")
 	}
 
 	// Logger
@@ -73,7 +73,7 @@ func runGrpcServer(config util.Config, inStore indb.InfoStore, chStore chdb.Chat
 
 	listener, err := net.Listen("tcp", config.GRPCServerAddress)
 	if err != nil {
-		log.Print(err)
+		log.Fatal().Err(err).Msg("cannot start listener")
 	}
 
 	log.Info().Msgf("Connecting to Grpc Server at %s", listener.Addr().String())

@@ -62,6 +62,7 @@ const (
 	Information_CreatePayment_FullMethodName         = "/pb.Information/CreatePayment"
 	Information_GetPayment_FullMethodName            = "/pb.Information/GetPayment"
 	Information_GetUserID_FullMethodName             = "/pb.Information/GetUserID"
+	Information_LogoutUser_FullMethodName            = "/pb.Information/LogoutUser"
 	Information_EmailResetPassword_FullMethodName    = "/pb.Information/EmailResetPassword"
 	Information_ResetPwEmailConfirm_FullMethodName   = "/pb.Information/ResetPwEmailConfirm"
 	Information_SearchTargetHobby_FullMethodName     = "/pb.Information/SearchTargetHobby"
@@ -129,6 +130,7 @@ type InformationClient interface {
 	GetPayment(ctx context.Context, in *GetPaymentRequest, opts ...grpc.CallOption) (*GetPaymentResponse, error)
 	// Session
 	GetUserID(ctx context.Context, in *GetUserIDRequest, opts ...grpc.CallOption) (*GetUserIDResponse, error)
+	LogoutUser(ctx context.Context, in *GetUserIDRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Reset Password Email
 	EmailResetPassword(ctx context.Context, in *ResetPwEmailRequest, opts ...grpc.CallOption) (*ResetPwEmailResponse, error)
 	ResetPwEmailConfirm(ctx context.Context, in *ResetPwEmailConfirmRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -524,6 +526,15 @@ func (c *informationClient) GetUserID(ctx context.Context, in *GetUserIDRequest,
 	return out, nil
 }
 
+func (c *informationClient) LogoutUser(ctx context.Context, in *GetUserIDRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Information_LogoutUser_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *informationClient) EmailResetPassword(ctx context.Context, in *ResetPwEmailRequest, opts ...grpc.CallOption) (*ResetPwEmailResponse, error) {
 	out := new(ResetPwEmailResponse)
 	err := c.cc.Invoke(ctx, Information_EmailResetPassword_FullMethodName, in, out, opts...)
@@ -629,6 +640,7 @@ type InformationServer interface {
 	GetPayment(context.Context, *GetPaymentRequest) (*GetPaymentResponse, error)
 	// Session
 	GetUserID(context.Context, *GetUserIDRequest) (*GetUserIDResponse, error)
+	LogoutUser(context.Context, *GetUserIDRequest) (*emptypb.Empty, error)
 	// Reset Password Email
 	EmailResetPassword(context.Context, *ResetPwEmailRequest) (*ResetPwEmailResponse, error)
 	ResetPwEmailConfirm(context.Context, *ResetPwEmailConfirmRequest) (*emptypb.Empty, error)
@@ -768,6 +780,9 @@ func (UnimplementedInformationServer) GetPayment(context.Context, *GetPaymentReq
 }
 func (UnimplementedInformationServer) GetUserID(context.Context, *GetUserIDRequest) (*GetUserIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserID not implemented")
+}
+func (UnimplementedInformationServer) LogoutUser(context.Context, *GetUserIDRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LogoutUser not implemented")
 }
 func (UnimplementedInformationServer) EmailResetPassword(context.Context, *ResetPwEmailRequest) (*ResetPwEmailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EmailResetPassword not implemented")
@@ -1553,6 +1568,24 @@ func _Information_GetUserID_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Information_LogoutUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserIDRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformationServer).LogoutUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Information_LogoutUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformationServer).LogoutUser(ctx, req.(*GetUserIDRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Information_EmailResetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ResetPwEmailRequest)
 	if err := dec(in); err != nil {
@@ -1817,6 +1850,10 @@ var Information_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserID",
 			Handler:    _Information_GetUserID_Handler,
+		},
+		{
+			MethodName: "LogoutUser",
+			Handler:    _Information_LogoutUser_Handler,
 		},
 		{
 			MethodName: "EmailResetPassword",

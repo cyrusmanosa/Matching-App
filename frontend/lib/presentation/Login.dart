@@ -2,6 +2,7 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_login.pb.dart';
 import 'package:dating_your_date/client/grpc_services.dart';
+import 'package:dating_your_date/client/session_auth.dart';
 import 'package:dating_your_date/pb/rpc_session.pb.dart';
 import 'package:dating_your_date/presentation/NewPassword_Email_Setup.dart';
 import 'package:dating_your_date/widgets/Custom_Loading.dart';
@@ -25,6 +26,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   bool passwordVisible = false;
+  bool _shownSessionMessage = false;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -33,6 +35,42 @@ class _LoginState extends State<Login> {
     super.initState();
     WidgetsFlutterBinding.ensureInitialized();
     initUniLinks(context);
+    resumeSession();
+  }
+
+  Future<void> resumeSession() async {
+    final sessionID = await globalSession.read(key: 'SessionId');
+    if (sessionID == null || sessionID.isEmpty || !mounted) {
+      return;
+    }
+    try {
+      final useridResponse = await GrpcInfoService.client.getUserID(GetUserIDRequest(sessionID: sessionID));
+      await globalUserId.write(key: 'UserID', value: '${useridResponse.userID}');
+      if (!mounted) {
+        return;
+      }
+      getCanChangeGrpc(context);
+    } on GrpcError catch (error) {
+      if (isUnauthenticated(error)) {
+        return;
+      }
+      await globalSession.delete(key: 'SessionId');
+      await globalUserId.delete(key: 'UserID');
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final message = ModalRoute.of(context)?.settings.arguments;
+    if (!_shownSessionMessage && message is String && message.isNotEmpty) {
+      _shownSessionMessage = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          showErrorDialog(context, message);
+        }
+      });
+    }
   }
 
   void initUniLinks(BuildContext context) async {

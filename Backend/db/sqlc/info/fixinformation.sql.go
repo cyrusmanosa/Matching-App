@@ -89,9 +89,9 @@ func (q *Queries) DeleteUser(ctx context.Context, userID int32) error {
 
 const fixSearchAccompany = `-- name: FixSearchAccompany :many
 SELECT user_id, first_name, last_name, email, hashed_password, birth, country, gender, blood, age, constellation, certification, created_at, password_changed_at, role FROM fixinformation
-WHERE user_id = $1
+WHERE user_id != $1
     AND (age >= $2 OR $2 IS NULL)
-    AND (age < $3 OR $3 IS NULL)
+    AND (age <= $3 OR $3 IS NULL)
 `
 
 type FixSearchAccompanyParams struct {
@@ -140,7 +140,7 @@ const fixSearchHobby = `-- name: FixSearchHobby :many
 SELECT user_id, first_name, last_name, email, hashed_password, birth, country, gender, blood, age, constellation, certification, created_at, password_changed_at, role FROM fixinformation
 WHERE user_id != $1
     AND (age >= $2 OR $2 IS NULL)
-    AND (age < $3 OR $3 IS NULL)
+    AND (age <= $3 OR $3 IS NULL)
     AND (gender = $4 OR $4 IS NULL)
 `
 
@@ -196,7 +196,7 @@ const fixSearchLover = `-- name: FixSearchLover :many
 SELECT user_id, first_name, last_name, email, hashed_password, birth, country, gender, blood, age, constellation, certification, created_at, password_changed_at, role FROM fixinformation
 WHERE user_id != $1  
     AND (age >= $2 OR $2 IS NULL)
-    AND (age < $3 OR $3 IS NULL)
+    AND (age <= $3 OR $3 IS NULL)
     AND (gender = $4 OR $4 IS NULL)
 `
 

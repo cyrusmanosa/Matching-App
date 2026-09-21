@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:dating_your_date/client/grpc_services.dart';
+import 'package:dating_your_date/client/session_auth.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/canChange.pb.dart';
 import 'package:dating_your_date/pb/fix.pb.dart';
@@ -56,8 +57,11 @@ class _HomeState extends State<Home> {
       final tlRequest = GetTargetListRequest(sessionID: apiKeyS, userID: userid);
       final tlResponse = await GrpcInfoService.client.getTargetList(tlRequest);
       return tlResponse.tl;
-    } on GrpcError {
+    } on GrpcError catch (error) {
       check = true;
+      if (isUnauthenticated(error)) {
+        return Targetlist();
+      }
       throw Exception("データの送信中にエラーが発生しました。");
     }
   }
@@ -128,7 +132,10 @@ class _HomeState extends State<Home> {
           setState(() {
             allTargetFix[i] = response.fix;
           });
-        } on GrpcError {
+        } on GrpcError catch (error) {
+          if (isUnauthenticated(error)) {
+            return;
+          }
           await showErrorDialog(context, "エラー：検証可能な入力データ");
           throw Exception("データの送信中にエラーが発生しました。");
         }
@@ -140,7 +147,10 @@ class _HomeState extends State<Home> {
           setState(() {
             allTargetCanChange[i] = response.canChangeInfo;
           });
-        } on GrpcError {
+        } on GrpcError catch (error) {
+          if (isUnauthenticated(error)) {
+            return;
+          }
           await showErrorDialog(context, "エラー：検証可能な入力データ");
           throw Exception("データの送信中にエラーが発生しました。");
         }

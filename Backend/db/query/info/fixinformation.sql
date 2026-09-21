@@ -41,18 +41,18 @@ WHERE user_id = $1;
 SELECT * FROM fixinformation
 WHERE user_id != $1
     AND (age >= $2 OR $2 IS NULL)
-    AND (age < $3 OR $3 IS NULL)
+    AND (age <= $3 OR $3 IS NULL)
     AND (gender = $4 OR $4 IS NULL);
 
 -- name: FixSearchAccompany :many
 SELECT * FROM fixinformation
-WHERE user_id = $1
+WHERE user_id != $1
     AND (age >= $2 OR $2 IS NULL)
-    AND (age < $3 OR $3 IS NULL);
+    AND (age <= $3 OR $3 IS NULL);
 
 -- name: FixSearchLover :many
 SELECT * FROM fixinformation
 WHERE user_id != $1  
     AND (age >= $2 OR $2 IS NULL)
-    AND (age < $3 OR $3 IS NULL)
+    AND (age <= $3 OR $3 IS NULL)
     AND (gender = $4 OR $4 IS NULL);

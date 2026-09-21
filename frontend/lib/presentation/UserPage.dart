@@ -9,6 +9,7 @@ import 'package:dating_your_date/pb/rpc_socialmedia.pb.dart';
 import 'package:dating_your_date/presentation/ChatBox.dart';
 import 'package:dating_your_date/presentation/Profile/widgets/showDataBar.dart';
 import 'package:dating_your_date/widgets/Custom_Show_Image.dart';
+import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/app_bar/Custom_App_bar.dart';
 import 'package:dating_your_date/widgets/button/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
@@ -28,50 +29,54 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
-  void checkSocialMediaRecode(BuildContext context) async {
-    String? apiKeyU = await globalUserId.read(key: 'UserID');
-    final userid = int.tryParse(apiKeyU!);
+  Future<bool> _hasSocialMedia(int userID, int targetID) async {
     try {
-      final myReq = GetSocialMediaRequest(userID: userid, targetID: widget.canData!.userID);
-      await GrpcChatService.client.getSocialMedia(myReq);
-      final tarReq = GetSocialMediaRequest(userID: widget.canData!.userID, targetID: userid);
-      await GrpcChatService.client.getSocialMedia(tarReq);
+      await GrpcChatService.client.getSocialMedia(GetSocialMediaRequest(userID: userID, targetID: targetID));
+      return true;
+    } on GrpcError {
+      return false;
+    }
+  }
+
+  Future<void> _createSocialMedia(int userID, int targetID) async {
+    await GrpcChatService.client.createSocialMedia(CreateSocialMediaRequest(
+      userID: userID,
+      targetID: targetID,
+      image: false,
+      contact: false,
+      appointment: false,
+      sns: false,
+      location: false,
+    ));
+  }
+
+  void checkSocialMediaRecode(BuildContext context) async {
+    final apiKeyU = await globalUserId.read(key: 'UserID');
+    final userid = int.tryParse(apiKeyU ?? '');
+    final targetID = widget.canData?.userID;
+    if (userid == null || targetID == null || !context.mounted) return;
+    try {
+      if (!await _hasSocialMedia(userid, targetID)) {
+        await _createSocialMedia(userid, targetID);
+      }
+      if (!await _hasSocialMedia(targetID, userid)) {
+        await _createSocialMedia(targetID, userid);
+      }
+      if (!context.mounted) return;
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>
-              ChatBox(name: widget.canData!.nickName, imageUrl: widget.img!, targetid: widget.canData!.userID, tType: widget.tType!),
+          builder: (context) => ChatBox(
+            name: widget.canData!.nickName,
+            imageUrl: widget.img,
+            targetid: targetID,
+            tType: widget.tType,
+          ),
         ),
       );
-    } on GrpcError catch (e) {
-      if (e.code == 5 || e.code == 13) {
-        // my
-        final mReq = CreateSocialMediaRequest(
-          userID: userid,
-          targetID: widget.canData!.userID,
-          image: false,
-          contact: false,
-          appointment: false,
-          sns: false,
-          location: false,
-        );
-        await GrpcChatService.client.createSocialMedia(mReq);
-        // target
-        final tReq = CreateSocialMediaRequest(
-          userID: widget.canData!.userID,
-          targetID: userid,
-          image: false,
-          contact: false,
-          appointment: false,
-          sns: false,
-          location: false,
-        );
-        await GrpcChatService.client.createSocialMedia(tReq);
-
-        await Future.delayed(Duration(milliseconds: 300));
-        checkSocialMediaRecode(context);
-      }
-      throw Exception("エラーがあります。$e");
+    } on GrpcError {
+      if (!context.mounted) return;
+      await showErrorDialog(context, "チャットを開けませんでした。");
     }
   }
 

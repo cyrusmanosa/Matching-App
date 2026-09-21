@@ -1,7 +1,6 @@
 package gapi
 
 import (
-	db "Backend/db/sqlc"
 	info "Backend/db/sqlc/info"
 
 	"Backend/pb"
@@ -14,19 +13,9 @@ import (
 )
 
 func (server *Server) CreatePayment(ctx context.Context, req *pb.CreatePaymentRequest) (*pb.CreatePaymentResponse, error) {
-	Gid, err := uuid.Parse(req.GetSessionID())
+	token, err := server.userFromSession(ctx, req.GetSessionID())
 	if err != nil {
-		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
-	}
-
-	token, err := server.infoStore.GetSession(ctx, Gid)
-	if err != nil {
-		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
-	}
-
-	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
-	if err != nil {
-		return nil, fmt.Errorf("invalid access token: %v", err)
+		return nil, err
 	}
 
 	user, err := server.infoStore.GetUserFixInformation(ctx, token.UserID)
@@ -64,8 +53,7 @@ func (server *Server) GetPayment(ctx context.Context, req *pb.GetPaymentRequest)
 
 	GetP, err := server.infoStore.GetPayment(ctx, payid)
 	if err != nil {
-		errCode := db.ErrorCode(err)
-		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "user not found")
 		}
 		return nil, status.Errorf(codes.Internal, "failed to input UserID: %s", err)

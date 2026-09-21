@@ -2,7 +2,7 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 class ProfileButton extends StatefulWidget {
-  ProfileButton({super.key, this.mediaW, this.mediaH, this.iconData, this.title, this.page, this.width, this.padding});
+  ProfileButton({super.key, this.mediaW, this.mediaH, this.iconData, this.title, this.page, this.width, this.padding, this.onTapOverride});
   final double? width;
   final bool? padding;
   final double? mediaW;
@@ -10,6 +10,7 @@ class ProfileButton extends StatefulWidget {
   final String? title;
   final String? page;
   final IconData? iconData;
+  final Future<void> Function(BuildContext context)? onTapOverride;
 
   @override
   State<ProfileButton> createState() => _ProfileButtonState();
@@ -21,7 +22,11 @@ class _ProfileButtonState extends State<ProfileButton> {
     return Column(
       children: [
         GestureDetector(
-          onTap: () {
+          onTap: () async {
+            if (widget.onTapOverride != null) {
+              await widget.onTapOverride!(context);
+              return;
+            }
             Navigator.pushNamed(context, widget.page!);
           },
           child: Container(

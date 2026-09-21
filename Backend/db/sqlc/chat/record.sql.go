@@ -218,6 +218,7 @@ func (q *Queries) UpdateRead(ctx context.Context, targetID int32,tablename strin
     UPDATE %s
     SET isread = true
     WHERE target_id = $1
+    AND role_type = 'receiver'
     `,tablename)
     rows, err := q.db.Query(ctx, updateRead, targetID)
     if err != nil {

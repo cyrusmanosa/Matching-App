@@ -1,33 +1,20 @@
 package gapi
 
 import (
-	db "Backend/db/sqlc"
 	info "Backend/db/sqlc/info"
 	"Backend/pb"
 	"Backend/util"
 	"context"
-	"database/sql"
-	"fmt"
 
-	"github.com/google/uuid"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func (server *Server) InputPassword(ctx context.Context, req *pb.InputPasswordRequest) (*pb.InputPasswordResponse, error) {
-	Gid, err := uuid.Parse(req.GetSessionID())
+	token, err := server.userFromSession(ctx, req.GetSessionID())
 	if err != nil {
-		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
-	}
-
-	token, err := server.infoStore.GetSession(ctx, Gid)
-	if err != nil {
-		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
-	}
-	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
-	if err != nil {
-		return nil, fmt.Errorf("invalid access token: %v", err)
+		return nil, err
 	}
 
 	Hash, _ := util.HashPassword(req.GetPassword())
@@ -38,19 +25,18 @@ func (server *Server) InputPassword(ctx context.Context, req *pb.InputPasswordRe
 
 	_, err = server.infoStore.UpdatePassword(ctx, arg)
 	if err != nil {
-		errCode := db.ErrorCode(err)
-		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
-			return nil, status.Errorf(codes.AlreadyExists, err.Error())
+		if missingRecord(err) {
+			return nil, status.Error(codes.NotFound, "user not found")
 		}
-		return nil, status.Errorf(codes.Internal, "failed to input password: %s", err)
+		return nil, status.Error(codes.Internal, "failed to input password")
 	}
 
 	user, err := server.infoStore.GetUserFixInformation(ctx, token.UserID)
 	if err != nil {
-		if err == sql.ErrNoRows {
-			return nil, status.Errorf(codes.NotFound, "user not found")
+		if missingRecord(err) {
+			return nil, status.Error(codes.NotFound, "user not found")
 		}
-		return nil, status.Errorf(codes.Internal, "failed to input Email: %s", err)
+		return nil, status.Error(codes.Internal, "failed to input Email")
 	}
 
 	rsp := &pb.InputPasswordResponse{
@@ -62,19 +48,9 @@ func (server *Server) InputPassword(ctx context.Context, req *pb.InputPasswordRe
 }
 
 func (server *Server) ResetPassword(ctx context.Context, req *pb.ResetPasswordRequest) (*pb.ResetPasswordResponse, error) {
-	Gid, err := uuid.Parse(req.GetSessionID())
+	token, err := server.userFromSession(ctx, req.GetSessionID())
 	if err != nil {
-		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
-	}
-
-	token, err := server.infoStore.GetSession(ctx, Gid)
-	if err != nil {
-		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
-	}
-
-	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
-	if err != nil {
-		return nil, fmt.Errorf("invalid access token: %v", err)
+		return nil, err
 	}
 
 	Hash, _ := util.HashPassword(req.GetPassword())
@@ -85,19 +61,18 @@ func (server *Server) ResetPassword(ctx context.Context, req *pb.ResetPasswordRe
 	}
 	_, err = server.infoStore.UpdatePassword(ctx, arg)
 	if err != nil {
-		errCode := db.ErrorCode(err)
-		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
-			return nil, status.Errorf(codes.AlreadyExists, err.Error())
+		if missingRecord(err) {
+			return nil, status.Error(codes.NotFound, "user not found")
 		}
-		return nil, status.Errorf(codes.Internal, "failed to reset password: %s", err)
+		return nil, status.Error(codes.Internal, "failed to reset password")
 	}
 
 	user, err := server.infoStore.GetUserFixInformation(ctx, token.UserID)
 	if err != nil {
-		if err == sql.ErrNoRows {
-			return nil, status.Errorf(codes.NotFound, "user not found")
+		if missingRecord(err) {
+			return nil, status.Error(codes.NotFound, "user not found")
 		}
-		return nil, status.Errorf(codes.Internal, "failed to input Email: %s", err)
+		return nil, status.Error(codes.Internal, "failed to input Email")
 	}
 
 	rsp := &pb.ResetPasswordResponse{

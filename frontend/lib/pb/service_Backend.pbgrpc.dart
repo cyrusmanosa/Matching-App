@@ -207,6 +207,10 @@ class InformationClient extends $grpc.Client {
       '/pb.Information/GetUserID',
       ($14.GetUserIDRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $14.GetUserIDResponse.fromBuffer(value));
+  static final _$logoutUser = $grpc.ClientMethod<$14.GetUserIDRequest, $4.Empty>(
+      '/pb.Information/LogoutUser',
+      ($14.GetUserIDRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $4.Empty.fromBuffer(value));
   static final _$emailResetPassword = $grpc.ClientMethod<$15.ResetPwEmailRequest, $15.ResetPwEmailResponse>(
       '/pb.Information/EmailResetPassword',
       ($15.ResetPwEmailRequest value) => value.writeToBuffer(),
@@ -400,6 +404,10 @@ class InformationClient extends $grpc.Client {
 
   $grpc.ResponseFuture<$14.GetUserIDResponse> getUserID($14.GetUserIDRequest request, {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getUserID, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$4.Empty> logoutUser($14.GetUserIDRequest request, {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$logoutUser, request, options: options);
   }
 
   $grpc.ResponseFuture<$15.ResetPwEmailResponse> emailResetPassword($15.ResetPwEmailRequest request, {$grpc.CallOptions? options}) {

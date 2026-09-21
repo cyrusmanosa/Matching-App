@@ -1,7 +1,6 @@
 package gapi
 
 import (
-	db "Backend/db/sqlc"
 	ch "Backend/db/sqlc/chat"
 
 	"Backend/pb"
@@ -25,8 +24,7 @@ func (server *Server) CreateSocialMedia(ctx context.Context, req *pb.CreateSocia
 
 	creSM, err := server.chatStore.Createsocialmedia(ctx, sm)
 	if err != nil {
-		errCode := db.ErrorCode(err)
-		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "userID not found")
 		}
 		return nil, status.Errorf(codes.Internal, "failed to input table: %s", err)
@@ -55,8 +53,7 @@ func (server *Server) GetSocialMedia(ctx context.Context, req *pb.GetSocialMedia
 
 	Get, err := server.chatStore.Getsocialmedia(ctx, sm)
 	if err != nil {
-		errCode := db.ErrorCode(err)
-		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "userID not found")
 		}
 		return nil, status.Errorf(codes.Internal, "failed to input table: %s", err)
@@ -80,8 +77,7 @@ func (server *Server) UpdateSocialMedia(ctx context.Context, req *pb.UpdateSocia
 
 	creSM, err := server.chatStore.Updatesocialmedia(ctx, sm)
 	if err != nil {
-		errCode := db.ErrorCode(err)
-		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "userID not found")
 		}
 		return nil, status.Errorf(codes.Internal, "failed to input table: %s", err)

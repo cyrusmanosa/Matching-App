@@ -1,7 +1,6 @@
 package gapi
 
 import (
-	db "Backend/db/sqlc"
 	ch "Backend/db/sqlc/chat"
 	"Backend/pb"
 	"context"
@@ -35,8 +34,7 @@ func (server *Server) CreateChatRecord(ctx context.Context, req *pb.CreateChatRe
 
 	chatR, err := server.chatStore.CreateRecord(ctx, chat, tablename)
 	if err != nil {
-		errCode := db.ErrorCode(err)
-		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "table not found %s", tablename)
 		}
 		return nil, status.Errorf(codes.Internal, "failed to input table: %s", err)
@@ -54,12 +52,8 @@ func (server *Server) GetChatRecord(ctx context.Context, req *pb.GetChatRecordRe
 
 	GetC, err := server.chatStore.GetRecord(ctx, req.GetTargetID(), tablename)
 	if err != nil {
-		errCode := db.ErrorCode(err)
-		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "chat record not found")
-		}
-		if err == db.ErrRecordNotFound {
-			return nil, status.Errorf(codes.NotFound, "Not found Record in table")
 		}
 		return nil, status.Errorf(codes.Internal, "failed: %s And tablename %s at targetid %d", err, tablename, req.GetTargetID())
 	}
@@ -76,8 +70,7 @@ func (server *Server) GetTargetID(ctx context.Context, req *pb.GetTargetIDReques
 
 	tid, err := server.chatStore.GetTargetID(ctx, tablename)
 	if err != nil {
-		errCode := db.ErrorCode(err)
-		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "table not found")
 		}
 		return nil, status.Errorf(codes.Internal, "failed to get data: %s", err)
@@ -95,8 +88,7 @@ func (server *Server) GetLastMsg(ctx context.Context, req *pb.GetLastMsgRequest)
 
 	lmsg, err := server.chatStore.GetLastMsg(ctx, req.GetTargetID(), tablename)
 	if err != nil {
-		errCode := db.ErrorCode(err)
-		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "table not found")
 		}
 		return nil, status.Errorf(codes.Internal, "failed to get data: %s", err)
@@ -116,8 +108,7 @@ func (server *Server) GetChatRow(ctx context.Context, req *pb.GetChatRowRequest)
 
 	row, err := server.chatStore.GetChatRow(ctx, tablename)
 	if err != nil {
-		errCode := db.ErrorCode(err)
-		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "table not found")
 		}
 		return nil, status.Errorf(codes.Internal, "failed to get data: %s", err)
@@ -133,8 +124,7 @@ func (server *Server) UpdateRead(ctx context.Context, req *pb.UpdateReadRequest)
 	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
 	err := server.chatStore.UpdateRead(ctx, req.GetTargetID(), tablename)
 	if err != nil {
-		errCode := db.ErrorCode(err)
-		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "table not found")
 		}
 		return nil, status.Errorf(codes.Internal, "failed to update table: %s", err)
@@ -157,8 +147,7 @@ func (server *Server) UpdateChatRecord(ctx context.Context, req *pb.UpdateChatRe
 
 	Updatechat, err := server.chatStore.UpdateRecord(ctx, chat, tablename)
 	if err != nil {
-		errCode := db.ErrorCode(err)
-		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "table not found")
 		}
 		return nil, status.Errorf(codes.Internal, "failed to update table: %s", err)

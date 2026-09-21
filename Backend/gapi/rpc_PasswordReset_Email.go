@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 
-	db "Backend/db/sqlc"
 	info "Backend/db/sqlc/info"
 	"Backend/pb"
 	"Backend/util"
@@ -19,10 +18,10 @@ var resetPasswordEmail string
 func (server *Server) EmailResetPassword(ctx context.Context, req *pb.ResetPwEmailRequest) (*pb.ResetPwEmailResponse, error) {
 	data, err := server.infoStore.LoginAtEmail(ctx, req.GetEmail())
 	if err != nil {
-		return &pb.ResetPwEmailResponse{
-			Link:   "",
-			Status: "no this user",
-		}, err
+		if missingRecord(err) {
+			return &pb.ResetPwEmailResponse{Link: "", Status: "no this user"}, status.Error(codes.NotFound, "user not found")
+		}
+		return &pb.ResetPwEmailResponse{Link: "", Status: "no this user"}, status.Error(codes.Internal, "failed to find user")
 	}
 
 	resetPasswordEmail = data.Email
@@ -40,24 +39,22 @@ func (server *Server) ResetPwEmailConfirm(ctx context.Context, req *pb.ResetPwEm
 	hashedPassword, _ := util.HashPassword(req.GetPassword())
 	data, err := server.infoStore.LoginAtEmail(ctx, resetPasswordEmail)
 	if err != nil {
-		errCode := db.ErrorCode(err)
-		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
-			return &emptypb.Empty{}, status.Errorf(codes.AlreadyExists, err.Error())
+		if missingRecord(err) {
+			return &emptypb.Empty{}, status.Error(codes.NotFound, "user not found")
 		}
-		return &emptypb.Empty{}, status.Errorf(codes.Internal, "failed to reset password: %s", err)
+		return &emptypb.Empty{}, status.Error(codes.Internal, "failed to reset password")
 	}
 
 	arg := info.UpdatePasswordParams{
 		UserID:         data.UserID,
 		HashedPassword: hashedPassword,
 	}
-	_, _ = server.infoStore.UpdatePassword(ctx, arg)
+	_, err = server.infoStore.UpdatePassword(ctx, arg)
 	if err != nil {
-		errCode := db.ErrorCode(err)
-		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
-			return &emptypb.Empty{}, status.Errorf(codes.AlreadyExists, err.Error())
+		if missingRecord(err) {
+			return &emptypb.Empty{}, status.Error(codes.NotFound, "user not found")
 		}
-		return &emptypb.Empty{}, status.Errorf(codes.Internal, "failed to reset password: %s", err)
+		return &emptypb.Empty{}, status.Error(codes.Internal, "failed to reset password")
 	}
 
 	return &emptypb.Empty{}, nil

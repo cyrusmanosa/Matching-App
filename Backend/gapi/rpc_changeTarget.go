@@ -1,32 +1,19 @@
 package gapi
 
 import (
-	db "Backend/db/sqlc"
 	info "Backend/db/sqlc/info"
 	"Backend/pb"
 	"context"
-	"fmt"
 
-	"github.com/google/uuid"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 func (server *Server) CreateChangeTarget(ctx context.Context, req *pb.CreateChangeTargetRequest) (*pb.CreateChangeTargetResponse, error) {
-	Gid, err := uuid.Parse(req.GetSessionID())
+	token, err := server.userFromSession(ctx, req.GetSessionID())
 	if err != nil {
-		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
-	}
-
-	token, err := server.infoStore.GetSession(ctx, Gid)
-	if err != nil {
-		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
-	}
-
-	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
-	if err != nil {
-		return nil, fmt.Errorf("invalid access token: %v", err)
+		return nil, err
 	}
 
 	Ct := info.CreateChangeTargetUserParams{
@@ -43,8 +30,7 @@ func (server *Server) CreateChangeTarget(ctx context.Context, req *pb.CreateChan
 
 	changeTarget, err := server.infoStore.CreateChangeTargetUser(ctx, Ct)
 	if err != nil {
-		errCode := db.ErrorCode(err)
-		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "user not found")
 		}
 		return nil, status.Errorf(codes.Internal, "failed to input UserID: %s", err)
@@ -57,25 +43,14 @@ func (server *Server) CreateChangeTarget(ctx context.Context, req *pb.CreateChan
 }
 
 func (server *Server) GetChangeTarget(ctx context.Context, req *pb.GetChangeTargetRequest) (*pb.GetChangeTargetResponse, error) {
-	Gid, err := uuid.Parse(req.GetSessionID())
+	token, err := server.userFromSession(ctx, req.GetSessionID())
 	if err != nil {
-		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
-	}
-
-	token, err := server.infoStore.GetSession(ctx, Gid)
-	if err != nil {
-		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
-	}
-
-	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
-	if err != nil {
-		return nil, fmt.Errorf("invalid access token: %v", err)
+		return nil, err
 	}
 
 	changeTarget, err := server.infoStore.GetChangeTargetUserList(ctx, token.UserID)
 	if err != nil {
-		errCode := db.ErrorCode(err)
-		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "user not found")
 		}
 		return nil, status.Errorf(codes.Internal, "failed to input UserID: %s", err)
@@ -88,25 +63,14 @@ func (server *Server) GetChangeTarget(ctx context.Context, req *pb.GetChangeTarg
 }
 
 func (server *Server) DeleteChangeTarget(ctx context.Context, req *pb.DeleteChangeTargetRequest) (*emptypb.Empty, error) {
-	Gid, err := uuid.Parse(req.GetSessionID())
+	token, err := server.userFromSession(ctx, req.GetSessionID())
 	if err != nil {
-		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)
-	}
-
-	token, err := server.infoStore.GetSession(ctx, Gid)
-	if err != nil {
-		return nil, status.Errorf(codes.Internal, "authID Error: %s", err)
-	}
-
-	_, err = server.tokenMaker.VerifyToken(token.AccessToken)
-	if err != nil {
-		return nil, fmt.Errorf("invalid access token: %v", err)
+		return nil, err
 	}
 
 	err = server.infoStore.DeleteChangeTargetUser(ctx, token.UserID)
 	if err != nil {
-		errCode := db.ErrorCode(err)
-		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
+		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "user not found")
 		}
 		return nil, status.Errorf(codes.Internal, "failed to input UserID: %s", err)

@@ -1,4 +1,5 @@
 import 'package:dating_your_date/client/grpc_services.dart';
+import 'package:dating_your_date/client/session_auth.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/models/listData.dart';
@@ -61,12 +62,15 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
       if (rsp.resu.len != 0) {
         checkTargetList(context, rsp);
       } else {
-        await showLogoDialog(context, "新しい条件で合わせるパーセントは0%です。", false);
+        await showLogoDialog(context, emptyMatchMessage(rsp.resu.rank), false);
         await Future.delayed(Duration(seconds: 2));
         Navigator.pop(context);
         Navigator.pop(context);
       }
-    } on GrpcError {
+    } on GrpcError catch (error) {
+      if (isUnauthenticated(error)) {
+        return;
+      }
       await showErrorDialog(context, "検索エンジニアリングにエラーがあります。");
       throw Exception("検索エンジニアリングにエラーがあります。");
     }
@@ -130,7 +134,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
               break;
             } else {
               await Future.delayed(Duration(seconds: 1));
-              await showLogoDialog(context, "新しいターゲットも準備しました", false);
+              await showLogoDialog(context, matchReadyMessage(rsp.resu.rank), false);
               await Future.delayed(Duration(seconds: 1));
 
               Navigator.push(
@@ -151,7 +155,10 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
             Navigator.pop(context);
             Navigator.pop(context);
           }
-        } on GrpcError {
+        } on GrpcError catch (error) {
+          if (isUnauthenticated(error)) {
+            return;
+          }
           if (myResponse.tl.target1ID != 0 && myResponse.tl.target2ID != 0 && myResponse.tl.target3ID != 0) {
             Navigator.push(
               context,
@@ -163,7 +170,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
             break;
           } else {
             await Future.delayed(Duration(seconds: 1));
-            await showLogoDialog(context, "新しいターゲットも準備しました", false);
+            await showLogoDialog(context, matchReadyMessage(rsp.resu.rank), false);
             await Future.delayed(Duration(seconds: 1));
             Navigator.push(
               context,

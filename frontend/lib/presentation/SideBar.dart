@@ -26,14 +26,15 @@ class _SideBarState extends State<SideBar> {
   @override
   void initState() {
     super.initState();
-    imgBtn = widget.sm!.image;
-    conBtn = widget.sm!.contact;
-    locaBtn = widget.sm!.location;
-    datBtn = widget.sm!.appointment;
-    snsBtn = widget.sm!.sns;
+    imgBtn = widget.sm?.image ?? false;
+    conBtn = widget.sm?.contact ?? false;
+    locaBtn = widget.sm?.location ?? false;
+    datBtn = widget.sm?.appointment ?? false;
+    snsBtn = widget.sm?.sns ?? false;
   }
 
   void updatesSocialMedia(BuildContext context) async {
+    if (widget.targetId == null) return;
     String? apiKeyU = await globalUserId.read(key: 'UserID');
     final userid = int.tryParse(apiKeyU!);
     final req = UpdateSocialMediaRequest(
@@ -57,13 +58,13 @@ class _SideBarState extends State<SideBar> {
     double mediaW = mediaQueryData.size.width;
     return SizedBox(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 80),
+        padding: EdgeInsets.symmetric(horizontal: mediaW * 0.05, vertical: mediaH * 0.08),
         decoration: BoxDecoration(color: appTheme.pinkA100, borderRadius: BorderRadius.zero),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             // add date
-            Text("2023-11-01から", style: TextStyle(color: appTheme.grey800)),
+            Text("共有したい項目を選んでください", textAlign: TextAlign.center, style: TextStyle(color: appTheme.grey800, fontSize: mediaW * 0.034)),
             SizedBox(height: mediaH / 300),
 
             _buildCheckPointRow(mediaH, mediaW),

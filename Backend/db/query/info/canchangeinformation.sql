@@ -57,7 +57,7 @@ WHERE user_id = $1;
 SELECT * FROM canchangeinformation
 WHERE user_id != $1
     AND (city = $2 OR $2 IS NULL)
-    AND (speaklanguage = $3 OR $3 IS NULL)
+    AND (speaklanguage && $3 OR $3 IS NULL)
     AND (hobby_type = $4 OR $4 IS NULL)
     AND (experience >= $5 OR $5 IS NULL);
 
@@ -65,7 +65,7 @@ WHERE user_id != $1
 -- name: CanChangeSearchAccompany :many
 SELECT * FROM canchangeinformation
 WHERE user_id != $1
-    AND (speaklanguage = $2 OR $2 IS NULL)
+    AND (speaklanguage && $2 OR $2 IS NULL)
     AND (accompany_type = $3 OR $3 IS NULL)
     AND (sociability = $4 OR $4 IS NULL);
 
@@ -74,5 +74,5 @@ WHERE user_id != $1
 SELECT * FROM canchangeinformation
 WHERE user_id != $1  
     AND (sexual = $2 OR $2 IS NULL)
-    AND (speaklanguage = $3 OR $3 IS NULL)
+    AND (speaklanguage && $3 OR $3 IS NULL)
     AND (city = $4 OR $4 IS NULL);

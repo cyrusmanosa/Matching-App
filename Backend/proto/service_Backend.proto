@@ -299,6 +299,12 @@ service Information {
             get: "/v1/Get_UserID"
         };
     }
+    rpc LogoutUser(GetUserIDRequest) returns (google.protobuf.Empty){
+        option (google.api.http) = {
+            post: "/v1/Logout"
+            body: "*"
+        };
+    }
 
     // Reset Password Email
     rpc EmailResetPassword(ResetPwEmailRequest) returns (ResetPwEmailResponse){

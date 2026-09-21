@@ -51,13 +51,18 @@ type InfoQuerier interface {
 	GetUserFixInformation(ctx context.Context, userID int32) (Fixinformation, error)
 	GetUserimageData(ctx context.Context, userID int32) (Image, error)
 	ListAccompany(ctx context.Context) ([]Accompany, error)
+	ListAccompanyCandidates(ctx context.Context, arg ListAccompanyCandidatesParams) ([]AccompanyCandidate, error)
 	ListCanChangeInformation(ctx context.Context) ([]Canchangeinformation, error)
 	ListContact(ctx context.Context) ([]Contact, error)
 	ListFixInformation(ctx context.Context) ([]Fixinformation, error)
 	ListHobby(ctx context.Context) ([]Hobby, error)
+	ListHobbyCandidates(ctx context.Context, arg ListHobbyCandidatesParams) ([]HobbyCandidate, error)
 	ListLover(ctx context.Context) ([]Lover, error)
+	ListLoverCandidates(ctx context.Context, arg ListLoverCandidatesParams) ([]LoverCandidate, error)
 	ListimagesList(ctx context.Context) ([]Image, error)
 	LoginAtEmail(ctx context.Context, email string) (Fixinformation, error)
+	LogoutActiveSessions(ctx context.Context, userID int32) error
+	LogoutSession(ctx context.Context, id uuid.UUID) error
 	TargetUserList(ctx context.Context, arg TargetUserListParams) (Targetlist, error)
 	UpdateAccompany(ctx context.Context, arg UpdateAccompanyParams) (Accompany, error)
 	UpdateHobby(ctx context.Context, arg UpdateHobbyParams) (Hobby, error)

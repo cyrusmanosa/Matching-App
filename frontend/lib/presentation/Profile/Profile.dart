@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dating_your_date/client/grpc_services.dart';
+import 'package:dating_your_date/client/session_auth.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/canChange.pb.dart';
 import 'package:dating_your_date/pb/fix.pb.dart';
@@ -9,6 +10,7 @@ import 'package:dating_your_date/pb/rpc_changeTarget.pb.dart';
 import 'package:dating_your_date/pb/rpc_chatRecord.pb.dart';
 import 'package:dating_your_date/pb/rpc_fix.pb.dart';
 import 'package:dating_your_date/pb/rpc_images.pb.dart';
+import 'package:dating_your_date/pb/rpc_session.pb.dart';
 import 'package:dating_your_date/presentation/Information.dart';
 import 'package:dating_your_date/presentation/InformationEdit.dart';
 import 'package:dating_your_date/widgets/Custom_IconLogoBox.dart';
@@ -65,6 +67,9 @@ class _ProfileState extends State<Profile> {
         changeTime = changeResponse.ct.frequency.toString();
       });
     } on GrpcError catch (e) {
+      if (isUnauthenticated(e)) {
+        return;
+      }
       if (e.code == 13) {
         changeTime = "0";
       } else {
@@ -127,7 +132,10 @@ class _ProfileState extends State<Profile> {
           allMyImg.add(bytes);
         });
       }
-    } on GrpcError {
+    } on GrpcError catch (error) {
+      if (isUnauthenticated(error)) {
+        return;
+      }
       await showErrorDialog(context, "エラー：検証可能な入力データ");
       throw Exception("データの送信中にエラーが発生しました。");
     }
@@ -146,6 +154,9 @@ class _ProfileState extends State<Profile> {
         myFixData = fResponse.fix;
       });
     } on GrpcError catch (e) {
+      if (isUnauthenticated(e)) {
+        return;
+      }
       await showErrorDialog(context, "Error: validatable input UserId in Fixinfo! at $e");
       throw Exception("Error occurred while fetching Fixinfo.");
     }
@@ -157,6 +168,9 @@ class _ProfileState extends State<Profile> {
         cCData = cResponse.canChangeInfo;
       });
     } on GrpcError catch (e) {
+      if (isUnauthenticated(e)) {
+        return;
+      }
       await showErrorDialog(context, "Error: validatable input UserId in Fixinfo! at $e");
       throw Exception("Error occurred while fetching Fixinfo.");
     }
@@ -222,7 +236,10 @@ class _ProfileState extends State<Profile> {
           break;
       }
       await showLogoDialog(context, "アバターも更新しました", true);
-    } on GrpcError {
+    } on GrpcError catch (error) {
+      if (isUnauthenticated(error)) {
+        return;
+      }
       await showErrorDialog(context, "エラー：検証可能な入力データ");
       throw Exception("データの送信中にエラーが発生しました。");
     }
@@ -479,13 +496,7 @@ class _ProfileState extends State<Profile> {
     return Expanded(
       child: Align(
         alignment: Alignment.center,
-        child: GestureDetector(
-          onTap: () async {
-            await globalSession.delete(key: 'SessionId');
-            await globalUserId.delete(key: 'UserId');
-            await globalemail.delete(key: 'email');
-          },
-          child: ProfileButton(
+        child: ProfileButton(
             mediaW: mediaW,
             mediaH: mediaH / 15,
             iconData: Icons.logout_sharp,
@@ -493,8 +504,21 @@ class _ProfileState extends State<Profile> {
             title: "ログアウト",
             width: mediaW,
             padding: true,
+            onTapOverride: (buttonContext) async {
+              final sessionID = await globalSession.read(key: 'SessionId');
+              if (sessionID != null && sessionID.isNotEmpty) {
+                try {
+                  await GrpcInfoService.client.logoutUser(GetUserIDRequest(sessionID: sessionID));
+                } on GrpcError {
+                  // 伺服器已拒絕這次 session 時，仍然清掉本機登入資料。
+                }
+              }
+              await clearLocalLogin();
+              if (buttonContext.mounted) {
+                Navigator.pushNamedAndRemoveUntil(buttonContext, AppRoutes.login, (route) => false);
+              }
+            },
           ),
-        ),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:dating_your_date/client/session_auth.dart';
 import 'package:dating_your_date/pb/service_Backend.pbgrpc.dart';
 // ignore: implementation_imports
 import 'package:grpc/src/client/Http2_channel.dart' as grpc_channel;
@@ -11,7 +12,7 @@ class GrpcInfoService {
     options: ChannelOptions(credentials: ChannelCredentials.insecure()),
   );
 
-  static var client = InformationClient(channel);
+  static var client = InformationClient(channel, interceptors: [SessionAuthInterceptor()]);
 
   static Future<void> shutdown() async {
     await channel.shutdown();
