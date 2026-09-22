@@ -72,7 +72,7 @@ class _InformationState extends State<Information> {
         decoration: BoxDecoration(
           color: Color.fromARGB(255, 233, 233, 233),
           borderRadius: BorderRadiusStyle.r15,
-          boxShadow: [BoxShadow(color: appTheme.grey800.withOpacity(0.4), blurRadius: 5, offset: Offset(0, 4))],
+          boxShadow: [BoxShadow(color: appTheme.grey800.withValues(alpha: 0.4), blurRadius: 5, offset: Offset(0, 4))],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,7 +119,7 @@ class _InformationState extends State<Information> {
         decoration: BoxDecoration(
           color: appTheme.grey100,
           borderRadius: BorderRadiusStyle.r15,
-          boxShadow: [BoxShadow(color: appTheme.grey800.withOpacity(0.4), blurRadius: 5, offset: Offset(0, 4))],
+          boxShadow: [BoxShadow(color: appTheme.grey800.withValues(alpha: 0.4), blurRadius: 5, offset: Offset(0, 4))],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

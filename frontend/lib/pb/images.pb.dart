@@ -73,7 +73,7 @@ class Images extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static Images create() => Images._();
   Images createEmptyInstance() => create();
-  static $pb.PbList<Images> createRepeated() => $pb.PbList<Images>();
+  static $pb.PbList<Images> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static Images getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Images>(create);
   static Images? _defaultInstance;

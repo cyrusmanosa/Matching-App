@@ -75,7 +75,7 @@ class Payment extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static Payment create() => Payment._();
   Payment createEmptyInstance() => create();
-  static $pb.PbList<Payment> createRepeated() => $pb.PbList<Payment>();
+  static $pb.PbList<Payment> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static Payment getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Payment>(create);
   static Payment? _defaultInstance;

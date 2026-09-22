@@ -70,7 +70,7 @@ class ChangeTarget extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static ChangeTarget create() => ChangeTarget._();
   ChangeTarget createEmptyInstance() => create();
-  static $pb.PbList<ChangeTarget> createRepeated() => $pb.PbList<ChangeTarget>();
+  static $pb.PbList<ChangeTarget> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static ChangeTarget getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ChangeTarget>(create);
   static ChangeTarget? _defaultInstance;

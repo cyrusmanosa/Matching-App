@@ -130,7 +130,7 @@ class CanChange extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CanChange create() => CanChange._();
   CanChange createEmptyInstance() => create();
-  static $pb.PbList<CanChange> createRepeated() => $pb.PbList<CanChange>();
+  static $pb.PbList<CanChange> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CanChange getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CanChange>(create);
   static CanChange? _defaultInstance;

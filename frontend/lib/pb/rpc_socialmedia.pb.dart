@@ -80,7 +80,7 @@ class CreateSocialMediaRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CreateSocialMediaRequest create() => CreateSocialMediaRequest._();
   CreateSocialMediaRequest createEmptyInstance() => create();
-  static $pb.PbList<CreateSocialMediaRequest> createRepeated() => $pb.PbList<CreateSocialMediaRequest>();
+  static $pb.PbList<CreateSocialMediaRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CreateSocialMediaRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateSocialMediaRequest>(create);
   static CreateSocialMediaRequest? _defaultInstance;
@@ -184,7 +184,7 @@ class CreateSocialMediaResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CreateSocialMediaResponse create() => CreateSocialMediaResponse._();
   CreateSocialMediaResponse createEmptyInstance() => create();
-  static $pb.PbList<CreateSocialMediaResponse> createRepeated() => $pb.PbList<CreateSocialMediaResponse>();
+  static $pb.PbList<CreateSocialMediaResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CreateSocialMediaResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateSocialMediaResponse>(create);
   static CreateSocialMediaResponse? _defaultInstance;
@@ -266,7 +266,7 @@ class UpdateSocialMediaRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UpdateSocialMediaRequest create() => UpdateSocialMediaRequest._();
   UpdateSocialMediaRequest createEmptyInstance() => create();
-  static $pb.PbList<UpdateSocialMediaRequest> createRepeated() => $pb.PbList<UpdateSocialMediaRequest>();
+  static $pb.PbList<UpdateSocialMediaRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static UpdateSocialMediaRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateSocialMediaRequest>(create);
   static UpdateSocialMediaRequest? _defaultInstance;
@@ -370,7 +370,7 @@ class UpdateSocialMediaResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UpdateSocialMediaResponse create() => UpdateSocialMediaResponse._();
   UpdateSocialMediaResponse createEmptyInstance() => create();
-  static $pb.PbList<UpdateSocialMediaResponse> createRepeated() => $pb.PbList<UpdateSocialMediaResponse>();
+  static $pb.PbList<UpdateSocialMediaResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static UpdateSocialMediaResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateSocialMediaResponse>(create);
   static UpdateSocialMediaResponse? _defaultInstance;
@@ -427,7 +427,7 @@ class GetSocialMediaRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetSocialMediaRequest create() => GetSocialMediaRequest._();
   GetSocialMediaRequest createEmptyInstance() => create();
-  static $pb.PbList<GetSocialMediaRequest> createRepeated() => $pb.PbList<GetSocialMediaRequest>();
+  static $pb.PbList<GetSocialMediaRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetSocialMediaRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetSocialMediaRequest>(create);
   static GetSocialMediaRequest? _defaultInstance;
@@ -486,7 +486,7 @@ class GetSocialMediaResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetSocialMediaResponse create() => GetSocialMediaResponse._();
   GetSocialMediaResponse createEmptyInstance() => create();
-  static $pb.PbList<GetSocialMediaResponse> createRepeated() => $pb.PbList<GetSocialMediaResponse>();
+  static $pb.PbList<GetSocialMediaResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetSocialMediaResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetSocialMediaResponse>(create);
   static GetSocialMediaResponse? _defaultInstance;
@@ -538,7 +538,7 @@ class DeleteSocialMediaRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static DeleteSocialMediaRequest create() => DeleteSocialMediaRequest._();
   DeleteSocialMediaRequest createEmptyInstance() => create();
-  static $pb.PbList<DeleteSocialMediaRequest> createRepeated() => $pb.PbList<DeleteSocialMediaRequest>();
+  static $pb.PbList<DeleteSocialMediaRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static DeleteSocialMediaRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteSocialMediaRequest>(create);
   static DeleteSocialMediaRequest? _defaultInstance;

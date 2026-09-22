@@ -82,6 +82,9 @@ class _LoginState extends State<Login> {
         MaterialPageRoute(builder: (context) => NewPasswordEmailSetup()),
       );
     }
+    if (kIsWeb) {
+      return;
+    }
     uriLinkStream.listen((Uri? uri) {
       if (uri != null) {
         Navigator.push(
@@ -90,6 +93,66 @@ class _LoginState extends State<Login> {
         );
       }
     });
+  }
+
+  bool isEmailValid(String email) {
+    final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+    return emailRegex.hasMatch(email);
+  }
+
+  Future<void> continueWithSns(String provider, String serviceName) async {
+    final emailController = TextEditingController();
+    final email = await showDialog<String>(
+      context: context,
+      builder: (dialogContext) {
+        final size = MediaQuery.of(dialogContext).size;
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
+          title: Text("$serviceNameで続ける", style: TextStyle(fontSize: size.width * 0.045)),
+          content: TextField(
+            controller: emailController,
+            autofocus: true,
+            keyboardType: TextInputType.emailAddress,
+            decoration: const InputDecoration(hintText: "メールアドレス"),
+          ),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(dialogContext), child: const Text("キャンセル")),
+            TextButton(onPressed: () => Navigator.pop(dialogContext, emailController.text.trim()), child: const Text("続ける")),
+          ],
+        );
+      },
+    );
+    emailController.dispose();
+    if (!mounted || email == null) return;
+    if (!isEmailValid(email)) {
+      await showErrorDialog(context, "無効なメールアドレス");
+      return;
+    }
+
+    var loading = false;
+    try {
+      showLoadDialog(context);
+      loading = true;
+      final loginResponse = await GrpcInfoService.client.loginUser(LoginUserRequest(email: email, password: "sns:$provider"));
+      if (!mounted) return;
+      Navigator.pop(context);
+      loading = false;
+      if (loginResponse.sessionsID.isEmpty) {
+        await globalemail.write(key: "email", value: email);
+        Navigator.pushNamed(context, AppRoutes.fixInformation);
+        return;
+      }
+      await globalSession.write(key: "SessionId", value: loginResponse.sessionsID);
+      final useridResponse = await GrpcInfoService.client.getUserID(GetUserIDRequest(sessionID: loginResponse.sessionsID));
+      await globalUserId.write(key: "UserID", value: "${useridResponse.userID}");
+      await globalemail.write(key: "email", value: loginResponse.email);
+      if (!mounted) return;
+      getCanChangeGrpc(context);
+    } on GrpcError {
+      if (!mounted) return;
+      if (loading) Navigator.pop(context);
+      await showErrorDialog(context, "SNSでのログインに失敗しました。");
+    }
   }
 
   void loginGrpcUser(BuildContext context) async {
@@ -268,39 +331,45 @@ class _LoginState extends State<Login> {
 
         // SignUp of Facebook
         CustomElevatedButton(
-          isDisabled: true,
           text: "フェイスブックで続ける",
           leftIcon: Container(
             margin: EdgeInsets.only(left: mediaW / 20, right: mediaW / 15),
-            child: CustomImageView(imagePath: ImageConstant.imgFacebook, width: mediaW / 23, color: Colors.grey),
+            child: CustomImageView(imagePath: ImageConstant.imgFacebook, width: mediaW / 23),
           ),
           buttonStyle: CustomButtonStyles.fillBlue,
+          onPressed: () {
+            continueWithSns("facebook", "Facebook");
+          },
         ),
         SizedBox(height: mediaH / 50),
 
         // SignUp of Twitter
         CustomElevatedButton(
-          isDisabled: true,
           text: "ツイッターで続ける",
           leftIcon: Container(
             margin: EdgeInsets.only(right: mediaW / 15),
-            child: CustomImageView(imagePath: ImageConstant.imgClose, width: mediaW / 14, color: Colors.grey),
+            child: CustomImageView(imagePath: ImageConstant.imgClose, width: mediaW / 14),
           ),
           buttonStyle: CustomButtonStyles.fillDarkgrey,
+          onPressed: () {
+            continueWithSns("twitter", "X");
+          },
         ),
         SizedBox(height: mediaH / 50),
 
         // SignUp of Google
         CustomElevatedButton(
-          isDisabled: true,
           text: "グーグルで続ける",
           leftIcon: Container(
             padding: EdgeInsets.only(top: mediaH / 150),
             margin: EdgeInsets.only(right: mediaW / 13),
-            child: CustomImageView(imagePath: ImageConstant.imgGoogle, width: mediaW / 14, color: Colors.grey),
+            child: CustomImageView(imagePath: ImageConstant.imgGoogle, width: mediaW / 14),
           ),
-          // buttonStyle: CustomButtonStyles.outlineGoogleButton,
-          // buttonTextStyle: theme.textTheme.displaySmall,
+          buttonStyle: CustomButtonStyles.outlineGoogleButton,
+          buttonTextStyle: theme.textTheme.headlineMedium?.copyWith(color: appTheme.black),
+          onPressed: () {
+            continueWithSns("google", "Google");
+          },
         ),
       ],
     );

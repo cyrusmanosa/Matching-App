@@ -48,7 +48,7 @@ class GetUserIDRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetUserIDRequest create() => GetUserIDRequest._();
   GetUserIDRequest createEmptyInstance() => create();
-  static $pb.PbList<GetUserIDRequest> createRepeated() => $pb.PbList<GetUserIDRequest>();
+  static $pb.PbList<GetUserIDRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetUserIDRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUserIDRequest>(create);
   static GetUserIDRequest? _defaultInstance;
@@ -98,7 +98,7 @@ class GetUserIDResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetUserIDResponse create() => GetUserIDResponse._();
   GetUserIDResponse createEmptyInstance() => create();
-  static $pb.PbList<GetUserIDResponse> createRepeated() => $pb.PbList<GetUserIDResponse>();
+  static $pb.PbList<GetUserIDResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetUserIDResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetUserIDResponse>(create);
   static GetUserIDResponse? _defaultInstance;

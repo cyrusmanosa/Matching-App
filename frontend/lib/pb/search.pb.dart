@@ -58,7 +58,7 @@ class sH extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static sH create() => sH._();
   sH createEmptyInstance() => create();
-  static $pb.PbList<sH> createRepeated() => $pb.PbList<sH>();
+  static $pb.PbList<sH> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static sH getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<sH>(create);
   static sH? _defaultInstance;
@@ -130,7 +130,7 @@ class sL extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static sL create() => sL._();
   sL createEmptyInstance() => create();
-  static $pb.PbList<sL> createRepeated() => $pb.PbList<sL>();
+  static $pb.PbList<sL> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static sL getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<sL>(create);
   static sL? _defaultInstance;
@@ -202,7 +202,7 @@ class sA extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static sA create() => sA._();
   sA createEmptyInstance() => create();
-  static $pb.PbList<sA> createRepeated() => $pb.PbList<sA>();
+  static $pb.PbList<sA> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static sA getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<sA>(create);
   static sA? _defaultInstance;

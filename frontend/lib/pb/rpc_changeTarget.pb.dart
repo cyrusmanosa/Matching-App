@@ -61,7 +61,7 @@ class CreateChangeTargetRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CreateChangeTargetRequest create() => CreateChangeTargetRequest._();
   CreateChangeTargetRequest createEmptyInstance() => create();
-  static $pb.PbList<CreateChangeTargetRequest> createRepeated() => $pb.PbList<CreateChangeTargetRequest>();
+  static $pb.PbList<CreateChangeTargetRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CreateChangeTargetRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateChangeTargetRequest>(create);
   static CreateChangeTargetRequest? _defaultInstance;
@@ -129,7 +129,7 @@ class CreateChangeTargetResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CreateChangeTargetResponse create() => CreateChangeTargetResponse._();
   CreateChangeTargetResponse createEmptyInstance() => create();
-  static $pb.PbList<CreateChangeTargetResponse> createRepeated() => $pb.PbList<CreateChangeTargetResponse>();
+  static $pb.PbList<CreateChangeTargetResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CreateChangeTargetResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateChangeTargetResponse>(create);
   static CreateChangeTargetResponse? _defaultInstance;
@@ -182,7 +182,7 @@ class GetChangeTargetRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetChangeTargetRequest create() => GetChangeTargetRequest._();
   GetChangeTargetRequest createEmptyInstance() => create();
-  static $pb.PbList<GetChangeTargetRequest> createRepeated() => $pb.PbList<GetChangeTargetRequest>();
+  static $pb.PbList<GetChangeTargetRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetChangeTargetRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetChangeTargetRequest>(create);
   static GetChangeTargetRequest? _defaultInstance;
@@ -232,7 +232,7 @@ class GetChangeTargetResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetChangeTargetResponse create() => GetChangeTargetResponse._();
   GetChangeTargetResponse createEmptyInstance() => create();
-  static $pb.PbList<GetChangeTargetResponse> createRepeated() => $pb.PbList<GetChangeTargetResponse>();
+  static $pb.PbList<GetChangeTargetResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetChangeTargetResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetChangeTargetResponse>(create);
   static GetChangeTargetResponse? _defaultInstance;
@@ -285,7 +285,7 @@ class DeleteChangeTargetRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static DeleteChangeTargetRequest create() => DeleteChangeTargetRequest._();
   DeleteChangeTargetRequest createEmptyInstance() => create();
-  static $pb.PbList<DeleteChangeTargetRequest> createRepeated() => $pb.PbList<DeleteChangeTargetRequest>();
+  static $pb.PbList<DeleteChangeTargetRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static DeleteChangeTargetRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteChangeTargetRequest>(create);
   static DeleteChangeTargetRequest? _defaultInstance;

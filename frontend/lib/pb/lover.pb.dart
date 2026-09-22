@@ -85,7 +85,7 @@ class Lover extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static Lover create() => Lover._();
   Lover createEmptyInstance() => create();
-  static $pb.PbList<Lover> createRepeated() => $pb.PbList<Lover>();
+  static $pb.PbList<Lover> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static Lover getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Lover>(create);
   static Lover? _defaultInstance;

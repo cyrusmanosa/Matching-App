@@ -126,7 +126,7 @@ class CreateCanChangeRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CreateCanChangeRequest create() => CreateCanChangeRequest._();
   CreateCanChangeRequest createEmptyInstance() => create();
-  static $pb.PbList<CreateCanChangeRequest> createRepeated() => $pb.PbList<CreateCanChangeRequest>();
+  static $pb.PbList<CreateCanChangeRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CreateCanChangeRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateCanChangeRequest>(create);
   static CreateCanChangeRequest? _defaultInstance;
@@ -305,7 +305,7 @@ class CreateCanChangeResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CreateCanChangeResponse create() => CreateCanChangeResponse._();
   CreateCanChangeResponse createEmptyInstance() => create();
-  static $pb.PbList<CreateCanChangeResponse> createRepeated() => $pb.PbList<CreateCanChangeResponse>();
+  static $pb.PbList<CreateCanChangeResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CreateCanChangeResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateCanChangeResponse>(create);
   static CreateCanChangeResponse? _defaultInstance;
@@ -363,7 +363,7 @@ class GetCanChangeRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetCanChangeRequest create() => GetCanChangeRequest._();
   GetCanChangeRequest createEmptyInstance() => create();
-  static $pb.PbList<GetCanChangeRequest> createRepeated() => $pb.PbList<GetCanChangeRequest>();
+  static $pb.PbList<GetCanChangeRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetCanChangeRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetCanChangeRequest>(create);
   static GetCanChangeRequest? _defaultInstance;
@@ -422,7 +422,7 @@ class GetCanChangeResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetCanChangeResponse create() => GetCanChangeResponse._();
   GetCanChangeResponse createEmptyInstance() => create();
-  static $pb.PbList<GetCanChangeResponse> createRepeated() => $pb.PbList<GetCanChangeResponse>();
+  static $pb.PbList<GetCanChangeResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetCanChangeResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetCanChangeResponse>(create);
   static GetCanChangeResponse? _defaultInstance;
@@ -550,7 +550,7 @@ class UpdateCanChangeRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UpdateCanChangeRequest create() => UpdateCanChangeRequest._();
   UpdateCanChangeRequest createEmptyInstance() => create();
-  static $pb.PbList<UpdateCanChangeRequest> createRepeated() => $pb.PbList<UpdateCanChangeRequest>();
+  static $pb.PbList<UpdateCanChangeRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static UpdateCanChangeRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateCanChangeRequest>(create);
   static UpdateCanChangeRequest? _defaultInstance;
@@ -729,7 +729,7 @@ class UpdateCanChangeResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UpdateCanChangeResponse create() => UpdateCanChangeResponse._();
   UpdateCanChangeResponse createEmptyInstance() => create();
-  static $pb.PbList<UpdateCanChangeResponse> createRepeated() => $pb.PbList<UpdateCanChangeResponse>();
+  static $pb.PbList<UpdateCanChangeResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static UpdateCanChangeResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateCanChangeResponse>(create);
   static UpdateCanChangeResponse? _defaultInstance;
@@ -782,7 +782,7 @@ class DeleteCanChangeRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static DeleteCanChangeRequest create() => DeleteCanChangeRequest._();
   DeleteCanChangeRequest createEmptyInstance() => create();
-  static $pb.PbList<DeleteCanChangeRequest> createRepeated() => $pb.PbList<DeleteCanChangeRequest>();
+  static $pb.PbList<DeleteCanChangeRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static DeleteCanChangeRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteCanChangeRequest>(create);
   static DeleteCanChangeRequest? _defaultInstance;

@@ -70,7 +70,7 @@ class ChatRecordNoID extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static ChatRecordNoID create() => ChatRecordNoID._();
   ChatRecordNoID createEmptyInstance() => create();
-  static $pb.PbList<ChatRecordNoID> createRepeated() => $pb.PbList<ChatRecordNoID>();
+  static $pb.PbList<ChatRecordNoID> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static ChatRecordNoID getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ChatRecordNoID>(create);
   static ChatRecordNoID? _defaultInstance;

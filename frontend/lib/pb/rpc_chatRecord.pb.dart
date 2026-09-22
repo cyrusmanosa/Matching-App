@@ -53,7 +53,7 @@ class CreateChatTableRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CreateChatTableRequest create() => CreateChatTableRequest._();
   CreateChatTableRequest createEmptyInstance() => create();
-  static $pb.PbList<CreateChatTableRequest> createRepeated() => $pb.PbList<CreateChatTableRequest>();
+  static $pb.PbList<CreateChatTableRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CreateChatTableRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateChatTableRequest>(create);
   static CreateChatTableRequest? _defaultInstance;
@@ -124,7 +124,7 @@ class CreateChatRecordRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CreateChatRecordRequest create() => CreateChatRecordRequest._();
   CreateChatRecordRequest createEmptyInstance() => create();
-  static $pb.PbList<CreateChatRecordRequest> createRepeated() => $pb.PbList<CreateChatRecordRequest>();
+  static $pb.PbList<CreateChatRecordRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CreateChatRecordRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateChatRecordRequest>(create);
   static CreateChatRecordRequest? _defaultInstance;
@@ -210,7 +210,7 @@ class CreateChatRecordResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CreateChatRecordResponse create() => CreateChatRecordResponse._();
   CreateChatRecordResponse createEmptyInstance() => create();
-  static $pb.PbList<CreateChatRecordResponse> createRepeated() => $pb.PbList<CreateChatRecordResponse>();
+  static $pb.PbList<CreateChatRecordResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CreateChatRecordResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateChatRecordResponse>(create);
   static CreateChatRecordResponse? _defaultInstance;
@@ -268,7 +268,7 @@ class GetChatRecordRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetChatRecordRequest create() => GetChatRecordRequest._();
   GetChatRecordRequest createEmptyInstance() => create();
-  static $pb.PbList<GetChatRecordRequest> createRepeated() => $pb.PbList<GetChatRecordRequest>();
+  static $pb.PbList<GetChatRecordRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetChatRecordRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetChatRecordRequest>(create);
   static GetChatRecordRequest? _defaultInstance;
@@ -327,7 +327,7 @@ class GetChatRecordResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetChatRecordResponse create() => GetChatRecordResponse._();
   GetChatRecordResponse createEmptyInstance() => create();
-  static $pb.PbList<GetChatRecordResponse> createRepeated() => $pb.PbList<GetChatRecordResponse>();
+  static $pb.PbList<GetChatRecordResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetChatRecordResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetChatRecordResponse>(create);
   static GetChatRecordResponse? _defaultInstance;
@@ -372,7 +372,7 @@ class GetTargetIDRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetTargetIDRequest create() => GetTargetIDRequest._();
   GetTargetIDRequest createEmptyInstance() => create();
-  static $pb.PbList<GetTargetIDRequest> createRepeated() => $pb.PbList<GetTargetIDRequest>();
+  static $pb.PbList<GetTargetIDRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetTargetIDRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetTargetIDRequest>(create);
   static GetTargetIDRequest? _defaultInstance;
@@ -422,7 +422,7 @@ class GetTargetIDResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetTargetIDResponse create() => GetTargetIDResponse._();
   GetTargetIDResponse createEmptyInstance() => create();
-  static $pb.PbList<GetTargetIDResponse> createRepeated() => $pb.PbList<GetTargetIDResponse>();
+  static $pb.PbList<GetTargetIDResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetTargetIDResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetTargetIDResponse>(create);
   static GetTargetIDResponse? _defaultInstance;
@@ -472,7 +472,7 @@ class GetLastMsgRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetLastMsgRequest create() => GetLastMsgRequest._();
   GetLastMsgRequest createEmptyInstance() => create();
-  static $pb.PbList<GetLastMsgRequest> createRepeated() => $pb.PbList<GetLastMsgRequest>();
+  static $pb.PbList<GetLastMsgRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetLastMsgRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetLastMsgRequest>(create);
   static GetLastMsgRequest? _defaultInstance;
@@ -541,7 +541,7 @@ class GetLastMsgResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetLastMsgResponse create() => GetLastMsgResponse._();
   GetLastMsgResponse createEmptyInstance() => create();
-  static $pb.PbList<GetLastMsgResponse> createRepeated() => $pb.PbList<GetLastMsgResponse>();
+  static $pb.PbList<GetLastMsgResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetLastMsgResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetLastMsgResponse>(create);
   static GetLastMsgResponse? _defaultInstance;
@@ -609,7 +609,7 @@ class GetChatRowRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetChatRowRequest create() => GetChatRowRequest._();
   GetChatRowRequest createEmptyInstance() => create();
-  static $pb.PbList<GetChatRowRequest> createRepeated() => $pb.PbList<GetChatRowRequest>();
+  static $pb.PbList<GetChatRowRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetChatRowRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetChatRowRequest>(create);
   static GetChatRowRequest? _defaultInstance;
@@ -659,7 +659,7 @@ class GetChatRowResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetChatRowResponse create() => GetChatRowResponse._();
   GetChatRowResponse createEmptyInstance() => create();
-  static $pb.PbList<GetChatRowResponse> createRepeated() => $pb.PbList<GetChatRowResponse>();
+  static $pb.PbList<GetChatRowResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetChatRowResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetChatRowResponse>(create);
   static GetChatRowResponse? _defaultInstance;
@@ -735,7 +735,7 @@ class UpdateChatRecordRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UpdateChatRecordRequest create() => UpdateChatRecordRequest._();
   UpdateChatRecordRequest createEmptyInstance() => create();
-  static $pb.PbList<UpdateChatRecordRequest> createRepeated() => $pb.PbList<UpdateChatRecordRequest>();
+  static $pb.PbList<UpdateChatRecordRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static UpdateChatRecordRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateChatRecordRequest>(create);
   static UpdateChatRecordRequest? _defaultInstance;
@@ -832,7 +832,7 @@ class UpdateChatRecordResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UpdateChatRecordResponse create() => UpdateChatRecordResponse._();
   UpdateChatRecordResponse createEmptyInstance() => create();
-  static $pb.PbList<UpdateChatRecordResponse> createRepeated() => $pb.PbList<UpdateChatRecordResponse>();
+  static $pb.PbList<UpdateChatRecordResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static UpdateChatRecordResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateChatRecordResponse>(create);
   static UpdateChatRecordResponse? _defaultInstance;
@@ -889,7 +889,7 @@ class UpdateReadRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UpdateReadRequest create() => UpdateReadRequest._();
   UpdateReadRequest createEmptyInstance() => create();
-  static $pb.PbList<UpdateReadRequest> createRepeated() => $pb.PbList<UpdateReadRequest>();
+  static $pb.PbList<UpdateReadRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static UpdateReadRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateReadRequest>(create);
   static UpdateReadRequest? _defaultInstance;
@@ -949,7 +949,7 @@ class DeleteChatTableRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static DeleteChatTableRequest create() => DeleteChatTableRequest._();
   DeleteChatTableRequest createEmptyInstance() => create();
-  static $pb.PbList<DeleteChatTableRequest> createRepeated() => $pb.PbList<DeleteChatTableRequest>();
+  static $pb.PbList<DeleteChatTableRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static DeleteChatTableRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteChatTableRequest>(create);
   static DeleteChatTableRequest? _defaultInstance;

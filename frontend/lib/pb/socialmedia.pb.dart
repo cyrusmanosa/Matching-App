@@ -78,7 +78,7 @@ class SocialMedia extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static SocialMedia create() => SocialMedia._();
   SocialMedia createEmptyInstance() => create();
-  static $pb.PbList<SocialMedia> createRepeated() => $pb.PbList<SocialMedia>();
+  static $pb.PbList<SocialMedia> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static SocialMedia getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SocialMedia>(create);
   static SocialMedia? _defaultInstance;

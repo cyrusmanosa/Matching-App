@@ -81,7 +81,7 @@ class CreateHobbyRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CreateHobbyRequest create() => CreateHobbyRequest._();
   CreateHobbyRequest createEmptyInstance() => create();
-  static $pb.PbList<CreateHobbyRequest> createRepeated() => $pb.PbList<CreateHobbyRequest>();
+  static $pb.PbList<CreateHobbyRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CreateHobbyRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateHobbyRequest>(create);
   static CreateHobbyRequest? _defaultInstance;
@@ -173,7 +173,7 @@ class CreateHobbyResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CreateHobbyResponse create() => CreateHobbyResponse._();
   CreateHobbyResponse createEmptyInstance() => create();
-  static $pb.PbList<CreateHobbyResponse> createRepeated() => $pb.PbList<CreateHobbyResponse>();
+  static $pb.PbList<CreateHobbyResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CreateHobbyResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateHobbyResponse>(create);
   static CreateHobbyResponse? _defaultInstance;
@@ -226,7 +226,7 @@ class GetHobbyRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetHobbyRequest create() => GetHobbyRequest._();
   GetHobbyRequest createEmptyInstance() => create();
-  static $pb.PbList<GetHobbyRequest> createRepeated() => $pb.PbList<GetHobbyRequest>();
+  static $pb.PbList<GetHobbyRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetHobbyRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetHobbyRequest>(create);
   static GetHobbyRequest? _defaultInstance;
@@ -276,7 +276,7 @@ class GetHobbyResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetHobbyResponse create() => GetHobbyResponse._();
   GetHobbyResponse createEmptyInstance() => create();
-  static $pb.PbList<GetHobbyResponse> createRepeated() => $pb.PbList<GetHobbyResponse>();
+  static $pb.PbList<GetHobbyResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetHobbyResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetHobbyResponse>(create);
   static GetHobbyResponse? _defaultInstance;
@@ -359,7 +359,7 @@ class UpdateHobbyRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UpdateHobbyRequest create() => UpdateHobbyRequest._();
   UpdateHobbyRequest createEmptyInstance() => create();
-  static $pb.PbList<UpdateHobbyRequest> createRepeated() => $pb.PbList<UpdateHobbyRequest>();
+  static $pb.PbList<UpdateHobbyRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static UpdateHobbyRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateHobbyRequest>(create);
   static UpdateHobbyRequest? _defaultInstance;
@@ -451,7 +451,7 @@ class UpdateHobbyResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UpdateHobbyResponse create() => UpdateHobbyResponse._();
   UpdateHobbyResponse createEmptyInstance() => create();
-  static $pb.PbList<UpdateHobbyResponse> createRepeated() => $pb.PbList<UpdateHobbyResponse>();
+  static $pb.PbList<UpdateHobbyResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static UpdateHobbyResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateHobbyResponse>(create);
   static UpdateHobbyResponse? _defaultInstance;
@@ -504,7 +504,7 @@ class DeleteHobbyRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static DeleteHobbyRequest create() => DeleteHobbyRequest._();
   DeleteHobbyRequest createEmptyInstance() => create();
-  static $pb.PbList<DeleteHobbyRequest> createRepeated() => $pb.PbList<DeleteHobbyRequest>();
+  static $pb.PbList<DeleteHobbyRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static DeleteHobbyRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteHobbyRequest>(create);
   static DeleteHobbyRequest? _defaultInstance;

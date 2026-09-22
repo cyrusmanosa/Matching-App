@@ -48,7 +48,7 @@ class CheckEmailRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CheckEmailRequest create() => CheckEmailRequest._();
   CheckEmailRequest createEmptyInstance() => create();
-  static $pb.PbList<CheckEmailRequest> createRepeated() => $pb.PbList<CheckEmailRequest>();
+  static $pb.PbList<CheckEmailRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CheckEmailRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CheckEmailRequest>(create);
   static CheckEmailRequest? _defaultInstance;
@@ -103,7 +103,7 @@ class CheckEmailResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CheckEmailResponse create() => CheckEmailResponse._();
   CheckEmailResponse createEmptyInstance() => create();
-  static $pb.PbList<CheckEmailResponse> createRepeated() => $pb.PbList<CheckEmailResponse>();
+  static $pb.PbList<CheckEmailResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CheckEmailResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CheckEmailResponse>(create);
   static CheckEmailResponse? _defaultInstance;
@@ -162,7 +162,7 @@ class SendEmailRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static SendEmailRequest create() => SendEmailRequest._();
   SendEmailRequest createEmptyInstance() => create();
-  static $pb.PbList<SendEmailRequest> createRepeated() => $pb.PbList<SendEmailRequest>();
+  static $pb.PbList<SendEmailRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static SendEmailRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SendEmailRequest>(create);
   static SendEmailRequest? _defaultInstance;
@@ -217,7 +217,7 @@ class CheckedEmailResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CheckedEmailResponse create() => CheckedEmailResponse._();
   CheckedEmailResponse createEmptyInstance() => create();
-  static $pb.PbList<CheckedEmailResponse> createRepeated() => $pb.PbList<CheckedEmailResponse>();
+  static $pb.PbList<CheckedEmailResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CheckedEmailResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CheckedEmailResponse>(create);
   static CheckedEmailResponse? _defaultInstance;

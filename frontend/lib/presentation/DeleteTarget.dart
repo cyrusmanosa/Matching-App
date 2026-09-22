@@ -216,7 +216,7 @@ class _DeleteTargetState extends State<DeleteTarget> {
         decoration: BoxDecoration(
           borderRadius: BorderRadiusStyle.r30,
           image: DecorationImage(image: MemoryImage(icon[index]), fit: BoxFit.cover),
-          boxShadow: isSelectedList[index] ? [BoxShadow(color: appTheme.red.withOpacity(1), blurRadius: 5, spreadRadius: 5)] : [],
+          boxShadow: isSelectedList[index] ? [BoxShadow(color: appTheme.red.withValues(alpha: 1), blurRadius: 5, spreadRadius: 5)] : [],
         ),
       ),
     );

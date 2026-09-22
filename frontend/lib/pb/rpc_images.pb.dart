@@ -76,7 +76,7 @@ class CreateImagesRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CreateImagesRequest create() => CreateImagesRequest._();
   CreateImagesRequest createEmptyInstance() => create();
-  static $pb.PbList<CreateImagesRequest> createRepeated() => $pb.PbList<CreateImagesRequest>();
+  static $pb.PbList<CreateImagesRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CreateImagesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateImagesRequest>(create);
   static CreateImagesRequest? _defaultInstance;
@@ -171,7 +171,7 @@ class CreateImagesResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CreateImagesResponse create() => CreateImagesResponse._();
   CreateImagesResponse createEmptyInstance() => create();
-  static $pb.PbList<CreateImagesResponse> createRepeated() => $pb.PbList<CreateImagesResponse>();
+  static $pb.PbList<CreateImagesResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CreateImagesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateImagesResponse>(create);
   static CreateImagesResponse? _defaultInstance;
@@ -229,7 +229,7 @@ class GetImagesRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetImagesRequest create() => GetImagesRequest._();
   GetImagesRequest createEmptyInstance() => create();
-  static $pb.PbList<GetImagesRequest> createRepeated() => $pb.PbList<GetImagesRequest>();
+  static $pb.PbList<GetImagesRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetImagesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetImagesRequest>(create);
   static GetImagesRequest? _defaultInstance;
@@ -288,7 +288,7 @@ class GetImagesResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetImagesResponse create() => GetImagesResponse._();
   GetImagesResponse createEmptyInstance() => create();
-  static $pb.PbList<GetImagesResponse> createRepeated() => $pb.PbList<GetImagesResponse>();
+  static $pb.PbList<GetImagesResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetImagesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetImagesResponse>(create);
   static GetImagesResponse? _defaultInstance;
@@ -366,7 +366,7 @@ class UpdateImagesRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UpdateImagesRequest create() => UpdateImagesRequest._();
   UpdateImagesRequest createEmptyInstance() => create();
-  static $pb.PbList<UpdateImagesRequest> createRepeated() => $pb.PbList<UpdateImagesRequest>();
+  static $pb.PbList<UpdateImagesRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static UpdateImagesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateImagesRequest>(create);
   static UpdateImagesRequest? _defaultInstance;
@@ -461,7 +461,7 @@ class UpdateImagesResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UpdateImagesResponse create() => UpdateImagesResponse._();
   UpdateImagesResponse createEmptyInstance() => create();
-  static $pb.PbList<UpdateImagesResponse> createRepeated() => $pb.PbList<UpdateImagesResponse>();
+  static $pb.PbList<UpdateImagesResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static UpdateImagesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateImagesResponse>(create);
   static UpdateImagesResponse? _defaultInstance;
@@ -514,7 +514,7 @@ class DeleteImagesRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static DeleteImagesRequest create() => DeleteImagesRequest._();
   DeleteImagesRequest createEmptyInstance() => create();
-  static $pb.PbList<DeleteImagesRequest> createRepeated() => $pb.PbList<DeleteImagesRequest>();
+  static $pb.PbList<DeleteImagesRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static DeleteImagesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteImagesRequest>(create);
   static DeleteImagesRequest? _defaultInstance;
@@ -564,7 +564,7 @@ class DeleteResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static DeleteResponse create() => DeleteResponse._();
   DeleteResponse createEmptyInstance() => create();
-  static $pb.PbList<DeleteResponse> createRepeated() => $pb.PbList<DeleteResponse>();
+  static $pb.PbList<DeleteResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static DeleteResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteResponse>(create);
   static DeleteResponse? _defaultInstance;

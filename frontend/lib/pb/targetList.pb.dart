@@ -85,7 +85,7 @@ class Targetlist extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static Targetlist create() => Targetlist._();
   Targetlist createEmptyInstance() => create();
-  static $pb.PbList<Targetlist> createRepeated() => $pb.PbList<Targetlist>();
+  static $pb.PbList<Targetlist> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static Targetlist getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Targetlist>(create);
   static Targetlist? _defaultInstance;

@@ -55,7 +55,7 @@ class LoginUserRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static LoginUserRequest create() => LoginUserRequest._();
   LoginUserRequest createEmptyInstance() => create();
-  static $pb.PbList<LoginUserRequest> createRepeated() => $pb.PbList<LoginUserRequest>();
+  static $pb.PbList<LoginUserRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static LoginUserRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LoginUserRequest>(create);
   static LoginUserRequest? _defaultInstance;
@@ -124,7 +124,7 @@ class LoginUserResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static LoginUserResponse create() => LoginUserResponse._();
   LoginUserResponse createEmptyInstance() => create();
-  static $pb.PbList<LoginUserResponse> createRepeated() => $pb.PbList<LoginUserResponse>();
+  static $pb.PbList<LoginUserResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static LoginUserResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LoginUserResponse>(create);
   static LoginUserResponse? _defaultInstance;

@@ -85,7 +85,7 @@ class Hobby extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static Hobby create() => Hobby._();
   Hobby createEmptyInstance() => create();
-  static $pb.PbList<Hobby> createRepeated() => $pb.PbList<Hobby>();
+  static $pb.PbList<Hobby> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static Hobby getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Hobby>(create);
   static Hobby? _defaultInstance;

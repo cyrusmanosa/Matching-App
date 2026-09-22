@@ -75,7 +75,7 @@ class Accompany extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static Accompany create() => Accompany._();
   Accompany createEmptyInstance() => create();
-  static $pb.PbList<Accompany> createRepeated() => $pb.PbList<Accompany>();
+  static $pb.PbList<Accompany> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static Accompany getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Accompany>(create);
   static Accompany? _defaultInstance;

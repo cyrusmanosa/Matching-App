@@ -55,7 +55,7 @@ class InputPasswordRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static InputPasswordRequest create() => InputPasswordRequest._();
   InputPasswordRequest createEmptyInstance() => create();
-  static $pb.PbList<InputPasswordRequest> createRepeated() => $pb.PbList<InputPasswordRequest>();
+  static $pb.PbList<InputPasswordRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static InputPasswordRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<InputPasswordRequest>(create);
   static InputPasswordRequest? _defaultInstance;
@@ -119,7 +119,7 @@ class InputPasswordResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static InputPasswordResponse create() => InputPasswordResponse._();
   InputPasswordResponse createEmptyInstance() => create();
-  static $pb.PbList<InputPasswordResponse> createRepeated() => $pb.PbList<InputPasswordResponse>();
+  static $pb.PbList<InputPasswordResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static InputPasswordResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<InputPasswordResponse>(create);
   static InputPasswordResponse? _defaultInstance;
@@ -185,7 +185,7 @@ class ResetPasswordRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static ResetPasswordRequest create() => ResetPasswordRequest._();
   ResetPasswordRequest createEmptyInstance() => create();
-  static $pb.PbList<ResetPasswordRequest> createRepeated() => $pb.PbList<ResetPasswordRequest>();
+  static $pb.PbList<ResetPasswordRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static ResetPasswordRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResetPasswordRequest>(create);
   static ResetPasswordRequest? _defaultInstance;
@@ -249,7 +249,7 @@ class ResetPasswordResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static ResetPasswordResponse create() => ResetPasswordResponse._();
   ResetPasswordResponse createEmptyInstance() => create();
-  static $pb.PbList<ResetPasswordResponse> createRepeated() => $pb.PbList<ResetPasswordResponse>();
+  static $pb.PbList<ResetPasswordResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static ResetPasswordResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResetPasswordResponse>(create);
   static ResetPasswordResponse? _defaultInstance;

@@ -77,7 +77,7 @@ class CreateFixRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CreateFixRequest create() => CreateFixRequest._();
   CreateFixRequest createEmptyInstance() => create();
-  static $pb.PbList<CreateFixRequest> createRepeated() => $pb.PbList<CreateFixRequest>();
+  static $pb.PbList<CreateFixRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CreateFixRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateFixRequest>(create);
   static CreateFixRequest? _defaultInstance;
@@ -187,7 +187,7 @@ class CreateFixResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CreateFixResponse create() => CreateFixResponse._();
   CreateFixResponse createEmptyInstance() => create();
-  static $pb.PbList<CreateFixResponse> createRepeated() => $pb.PbList<CreateFixResponse>();
+  static $pb.PbList<CreateFixResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CreateFixResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateFixResponse>(create);
   static CreateFixResponse? _defaultInstance;
@@ -274,7 +274,7 @@ class GetFixRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetFixRequest create() => GetFixRequest._();
   GetFixRequest createEmptyInstance() => create();
-  static $pb.PbList<GetFixRequest> createRepeated() => $pb.PbList<GetFixRequest>();
+  static $pb.PbList<GetFixRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetFixRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetFixRequest>(create);
   static GetFixRequest? _defaultInstance;
@@ -333,7 +333,7 @@ class GetFixResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetFixResponse create() => GetFixResponse._();
   GetFixResponse createEmptyInstance() => create();
-  static $pb.PbList<GetFixResponse> createRepeated() => $pb.PbList<GetFixResponse>();
+  static $pb.PbList<GetFixResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetFixResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetFixResponse>(create);
   static GetFixResponse? _defaultInstance;
@@ -386,7 +386,7 @@ class DeleteFixRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static DeleteFixRequest create() => DeleteFixRequest._();
   DeleteFixRequest createEmptyInstance() => create();
-  static $pb.PbList<DeleteFixRequest> createRepeated() => $pb.PbList<DeleteFixRequest>();
+  static $pb.PbList<DeleteFixRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static DeleteFixRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteFixRequest>(create);
   static DeleteFixRequest? _defaultInstance;

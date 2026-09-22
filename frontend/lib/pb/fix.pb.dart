@@ -95,7 +95,7 @@ class Fix extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static Fix create() => Fix._();
   Fix createEmptyInstance() => create();
-  static $pb.PbList<Fix> createRepeated() => $pb.PbList<Fix>();
+  static $pb.PbList<Fix> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static Fix getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Fix>(create);
   static Fix? _defaultInstance;

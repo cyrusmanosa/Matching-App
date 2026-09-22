@@ -48,7 +48,7 @@ class ResetPwEmailRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static ResetPwEmailRequest create() => ResetPwEmailRequest._();
   ResetPwEmailRequest createEmptyInstance() => create();
-  static $pb.PbList<ResetPwEmailRequest> createRepeated() => $pb.PbList<ResetPwEmailRequest>();
+  static $pb.PbList<ResetPwEmailRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static ResetPwEmailRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResetPwEmailRequest>(create);
   static ResetPwEmailRequest? _defaultInstance;
@@ -103,7 +103,7 @@ class ResetPwEmailResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static ResetPwEmailResponse create() => ResetPwEmailResponse._();
   ResetPwEmailResponse createEmptyInstance() => create();
-  static $pb.PbList<ResetPwEmailResponse> createRepeated() => $pb.PbList<ResetPwEmailResponse>();
+  static $pb.PbList<ResetPwEmailResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static ResetPwEmailResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResetPwEmailResponse>(create);
   static ResetPwEmailResponse? _defaultInstance;
@@ -167,7 +167,7 @@ class ResetPwEmailConfirmRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static ResetPwEmailConfirmRequest create() => ResetPwEmailConfirmRequest._();
   ResetPwEmailConfirmRequest createEmptyInstance() => create();
-  static $pb.PbList<ResetPwEmailConfirmRequest> createRepeated() => $pb.PbList<ResetPwEmailConfirmRequest>();
+  static $pb.PbList<ResetPwEmailConfirmRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static ResetPwEmailConfirmRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResetPwEmailConfirmRequest>(create);
   static ResetPwEmailConfirmRequest? _defaultInstance;

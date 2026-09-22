@@ -78,7 +78,7 @@ class CustomDropDownBar extends StatelessWidget {
           child: DropdownButtonFormField(
             borderRadius: BorderRadiusStyle.r15,
             decoration: decoration,
-            value: value,
+            initialValue: value,
             items: itemArray!.toSet().map((option) {
               return DropdownMenuItem(value: option, child: Text(option));
             }).toList(),

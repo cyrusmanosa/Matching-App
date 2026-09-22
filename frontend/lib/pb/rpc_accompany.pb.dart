@@ -71,7 +71,7 @@ class CreateAccompanyRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CreateAccompanyRequest create() => CreateAccompanyRequest._();
   CreateAccompanyRequest createEmptyInstance() => create();
-  static $pb.PbList<CreateAccompanyRequest> createRepeated() => $pb.PbList<CreateAccompanyRequest>();
+  static $pb.PbList<CreateAccompanyRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CreateAccompanyRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateAccompanyRequest>(create);
   static CreateAccompanyRequest? _defaultInstance;
@@ -151,7 +151,7 @@ class CreateAccompanyResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CreateAccompanyResponse create() => CreateAccompanyResponse._();
   CreateAccompanyResponse createEmptyInstance() => create();
-  static $pb.PbList<CreateAccompanyResponse> createRepeated() => $pb.PbList<CreateAccompanyResponse>();
+  static $pb.PbList<CreateAccompanyResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CreateAccompanyResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateAccompanyResponse>(create);
   static CreateAccompanyResponse? _defaultInstance;
@@ -204,7 +204,7 @@ class GetAccompanyRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetAccompanyRequest create() => GetAccompanyRequest._();
   GetAccompanyRequest createEmptyInstance() => create();
-  static $pb.PbList<GetAccompanyRequest> createRepeated() => $pb.PbList<GetAccompanyRequest>();
+  static $pb.PbList<GetAccompanyRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetAccompanyRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetAccompanyRequest>(create);
   static GetAccompanyRequest? _defaultInstance;
@@ -254,7 +254,7 @@ class GetAccompanyResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetAccompanyResponse create() => GetAccompanyResponse._();
   GetAccompanyResponse createEmptyInstance() => create();
-  static $pb.PbList<GetAccompanyResponse> createRepeated() => $pb.PbList<GetAccompanyResponse>();
+  static $pb.PbList<GetAccompanyResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetAccompanyResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetAccompanyResponse>(create);
   static GetAccompanyResponse? _defaultInstance;
@@ -327,7 +327,7 @@ class UpdateAccompanyRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UpdateAccompanyRequest create() => UpdateAccompanyRequest._();
   UpdateAccompanyRequest createEmptyInstance() => create();
-  static $pb.PbList<UpdateAccompanyRequest> createRepeated() => $pb.PbList<UpdateAccompanyRequest>();
+  static $pb.PbList<UpdateAccompanyRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static UpdateAccompanyRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateAccompanyRequest>(create);
   static UpdateAccompanyRequest? _defaultInstance;
@@ -407,7 +407,7 @@ class UpdateAccompanyResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UpdateAccompanyResponse create() => UpdateAccompanyResponse._();
   UpdateAccompanyResponse createEmptyInstance() => create();
-  static $pb.PbList<UpdateAccompanyResponse> createRepeated() => $pb.PbList<UpdateAccompanyResponse>();
+  static $pb.PbList<UpdateAccompanyResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static UpdateAccompanyResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateAccompanyResponse>(create);
   static UpdateAccompanyResponse? _defaultInstance;
@@ -460,7 +460,7 @@ class DeleteAccompanyRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static DeleteAccompanyRequest create() => DeleteAccompanyRequest._();
   DeleteAccompanyRequest createEmptyInstance() => create();
-  static $pb.PbList<DeleteAccompanyRequest> createRepeated() => $pb.PbList<DeleteAccompanyRequest>();
+  static $pb.PbList<DeleteAccompanyRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static DeleteAccompanyRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteAccompanyRequest>(create);
   static DeleteAccompanyRequest? _defaultInstance;

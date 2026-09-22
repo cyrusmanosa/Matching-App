@@ -66,7 +66,7 @@ class CreateContactRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CreateContactRequest create() => CreateContactRequest._();
   CreateContactRequest createEmptyInstance() => create();
-  static $pb.PbList<CreateContactRequest> createRepeated() => $pb.PbList<CreateContactRequest>();
+  static $pb.PbList<CreateContactRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CreateContactRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateContactRequest>(create);
   static CreateContactRequest? _defaultInstance;
@@ -143,7 +143,7 @@ class CreateContactResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CreateContactResponse create() => CreateContactResponse._();
   CreateContactResponse createEmptyInstance() => create();
-  static $pb.PbList<CreateContactResponse> createRepeated() => $pb.PbList<CreateContactResponse>();
+  static $pb.PbList<CreateContactResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CreateContactResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateContactResponse>(create);
   static CreateContactResponse? _defaultInstance;
@@ -201,7 +201,7 @@ class GetContactRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetContactRequest create() => GetContactRequest._();
   GetContactRequest createEmptyInstance() => create();
-  static $pb.PbList<GetContactRequest> createRepeated() => $pb.PbList<GetContactRequest>();
+  static $pb.PbList<GetContactRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetContactRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetContactRequest>(create);
   static GetContactRequest? _defaultInstance;
@@ -260,7 +260,7 @@ class GetContactResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetContactResponse create() => GetContactResponse._();
   GetContactResponse createEmptyInstance() => create();
-  static $pb.PbList<GetContactResponse> createRepeated() => $pb.PbList<GetContactResponse>();
+  static $pb.PbList<GetContactResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetContactResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetContactResponse>(create);
   static GetContactResponse? _defaultInstance;
@@ -333,7 +333,7 @@ class UpdateContactRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UpdateContactRequest create() => UpdateContactRequest._();
   UpdateContactRequest createEmptyInstance() => create();
-  static $pb.PbList<UpdateContactRequest> createRepeated() => $pb.PbList<UpdateContactRequest>();
+  static $pb.PbList<UpdateContactRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static UpdateContactRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateContactRequest>(create);
   static UpdateContactRequest? _defaultInstance;
@@ -419,7 +419,7 @@ class UpdateContactResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UpdateContactResponse create() => UpdateContactResponse._();
   UpdateContactResponse createEmptyInstance() => create();
-  static $pb.PbList<UpdateContactResponse> createRepeated() => $pb.PbList<UpdateContactResponse>();
+  static $pb.PbList<UpdateContactResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static UpdateContactResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateContactResponse>(create);
   static UpdateContactResponse? _defaultInstance;
@@ -477,7 +477,7 @@ class DeleteContactRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static DeleteContactRequest create() => DeleteContactRequest._();
   DeleteContactRequest createEmptyInstance() => create();
-  static $pb.PbList<DeleteContactRequest> createRepeated() => $pb.PbList<DeleteContactRequest>();
+  static $pb.PbList<DeleteContactRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static DeleteContactRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteContactRequest>(create);
   static DeleteContactRequest? _defaultInstance;

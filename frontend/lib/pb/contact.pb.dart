@@ -75,7 +75,7 @@ class Contact extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static Contact create() => Contact._();
   Contact createEmptyInstance() => create();
-  static $pb.PbList<Contact> createRepeated() => $pb.PbList<Contact>();
+  static $pb.PbList<Contact> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static Contact getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Contact>(create);
   static Contact? _defaultInstance;

@@ -81,7 +81,7 @@ class CreateLoverRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CreateLoverRequest create() => CreateLoverRequest._();
   CreateLoverRequest createEmptyInstance() => create();
-  static $pb.PbList<CreateLoverRequest> createRepeated() => $pb.PbList<CreateLoverRequest>();
+  static $pb.PbList<CreateLoverRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CreateLoverRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateLoverRequest>(create);
   static CreateLoverRequest? _defaultInstance;
@@ -173,7 +173,7 @@ class CreateLoverResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static CreateLoverResponse create() => CreateLoverResponse._();
   CreateLoverResponse createEmptyInstance() => create();
-  static $pb.PbList<CreateLoverResponse> createRepeated() => $pb.PbList<CreateLoverResponse>();
+  static $pb.PbList<CreateLoverResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static CreateLoverResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<CreateLoverResponse>(create);
   static CreateLoverResponse? _defaultInstance;
@@ -226,7 +226,7 @@ class GetLoverRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetLoverRequest create() => GetLoverRequest._();
   GetLoverRequest createEmptyInstance() => create();
-  static $pb.PbList<GetLoverRequest> createRepeated() => $pb.PbList<GetLoverRequest>();
+  static $pb.PbList<GetLoverRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetLoverRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetLoverRequest>(create);
   static GetLoverRequest? _defaultInstance;
@@ -276,7 +276,7 @@ class GetLoverResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetLoverResponse create() => GetLoverResponse._();
   GetLoverResponse createEmptyInstance() => create();
-  static $pb.PbList<GetLoverResponse> createRepeated() => $pb.PbList<GetLoverResponse>();
+  static $pb.PbList<GetLoverResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static GetLoverResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetLoverResponse>(create);
   static GetLoverResponse? _defaultInstance;
@@ -359,7 +359,7 @@ class UpdateLoverRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UpdateLoverRequest create() => UpdateLoverRequest._();
   UpdateLoverRequest createEmptyInstance() => create();
-  static $pb.PbList<UpdateLoverRequest> createRepeated() => $pb.PbList<UpdateLoverRequest>();
+  static $pb.PbList<UpdateLoverRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static UpdateLoverRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateLoverRequest>(create);
   static UpdateLoverRequest? _defaultInstance;
@@ -451,7 +451,7 @@ class UpdateLoverResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static UpdateLoverResponse create() => UpdateLoverResponse._();
   UpdateLoverResponse createEmptyInstance() => create();
-  static $pb.PbList<UpdateLoverResponse> createRepeated() => $pb.PbList<UpdateLoverResponse>();
+  static $pb.PbList<UpdateLoverResponse> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static UpdateLoverResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateLoverResponse>(create);
   static UpdateLoverResponse? _defaultInstance;
@@ -504,7 +504,7 @@ class DeleteLoverRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static DeleteLoverRequest create() => DeleteLoverRequest._();
   DeleteLoverRequest createEmptyInstance() => create();
-  static $pb.PbList<DeleteLoverRequest> createRepeated() => $pb.PbList<DeleteLoverRequest>();
+  static $pb.PbList<DeleteLoverRequest> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static DeleteLoverRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeleteLoverRequest>(create);
   static DeleteLoverRequest? _defaultInstance;

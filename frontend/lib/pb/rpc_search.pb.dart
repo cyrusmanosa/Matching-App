@@ -50,7 +50,7 @@ class SearchRequestH extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static SearchRequestH create() => SearchRequestH._();
   SearchRequestH createEmptyInstance() => create();
-  static $pb.PbList<SearchRequestH> createRepeated() => $pb.PbList<SearchRequestH>();
+  static $pb.PbList<SearchRequestH> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static SearchRequestH getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchRequestH>(create);
   static SearchRequestH? _defaultInstance;
@@ -100,7 +100,7 @@ class SearchResponseH extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static SearchResponseH create() => SearchResponseH._();
   SearchResponseH createEmptyInstance() => create();
-  static $pb.PbList<SearchResponseH> createRepeated() => $pb.PbList<SearchResponseH>();
+  static $pb.PbList<SearchResponseH> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static SearchResponseH getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchResponseH>(create);
   static SearchResponseH? _defaultInstance;
@@ -152,7 +152,7 @@ class SearchRequestL extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static SearchRequestL create() => SearchRequestL._();
   SearchRequestL createEmptyInstance() => create();
-  static $pb.PbList<SearchRequestL> createRepeated() => $pb.PbList<SearchRequestL>();
+  static $pb.PbList<SearchRequestL> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static SearchRequestL getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchRequestL>(create);
   static SearchRequestL? _defaultInstance;
@@ -202,7 +202,7 @@ class SearchResponseL extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static SearchResponseL create() => SearchResponseL._();
   SearchResponseL createEmptyInstance() => create();
-  static $pb.PbList<SearchResponseL> createRepeated() => $pb.PbList<SearchResponseL>();
+  static $pb.PbList<SearchResponseL> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static SearchResponseL getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchResponseL>(create);
   static SearchResponseL? _defaultInstance;
@@ -254,7 +254,7 @@ class SearchRequestA extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static SearchRequestA create() => SearchRequestA._();
   SearchRequestA createEmptyInstance() => create();
-  static $pb.PbList<SearchRequestA> createRepeated() => $pb.PbList<SearchRequestA>();
+  static $pb.PbList<SearchRequestA> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static SearchRequestA getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchRequestA>(create);
   static SearchRequestA? _defaultInstance;
@@ -304,7 +304,7 @@ class SearchResponseA extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static SearchResponseA create() => SearchResponseA._();
   SearchResponseA createEmptyInstance() => create();
-  static $pb.PbList<SearchResponseA> createRepeated() => $pb.PbList<SearchResponseA>();
+  static $pb.PbList<SearchResponseA> createRepeated() => throw $core.UnsupportedError('createRepeated');
   @$core.pragma('dart2js:noInline')
   static SearchResponseA getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SearchResponseA>(create);
   static SearchResponseA? _defaultInstance;

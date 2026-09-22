@@ -8,7 +8,7 @@ class GrpcInfoService {
   static var channel = grpc_channel.ClientChannel(
     "localhost",
     // "10.16.10.56",
-    port: 9090,
+    port: 19090,
     options: ChannelOptions(credentials: ChannelCredentials.insecure()),
   );
 
@@ -23,7 +23,7 @@ class GrpcChatService {
   static var channel = grpc_channel.ClientChannel(
     "localhost",
     // "10.16.10.56",
-    port: 9090,
+    port: 19090,
     options: ChannelOptions(credentials: ChannelCredentials.insecure()),
   );
 
