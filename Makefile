@@ -49,7 +49,7 @@ protob:
 	proto/*.proto
 
 evans:
-	evans --host localhost --port 9090 -r repl
+	evans --host localhost --port 19090 -r repl
 
 createmigrate_info:
 	migrate create -ext sql -dir $(BACKEND)/db/migration/info -seq init_info_schema

@@ -1,4 +1,5 @@
 import 'package:dating_your_date/client/grpc_services.dart';
+import 'package:dating_your_date/client/session_auth.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/pb/rpc_checkEmail.pb.dart';
 import 'package:dating_your_date/widgets/app_bar/Custom_App_bar.dart';
@@ -27,11 +28,11 @@ class _ConfirmationCoreState extends State<ConfirmationCore> {
       await Future.delayed(Duration(seconds: 1));
       final request = SendEmailRequest(checkCode: confirmationCoreController.text);
       await GrpcInfoService.client.checkEmailCode(request);
+      signupCode = confirmationCoreController.text.trim();
       onTapNextPage(context);
     } on GrpcError {
       Navigator.pop(context);
       await showErrorDialog(context, "コードにエラーがあります。");
-      throw Exception("チェックコードの確認中にエラーが発生しました。");
     }
   }
 

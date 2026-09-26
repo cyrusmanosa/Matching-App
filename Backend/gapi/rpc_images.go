@@ -40,8 +40,11 @@ func (server *Server) CreateImages(ctx context.Context, req *pb.CreateImagesRequ
 }
 
 func (server *Server) GetImages(ctx context.Context, req *pb.GetImagesRequest) (*pb.GetImagesResponse, error) {
-	_, err := server.userFromSession(ctx, req.GetSessionID())
+	session, err := server.userFromSession(ctx, req.GetSessionID())
 	if err != nil {
+		return nil, err
+	}
+	if err = server.canReadUser(ctx, session, req.GetUserID()); err != nil {
 		return nil, err
 	}
 

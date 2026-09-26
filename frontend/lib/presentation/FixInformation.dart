@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dating_your_date/client/grpc_services.dart';
+import 'package:dating_your_date/client/session_auth.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/models/listData.dart';
@@ -78,6 +79,10 @@ class _FixInformationState extends State<FixInformation> {
     } else if (confirmAgreeBtn == false) {
       await showErrorDialog(context, "同意のボタンを押してください");
     } else {
+      if (signupCode == null || signupCode!.isEmpty) {
+        await showErrorDialog(context, "登録の確認が期限切れです。最初からやり直してください。");
+        return;
+      }
       try {
         setState(() {
           showLoadDialog(context);
@@ -90,9 +95,13 @@ class _FixInformationState extends State<FixInformation> {
           gender: fixGenderController.text,
           blood: fixBloodController.text,
         );
-        final response = await GrpcInfoService.client.createFix(request);
-        // set session ID
+        final response = await GrpcInfoService.client.createFix(
+          request,
+          options: CallOptions(metadata: {'signup-code': signupCode!}),
+        );
+        signupCode = null;
         await globalSession.write(key: 'SessionId', value: response.sessionsID);
+        rememberSession(response.sessionsID);
         // take user id
         final useridRequest = GetUserIDRequest(sessionID: response.sessionsID);
         final useridResponse = await GrpcInfoService.client.getUserID(useridRequest);
@@ -102,7 +111,6 @@ class _FixInformationState extends State<FixInformation> {
       } on GrpcError {
         Navigator.pop(context);
         await showErrorDialog(context, "エラー：検証可能な入力データ");
-        throw Exception("データの送信中にエラーが発生しました。");
       }
     }
   }

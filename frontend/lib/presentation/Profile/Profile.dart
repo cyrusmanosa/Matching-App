@@ -74,7 +74,6 @@ class _ProfileState extends State<Profile> {
         changeTime = "0";
       } else {
         await showErrorDialog(context, "Error: validatable input UserId in ChangeTarget! $e");
-        throw Exception("Error occurred while fetching canChangeInfo.");
       }
     }
     try {
@@ -85,7 +84,6 @@ class _ProfileState extends State<Profile> {
       });
     } on GrpcError {
       await showErrorDialog(context, "Error: validatable input UserId in Chat Record!");
-      throw Exception("Error occurred while fetching canChangeInfo.");
     }
   }
 
@@ -137,7 +135,6 @@ class _ProfileState extends State<Profile> {
         return;
       }
       await showErrorDialog(context, "エラー：検証可能な入力データ");
-      throw Exception("データの送信中にエラーが発生しました。");
     }
   }
 
@@ -158,7 +155,6 @@ class _ProfileState extends State<Profile> {
         return;
       }
       await showErrorDialog(context, "Error: validatable input UserId in Fixinfo! at $e");
-      throw Exception("Error occurred while fetching Fixinfo.");
     }
     // Can Change
     try {
@@ -172,7 +168,6 @@ class _ProfileState extends State<Profile> {
         return;
       }
       await showErrorDialog(context, "Error: validatable input UserId in Fixinfo! at $e");
-      throw Exception("Error occurred while fetching Fixinfo.");
     }
   }
 
@@ -241,7 +236,6 @@ class _ProfileState extends State<Profile> {
         return;
       }
       await showErrorDialog(context, "エラー：検証可能な入力データ");
-      throw Exception("データの送信中にエラーが発生しました。");
     }
   }
 

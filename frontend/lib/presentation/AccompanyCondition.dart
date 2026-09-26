@@ -72,7 +72,6 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
         return;
       }
       await showErrorDialog(context, "検索エンジニアリングにエラーがあります。");
-      throw Exception("検索エンジニアリングにエラーがあります。");
     }
   }
 
@@ -227,7 +226,6 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
       } on GrpcError {
         Navigator.pop(context);
         await showErrorDialog(context, "エラー：更新用の検証可能な入力データがありません。");
-        throw Exception("相伴の条件を入力中にエラーが発生しました。");
       }
     } else {
       if (!isPureNumber(accompanyEraController.text)) {
@@ -263,7 +261,6 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
         } on GrpcError {
           Navigator.pop(context);
           await showErrorDialog(context, "エラー：作成用の検証可能な入力データがありません。");
-          throw Exception("相伴の条件を入力中にエラーが発生しました。");
         }
       }
     }

@@ -125,7 +125,6 @@ class _InformationEditState extends State<InformationEdit> {
     } on GrpcError catch (e) {
       Navigator.pop(context);
       await showErrorDialog(context, "Error: validatable update image in Image at $e");
-      throw Exception("Error occurred while fetching profile edit.");
     }
   }
 
@@ -163,7 +162,6 @@ class _InformationEditState extends State<InformationEdit> {
     } on GrpcError {
       Navigator.pop(context);
       await showErrorDialog(context, "エラー：検証可能な入力データがありません。");
-      throw Exception("プロフィールの編集中にエラーが発生しました。");
     }
   }
 

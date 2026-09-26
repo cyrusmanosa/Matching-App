@@ -62,7 +62,6 @@ class _HomeState extends State<Home> {
       if (isUnauthenticated(error)) {
         return Targetlist();
       }
-      throw Exception("データの送信中にエラーが発生しました。");
     }
   }
 
@@ -137,7 +136,6 @@ class _HomeState extends State<Home> {
             return;
           }
           await showErrorDialog(context, "エラー：検証可能な入力データ");
-          throw Exception("データの送信中にエラーが発生しました。");
         }
 
         try {
@@ -152,7 +150,6 @@ class _HomeState extends State<Home> {
             return;
           }
           await showErrorDialog(context, "エラー：検証可能な入力データ");
-          throw Exception("データの送信中にエラーが発生しました。");
         }
       }
     }

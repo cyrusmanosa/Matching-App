@@ -108,7 +108,6 @@ class _DeleteTargetState extends State<DeleteTarget> {
     } on GrpcError catch (e) {
       Navigator.pop(context);
       await showErrorDialog(context, "Error: $e");
-      throw Exception("Error occurred while fetching Login.");
     }
   }
 

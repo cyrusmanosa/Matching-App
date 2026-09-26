@@ -12,6 +12,9 @@ import (
 )
 
 func (server *Server) CreateSocialMedia(ctx context.Context, req *pb.CreateSocialMediaRequest) (*pb.CreateSocialMediaResponse, error) {
+	if err := server.requireChatPair(ctx, req.GetUserID(), req.GetTargetID()); err != nil {
+		return nil, err
+	}
 	sm := ch.CreatesocialmediaParams{
 		UserID:      req.GetUserID(),
 		TargetID:    req.GetTargetID(),
@@ -38,6 +41,9 @@ func (server *Server) CreateSocialMedia(ctx context.Context, req *pb.CreateSocia
 }
 
 func (server *Server) DeleteSocialMedia(ctx context.Context, req *pb.DeleteSocialMediaRequest) (*emptypb.Empty, error) {
+	if err := server.requireOwnChat(ctx, req.GetUserID()); err != nil {
+		return nil, err
+	}
 	err := server.chatStore.Deletesocialmedia(ctx, req.GetUserID())
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to create table: %s", err)
@@ -46,6 +52,9 @@ func (server *Server) DeleteSocialMedia(ctx context.Context, req *pb.DeleteSocia
 }
 
 func (server *Server) GetSocialMedia(ctx context.Context, req *pb.GetSocialMediaRequest) (*pb.GetSocialMediaResponse, error) {
+	if err := server.requireChatPair(ctx, req.GetUserID(), req.GetTargetID()); err != nil {
+		return nil, err
+	}
 	sm := ch.GetsocialmediaParams{
 		UserID:   req.GetUserID(),
 		TargetID: req.GetTargetID(),
@@ -65,6 +74,9 @@ func (server *Server) GetSocialMedia(ctx context.Context, req *pb.GetSocialMedia
 }
 
 func (server *Server) UpdateSocialMedia(ctx context.Context, req *pb.UpdateSocialMediaRequest) (*pb.UpdateSocialMediaResponse, error) {
+	if err := server.requireOwnChat(ctx, req.GetUserID()); err != nil {
+		return nil, err
+	}
 	sm := ch.UpdatesocialmediaParams{
 		UserID:      req.GetUserID(),
 		TargetID:    req.GetTargetID(),

@@ -7,17 +7,24 @@ import (
 	"Backend/util"
 	"context"
 
-	"github.com/google/uuid"
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/emptypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
-var GlobalSessionID uuid.UUID
-
 func (server *Server) CreateFix(ctx context.Context, req *pb.CreateFixRequest) (*pb.CreateFixResponse, error) {
-	Mail := Validate.Email
+	md, _ := metadata.FromIncomingContext(ctx)
+	codesMD := md.Get("signup-code")
+	if len(codesMD) == 0 || codesMD[0] == "" {
+		return nil, status.Error(codes.FailedPrecondition, "signup verification is required")
+	}
+	pending, ok := takeVerifiedSignup(codesMD[0])
+	if !ok || pending.Email == "" {
+		return nil, status.Error(codes.FailedPrecondition, "signup verification expired")
+	}
+	Mail := pending.Email
 
 	aToken, payload, err := server.tokenMaker.CreateToken(
 		Mail,
@@ -55,9 +62,11 @@ func (server *Server) CreateFix(ctx context.Context, req *pb.CreateFixRequest) (
 			return nil, status.Errorf(codes.AlreadyExists, err.Error())
 		}
 		return nil, status.Errorf(codes.Internal, "failed to create user: %s", err)
-	} else {
-		Validate.Email = ""
-		Validate.CheckCode = ""
+	}
+	if pending.Provider != "" {
+		if err = server.infoStore.SetLoginProvider(ctx, fix.UserID, pending.Provider); err != nil {
+			return nil, status.Error(codes.Internal, "failed to save login provider")
+		}
 	}
 
 	sessions, err := server.infoStore.CreateSession(ctx, info.CreateSessionParams{
@@ -79,14 +88,15 @@ func (server *Server) CreateFix(ctx context.Context, req *pb.CreateFixRequest) (
 		AccessTokenExpiresAt: timestamppb.New(sessions.ExpiresAt.Time),
 	}
 
-	GlobalSessionID = sessions.ID
-
 	return rsp, nil
 }
 
 func (server *Server) GetFix(ctx context.Context, req *pb.GetFixRequest) (*pb.GetFixResponse, error) {
-	_, err := server.userFromSession(ctx, req.GetSessionID())
+	session, err := server.userFromSession(ctx, req.GetSessionID())
 	if err != nil {
+		return nil, err
+	}
+	if err = server.canReadUser(ctx, session, req.GetUserID()); err != nil {
 		return nil, err
 	}
 

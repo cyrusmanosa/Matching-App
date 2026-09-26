@@ -46,7 +46,6 @@ class _ContactPageState extends State<ContactPage> {
         });
       } on GrpcError {
         await showErrorDialog(context, "エラー：検証可能なメッセージの送信");
-        throw Exception("データの取得中にエラーが発生しました。");
       }
     }
   }

@@ -27,7 +27,7 @@ class GrpcChatService {
     options: ChannelOptions(credentials: ChannelCredentials.insecure()),
   );
 
-  static var client = ChatClient(channel);
+  static var client = ChatClient(channel, interceptors: [ChatSessionInterceptor(), SessionAuthInterceptor()]);
 
   static Future<void> shutdown() async {
     await channel.shutdown();

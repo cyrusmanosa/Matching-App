@@ -105,7 +105,6 @@ class _LoverConditionState extends State<LoverCondition> {
         return;
       }
       await showErrorDialog(context, "検索エンジニアリングにエラーがあります。");
-      throw Exception("検索エンジニアリングにエラーがあります。");
     }
   }
 
@@ -234,7 +233,6 @@ class _LoverConditionState extends State<LoverCondition> {
       } on GrpcError {
         Navigator.pop(context);
         await showErrorDialog(context, "エラー：更新用の検証可能な入力データがありません。");
-        throw Exception("恋人条件の更新中にエラーが発生しました。");
       }
     } else {
       if (!isPureNumber(loverMinAgeController.text) || !isPureNumber(loverMaxAgeController.text)) {
@@ -277,7 +275,6 @@ class _LoverConditionState extends State<LoverCondition> {
         } on GrpcError {
           Navigator.pop(context);
           await showErrorDialog(context, "エラー：作成用の検証可能な入力データがありません。");
-          throw Exception("恋人条件を入力中にエラーが発生しました。");
         }
       }
     }

@@ -51,8 +51,11 @@ func (server *Server) CreateCanChange(ctx context.Context, req *pb.CreateCanChan
 }
 
 func (server *Server) GetCanChange(ctx context.Context, req *pb.GetCanChangeRequest) (*pb.GetCanChangeResponse, error) {
-	_, err := server.userFromSession(ctx, req.GetSessionID())
+	session, err := server.userFromSession(ctx, req.GetSessionID())
 	if err != nil {
+		return nil, err
+	}
+	if err = server.canReadUser(ctx, session, req.GetUserID()); err != nil {
 		return nil, err
 	}
 

@@ -9,40 +9,33 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-var Validate *pb.CheckEmailResponse
-
 func (server *Server) CheckEmail(ctx context.Context, req *pb.CheckEmailRequest) (*pb.CheckEmailResponse, error) {
 	_, err := server.infoStore.LoginAtEmail(ctx, req.GetEmail())
 	if err == nil {
-		return nil, status.Errorf(codes.AlreadyExists, "failed to create user: %s", err)
+		return nil, status.Error(codes.AlreadyExists, "email already registered")
+	}
+	if !missingRecord(err) {
+		return nil, status.Error(codes.Internal, "failed to check email")
 	}
 
 	sendEmail := req.GetEmail()
 	checkRandomCode := util.RandomCheckCode()
-	sended := util.SendValidateCodeOnEmail(checkRandomCode, []string{sendEmail})
-
-	if sended {
-		Validate = &pb.CheckEmailResponse{
-			Email:     sendEmail,
-			CheckCode: checkRandomCode,
-		}
+	savePending(checkRandomCode, sendEmail, "email", false)
+	if !util.SendValidateCodeOnEmail(checkRandomCode, []string{sendEmail}) {
+		return nil, status.Error(codes.Unavailable, "failed to send verification email")
 	}
 
-	return Validate, nil
+	return &pb.CheckEmailResponse{Email: sendEmail}, nil
 }
 
 func (server *Server) CheckEmailCode(ctx context.Context, req *pb.SendEmailRequest) (*pb.CheckedEmailResponse, error) {
-	Code := Validate.CheckCode
-	Mail := Validate.Email
-	if req.GetCheckCode() != Code {
-		return nil, status.Errorf(codes.Internal, "No Work at %s not max this :%s", req.GetCheckCode(), Code)
+	item, ok := verifyPending(req.GetCheckCode())
+	if !ok {
+		return nil, status.Error(codes.InvalidArgument, "invalid verification code")
 	}
 
-	rsp := &pb.CheckedEmailResponse{
-		Email:  Mail,
+	return &pb.CheckedEmailResponse{
+		Email:  item.Email,
 		Status: "OK",
-	}
-
-	return rsp, nil
-
+	}, nil
 }

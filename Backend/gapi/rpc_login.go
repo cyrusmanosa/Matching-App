@@ -7,6 +7,8 @@ import (
 	"context"
 	"strings"
 
+	"github.com/google/uuid"
+
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/timestamppb"
@@ -21,7 +23,7 @@ func snsProvider(marker string) (string, bool) {
 	}
 }
 
-func (server *Server) continueWithSns(ctx context.Context, email string) (*pb.LoginUserResponse, error) {
+func (server *Server) continueWithSns(ctx context.Context, provider, email string) (*pb.LoginUserResponse, error) {
 	email = strings.TrimSpace(email)
 	if !strings.Contains(email, "@") || !strings.Contains(email, ".") {
 		return nil, status.Error(codes.InvalidArgument, "invalid email")
@@ -32,9 +34,20 @@ func (server *Server) continueWithSns(ctx context.Context, email string) (*pb.Lo
 		if !missingRecord(err) {
 			return nil, status.Error(codes.Internal, "failed to find user")
 		}
-		// 新帳戶：略過驗證碼，讓之後的基本資料註冊沿用這個 email。
-		Validate = &pb.CheckEmailResponse{Email: email, CheckCode: "SNS"}
-		return &pb.LoginUserResponse{Email: email}, nil
+		code := uuid.NewString()
+		savePending(code, email, provider, true)
+		return &pb.LoginUserResponse{SessionsID: "signup:" + code, Email: email}, nil
+	}
+
+	loginProvider, err := server.infoStore.GetLoginProvider(ctx, email)
+	if err != nil {
+		return nil, status.Error(codes.Internal, "failed to find user")
+	}
+	if loginProvider == "" || loginProvider == "email" {
+		return nil, status.Error(codes.PermissionDenied, "use password")
+	}
+	if loginProvider != provider {
+		return nil, status.Error(codes.FailedPrecondition, "different sns")
 	}
 
 	accessToken, payload, err := server.tokenMaker.CreateToken(user.Email, user.Role, server.config.AccessTokenDuration)
@@ -63,8 +76,8 @@ func (server *Server) continueWithSns(ctx context.Context, email string) (*pb.Lo
 }
 
 func (server *Server) LoginUser(ctx context.Context, req *pb.LoginUserRequest) (*pb.LoginUserResponse, error) {
-	if _, ok := snsProvider(req.GetPassword()); ok {
-		return server.continueWithSns(ctx, req.GetEmail())
+	if provider, ok := snsProvider(req.GetPassword()); ok {
+		return server.continueWithSns(ctx, provider, req.GetEmail())
 	}
 
 	user, err := server.infoStore.LoginAtEmail(ctx, req.GetEmail())

@@ -47,10 +47,34 @@ const _methodsWithoutSession = {
 
 bool isUnauthenticated(GrpcError error) => error.code == StatusCode.unauthenticated;
 
+String? activeSessionId;
+String? signupCode;
+
+void rememberSession(String? sessionID) {
+  activeSessionId = sessionID;
+}
+
 Future<void> clearLocalLogin() async {
+  activeSessionId = null;
   await globalSession.delete(key: 'SessionId');
   await globalUserId.delete(key: 'UserID');
   await globalemail.delete(key: 'email');
+}
+
+class ChatSessionInterceptor extends ClientInterceptor {
+  @override
+  ResponseFuture<R> interceptUnary<Q, R>(ClientMethod<Q, R> method, Q request, CallOptions options, ClientUnaryInvoker<Q, R> invoker) {
+    final sessionID = activeSessionId;
+    if (sessionID != null && sessionID.isNotEmpty) {
+      options = options.mergedWith(CallOptions(metadata: {'session-id': sessionID}));
+    }
+    return invoker(method, request, options);
+  }
+
+  @override
+  ResponseStream<R> interceptStreaming<Q, R>(ClientMethod<Q, R> method, Stream<Q> requests, CallOptions options, ClientStreamingInvoker<Q, R> invoker) {
+    return invoker(method, requests, options);
+  }
 }
 
 class SessionAuthInterceptor extends ClientInterceptor {

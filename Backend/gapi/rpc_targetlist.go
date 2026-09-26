@@ -40,7 +40,7 @@ func (server *Server) CreateTargetList(ctx context.Context, req *pb.CreateTarget
 }
 
 func (server *Server) GetTargetList(ctx context.Context, req *pb.GetTargetListRequest) (*pb.GetTargetListResponse, error) {
-	_, err := server.userFromSession(ctx, req.GetSessionID())
+	session, err := server.userFromSession(ctx, req.GetSessionID())
 	if err != nil {
 		return nil, err
 	}
@@ -53,10 +53,23 @@ func (server *Server) GetTargetList(ctx context.Context, req *pb.GetTargetListRe
 		return nil, status.Errorf(codes.Internal, "failed to input UserID: %s", err)
 	}
 
-	rsp := &pb.GetTargetListResponse{
-		Tl: convertTargetList(targetlist),
+	converted := convertTargetList(targetlist)
+	if req.GetUserID() != session.UserID {
+		converted.Target1ID = maskSlot(converted.Target1ID, session.UserID)
+		converted.Target2ID = maskSlot(converted.Target2ID, session.UserID)
+		converted.Target3ID = maskSlot(converted.Target3ID, session.UserID)
+		if converted.Target1ID == -1 {
+			converted.T1Type = ""
+		}
+		if converted.Target2ID == -1 {
+			converted.T2Type = ""
+		}
+		if converted.Target3ID == -1 {
+			converted.T3Type = ""
+		}
 	}
-	return rsp, nil
+
+	return &pb.GetTargetListResponse{Tl: converted}, nil
 }
 
 func (server *Server) UpdateTargetList(ctx context.Context, req *pb.UpdateTargetListRequest) (*pb.UpdateTargetListResponse, error) {

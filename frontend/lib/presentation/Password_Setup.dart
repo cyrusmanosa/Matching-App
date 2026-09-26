@@ -43,7 +43,6 @@ class _PasswordSetupState extends State<PasswordSetup> {
       } on GrpcError {
         Navigator.pop(context);
         await showErrorDialog(context, "エラー：検証可能な入力データがありません。");
-        throw Exception("パスワードの設定中にエラーが発生しました。");
       }
     }
   }

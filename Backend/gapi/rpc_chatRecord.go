@@ -13,6 +13,9 @@ import (
 )
 
 func (server *Server) CreateChatTable(ctx context.Context, req *pb.CreateChatTableRequest) (*emptypb.Empty, error) {
+	if err := server.requireOwnChat(ctx, req.GetUserID()); err != nil {
+		return nil, err
+	}
 	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
 
 	err := server.chatStore.CreateChatTable(ctx, tablename)
@@ -23,6 +26,15 @@ func (server *Server) CreateChatTable(ctx context.Context, req *pb.CreateChatTab
 }
 
 func (server *Server) CreateChatRecord(ctx context.Context, req *pb.CreateChatRecordRequest) (*pb.CreateChatRecordResponse, error) {
+	session, err := server.sessionFromMetadata(ctx)
+	if err != nil {
+		return nil, err
+	}
+	ownTable := req.GetUserID() == session.UserID
+	deliverCopy := req.GetUserID() != session.UserID && req.GetTargetID() == session.UserID && req.GetRoleType() == "receiver"
+	if !ownTable && !deliverCopy {
+		return nil, status.Error(codes.PermissionDenied, "cannot write this chat")
+	}
 
 	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
 	chat := ch.CreateRecordParams{
@@ -48,6 +60,9 @@ func (server *Server) CreateChatRecord(ctx context.Context, req *pb.CreateChatRe
 }
 
 func (server *Server) GetChatRecord(ctx context.Context, req *pb.GetChatRecordRequest) (*pb.GetChatRecordResponse, error) {
+	if err := server.requireOwnChat(ctx, req.GetUserID()); err != nil {
+		return nil, err
+	}
 	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
 
 	GetC, err := server.chatStore.GetRecord(ctx, req.GetTargetID(), tablename)
@@ -66,6 +81,9 @@ func (server *Server) GetChatRecord(ctx context.Context, req *pb.GetChatRecordRe
 }
 
 func (server *Server) GetTargetID(ctx context.Context, req *pb.GetTargetIDRequest) (*pb.GetTargetIDResponse, error) {
+	if err := server.requireOwnChat(ctx, req.GetUserID()); err != nil {
+		return nil, err
+	}
 	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
 
 	tid, err := server.chatStore.GetTargetID(ctx, tablename)
@@ -84,6 +102,9 @@ func (server *Server) GetTargetID(ctx context.Context, req *pb.GetTargetIDReques
 }
 
 func (server *Server) GetLastMsg(ctx context.Context, req *pb.GetLastMsgRequest) (*pb.GetLastMsgResponse, error) {
+	if err := server.requireOwnChat(ctx, req.GetUserID()); err != nil {
+		return nil, err
+	}
 	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
 
 	lmsg, err := server.chatStore.GetLastMsg(ctx, req.GetTargetID(), tablename)
@@ -104,6 +125,9 @@ func (server *Server) GetLastMsg(ctx context.Context, req *pb.GetLastMsgRequest)
 }
 
 func (server *Server) GetChatRow(ctx context.Context, req *pb.GetChatRowRequest) (*pb.GetChatRowResponse, error) {
+	if err := server.requireOwnChat(ctx, req.GetUserID()); err != nil {
+		return nil, err
+	}
 	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
 
 	row, err := server.chatStore.GetChatRow(ctx, tablename)
@@ -121,6 +145,9 @@ func (server *Server) GetChatRow(ctx context.Context, req *pb.GetChatRowRequest)
 }
 
 func (server *Server) UpdateRead(ctx context.Context, req *pb.UpdateReadRequest) (*emptypb.Empty, error) {
+	if err := server.requireOwnChat(ctx, req.GetUserID()); err != nil {
+		return nil, err
+	}
 	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
 	err := server.chatStore.UpdateRead(ctx, req.GetTargetID(), tablename)
 	if err != nil {
@@ -133,6 +160,9 @@ func (server *Server) UpdateRead(ctx context.Context, req *pb.UpdateReadRequest)
 }
 
 func (server *Server) UpdateChatRecord(ctx context.Context, req *pb.UpdateChatRecordRequest) (*pb.UpdateChatRecordResponse, error) {
+	if err := server.requireOwnChat(ctx, req.GetUserID()); err != nil {
+		return nil, err
+	}
 	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
 
 	pbTimestamp := req.GetCreateAt()

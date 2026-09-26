@@ -46,6 +46,10 @@ func (server *Server) CreatePayment(ctx context.Context, req *pb.CreatePaymentRe
 }
 
 func (server *Server) GetPayment(ctx context.Context, req *pb.GetPaymentRequest) (*pb.GetPaymentResponse, error) {
+	if _, err := server.sessionFromMetadata(ctx); err != nil {
+		return nil, err
+	}
+
 	payid, err := uuid.Parse(req.GetPayID())
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "Session ID Error: %s", err)

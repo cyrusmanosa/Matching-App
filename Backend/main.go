@@ -53,12 +53,12 @@ func main() {
 
 // Grpc
 func runGrpcServer(config util.Config, inStore indb.InfoStore, chStore chdb.ChatStore) {
-	InfoServer, err := gapi.NewInfoServer(config, inStore)
+	InfoServer, err := gapi.NewInfoServer(config, inStore, chStore)
 	if err != nil {
 		log.Fatal().Err(err).Msg("cannot create info server")
 	}
 
-	ChatServer, err := gapi.NewChatServer(config, chStore)
+	ChatServer, err := gapi.NewChatServer(config, chStore, inStore)
 	if err != nil {
 		log.Fatal().Err(err).Msg("cannot create chat server")
 	}

@@ -42,6 +42,7 @@ type InfoQuerier interface {
 	GetChangeTargetUserList(ctx context.Context, userID int32) (Changetargetuser, error)
 	GetHobby(ctx context.Context, userID int32) (Hobby, error)
 	GetLover(ctx context.Context, userID int32) (Lover, error)
+	GetLoginProvider(ctx context.Context, email string) (string, error)
 	GetPayment(ctx context.Context, payID uuid.UUID) (Payment, error)
 	GetRowCount(ctx context.Context, userID int32) (int32, error)
 	GetSession(ctx context.Context, id uuid.UUID) (Session, error)
@@ -63,6 +64,7 @@ type InfoQuerier interface {
 	LoginAtEmail(ctx context.Context, email string) (Fixinformation, error)
 	LogoutActiveSessions(ctx context.Context, userID int32) error
 	LogoutSession(ctx context.Context, id uuid.UUID) error
+	SetLoginProvider(ctx context.Context, userID int32, provider string) error
 	TargetUserList(ctx context.Context, arg TargetUserListParams) (Targetlist, error)
 	UpdateAccompany(ctx context.Context, arg UpdateAccompanyParams) (Accompany, error)
 	UpdateHobby(ctx context.Context, arg UpdateHobbyParams) (Hobby, error)

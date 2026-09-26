@@ -37,7 +37,6 @@ class _EmailConfirmationtate extends State<EmailConfirmation> {
       } catch (error) {
         Navigator.pop(context);
         await showErrorDialog(context, "エラー：メール確認してください");
-        throw Exception("メール確認の取得中にエラーが発生しました。");
       }
     }
   }

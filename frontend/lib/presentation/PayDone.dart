@@ -64,7 +64,6 @@ class _PayDoneState extends State<PayDone> {
     } on GrpcError {
       Navigator.pop(context);
       await showErrorDialog(context, "エラー：更新用の検証可能な入力データがありません。");
-      throw Exception("ホビーの更新中にエラーが発生しました。");
     }
   }
 

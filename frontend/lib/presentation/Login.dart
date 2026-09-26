@@ -43,6 +43,7 @@ class _LoginState extends State<Login> {
     if (sessionID == null || sessionID.isEmpty || !mounted) {
       return;
     }
+    rememberSession(sessionID);
     try {
       final useridResponse = await GrpcInfoService.client.getUserID(GetUserIDRequest(sessionID: sessionID));
       await globalUserId.write(key: 'UserID', value: '${useridResponse.userID}');
@@ -109,11 +110,22 @@ class _LoginState extends State<Login> {
         return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
           title: Text("$serviceNameで続ける", style: TextStyle(fontSize: size.width * 0.045)),
-          content: TextField(
-            controller: emailController,
-            autofocus: true,
-            keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(hintText: "メールアドレス"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "初めてなら登録へ進みます。パスワードで作ったアカウントは、ここからは入れません。",
+                style: TextStyle(fontSize: size.width * 0.034),
+              ),
+              SizedBox(height: size.height * 0.015),
+              TextField(
+                controller: emailController,
+                autofocus: true,
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(hintText: "メールアドレス"),
+              ),
+            ],
           ),
           actions: [
             TextButton(onPressed: () => Navigator.pop(dialogContext), child: const Text("キャンセル")),
@@ -137,20 +149,30 @@ class _LoginState extends State<Login> {
       if (!mounted) return;
       Navigator.pop(context);
       loading = false;
-      if (loginResponse.sessionsID.isEmpty) {
+      if (loginResponse.sessionsID.startsWith("signup:")) {
+        signupCode = loginResponse.sessionsID.substring("signup:".length);
         await globalemail.write(key: "email", value: email);
         Navigator.pushNamed(context, AppRoutes.fixInformation);
         return;
       }
       await globalSession.write(key: "SessionId", value: loginResponse.sessionsID);
+      rememberSession(loginResponse.sessionsID);
       final useridResponse = await GrpcInfoService.client.getUserID(GetUserIDRequest(sessionID: loginResponse.sessionsID));
       await globalUserId.write(key: "UserID", value: "${useridResponse.userID}");
       await globalemail.write(key: "email", value: loginResponse.email);
       if (!mounted) return;
       getCanChangeGrpc(context);
-    } on GrpcError {
+    } on GrpcError catch (error) {
       if (!mounted) return;
       if (loading) Navigator.pop(context);
+      if (error.code == StatusCode.permissionDenied) {
+        await showErrorDialog(context, "このメールアドレスはパスワードで登録されています。上の欄からログインしてください。");
+        return;
+      }
+      if (error.code == StatusCode.failedPrecondition) {
+        await showErrorDialog(context, "このアカウントは別のサービスで登録されています。");
+        return;
+      }
       await showErrorDialog(context, "SNSでのログインに失敗しました。");
     }
   }
@@ -164,6 +186,7 @@ class _LoginState extends State<Login> {
       final loginRequest = LoginUserRequest(email: emailController.text, password: passwordController.text);
       final loginResponse = await GrpcInfoService.client.loginUser(loginRequest);
       await globalSession.write(key: 'SessionId', value: loginResponse.sessionsID);
+      rememberSession(loginResponse.sessionsID);
       // take user id
       final useridRequest = GetUserIDRequest(sessionID: loginResponse.sessionsID);
       final useridResponse = await GrpcInfoService.client.getUserID(useridRequest);
@@ -172,7 +195,6 @@ class _LoginState extends State<Login> {
     } on GrpcError {
       Navigator.pop(context);
       await showErrorDialog(context, "メールアドレスまたはパスワードに誤りがあります。");
-      throw Exception("ログインの取得中にエラーが発生しました。");
     }
   }
 

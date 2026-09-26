@@ -44,7 +44,6 @@ class PasswordResetEmail extends StatelessWidget {
       }
     } on GrpcError {
       showErrorDialog(context, "メールアドレスは誤りがあります。");
-      throw Exception("ログインの取得中にエラーが発生しました。");
     }
     Navigator.pop(context);
   }

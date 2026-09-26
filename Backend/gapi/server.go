@@ -18,7 +18,7 @@ type Server struct {
 	tokenMaker token.Maker
 }
 
-func NewInfoServer(config util.Config, infoStore indb.InfoStore) (*Server, error) {
+func NewInfoServer(config util.Config, infoStore indb.InfoStore, chatStore chdb.ChatStore) (*Server, error) {
 	tokenMaker, err := token.NewPasetoMaker(config.TokenSymmetricKey)
 	if err != nil {
 		return nil, fmt.Errorf("cannot create token maker: %w", err)
@@ -26,13 +26,14 @@ func NewInfoServer(config util.Config, infoStore indb.InfoStore) (*Server, error
 	server := &Server{
 		config:     config,
 		infoStore:  infoStore,
+		chatStore:  chatStore,
 		tokenMaker: tokenMaker,
 	}
 
 	return server, nil
 }
 
-func NewChatServer(config util.Config, chatStore chdb.ChatStore) (*Server, error) {
+func NewChatServer(config util.Config, chatStore chdb.ChatStore, infoStore indb.InfoStore) (*Server, error) {
 	tokenMaker, err := token.NewPasetoMaker(config.TokenSymmetricKey)
 	if err != nil {
 		return nil, fmt.Errorf("cannot create token maker: %w", err)
@@ -40,6 +41,7 @@ func NewChatServer(config util.Config, chatStore chdb.ChatStore) (*Server, error
 
 	server := &Server{
 		config:     config,
+		infoStore:  infoStore,
 		chatStore:  chatStore,
 		tokenMaker: tokenMaker,
 	}

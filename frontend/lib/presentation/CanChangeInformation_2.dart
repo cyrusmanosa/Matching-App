@@ -72,7 +72,6 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
       } on GrpcError {
         Navigator.pop(context);
         await showErrorDialog(context, "エラー：検証可能な入力データがありません。");
-        throw Exception("基本個人情報 - B の取得中にエラーが発生しました。");
       }
     }
   }
@@ -90,7 +89,6 @@ class _CanChangeInformation2State extends State<CanChangeInformation2> {
     } on GrpcError {
       Navigator.pop(context);
       await showErrorDialog(context, "エラー：検証可能なチャットレコードの作成");
-      throw Exception("チャットレコードの取得中にエラーが発生しました。");
     }
   }
 

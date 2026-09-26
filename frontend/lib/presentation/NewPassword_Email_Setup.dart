@@ -40,7 +40,6 @@ class _NewPasswordSetupEmailState extends State<NewPasswordEmailSetup> {
       } on GrpcError {
         Navigator.pop(context);
         await showErrorDialog(context, "エラー：検証可能な入力データがありません。");
-        throw Exception("新しいパスワードの設定中にエラーが発生しました。");
       }
     }
   }
