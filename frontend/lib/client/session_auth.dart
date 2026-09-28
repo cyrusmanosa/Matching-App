@@ -1,3 +1,4 @@
+import 'package:dating_your_date/client/blocked_users.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/routes/app_routes.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
@@ -27,11 +28,47 @@ class SessionRouteObserver extends NavigatorObserver {
   void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) => _remember(previousRoute);
 }
 
-String matchReadyMessage(String rank) => '新しいターゲットも準備しました（一致 $rank）';
+String matchPercent(String rank) {
+  final line = rank.split('\n').first.trim();
+  if (line.isEmpty) return '0%';
+  return line;
+}
+
+List<String> matchReasonLines(String rank) {
+  final lines = rank.split('\n').map((line) => line.trim()).where((line) => line.isNotEmpty).toList();
+  if (lines.length <= 1) return const [];
+  if (!lines.first.endsWith('%')) return lines;
+  return lines.sublist(1);
+}
+
+String matchBlockFor(String rank, int userID) {
+  final hasBlocks = rank.contains('\n---\n') || RegExp(r'^\d+\n').hasMatch(rank);
+  if (!hasBlocks) return rank;
+  for (final block in rank.split('\n---\n')) {
+    final lines = block.split('\n');
+    if (lines.isNotEmpty && int.tryParse(lines.first) == userID) {
+      return lines.skip(1).join('\n');
+    }
+  }
+  final first = rank.split('\n---\n').first.split('\n');
+  if (first.length > 1 && int.tryParse(first.first) != null) {
+    return first.skip(1).join('\n');
+  }
+  return rank;
+}
+
+String matchReadyMessageFor(String rank, int userID) => matchReadyMessage(matchBlockFor(rank, userID));
+
+String matchReadyMessage(String rank) {
+  final buffer = StringBuffer('新しいターゲットも準備しました（一致 ${matchPercent(rank)}）');
+  for (final reason in matchReasonLines(rank)) {
+    buffer.write('\n・$reason');
+  }
+  return buffer.toString();
+}
 
 String emptyMatchMessage(String rank) {
-  final percent = rank.isEmpty ? '0%' : rank;
-  return '新しい条件で合わせるパーセントは$percentです。';
+  return '新しい条件で合わせるパーセントは${matchPercent(rank)}です。';
 }
 
 const sessionEndedMessage = 'ログインの有効期限が切れたか、別の端末でログインされています。もう一度ログインしてください。';
@@ -59,6 +96,7 @@ Future<void> clearLocalLogin() async {
   await globalSession.delete(key: 'SessionId');
   await globalUserId.delete(key: 'UserID');
   await globalemail.delete(key: 'email');
+  await clearBlockedUsers();
 }
 
 class ChatSessionInterceptor extends ClientInterceptor {

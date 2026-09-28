@@ -10,7 +10,7 @@ import 'package:dating_your_date/widgets/button/custom_outlined_button.dart';
 import 'package:flutter/material.dart';
 
 class EmailConfirmation extends StatefulWidget {
-  EmailConfirmation({Key? key}) : super(key: key);
+  EmailConfirmation({super.key});
   @override
   _EmailConfirmationtate createState() => _EmailConfirmationtate();
 }

@@ -17,7 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
 class CanChangeInformation1 extends StatefulWidget {
-  CanChangeInformation1({Key? key}) : super(key: key);
+  CanChangeInformation1({super.key});
 
   @override
   _CanChangeInformation1State createState() => _CanChangeInformation1State();

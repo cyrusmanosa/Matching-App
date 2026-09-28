@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dating_your_date/client/grpc_services.dart';
+import 'package:dating_your_date/client/photo_bytes.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/models/listData.dart';
@@ -21,10 +22,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:image/image.dart' as customImage;
 
 class InformationEdit extends StatefulWidget {
-  InformationEdit({Key? key, this.canData, this.imgIcon, this.country}) : super(key: key);
+  InformationEdit({super.key, this.canData, this.imgIcon, this.country});
   final String? country;
   final CanChange? canData;
   final List<Uint8List>? imgIcon;
@@ -104,13 +104,7 @@ class _InformationEditState extends State<InformationEdit> {
     try {
       List<List<int>> imageBytesList = [];
       for (var imageFile in _newimageFile!) {
-        final image = customImage.decodeImage(imageFile);
-        final double ratio = image!.width / image.height;
-        final int targetWidth = 1024;
-        final int targetHeight = (targetWidth / ratio).round();
-        final resizedImage = customImage.copyResize(image, width: targetWidth, height: targetHeight);
-        final compressedImage = customImage.encodeJpg(resizedImage, quality: 85);
-        imageBytesList.add(compressedImage.toList());
+        imageBytesList.add(compressPhoto(imageFile));
       }
 
       final request = UpdateImagesRequest(

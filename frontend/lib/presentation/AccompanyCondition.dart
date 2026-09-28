@@ -22,7 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
 class AccompanyCondition extends StatefulWidget {
-  AccompanyCondition({Key? key}) : super(key: key);
+  AccompanyCondition({super.key});
 
   @override
   _AccompanyConditionState createState() => _AccompanyConditionState();
@@ -58,7 +58,6 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
     try {
       final req = SearchRequestA(sessionID: apiKeyS);
       final rsp = await GrpcInfoService.client.searchTargetAccompany(req);
-      print(rsp.resu);
       if (rsp.resu.len != 0) {
         checkTargetList(context, rsp);
       } else {
@@ -133,7 +132,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
               break;
             } else {
               await Future.delayed(Duration(seconds: 1));
-              await showLogoDialog(context, matchReadyMessage(rsp.resu.rank), false);
+              await showLogoDialog(context, matchReadyMessageFor(rsp.resu.rank, rsp.resu.resultID[i]), false);
               await Future.delayed(Duration(seconds: 1));
 
               Navigator.push(
@@ -169,7 +168,7 @@ class _AccompanyConditionState extends State<AccompanyCondition> {
             break;
           } else {
             await Future.delayed(Duration(seconds: 1));
-            await showLogoDialog(context, matchReadyMessage(rsp.resu.rank), false);
+            await showLogoDialog(context, matchReadyMessageFor(rsp.resu.rank, rsp.resu.resultID[i]), false);
             await Future.delayed(Duration(seconds: 1));
             Navigator.push(
               context,

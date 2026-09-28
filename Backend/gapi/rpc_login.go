@@ -35,7 +35,9 @@ func (server *Server) continueWithSns(ctx context.Context, provider, email strin
 			return nil, status.Error(codes.Internal, "failed to find user")
 		}
 		code := uuid.NewString()
-		savePending(code, email, provider, true)
+		if err = server.savePending(ctx, code, email, provider, true); err != nil {
+			return nil, status.Error(codes.Internal, "failed to start signup")
+		}
 		return &pb.LoginUserResponse{SessionsID: "signup:" + code, Email: email}, nil
 	}
 

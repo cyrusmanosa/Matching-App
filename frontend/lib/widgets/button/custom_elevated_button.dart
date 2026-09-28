@@ -10,7 +10,7 @@ class CustomElevatedButton extends BaseButton {
     double? height,
     double? width,
     EdgeInsets? margin,
-    Key? key,
+    super.key,
     TextStyle? buttonTextStyle,
     VoidCallback? onPressed,
     this.decoration,

@@ -2,6 +2,7 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/pb/rpc_canChange.pb.dart';
 import 'package:dating_your_date/pb/rpc_login.pb.dart';
 import 'package:dating_your_date/client/grpc_services.dart';
+import 'package:dating_your_date/client/login_rules.dart';
 import 'package:dating_your_date/client/session_auth.dart';
 import 'package:dating_your_date/pb/rpc_session.pb.dart';
 import 'package:dating_your_date/presentation/NewPassword_Email_Setup.dart';
@@ -11,14 +12,15 @@ import 'package:dating_your_date/widgets/button/custom_elevated_button.dart';
 import 'package:dating_your_date/widgets/Custom_Input_Form_Bar.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:dating_your_date/widgets/button/custom_outlined_button.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
-import 'package:uni_links/uni_links.dart';
+import 'package:app_links/app_links.dart';
 
 class Login extends StatefulWidget {
-  Login({Key? key}) : super(key: key);
+  Login({super.key});
 
   @override
   _LoginState createState() => _LoginState();
@@ -75,30 +77,28 @@ class _LoginState extends State<Login> {
   }
 
   void initUniLinks(BuildContext context) async {
-    await getInitialLink();
-    Uri? initialLink = await getInitialUri();
-    if (initialLink != null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => NewPasswordEmailSetup()),
-      );
-    }
-    if (kIsWeb) {
-      return;
-    }
-    uriLinkStream.listen((Uri? uri) {
-      if (uri != null) {
+    final appLinks = AppLinks();
+    try {
+      final initialLink = await appLinks.getInitialLink();
+      if (initialLink != null && context.mounted) {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => NewPasswordEmailSetup()),
         );
       }
+    } catch (_) {}
+    if (kIsWeb) {
+      return;
+    }
+    appLinks.uriLinkStream.listen((Uri uri) {
+      if (!context.mounted) {
+        return;
+      }
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => NewPasswordEmailSetup()),
+      );
     });
-  }
-
-  bool isEmailValid(String email) {
-    final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
-    return emailRegex.hasMatch(email);
   }
 
   Future<void> continueWithSns(String provider, String serviceName) async {
@@ -136,7 +136,7 @@ class _LoginState extends State<Login> {
     );
     emailController.dispose();
     if (!mounted || email == null) return;
-    if (!isEmailValid(email)) {
+    if (!emailIsValid(email)) {
       await showErrorDialog(context, "無効なメールアドレス");
       return;
     }
@@ -145,12 +145,12 @@ class _LoginState extends State<Login> {
     try {
       showLoadDialog(context);
       loading = true;
-      final loginResponse = await GrpcInfoService.client.loginUser(LoginUserRequest(email: email, password: "sns:$provider"));
+      final loginResponse = await GrpcInfoService.client.loginUser(LoginUserRequest(email: email, password: snsPassword(provider)));
       if (!mounted) return;
       Navigator.pop(context);
       loading = false;
-      if (loginResponse.sessionsID.startsWith("signup:")) {
-        signupCode = loginResponse.sessionsID.substring("signup:".length);
+      if (isSignupSession(loginResponse.sessionsID)) {
+        signupCode = signupCodeFromSession(loginResponse.sessionsID);
         await globalemail.write(key: "email", value: email);
         Navigator.pushNamed(context, AppRoutes.fixInformation);
         return;
@@ -280,7 +280,7 @@ class _LoginState extends State<Login> {
                     ],
                   ),
                   SizedBox(height: mediaH / 35),
-                  _buildSignUpPart(context, mediaH, mediaW),
+                  _buildSignUpPart(context, mediaH),
                   SizedBox(height: mediaH / 35),
                 ],
               ),
@@ -337,8 +337,19 @@ class _LoginState extends State<Login> {
     );
   }
 
+  Widget _snsIcon(String imagePath, double mediaH) {
+    final size = mediaH * 0.028;
+    return Container(
+      width: size,
+      height: size,
+      margin: EdgeInsets.only(right: size * 0.45),
+      alignment: Alignment.center,
+      child: CustomImageView(imagePath: imagePath, width: size, height: size, fit: BoxFit.contain),
+    );
+  }
+
   /// SignUp Part
-  Widget _buildSignUpPart(BuildContext context, double mediaH, double mediaW) {
+  Widget _buildSignUpPart(BuildContext context, double mediaH) {
     return Column(
       children: [
         // SignUp of Email
@@ -354,10 +365,7 @@ class _LoginState extends State<Login> {
         // SignUp of Facebook
         CustomElevatedButton(
           text: "フェイスブックで続ける",
-          leftIcon: Container(
-            margin: EdgeInsets.only(left: mediaW / 20, right: mediaW / 15),
-            child: CustomImageView(imagePath: ImageConstant.imgFacebook, width: mediaW / 23),
-          ),
+          leftIcon: _snsIcon(ImageConstant.imgFacebook, mediaH),
           buttonStyle: CustomButtonStyles.fillBlue,
           onPressed: () {
             continueWithSns("facebook", "Facebook");
@@ -368,10 +376,7 @@ class _LoginState extends State<Login> {
         // SignUp of Twitter
         CustomElevatedButton(
           text: "ツイッターで続ける",
-          leftIcon: Container(
-            margin: EdgeInsets.only(right: mediaW / 15),
-            child: CustomImageView(imagePath: ImageConstant.imgClose, width: mediaW / 14),
-          ),
+          leftIcon: _snsIcon(ImageConstant.imgClose, mediaH),
           buttonStyle: CustomButtonStyles.fillDarkgrey,
           onPressed: () {
             continueWithSns("twitter", "X");
@@ -382,11 +387,7 @@ class _LoginState extends State<Login> {
         // SignUp of Google
         CustomElevatedButton(
           text: "グーグルで続ける",
-          leftIcon: Container(
-            padding: EdgeInsets.only(top: mediaH / 150),
-            margin: EdgeInsets.only(right: mediaW / 13),
-            child: CustomImageView(imagePath: ImageConstant.imgGoogle, width: mediaW / 14),
-          ),
+          leftIcon: _snsIcon(ImageConstant.imgGoogle, mediaH),
           buttonStyle: CustomButtonStyles.outlineGoogleButton,
           buttonTextStyle: theme.textTheme.headlineMedium?.copyWith(color: appTheme.black),
           onPressed: () {

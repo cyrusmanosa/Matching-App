@@ -14,7 +14,7 @@ import 'package:grpc/grpc.dart';
 
 // ignore: must_be_immutable, camel_case_types
 class PasswordResetEmail extends StatelessWidget {
-  PasswordResetEmail({Key? key}) : super(key: key);
+  PasswordResetEmail({super.key});
 
   TextEditingController emailController = TextEditingController();
 

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class CustomOutlinedButton extends BaseButton {
   CustomOutlinedButton({
-    Key? key,
+    super.key,
     Alignment? alignment,
     ButtonStyle? buttonStyle,
     bool? isDisabled,

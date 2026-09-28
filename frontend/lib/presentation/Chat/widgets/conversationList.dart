@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
 class ConversationList extends StatefulWidget {
-  ConversationList({Key? key, this.targetid, this.name, this.messageText, this.imageUrl, this.isMessageRead, this.onClosed}) : super(key: key);
+  ConversationList({super.key, this.targetid, this.name, this.messageText, this.imageUrl, this.isMessageRead, this.onClosed});
   final int? targetid;
   final String? name;
   final String? messageText;

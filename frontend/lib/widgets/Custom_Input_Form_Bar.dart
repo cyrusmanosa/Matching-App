@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class CustomInputFormBar extends StatelessWidget {
   CustomInputFormBar({
-    Key? key,
+    super.key,
     this.alignment,
     this.borderDecoration,
     this.controller,
@@ -29,7 +29,7 @@ class CustomInputFormBar extends StatelessWidget {
     this.filled,
     this.obscureText,
     this.onTap,
-  }) : super(key: key);
+  });
 
   final Alignment? alignment;
   final bool autofocus;

@@ -5,9 +5,8 @@
 package db
 
 import (
-    "context"
+	"context"
 )
-
 
 type ChatQuerier interface {
 	Createsocialmedia(ctx context.Context, arg CreatesocialmediaParams) (Socialmedium, error)
@@ -15,17 +14,17 @@ type ChatQuerier interface {
 	Listsocialmedia(ctx context.Context) ([]Socialmedium, error)
 	Updatesocialmedia(ctx context.Context, arg UpdatesocialmediaParams) (Socialmedium, error)
 	Deletesocialmedia(ctx context.Context, userID int32) error
+	DropUserChat(ctx context.Context, userID int32) error
 
-    CreateChatTable(ctx context.Context, tablename string) error
-    CreateRecord(ctx context.Context, arg CreateRecordParams, tablename string) (Record, error)
-    DeleteRecord(ctx context.Context, arg DeleteRecordParams, tablename string) error
-    GetLastMsg(ctx context.Context, targetID int32, tablename string) (GetLastMsgRow, error) 
-    GetRecord(ctx context.Context, targetID int32, tablename string) ([]Record, error)
-    GetTargetID(ctx context.Context,tablename string) ([]int32, error)
-    GetChatRow(ctx context.Context, tablename string) (int32, error)
-	UpdateRead(ctx context.Context, targetID int32,tablename string) error
-    UpdateRecord(ctx context.Context, arg UpdateRecordParams, tablename string) (Record, error)
+	CreateChatTable(ctx context.Context, ownerID int32) error
+	CreateRecord(ctx context.Context, arg CreateRecordParams, ownerID int32) (Record, error)
+	DeleteRecord(ctx context.Context, arg DeleteRecordParams, ownerID int32) error
+	GetLastMsg(ctx context.Context, targetID int32, ownerID int32) (GetLastMsgRow, error)
+	GetRecord(ctx context.Context, targetID int32, ownerID int32) ([]Record, error)
+	GetTargetID(ctx context.Context, ownerID int32) ([]int32, error)
+	GetChatRow(ctx context.Context, ownerID int32) (int32, error)
+	UpdateRead(ctx context.Context, targetID int32, ownerID int32) error
+	UpdateRecord(ctx context.Context, arg UpdateRecordParams, ownerID int32) (Record, error)
 }
-
 
 var _ ChatQuerier = (*Queries)(nil)

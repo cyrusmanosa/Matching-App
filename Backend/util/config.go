@@ -15,6 +15,11 @@ type Config struct {
 	GRPCServerAddress   string        `mapstructure:"GRPC_SERVER_ADDRESS"`
 	TokenSymmetricKey   string        `mapstructure:"TOKEN_SYMMETRIC_KEY"`
 	AccessTokenDuration time.Duration `mapstructure:"ACCESS_TOKEN_DURATION"`
+	SMTPHost            string        `mapstructure:"SMTP_HOST"`
+	SMTPPort            string        `mapstructure:"SMTP_PORT"`
+	SMTPUsername        string        `mapstructure:"SMTP_USERNAME"`
+	SMTPPassword        string        `mapstructure:"SMTP_PASSWORD"`
+	SMTPFrom            string        `mapstructure:"SMTP_FROM"`
 }
 
 // LoadConfig reads the configuration from file or environment variable
@@ -26,7 +31,9 @@ func LoadConfig(path string) (config Config, err error) {
 
 	err = viper.ReadInConfig()
 	if err != nil {
-		return
+		if _, missing := err.(viper.ConfigFileNotFoundError); !missing {
+			return
+		}
 	}
 	err = viper.Unmarshal(&config)
 	return

@@ -67,6 +67,8 @@ func (server *Server) GetTargetList(ctx context.Context, req *pb.GetTargetListRe
 		if converted.Target3ID == -1 {
 			converted.T3Type = ""
 		}
+	} else if err = server.hideBlockedTargets(ctx, session.UserID, converted); err != nil {
+		return nil, err
 	}
 
 	return &pb.GetTargetListResponse{Tl: converted}, nil

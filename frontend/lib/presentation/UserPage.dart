@@ -1,10 +1,15 @@
 import 'dart:typed_data';
 
 import 'package:dating_your_date/client/grpc_services.dart';
+import 'package:dating_your_date/client/match_reasons.dart';
+import 'package:dating_your_date/client/session_auth.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/canChange.pb.dart';
 import 'package:dating_your_date/pb/fix.pb.dart';
+import 'package:dating_your_date/pb/rpc_accompany.pb.dart';
+import 'package:dating_your_date/pb/rpc_hobby.pb.dart';
+import 'package:dating_your_date/pb/rpc_lover.pb.dart';
 import 'package:dating_your_date/pb/rpc_socialmedia.pb.dart';
 import 'package:dating_your_date/presentation/ChatBox.dart';
 import 'package:dating_your_date/presentation/Profile/widgets/showDataBar.dart';
@@ -29,6 +34,76 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
+  List<String> reasons = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadReasons();
+  }
+
+  Future<void> _loadReasons() async {
+    final sessionID = await globalSession.read(key: 'SessionId');
+    final their = widget.canData;
+    final fix = widget.fixData;
+    if (sessionID == null || their == null || fix == null) return;
+    List<String> next = [];
+    try {
+      if (widget.tType == '趣味') {
+        final response = await GrpcInfoService.client.getHobby(GetHobbyRequest(sessionID: sessionID));
+        final pref = response.h;
+        next = hobbyMatchReasons(
+          theirHobby: their.hobbyType,
+          theirGender: fix.gender,
+          theirCity: their.city,
+          theirLanguages: their.speaklanguage,
+          theirAge: fix.age,
+          theirExperience: their.experience,
+          findType: pref.findType,
+          wantGender: pref.gender,
+          wantCities: pref.city,
+          wantLanguages: pref.speaklanguage,
+          wantEra: pref.era,
+          wantExperience: pref.experience,
+        );
+      } else if (widget.tType == '恋人') {
+        final response = await GrpcInfoService.client.getLover(GetLoverRequest(sessionID: sessionID));
+        final pref = response.l;
+        next = loverMatchReasons(
+          theirGender: fix.gender,
+          theirSexual: their.sexual,
+          theirCity: their.city,
+          theirLanguages: their.speaklanguage,
+          theirAge: fix.age,
+          wantGender: pref.gender,
+          wantSexual: pref.sexual,
+          wantCities: pref.city,
+          wantLanguages: pref.speaklanguage,
+          minAge: pref.minAge,
+          maxAge: pref.maxAge,
+        );
+      } else if (widget.tType == '相伴') {
+        final response = await GrpcInfoService.client.getAccompany(GetAccompanyRequest(sessionID: sessionID));
+        final pref = response.ac;
+        next = accompanyMatchReasons(
+          theirAccompany: their.accompanyType,
+          theirSociability: their.sociability,
+          theirLanguages: their.speaklanguage,
+          theirAge: fix.age,
+          findType: pref.findType,
+          wantSociability: pref.sociability,
+          wantLanguages: pref.speaklanguage,
+          wantEra: pref.era,
+        );
+      }
+    } on GrpcError catch (error) {
+      if (isUnauthenticated(error)) return;
+      return;
+    }
+    if (!mounted) return;
+    setState(() => reasons = next);
+  }
+
   Future<bool> _hasSocialMedia(int userID, int targetID) async {
     try {
       await GrpcChatService.client.getSocialMedia(GetSocialMediaRequest(userID: userID, targetID: targetID));
@@ -101,6 +176,7 @@ class _UserPageState extends State<UserPage> {
             ),
             // ago
             Text(widget.fixData!.age.toString() + ' 才', style: TextStyle(fontSize: 18, color: appTheme.black)),
+            if (reasons.isNotEmpty) _buildReasons(mediaW, mediaH),
             SizedBox(height: mediaH / 50),
 
             // Part 1
@@ -118,6 +194,28 @@ class _UserPageState extends State<UserPage> {
             SizedBox(height: mediaH / 15),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildReasons(double mediaW, double mediaH) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(mediaW * 0.08, mediaH * 0.012, mediaW * 0.08, 0),
+      child: Wrap(
+        alignment: WrapAlignment.center,
+        spacing: mediaW * 0.02,
+        runSpacing: mediaH * 0.008,
+        children: [
+          for (final reason in reasons)
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: mediaW * 0.03, vertical: mediaH * 0.006),
+              decoration: BoxDecoration(
+                color: appTheme.pinkA100.withValues(alpha: 0.18),
+                borderRadius: BorderRadius.circular(mediaW * 0.04),
+              ),
+              child: Text(reason, style: TextStyle(fontSize: mediaW * 0.032, fontWeight: FontWeight.w700, color: appTheme.black)),
+            ),
+        ],
       ),
     );
   }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class ResetTargetButton extends StatelessWidget {
-  ResetTargetButton({Key? key, this.title, this.color, this.sendPage}) : super(key: key);
+  ResetTargetButton({super.key, this.title, this.color, this.sendPage});
 
   final String? title;
   final String? sendPage;

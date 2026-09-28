@@ -10,7 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
 
 class PayDone extends StatefulWidget {
-  PayDone({Key? key, this.oldData, this.newU, this.le, this.type}) : super(key: key);
+  PayDone({super.key, this.oldData, this.newU, this.le, this.type});
 
   final Targetlist? oldData;
   final int? newU;

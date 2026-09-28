@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
 class ConfirmationCore extends StatefulWidget {
-  ConfirmationCore({Key? key}) : super(key: key);
+  ConfirmationCore({super.key});
   @override
   _ConfirmationCoreState createState() => _ConfirmationCoreState();
 }

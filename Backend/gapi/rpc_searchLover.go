@@ -44,11 +44,19 @@ func (server *Server) SearchTargetLover(ctx context.Context, req *pb.SearchReque
 		return nil, status.Errorf(codes.Internal, "failed to search lover")
 	}
 
+	blocked, err := server.blockedWith(ctx, session.UserID)
+	if err != nil {
+		return nil, err
+	}
 	ranked := make([]rankedID, 0, len(candidates))
 	for _, candidate := range candidates {
+		if _, skip := blocked[candidate.UserID]; skip {
+			continue
+		}
 		ranked = append(ranked, rankedID{
 			id:      candidate.UserID,
 			percent: scoreLover(candidate, myLover, me),
+			reasons: loverReasons(candidate, myLover, me),
 		})
 	}
 

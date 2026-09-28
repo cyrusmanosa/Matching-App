@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
 class PasswordSetup extends StatefulWidget {
-  PasswordSetup({Key? key}) : super(key: key);
+  PasswordSetup({super.key});
 
   @override
   _PasswordSetupState createState() => _PasswordSetupState();

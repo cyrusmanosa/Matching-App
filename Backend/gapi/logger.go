@@ -10,7 +10,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func GprcLogger(ctx context.Context, req interface{}, in *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
+func GprcLogger(ctx context.Context, req any, in *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp any, err error) {
 	startTime := time.Now()
 	result, err := handler(ctx, req)
 	duration := time.Since(startTime)

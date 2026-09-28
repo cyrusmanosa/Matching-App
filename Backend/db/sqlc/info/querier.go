@@ -6,6 +6,7 @@ package db
 
 import (
 	"context"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -25,7 +26,9 @@ type InfoQuerier interface {
 	CreatePayment(ctx context.Context, arg CreatePaymentParams) (Payment, error)
 	CreateSession(ctx context.Context, arg CreateSessionParams) (Session, error)
 	CreateUserCanChangeInformation(ctx context.Context, arg CreateUserCanChangeInformationParams) (Canchangeinformation, error)
+	CreateUserBlock(ctx context.Context, userID int32, targetID int32, reason string) error
 	CreateUserFixInformation(ctx context.Context, arg CreateUserFixInformationParams) (Fixinformation, error)
+	DeleteAccountData(ctx context.Context, userID int32) error
 	DeleteAccompany(ctx context.Context, userID int32) error
 	DeleteCanChangeInformation(ctx context.Context, userID int32) error
 	DeleteChangeTargetUser(ctx context.Context, userID int32) error
@@ -33,6 +36,7 @@ type InfoQuerier interface {
 	DeleteHobby(ctx context.Context, userID int32) error
 	DeleteImage(ctx context.Context, userID int32) error
 	DeleteLover(ctx context.Context, userID int32) error
+	DeletePendingSignup(ctx context.Context, code string) error
 	DeleteTargetList(ctx context.Context, userID int32) error
 	DeleteUser(ctx context.Context, userID int32) error
 	FixSearchAccompany(ctx context.Context, arg FixSearchAccompanyParams) ([]Fixinformation, error)
@@ -44,6 +48,7 @@ type InfoQuerier interface {
 	GetLover(ctx context.Context, userID int32) (Lover, error)
 	GetLoginProvider(ctx context.Context, email string) (string, error)
 	GetPayment(ctx context.Context, payID uuid.UUID) (Payment, error)
+	GetPendingSignup(ctx context.Context, code string) (email string, provider string, verified bool, expiresAt time.Time, err error)
 	GetRowCount(ctx context.Context, userID int32) (int32, error)
 	GetSession(ctx context.Context, id uuid.UUID) (Session, error)
 	GetTargetUserList(ctx context.Context, userID int32) (Targetlist, error)
@@ -51,6 +56,8 @@ type InfoQuerier interface {
 	GetUserContactList(ctx context.Context, contactID int32) (Contact, error)
 	GetUserFixInformation(ctx context.Context, userID int32) (Fixinformation, error)
 	GetUserimageData(ctx context.Context, userID int32) (Image, error)
+	IsEitherBlocked(ctx context.Context, userID int32, targetID int32) (bool, error)
+	ListBlockedWith(ctx context.Context, userID int32) ([]int32, error)
 	ListAccompany(ctx context.Context) ([]Accompany, error)
 	ListAccompanyCandidates(ctx context.Context, arg ListAccompanyCandidatesParams) ([]AccompanyCandidate, error)
 	ListCanChangeInformation(ctx context.Context) ([]Canchangeinformation, error)
@@ -64,6 +71,8 @@ type InfoQuerier interface {
 	LoginAtEmail(ctx context.Context, email string) (Fixinformation, error)
 	LogoutActiveSessions(ctx context.Context, userID int32) error
 	LogoutSession(ctx context.Context, id uuid.UUID) error
+	MarkPendingSignupVerified(ctx context.Context, code string) error
+	SavePendingSignup(ctx context.Context, code string, email string, provider string, verified bool, expiresAt time.Time) error
 	SetLoginProvider(ctx context.Context, userID int32, provider string) error
 	TargetUserList(ctx context.Context, arg TargetUserListParams) (Targetlist, error)
 	UpdateAccompany(ctx context.Context, arg UpdateAccompanyParams) (Accompany, error)

@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"math"
 	"sort"
+	"strings"
 	"time"
 
 	"github.com/google/uuid"
@@ -39,6 +40,7 @@ type searcherProfile struct {
 type rankedID struct {
 	id      int32
 	percent int
+	reasons []string
 }
 
 func (server *Server) userFromSession(ctx context.Context, sessionID string) (info.Session, error) {
@@ -296,7 +298,102 @@ func buildSearchResult(ranked []rankedID) (ids []int32, rank string, length int3
 	for i, item := range ranked {
 		ids[i] = item.id
 	}
-	return ids, fmt.Sprintf("%d%%", ranked[0].percent), int32(len(ids))
+	return ids, formatSearchRank(ranked), int32(len(ids))
+}
+
+func formatSearchRank(ranked []rankedID) string {
+	parts := make([]string, len(ranked))
+	for i, item := range ranked {
+		parts[i] = fmt.Sprintf("%d\n%s", item.id, formatMatchRank(item))
+	}
+	return strings.Join(parts, "\n---\n")
+}
+
+func formatMatchRank(item rankedID) string {
+	percent := fmt.Sprintf("%d%%", item.percent)
+	if len(item.reasons) == 0 {
+		return percent
+	}
+	return percent + "\n" + strings.Join(item.reasons, "\n")
+}
+
+func limitReasons(reasons []string) []string {
+	if len(reasons) == 0 {
+		return []string{"条件に近い相手"}
+	}
+	if len(reasons) > 4 {
+		return reasons[:4]
+	}
+	return reasons
+}
+
+func hobbyReasons(candidate info.HobbyCandidate, pref info.Hobby, me searcherProfile) []string {
+	reasons := []string{"同じ趣味"}
+	if jaccardSimilarity(pref.Speaklanguage, candidate.Speaklanguage).score > 0 {
+		reasons = append(reasons, "同じ言語")
+	}
+	if citySimilarity(pref.City, candidate.City).score == 1 {
+		reasons = append(reasons, "同じ都市")
+	}
+	if decadeSimilarity(candidate.Age, pref.Era).score >= 0.5 {
+		reasons = append(reasons, "年齢が近い")
+	}
+	if exactSimilarity(pref.Gender, candidate.Gender).score == 1 {
+		reasons = append(reasons, "希望の性別")
+	}
+	experience := experienceSimilarity(pref.Experience, candidate.Experience)
+	if experience.score == 1 {
+		reasons = append(reasons, "経験が希望以上")
+	} else if experience.score >= 0.5 {
+		reasons = append(reasons, "経験が近い")
+	}
+	if exactSimilarity(candidate.WantType, me.HobbyType).score == 1 {
+		reasons = append(reasons, "相手も同じ趣味を探しています")
+	}
+	return limitReasons(reasons)
+}
+
+func loverReasons(candidate info.LoverCandidate, pref info.Lover, me searcherProfile) []string {
+	var reasons []string
+	if pref.Gender != "" && candidate.Gender == pref.Gender {
+		reasons = append(reasons, "希望の性別")
+	}
+	age := rangeSimilarity(candidate.Age, pref.MinAge, pref.MaxAge)
+	if age.score == 1 {
+		reasons = append(reasons, "希望の年齢")
+	} else if age.score >= 0.5 {
+		reasons = append(reasons, "年齢が近い")
+	}
+	if exactSimilarity(pref.Sexual, candidate.Sexual).score == 1 {
+		reasons = append(reasons, "性的指向が合う")
+	}
+	if jaccardSimilarity(pref.Speaklanguage, candidate.Speaklanguage).score > 0 {
+		reasons = append(reasons, "同じ言語")
+	}
+	if citySimilarity(pref.City, candidate.City).score == 1 {
+		reasons = append(reasons, "同じ都市")
+	}
+	if exactSimilarity(candidate.WantGender, me.Gender).score == 1 {
+		reasons = append(reasons, "相手もあなたの性別を探しています")
+	}
+	return limitReasons(reasons)
+}
+
+func accompanyReasons(candidate info.AccompanyCandidate, pref info.Accompany, me searcherProfile) []string {
+	reasons := []string{"同じ相伴"}
+	if exactSimilarity(pref.Sociability, candidate.Sociability).score == 1 {
+		reasons = append(reasons, "社交力が合う")
+	}
+	if jaccardSimilarity(pref.Speaklanguage, candidate.Speaklanguage).score > 0 {
+		reasons = append(reasons, "同じ言語")
+	}
+	if decadeSimilarity(candidate.Age, pref.Era).score >= 0.5 {
+		reasons = append(reasons, "年齢が近い")
+	}
+	if exactSimilarity(candidate.WantType, me.AccompanyType).score == 1 {
+		reasons = append(reasons, "相手も同じ相伴を探しています")
+	}
+	return limitReasons(reasons)
 }
 
 func scoreHobby(candidate info.HobbyCandidate, pref info.Hobby, me searcherProfile) int {

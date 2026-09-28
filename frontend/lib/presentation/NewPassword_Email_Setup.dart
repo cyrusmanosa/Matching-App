@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
 class NewPasswordEmailSetup extends StatefulWidget {
-  NewPasswordEmailSetup({Key? key}) : super(key: key);
+  NewPasswordEmailSetup({super.key});
 
   @override
   _NewPasswordSetupEmailState createState() => _NewPasswordSetupEmailState();

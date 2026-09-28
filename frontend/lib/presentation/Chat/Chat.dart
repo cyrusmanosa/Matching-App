@@ -1,5 +1,8 @@
-import 'dart:convert';
+import 'dart:async';
 
+import 'package:dating_your_date/client/blocked_users.dart';
+import 'package:dating_your_date/client/chat_preview.dart';
+import 'package:dating_your_date/client/chat_unread.dart';
 import 'package:dating_your_date/client/grpc_services.dart';
 import 'package:dating_your_date/client/session_auth.dart';
 import 'package:dating_your_date/core/app_export.dart';
@@ -17,7 +20,7 @@ import 'package:flutter/services.dart';
 import 'package:grpc/grpc.dart';
 
 class Chat extends StatefulWidget {
-  Chat({Key? key}) : super(key: key);
+  Chat({super.key});
 
   @override
   _ChatState createState() => _ChatState();
@@ -26,6 +29,8 @@ class Chat extends StatefulWidget {
 class _ChatState extends State<Chat> {
   bool isEmpty = false;
   bool loading = true;
+  bool fetching = false;
+  Timer? pollTimer;
   List<int> targetID = [];
   List<TargetInfos> users = [];
 
@@ -33,15 +38,30 @@ class _ChatState extends State<Chat> {
   void initState() {
     super.initState();
     fetchData(context);
+    pollTimer = Timer.periodic(const Duration(seconds: 4), (_) {
+      if (!fetching) fetchData(context, silent: true);
+    });
   }
 
-  Future<void> fetchData(BuildContext context) async {
-    await _getTargetID(context);
-    await _getUserInfoGrpcRequest();
+  @override
+  void dispose() {
+    pollTimer?.cancel();
+    super.dispose();
+  }
+
+  Future<void> fetchData(BuildContext context, {bool silent = false}) async {
+    if (fetching) return;
+    fetching = true;
+    try {
+      await _getTargetID(context, silent: silent);
+      await _getUserInfoGrpcRequest(silent: silent);
+    } finally {
+      fetching = false;
+    }
   }
 
 // Grpc
-  Future<void> _getTargetID(BuildContext context) async {
+  Future<void> _getTargetID(BuildContext context, {bool silent = false}) async {
     final ids = <int>{};
     String? apiKeyS = await globalSession.read(key: 'SessionId');
     String? apiKeyU = await globalUserId.read(key: 'UserID');
@@ -55,7 +75,7 @@ class _ChatState extends State<Chat> {
       ids.addAll(tid.targetID.where((id) => id != 0));
     } on GrpcError catch (error) {
       if (isUnauthenticated(error)) {
-        if (mounted) setState(() => loading = false);
+        if (mounted && !silent) setState(() => loading = false);
         return;
       }
     }
@@ -67,10 +87,10 @@ class _ChatState extends State<Chat> {
     } on GrpcError catch (error) {
       if (!mounted) return;
       if (isUnauthenticated(error)) {
-        setState(() => loading = false);
+        if (mounted && !silent) setState(() => loading = false);
         return;
       }
-      if (ids.isEmpty) {
+      if (ids.isEmpty && !silent) {
         setState(() => loading = false);
         await showErrorDialog(context, "チャット相手を読み込めませんでした。");
         return;
@@ -82,13 +102,17 @@ class _ChatState extends State<Chat> {
     });
   }
 
-  Future<void> _getUserInfoGrpcRequest() async {
+  Future<void> _getUserInfoGrpcRequest({bool silent = false}) async {
     try {
       String? apiKeyS = await globalSession.read(key: 'SessionId');
       String? apiKeyU = await globalUserId.read(key: 'UserID');
       final userid = int.tryParse(apiKeyU!);
+      final blocked = await readBlockedUsers();
       final next = <TargetInfos>[];
       for (int i = 0; i < targetID.length; i++) {
+        if (blocked.contains(targetID[i])) {
+          continue;
+        }
         try {
           final infoResponse = await GrpcInfoService.client.getCanChange(GetCanChangeRequest(sessionID: apiKeyS, userID: targetID[i]));
           final imgResponse = await GrpcInfoService.client.getImages(GetImagesRequest(sessionID: apiKeyS, userID: targetID[i]));
@@ -97,13 +121,9 @@ class _ChatState extends State<Chat> {
           try {
             final lmsgResponse = await GrpcChatService.client.getLastMsg(GetLastMsgRequest(userID: userid!, targetID: targetID[i]));
             isRead = lmsgResponse.isRead;
-            if (lmsgResponse.mediaType == "image") {
-              preview = "写真";
-            } else if (lmsgResponse.media.isNotEmpty) {
-              preview = utf8.decode(lmsgResponse.media, allowMalformed: true);
-            }
+            preview = chatPreview(lmsgResponse.mediaType, lmsgResponse.media);
           } on GrpcError catch (error) {
-            if (isUnauthenticated(error)) rethrow;
+            if (isUnauthenticated(error) || error.code == StatusCode.permissionDenied) rethrow;
           }
           next.add(TargetInfos(
             userid: targetID[i],
@@ -114,6 +134,9 @@ class _ChatState extends State<Chat> {
           ));
         } on GrpcError catch (error) {
           if (isUnauthenticated(error)) rethrow;
+          if (error.code == StatusCode.permissionDenied) {
+            continue;
+          }
         }
       }
       if (mounted) {
@@ -122,9 +145,10 @@ class _ChatState extends State<Chat> {
           isEmpty = users.isEmpty;
           loading = false;
         });
+        publishChatUnread(users.map((user) => user.isRead));
       }
     } on GrpcError catch (error) {
-      if (!mounted || isUnauthenticated(error)) return;
+      if (!mounted || isUnauthenticated(error) || silent) return;
       setState(() {
         isEmpty = users.isEmpty;
         loading = false;

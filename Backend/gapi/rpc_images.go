@@ -16,13 +16,34 @@ func (server *Server) CreateImages(ctx context.Context, req *pb.CreateImagesRequ
 		return nil, err
 	}
 
+	img1, err := compressPhoto(req.GetImg1())
+	if err != nil {
+		return nil, status.Error(codes.InvalidArgument, "image is too large")
+	}
+	img2, err := compressPhoto(req.GetImg2())
+	if err != nil {
+		return nil, status.Error(codes.InvalidArgument, "image is too large")
+	}
+	img3, err := compressPhoto(req.GetImg3())
+	if err != nil {
+		return nil, status.Error(codes.InvalidArgument, "image is too large")
+	}
+	img4, err := compressPhoto(req.GetImg4())
+	if err != nil {
+		return nil, status.Error(codes.InvalidArgument, "image is too large")
+	}
+	img5, err := compressPhoto(req.GetImg5())
+	if err != nil {
+		return nil, status.Error(codes.InvalidArgument, "image is too large")
+	}
+
 	img := info.CreateImageParams{
 		UserID: token.UserID,
-		Img1:   req.GetImg1(),
-		Img2:   req.GetImg2(),
-		Img3:   req.GetImg3(),
-		Img4:   req.GetImg4(),
-		Img5:   req.GetImg5(),
+		Img1:   img1,
+		Img2:   img2,
+		Img3:   img3,
+		Img4:   img4,
+		Img5:   img5,
 	}
 
 	images, err := server.infoStore.CreateImage(ctx, img)
@@ -68,13 +89,34 @@ func (server *Server) UpdateImages(ctx context.Context, req *pb.UpdateImagesRequ
 		return nil, err
 	}
 
+	img1, err := compressPhoto(req.GetImg1())
+	if err != nil {
+		return nil, status.Error(codes.InvalidArgument, "image is too large")
+	}
+	img2, err := compressPhoto(req.GetImg2())
+	if err != nil {
+		return nil, status.Error(codes.InvalidArgument, "image is too large")
+	}
+	img3, err := compressPhoto(req.GetImg3())
+	if err != nil {
+		return nil, status.Error(codes.InvalidArgument, "image is too large")
+	}
+	img4, err := compressPhoto(req.GetImg4())
+	if err != nil {
+		return nil, status.Error(codes.InvalidArgument, "image is too large")
+	}
+	img5, err := compressPhoto(req.GetImg5())
+	if err != nil {
+		return nil, status.Error(codes.InvalidArgument, "image is too large")
+	}
+
 	img := info.UpdateImageParams{
 		UserID: token.UserID,
-		Img1:   req.GetImg1(),
-		Img2:   req.GetImg2(),
-		Img3:   req.GetImg3(),
-		Img4:   req.GetImg4(),
-		Img5:   req.GetImg5(),
+		Img1:   img1,
+		Img2:   img2,
+		Img3:   img3,
+		Img4:   img4,
+		Img5:   img5,
 	}
 
 	images, err := server.infoStore.UpdateImage(ctx, img)

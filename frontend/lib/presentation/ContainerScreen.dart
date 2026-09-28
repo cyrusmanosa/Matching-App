@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class ContainerScreen extends StatefulWidget {
-  ContainerScreen({Key? key, this.number}) : super(key: key);
+  ContainerScreen({super.key, this.number});
 
   final int? number;
 

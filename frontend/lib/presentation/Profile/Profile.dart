@@ -24,7 +24,7 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
-  Profile({Key? key}) : super(key: key);
+  Profile({super.key});
 
   @override
   _ProfileState createState() => _ProfileState();

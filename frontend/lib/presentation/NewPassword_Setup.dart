@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
 class NewPasswordSetup extends StatefulWidget {
-  NewPasswordSetup({Key? key}) : super(key: key);
+  NewPasswordSetup({super.key});
 
   @override
   _NewPasswordSetupState createState() => _NewPasswordSetupState();

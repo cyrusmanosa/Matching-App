@@ -43,6 +43,8 @@ services:
     environment:
       DB_SOURCE_INFO: postgresql://root:secret@postgres:5432/dating_date_info?sslmode=disable
       DB_SOURCE_CHAT: postgresql://root:secret@postgres:5432/dating_date_chat?sslmode=disable
+    env_file:
+      - ./Backend/app.env
     depends_on:
       migrate-chat:
         condition: service_completed_successfully

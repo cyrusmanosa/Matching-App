@@ -22,7 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
 class LoverCondition extends StatefulWidget {
-  LoverCondition({Key? key}) : super(key: key);
+  LoverCondition({super.key});
 
   @override
   _LoverConditionState createState() => _LoverConditionState();
@@ -137,7 +137,7 @@ class _LoverConditionState extends State<LoverCondition> {
               break;
             } else {
               await Future.delayed(Duration(seconds: 1));
-              await showLogoDialog(context, matchReadyMessage(rsp.resu.rank), false);
+              await showLogoDialog(context, matchReadyMessageFor(rsp.resu.rank, rsp.resu.resultID[i]), false);
               await Future.delayed(Duration(seconds: 1));
 
               Navigator.push(
@@ -174,7 +174,7 @@ class _LoverConditionState extends State<LoverCondition> {
             break;
           } else {
             await Future.delayed(Duration(seconds: 1));
-            await showLogoDialog(context, matchReadyMessage(rsp.resu.rank), false);
+            await showLogoDialog(context, matchReadyMessageFor(rsp.resu.rank, rsp.resu.resultID[i]), false);
             await Future.delayed(Duration(seconds: 1));
             Navigator.push(
               context,

@@ -22,7 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
 class HobbyCondition extends StatefulWidget {
-  HobbyCondition({Key? key, this.arguments}) : super(key: key);
+  HobbyCondition({super.key, this.arguments});
 
   final String? arguments;
   @override
@@ -137,7 +137,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
               break;
             } else {
               await Future.delayed(Duration(seconds: 1));
-              await showLogoDialog(context, matchReadyMessage(rsp.resu.rank), false);
+              await showLogoDialog(context, matchReadyMessageFor(rsp.resu.rank, rsp.resu.resultID[i]), false);
               await Future.delayed(Duration(seconds: 1));
 
               Navigator.push(
@@ -173,7 +173,7 @@ class _HobbyConditionState extends State<HobbyCondition> {
             break;
           } else {
             await Future.delayed(Duration(seconds: 1));
-            await showLogoDialog(context, matchReadyMessage(rsp.resu.rank), false);
+            await showLogoDialog(context, matchReadyMessageFor(rsp.resu.rank, rsp.resu.resultID[i]), false);
             await Future.delayed(Duration(seconds: 1));
             Navigator.push(
               context,

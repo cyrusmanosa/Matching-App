@@ -7,8 +7,7 @@ import 'package:dating_your_date/presentation/UserPage.dart';
 import 'package:flutter/material.dart';
 
 class MainframeItemWidget extends StatefulWidget {
-  MainframeItemWidget({Key? key, this.mediaH, this.mediaW, this.img, this.fix, this.canChange, this.allImage, this.tType})
-      : super(key: key);
+  MainframeItemWidget({super.key, this.mediaH, this.mediaW, this.img, this.fix, this.canChange, this.allImage, this.tType});
 
   final double? mediaH;
   final double? mediaW;

@@ -1,25 +1,29 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:dating_your_date/client/blocked_users.dart';
 import 'package:dating_your_date/client/grpc_services.dart';
+import 'package:dating_your_date/client/photo_bytes.dart';
 import 'package:dating_your_date/client/session_auth.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
 import 'package:dating_your_date/pb/chatRecordNoID.pb.dart';
 import 'package:dating_your_date/pb/rpc_chatRecord.pb.dart';
+import 'package:dating_your_date/pb/rpc_contact.pb.dart';
 import 'package:dating_your_date/pb/rpc_socialmedia.pb.dart';
 import 'package:dating_your_date/pb/rpc_targetList.pb.dart';
 import 'package:dating_your_date/pb/socialmedia.pb.dart';
 import 'package:dating_your_date/presentation/SideBar.dart';
+import 'package:dating_your_date/widgets/Custom_IconLogoBox.dart';
 import 'package:dating_your_date/widgets/Custom_WarningLogoBox.dart';
 import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
-import 'package:image/image.dart' as customImage;
 import 'package:image_picker/image_picker.dart';
 
 class ChatBox extends StatefulWidget {
-  ChatBox({Key? key, this.name, this.imageUrl, this.time, this.targetid, this.tType}) : super(key: key);
+  ChatBox({super.key, this.name, this.imageUrl, this.time, this.targetid, this.tType});
 
   final String? name;
   final String? tType;
@@ -36,6 +40,8 @@ class _ChatBoxState extends State<ChatBox> {
   Color headerColor = Colors.white;
   bool loading = true;
   bool sending = false;
+  bool blocked = false;
+  Timer? pollTimer;
   SocialMedia? mySocialMedia;
   SocialMedia? tarSocialMedia;
   List<ChatRecordNoID> records = [];
@@ -55,10 +61,16 @@ class _ChatBoxState extends State<ChatBox> {
     _loadSocialMedia();
     _loadRecords();
     _markRead();
+    pollTimer = Timer.periodic(const Duration(seconds: 4), (_) {
+      if (!sending && !blocked) {
+        _loadRecords(silent: true);
+      }
+    });
   }
 
   @override
   void dispose() {
+    pollTimer?.cancel();
     scrollController.dispose();
     messageController.dispose();
     messageFocus.dispose();
@@ -106,24 +118,36 @@ class _ChatBoxState extends State<ChatBox> {
     });
   }
 
-  Future<void> _loadRecords() async {
+  Future<void> _loadRecords({bool silent = false}) async {
     final apiKeyU = await globalUserId.read(key: 'UserID');
     final userid = int.tryParse(apiKeyU ?? '');
     if (userid == null || widget.targetid == null) {
-      if (mounted) setState(() => loading = false);
+      if (mounted && !silent) setState(() => loading = false);
       return;
     }
     try {
       final response = await GrpcChatService.client.getChatRecord(GetChatRecordRequest(userID: userid, targetID: widget.targetid));
       if (!mounted) return;
+      final next = response.chatRecordNoID;
+      final changed = next.length != records.length;
       setState(() {
-        records = response.chatRecordNoID;
+        records = next;
         loading = false;
       });
-      _scrollToLatest();
+      if (!silent || changed) {
+        _scrollToLatest();
+      }
     } on GrpcError catch (error) {
       if (!mounted || isUnauthenticated(error)) return;
-      setState(() => loading = false);
+      if (error.code == StatusCode.permissionDenied) {
+        setState(() {
+          blocked = true;
+          loading = false;
+        });
+        pollTimer?.cancel();
+        return;
+      }
+      if (!silent) setState(() => loading = false);
     }
   }
 
@@ -225,12 +249,7 @@ class _ChatBoxState extends State<ChatBox> {
     final picked = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (picked == null) return;
     final bytes = await File(picked.path).readAsBytes();
-    final image = customImage.decodeImage(bytes);
-    if (image == null) return;
-    final targetWidth = 1024;
-    final targetHeight = (targetWidth / (image.width / image.height)).round();
-    final resized = customImage.copyResize(image, width: targetWidth, height: targetHeight);
-    await _send(media: customImage.encodeJpg(resized), mediaType: 'image');
+    await _send(media: compressPhoto(bytes), mediaType: 'image');
   }
 
   Future<void> _shareNote(String title, String label, String hint) async {
@@ -359,8 +378,8 @@ class _ChatBoxState extends State<ChatBox> {
         drawer: Drawer(width: mediaW * 0.72, child: SideBar(sm: mySocialMedia, targetId: widget.targetid)),
         body: Column(
           children: [
-            Expanded(child: _buildMessages(mediaH, mediaW)),
-            _buildComposer(mediaH, mediaW, media.padding.bottom),
+            Expanded(child: blocked ? _blockedNotice(mediaW) : _buildMessages(mediaH, mediaW)),
+            if (!blocked) _buildComposer(mediaH, mediaW, media.padding.bottom),
           ],
         ),
       ),
@@ -409,6 +428,17 @@ class _ChatBoxState extends State<ChatBox> {
         ],
       ),
       actions: [
+        PopupMenuButton<String>(
+          icon: Icon(Icons.more_vert, color: appTheme.black, size: mediaW * 0.06),
+          onSelected: (value) {
+            if (value == 'report') _reportUser();
+            if (value == 'block') _blockUser();
+          },
+          itemBuilder: (context) => [
+            PopupMenuItem(value: 'report', child: Text('通報', style: TextStyle(fontSize: mediaW * 0.038))),
+            PopupMenuItem(value: 'block', child: Text('ブロック', style: TextStyle(fontSize: mediaW * 0.038))),
+          ],
+        ),
         IconButton(
           icon: Icon(Icons.tune, color: appTheme.black, size: mediaW * 0.06),
           onPressed: () {
@@ -421,6 +451,83 @@ class _ChatBoxState extends State<ChatBox> {
         ),
       ],
     );
+  }
+
+  Widget _blockedNotice(double mediaW) {
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: mediaW * 0.1),
+        child: Text(
+          'このユーザーとはメッセージできません。',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: mediaW * 0.04, color: appTheme.grey800),
+        ),
+      ),
+    );
+  }
+
+  Future<String?> _askReason(String title) async {
+    final controller = TextEditingController();
+    final text = await showDialog<String>(
+      context: context,
+      builder: (dialogContext) {
+        final size = MediaQuery.of(dialogContext).size;
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadiusStyle.r15),
+          title: Text(title, style: TextStyle(fontSize: size.width * 0.045)),
+          content: TextField(controller: controller, autofocus: true, decoration: const InputDecoration(hintText: '理由')),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(dialogContext), child: const Text('キャンセル')),
+            TextButton(onPressed: () => Navigator.pop(dialogContext, controller.text.trim()), child: const Text('送信')),
+          ],
+        );
+      },
+    );
+    controller.dispose();
+    return text;
+  }
+
+  Future<void> _sendSafety(String type, String reason) async {
+    final sessionID = await globalSession.read(key: 'SessionId');
+    final targetID = widget.targetid;
+    if (sessionID == null || targetID == null) return;
+    await GrpcInfoService.client.createContact(CreateContactRequest(
+      sessionID: sessionID,
+      contactType: type,
+      message: 'target:$targetID\n$reason',
+      status: 'Sended',
+    ));
+  }
+
+  Future<void> _reportUser() async {
+    final reason = await _askReason('通報する理由');
+    if (reason == null || reason.isEmpty || !mounted) return;
+    try {
+      await _sendSafety('通報', reason);
+      if (!mounted) return;
+      await showLogoDialog(context, '通報を受け付けました。', true);
+    } on GrpcError {
+      if (!mounted) return;
+      await showErrorDialog(context, '通報を送れませんでした。');
+    }
+  }
+
+  Future<void> _blockUser() async {
+    final reason = await _askReason('ブロックする理由');
+    if (reason == null || !mounted) return;
+    final targetID = widget.targetid;
+    if (targetID == null) return;
+    try {
+      await _sendSafety('ブロック', reason.isEmpty ? 'ブロック' : reason);
+      await rememberBlockedUser(targetID);
+      if (!mounted) return;
+      setState(() => blocked = true);
+      pollTimer?.cancel();
+      Navigator.pop(context);
+    } on GrpcError {
+      if (!mounted) return;
+      await showErrorDialog(context, 'ブロックできませんでした。');
+    }
   }
 
   Widget _buildMessages(double mediaH, double mediaW) {

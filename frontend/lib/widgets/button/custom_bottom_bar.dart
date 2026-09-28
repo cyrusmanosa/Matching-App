@@ -1,3 +1,4 @@
+import 'package:dating_your_date/client/chat_unread.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +40,7 @@ class CustomBottomBar extends StatelessWidget {
               icon: Column(
                 children: [
                   Padding(padding: EdgeInsets.only(top: mediaH / 100)),
-                  CustomImageView(imagePath: bottomMenuList[index].icon, width: mediaW / 20, color: appTheme.white),
+                  _menuIcon(bottomMenuList[index].icon, index, mediaW, appTheme.white, appTheme.black),
                   Padding(padding: EdgeInsets.only(top: 2), child: Text(bottomMenuList[index].label!, style: CustomTextStyles.mainButtonW)),
                 ],
               ),
@@ -48,7 +49,7 @@ class CustomBottomBar extends StatelessWidget {
               activeIcon: Column(
                 children: [
                   Padding(padding: EdgeInsets.only(top: mediaH / 100)),
-                  CustomImageView(imagePath: bottomMenuList[index].activeIcon, width: mediaW / 20, color: appTheme.black),
+                  _menuIcon(bottomMenuList[index].activeIcon, index, mediaW, appTheme.black, appTheme.white),
                   Padding(
                     padding: EdgeInsets.only(top: 2),
                     child: Text(bottomMenuList[index].label!, style: CustomTextStyles.mainButtonC),
@@ -60,6 +61,33 @@ class CustomBottomBar extends StatelessWidget {
         ),
         onTap: onChanged,
       ),
+    );
+  }
+
+  Widget _menuIcon(String? path, int index, double mediaW, Color color, Color badgeColor) {
+    final image = CustomImageView(imagePath: path, width: mediaW / 20, color: color);
+    if (index != 2) return image;
+    return ValueListenableBuilder<int>(
+      valueListenable: chatUnreadCount,
+      builder: (context, count, child) {
+        return Stack(
+          clipBehavior: Clip.none,
+          children: [
+            child!,
+            if (count > 0)
+              Positioned(
+                right: -mediaW * 0.012,
+                top: -mediaW * 0.006,
+                child: Container(
+                  width: mediaW * 0.022,
+                  height: mediaW * 0.022,
+                  decoration: BoxDecoration(color: badgeColor, shape: BoxShape.circle),
+                ),
+              ),
+          ],
+        );
+      },
+      child: image,
     );
   }
 }

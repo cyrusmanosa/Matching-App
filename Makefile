@@ -22,6 +22,15 @@ rebuild:
 logs:
 	$(COMPOSE) logs -f api
 
+# 啟動 Flutter。run-android 會先開 AVD dating_phone，再等模擬器連上。
+ANDROID_AVD ?= dating_phone
+
+run-chrome:
+	cd frontend && flutter run -d chrome
+
+run-android:
+	powershell -NoProfile -ExecutionPolicy Bypass -Command "$$env:ANDROID_AVD='$(ANDROID_AVD)'; & '$(CURDIR)/scripts/run-android.ps1'"
+
 # 本機直接跑 Backend（資料庫仍用 compose 公佈的 localhost:5432）
 server:
 	cd $(BACKEND) && go run main.go
@@ -31,6 +40,9 @@ sqlc:
 
 test:
 	cd $(BACKEND) && go test -v -cover ./...
+
+test-flutter:
+	cd frontend && flutter test
 
 db_docs:
 	cd $(BACKEND) && dbdocs build doc/db.dbml
@@ -47,6 +59,13 @@ protob:
 	--grpc-gateway_out=pb --grpc-gateway_opt paths=source_relative \
 	--openapiv2_out=doc/swagger --openapiv2_opt=allow_merge=true,merge_file_name=Backend \
 	proto/*.proto
+
+# Frontend protobuf 由 Backend/proto 產生，不要手改 frontend/lib/pb。
+# 需要已安裝 protoc，以及 dart pub global activate protoc_plugin。
+proto-dart:
+	protoc --proto_path=$(BACKEND)/proto --dart_out=grpc:frontend/lib/pb $(BACKEND)/proto/*.proto google/protobuf/timestamp.proto google/protobuf/empty.proto
+
+proto: protob proto-dart
 
 evans:
 	evans --host localhost --port 19090 -r repl
@@ -78,7 +97,7 @@ chat_migrateup1:
 chat_migratedown1:
 	migrate -path $(BACKEND)/db/migration/chat -database "$(DB_CHAT_URL)" -verbose down 1
 
-.PHONY: up down build rebuild logs server sqlc test db_docs db_schema mock protob evans \
+.PHONY: up down build rebuild logs run-chrome run-android server sqlc test test-flutter db_docs db_schema mock proto protob proto-dart evans \
 	createmigrate_info createmigrate_chat \
 	info_migrateup info_migratedown info_migrateup1 info_migratedown1 info_migrateup2 info_migratedown2 \
 	chat_migrateup chat_migratedown chat_migrateup1 chat_migratedown1

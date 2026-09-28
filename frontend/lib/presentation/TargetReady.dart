@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class TargetReady extends StatelessWidget {
-  TargetReady({Key? key}) : super(key: key);
+  TargetReady({super.key});
 
   @override
   Widget build(BuildContext context) {

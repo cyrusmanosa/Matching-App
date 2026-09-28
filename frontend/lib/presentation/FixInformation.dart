@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dating_your_date/client/grpc_services.dart';
+import 'package:dating_your_date/client/photo_bytes.dart';
 import 'package:dating_your_date/client/session_auth.dart';
 import 'package:dating_your_date/core/app_export.dart';
 import 'package:dating_your_date/models/GlobalModel.dart';
@@ -24,7 +25,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 class FixInformation extends StatefulWidget {
-  FixInformation({Key? key}) : super(key: key);
+  FixInformation({super.key});
 
   @override
   _FixInformationState createState() => _FixInformationState();
@@ -119,13 +120,12 @@ class _FixInformationState extends State<FixInformation> {
     try {
       String? apiKeyS = await globalSession.read(key: 'SessionId');
       Uint8List bytes = await _imageFile!.readAsBytes();
-      List<int> img = bytes.toList();
+      List<int> img = compressPhoto(bytes);
       final request = CreateImagesRequest(sessionID: apiKeyS, img1: img, img2: null, img3: null, img4: null, img5: null);
       await GrpcInfoService.client.createImages(request);
       onTapNextPage(context);
-    } on GrpcError catch (e) {
+    } on GrpcError {
       Navigator.pop(context);
-      print("Error: $e");
     }
   }
 

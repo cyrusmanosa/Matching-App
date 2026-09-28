@@ -27,7 +27,7 @@ func (server *Server) EmailResetPassword(ctx context.Context, req *pb.ResetPwEma
 	resetPasswordEmail = data.Email
 	checkRandomCode := util.RandomCheckCode() + util.RandomCheckCode()
 	link := fmt.Sprintf("DatingDate://%s", checkRandomCode)
-	util.SendResetPWEmail(link, []string{data.Email})
+	util.SendResetPWEmail(server.config.SMTP(), link, []string{data.Email})
 
 	return &pb.ResetPwEmailResponse{
 		Link:   checkRandomCode,

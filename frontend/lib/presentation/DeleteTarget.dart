@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
 class DeleteTarget extends StatefulWidget {
-  DeleteTarget({Key? key, this.oldData, this.newU, this.le, this.type}) : super(key: key);
+  DeleteTarget({super.key, this.oldData, this.newU, this.le, this.type});
 
   final Targetlist? oldData;
   final int? newU;

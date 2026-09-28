@@ -4,7 +4,6 @@ import (
 	ch "Backend/db/sqlc/chat"
 	"Backend/pb"
 	"context"
-	"strconv"
 	"time"
 
 	"google.golang.org/grpc/codes"
@@ -16,9 +15,7 @@ func (server *Server) CreateChatTable(ctx context.Context, req *pb.CreateChatTab
 	if err := server.requireOwnChat(ctx, req.GetUserID()); err != nil {
 		return nil, err
 	}
-	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
-
-	err := server.chatStore.CreateChatTable(ctx, tablename)
+	err := server.chatStore.CreateChatTable(ctx, req.GetUserID())
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to create table: %s", err)
 	}
@@ -35,8 +32,10 @@ func (server *Server) CreateChatRecord(ctx context.Context, req *pb.CreateChatRe
 	if !ownTable && !deliverCopy {
 		return nil, status.Error(codes.PermissionDenied, "cannot write this chat")
 	}
+	if err = server.ensureNotBlocked(ctx, session.UserID, otherChatUser(session.UserID, req.GetUserID(), req.GetTargetID())); err != nil {
+		return nil, err
+	}
 
-	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
 	chat := ch.CreateRecordParams{
 		TargetID:  req.GetTargetID(),
 		RoleType:  req.GetRoleType(),
@@ -44,10 +43,10 @@ func (server *Server) CreateChatRecord(ctx context.Context, req *pb.CreateChatRe
 		Media:     req.GetMedia(),
 	}
 
-	chatR, err := server.chatStore.CreateRecord(ctx, chat, tablename)
+	chatR, err := server.chatStore.CreateRecord(ctx, chat, req.GetUserID())
 	if err != nil {
 		if missingRecord(err) {
-			return nil, status.Errorf(codes.NotFound, "table not found %s", tablename)
+			return nil, status.Errorf(codes.NotFound, "chat record not found")
 		}
 		return nil, status.Errorf(codes.Internal, "failed to input table: %s", err)
 	}
@@ -63,14 +62,15 @@ func (server *Server) GetChatRecord(ctx context.Context, req *pb.GetChatRecordRe
 	if err := server.requireOwnChat(ctx, req.GetUserID()); err != nil {
 		return nil, err
 	}
-	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
-
-	GetC, err := server.chatStore.GetRecord(ctx, req.GetTargetID(), tablename)
+	if err := server.ensureNotBlocked(ctx, req.GetUserID(), req.GetTargetID()); err != nil {
+		return nil, err
+	}
+	GetC, err := server.chatStore.GetRecord(ctx, req.GetTargetID(), req.GetUserID())
 	if err != nil {
 		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "chat record not found")
 		}
-		return nil, status.Errorf(codes.Internal, "failed: %s And tablename %s at targetid %d", err, tablename, req.GetTargetID())
+		return nil, status.Errorf(codes.Internal, "failed to get chat record: %s", err)
 	}
 
 	rsp := &pb.GetChatRecordResponse{
@@ -84,9 +84,7 @@ func (server *Server) GetTargetID(ctx context.Context, req *pb.GetTargetIDReques
 	if err := server.requireOwnChat(ctx, req.GetUserID()); err != nil {
 		return nil, err
 	}
-	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
-
-	tid, err := server.chatStore.GetTargetID(ctx, tablename)
+	tid, err := server.chatStore.GetTargetID(ctx, req.GetUserID())
 	if err != nil {
 		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "table not found")
@@ -105,9 +103,10 @@ func (server *Server) GetLastMsg(ctx context.Context, req *pb.GetLastMsgRequest)
 	if err := server.requireOwnChat(ctx, req.GetUserID()); err != nil {
 		return nil, err
 	}
-	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
-
-	lmsg, err := server.chatStore.GetLastMsg(ctx, req.GetTargetID(), tablename)
+	if err := server.ensureNotBlocked(ctx, req.GetUserID(), req.GetTargetID()); err != nil {
+		return nil, err
+	}
+	lmsg, err := server.chatStore.GetLastMsg(ctx, req.GetTargetID(), req.GetUserID())
 	if err != nil {
 		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "table not found")
@@ -128,9 +127,7 @@ func (server *Server) GetChatRow(ctx context.Context, req *pb.GetChatRowRequest)
 	if err := server.requireOwnChat(ctx, req.GetUserID()); err != nil {
 		return nil, err
 	}
-	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
-
-	row, err := server.chatStore.GetChatRow(ctx, tablename)
+	row, err := server.chatStore.GetChatRow(ctx, req.GetUserID())
 	if err != nil {
 		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "table not found")
@@ -148,8 +145,7 @@ func (server *Server) UpdateRead(ctx context.Context, req *pb.UpdateReadRequest)
 	if err := server.requireOwnChat(ctx, req.GetUserID()); err != nil {
 		return nil, err
 	}
-	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
-	err := server.chatStore.UpdateRead(ctx, req.GetTargetID(), tablename)
+	err := server.chatStore.UpdateRead(ctx, req.GetTargetID(), req.GetUserID())
 	if err != nil {
 		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "table not found")
@@ -163,8 +159,6 @@ func (server *Server) UpdateChatRecord(ctx context.Context, req *pb.UpdateChatRe
 	if err := server.requireOwnChat(ctx, req.GetUserID()); err != nil {
 		return nil, err
 	}
-	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
-
 	pbTimestamp := req.GetCreateAt()
 	timeValue := time.Unix(pbTimestamp.GetSeconds(), int64(pbTimestamp.GetNanos()))
 
@@ -175,7 +169,7 @@ func (server *Server) UpdateChatRecord(ctx context.Context, req *pb.UpdateChatRe
 		CreatedAt: timeValue,
 	}
 
-	Updatechat, err := server.chatStore.UpdateRecord(ctx, chat, tablename)
+	Updatechat, err := server.chatStore.UpdateRecord(ctx, chat, req.GetUserID())
 	if err != nil {
 		if missingRecord(err) {
 			return nil, status.Errorf(codes.NotFound, "table not found")
@@ -189,19 +183,3 @@ func (server *Server) UpdateChatRecord(ctx context.Context, req *pb.UpdateChatRe
 
 	return rsp, nil
 }
-
-// func (server *Server) DeleteChatRecord(ctx context.Context, req *pb.DeleteChatTableRequest) (*emptypb.Empty, error) {
-
-// 	tablename := "u" + strconv.Itoa(int(req.GetUserID()))
-
-// 	err := server.chatStore.DeleteRecord(ctx, d, tablename)
-// 	if err != nil {
-// 		errCode := db.ErrorCode(err)
-// 		if errCode == db.ForeignKeyViolation || errCode == db.UniqueViolation {
-// 			return nil, status.Errorf(codes.NotFound, "user not found")
-// 		}
-// 		return nil, status.Errorf(codes.Internal, "failed to input UserID: %s", err)
-// 	}
-
-// 	return &emptypb.Empty{}, nil
-// }

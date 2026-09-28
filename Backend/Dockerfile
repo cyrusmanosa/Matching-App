@@ -9,6 +9,6 @@ RUN CGO_ENABLED=0 go build -o /server .
 FROM alpine:3.21
 WORKDIR /app
 COPY --from=build /server /app/server
-COPY app.env /app/app.env
+COPY app.env.example /app/app.env
 EXPOSE 8080 9090
 CMD ["/app/server"]

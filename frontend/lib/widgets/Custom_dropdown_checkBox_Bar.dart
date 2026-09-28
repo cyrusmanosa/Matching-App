@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class CustomMultiSelectDropDownBar extends StatefulWidget {
   CustomMultiSelectDropDownBar({
-    Key? key,
+    super.key,
     this.alignment,
     this.borderDecoration,
     this.contentPadding,
@@ -33,7 +33,7 @@ class CustomMultiSelectDropDownBar extends StatefulWidget {
     this.itemArray,
     this.value,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   final Alignment? alignment;
   final bool autofocus;

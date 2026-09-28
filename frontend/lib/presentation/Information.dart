@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class Information extends StatefulWidget {
-  Information({Key? key, this.canData, this.fixData, this.imgIcon}) : super(key: key);
+  Information({super.key, this.canData, this.fixData, this.imgIcon});
 
   final CanChange? canData;
   final List<Uint8List>? imgIcon;

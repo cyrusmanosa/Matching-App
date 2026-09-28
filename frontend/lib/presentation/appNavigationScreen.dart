@@ -2,7 +2,7 @@ import 'package:dating_your_date/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 class AppNavigationScreen extends StatelessWidget {
-  AppNavigationScreen({Key? key}) : super(key: key);
+  AppNavigationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 class ShownDataBarWidget extends StatelessWidget {
   const ShownDataBarWidget({
-    Key? key,
+    super.key,
     this.item,
     this.data,
-  }) : super(key: key);
+  });
 
   final String? item;
   final String? data;

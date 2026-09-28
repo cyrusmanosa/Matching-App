@@ -7,7 +7,7 @@ import 'package:dating_your_date/presentation/Target/widgets/ResetTargetButton.d
 
 // ignore: must_be_immutable
 class Target extends StatefulWidget {
-  Target({Key? key, this.head}) : super(key: key);
+  Target({super.key, this.head});
 
   String? head;
 

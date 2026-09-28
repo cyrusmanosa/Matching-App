@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:grpc/grpc.dart';
 
 class ContactPage extends StatefulWidget {
-  ContactPage({Key? key}) : super(key: key);
+  ContactPage({super.key});
   @override
   _ContactPageState createState() => _ContactPageState();
 }

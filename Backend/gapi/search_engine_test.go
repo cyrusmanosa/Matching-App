@@ -2,6 +2,7 @@ package gapi
 
 import (
 	info "Backend/db/sqlc/info"
+	"strings"
 	"testing"
 )
 
@@ -132,7 +133,7 @@ func TestBuildSearchResultOrdersByPercent(t *testing.T) {
 		{id: 9, percent: 100},
 		{id: 3, percent: 75},
 	})
-	if rank != "100%" || length != 4 {
+	if rank != "2\n100%\n---\n9\n100%\n---\n3\n75%\n---\n4\n50%" || length != 4 {
 		t.Fatalf("rank=%s len=%d", rank, length)
 	}
 	if ids[0] != 2 || ids[1] != 9 || ids[2] != 3 || ids[3] != 4 {
@@ -142,6 +143,32 @@ func TestBuildSearchResultOrdersByPercent(t *testing.T) {
 	emptyIDs, emptyRank, emptyLen := buildSearchResult(nil)
 	if len(emptyIDs) != 0 || emptyRank != "0%" || emptyLen != 0 {
 		t.Fatalf("empty result = %v %s %d", emptyIDs, emptyRank, emptyLen)
+	}
+}
+
+func TestMatchRankIncludesStrongReasons(t *testing.T) {
+	pref := info.Hobby{
+		FindType: "音楽", Gender: "女性", Era: 20, Experience: 3,
+		City: []string{"東京"}, Speaklanguage: []string{"日本語"},
+	}
+	me := searcherProfile{HobbyType: "音楽", Gender: "男性"}
+	candidate := info.HobbyCandidate{
+		HobbyType: "音楽", Gender: "女性", Age: 24, Experience: 5, City: "東京",
+		Speaklanguage: []string{"日本語"}, WantType: "音楽", HasPref: true,
+	}
+	reasons := hobbyReasons(candidate, pref, me)
+	if reasons[0] != "同じ趣味" {
+		t.Fatalf("first reason = %s", reasons[0])
+	}
+	joined := strings.Join(reasons, "\n")
+	for _, want := range []string{"同じ言語", "同じ都市", "年齢が近い", "希望の性別"} {
+		if !strings.Contains(joined, want) && len(reasons) < 4 {
+			t.Fatalf("missing %s in %v", want, reasons)
+		}
+	}
+	rank := formatMatchRank(rankedID{percent: 80, reasons: reasons})
+	if !strings.HasPrefix(rank, "80%\n") {
+		t.Fatalf("rank = %s", rank)
 	}
 }
 

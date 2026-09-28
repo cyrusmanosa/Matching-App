@@ -19,7 +19,7 @@ import 'package:grpc/grpc.dart';
 
 // ignore: must_be_immutable
 class Home extends StatefulWidget {
-  Home({Key? key}) : super(key: key);
+  Home({super.key});
 
   @override
   _HomeState createState() => _HomeState();
@@ -62,6 +62,7 @@ class _HomeState extends State<Home> {
       if (isUnauthenticated(error)) {
         return Targetlist();
       }
+      return Targetlist();
     }
   }
 

@@ -7,7 +7,6 @@ package db
 
 import (
 	"context"
-
 )
 
 const createsocialmedia = `-- name: Createsocialmedia :one
@@ -25,13 +24,13 @@ INSERT INTO socialmedia (
 `
 
 type CreatesocialmediaParams struct {
-	UserID      int32       `json:"user_id"`
-	TargetID    int32       `json:"target_id"`
-	Image       bool `json:"image"`
-	Contact     bool `json:"contact"`
-	Location    bool `json:"location"`
-	Appointment bool `json:"appointment"`
-	Sns         bool `json:"sns"`
+	UserID      int32 `json:"user_id"`
+	TargetID    int32 `json:"target_id"`
+	Image       bool  `json:"image"`
+	Contact     bool  `json:"contact"`
+	Location    bool  `json:"location"`
+	Appointment bool  `json:"appointment"`
+	Sns         bool  `json:"sns"`
 }
 
 func (q *Queries) Createsocialmedia(ctx context.Context, arg CreatesocialmediaParams) (Socialmedium, error) {
@@ -67,7 +66,6 @@ func (q *Queries) Deletesocialmedia(ctx context.Context, userID int32) error {
 	return err
 }
 
-
 const getsocialmedia = `-- name: Getsocialmedia :one
 SELECT user_id, target_id, image, contact, location, appointment, sns FROM socialmedia
 WHERE user_id = $1 AND target_id = $2 
@@ -93,7 +91,6 @@ func (q *Queries) Getsocialmedia(ctx context.Context, arg GetsocialmediaParams) 
 	)
 	return i, err
 }
-
 
 const listsocialmedia = `-- name: Listsocialmedia :many
 SELECT user_id, target_id, image, contact, location, appointment, sns FROM socialmedia
@@ -130,24 +127,23 @@ func (q *Queries) Listsocialmedia(ctx context.Context) ([]Socialmedium, error) {
 
 const updatesocialmedia = `-- name: Updatesocialmedia :one
 UPDATE socialmedia
-SET target_id = $2,
-    image = $3,
+SET image = $3,
     contact = $4,
     location = $5,
     appointment = $6,
     sns  = $7
-WHERE user_id = $1
+WHERE user_id = $1 AND target_id = $2
 RETURNING user_id, target_id, image, contact, location, appointment, sns
 `
 
 type UpdatesocialmediaParams struct {
-	UserID      int32       `json:"user_id"`
-	TargetID    int32       `json:"target_id"`
-	Image       bool `json:"image"`
-	Contact     bool `json:"contact"`
-	Location    bool `json:"location"`
-	Appointment bool `json:"appointment"`
-	Sns         bool `json:"sns"`
+	UserID      int32 `json:"user_id"`
+	TargetID    int32 `json:"target_id"`
+	Image       bool  `json:"image"`
+	Contact     bool  `json:"contact"`
+	Location    bool  `json:"location"`
+	Appointment bool  `json:"appointment"`
+	Sns         bool  `json:"sns"`
 }
 
 func (q *Queries) Updatesocialmedia(ctx context.Context, arg UpdatesocialmediaParams) (Socialmedium, error) {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class CustomDropDownBar extends StatelessWidget {
   CustomDropDownBar({
-    Key? key,
+    super.key,
     this.alignment,
     this.borderDecoration,
     this.controller,
@@ -33,7 +33,7 @@ class CustomDropDownBar extends StatelessWidget {
     this.itemArray,
     this.value,
     this.onChanged,
-  }) : super(key: key);
+  });
 
   final Alignment? alignment;
   final bool autofocus;

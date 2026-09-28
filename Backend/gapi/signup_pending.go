@@ -1,11 +1,11 @@
 package gapi
 
 import (
-	"sync"
+	"context"
 	"time"
 )
 
-const signupTTL = 30 * time.Minute
+const signupTTL = 15 * time.Minute
 
 type pendingSignup struct {
 	Email    string
@@ -14,48 +14,29 @@ type pendingSignup struct {
 	Expires  time.Time
 }
 
-var (
-	signupMu      sync.Mutex
-	pendingByCode = map[string]pendingSignup{}
-)
-
-func savePending(code, email, provider string, verified bool) {
-	signupMu.Lock()
-	defer signupMu.Unlock()
-	now := time.Now()
-	for key, item := range pendingByCode {
-		if now.After(item.Expires) {
-			delete(pendingByCode, key)
-		}
-	}
-	pendingByCode[code] = pendingSignup{
-		Email:    email,
-		Provider: provider,
-		Verified: verified,
-		Expires:  now.Add(signupTTL),
-	}
+func (server *Server) savePending(ctx context.Context, code, email, provider string, verified bool) error {
+	return server.infoStore.SavePendingSignup(ctx, code, email, provider, verified, time.Now().Add(signupTTL))
 }
 
-func verifyPending(code string) (pendingSignup, bool) {
-	signupMu.Lock()
-	defer signupMu.Unlock()
-	item, ok := pendingByCode[code]
-	if !ok || time.Now().After(item.Expires) {
-		delete(pendingByCode, code)
+func (server *Server) verifyPending(ctx context.Context, code string) (pendingSignup, bool) {
+	email, provider, _, expiresAt, err := server.infoStore.GetPendingSignup(ctx, code)
+	if err != nil || time.Now().After(expiresAt) {
+		_ = server.infoStore.DeletePendingSignup(ctx, code)
 		return pendingSignup{}, false
 	}
-	item.Verified = true
-	pendingByCode[code] = item
-	return item, true
+	if err = server.infoStore.MarkPendingSignupVerified(ctx, code); err != nil {
+		return pendingSignup{}, false
+	}
+	return pendingSignup{Email: email, Provider: provider, Verified: true, Expires: expiresAt}, true
 }
 
-func takeVerifiedSignup(code string) (pendingSignup, bool) {
-	signupMu.Lock()
-	defer signupMu.Unlock()
-	item, ok := pendingByCode[code]
-	if !ok || !item.Verified || time.Now().After(item.Expires) {
+func (server *Server) takeVerifiedSignup(ctx context.Context, code string) (pendingSignup, bool) {
+	email, provider, verified, expiresAt, err := server.infoStore.GetPendingSignup(ctx, code)
+	if err != nil || !verified || time.Now().After(expiresAt) {
 		return pendingSignup{}, false
 	}
-	delete(pendingByCode, code)
-	return item, true
+	if err = server.infoStore.DeletePendingSignup(ctx, code); err != nil {
+		return pendingSignup{}, false
+	}
+	return pendingSignup{Email: email, Provider: provider, Verified: true, Expires: expiresAt}, true
 }

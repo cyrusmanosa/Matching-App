@@ -7,7 +7,7 @@ import 'package:dating_your_date/widgets/button/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 
 class SideBar extends StatefulWidget {
-  SideBar({Key? key, this.targetId, this.sm}) : super(key: key);
+  SideBar({super.key, this.targetId, this.sm});
 
   final SocialMedia? sm;
   final int? targetId;

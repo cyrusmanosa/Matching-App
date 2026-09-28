@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class CustomInputBar extends StatelessWidget {
-  CustomInputBar({Key? key, this.titleName, this.backendPart}) : super(key: key);
+  CustomInputBar({super.key, this.titleName, this.backendPart});
 
   final String? titleName;
   final Widget? backendPart;

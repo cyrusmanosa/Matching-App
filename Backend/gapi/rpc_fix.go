@@ -20,7 +20,7 @@ func (server *Server) CreateFix(ctx context.Context, req *pb.CreateFixRequest) (
 	if len(codesMD) == 0 || codesMD[0] == "" {
 		return nil, status.Error(codes.FailedPrecondition, "signup verification is required")
 	}
-	pending, ok := takeVerifiedSignup(codesMD[0])
+	pending, ok := server.takeVerifiedSignup(ctx, codesMD[0])
 	if !ok || pending.Email == "" {
 		return nil, status.Error(codes.FailedPrecondition, "signup verification expired")
 	}
@@ -120,12 +120,12 @@ func (server *Server) Deletefix(ctx context.Context, req *pb.DeleteFixRequest) (
 		return nil, err
 	}
 
-	err = server.infoStore.DeleteUser(ctx, token.UserID)
+	err = server.infoStore.DeleteAccountData(ctx, token.UserID)
 	if err != nil {
-		if missingRecord(err) {
-			return nil, status.Errorf(codes.NotFound, "user not found")
-		}
-		return nil, status.Errorf(codes.Internal, "failed to input UserID: %s", err)
+		return nil, status.Errorf(codes.Internal, "failed to delete account")
+	}
+	if server.chatStore != nil {
+		_ = server.chatStore.DropUserChat(ctx, token.UserID)
 	}
 
 	return &emptypb.Empty{}, nil
